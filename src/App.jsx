@@ -1,8 +1,9 @@
 import React from 'react'
+import Home from './pages/landingPage/Home'
 
 const App = () => {
   return (
-    <div className='text-center uppercase border border-red-900 p-4'>Welcome to Ease Drive</div>
+    <Home/>
   )
 }
 
