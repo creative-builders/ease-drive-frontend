@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useNavigate, Link, Links } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function DriverLogin() {
     const [active, setActive] = useState(false);
@@ -50,7 +50,7 @@ export default function DriverLogin() {
 
                 <button className="h-10 w-full rounded indent-2 outline-none bg-white text-black">Continue</button>
                 <link typeof=''></link>
-                {/* <p className="text-white text-sm">Don't have an account? <Link to="/signup" className="text-blue-400 cursor-pointer">Sign up</Link></p> */}
+                <p className="text-white text-sm">Don't have an account? <Link to="/DriverSign" className="text-blue-400 cursor-pointer">Sign up</Link></p>
             </form>
         </div>
     );

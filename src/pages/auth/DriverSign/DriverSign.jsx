@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function DriverSign(){
     const [active, setActive] = useState(false)
@@ -72,6 +72,7 @@ export default function DriverSign(){
                     <input className="rounded border bg-transparent" type="checkbox" id="" />
                     <p className="text-gray-400 text-sm">I agree to our <a className="text-white font-bold" href="">privacy policy</a> and <a className="text-white font-bold" href="">terms and conditions</a></p>
                 </main>
+                <p className="text-white text-sm">Already have an account <Link className="text-green-700 cursor-pointer" to={'/DriverLogin'}>login</Link></p>
             </form>
 
         </div>
