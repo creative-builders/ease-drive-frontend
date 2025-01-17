@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
+import Option from '../SignupOption/Option';
 
 const Home = () => {
   const [active, setActive] = useState(false);
@@ -34,6 +35,7 @@ const Home = () => {
           LogIn
         </button>
       </main>
+      <Option />
     </div>
   );
 };
