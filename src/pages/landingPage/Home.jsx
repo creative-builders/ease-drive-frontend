@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
-import Option from '../SignupOption/Option';
+// import Option from '../SignupOption/Option';
 
 const Home = () => {
   const [active, setActive] = useState(false);
@@ -13,6 +13,14 @@ const Home = () => {
 
   const handleDriverlogin = () => {
     navigate('/DriverLogin');
+  };
+
+  const handleSignupOption = () => {
+    navigate('/SignupOPtion');
+  };
+
+  const handleRegister = () => {
+    navigate('/Register');
   };
 
   return (
@@ -34,8 +42,22 @@ const Home = () => {
         >
           LogIn
         </button>
+
+        <button
+          className='h-10 w-20 text-white bg-red-500'
+          onClick={handleSignupOption}
+        >
+          Option
+        </button>
+
+        <button
+          className='h-10 w-20 text-white bg-purple-900'
+          onClick={handleRegister}
+        >
+          Register
+        </button>
       </main>
-      <Option />
+      {/* <Option /> */}
     </div>
   );
 };
