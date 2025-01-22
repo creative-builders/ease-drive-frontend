@@ -1,5 +1,7 @@
 import React from 'react'
 import Footer from './Footer'
+import BookingForm from './BookingForm'
+
 
 const Home = () => {
   return (
@@ -7,8 +9,10 @@ const Home = () => {
       Welcome to Ease Drive
       <p>this is how we started</p>
 
+
+      <BookingForm/>
       <Footer/>
-      </div>
+    </div>
   )
 }
 
