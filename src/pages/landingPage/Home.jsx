@@ -1,63 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Footer from './Footer';
-import { useNavigate } from 'react-router-dom';
-// import Option from '../SignupOption/Option';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const [active, setActive] = useState(false);
-  const navigate = useNavigate();
-
-  const handleDriversignup = () => {
-    navigate('/DriverSign');
-  };
-
-  const handleDriverlogin = () => {
-    navigate('/DriverLogin');
-  };
-
-  const handleSignupOption = () => {
-    navigate('/SignupOPtion');
-  };
-
-  const handleRegister = () => {
-    navigate('/Register');
-  };
-
   return (
     <div className='text-center uppercase border border-red-900 p-4'>
       Welcome to Ease Drive
       <p>this is how we started</p>
 
       <Footer />
-      <main className='h-16 w-[50%] mx-10 flex border border-red-600 items-center justify-around'>
-        <button
-          className='h-10 w-20 text-white bg-blue-500'
-          onClick={handleDriversignup}
+      <main className='h-16 w-3/6 mx-10 flex border border-red-600 items-center justify-around'>
+        <Link
+          to='/DriverSign'
+          className='h-10 w-20 text-white bg-blue-500 flex items-center justify-center'
         >
           SignUp
-        </button>
-        <button
-          className='h-10 w-20 text-white bg-green-500'
-          onClick={handleDriverlogin}
+        </Link>
+        <Link
+          to='/DriverLogin'
+          className='h-10 w-20 text-white bg-green-500 flex items-center justify-center'
         >
           LogIn
-        </button>
-
-        <button
-          className='h-10 w-20 text-white bg-red-500'
-          onClick={handleSignupOption}
+        </Link>
+        <Link
+          to='/SignupOption'
+          className='h-10 w-20 text-white bg-red-500 flex items-center justify-center'
         >
           Option
-        </button>
-
-        <button
-          className='h-10 w-20 text-white bg-purple-900'
-          onClick={handleRegister}
+        </Link>
+        <Link
+          to='/Register'
+          className='h-10 w-20 text-white bg-purple-900 flex items-center justify-center'
         >
           Register
-        </button>
+        </Link>
       </main>
-      {/* <Option /> */}
     </div>
   );
 };
