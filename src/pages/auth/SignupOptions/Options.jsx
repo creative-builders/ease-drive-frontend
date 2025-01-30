@@ -1,13 +1,17 @@
 
 import { useState } from 'react';
 import MobilePic from '/Rectangle.png'
+import { useNavigate } from 'react-router-dom';
 
 export default function Option() {
+  const navigate =  useNavigate();
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleSelect = (option) => {
     setSelectedOption(option);
   };
+
+  console.log(selectedOption)
 
   return (
     
@@ -41,11 +45,11 @@ export default function Option() {
               {/* Passenger Section */}
               <section
                 className={`h-24 w-4/5 relative border px-2 py-3 flex flex-col gap-2 rounded-lg cursor-pointer ${
-                  selectedOption === 'passenger'
+                  selectedOption === 'passenger-login'
                     ? 'border-purple-900'
                     : 'border-gray-300'
                 }`}
-                onClick={() => handleSelect('passenger')}
+                onClick={() => handleSelect('/passenger-login')}
               >
                 <h2 className="font-semibold">Passenger</h2>
                 <p>Effortlessly book your trip with Easedrive</p>
@@ -58,7 +62,7 @@ export default function Option() {
                     ? 'border-purple-900'
                     : 'border-gray-300'
                 }`}
-                onClick={() => handleSelect('vehicleOwner')}
+                onClick={() => handleSelect('/driver-signup')}
               >
                 <h2 className="font-semibold">Vehicle Owners</h2>
                 <p>
@@ -69,6 +73,7 @@ export default function Option() {
               </section>
 
               <button
+               onClick={() => navigate(selectedOption)}
                 className="h-12 w-4/5 rounded-md bg-green-600 text-white disabled:bg-gray-400"
                 disabled={!selectedOption}
               >

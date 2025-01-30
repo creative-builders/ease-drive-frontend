@@ -1,8 +1,7 @@
 import { useState } from "react"
-import TabSelector from "../../components/TabSelector/TabSelector"
 import { FcGoogle } from "react-icons/fc";
-import googleIcon from "../../assets/icons/google-icon.svg"
 import { Link } from "react-router-dom";
+import TabSelector from "../../../components/TabSelector/TabSelector";
 
 
 const PassengersLogin = () => {
@@ -19,12 +18,14 @@ const PassengersLogin = () => {
   return (
     <div className='min-h-screen bg-gray-500'>
         <div className='w-11/12 mx-auto xl:w-8/12 px-2 py-4'>
-            <h2 className="font-bold text-base text-center text-gray-950 mb-[51px]">EaseDrive</h2>
+            <h2 className="font-bold text-base text-center text-gray-950 mb-[51px]">
+                <Link to="/">EaseDrive</Link>
+            </h2>
             <h3 className="mb-4 text-xl text-gray-950 font-bold">Welcome back</h3>
-            <p className="text-gray-900 mb-16">Log into your EaseDrive account.</p>
+            <p className="text-gray-600 mb-16">Log into your EaseDrive account.</p>
 
             {/* Tab Selector Section */}
-            <TabSelector 
+            <TabSelector
             extendedStyles={"mb-[34px]"}
             tabs={tabs}
             handleClick={handleClick}
