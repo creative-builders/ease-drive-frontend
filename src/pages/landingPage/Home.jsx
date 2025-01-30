@@ -36,10 +36,17 @@ const Home = () => {
           Register
         </Link>
         <Link
+<<<<<<< HEAD
+          to='/passenger-login'
+          className='h-10  p-4 text-white bg-purple-900 flex items-center justify-center'
+        >
+          Passenger Login
+=======
           to='/DrivPlace'
           className='h-10 w-20 text-white bg-purple-900 flex items-center justify-center'
         >
           Place
+>>>>>>> staging
         </Link>
       </main>
     </div>
