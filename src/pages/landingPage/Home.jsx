@@ -10,15 +10,15 @@ const Home = () => {
       <span className='p-0 m-0 m-0 p-0 m-0'></span>
 
       <Footer />
-      <main className='h-16 w-3/6 mx-10 flex border border-red-600 items-center justify-around'>
+      <main className='h-16 w-3/5 mx-10 flex border border-red-600 items-center justify-around'>
         <Link
-          to='/DriverSign'
+          to='/Signupd'
           className='h-10 w-20 text-white bg-blue-500 flex items-center justify-center'
         >
           SignUp
         </Link>
         <Link
-          to='/DriverLogin'
+          to='/DriVerify'
           className='h-10 w-20 text-white bg-green-500 flex items-center justify-center'
         >
           LogIn
@@ -30,10 +30,16 @@ const Home = () => {
           Option
         </Link>
         <Link
-          to='/Register'
+          to='/Signup'
           className='h-10 w-20 text-white bg-purple-900 flex items-center justify-center'
         >
           Register
+        </Link>
+        <Link
+          to='/DrivPlace'
+          className='h-10 w-20 text-white bg-purple-900 flex items-center justify-center'
+        >
+          Place
         </Link>
       </main>
     </div>
