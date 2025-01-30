@@ -3,10 +3,27 @@ export default {
   content:["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      colors:{
+        gray:{
+         100:"#F5F5F5",
+         300:"#F0F1F1",
+         400:"#444444",
+         500:"#F6F7F6",
+         600:"#666464",
+         900:"#1E1E1E",
+         950:"#000000",
+        },
+        green:{
+         100:"#DCFFDC",
+         200:"#D4F9DB",
+         300:"#20AE3A",
+        }
+      },
       height:{
         106: "450px",
-        39: "45px",
-        17: "100px"
+        108: "550px",
+        39: "40px",
+        17: "80px"
       },
       width:{
         211: "200px",
@@ -15,6 +32,9 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 }
+
+
+
 
