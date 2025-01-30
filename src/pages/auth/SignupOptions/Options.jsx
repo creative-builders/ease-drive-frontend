@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import { useState } from 'react';
 import MobilePic from '/Rectangle.png'
 
 export default function Option() {
