@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import TabSelector from "../../../components/TabSelector/TabSelector";
 
 
-const PassengersLogin = () => {
+const Login = () => {
     const [activeTab,setActiveTab] = useState("Email Address");
     const tabs = ["Email Address", "Phone Number"]
 
@@ -82,4 +82,4 @@ const PassengersLogin = () => {
   )
 }
 
-export default PassengersLogin
+export default Login
