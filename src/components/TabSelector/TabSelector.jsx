@@ -14,7 +14,7 @@ const TabSelector = ({
 						key={tab}
 						type='button'
 						className={`p-4 ${extendedStyles} rounded-lg inline-block ${
-							activeTab === tabName ? 'bg-green-200 text-white font-normal text-base' : 'text-gray-400'
+							activeTab === tabName ? 'bg-green-100 text-green-300 font-normal text-base' : 'text-gray-400'
 						}`}
 						onClick={() => handleClick(tabName)}
 					>
