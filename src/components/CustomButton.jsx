@@ -7,7 +7,7 @@ const CustomButton = ({
     btnClick
 }) => {
 
-    const sizes = {
+ const sizes = {
 	sm: 'text-base leading-normal',
 	md: 'text-xl leading-normal',
     }

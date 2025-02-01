@@ -1,6 +1,5 @@
 
 import { useState } from 'react';
-import MobilePic from '/Rectangle.png'
 import { Link, useNavigate } from 'react-router-dom';
 import leftCarImage from "../../../assets/images/signup-options-left-image.svg"
 import { BiChevronRight } from 'react-icons/bi';
@@ -27,18 +26,18 @@ export default function Option() {
         <div className="lg:basis-1/2 pb-[40px] px-[4%]">
             <div className="hidden lg:flex justify-center items-center gap-x-[42px]">
                     <p>Already have have an account ?</p>
-                    <Link to="/passenger-login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
+                    <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
                 </div>
 
               <h1 className='font-bold mb-8 text-gray-900 text-xl lg:text-2xl'>Sign up as a</h1>
               {/* Passenger Section */}
               <div
                 className={`mb-8 min-h-[93px] border p-4 rounded-[20px] cursor-pointer ${
-                  selectedOption === '/passenger-login'
+                  selectedOption === '/passenger-signup'
                     ? 'border-green-300'
                     : 'border-gray-300'
                 }`}
-                onClick={() => handleSelect('/passenger-login')}
+                onClick={() => handleSelect('/passenger-signup')}
               >
                <div className="flex items-center">
                 <div className='basis-[calc(100%-54px)]'>
@@ -85,7 +84,7 @@ export default function Option() {
 
                <div className="lg:hidden flex justify-center gap-x-2">
                     <p>Already have have an account ?</p>
-                    <Link to="/passenger-login" className="text-green-300">Login</Link>
+                    <Link to="/login" className="text-green-300">Login</Link>
                 </div>
         </div>
       </div>
