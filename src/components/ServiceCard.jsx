@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import CustomButton from "./CustomButton"
 
 
@@ -8,6 +9,7 @@ const ServiceCard = ({
  title,
  description,
 }) => {
+  const navigate = useNavigate();
   return (
     <div 
     style={{background:`${bgColor}`}}
@@ -23,6 +25,7 @@ const ServiceCard = ({
     <CustomButton
      title={"Book Now"}
      extendedStyles={"flex mb-4"}
+     btnClick={() => navigate('/login')}
     />
      </div>
     </div>
