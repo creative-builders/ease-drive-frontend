@@ -8,6 +8,7 @@ import Signupd from '../pages/auth/Drivers/Signupd';
 import DriVerify from '../pages/auth/Drivers/DriVerify';
 import DrivUpload from '../pages/auth/Drivers/DrivUpload';
 import DrivPlace from '../pages/auth/Drivers/DrivPlace';
+import PassengersSignup from '../pages/auth/Passengers/PassengersSignup';
 
 
 
@@ -21,6 +22,7 @@ const IndexRoute = () => {
       <Route path="/" element={<Home />} />
       <Route path="/signup-as" element={<Options />} />
       <Route path="/passenger-login" element={<PassengersLogin />} />
+      <Route path="/passenger-signup" element={<PassengersSignup />} />
       <Route path="/driver-signup" element={<Signupd />} />
       <Route path="/DriVerify" element={<DriVerify />} />
       <Route path="/DrivUpload" element={<DrivUpload />} />
