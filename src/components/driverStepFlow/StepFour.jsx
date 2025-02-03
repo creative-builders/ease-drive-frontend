@@ -2,8 +2,12 @@ import {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Frame from '/Frame.png';
 import SectionLabel from '../SectionLabel';
+import { FcGoogle } from "react-icons/fc";
+import { useStepFlowContext } from "../../hooks/useStepFlowFormContext"
 
 const StepFour = ({nextStep, prevStep, step , totalSteps}) =>{
+
+     const{ formData , handleUpdateFormData } = useStepFlowContext();
 
     const [imagePreview, setImagePreview] = useState(null);
 
@@ -25,9 +29,7 @@ const StepFour = ({nextStep, prevStep, step , totalSteps}) =>{
          </ul>
        </header>
        <div className="text-center mb-[29px]">
-            <SectionLabel
-                title={`${step} Step of ${totalSteps}`}
-            />
+            <SectionLabel title={`${step} Step of ${totalSteps}`} />
         </div>
        <h2 className='text-3xl font-normal capitalize'>kYC Verification</h2>
        <p className="flex text-center gap-3 text-sm">
@@ -78,15 +80,24 @@ const StepFour = ({nextStep, prevStep, step , totalSteps}) =>{
             </article>
 
         </form>
-            <div className="buttons h-16 w-2/5 flex items-center justify-around absolute right-3 bottom-[-100px]">
+            <div className="buttons h-16 w-2/5 hidden lg:flex items-center justify-around absolute right-3 bottom-[-100px]">
                 <button className='h-12 w-24 cursor-pointer rounded-lg border border-green-600'>Skip Now</button>
                 <button className='h-12 w-24 cursor-pointer rounded-lg bg-green-600 text-white'>Next</button>
             </div>
             <div className="hidden h-[20px] w-full justify-around items-center">
                 <span className=' border-b-2 w-2/5 border-black '></span> Or <span className=' border-b-2 w-2/5 border-black'></span>
             </div>
-            <button className='tip h-39 w-full  bg-gray-300 text-black cursor-pointer rounded-lg relative'><aside className='h-5 md:h-6 w-8 absolute left-12 md:left-80'><img className='object-contain h-full w-full' src="" alt="" /></aside> Contiue with Google</button>
-            <p className='pair text-sm hidden'>Already have an account? <a className='text-green-500' href="">Login</a></p>
+            <button 
+                className="inline-block mb-2 w-11/12 p-2 bg-gray-500 rounded-lg md:hidden">
+                <span className="text-bold text-base text-gray-950 flex justify-center items-center gap-x-2">
+                <FcGoogle size={20} />
+                Continue with Google
+                </span>
+            </button>
+            
+            <Link to={"/login"}>
+             <p className='pair text-sm md:hidden'>Already have an account? <a className='text-green-500' href="">Login</a></p>
+            </Link>
        </section>
     </div>
    )

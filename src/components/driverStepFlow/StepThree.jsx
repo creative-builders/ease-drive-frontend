@@ -10,13 +10,13 @@ const StepThree = ({nextStep, prevStep, step , totalSteps}) => {
    return (
       <div className='h-full w-full flex flex-col items-center gap-5 bg-[#F0F1F1]'>
          <header className='h-20 w-full flex items-center justify-around'>
-            <p className='ml-[-220px] uppercase md:uppercase text-2xl font-bold'>ease drive</p>
+            <p className='ml-4 lg:ml-[-220px] uppercase md:uppercase text-2xl font-bold'>ease drive</p>
             <ul className='h-16 w-96 hidden md:flex items-center justify-between'>
                <p>Already have an account?</p>
                <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
             </ul>
          </header>
-         <h2 className='text-3xl font-normal capitalize'>Create a driver account</h2>
+         <h2 className='font-base lg:text-3xl font-normal capitalize'>Create a driver account</h2>
          <div className="text-center mb-[29px]">
             <SectionLabel title={`${step} Step of ${totalSteps}`} />
          </div>
@@ -42,9 +42,12 @@ const StepThree = ({nextStep, prevStep, step , totalSteps}) => {
                <CustomButton 
                   name="Next"
                   extendedStyles={"w-full"}
-                  btnClick={() => console.log('Next Step')}
+                  btnClick={() => nextStep()}
                />
             </form>
+            <Link to={"/login"}>
+               <p className='pair text-sm md:hidden'>Already have an account? <a className='text-green-500' href="">Login</a></p>
+            </Link>
          </section>
       </div>
    );

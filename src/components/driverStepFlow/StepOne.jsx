@@ -105,7 +105,9 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
             extendedStyles={"w-full"}
             btnClick={() => nextStep()}
           />
-         <p className='pair text-sm hidden'>Already have an account? <a className='text-green-500' href="">Login</a></p>
+         <Link to={"/login"}>
+         <p className='pair text-sm md:hidden'>Already have an account? <a className='text-green-500' href="">Login</a></p>
+         </Link>
        </section> 
       </div>
     </div>
