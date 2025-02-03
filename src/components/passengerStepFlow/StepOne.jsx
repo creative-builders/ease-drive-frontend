@@ -46,7 +46,7 @@ const StepOne = ({ nextStep, step, totalSteps }) => {
         <div className="">
             <CustomButton 
             name="Continue"
-            extendedStyles={"w-full"}
+            extendedStyles={"w-full px-5 py-4 text-base lg:text-2xl"}
             btnClick={() => nextStep()}
             />
         </div>
