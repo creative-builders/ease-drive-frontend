@@ -1,5 +1,5 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../layout/header';
 import ServiceCard from '../../components/ServiceCard';
 import SectionLabel from '../../components/SectionLabel';
@@ -8,6 +8,7 @@ import demoImage from "../../assets/images/city-ride-jeep.svg"
 import safetyImage from "../../assets/images/safety-image.svg"
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
     <Header/>
@@ -53,6 +54,8 @@ const Home = () => {
           <p className='lg:text-left mb-6'>We all share the responsibility for safety. Let's call this our safety pact – an agreement between passengers and drivers to ensure a safe ride for everyone</p>
           <CustomButton 
           extendedStyles={"lg:flex"}
+          title='No'
+          btnClick={() => navigate('/login')}
           />
           </div>
         </div>

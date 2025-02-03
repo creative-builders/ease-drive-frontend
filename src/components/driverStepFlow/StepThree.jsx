@@ -26,7 +26,7 @@ const StepThree = ({nextStep, prevStep, step , totalSteps}) => {
             <form className='h-fit md:h-3/5 w-full p-4 flex flex-col gap-4 relative'>
                <article className='h-20 w-full flex flex-col items-left gap-2'>
                   <label htmlFor="place">Address</label>
-                  <select className='h-12 w-full border outline-none indent-3'
+                  <select className='h-12 w-full border outline-none indent-3 rounded-lg'
                      name="sectionAddress"
                      id="place"
                   >

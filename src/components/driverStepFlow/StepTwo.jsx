@@ -38,7 +38,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
          <form className='h-fit md:h-3/5 w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-4 relative' action="">
             <article className='h-20 w-full flex flex-col items-left gap-2'>
                 <label htmlFor="identification">Means of Identification</label>
-                <select className='h-12 w-full border outline-none indent-3'
+                <select className='h-12 w-full border outline-none indent-3 rounded-lg'
                   name="Identification"
                   id="identification"
                   onChange={handleUpdateFormData}
@@ -55,7 +55,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
 
             <article className='h-20 w-full flex flex-col items-left gap-2'>
                 <label htmlFor="ID">Document ID</label>
-                <input className='h-12 w-full border outline-none indent-3'
+                <input className='h-12 w-full border outline-none indent-3 rounded-lg'
                  type="number"
                  name="Document ID"
                 id="ID"
@@ -66,7 +66,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
 
             <article className='h-20 w-full flex flex-col items-left gap-2'>
                 <label htmlFor="date">Date of Birth</label>
-                <input className='h-12 w-full border outline-none indent-3'
+                <input className='h-12 w-full border outline-none indent-3 rounded-lg'
                  type="date"
                  name="DOB"
                 id="date"

@@ -11,7 +11,7 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
 
    return(
     <div className='min-h-screen bg-gray-500'>
-      <div className="w-11/12 mx-auto xl:w-8/12 px-2 py-4">
+      <div className="h-full w-full mx-auto xl:w-8/12 px-2 py-4">
        <header className='h-20 w-full flex items-center justify-around'>
          <p className=' ml-[-220px] uppercase md:uppercase text-2xl font-bold'>ease drive</p>
          <ul className='h-16 w-96 hidden md:flex items-center justify-between'>
@@ -32,7 +32,7 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
            <article className='h-20 w-full flex flex-col items-left gap-2'>
             <label htmlFor="first-name">First Name</label>
             <input 
-            className='h-12 w-full border outline-none indent-3' 
+            className='h-12 w-full border outline-none indent-3 rounded-lg' 
             type="text"
              name="firstName"
              id="first-name"
@@ -43,7 +43,7 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
 
            <article className='h-20 w-full flex flex-col items-left gap-2'>
             <label htmlFor="last-name">Last Name</label>
-            <input className='h-12 w-full border outline-none indent-3'
+            <input className='h-12 w-full border outline-none indent-3 rounded-lg'
              type="text"
              name="lastName"
              id="last-name"
@@ -54,7 +54,7 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
 
            <article className='h-20 w-full flex flex-col items-left gap-2'>
             <label htmlFor="phone-number">phone number</label>
-            <input className='h-12 w-full border outline-none indent-3'
+            <input className='h-12 w-full border outline-none indent-3 rounded-lg'
              type="number"
              name="phoneNumber"
              id="phone-number"
@@ -65,7 +65,7 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
 
            <article className='h-20 w-full flex flex-col items-left gap-2'>
             <label htmlFor="email">Email</label>
-            <input className='h-12 w-full border outline-none indent-3'
+            <input className='h-12 w-full border outline-none indent-3 rounded-lg'
              type="email"
              name="email"
              id="email"
@@ -76,7 +76,7 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
 
            <article className='pa md:h-20 w-full flex flex-col items-left gap-2'>
             <label htmlFor="password">Password</label>
-            <input className='h-12 w-full border outline-none indent-3'
+            <input className='h-12 w-full border outline-none indent-3 rounded-lg'
              type="password"
              name="password"
              id="password"
@@ -87,7 +87,7 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
 
            <article className='pa h-20 w-full flex flex-col items-left gap-2'>
             <label htmlFor="con-pas">Confirm password</label>
-            <input className='h-12 w-full border outline-none indent-3'
+            <input className='h-12 w-full border outline-none indent-3 rounded-lg'
              type="password"
              name="confirmPassword"
              id="con-pass"
@@ -104,7 +104,7 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
             name="Continue"
             extendedStyles={"w-full"}
             btnClick={() => nextStep()}
-        />
+          />
          <p className='pair text-sm hidden'>Already have an account? <a className='text-green-500' href="">Login</a></p>
        </section> 
       </div>
