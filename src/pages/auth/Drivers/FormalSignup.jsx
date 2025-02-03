@@ -16,7 +16,7 @@ const Signupd = () =>{
          <span className='text-center text-sm'>Enter your name, phone number and email address,and <br /> we'll send you a four digit code to confirm it</span>
          <form className='h-fit md:h-3/5 w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-4' action="">
            <article className='h-20 w-full flex flex-col items-left gap-2'>
-            <label htmlFor="">First Name</label>
+            <label htmlFor="hhhh">First Name</label>
             <input className='h-12 w-full border outline-none indent-3' type="text" />
            </article>
 
