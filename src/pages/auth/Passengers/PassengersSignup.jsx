@@ -5,6 +5,7 @@ import { FormProvider } from "../../../hooks/useStepFlowFormContext";
 
 const PassengersSignup = () => {
    const [step,setStep] = useState(1);
+   const totalSteps = 2;
 
    const initialInputFields = [ "firstName", "lastName", "phoneNumber", "email", "password", "confirmPassword"
    ]
@@ -15,9 +16,9 @@ const PassengersSignup = () => {
    console.log(step)
   return (
     <FormProvider initialInputFields={initialInputFields}>
-    <div>
-        {step === 1 && <StepOne nextStep={nextStep}/>}
-        {step === 2 && <StepTwo nextStep={nextStep} prevStep={prevStep}/>}
+    <div className="px-[4%] lg:px-[8%] py-[4%]">
+        {step === 1 && <StepOne nextStep={nextStep} step={step} totalSteps={totalSteps} />}
+        {step === 2 && <StepTwo nextStep={nextStep} prevStep={prevStep} step={step} totalSteps={totalSteps}/>}
     </div>
     </FormProvider>
   )
