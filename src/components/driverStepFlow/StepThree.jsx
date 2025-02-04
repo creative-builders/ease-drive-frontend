@@ -8,7 +8,7 @@ const StepThree = ({nextStep, prevStep, step , totalSteps}) => {
    // const totalSteps = 4;
 
    return (
-      <div className='h-full w-full flex flex-col items-center gap-5 bg-[#F0F1F1]'>
+      <div className='min-h-screen w-full flex flex-col items-center p-2 gap-5 bg-[#F0F1F1]'>
          <header className='h-20 w-full flex items-center justify-around'>
             <p className='ml-4 lg:ml-[-220px] uppercase md:uppercase text-2xl font-bold'>ease drive</p>
             <ul className='h-16 w-96 hidden md:flex items-center justify-between'>
@@ -20,10 +20,10 @@ const StepThree = ({nextStep, prevStep, step , totalSteps}) => {
          <div className="text-center mb-[29px]">
             <SectionLabel title={`${step} Step of ${totalSteps}`} />
          </div>
-         <section className='h-screen items-center gap-5 md:h-108 w-full md:w-4/5 flex flex-col items-left justify-center'>
-            <p className='text-xl'>Places you want to operate in</p>
-            <span className='text-center md:text-left text-sm'>We would love to know the places you will want to operate</span>
-            <form className='h-fit md:h-3/5 w-full p-4 flex flex-col gap-4 relative'>
+         <section className='h-full items-center gap-8 md:h-108 w-full md:w-4/5 flex flex-col items-left justify-center'>
+            <p className='text-center font-normal md:text-xl'>Places you want to operate in</p>
+            <span className='text-center md:text-left text-base'>We would love to know the places you will want to operate</span>
+            <form className='h-fit md:h-3/5 w-full p-4 flex flex-col gap-8 relative'>
                <article className='h-20 w-full flex flex-col items-left gap-2'>
                   <label htmlFor="place">Address</label>
                   <select className='h-12 w-full border outline-none indent-3 rounded-lg'

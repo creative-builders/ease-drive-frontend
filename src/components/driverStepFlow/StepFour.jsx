@@ -31,14 +31,14 @@ const StepFour = ({nextStep, prevStep, step , totalSteps}) =>{
        <div className="text-center mb-[29px]">
             <SectionLabel title={`${step} Step of ${totalSteps}`} />
         </div>
-       <h2 className='text-3xl font-normal capitalize'>kYC Verification</h2>
+       <h2 className='text-xl md:text-3xl font-normal capitalize'>kYC Verification</h2>
        <p className="flex text-center gap-3 text-sm">
         <Link to="/DriVerify"><span>Identity Verification</span></Link>
         <Link to="/DrivUpload"><span>Address Verification</span></Link>
         </p>
-       <section className='h-fit items-center md:h-fit w-4/5 flex flex-col items-left justify-center gap-4'>
+       <section className='h-fit items-center p-1 md:h-fit w-full md:w-4/5 flex flex-col items-left justify-center gap-4'>
          <p className='text-xl'>Identity Verification</p>
-         <span className='text-left text-sm'>This Information will help us know you more</span>
+         <span className='text-center md:text-left text-sm'>This Information will help us know you more</span>
          <form className='h-fit md:h-fit w-full p-4 flex flex-col gap-4 relative' action="">
 
             <article className='h-20 w-full flex flex-col items-left gap-2'>
@@ -96,7 +96,7 @@ const StepFour = ({nextStep, prevStep, step , totalSteps}) =>{
             </button>
             
             <Link to={"/login"}>
-             <p className='pair text-sm md:hidden'>Already have an account? <a className='text-green-500' href="">Login</a></p>
+             <p className='pair mb-2 text-sm md:hidden'>Already have an account? <a className='text-green-500' href="">Login</a></p>
             </Link>
        </section>
     </div>

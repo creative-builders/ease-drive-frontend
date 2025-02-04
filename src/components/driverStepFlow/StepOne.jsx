@@ -53,7 +53,7 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
            </article>
 
            <article className='h-20 w-full flex flex-col items-left gap-2'>
-            <label htmlFor="phone-number">phone number</label>
+            <label htmlFor="phone-number">Phone Number</label>
             <input className='h-12 w-full border outline-none indent-3 rounded-lg'
              type="number"
              name="phoneNumber"
@@ -97,9 +97,10 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
            </article>
          </form>
          <div className="line h-[20px] w-full flex justify-around items-center">
-         <span className=' border-b-2 w-2/5 border-black'></span> Or <span className=' border-b-2 w-2/5 border-black'></span>
+         <span className=' border-b-2 w-2/5 border-gray-600'></span> OR <span className=' border-b-2 w-2/5 border-gray-600'></span>
          </div>
-          {/* <button className='h-39 w-full  bg-gray-300 text-black cursor-pointer rounded-lg relative'><aside className='h-5 md:h-6 w-8 absolute left-12 md:left-80'><img className='object-contain h-full w-full' src="" alt="" /></aside> Contiue with Google</button> */}
+          {/* <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div> */}
+          
          <CustomButton 
             name="Continue"
             extendedStyles={"w-full"}

@@ -14,7 +14,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
         }
     
    return(
-    <div className='min-h-screen bg-transparent sm:bg-[#F0F1F1] w-full flex flex-col items-center gap-5'>
+    <div className='bg-[#F0F1F1] min-h-screen w-full flex flex-col items-center gap-5'>
        <header className='h-20 w-full flex items-center justify-around'>
          <p className='ml-0 lg:ml-[-150px] uppercase md:uppercase text-2xl font-bold'>ease drive</p>
          <ul className='h-16 w-96 hidden md:flex items-center justify-between'>
@@ -32,7 +32,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
         <Link to="/DriVerify"><span>Identity Verification</span></Link>
         <Link to="/DrivUpload"><span>Address Verification</span></Link>
         </p>
-       <section className='h-fit items-center md:h-108 w-4/5 flex flex-col items-left justify-center gap-4'>
+       <section className='h-fit items-center md:h-108 w-full md:w-4/5 flex flex-col items-left justify-center gap-4'>
          <p className='text-xl'>Identity Verification</p>
          <span className='text-left text-sm'>This Information will help us know you more</span>
          <form className='h-full md:h-3/5 w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-4 relative' action="">
@@ -101,6 +101,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
                     <img className='object-contain h-full w-full' src={google} alt="" />
                 </aside> Contiue with Google
             </button> */}
+            {/* <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div> */}
             <CustomButton 
                 name="Continue"
                 // extendedStyles={"w-full"}
