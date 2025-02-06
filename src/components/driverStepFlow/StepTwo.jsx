@@ -16,7 +16,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
    return(
     <div className='bg-[#F0F1F1] min-h-screen w-full flex flex-col items-center gap-5'>
        <header className='h-20 w-full flex items-center justify-around'>
-         <p className='ml-0 lg:ml-[-150px] uppercase md:uppercase text-2xl font-bold'>ease drive</p>
+         <p className='ml-4 xl:ml-[-220px] uppercase md:uppercase text-2xl font-bold'>ease drive</p>
          <ul className='h-16 w-96 hidden md:flex items-center justify-between'>
             <p>Already have an account?</p>
             <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
@@ -32,7 +32,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
         <Link to="/DriVerify"><span>Identity Verification</span></Link>
         <Link to="/DrivUpload"><span>Address Verification</span></Link>
         </p>
-       <section className='h-fit items-center md:h-108 w-full md:w-4/5 flex flex-col items-left justify-center gap-4'>
+       <section className='h-fit items-center md:h-108 w-full md:w-4/5 flex flex-col items-left justify-center gap-4  rounded-lg border-0 md:border border-green-600'>
          <p className='text-xl'>Identity Verification</p>
          <span className='text-left text-sm'>This Information will help us know you more</span>
          <form className='h-full md:h-3/5 w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-4 relative' action="">
@@ -76,38 +76,35 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
             </article>
 
         </form>
-            <div className=" md:h-16 w-2/5 hidden lg:flex items-center justify-around absolute right-3 top-[600px]">
+            <div className="h-16 w-3/4 items-center md:w-2/5 gap-10 flex justify-end  md:mt-[-80px] translate-x-0 md:translate-x-64">
                 <button 
                 name="Skip Now"
-                className='h-12 w-24 cursor-pointer rounded-lg border border-green-600'
-                btnClick={() => nextStep()}
+                className='h-12 w-28 cursor-pointer rounded-lg border border-green-600'
+                onClick={() => nextStep()}
                 >
                     Skip Now
                 </button>
                 
-                <CustomButton 
+                <button
                     name="Next"
-                    className='h-12 w-24 cursor-pointer rounded-lg bg-green-600 text-white'
-                    btnClick={() => nextStep()}
-                /> 
+                    className='h-12 w-28 cursor-pointer rounded-lg bg-green-600 text-white'
+                    onClick={() => nextStep()}
+                >
+                    Next
+                </button> 
                 
                 
             </div>
             <div className="hidden h-[20px] w-full justify-around items-center">
                 <span className=' border-b-2 w-2/5 border-black '></span> Or <span className=' border-b-2 w-2/5 border-black'></span>
             </div>
-            {/* <button className='tip h-39 w-full  bg-gray-300 text-black cursor-pointer rounded-lg relative'>
-                <aside className='h-5 md:h-6 w-8 absolute left-12 md:left-80'>
-                    <img className='object-contain h-full w-full' src={google} alt="" />
-                </aside> Contiue with Google
-            </button> */}
-            {/* <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div> */}
-            <CustomButton 
+           
+            {/* <CustomButton 
                 name="Continue"
                 // extendedStyles={"w-full"}
                  className='bg-[#F0F1F1] mb-4 text-black w-11/12 gap-2 lg:hidden'
                 btnClick={() => nextStep()}
-            />
+            /> */}
             <Link to={"/login"}>
                 <p className='pair mb-4 text-sm md:hidden'>Already have an account? <a className='text-green-500' href="">Login</a></p>
             </Link>

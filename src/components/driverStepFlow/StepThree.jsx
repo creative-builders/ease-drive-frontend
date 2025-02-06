@@ -10,7 +10,7 @@ const StepThree = ({nextStep, prevStep, step , totalSteps}) => {
    return (
       <div className='min-h-screen w-full flex flex-col items-center p-2 gap-5 bg-[#F0F1F1]'>
          <header className='h-20 w-full flex items-center justify-around'>
-            <p className='ml-4 lg:ml-[-220px] uppercase md:uppercase text-2xl font-bold'>ease drive</p>
+            <p className='ml-4 xl:ml-[-220px] uppercase md:uppercase text-2xl font-bold'>ease drive</p>
             <ul className='h-16 w-96 hidden md:flex items-center justify-between'>
                <p>Already have an account?</p>
                <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
@@ -20,7 +20,7 @@ const StepThree = ({nextStep, prevStep, step , totalSteps}) => {
          <div className="text-center mb-[29px]">
             <SectionLabel title={`${step} Step of ${totalSteps}`} />
          </div>
-         <section className='h-full items-center gap-8 md:h-108 w-full md:w-4/5 flex flex-col items-left justify-center'>
+         <section className='h-full items-center gap-8 md:h-108 w-full md:w-4/5 flex flex-col items-left justify-center  rounded-lg border-0 md:border border-green-600'>
             <p className='text-center font-normal md:text-xl'>Places you want to operate in</p>
             <span className='text-center md:text-left text-base'>We would love to know the places you will want to operate</span>
             <form className='h-fit md:h-3/5 w-full p-4 flex flex-col gap-8 relative'>
