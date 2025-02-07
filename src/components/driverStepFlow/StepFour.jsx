@@ -56,7 +56,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
                     <article className='h-20 w-full flex flex-col items-left gap-2'>
                         <label htmlFor="place">Address</label>
                         <input placeholder='Enter your address' 
-                            className='h-12 w-full border outline-none indent-3'
+                            className='h-12 w-full border outline-none indent-3 rounded-lg'
                             type="text"
                             name="sectionAddress"
                             id="place"
@@ -76,7 +76,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
                             onChange={handleFileChange}
                         />
                         <label
-                            className={`relative flex items-center justify-center border bg-[#FEFEFE] ${uploadComplete ? 'h-20 w-3/5' : 'h-72 w-full'}`}
+                            className={`relative flex items-center justify-center border bg-[#FEFEFE] rounded-lg ${uploadComplete ? 'h-20 w-3/5' : 'h-72 w-full'}`}
                             htmlFor="upload"
                         >
                             {uploadComplete ? (
@@ -114,15 +114,15 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
                     </article>
                 </form>
                 <div className="h-16 w-4/5 items-center md:w-2/5 gap-10 flex justify-end">
-                    <button 
+                    {/* <button 
                         name="Skip Now"
                         className='h-12 w-28 cursor-pointer rounded-lg border border-green-600'
                         onClick={() => nextStep()}
                     >
                         Skip Now
-                    </button>
+                    </button> */}
                     <button
-                        name="Next"
+                        name="Submit"
                         className='h-12 w-28 cursor-pointer rounded-lg bg-green-600 text-white'
                         onClick={() => nextStep()}
                     >
