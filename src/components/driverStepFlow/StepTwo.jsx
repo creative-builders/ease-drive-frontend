@@ -16,7 +16,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
    return(
     <div className='bg-[#F0F1F1] min-h-screen w-full flex flex-col items-center gap-5'>
        <header className='h-20 w-full flex items-center justify-around'>
-         <p className='ml-4 xl:ml-[-220px] uppercase md:uppercase text-2xl font-bold'>ease drive</p>
+         <p className='ml-4 xl:ml-[-220px] uppercase md:uppercase text-2xl font-bold'><Link to={"/"}>ease drive</Link></p>
          <ul className='h-16 w-96 hidden md:flex items-center justify-between'>
             <p>Already have an account?</p>
             <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
@@ -35,7 +35,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
        <section className='h-fit items-center md:h-108 w-full md:w-4/5 flex flex-col items-left justify-center gap-4  rounded-lg border-0 md:border border-green-600'>
          <p className='text-xl'>Identity Verification</p>
          <span className='text-left text-sm'>This Information will help us know you more</span>
-         <form className='h-full md:h-3/5 w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-4 relative' action="">
+        <div className='h-full md:h-3/5 w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-4 relative'>
             <article className='h-20 w-full flex flex-col items-left gap-2'>
                 <label htmlFor="identification">Means of Identification</label>
                 <select className='h-12 w-full border outline-none indent-3 rounded-lg'
@@ -75,8 +75,8 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
                   />
             </article>
 
-        </form>
-            <div className="h-16 w-3/4 items-center md:w-2/5 gap-10 flex justify-end  md:mt-[-80px] translate-x-0 md:translate-x-64">
+        </div>
+            <div className="h-16 w-3/4 items-center md:w-2/5 gap-10 flex justify-end  md:mt-[-80px] translate-x-0 md:translate-x-52">
                 <button 
                 name="Skip Now"
                 className='h-12 w-28 cursor-pointer rounded-lg border border-green-600'

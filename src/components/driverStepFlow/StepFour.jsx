@@ -39,7 +39,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
     return (
         <div className='min-h-screen w-full flex flex-col items-center gap-5 bg-[#F0F1F1]'>
             <header className='h-20 w-full flex items-center justify-around'>
-                <p className='ml-4 xl:ml-[-220px] uppercase md:uppercase text-2xl font-bold'>ease drive</p>
+                <p className='ml-4 xl:ml-[-220px] uppercase md:uppercase text-2xl font-bold'><Link to={"/"}>ease drive</Link></p>
                 <ul className='h-16 w-96 hidden md:flex items-center justify-between'>
                     <p>Already have an account?</p>
                     <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
@@ -126,7 +126,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
                         className='h-12 w-28 cursor-pointer rounded-lg bg-green-600 text-white'
                         onClick={() => nextStep()}
                     >
-                        Next
+                        Submit
                     </button>      
                 </div>
             </section>
