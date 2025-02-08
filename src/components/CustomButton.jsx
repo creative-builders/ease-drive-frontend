@@ -1,3 +1,4 @@
+import LoadingSpinner from "./LoadingSpinner";
 
 
 const CustomButton = ({
@@ -5,7 +6,8 @@ const CustomButton = ({
     name = "Book Now",
     size = "sm",
     className = "",
-    btnClick
+    btnClick,
+    isLoading=false
 }) => {
 
  const sizes = {
@@ -18,8 +20,8 @@ const CustomButton = ({
   return (
     <button 
      onClick={btnClick}
-     className={`${sizeClasses} ${className} ${extendedStyles} p-2 lg:p-4 inner-block rounded-lg bg-green-300 text-gray-100 font-bold `}>
-     {name}
+     className={`${sizeClasses} ${className} ${extendedStyles} p-3 lg:p-4 flex items-center justify-center rounded-lg bg-green-300 text-gray-100 font-bold `}>
+     {isLoading ? <LoadingSpinner className="animate-spin" /> : name}
     </button>
   )
 }
