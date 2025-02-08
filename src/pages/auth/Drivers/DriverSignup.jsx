@@ -15,7 +15,6 @@ const DriverSignup = () => {
    const nextStep = () => setStep(prev => prev + 1)
    const prevStep = () => setStep(prev => prev - 1)
 
-   console.log(step)
   return (
     <FormProvider initialInputFields={initialInputFields}>
     <div className="h-full w-full">
