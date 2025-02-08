@@ -15,7 +15,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
     <div>
        <form onSubmit={handleSubmit}>
        <div>
-           <div className="hidden lg:flex justify-center items-center gap-x-[42px]">
+           <div className="hidden lg:flex justify-end items-center gap-x-[42px]">
             <p>Already have have an account ?</p>
             <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
           </div>
@@ -55,7 +55,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
             <CustomButton
             name="Continue"
             extendedStyles={"w-full"}
-            // btnClick={() => nextStep()}
+            // isLoading={true}
             />
         </div>
         </div>
