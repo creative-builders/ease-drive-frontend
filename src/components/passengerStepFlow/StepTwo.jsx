@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
 import CustomButton from "../CustomButton"
 import SectionLabel from "../SectionLabel";
@@ -13,15 +14,20 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
   return (
     <div>
        <form onSubmit={handleSubmit}>
-       <div className="text-center mb-[29px]">
+       <div>
+           <div className="hidden lg:flex justify-center items-center gap-x-[42px]">
+            <p>Already have have an account ?</p>
+            <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
+          </div>
+          {/* show the current step */}
+         <div className="text-center mb-[29px]">
          <SectionLabel
             title={`${step} Step of ${totalSteps}`}
            />
          </div>
-
-       <div className="mb-4 flex gap-x-8">
-            <p onClick={() => prevStep()}>back</p>
-         <div className="basis-1/2">
+        <div className="mb-4 p-6 bg-white rounded-3xl">
+          <h3 className="text-xl lg:text-2xl mb-5 lg:mb-4 text-gray-900 font-normal text-center">You are almost there</h3>
+          <div className="mb-4">
              <label htmlFor="password">Password</label>
              <input 
              className="p-4 rounded-lg w-full bg-gray-300"
@@ -32,7 +38,8 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
               value={formData?.password}
              />
           </div>
-          <div className="basis-1/2">
+
+          <div className="mb-4">
             <label htmlFor="confirm-password">Confirm Password</label>
             <input 
             className="p-4 rounded-lg w-full bg-gray-300"
@@ -43,15 +50,17 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
             value={formData?.confirmPassword}
              />
             </div>
-        </div>
-        <div className="">
-            <CustomButton 
+
+            <div className="">
+            <CustomButton
             name="Continue"
-            extendedStyles={"w-full px-5 py-4 text-base lg:text-2xl"}
-            btnClick={() => console.log(formData)}
+            extendedStyles={"w-full"}
+            // btnClick={() => nextStep()}
             />
         </div>
-       </form>
+        </div>
+    </div>
+    </form>
     </div>
   )
 }
