@@ -2,6 +2,7 @@ import React from 'react';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import SectionLabel from '../SectionLabel';
 import CustomButton from "../CustomButton"
+import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 
 
@@ -13,7 +14,7 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
     <div className='min-h-screen bg-gray-500'>
       <div className="h-full w-full mx-auto xl:w-8/12 px-2 py-4">
        <header className='h-20 w-full flex items-center justify-around'>
-         <p className=' ml-[-220px] uppercase md:uppercase text-2xl font-bold'>ease drive</p>
+         <p className='ml-4 xl:ml-[-220px] uppercase md:uppercase text-2xl font-bold'>ease drive</p>
          <ul className='h-16 w-96 hidden md:flex items-center justify-between'>
             <p>Already have an account?</p>
             <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
@@ -25,7 +26,7 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
             title={`${step} Step of ${totalSteps}`}
            />
         </div>
-       <section className='h-fit md:h-108 w-full flex flex-col items-center justify-center gap-4'>
+       <section className='border-0 md:border border-green-600 h-fit p-4 w-full rounded-lg flex flex-col items-center justify-center gap-4'>
          <p className='text-2xl'>Let's get started</p>
          <span className='text-center text-sm'>Enter your name, phone number and email address,and <br /> we'll send you a four digit code to confirm it</span>
          <form className='h-fit md:h-3/5 w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-4' action="">
@@ -53,7 +54,7 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
            </article>
 
            <article className='h-20 w-full flex flex-col items-left gap-2'>
-            <label htmlFor="phone-number">phone number</label>
+            <label htmlFor="phone-number">Phone Number</label>
             <input className='h-12 w-full border outline-none indent-3 rounded-lg'
              type="number"
              name="phoneNumber"
@@ -96,16 +97,25 @@ const StepOne = ({ nextStep, step, totalSteps }) =>{
             />
            </article>
          </form>
-         <div className="line h-[20px] w-full flex justify-around items-center">
-         <span className=' border-b-2 w-2/5 border-black'></span> Or <span className=' border-b-2 w-2/5 border-black'></span>
-         </div>
-          {/* <button className='h-39 w-full  bg-gray-300 text-black cursor-pointer rounded-lg relative'><aside className='h-5 md:h-6 w-8 absolute left-12 md:left-80'><img className='object-contain h-full w-full' src="" alt="" /></aside> Contiue with Google</button> */}
          <CustomButton 
             name="Continue"
             extendedStyles={"w-full"}
             btnClick={() => nextStep()}
           />
-         <p className='pair text-sm hidden'>Already have an account? <a className='text-green-500' href="">Login</a></p>
+         <div className="line h-[20px] w-11/12 flex justify-around items-center">
+         <span className=' border-b-2 w-2/5 border-gray-600'></span> OR <span className=' border-b-2 w-2/5 border-gray-600'></span>
+         </div>
+          {/* <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div> */}
+          <button 
+            className="inline-block mb-2 w-full p-4 bg-gray-300 rounded-lg">
+              <span className="text-bold text-base text-gray-950 flex justify-center items-center gap-x-2">
+              <FcGoogle size={20} />
+              Continue with Google
+              </span>
+          </button>
+         <Link to={"/login"}>
+         <p className='pair text-sm md:hidden'>Already have an account? <a className='text-green-500' href="">Login</a></p>
+         </Link>
        </section> 
       </div>
     </div>

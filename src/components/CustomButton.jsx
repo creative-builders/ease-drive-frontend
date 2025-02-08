@@ -4,6 +4,7 @@ const CustomButton = ({
     extendedStyles,
     name = "Book Now",
     size = "sm",
+    className = "",
     btnClick
 }) => {
 
@@ -17,7 +18,7 @@ const CustomButton = ({
   return (
     <button 
      onClick={btnClick}
-     className={`${extendedStyles} ${sizeClasses} p-2 lg:p-4 inner-block rounded-lg bg-green-300 text-gray-100 font-bold `}>
+     className={`${sizeClasses} ${className} ${extendedStyles} p-2 lg:p-4 inner-block rounded-lg bg-green-300 text-gray-100 font-bold `}>
      {name}
     </button>
   )
