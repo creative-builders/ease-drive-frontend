@@ -6,13 +6,43 @@ import SectionLabel from '../../components/SectionLabel';
 import CustomButton from '../../components/CustomButton';
 import demoImage from "../../assets/images/city-ride-jeep.svg"
 import safetyImage from "../../assets/images/safety-image.svg"
+import headerBannerImage from "../../assets/images/header-banner-img.jpg"
+
 
 const Home = () => {
   const navigate = useNavigate();
   return (
     <>
-    <Header/>
-    <div className='border border-red-950 px-[4%] lg:px-[8%]'>
+     <div 
+      //  style={{background: `url(${headerBannerImage}) no-repeat lightgray center /cover`}}
+      className="h-screen relative mb-[56px]">
+        <div className="relative z-10">
+        <Header/>
+        </div>
+        <div className="relative z-10 flex h-full">
+          <div className="basis-[72%] m-auto">
+            <h2 className='mb-[18px] text-white font-bold text-[32px] lg:text-5xl'>
+            Go wherever, When whenever in luxury. 
+            </h2>
+            <p className='text-white text-base lg:text-2xl font-normal'>
+            This  is the all-in-one mobility website. Get picked up by a top-rated driver in minutes and enjoy a comfortable ride to wherever you’re going and skip the queue at the park.
+            </p>
+          </div>
+        </div>
+
+        {/* use for the header background */}
+       <div className=" absolute top-0 left-0  z-4 h-full border-red-900 border w-full">
+        <img src={headerBannerImage} className='w-full h-full object-cover' alt="" />
+       </div>
+       
+       {/* header section overlay */}
+       <span 
+          style={{background:`rgba(0, 0, 0, 0.2)`}}
+           className="absolute top-0 left-0 block h-full w-full z-8">
+          </span>
+     </div>
+
+    <div className='px-[4%] lg:px-[8%]'>
       {/* Landing page contents */}
       <section className='text-center mb-[126px]'>
         <h3 className='mb-2 lg:mb-4 text-gray-900 font-semibold text-xl lg:text-[32px]'>Why choose Easedrive</h3>
@@ -54,8 +84,6 @@ const Home = () => {
           <p className='lg:text-left mb-6'>We all share the responsibility for safety. Let's call this our safety pact – an agreement between passengers and drivers to ensure a safe ride for everyone</p>
           <CustomButton 
           extendedStyles={"lg:flex"}
-          title='No'
-          btnClick={() => navigate('/login')}
           />
           </div>
         </div>
