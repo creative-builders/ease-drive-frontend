@@ -13,10 +13,9 @@ const PassengersSignup = () => {
    const nextStep = () => setStep(prev => prev + 1)
    const prevStep = () => setStep(prev => prev - 1)
 
-   console.log(step)
   return (
     <FormProvider initialInputFields={initialInputFields}>
-    <div className="px-[4%] lg:px-[8%] py-[4%]">
+    <div className="px-[4%] lg:px-[8%] py-[4%] bg-gray-500">
         {step === 1 && <StepOne nextStep={nextStep} step={step} totalSteps={totalSteps} />}
         {step === 2 && <StepTwo nextStep={nextStep} prevStep={prevStep} step={step} totalSteps={totalSteps}/>}
     </div>
