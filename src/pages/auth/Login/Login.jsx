@@ -2,11 +2,13 @@ import { useState } from "react"
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import TabSelector from "../../../components/TabSelector/TabSelector";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 
 const Login = () => {
     const [activeTab,setActiveTab] = useState("Email Address");
     const tabs = ["Email Address", "Phone Number"]
+    const[togglePassword,setTogglePassword] = useState(false);
 
     const handleClick  = (tabName) => {
         setActiveTab(tabName)
@@ -15,6 +17,10 @@ const Login = () => {
         e.preventDefault()
     }
     
+    const handleTogglePassword = () => {
+        setTogglePassword(prev => !prev)
+    }
+
   return (
     <div className='min-h-screen bg-gray-500'>
         <div className='w-11/12 mx-auto xl:w-8/12 px-2 py-4'>
@@ -43,14 +49,21 @@ const Login = () => {
                     id={`${activeTab === "Email Address" ? "email" : "phoneNumber"}`} 
                      />
                 </div>
-                <div className="mb-[45px]">
+                  <div className="mb-[45px] relative">
                     <label className="text-gray-400 mb-2 block" htmlFor="password">Password</label>
                     <input 
                     className="p-4 rounded-lg w-full bg-gray-300"
-                    type="password"
+                    type={`${togglePassword ? "text" : "password"}`}
                     name="password"
                     id="password"
                      />
+
+                     <span 
+                     onClick={handleTogglePassword}
+                     className="inline-block border absolute right-4 top-1/2 cursor-pointer translate-y-1/2 -translate-y-1/2">
+                       {togglePassword ? <FiEyeOff fontSize={"18"}/> : <FiEye fontSize={"18"}/>}
+                     </span>
+
                 </div>
 
                 {/* Login Button */}

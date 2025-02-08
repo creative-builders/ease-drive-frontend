@@ -19,7 +19,7 @@ export default function Option() {
     <div className="h-screen lg:flex lg:flex-row lg:gap-x-[45px] lg:items-center">
       <div 
       style={{background:`linear-gradient(0deg, rgba(43, 170, 66, 0.44) 0%, rgba(43, 170, 66, 0.44) 100%), url(${leftCarImage}) lightgray bottom left / cover no-repeat`}}
-      className="mb-6 basis-1/2 h-[421px] lg:h-screen border border-red-900">
+      className="mb-6 basis-1/2 h-[421px] lg:h-screen">
         {/* <img  alt="" /> */}
       </div>
 
@@ -27,7 +27,7 @@ export default function Option() {
             <div className="hidden lg:flex justify-center items-center gap-x-[42px]">
                     <p>Already have have an account ?</p>
                     <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
-                </div>
+              </div>
 
               <h1 className='font-bold mb-8 text-gray-900 text-xl lg:text-2xl'>Sign up as a</h1>
               {/* Passenger Section */}

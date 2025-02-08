@@ -47,7 +47,6 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
         <div className="">
             <CustomButton 
             name="Continue"
-            size="md"
             extendedStyles={"w-full px-5 py-4 text-base lg:text-2xl"}
             btnClick={() => console.log(formData)}
             />
