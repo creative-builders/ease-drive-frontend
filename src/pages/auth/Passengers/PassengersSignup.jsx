@@ -15,7 +15,7 @@ const PassengersSignup = () => {
 
   return (
     <FormProvider initialInputFields={initialInputFields}>
-    <div className="min-h-screen px-[4%] lg:px-[8%] py-[4%] bg-gray-500">
+    <div className="bg-gray-500">
         {step === 1 && <StepOne nextStep={nextStep} step={step} totalSteps={totalSteps} />}
         {step === 2 && <StepTwo nextStep={nextStep} prevStep={prevStep} step={step} totalSteps={totalSteps}/>}
     </div>

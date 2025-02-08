@@ -54,8 +54,6 @@ const Home = () => {
           <p className='lg:text-left mb-6'>We all share the responsibility for safety. Let's call this our safety pact – an agreement between passengers and drivers to ensure a safe ride for everyone</p>
           <CustomButton 
           extendedStyles={"lg:flex"}
-          title='No'
-          btnClick={() => navigate('/login')}
           />
           </div>
         </div>
