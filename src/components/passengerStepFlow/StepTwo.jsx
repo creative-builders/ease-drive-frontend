@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
 import CustomButton from "../CustomButton"
 import SectionLabel from "../SectionLabel";
-
+import { FcGoogle } from "react-icons/fc";
+import signupLeftCar from "../../../src/assets/images/signup-left-car.jpg"
 
 const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
     const{ formData , handleUpdateFormData } = useStepFlowContext();
@@ -12,7 +13,17 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
     }
 
   return (
-    <div>
+     <div className="lg:flex gap-x-[128px]">
+       <div className="mb-[22px] relative z-4 basis-1/2">
+         <div className="h-full">
+         <img className="h-full w-full object-cover" src={signupLeftCar} alt="" />
+          <span 
+          style={{background:`rgba(43, 170, 66, 0.44)`}}
+           className="absolute top-0 left-0 block h-full w-full z-10">
+          </span>
+         </div>
+       </div>
+      <div className="basis-1/2 px-[24px] lg:px-0 lg:pr-[48px] lg:pt-[48px]">
        <form onSubmit={handleSubmit}>
        <div>
            <div className="hidden lg:flex justify-end items-center gap-x-[42px]">
@@ -51,17 +62,34 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
              />
             </div>
 
-            <div className="">
+            <div className="mb-4">
             <CustomButton
             name="Continue"
             extendedStyles={"w-full"}
             // isLoading={true}
             />
         </div>
+        {/* Or use Google auth */}
+                <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div>
+
+                {/* Google Login button*/}
+                <button 
+                 className="inline-block mb-16 lg:mb-0 w-full p-4 bg-gray-300 rounded-lg">
+                    <span className="text-bold text-base text-gray-950 flex justify-center items-center gap-x-2">
+                    <FcGoogle size={20} />
+                    Continue with Google
+                    </span>
+                </button>
+
+                <div className="lg:hidden flex justify-center gap-x-2">
+                    <p>Already have an account ?</p>
+                    <Link to="/login" className="text-green-300">Sign Up</Link>
+                </div>
         </div>
     </div>
     </form>
     </div>
+     </div>
   )
 }
 

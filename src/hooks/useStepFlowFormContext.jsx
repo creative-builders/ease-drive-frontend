@@ -19,7 +19,7 @@ const generateIntialState = () => {
     return initialState;
 }
 
-const[formData,setFormData] = useState(generateIntialState)
+const[formData,setFormData] = useState(generateIntialState);
 
 const handleUpdateFormData = (e) => {
     setFormData(prev => ({...prev,[e.target.name]:e.target.value}))
