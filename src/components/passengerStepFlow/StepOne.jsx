@@ -48,25 +48,25 @@ const StepOne = ({ nextStep, step, totalSteps }) => {
           </div>
           
           <div className="mb-4">
-            <label htmlFor="last-name">Phone Number</label>
+            <label htmlFor="phoneNumber">Phone Number</label>
             <input 
             className="p-4 rounded-lg w-full bg-gray-300"
-            type="text"
-            name="lastName"
-            id="last-name"
+            type="number"
+            name="phoneNumber"
+            id="phoneNumber"
             onChange={handleUpdateFormData}
-            value={formData.lastName}
+            value={formData.phoneNumber}
              />
             </div>
             <div className="mb-4">
-            <label htmlFor="last-name">Email</label>
+            <label htmlFor="email">Email</label>
             <input 
             className="p-4 rounded-lg w-full bg-gray-300"
-            type="text"
-            name="lastName"
-            id="last-name"
+            type="email"
+            name="email"
+            id="email"
             onChange={handleUpdateFormData}
-            value={formData.lastName}
+            value={formData.email}
              />
             </div>
 
