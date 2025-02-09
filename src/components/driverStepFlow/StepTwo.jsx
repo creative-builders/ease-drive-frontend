@@ -1,8 +1,9 @@
-import React from 'react';
+import { useState } from 'react';
 // import google from '/Google-icon.png';
 import { Link } from 'react-router-dom';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
-import CustomButton from '../CustomButton';
+// import CustomButton from '../CustomButton';
+import { CgChevronDown } from "react-icons/cg";
 import SectionLabel from '../SectionLabel';
 
 const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
@@ -12,6 +13,9 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
           e.preventDefault();
           console.log(formData)
         }
+
+        const [isOpen, setIsOpen] = useState(false)
+    
     
    return(
     <div className='bg-[#F0F1F1] min-h-screen w-full flex flex-col items-center gap-5'>
@@ -36,21 +40,28 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
          <p className='text-xl'>Identity Verification</p>
          <span className='text-left text-sm'>This Information will help us know you more</span>
         <div className='h-full md:h-3/5 w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-4 relative'>
-            <article className='h-20 w-full flex flex-col items-left gap-2'>
+            <article className='h-20 w-full flex flex-col items-left gap-2 relative'>
                 <label htmlFor="identification">Means of Identification</label>
                 <select className='h-12 w-full border outline-none indent-3 rounded-lg'
                   name="Identification"
                   id="identification"
                   onChange={handleUpdateFormData}
                   value={formData.Identification}
+                  onFocus={() => setIsOpen(true)}
+                  onBlur={() => setIsOpen(false)}
                  >
-                    <option value="" defaultValue></option>
-                    <option value="">NIN</option>
-                    <option value="">Driving Liesence</option>
-                    <option value="">Voters Card</option>
-                    <option value="">Birth Certificate</option>
-                    <option value="">International Passport</option>
+                   
+                    <option value="" defaultValue>Preference ID</option>
+                    <option value="NIN">NIN</option>
+                    <option value="Driving Liesence">Driving Liesence</option>
+                    <option value="Voters Card">Voters Card</option>
+                    <option value="Birth Certificate">Birth Certificate</option>
+                    <option value="International Passport">International Passport</option>
                 </select>
+                <CgChevronDown
+                 className={`absolute right-4 top-1/2 cursor-pointer translate-y-1/2 inline-block transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}
+                 fontSize={'18px'} 
+                />
             </article>
 
             <article className='h-20 w-full flex flex-col items-left gap-2'>
