@@ -42,7 +42,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
         <div className='h-full md:h-3/5 w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-4 relative'>
             <article className='h-20 w-full flex flex-col items-left gap-2 relative'>
                 <label htmlFor="identification">Means of Identification</label>
-                <select className='h-12 w-full border outline-none indent-3 rounded-lg'
+                <select className='h-12 w-full border outline-none gap-6 rounded-lg p-6'
                   name="Identification"
                   id="identification"
                   onChange={handleUpdateFormData}
@@ -66,7 +66,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
 
             <article className='h-20 w-full flex flex-col items-left gap-2'>
                 <label htmlFor="ID">Document ID</label>
-                <input className='h-12 w-full border outline-none indent-3 rounded-lg'
+                <input className='h-12 w-full border outline-none gap-6 rounded-lg p-6'
                  type="number"
                  name="Document ID"
                 id="ID"
@@ -77,7 +77,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
 
             <article className='h-20 w-full flex flex-col items-left gap-2'>
                 <label htmlFor="date">Date of Birth</label>
-                <input className='h-12 w-full border outline-none indent-3 rounded-lg'
+                <input className='h-12 w-full border outline-none gap-6 rounded-lg p-6'
                  type="date"
                  name="DOB"
                 id="date"
@@ -90,7 +90,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
             <div className="h-16 w-3/4 items-center md:w-2/5 gap-10 flex justify-end  md:mt-[-80px] translate-x-0 md:translate-x-52">
                 <button 
                 name="Skip Now"
-                className='h-12 w-28 cursor-pointer rounded-lg border border-green-600'
+                className='h-12 w-32 cursor-pointer rounded-lg border border-green-600 gap-0 lg:gap-2'
                 onClick={() => nextStep()}
                 >
                     Skip Now
@@ -98,7 +98,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) =>{
                 
                 <button
                     name="Next"
-                    className='h-12 w-28 cursor-pointer rounded-lg bg-green-600 text-white'
+                    className='h-12 w-32 cursor-pointer rounded-lg bg-green-600 text-white gap-0 lg:gap-2'
                     onClick={() => nextStep()}
                 >
                     Next

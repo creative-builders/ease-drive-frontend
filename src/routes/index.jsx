@@ -9,6 +9,9 @@ import DrivPlace from '../pages/auth/Drivers/DrivPlace';
 import PassengersSignup from '../pages/auth/Passengers/PassengersSignup';
 import Login from '../pages/auth/Login/Login';
 import DriverSignup from '../pages/auth/Drivers/DriverSignup';
+import { ForgotPassword } from '../pages/auth/Passengers/ForgotPassword';
+import { Otp } from '../pages/auth/Passengers/Otp';
+import { ChangePassword } from '../pages/auth/Passengers/ChangePassword';
 
 
 
@@ -27,6 +30,9 @@ const IndexRoute = () => {
       <Route path="/DriVerify" element={<DriVerify />} />
       <Route path="/DrivUpload" element={<DrivUpload />} />
       <Route path="/DrivPlace" element={<DrivPlace />} />
+      <Route path="/ForgotPassword" element={<ForgotPassword />} />
+      <Route path="/Otp" element={<Otp />} />
+      <Route path="/ChangePassword" element={<ChangePassword />} />
     </Routes>
     </Router>
   )
