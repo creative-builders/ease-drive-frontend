@@ -72,6 +72,6 @@ export const Otp = () => {
 }
 
 {/* <input className='h-14 w-[20%] rounded-md text-center text-[20px]' id="input" type="text" maxlength="1" />
-                <input className='h-14 w-[20%] rounded-md text-center text-[20px]' type="text" maxlength="1" />
-                <input className='h-14 w-[20%] rounded-md text-center text-[20px]' type="text" maxlength="1" />
-                <input className='h-14 w-[20%] rounded-md text-center text-[20px]' type="text" maxlength="1" /> */}
+    <input className='h-14 w-[20%] rounded-md text-center text-[20px]' type="text" maxlength="1" />
+    <input className='h-14 w-[20%] rounded-md text-center text-[20px]' type="text" maxlength="1" />
+    <input className='h-14 w-[20%] rounded-md text-center text-[20px]' type="text" maxlength="1" /> */}
