@@ -25,8 +25,8 @@ const IndexRoute = () => {
       <Route path="/" element={<Home />} />
       <Route path="/signup-as" element={<Options />} />
       <Route path="/login" element={<Login/>} />
-      <Route path="/passenger-signup" element={<PassengersSignup />} />
-      <Route path="/driver-signup" element={<DriverSignup />} />
+      <Route path="/PassengersSignup" element={<PassengersSignup />} />
+      <Route path="/driverSignup" element={<DriverSignup />} />
       <Route path="/DriVerify" element={<DriVerify />} />
       <Route path="/DrivUpload" element={<DrivUpload />} />
       <Route path="/DrivPlace" element={<DrivPlace />} />
