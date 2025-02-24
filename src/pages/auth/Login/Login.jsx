@@ -57,10 +57,11 @@ const Login = () => {
                     name="password"
                     id="password"
                      />
+                     <p className="absolute text-sm right-4 top-4/5 cursor-pointer"><Link to={"/ForgotPassword"}>ForgotPassword</Link></p>
 
                      <span 
                      onClick={handleTogglePassword}
-                     className="inline-block border absolute right-4 top-1/2 cursor-pointer translate-y-1/2 -translate-y-1/2">
+                     className="inline-block absolute right-4 top-1/2 cursor-pointer translate-y-1/2">
                        {togglePassword ? <FiEyeOff fontSize={"18"}/> : <FiEye fontSize={"18"}/>}
                      </span>
 
@@ -86,7 +87,7 @@ const Login = () => {
 
                 <div className="flex justify-center gap-x-2">
                     <p>Don't have an account ?</p>
-                    <Link to="/passenger-signup" className="text-green-300">Sign Up</Link>
+                    <Link to="/passengersSignup" className="text-green-300">Sign Up</Link>
                 </div>
 
             </form>

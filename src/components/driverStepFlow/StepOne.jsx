@@ -44,7 +44,7 @@ const handleToggleConfirmPassword = () => {
            <article className='h-20 w-full flex flex-col items-left gap-2'>
             <label htmlFor="first-name">First Name</label>
             <input 
-            className='h-12 w-full border outline-none indent-3 rounded-lg' 
+            className='h-12 w-full border outline-none p-4 lg:p-6 rounded-lg' 
             type="text"
              name="firstName"
              id="first-name"
@@ -55,7 +55,7 @@ const handleToggleConfirmPassword = () => {
 
            <article className='h-20 w-full flex flex-col items-left gap-2'>
             <label htmlFor="last-name">Last Name</label>
-            <input className='h-12 w-full border outline-none indent-3 rounded-lg'
+            <input className='h-12 w-full border outline-none p-4 lg:p-6 rounded-lg'
              type="text"
              name="lastName"
              id="last-name"
@@ -66,7 +66,7 @@ const handleToggleConfirmPassword = () => {
 
            <article className='h-20 w-full flex flex-col items-left gap-2'>
             <label htmlFor="phone-number">Phone Number</label>
-            <input className='h-12 w-full border outline-none indent-3 rounded-lg'
+            <input className='h-12 w-full border outline-none p-4 lg:p-6 rounded-lg'
              type="number"
              name="phoneNumber"
              id="phone-number"
@@ -77,7 +77,7 @@ const handleToggleConfirmPassword = () => {
 
            <article className='h-20 w-full flex flex-col items-left gap-2'>
             <label htmlFor="email">Email</label>
-            <input className='h-12 w-full border outline-none indent-3 rounded-lg'
+            <input className='h-12 w-full border outline-none p-4 lg:p-6 rounded-lg'
              type="email"
              name="email"
              id="email"
@@ -89,7 +89,7 @@ const handleToggleConfirmPassword = () => {
            <article className='pa md:h-20 w-full flex flex-col items-left gap-2 relative'>
               <label htmlFor="password">Password</label>
               <input
-                className='h-12 w-full border outline-none indent-3 rounded-lg'
+                className='h-12 w-full border outline-none p-4 lg:p-6 rounded-lg'
                 type={togglePassword ? "text" : "password"}
                 name="password"
                 id="password"
@@ -107,7 +107,7 @@ const handleToggleConfirmPassword = () => {
             <article className='pa h-20 w-full flex flex-col items-left gap-2 relative'>
               <label htmlFor="con-pass">Confirm password</label>
               <input
-                className='h-12 w-full border outline-none indent-3 rounded-lg'
+                className='h-12 w-full border outline-none p-4 lg:p-6 rounded-lg'
                 type={toggleConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
                 id="con-pass"
@@ -133,7 +133,7 @@ const handleToggleConfirmPassword = () => {
          </div>
           {/* <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div> */}
           <button 
-            className="inline-block mb-2 w-full p-4 bg-gray-300 rounded-lg">
+            className="inline-block mb-6 w-full p-6 gap-2 bg-gray-300 rounded-lg">
               <span className="text-bold text-base text-gray-950 flex justify-center items-center gap-x-2">
               <FcGoogle size={20} />
               Continue with Google
