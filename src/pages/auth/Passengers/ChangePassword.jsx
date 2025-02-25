@@ -85,22 +85,22 @@ export const ChangePassword = () => {
                     {toggleConfirmPassword ? <FiEyeOff fontSize={"18"} /> : <FiEye fontSize={"18"} />}
                     </span>
 
-                    {/* Password match message */}
                     {confirmPassword.length > 0 && password !== confirmPassword && (
                     <p className="text-red-500 text-sm mt-1">Passwords do not match</p>
                     )}
                 </div>
 
-                {/* Submit Button */}
+                <Link to={"/login"}>
                 <button
                     type="submit"
                     className={`inline-block mb-8 w-full p-4 rounded-lg transition-all duration-300 ${
-                    isFormValid ? "bg-green-600 hover:bg-green-700" : "bg-green-200 cursor-not-allowed"
+                    isFormValid ? "bg-green-500 hover:bg-green-700" : "bg-green-200 cursor-not-allowed"
                     }`}
                     disabled={!isFormValid}
                 >
                     <span className="text-bold text-base text-white">Submit</span>
                 </button>
+                </Link>
             </form>
         </div>
     </div>

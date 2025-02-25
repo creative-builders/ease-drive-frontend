@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 
 export const ForgotPassword = () => {
+
+    const [email, setEmail] = useState("");
+
+    const isValidEmail = (email) =>{
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
   return (
     <div className='min-h-screen bg-gray-500'>
         <div className='w-11/12 mx-auto xl:w-8/12 px-2 py-4'>
@@ -20,6 +26,7 @@ export const ForgotPassword = () => {
                     type="email"
                     name="email"
                     id="email"
+                    onChange={(e) => setEmail(e.target.value)}
                     // onChange={handleUpdateFormData}
                     // value={formData.email}
                     />
@@ -27,12 +34,14 @@ export const ForgotPassword = () => {
                 
                 {/* <div className="flex mb-4 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div> */}
 
+                <Link to={isValidEmail(email) ? '/Otp' : '#'} onChange={(e)=>!isValidEmail(email) && e.preventDefault()}>
                 <button 
-                 className="inline-block mb-8 w-full p-4 bg-green-200 rounded-lg">
-                    <Link to={'/Otp'}>
+                 className={`inline-block mb-8 w-full p-4 rounded-lg ${isValidEmail(email) ? "bg-green-500" : "bg-green-200 cursor-not-allowed"}`}
+                 disabled={!isValidEmail(email)}
+                 >
                     <span className="text-bold text-base text-white">Contiune</span>
-                    </Link>
                 </button>
+                </Link>
                 
 
                 

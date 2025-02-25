@@ -51,16 +51,16 @@ export const Otp = () => {
                     ))}
             </div>
 
+            <Link to={isOtpComplete ? "/ChangePassword" : "#"}>
             <button
                 className={`mb-8 w-full mx-auto p-4 rounded-lg ${
                     isOtpComplete ? "bg-green-500" : "bg-green-200 cursor-not-allowed"
                 }`}
                 disabled={!isOtpComplete}
                 >
-                <Link to={isOtpComplete ? "/ChangePassword" : "#"}>
                     <span className="font-bold text-base text-white">Continue</span>
-                </Link>
             </button>
+            </Link>
 
             <div className="flex justify-center gap-x-2">
                 <p className="details">Didn't receive the OTP? <a href="#" className="text-green-300" id="resendOtp">Resend OTP</a></p>
@@ -70,8 +70,3 @@ export const Otp = () => {
     </div>
   )
 }
-
-{/* <input className='h-14 w-[20%] rounded-md text-center text-[20px]' id="input" type="text" maxlength="1" />
-    <input className='h-14 w-[20%] rounded-md text-center text-[20px]' type="text" maxlength="1" />
-    <input className='h-14 w-[20%] rounded-md text-center text-[20px]' type="text" maxlength="1" />
-    <input className='h-14 w-[20%] rounded-md text-center text-[20px]' type="text" maxlength="1" /> */}
