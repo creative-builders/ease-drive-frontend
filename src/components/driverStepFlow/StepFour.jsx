@@ -56,7 +56,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
                     <article className='h-20 w-full flex flex-col items-left gap-2'>
                         <label htmlFor="place">Address</label>
                         <input placeholder='Enter your address' 
-                            className='h-12 w-full border outline-none indent-3 rounded-lg'
+                            className='h-12 w-full border outline-none p-6 rounded-lg'
                             type="text"
                             name="sectionAddress"
                             id="place"
