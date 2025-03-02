@@ -51,7 +51,7 @@ export const Otp = () => {
                     ))}
             </div>
 
-            <Link to={isOtpComplete ? "/ChangePassword" : "#"}>
+            <Link to={isOtpComplete ? "/Change-password" : "#"}>
             <button
                 className={`mb-8 w-full mx-auto p-4 rounded-lg ${
                     isOtpComplete ? "bg-green-500" : "bg-green-200 cursor-not-allowed"
