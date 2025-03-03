@@ -50,7 +50,7 @@ export const ChangePassword = () => {
                     />
                     <span
                     onClick={handleTogglePassword}
-                    className="inline-block absolute right-4 top-1/2 cursor-pointer translate-y-1/2"
+                     className="inline-block absolute lg:fixed right-4 lg:right-64 top-1/2 lg:top-[265px] cursor-pointer translate-y-1/2"
                     >
                     {togglePassword ? <FiEyeOff fontSize={"18"} /> : <FiEye fontSize={"18"} />}
                     </span>
@@ -106,3 +106,4 @@ export const ChangePassword = () => {
     </div>
   )
 }
+// className="inline-block absolute lg:fixed right-4 lg:right-64 top-1/2 lg:top-[42%] cursor-pointer translate-y-1/2"
