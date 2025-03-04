@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const StepThree = ({nextStep, prevStep, step , totalSteps}) => {
    // const [step, setStep] = useState(3);
    // const totalSteps = 4;
+  
 
    return (
       <div className='min-h-screen w-full flex flex-col items-center p-2 gap-5 bg-[#F0F1F1]'>
