@@ -83,7 +83,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
 
                 <div className="lg:hidden flex justify-center gap-x-2">
                     <p>Already have an account ?</p>
-                    <Link to="/login" className="text-green-300">Sign Up</Link>
+                    <Link to="/login" className="text-green-300">Login</Link>
                 </div>
         </div>
     </div>

@@ -3,34 +3,58 @@ import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import TabSelector from "../../../components/TabSelector/TabSelector";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { loginAuth } from "../../../store/auth/passenger/api";
+import { useMutation } from "@tanstack/react-query";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 
 const Login = () => {
     const [activeTab, setActiveTab] = useState("Email Address");
     const tabs = ["Email Address", "Phone Number"];
     const [togglePassword, setTogglePassword] = useState(false);
-    const [emailOrPhone, setEmailOrPhone] = useState(""); 
-    const [password, setPassword] = useState("");
+    // const [emailOrPhone, setEmailOrPhone] = useState(""); 
+    // const [password, setPassword] = useState("");
     const [isFormValid, setIsFormValid] = useState(false);
+    const [loginData, setLoginData] = useState({
+     email:"",
+     password:""
+    })
 
     const handleClick  = (tabName) => {
         setActiveTab(tabName);
-        setEmailOrPhone("");
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
+        // setEmailOrPhone("");
     };
     
     const handleTogglePassword = () => {
         setTogglePassword((prev) => !prev);
     };
 
-    useEffect(() => {
-        const isEmailValid = activeTab === "Email Address" ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailOrPhone) : true;
-        const isPhoneValid = activeTab === "Phone Number" ? /^[0-9]{10,}$/.test(emailOrPhone) : true;
-        const isPasswordValid = password.length >= 6;
-        setIsFormValid(emailOrPhone && password && (isEmailValid || isPhoneValid) && isPasswordValid);
-    }, [emailOrPhone, password, activeTab]);
+    const handleChange = (e) => {
+        setLoginData(prev => ({...prev,[e.target.name]:e.target.value}));
+    }
+
+    // useEffect(() => {
+    //     const isEmailValid = activeTab === "Email Address" ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailOrPhone) : true;
+    //     const isPhoneValid = activeTab === "Phone Number" ? /^[0-9]{10,}$/.test(emailOrPhone) : true;
+    //     const isPasswordValid = password.length >= 6;
+    //     setIsFormValid(emailOrPhone && password && (isEmailValid || isPhoneValid) && isPasswordValid);
+    // }, [emailOrPhone, password, activeTab]);
+
+    const { mutate:submitLogin, isLoading } = useMutation(loginAuth, {
+        onSuccess: (response) => {
+        //  toast.success(response?.message)
+        console.log(response?.message)
+        },
+        onError : (error) => {
+            console.log(error.message)
+        }
+    })
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log(loginData)
+        submitLogin(loginData)
+
+    };
 
     return (
         <div className='min-h-screen bg-gray-500'>
@@ -58,8 +82,9 @@ const Login = () => {
                             type={activeTab === "Email Address" ? "email" : "number"} 
                             name={activeTab === "Email Address" ? "email" : "phoneNumber"} 
                             id={activeTab === "Email Address" ? "email" : "phoneNumber"} 
-                            value={emailOrPhone}
-                            onChange={(e) => setEmailOrPhone(e.target.value)}
+                            value={loginData.email}
+                            // onChange={(e) => setEmailOrPhone(e.target.value)}
+                            onChange={handleChange}
                         />
                     </div>
 
@@ -70,8 +95,9 @@ const Login = () => {
                             type={togglePassword ? "text" : "password"}
                             name="password"
                             id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={loginData.password}
+                            // onChange={(e) => setPassword(e.target.value)}
+                            onChange={handleChange}
                         />
                         <p className="absolute text-sm right-4 top-4/5 mt-2 text-green-400 cursor-pointer">
                             <Link to={"/Forgot-password"}>Forgot Password</Link>
@@ -87,12 +113,13 @@ const Login = () => {
                     {/* Login Button */}
                     <button
                         type="submit"
-                        className={`inline-block mb-8 w-full p-4 rounded-lg transition-all duration-300 ${
-                            isFormValid ? "bg-green-500 hover:bg-green-700" : "bg-green-200 cursor-not-allowed"
-                        }`}
-                        disabled={!isFormValid}
+                        className={`bg-green-900 inline-block mb-8 w-full p-4 rounded-lg transition-all duration-300`
+                    }
+                        // disabled={!isFormValid}
                     >
-                        <span className="text-bold text-base text-white">Login to EaseDrive</span>
+                        <span className="text-bold text-base text-white">
+                       { isLoading ? <LoadingSpinner className="animate-spin"/> : "Login to EaseDrive"}
+                        </span>
                     </button>
 
                     {/* Or use Google auth */}
@@ -108,8 +135,8 @@ const Login = () => {
                     </button>
 
                     <div className="flex justify-center gap-x-2">
-                        <p>Don't have an account?</p>
-                        <Link to="/passengers-signup" className="text-green-300">Sign Up</Link>
+                        <p>Don &apos; t have an account?</p>
+                        <Link to="/signup-as" className="text-green-300">Sign Up </Link>
                     </div>
                 </form>
             </div>
