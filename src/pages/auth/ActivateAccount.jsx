@@ -6,10 +6,10 @@ const ActivateAccount = () => {
     const[searchParams] = useSearchParams();
 
     // GET the email and token from url
-    const email = searchParams.get("email");
+    // const email = searchParams.get("email");
     const token = searchParams.get("token");
 
-    const { isLoading, isError,isSuccess, error } = useQuery(["activateUser", { email ,token}],activateUser);
+    const { isLoading, isError,isSuccess, error } = useQuery(["activateUser", {token}],activateUser);
 
     // console.log(error)
 
