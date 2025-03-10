@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "react-router-dom";
+import {  useQuery } from "@tanstack/react-query";
+import { Link, useSearchParams } from "react-router-dom";
 import { activateUser } from "../../store/auth/general/api";
 
 const ActivateAccount = () => {
@@ -12,7 +11,7 @@ const ActivateAccount = () => {
 
     const { isLoading, isError,isSuccess, error } = useQuery(["activateUser", { email ,token}],activateUser);
 
-    console.log(error)
+    // console.log(error)
 
   return (
        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
@@ -24,12 +23,14 @@ const ActivateAccount = () => {
       ) : isSuccess ? (
         <div className="text-center">
           <h1 className="text-2xl font-bold text-green-600 animate-fade-in">🎉 Activation Successful!</h1>
-          <p className="text-gray-600 mt-2">You can now log in to your account.</p>
+          <p className="text-gray-600 mt-2 mb-4">You can now log in to your account.</p>
+          <Link className='text-gray-400 font-medium' to="/login">Proceed to Login</Link>
         </div>
       ) : isError ? (
         <div className="text-center">
           <h1 className="text-2xl font-bold text-red-600 animate-fade-in">❌ Activation Failed</h1>
-          <p className="text-gray-600 mt-2">{error?.response?.data?.message}</p>
+          <p className="text-gray-600 mt-2 mb-4">{error?.status === 404 ? error?.response?.data?.message : error?.message}</p>
+          <Link className='text-gray-400 font-medium' to="/login">Go back</Link>
         </div>
       ) : 
 
