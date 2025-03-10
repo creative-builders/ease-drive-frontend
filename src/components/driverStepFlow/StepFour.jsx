@@ -5,7 +5,7 @@ import Svg from '/Vector.svg'
 import SectionLabel from '../SectionLabel';
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
 
-const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
+const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
     const { formData, handleUpdateFormData } = useStepFlowContext();
     const [progress, setProgress] = useState(0);
     const [uploadComplete, setUploadComplete] = useState(false);
@@ -122,16 +122,21 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
                         Skip Now
                     </button> */}
                     <button
-                        name="Submit"
+                        type="submit"
+                        disabled={isLoading}
                         className='h-12 w-28 cursor-pointer rounded-lg bg-green-600 text-white'
                         onClick={() => nextStep()}
                     >
-                        Submit
-                    </button>      
+                        {isLoading ? "Submitting..." : "Submit"}
+                        
+                    </button>
+                    
                 </div>
             </section>
         </div>
     );
 };
-
+    {/* <button type="submit" disabled={isLoading}>
+    {isLoading ? "Submitting..." : "Submit"}
+    </button> */}
 export default StepFour;
