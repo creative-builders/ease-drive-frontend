@@ -12,6 +12,7 @@ import DriverSignup from '../pages/auth/Drivers/Driver-signup';
 import { ForgotPassword } from '../pages/auth/Passengers/Forgot-password';
 import { Otp } from '../pages/auth/Passengers/Otp';
 import { ChangePassword } from '../pages/auth/Passengers/Change-password';
+import ActivateAccount from '../pages/auth/ActivateAccount';
 
 
 
@@ -25,6 +26,7 @@ const IndexRoute = () => {
       <Route path="/" element={<Home />} />
       <Route path="/signup-as" element={<Options />} />
       <Route path="/login" element={<Login/>} />
+      <Route path="/activate" element={<ActivateAccount/>} />
       <Route path="/Passengers-signup" element={<PassengersSignup />} />
       <Route path="/driver-signup" element={<DriverSignup />} />
       <Route path="/DriVerify" element={<DriVerify />} />
