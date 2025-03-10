@@ -47,7 +47,7 @@ export default function Option() {
                     ? 'border-green-300'
                     : 'border-gray-300'
                 }`}
-                onClick={() => handleSelect('/passenger-signup')}
+                onClick={() => handleSelect('/passengers-signup')}
               >
                <div className="flex items-center">
                 <div className='basis-[calc(100%-54px)]'>
