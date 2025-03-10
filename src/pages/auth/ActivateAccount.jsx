@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {  useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { activateUser } from "../../store/auth/general/api";
 
@@ -12,7 +11,7 @@ const ActivateAccount = () => {
 
     const { isLoading, isError,isSuccess, error } = useQuery(["activateUser", { email ,token}],activateUser);
 
-    console.log(error)
+    // console.log(error)
 
   return (
        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
