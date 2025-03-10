@@ -117,7 +117,7 @@ const Login = () => {
                     }
                         // disabled={!isFormValid}
                     >
-                        <span className="text-bold text-base text-white">
+                        <span className="text-bold text-base text-white flex items-center justify-center">
                        { isLoading ? <LoadingSpinner className="animate-spin"/> : "Login to EaseDrive"}
                         </span>
                     </button>

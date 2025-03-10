@@ -1,10 +1,5 @@
-import axios from "axios"
-const baseUrl = import.meta.env.VITE_BASE_URL;
+import { axiosInstancePrivate } from "../general/api";
 
-export const axiosInstancePrivate = axios.create({
-    baseURL: baseUrl,
-    withCredentials: true
-  });
 
 
 //AUTH APIS
@@ -36,15 +31,6 @@ export const verifyResetPssowordOTP = async(credentials) => {
 export const resetPassword = async(credentials) => {
     const response = await axiosInstancePrivate.put(`/reset-password`, credentials);
     return response.data;
-}
-
-export const activateUser = async({ queryKey }) => {
-    const [_key, params]  =  queryKey;
-    const response = await axiosInstancePrivate.get(`/activate`, {
-        params
-    });
-    return response.data;
-    
 }
 
 
