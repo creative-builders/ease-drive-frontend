@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import TabSelector from "../../../components/TabSelector/TabSelector";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { loginAuth } from "../../../store/auth/passenger/api";
 import { useMutation } from "@tanstack/react-query";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import toast from "react-hot-toast";
 import GoogleAuth from "../../../components/GoogleAuth";
+import { loginAuth } from "../../../store/auth/general/api";
 
 const Login = () => {
     const navigate =  useNavigate();

@@ -4,9 +4,9 @@ import Header from '../../layout/header';
 import ServiceCard from '../../components/ServiceCard';
 import SectionLabel from '../../components/SectionLabel';
 import CustomButton from '../../components/CustomButton';
-import demoImage from "../../assets/images/city-ride-jeep.svg"
+import demoImage from "../../assets/images/keke-image.png"
 import safetyImage from "../../assets/images/safety-image.svg"
-import headerBannerImage from "../../assets/images/header-banner-img.jpg"
+import headerBannerImage from "../../assets/images/header-banner-img.png"
 
 
 const Home = () => {
