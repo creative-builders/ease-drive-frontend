@@ -13,6 +13,7 @@ import { ForgotPassword } from '../pages/auth/Passengers/Forgot-password';
 import { Otp } from '../pages/auth/Passengers/Otp';
 import { ChangePassword } from '../pages/auth/Passengers/Change-password';
 import ActivateAccount from '../pages/auth/ActivateAccount';
+import Dashboard from '../pages/dashboard';
 
 
 
@@ -35,6 +36,9 @@ const IndexRoute = () => {
       <Route path="/Forgot-password" element={<ForgotPassword />} />
       <Route path="/Otp" element={<Otp />} />
       <Route path="/Change-password" element={<ChangePassword />} />
+
+      {/* Dashboard Route */}
+      <Route path="/dashboard" element={<Dashboard/>} />
     </Routes>
     </Router>
   )
