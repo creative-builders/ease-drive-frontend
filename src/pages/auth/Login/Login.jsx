@@ -1,21 +1,19 @@
 import { useState, useEffect } from "react";
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import TabSelector from "../../../components/TabSelector/TabSelector";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { loginAuth } from "../../../store/auth/passenger/api";
 import { useMutation } from "@tanstack/react-query";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import toast from "react-hot-toast";
-import GoogleAuth from "./GoogleAuth";
+import GoogleAuth from "../../../components/GoogleAuth";
+import { loginAuth } from "../../../store/auth/general/api";
 
 const Login = () => {
     const navigate =  useNavigate();
     const [activeTab, setActiveTab] = useState("Email Address");
     const tabs = ["Email Address", "Phone Number"];
     const [togglePassword, setTogglePassword] = useState(false);
-    // const [emailOrPhone, setEmailOrPhone] = useState(""); 
-    // const [password, setPassword] = useState("");
     const [isFormValid, setIsFormValid] = useState(false);
     const [inputs, setInputs] = useState({
      email:"",
@@ -24,7 +22,6 @@ const Login = () => {
 
     const handleClick  = (tabName) => {
         setActiveTab(tabName);
-        // setEmailOrPhone("");
     };
     
     const handleTogglePassword = () => {
@@ -35,12 +32,12 @@ const Login = () => {
         setInputs(prev => ({...prev,[e.target.name]:e.target.value}));
     }
 
-    // useEffect(() => {
-    //     const isEmailValid = activeTab === "Email Address" ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailOrPhone) : true;
-    //     const isPhoneValid = activeTab === "Phone Number" ? /^[0-9]{10,}$/.test(emailOrPhone) : true;
-    //     const isPasswordValid = password.length >= 6;
-    //     setIsFormValid(emailOrPhone && password && (isEmailValid || isPhoneValid) && isPasswordValid);
-    // }, [emailOrPhone, password, activeTab]);
+    useEffect(() => {
+        const isEmailValid = activeTab === "Email Address" ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputs.email) : true;
+        const isPhoneValid = activeTab === "Phone Number" ? /^[0-9]{10,}$/.test(inputs.email) : true;
+        const isPasswordValid = inputs.password.length >= 6;
+        setIsFormValid(inputs.email && inputs.password && (isEmailValid || isPhoneValid) && isPasswordValid);
+    }, [inputs.email, inputs.password, activeTab]);
 
     const { mutate:submitLogin, isLoading } = useMutation(loginAuth, {
         onSuccess: (response) => {
@@ -60,7 +57,6 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(inputs)
         submitLogin(inputs)
 
     };
@@ -92,7 +88,6 @@ const Login = () => {
                             name={"email"} 
                             id={"email"} 
                             value={inputs.email}
-                            // onChange={(e) => setEmailOrPhone(e.target.value)}
                             onChange={handleChange}
                         />
                     </div>
@@ -105,7 +100,6 @@ const Login = () => {
                             name="password"
                             id="password"
                             value={inputs.password}
-                            // onChange={(e) => setPassword(e.target.value)}
                             onChange={handleChange}
                         />
                         <p className="absolute text-sm right-4 top-4/5 mt-2 text-green-400 cursor-pointer">
@@ -122,9 +116,10 @@ const Login = () => {
                     {/* Login Button */}
                     <button
                         type="submit"
-                        className={`bg-green-900 inline-block mb-8 w-full p-4 rounded-lg transition-all duration-300`
-                    }
-                        // disabled={!isFormValid}
+                       className={`inline-block mb-8 w-full p-4 rounded-lg transition-all duration-300 
+                        ${ isFormValid ? "bg-green-300 hover:bg-green-700" : "bg-green-200 cursor-not-allowed"}`
+                        }
+                        disabled={!isFormValid}
                     >
                         <span className="text-bold text-base text-white flex items-center justify-center">
                        { isLoading ? <LoadingSpinner className="animate-spin"/> : "Login to EaseDrive"}
@@ -144,7 +139,7 @@ const Login = () => {
                     </button> */}
 
                      {/* Google Login Component */}
-                    <div className="inline-block mb-16 w-full p-4 ">
+                    <div className="flex justify-center mb-16 p-4 ">
                     <GoogleAuth/>
                     </div>
 

@@ -13,8 +13,6 @@ export default function Option() {
     setSelectedOption(option);
   };
 
-  console.log(selectedOption)
-
   return (
     
     <div className="h-screen lg:flex lg:flex-row lg:gap-x-[45px] lg:items-center">
@@ -43,7 +41,7 @@ export default function Option() {
               {/* Passenger Section */}
               <div
                 className={`mb-8 min-h-[93px] border p-4 rounded-[20px] cursor-pointer ${
-                  selectedOption === '/passenger-signup'
+                  selectedOption === '/passengers-signup'
                     ? 'border-green-300'
                     : 'border-gray-300'
                 }`}
@@ -58,7 +56,6 @@ export default function Option() {
                   <BiChevronRight fontSize={"24px"}/>
                 </span>
                </div>
-                {/* <i className="pin absolute text-base right-1 top-8 fa fa-angle-right" aria-hidden="true"></i> */}
               </div>
 
               <div
@@ -81,7 +78,6 @@ export default function Option() {
                   <BiChevronRight fontSize={"24px"}/>
                 </span>
                </div>
-                {/* <i className="pin absolute text-base right-1 top-10 fa fa-angle-right" aria-hidden="true"></i> */}
               </div>
 
               <button
