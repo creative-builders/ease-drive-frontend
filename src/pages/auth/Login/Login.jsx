@@ -1,20 +1,23 @@
 import { useState, useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TabSelector from "../../../components/TabSelector/TabSelector";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { loginAuth } from "../../../store/auth/passenger/api";
 import { useMutation } from "@tanstack/react-query";
 import LoadingSpinner from "../../../components/LoadingSpinner";
+import toast from "react-hot-toast";
+import GoogleAuth from "./GoogleAuth";
 
 const Login = () => {
+    const navigate =  useNavigate();
     const [activeTab, setActiveTab] = useState("Email Address");
     const tabs = ["Email Address", "Phone Number"];
     const [togglePassword, setTogglePassword] = useState(false);
     // const [emailOrPhone, setEmailOrPhone] = useState(""); 
     // const [password, setPassword] = useState("");
     const [isFormValid, setIsFormValid] = useState(false);
-    const [loginData, setLoginData] = useState({
+    const [inputs, setInputs] = useState({
      email:"",
      password:""
     })
@@ -29,7 +32,7 @@ const Login = () => {
     };
 
     const handleChange = (e) => {
-        setLoginData(prev => ({...prev,[e.target.name]:e.target.value}));
+        setInputs(prev => ({...prev,[e.target.name]:e.target.value}));
     }
 
     // useEffect(() => {
@@ -41,18 +44,24 @@ const Login = () => {
 
     const { mutate:submitLogin, isLoading } = useMutation(loginAuth, {
         onSuccess: (response) => {
-        //  toast.success(response?.message)
-        console.log(response?.message)
+        toast.success(response?.message);
+        navigate("/dashboard");
+        setInputs( prev => ({
+        ...prev,
+        email:"",
+        password:""
+        }))
+
         },
         onError : (error) => {
-            console.log(error.message)
+        toast.error(error.message)
         }
     })
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(loginData)
-        submitLogin(loginData)
+        // console.log(inputs)
+        submitLogin(inputs)
 
     };
 
@@ -79,10 +88,10 @@ const Login = () => {
                         </label>
                         <input 
                             className="p-4 rounded-lg w-full bg-gray-300"
-                            type={activeTab === "Email Address" ? "email" : "number"} 
-                            name={activeTab === "Email Address" ? "email" : "phoneNumber"} 
-                            id={activeTab === "Email Address" ? "email" : "phoneNumber"} 
-                            value={loginData.email}
+                            type={activeTab === "Email Address" ? "email" : "tel"} 
+                            name={"email"} 
+                            id={"email"} 
+                            value={inputs.email}
                             // onChange={(e) => setEmailOrPhone(e.target.value)}
                             onChange={handleChange}
                         />
@@ -95,7 +104,7 @@ const Login = () => {
                             type={togglePassword ? "text" : "password"}
                             name="password"
                             id="password"
-                            value={loginData.password}
+                            value={inputs.password}
                             // onChange={(e) => setPassword(e.target.value)}
                             onChange={handleChange}
                         />
@@ -126,13 +135,18 @@ const Login = () => {
                     <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div>
 
                     {/* Google Login button */}
-                    <button 
+                    {/* <button 
                         className="inline-block mb-16 w-full p-4 bg-gray-300 rounded-lg">
                         <span className="text-bold text-base text-gray-950 flex justify-center items-center gap-x-2">
                             <FcGoogle size={20} />
                             Continue with Google
                         </span>
-                    </button>
+                    </button> */}
+
+                     {/* Google Login Component */}
+                    <div className="inline-block mb-16 w-full p-4 ">
+                    <GoogleAuth/>
+                    </div>
 
                     <div className="flex justify-center gap-x-2">
                         <p>Don &apos; t have an account?</p>

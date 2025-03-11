@@ -1,4 +1,5 @@
-import { axiosInstancePrivate } from "../auth/api";
+import { axiosInstancePrivate } from "../auth/passenger/api";
+
 
 
 
