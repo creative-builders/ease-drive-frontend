@@ -6,7 +6,7 @@ import Options from '../pages/auth/SignupOptions/Options';
 import DriVerify from '../pages/auth/Drivers/DriVerify';
 import DrivUpload from '../pages/auth/Drivers/DrivUpload';
 import DrivPlace from '../pages/auth/Drivers/DrivPlace';
-import PassengersSignup from '../pages/auth/Passengers/Passengers-signup';
+import PassengersSignup from '../pages/auth/Passengers/PassengersSignup';
 import Login from '../pages/auth/Login/Login';
 import DriverSignup from '../pages/auth/Drivers/Driver-signup';
 import { ForgotPassword } from '../pages/auth/Passengers/Forgot-password';
@@ -28,7 +28,7 @@ const IndexRoute = () => {
       <Route path="/signup-as" element={<Options />} />
       <Route path="/login" element={<Login/>} />
       <Route path="/activate" element={<ActivateAccount/>} />
-      <Route path="/Passengers-signup" element={<PassengersSignup />} />
+      <Route path="/passengers-signup" element={<PassengersSignup />} />
       <Route path="/driver-signup" element={<DriverSignup />} />
       <Route path="/DriVerify" element={<DriVerify />} />
       <Route path="/DrivUpload" element={<DrivUpload />} />

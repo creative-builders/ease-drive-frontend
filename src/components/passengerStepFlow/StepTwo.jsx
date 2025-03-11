@@ -4,12 +4,41 @@ import CustomButton from "../CustomButton"
 import SectionLabel from "../SectionLabel";
 import { FcGoogle } from "react-icons/fc";
 import signupLeftCar from "../../../src/assets/images/signup-left-car.jpg"
+import GoogleAuth from "../GoogleAuth";
+import { useMutation } from "@tanstack/react-query";
+import { passengerSignUpAuth } from "../../store/auth/passenger/api";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
-    const{ formData , handleUpdateFormData } = useStepFlowContext();
+    const{ formData , setFormData,  handleUpdateFormData } = useStepFlowContext();
+    const[isVerified,setIsVerified] = useState("");
+
+    
+    const {mutate:submitPassenDetails , isLoading } = useMutation(passengerSignUpAuth,{
+      onSuccess:(response) => {
+        setIsVerified(response?.message);
+        setFormData( prev => ({
+          ...prev,
+          firstName:"",
+          lastName:"",
+          phoneNumber:"",
+          email:"",
+          password:"",
+          confirmPassword:""
+        }))
+      },
+      onError: (error) => {
+        toast.error(error?.status >= 400 ? error?.response?.data?.message : error?.message)
+      }
+    })
     const handleSubmit  = (e) => {
       e.preventDefault();
-      console.log(formData)
+      submitPassenDetails({
+       ...formData,
+       role:"passenger"
+      });
+
     }
 
   return (
@@ -38,6 +67,11 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
          </div>
         <div className="mb-4 p-6 bg-white rounded-3xl">
           <h3 className="text-xl lg:text-2xl mb-5 lg:mb-4 text-gray-900 font-normal text-center">You are almost there</h3>
+
+          {/* check verification */}
+          {
+          isVerified && <div className="border border-green-300 rounded-md text-green-700 p-2 mb-4">{isVerified}</div>
+          }
           <div className="mb-4">
              <label htmlFor="password">Password</label>
              <input 
@@ -66,20 +100,23 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
             <CustomButton
             name="Continue"
             extendedStyles={"w-full"}
-            // isLoading={true}
+            isLoading={isLoading}
             />
         </div>
         {/* Or use Google auth */}
-                <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div>
+        <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div>
 
                 {/* Google Login button*/}
-                <button 
+                {/* <button 
                  className="inline-block mb-16 lg:mb-0 w-full p-4 bg-gray-300 rounded-lg">
                     <span className="text-bold text-base text-gray-950 flex justify-center items-center gap-x-2">
                     <FcGoogle size={20} />
                     Continue with Google
                     </span>
-                </button>
+                </button> */}
+                <div className="flex justify-center mb-16 p-4 ">
+                    <GoogleAuth/>
+                </div>
 
                 <div className="lg:hidden flex justify-center gap-x-2">
                     <p>Already have an account ?</p>
