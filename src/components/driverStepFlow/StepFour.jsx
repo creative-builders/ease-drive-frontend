@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Frame from '/Frame.png';
 import Svg from '/Vector.svg'
 import SectionLabel from '../SectionLabel';
+// import { useNavigate } from 'react-router-dom';
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
 
 const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
@@ -34,7 +35,14 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
                 setUploading(false);
             }
         }, 300);
-    };    
+    };  
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(loginData)
+        submitLogin(loginData)
+    };
+    
 
     return (
         <div className='min-h-screen w-full flex flex-col items-center gap-5 bg-[#F0F1F1]'>
@@ -52,7 +60,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
             <section className='h-fit items-center p-1 md:h-fit w-full md:w-4/5 flex flex-col items-left justify-center gap-4 mb-4 rounded-lg border-0 md:border border-green-600'>
                 <p className='text-xl'>Identity Verification</p>
                 <span className='text-center md:text-left text-sm'>This Information will help us know you more</span>
-                <form className='h-fit md:h-fit w-full p-4 flex flex-col gap-4 relative' action="">
+                <form onSubmit={handleSubmit} className='h-fit md:h-fit w-full p-4 flex flex-col gap-4 relative' action="">
                     <article className='h-20 w-full flex flex-col items-left gap-2'>
                         <label htmlFor="place">Address</label>
                         <input placeholder='Enter your address' 
@@ -136,7 +144,5 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
         </div>
     );
 };
-    {/* <button type="submit" disabled={isLoading}>
-    {isLoading ? "Submitting..." : "Submit"}
-    </button> */}
+  
 export default StepFour;

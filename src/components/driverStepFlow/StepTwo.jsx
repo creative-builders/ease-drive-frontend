@@ -47,7 +47,7 @@ const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
             >
               <option value="" disabled>Preference ID</option>
               <option value="NIN">NIN</option>
-              <option value="Driving License">Driving License</option>
+              <option value="Driving License">Driving Lisense</option>
               <option value="Voters Card">Voters Card</option>
               <option value="Birth Certificate">Birth Certificate</option>
               <option value="International Passport">International Passport</option>
