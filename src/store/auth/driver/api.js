@@ -8,7 +8,7 @@
 // }
 
 
-import { axiosInstancePrivate } from "../passenger/api";
+import { axiosInstancePrivate } from "../general/api";
 
 export const driverSignUpAuth = async (credentials) => {
     console.log("API Function Called with:", credentials); // Debugging log

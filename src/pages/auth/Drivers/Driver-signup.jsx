@@ -4,8 +4,8 @@ import StepTwo from '../../../components/driverStepFlow/StepTwo';
 import StepThree from '../../../components/driverStepFlow/StepThree';
 import StepFour from '../../../components/driverStepFlow/StepFour';
 import { FormProvider } from "../../../hooks/useStepFlowFormContext";
-import { useMutation } from "@tanstack/react-query"; 
-import { driverSignUpAuth } from "../../../store/auth/driver/api";
+// import { useMutation } from "@tanstack/react-query"; 
+// import { driverSignUpAuth } from "../../../store/auth/driver/api";
 
 const DriverSignupPage = () => {
    const [step, setStep] = useState(1);
@@ -17,38 +17,38 @@ const DriverSignupPage = () => {
       confirmPassword: "", Identification: "", documentID: "", DOB: "", sectionAddress: ""
    };
 
-   const [signupData, setSignupData] = useState(initialInputFields);
+   // const [signupData, setSignupData] = useState(initialInputFields);
 
    const nextStep = () => setStep((prev) => prev + 1);
    const prevStep = () => setStep((prev) => prev - 1);
 
    // Setup mutation using useMutation
-   const { mutate: submitSignup, isLoading } = useMutation(
-      (credentials) => driverSignUpAuth(credentials),
-      {
-         onSuccess: (response) => {
-            console.log("Signup successful:", response);
-            // Navigate to success page or next step if needed
-         },
-         onError: (error) => {
-            console.error("Signup failed:", error.response?.data || error.message);
-         },
-      }
-   );
+   // const { mutate: submitSignup, isLoading } = useMutation(
+   //    (credentials) => driverSignUpAuth(credentials),
+   //    {
+   //       onSuccess: (response) => {
+   //          console.log("Signup successful:", response);
+   //          // Navigate to success page or next step if needed
+   //       },
+   //       onError: (error) => {
+   //          console.error("Signup failed:", error.response?.data || error.message);
+   //       },
+   //    }
+   // );
 
-   const handleChange = (e) => {
-      const { name, value } = e.target;
-      setSignupData((prev) => ({
-         ...prev,
-         [name]: value
-      }));
-   };
+   // const handleChange = (e) => {
+   //    const { name, value } = e.target;
+   //    setSignupData((prev) => ({
+   //       ...prev,
+   //       [name]: value
+   //    }));
+   // };
 
-   const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log("Submitting API call with:", signupData); // Debugging log
-      submitSignup(signupData);
-   };
+   // const handleSubmit = (e) => {
+   //    e.preventDefault();
+   //    console.log("Submitting API call with:", signupData); // Debugging log
+   //    submitSignup(signupData);
+   // };
 
    return (
       <FormProvider initialInputFields={Object.keys(initialInputFields)}>
@@ -62,9 +62,9 @@ const DriverSignupPage = () => {
                   prevStep={prevStep}
                   step={step}
                   totalSteps={totalSteps}
-                  handleChange={handleChange}
-                  handleSubmit={handleSubmit}
-                  isLoading={isLoading}
+                  // handleChange={handleChange}
+                  // handleSubmit={handleSubmit}
+                  // isLoading={isLoading}
                />
             )}
          </div>

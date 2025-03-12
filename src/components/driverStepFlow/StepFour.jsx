@@ -3,15 +3,19 @@ import { Link } from 'react-router-dom';
 import Frame from '/Frame.png';
 import Svg from '/Vector.svg'
 import SectionLabel from '../SectionLabel';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
+import { useMutation } from "@tanstack/react-query";
+import { driverSignUpAuth } from "../../store/auth/driver/api";
+import toast from "react-hot-toast";
 
 const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
     const { formData, handleUpdateFormData } = useStepFlowContext();
     const [progress, setProgress] = useState(0);
     const [uploadComplete, setUploadComplete] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
-    const [uploading, setUploading] = useState(false);
+     const[isVerified,setIsVerified] = useState("");
+     const [uploading, setUploading] = useState(false);
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -37,12 +41,42 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
         }, 300);
     };  
     
-    const handleSubmit = (e) => {
+    const {mutate:submitPassenDetails , isLoading: isSubmitting} = useMutation(driverSignUpAuth,{
+          onSuccess:(response) => {
+          console.log(response?.message);
+            setIsVerified(response?.message);
+            setFormData( prev => ({
+              ...prev,
+                firstName: "", 
+                lastName: "", 
+                phoneNumber: "", 
+                email: "",
+                password: "",
+                confirmPassword: "", 
+                Identification: "", 
+                documentID: "", 
+                DOB: "", 
+                sectionAddress: ""
+            }))
+          },
+          onError: (error) => {
+            toast.error(error?.status >= 400 ? error?.response?.data?.message : error?.message)
+          }
+        })
+
+
+        const navigate = useNavigate();
+
+        const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(loginData)
-        submitLogin(loginData)
-    };
-    
+        submitPassenDetails({
+            ...formData,
+            role: "driver"
+        });
+         navigate('/login');
+        }
+
+        
 
     return (
         <div className='min-h-screen w-full flex flex-col items-center gap-5 bg-[#F0F1F1]'>
@@ -131,13 +165,13 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
                     </button> */}
                     <button
                         type="submit"
-                        disabled={isLoading}
+                        disabled={isSubmitting}
                         className='h-12 w-28 cursor-pointer rounded-lg bg-green-600 text-white'
-                        onClick={() => nextStep()}
+                        onClick={() => navigate('/login')}
                     >
-                        {isLoading ? "Submitting..." : "Submit"}
-                        
+                        {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
+
                     
                 </div>
             </section>

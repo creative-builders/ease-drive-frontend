@@ -1,27 +1,27 @@
 import { useState, useEffect } from "react";
-import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+// import { FcGoogle } from "react-icons/fc";
+import { Link, useNavigate } from "react-router-dom";
 import TabSelector from "../../../components/TabSelector/TabSelector";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { loginAuth } from "../../../store/auth/passenger/api";
 import { useMutation } from "@tanstack/react-query";
 import LoadingSpinner from "../../../components/LoadingSpinner";
+import toast from "react-hot-toast";
+import GoogleAuth from "../../../components/GoogleAuth";
+import { loginAuth } from "../../../store/auth/general/api";
 
 const Login = () => {
+    const navigate =  useNavigate();
     const [activeTab, setActiveTab] = useState("Email Address");
     const tabs = ["Email Address", "Phone Number"];
     const [togglePassword, setTogglePassword] = useState(false);
-    // const [emailOrPhone, setEmailOrPhone] = useState(""); 
-    // const [password, setPassword] = useState("");
     const [isFormValid, setIsFormValid] = useState(false);
-    const [loginData, setLoginData] = useState({
+    const [inputs, setInputs] = useState({
      email:"",
      password:""
     })
 
     const handleClick  = (tabName) => {
         setActiveTab(tabName);
-        // setEmailOrPhone("");
     };
     
     const handleTogglePassword = () => {
@@ -29,30 +29,35 @@ const Login = () => {
     };
 
     const handleChange = (e) => {
-        setLoginData(prev => ({...prev,[e.target.name]:e.target.value}));
+        setInputs(prev => ({...prev,[e.target.name]:e.target.value}));
     }
 
-    // useEffect(() => {
-    //     const isEmailValid = activeTab === "Email Address" ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailOrPhone) : true;
-    //     const isPhoneValid = activeTab === "Phone Number" ? /^[0-9]{10,}$/.test(emailOrPhone) : true;
-    //     const isPasswordValid = password.length >= 6;
-    //     setIsFormValid(emailOrPhone && password && (isEmailValid || isPhoneValid) && isPasswordValid);
-    // }, [emailOrPhone, password, activeTab]);
+    useEffect(() => {
+        const isEmailValid = activeTab === "Email Address" ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputs.email) : true;
+        const isPhoneValid = activeTab === "Phone Number" ? /^[0-9]{10,}$/.test(inputs.email) : true;
+        const isPasswordValid = inputs.password.length >= 6;
+        setIsFormValid(inputs.email && inputs.password && (isEmailValid || isPhoneValid) && isPasswordValid);
+    }, [inputs.email, inputs.password, activeTab]);
 
     const { mutate:submitLogin, isLoading } = useMutation(loginAuth, {
         onSuccess: (response) => {
-        //  toast.success(response?.message)
-        console.log(response?.message)
+        toast.success(response?.message);
+        navigate("/dashboard");
+        setInputs( prev => ({
+        ...prev,
+        email:"",
+        password:""
+        }))
+
         },
         onError : (error) => {
-            console.log(error.message)
+        toast.error(error.message)
         }
     })
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(loginData)
-        submitLogin(loginData)
+        submitLogin(inputs)
 
     };
 
@@ -79,11 +84,10 @@ const Login = () => {
                         </label>
                         <input 
                             className="p-4 rounded-lg w-full bg-gray-300"
-                            type={activeTab === "Email Address" ? "email" : "number"} 
-                            name={activeTab === "Email Address" ? "email" : "phoneNumber"} 
-                            id={activeTab === "Email Address" ? "email" : "phoneNumber"} 
-                            value={loginData.email}
-                            // onChange={(e) => setEmailOrPhone(e.target.value)}
+                            type={activeTab === "Email Address" ? "email" : "tel"} 
+                            name={"email"} 
+                            id={"email"} 
+                            value={inputs.email}
                             onChange={handleChange}
                         />
                     </div>
@@ -95,8 +99,7 @@ const Login = () => {
                             type={togglePassword ? "text" : "password"}
                             name="password"
                             id="password"
-                            value={loginData.password}
-                            // onChange={(e) => setPassword(e.target.value)}
+                            value={inputs.password}
                             onChange={handleChange}
                         />
                         <p className="absolute text-sm right-4 top-4/5 mt-2 text-green-400 cursor-pointer">
@@ -113,11 +116,12 @@ const Login = () => {
                     {/* Login Button */}
                     <button
                         type="submit"
-                        className={`bg-green-900 inline-block mb-8 w-full p-4 rounded-lg transition-all duration-300`
-                    }
-                        // disabled={!isFormValid}
+                       className={`inline-block mb-8 w-full p-4 rounded-lg transition-all duration-300 
+                        ${ isFormValid ? "bg-green-300 hover:bg-green-700" : "bg-green-200 cursor-not-allowed"}`
+                        }
+                        disabled={!isFormValid}
                     >
-                        <span className="text-bold text-base text-white">
+                        <span className="text-bold text-base text-white flex items-center justify-center">
                        { isLoading ? <LoadingSpinner className="animate-spin"/> : "Login to EaseDrive"}
                         </span>
                     </button>
@@ -126,13 +130,18 @@ const Login = () => {
                     <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div>
 
                     {/* Google Login button */}
-                    <button 
+                    {/* <button 
                         className="inline-block mb-16 w-full p-4 bg-gray-300 rounded-lg">
                         <span className="text-bold text-base text-gray-950 flex justify-center items-center gap-x-2">
                             <FcGoogle size={20} />
                             Continue with Google
                         </span>
-                    </button>
+                    </button> */}
+
+                     {/* Google Login Component */}
+                    <div className="flex justify-center mb-16 p-4 ">
+                    <GoogleAuth/>
+                    </div>
 
                     <div className="flex justify-center gap-x-2">
                         <p>Don &apos; t have an account?</p>
