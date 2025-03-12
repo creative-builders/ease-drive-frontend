@@ -115,7 +115,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
                     </span>
                 </button> */}
                 <div className="flex justify-center mb-16 p-4 ">
-                    <GoogleAuth/>
+                    <GoogleAuth role="passenger" />
                 </div>
 
                 <div className="lg:hidden flex justify-center gap-x-2">
