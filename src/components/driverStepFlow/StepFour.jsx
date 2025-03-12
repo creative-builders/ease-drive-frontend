@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 import Frame from '/Frame.png';
 import Svg from '/Vector.svg'
 import SectionLabel from '../SectionLabel';
-import { useNavigate } from 'react-router-dom';
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
 import { useMutation } from "@tanstack/react-query";
 import { driverSignUpAuth } from "../../store/auth/driver/api";
 import toast from "react-hot-toast";
 
-const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
+const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
     const { formData, handleUpdateFormData } = useStepFlowContext();
     const [progress, setProgress] = useState(0);
     const [uploadComplete, setUploadComplete] = useState(false);
@@ -41,11 +40,11 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
         }, 300);
     };  
     
-    const {mutate:submitPassenDetails , isLoading: isSubmitting} = useMutation(driverSignUpAuth,{
+    const {mutate:submitdriverSignUpAuth , isLoading} = useMutation(driverSignUpAuth,{
           onSuccess:(response) => {
           console.log(response?.message);
-            setIsVerified(response?.message);
-            setFormData( prev => ({
+          setIsVerified(response?.message);
+          setFormData( prev => ({
               ...prev,
                 firstName: "", 
                 lastName: "", 
@@ -53,10 +52,11 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
                 email: "",
                 password: "",
                 confirmPassword: "", 
-                Identification: "", 
+                documentType: "", 
                 documentID: "", 
-                DOB: "", 
-                sectionAddress: ""
+                dob: "", 
+                sectionAddress: "",
+                documentURL: ""
             }))
           },
           onError: (error) => {
@@ -65,18 +65,18 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
         })
 
 
-        const navigate = useNavigate();
+        
 
         const handleSubmit = (e) => {
         e.preventDefault();
-        submitPassenDetails({
+        submitdriverSignUpAuth({
             ...formData,
             role: "driver"
         });
-         navigate('/login');
+       
         }
 
-        
+        console.log(formData)
 
     return (
         <div className='min-h-screen w-full flex flex-col items-center gap-5 bg-[#F0F1F1]'>
@@ -95,6 +95,11 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
                 <p className='text-xl'>Identity Verification</p>
                 <span className='text-center md:text-left text-sm'>This Information will help us know you more</span>
                 <form onSubmit={handleSubmit} className='h-fit md:h-fit w-full p-4 flex flex-col gap-4 relative' action="">
+
+                     {/* check verification */}
+                    {
+                    isVerified && <div className="border border-green-300 rounded-md text-green-700 p-2 mb-4">{isVerified}</div>
+                    }
                     <article className='h-20 w-full flex flex-col items-left gap-2'>
                         <label htmlFor="place">Address</label>
                         <input placeholder='Enter your address' 
@@ -114,8 +119,8 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
                             id="upload"
                             required
                             hidden
-                            name="picture"
                             onChange={handleFileChange}
+                            // value={formData.documentURL}
                         />
                         <label
                             className={`relative flex items-center justify-center border bg-[#FEFEFE] rounded-lg ${uploadComplete ? 'h-20 w-3/5' : 'h-72 w-full'}`}
@@ -154,6 +159,13 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
                             </p>
                         )}
                     </article>
+
+                    <button
+                        className='h-12 w-28 cursor-pointer rounded-lg bg-green-600 text-white'
+                        isLoading={isLoading}
+                    >
+                        submit
+                    </button>
                 </form>
                 <div className="h-16 w-4/5 items-center md:w-2/5 gap-10 flex justify-end">
                     {/* <button 
@@ -163,16 +175,8 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps, isLoading }) => {
                     >
                         Skip Now
                     </button> */}
-                    <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className='h-12 w-28 cursor-pointer rounded-lg bg-green-600 text-white'
-                        onClick={() => navigate('/login')}
-                    >
-                        {isSubmitting ? "Submitting..." : "Submit"}
-                    </button>
 
-                    
+                
                 </div>
             </section>
         </div>

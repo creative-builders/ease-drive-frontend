@@ -28,7 +28,7 @@ const StepThree = ({nextStep, prevStep, step , totalSteps}) => {
                <article className='h-20 w-full flex flex-col items-left gap-2'>
                   <label htmlFor="place">Address</label>
                   <select className='h-12 w-full border outline-none indent-3 rounded-lg'
-                     name="sectionAddress"
+                     name=" documentURL"
                      id="place"
                   >
                      <option value="" defaultValue></option>
