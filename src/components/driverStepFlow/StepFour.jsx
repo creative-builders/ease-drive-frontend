@@ -7,9 +7,10 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
 import { useMutation } from "@tanstack/react-query";
 import { driverSignUpAuth } from "../../store/auth/driver/api";
 import toast from "react-hot-toast";
+import CustomButton from "../CustomButton"
 
 const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
-    const { formData, handleUpdateFormData } = useStepFlowContext();
+   const{ formData , setFormData,  handleUpdateFormData } = useStepFlowContext();
     const [progress, setProgress] = useState(0);
     const [uploadComplete, setUploadComplete] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
@@ -63,9 +64,6 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
             toast.error(error?.status >= 400 ? error?.response?.data?.message : error?.message)
           }
         })
-
-
-        
 
         const handleSubmit = (e) => {
         e.preventDefault();
@@ -160,12 +158,19 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
                         )}
                     </article>
 
-                    <button
+                    {/* <button
                         className='h-12 w-28 cursor-pointer rounded-lg bg-green-600 text-white'
                         isLoading={isLoading}
                     >
                         submit
-                    </button>
+                    </button> */}
+                    <div className="mb-4">
+                        <CustomButton
+                        name="submit"
+                        // extendedStyles={"w-full"}
+                        isLoading={isLoading}
+                        />
+                    </div>
                 </form>
                 <div className="h-16 w-4/5 items-center md:w-2/5 gap-10 flex justify-end">
                     {/* <button 
