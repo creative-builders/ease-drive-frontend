@@ -7,7 +7,7 @@ export const Otp = () => {
 
     const [formData] = useState({ email: "" });
 
-    localStorage.setItem("userEmail", formData.email);
+    localStorage.getItem("userEmail", formData.email);
 
     const [otp, setOtp] = useState(["", "", "", ""]);
     const navigate = useNavigate();

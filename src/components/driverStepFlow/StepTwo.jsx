@@ -38,16 +38,16 @@ const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
             <label htmlFor="identification">Means of Identification</label>
             <select
               className='h-20 w-full border outline-none gap-6 rounded-lg'
-              name="Identification"
+              name="documentType"
               id="identification"
               onChange={handleUpdateFormData}
-              value={formData.Identification || ""}
+              value={formData.documentType || ""}
               onFocus={() => setIsOpen(true)}
               onBlur={() => setIsOpen(false)}
             >
               <option value="" disabled>Preference ID</option>
               <option value="NIN">NIN</option>
-              <option value="Driving License">Driving License</option>
+              <option value="Driving License">Driving Lisense</option>
               <option value="Voters Card">Voters Card</option>
               <option value="Birth Certificate">Birth Certificate</option>
               <option value="International Passport">International Passport</option>
@@ -60,26 +60,26 @@ const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
           </article>
 
           <article className='h-20 w-full flex flex-col items-left gap-2'>
-            <label htmlFor="ID">Document ID</label>
+            <label htmlFor="documentID">Document ID</label>
             <input
-              className='h-12 w-full border outline-none gap-6 rounded-lg p-6'
+              className='h-12 w-full border outline-none gap-6 rounded-lg'
               type="number"
-              name="Document ID"
-              id="ID"
+              name="documentID"
+              id="documentID"
               onChange={handleUpdateFormData}
-              value={formData["Document ID"] || ""}
+              value={formData.documentID || ""}
             />
           </article>
 
           <article className='h-20 w-full flex flex-col items-left gap-2'>
             <label htmlFor="date">Date of Birth</label>
             <input
-              className='h-12 w-full border outline-none gap-6 rounded-lg p-6'
+              className='h-12 w-full border outline-none gap-6 rounded-lg'
               type="date"
-              name="DOB"
+              name="dob"
               id="date"
               onChange={handleUpdateFormData}
-              value={formData.DOB || ""}
+              value={formData.dob || ""}
             />
           </article>
         </div>
