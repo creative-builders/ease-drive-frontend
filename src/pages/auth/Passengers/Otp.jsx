@@ -63,8 +63,8 @@ export const Otp = () => {
                     <span className="text-gray-600 mb-16">Enter the OTP sent to <span className="link">{ formData.email}</span></span>
                 </div>
                 
-                <form onSubmit={handleSubmit}>
-                    <div className="h-16 w-full md:w-2/5 flex items-center justify-around mt-10 mb-10 mx-auto">
+                <form className='md:w-3/5 m-auto' onSubmit={handleSubmit}>
+                    <div className="h-16 w-full  flex items-center justify-around mt-10 mb-10 mx-auto">
                         {otp.map((digit, index) => (
                             <input
                                 key={index}
@@ -80,7 +80,7 @@ export const Otp = () => {
                     <Link to="/Change-password" className="text-blue-500 underline">
                         <button
                             type="submit"
-                            className={`mb-8 w-full mx-auto p-4 rounded-lg ${
+                            className={`mb-8 w-full  p-4 rounded-lg ${
                                 isOtpComplete ? "bg-green-500" : "bg-green-200 cursor-not-allowed"
                             }`}
                             disabled={!isOtpComplete || isLoading}
