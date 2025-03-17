@@ -9,7 +9,7 @@ export const Otp = () => {
 
     localStorage.getItem("userEmail", formData.email);
 
-    const [otp, setOtp] = useState(["", "", "", ""]);
+    const [otp, setOtp] = useState(["", "", "", "",""]);
     const navigate = useNavigate();
 
     const handleChange = (index, e) => {
@@ -20,7 +20,7 @@ export const Otp = () => {
         newOtp[index] = value;
         setOtp(newOtp);
     
-        if (value && index < 3) {
+        if (value && index < 4) {
             document.getElementById(`otp-${index + 1}`).focus();
         }
     
@@ -69,7 +69,7 @@ export const Otp = () => {
                             <input
                                 key={index}
                                 id={`otp-${index}`}
-                                className="h-14 w-[20%] rounded-md text-center text-[20px] border border-gray-300 focus:border-green-500 focus:outline-none"
+                                className="h-14 w-[15%] rounded-md text-center text-[20px] border border-gray-300 focus:border-green-500 focus:outline-none"
                                 type="text"
                                 maxLength="1"
                                 value={digit}
