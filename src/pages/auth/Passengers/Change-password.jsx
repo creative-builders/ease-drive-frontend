@@ -32,7 +32,7 @@ export const ChangePassword = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isFormValid) {
-            submitResetPassword({ password: formData.password });
+            submitResetPassword({ newPassword: formData.password, confirmNewPassword: formData?.confirmPassword });
         }
     };
 
