@@ -66,13 +66,19 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
         })
 
         const handleSubmit = (e) => {
-        e.preventDefault();
-        submitdriverSignUpAuth({
-            ...formData,
-            role: "driver"
-        });
-       
-        }
+            e.preventDefault();
+        
+            if (!formData.sectionAddress || !selectedFile) {
+                toast.error("Please Fill in the necessary spaces");
+                return;
+            }
+        
+            submitdriverSignUpAuth({
+                ...formData,
+                role: "driver"
+            });
+        };
+        
 
         console.log(formData)
 
@@ -115,7 +121,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
                             type="file"
                             accept=".pdf, .doc, .docx, .xls, .xlsx, .txt, .png, .jpg, .jpeg, .gif, .svg"
                             id="upload"
-                            required
+                            // required
                             hidden
                             onChange={handleFileChange}
                             // value={formData.documentURL}

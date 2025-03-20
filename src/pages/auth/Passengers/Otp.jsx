@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { verifyResetPssowordOTP } from '../../../store/auth/otp/api';
+import toast from "react-hot-toast";
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export const Otp = () => {
 
     const [formData] = useState({ email: "" });
+    const [isVerified, setIsVerified] = useState(false);
 
-    localStorage.getItem("userEmail", formData.email);
+    let email = localStorage.getItem("userEmail");
 
     const [otp, setOtp] = useState(["", "", "", "",""]);
     const navigate = useNavigate();
@@ -32,13 +35,14 @@ export const Otp = () => {
     const isOtpComplete = otp.every((digit) => digit !== "");
 
     const { mutate: submitverifyResetPssowordOTP, isLoading } = useMutation(verifyResetPssowordOTP, {
+        
         onSuccess: (response) => {
-            // alert("OTP Verified Successfully!");
+            setIsVerified(true);
             navigate("/Change-password");
             
         },
         onError: (error) => {
-            alert(error?.response?.data?.message || "Invalid OTP. Please try again.");
+           toast.error(error?.response?.data?.message === "Token has Expired"? `${error?.response?.data?.message} re-enter email to get new otp` : error?.response?.data?.message)
         },
     });
 
@@ -60,7 +64,7 @@ export const Otp = () => {
                 </h2>
                 <div className="headingitems">
                     <p className="mb-4 text-xl text-gray-950 font-bold">OTP Verification</p>
-                    <span className="text-gray-600 mb-16">Enter the OTP sent to <span className="link">{ formData.email}</span></span>
+                    <span className="text-gray-600 mb-16">Enter the OTP sent to <span className="link">{ email}</span></span>
                 </div>
                 
                 <form className='md:w-3/5 m-auto' onSubmit={handleSubmit}>
@@ -77,7 +81,7 @@ export const Otp = () => {
                             />
                         ))}
                     </div>
-                    <Link to="/Change-password" className="text-blue-500 underline">
+                    {/* <Link to="/Change-password" className="text-blue-500 underline"> */}
                         <button
                             type="submit"
                             className={`mb-8 w-full  p-4 rounded-lg ${
@@ -85,9 +89,11 @@ export const Otp = () => {
                             }`}
                             disabled={!isOtpComplete || isLoading}
                         >
-                            {isLoading ? "Verifying..." : <span className="font-bold text-base text-white">Continue</span>}
+                            <span className="text-bold text-base text-white flex items-center justify-center">
+                            { isLoading ? <LoadingSpinner className="animate-spin"/> : "Continue"}
+                            </span>
                         </button>
-                    </Link>
+                    {/* </Link> */}
                 </form>
 
                 <div className="flex justify-center gap-x-2">
