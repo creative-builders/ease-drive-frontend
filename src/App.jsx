@@ -2,10 +2,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Routes from "./routes";
 import { Toaster } from "react-hot-toast";
-// import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 
-// const clientId = import.meta.env.VITE_GOOLE_CLIENT_ID;
+const clientId = import.meta.env.VITE_GOOLE_CLIENT_ID;
 
 
 const App = () => {
@@ -16,10 +16,10 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <GoogleOAuthProvider clientId={clientId}> */}
+      <GoogleOAuthProvider clientId={clientId}>
       <Toaster position="top-left" reverseOrder={false}></Toaster>
       <Routes/>
-      {/* </GoogleOAuthProvider> */}
+      </GoogleOAuthProvider>
     </QueryClientProvider>
   );
 };
