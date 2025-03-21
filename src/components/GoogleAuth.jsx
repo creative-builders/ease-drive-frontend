@@ -7,8 +7,10 @@ import toast from "react-hot-toast";
 const clientId = import.meta.env.VITE_GOOLE_CLIENT_ID;
 // const clientId = "YOUR_GOOGLE_CLIENT_ID";
 
-const GoogleAuth = () => {
-    const navigate = useNavigate()
+const GoogleAuth = ({
+  role = "passenger"
+}) => {
+  const navigate = useNavigate()
   const handleSuccess = async (response) => {
     try {
       const { credential } = response;
@@ -16,7 +18,7 @@ const GoogleAuth = () => {
       console.log(credential)
       
       // Send token to backend for verification
-      const res = await axiosInstancePrivate.post("/auth/google", { token: credential });
+      const res = await axiosInstancePrivate.post("/auth/google", { token: credential, role });
 
       // Store JWT Token & User Data in Local Storage
       localStorage.setItem("token", res.data.token);
