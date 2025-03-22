@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useMutation } from "@tanstack/react-query";
 import { resetPassword } from '../../../store/auth/changePass/api';
+import toast from "react-hot-toast";
 
 export const ChangePassword = () => {
     const navigate = useNavigate();
@@ -13,19 +14,19 @@ export const ChangePassword = () => {
     const handleTogglePassword = () => setTogglePassword(prev => !prev);
     const handleToggleConfirmPassword = () => setToggleConfirmPassword(prev => !prev);
 
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
+    // Updated regex to only check for a minimum length of 6 characters
+    const passwordRegex = /^.{6,}$/;
     const isPasswordValid = passwordRegex.test(formData.password);
     const doPasswordsMatch = formData.password === formData.confirmPassword;
     const isFormValid = isPasswordValid && doPasswordsMatch;
-    console.log(isPasswordValid)
-
+    
     const { mutate: submitResetPassword, isLoading } = useMutation(resetPassword, {
         onSuccess: () => {
             setFormData({ password: "", confirmPassword: "" });
             navigate("/login");
         },
         onError: (error) => {
-            alert(error?.response?.data?.message || "An error occurred");
+            toast.error(error?.response?.data?.message)
         }
     });
 

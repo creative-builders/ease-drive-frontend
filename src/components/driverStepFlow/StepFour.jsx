@@ -8,6 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import { driverSignUpAuth } from "../../store/auth/driver/api";
 import toast from "react-hot-toast";
 import CustomButton from "../CustomButton"
+import backIcon from "../../assets/images/Frame.png";
 
 const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
    const{ formData , setFormData,  handleUpdateFormData } = useStepFlowContext();
@@ -66,13 +67,32 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
         })
 
         const handleSubmit = (e) => {
-        e.preventDefault();
-        submitdriverSignUpAuth({
-            ...formData,
-            role: "driver"
-        });
-       
-        }
+            e.preventDefault();
+        
+            // Check if all fields are empty
+            const isEmptyForm = Object.values(formData).every(value => value.trim() === "");
+        
+            if (isEmptyForm) {
+                toast.error("Fill in the necessary spaces");
+                return;
+            }
+        
+            // Check for specific empty fields
+            const emptyFields = Object.entries(formData).filter(([key, value]) => value.trim() === "");
+        
+            if (emptyFields.length > 0) {
+                emptyFields.forEach(([key]) => {
+                    toast.error(`Please fill in the ${key}`);
+                });
+                return;
+            }
+        
+            submitdriverSignUpAuth({
+                ...formData,
+                role: "driver"
+            });
+        };
+        
 
         console.log(formData)
 
@@ -85,6 +105,13 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
                     <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
                 </ul>
             </header>
+            <img 
+            className='ml-4 xl:ml-[-20px] h-5 cursor-pointer' 
+            src={backIcon} 
+            alt="Back Icon" 
+            onClick={prevStep} 
+            />
+
             <div className="text-center mb-[29px]">
                 <SectionLabel title={`${step} Step of ${totalSteps}`} />
             </div>
@@ -115,7 +142,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
                             type="file"
                             accept=".pdf, .doc, .docx, .xls, .xlsx, .txt, .png, .jpg, .jpeg, .gif, .svg"
                             id="upload"
-                            required
+                            // required
                             hidden
                             onChange={handleFileChange}
                             // value={formData.documentURL}

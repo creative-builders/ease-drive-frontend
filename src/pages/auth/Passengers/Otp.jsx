@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { verifyResetPssowordOTP } from '../../../store/auth/otp/api';
+import LoadingSpinner from "../../../components/LoadingSpinner";
+import toast from "react-hot-toast";
 
 export const Otp = () => {
 
@@ -33,12 +35,11 @@ export const Otp = () => {
 
     const { mutate: submitverifyResetPssowordOTP, isLoading } = useMutation(verifyResetPssowordOTP, {
         onSuccess: (response) => {
-            // alert("OTP Verified Successfully!");
             navigate("/Change-password");
             
         },
         onError: (error) => {
-            alert(error?.response?.data?.message || "Invalid OTP. Please try again.");
+            toast.error(`${error?.response?.data?.message}`)
         },
     });
 
@@ -46,7 +47,7 @@ export const Otp = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!isOtpComplete) {
-            alert("Please enter the full OTP.");
+            toast.error(`please enter the full otp`)
             return;
         }
         submitverifyResetPssowordOTP({ otp: otp.join("") });
@@ -77,7 +78,7 @@ export const Otp = () => {
                             />
                         ))}
                     </div>
-                    <Link to="/Change-password" className="text-blue-500 underline">
+                    {/* <Link to="/Change-password" className="text-blue-500 underline"> */}
                         <button
                             type="submit"
                             className={`mb-8 w-full  p-4 rounded-lg ${
@@ -85,9 +86,11 @@ export const Otp = () => {
                             }`}
                             disabled={!isOtpComplete || isLoading}
                         >
-                            {isLoading ? "Verifying..." : <span className="font-bold text-base text-white">Continue</span>}
+                            <span className="text-bold text-base text-white flex items-center justify-center">
+                                { isLoading ? <LoadingSpinner className="animate-spin"/> : "Contiune "}
+                            </span>
                         </button>
-                    </Link>
+                    {/* </Link> */}
                 </form>
 
                 <div className="flex justify-center gap-x-2">

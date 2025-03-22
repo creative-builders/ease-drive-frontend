@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import { CgChevronDown } from "react-icons/cg";
 import SectionLabel from '../SectionLabel';
+import backIcon from "../../assets/images/Frame.png";
 
 const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
   const { formData, handleUpdateFormData } = useStepFlowContext();
@@ -19,6 +20,13 @@ const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
           <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
         </ul>
       </header>
+        <img 
+          className='ml-4 xl:ml-[-80px] h-5 cursor-pointer' 
+          src={backIcon} 
+          alt="Back Icon" 
+          onClick={prevStep} 
+        />
+
 
       <div className="text-center mb-[29px]">
         <SectionLabel title={`${step} Step of ${totalSteps}`} />

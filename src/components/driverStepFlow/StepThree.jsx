@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import SectionLabel from '../SectionLabel';
 import CustomButton from '../CustomButton';
 import { Link } from "react-router-dom";
+import backIcon from "../../assets/images/Frame.png";
 
-const StepThree = ({nextStep, prevStep, step , totalSteps}) => {
+const StepThree = ({nextStep, prevStep, step ,totalSteps}) => {
    // const [step, setStep] = useState(3);
    // const totalSteps = 4;
   
@@ -17,6 +18,13 @@ const StepThree = ({nextStep, prevStep, step , totalSteps}) => {
                <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
             </ul>
          </header>
+         <img 
+            className='ml-4 xl:ml-[-20px] h-5 cursor-pointer' 
+            src={backIcon} 
+            alt="Back Icon" 
+            onClick={prevStep} 
+            />
+
          <h2 className='font-base lg:text-3xl font-normal capitalize'>Create a driver account</h2>
          <div className="text-center mb-[29px]">
             <SectionLabel title={`${step} Step of ${totalSteps}`} />

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { sendResetPasswordOTP } from '../../../store/auth/forgetPassword/api';
+import toast from "react-hot-toast";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 
 export const ForgotPassword = () => {
     const [formData, setFormData] = useState({ email: "" });
     const [isVerified, setIsVerified] = useState(false);
+     const navigate = useNavigate();
 
     const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -13,10 +16,11 @@ export const ForgotPassword = () => {
         onSuccess: (response) => {
             setIsVerified(true); // ✅ Set success flag
             localStorage.setItem("userEmail", formData.email);
+            navigate("/Otp");
             setFormData({ email: "" });
         },
         onError: (error) => {
-            alert(error?.response?.data?.message || "An error occurred");
+            toast.error(`${error?.response?.data?.message} enter a vaild email`)
         },
     });
 
@@ -27,7 +31,7 @@ export const ForgotPassword = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!isValidEmail(formData.email)) {
-            alert("Please enter a valid email.");
+            toast.error(`please enter a valid email`)
             return;
         }
         submitSendResetPasswordOTP({ email: formData.email });
@@ -43,12 +47,12 @@ export const ForgotPassword = () => {
                 <p className="text-gray-600 mb-16">Recover your account.</p>
 
                 <form onSubmit={handleSubmit}>
-                    {isVerified && (
+                    {/* {isVerified && (
                         <div className="border border-green-300 rounded-md text-green-700 p-2 mb-4">
                             Verification email sent! <br />
-                            <Link to="/Otp" className="text-blue-500 underline">Go to OTP page</Link> {/* ✅ Navigate after success */}
+                            <Link to="/Otp" className="text-blue-500 underline">Go to OTP page</Link>
                         </div>
-                    )}
+                    )} */}
                     <div className="mb-4">
                         <label htmlFor="email">Enter your email</label>
                         <input
@@ -68,7 +72,9 @@ export const ForgotPassword = () => {
                             }`}
                             disabled={!isValidEmail(formData.email) || isLoading}
                         >
-                            {isLoading ? "Processing..." : <span className="text-bold text-base text-white">Continue</span>}
+                             <span className="text-bold text-base text-white flex items-center justify-center">
+                            { isLoading ? <LoadingSpinner className="animate-spin"/> : "Contiune "}
+                            </span>
                         </button>
                     {/* </Link>  */}
                 </form>

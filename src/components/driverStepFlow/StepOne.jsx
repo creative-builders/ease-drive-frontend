@@ -3,9 +3,9 @@ import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import SectionLabel from '../SectionLabel';
 import CustomButton from "../CustomButton"
 import GoogleAuth from "../GoogleAuth";
-// import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import backIcon from "../../assets/images/Frame.png";
 
 
 const StepOne = ({ nextStep, step, totalSteps }) =>{
@@ -32,6 +32,14 @@ const handleToggleConfirmPassword = () => {
             <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
          </ul>
        </header>
+       <img 
+          className='ml-4 xl:ml-[-20px] h-5 cursor-pointer' 
+          src={backIcon} 
+          alt="Back Icon" 
+          onClick={() => window.history.back()}
+        />
+
+
        <h2 className='hidden md:text-3xl font-semibold capitalize'>create a driver account</h2>
        <div className="text-center mb-[29px]">
          <SectionLabel
