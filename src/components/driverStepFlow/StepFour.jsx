@@ -69,7 +69,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
         const handleSubmit = (e) => {
             e.preventDefault();
         
-            // Check if all fields are empty
+            
             const isEmptyForm = Object.values(formData).every(value => value.trim() === "");
         
             if (isEmptyForm) {
@@ -77,7 +77,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
                 return;
             }
         
-            // Check for specific empty fields
+            
             const emptyFields = Object.entries(formData).filter(([key, value]) => value.trim() === "");
         
             if (emptyFields.length > 0) {
