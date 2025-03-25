@@ -16,6 +16,7 @@ import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
 import BidCard from '../components/BidCard';
 import CarChoice from '../components/CarChoice';
+import LocationPopUp from '../components/LocationPopUp';
 
 
 
@@ -39,6 +40,7 @@ const IndexRoute = () => {
       <Route path="/Otp" element={<Otp />} />
       <Route path="/Change-password" element={<ChangePassword />} />
       <Route path="/cars" element={<CarChoice />} />
+      <Route path="/LocationPopUp" element={<LocationPopUp />} />
 
       {/* Dashboard Route */}
       <Route path="/dashboard" element={<Dashboard/>} />
