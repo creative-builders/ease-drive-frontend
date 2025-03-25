@@ -16,6 +16,7 @@ import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
 import BidCard from '../components/BidCard';
 import CarChoice from '../components/CarChoice';
+import TestingCompent from '../pages/dashboard/TestingCompent';
 
 
 
@@ -41,7 +42,9 @@ const IndexRoute = () => {
       <Route path="/cars" element={<CarChoice />} />
 
       {/* Dashboard Route */}
-      <Route path="/dashboard" element={<Dashboard/>} />
+      <Route path="/dashboard" element={<Dashboard/>} > 
+       <Route path="testing"  element={<TestingCompent/>}/>
+      </Route>
     </Routes>
     </Router>
   )

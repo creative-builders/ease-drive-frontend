@@ -1,8 +1,11 @@
 import React from 'react'
+import TestingCompent from './TestingCompent'
 
 const PassengerDashboard = () => {
   return (
-    <div>Welcome to the Passenger Dashboard</div>
+    <div>
+      <TestingCompent/>
+    </div>
   )
 }
 

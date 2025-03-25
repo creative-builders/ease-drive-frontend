@@ -1,8 +1,11 @@
 import React from 'react'
+import TestingCompent from './TestingCompent'
 
 const DriverDashboard = () => {
   return (
-    <div>Welcome to Driver Dashboard </div>
+    <div>
+      <TestingCompent/>
+    </div>
   )
 }
 
