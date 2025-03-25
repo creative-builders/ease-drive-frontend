@@ -14,6 +14,8 @@ import { Otp } from '../pages/auth/Passengers/Otp';
 import { ChangePassword } from '../pages/auth/Passengers/Change-password';
 import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
+import BidCard from '../components/BidCard';
+import CarChoice from '../components/CarChoice';
 
 
 
@@ -36,6 +38,7 @@ const IndexRoute = () => {
       <Route path="/Forgot-password" element={<ForgotPassword />} />
       <Route path="/Otp" element={<Otp />} />
       <Route path="/Change-password" element={<ChangePassword />} />
+      <Route path="/cars" element={<CarChoice />} />
 
       {/* Dashboard Route */}
       <Route path="/dashboard" element={<Dashboard/>} />
