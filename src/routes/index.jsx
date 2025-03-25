@@ -17,6 +17,7 @@ import Dashboard from '../pages/dashboard';
 import BidCard from '../components/BidCard';
 import CarChoice from '../components/CarChoice';
 import LocationPopUp from '../components/LocationPopUp';
+import TestingCompent from '../pages/dashboard/TestingCompent';
 
 
 
@@ -43,7 +44,9 @@ const IndexRoute = () => {
       <Route path="/LocationPopUp" element={<LocationPopUp />} />
 
       {/* Dashboard Route */}
-      <Route path="/dashboard" element={<Dashboard/>} />
+      <Route path="/dashboard" element={<Dashboard/>} > 
+       <Route path="testing"  element={<TestingCompent/>}/>
+      </Route>
     </Routes>
     </Router>
   )
