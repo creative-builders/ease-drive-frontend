@@ -7,6 +7,7 @@ import CustomButton from '../../components/CustomButton';
 import demoImage from "../../assets/images/keke-image.png"
 import safetyImage from "../../assets/images/safety-image.svg"
 import headerBannerImage from "../../assets/images/header-banner-img.png"
+import Footer from '../../layout/footer/Footer';
 
 
 const Home = () => {
@@ -94,6 +95,7 @@ const Home = () => {
       </section>
 
     </div>
+    <Footer/>
     </>
   );
 };

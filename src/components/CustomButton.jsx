@@ -20,7 +20,7 @@ const CustomButton = ({
   return (
     <button 
      onClick={btnClick}
-     className={`${sizeClasses} ${className} ${extendedStyles} p-3 lg:p-4 flex items-center justify-center rounded-lg bg-green-300 text-gray-100 font-bold `}>
+     className={`${sizeClasses} ${className} ${extendedStyles} p-3 lg:p-4 flex items-center justify-center bg-green-300 text-gray-100 font-bold `}>
      {isLoading ? <LoadingSpinner className="animate-spin" /> : name}
     </button>
   )
