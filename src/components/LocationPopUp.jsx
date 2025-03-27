@@ -3,8 +3,19 @@ import Location from '/src/assets/images/Location.png'
 
 
 const LocationPopUp = ({close}) =>{
+
+  const handleBackgroundClick = (e) => {
+    if (e.target.id === "popup-overlay") {
+      close(false);
+    }
+  };
+
   return(
-    <div className='min-h-screen w-full bg-black/70 flex items-center justify-center blur-0 fixed top-0'>
+    <div
+     id="popup-overlay"
+     onClick={handleBackgroundClick}
+     className='min-h-screen w-full bg-black/70 flex items-center justify-center blur-0 fixed top-0'
+      >
         <div className="h-[459px] sm:h-fit-content w-4/5 sm:w-1/4 bg-white flex flex-col items-center justify-around gap-5 p-4 rounded-xl">
             <div className="h-28 w-28 rounded-full"><img className='h-full w-full' src={Location} alt="" /></div>
             <h2 className='capitalize text-2xl not-italic leading-8 tracking-normal font-medium'>enable your location</h2>
