@@ -47,7 +47,7 @@ const Home = () => {
           </span>
      </div>
 
-    {/* <div className='px-[4%] lg:px-[8%]'> */}
+    <div className='bg-[#f8f8f8]'>
       {/* Landing page contents */}
       <WhyChooseUS/>
 
@@ -70,7 +70,7 @@ const Home = () => {
         </div>
       </section>
 
-    {/* </div> */}
+    </div>
     <Footer/>
     </>
   );
