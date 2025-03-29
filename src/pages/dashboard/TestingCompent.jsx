@@ -3,6 +3,7 @@ import BidCard from "../../components/BidCard";
 import LocationPopUp from "../../components/LocationPopUp";
 import keke from "/src/assets/images/user-icon.png";
 import tricyle from "/src/assets/images/image 5.png";
+import UpComingCard from "../../components/UpComingCard";
 
 const TestingComponent = () => {
   const [bids, setBids] = useState([]);
@@ -57,6 +58,7 @@ const TestingComponent = () => {
       {
         isOpen && <LocationPopUp close={closeModal}/>
       }
+      {/* <UpComingCard /> */}
     </div>
   );
 };

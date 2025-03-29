@@ -13,7 +13,7 @@ const Menu = () => {
         <div>
             <CustomButton 
             name="Create Account"
-            extendedStyles={"rounded-full"}
+            extendedStyles={"rounded-full p-3 lg:p-4"}
             btnClick={() => handleButtonClick("/signup-as")}
             />
         </div>
