@@ -1,6 +1,5 @@
 import React from 'react'
 import Location from '/src/assets/images/Location.png'
-import Map from '../assets/images/Map.png'
 
 
 const LocationPopUp = ({close}) =>{

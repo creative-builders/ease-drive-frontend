@@ -23,15 +23,7 @@ const TestingComponent = () => {
           transportMeans: "Keke",
           amount: "2000",
         },
-        // {
-        //   id: 2,
-        //   profilePic: keke,
-        //   imageUrl: tricyle,
-        //   name: "Michael",
-        //   rating: 4.9,
-        //   transportMeans: "Keke",
-        //   amount: "2500",
-        // },
+      
       ];
       setBids(response);
     };
@@ -39,9 +31,15 @@ const TestingComponent = () => {
     fetchBids();
   }, []);
 
+  const obj = {
+    Upcoming: "currently there's no upcoming",
+    Completed: "Sorry no completed",
+    Canelled: "",
+  }
+
   return (
     <div className="relative">
-      <div className="p-4 lg:h-fit w-full flex flex-wrap gap-4 justify-center">
+      {/* <div className="p-4 lg:h-fit w-full flex flex-wrap gap-4 justify-center">
         {bids.map((bid) => (
           <BidCard 
             key={bid.id}
@@ -54,11 +52,12 @@ const TestingComponent = () => {
             close={closeModal}
           />
         ))}
-      </div>
-      {
+      </div> */}
+      {/* {
         isOpen && <LocationPopUp close={closeModal}/>
-      }
-      {/* <UpComingCard /> */}
+      } */}
+      <UpComingCard tabResponses={obj}/>
+      
     </div>
   );
 };
