@@ -39,7 +39,7 @@ const TestingComponent = () => {
 
   return (
     <div className="relative">
-      {/* <div className="p-4 lg:h-fit w-full flex flex-wrap gap-4 justify-center">
+      <div className="p-4 lg:h-fit w-full flex flex-wrap gap-4 justify-center">
         {bids.map((bid) => (
           <BidCard 
             key={bid.id}
@@ -52,11 +52,11 @@ const TestingComponent = () => {
             close={closeModal}
           />
         ))}
-      </div> */}
-      {/* {
+      </div>
+      {
         isOpen && <LocationPopUp close={closeModal}/>
-      } */}
-      <UpComingCard tabResponses={obj}/>
+      }
+      {/* <UpComingCard tabResponses={obj}/> */}
       
     </div>
   );
