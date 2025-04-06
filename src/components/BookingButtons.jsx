@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const BookingButtons = ({ setActiveTab,buttons:tabs }) => {
-  const [activeTab, setTab] = useState(null);
+  const [activeTab, setTab] = useState("Upcoming");
 
   const handleClick = (tabName) => {
     setTab(tabName);

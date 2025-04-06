@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import BidCard from "../../components/BidCard";
-import LocationPopUp from "../../components/LocationPopUp";
+import BidCard from "../../components/bid/BidCard";
+
 import keke from "/src/assets/images/user-icon.png";
 import tricyle from "/src/assets/images/image 5.png";
 import UpComingCard from "../../components/UpComingCard";
 
+import PickRide from "../../components/PickRide";
+import Page from "../../components/yourRoute/page";
+import MainPage from "../../components/mainpage/MainPage";
+
 const TestingComponent = () => {
   const [bids, setBids] = useState([]);
-  const [isOpen, closeModal] = useState(false);
 
   // Simulating API fetch (Replace with real API call)
   useEffect(() => {
@@ -34,7 +37,7 @@ const TestingComponent = () => {
   const obj = {
     Upcoming: "currently there's no upcoming",
     Completed: "Sorry no completed",
-    Canelled: "",
+    Canelled: "here are the canelled",
   }
 
   return (
@@ -49,15 +52,13 @@ const TestingComponent = () => {
             rating={bid.rating}
             transportMeans={bid.transportMeans}
             amount={bid.amount}
-            close={closeModal}
           />
         ))}
       </div>
-      {
-        isOpen && <LocationPopUp close={closeModal}/>
-      }
-      <UpComingCard tabResponses={obj}/>
       
+      {/* <UpComingCard tabResponses={obj}/>
+     
+      {/* <MainPage /> */}
     </div>
   );
 };

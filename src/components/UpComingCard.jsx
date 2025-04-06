@@ -5,11 +5,11 @@ import BackArrow from "./BackArrow";
 const UpComingCard = ({tabResponses}) => {
   const [activeTab, setActiveTab] = useState(null);
 
-//   const tabResponses = {
-//    Upcoming: "currently there's no upcoming",
-//    Completed: "Sorry no completed",
-//    Canelled: "Here are the cancelled",
-//  };
+  //   const tabResponses = {
+  //    Upcoming: "currently there's no upcoming",
+  //    Completed: "Sorry no completed",
+  //    Canelled: "Here are the cancelled",
+  //  };
 
   
 

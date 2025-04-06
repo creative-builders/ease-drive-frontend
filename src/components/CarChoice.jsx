@@ -1,4 +1,4 @@
-import BidCard from "./BidCard";
+import BidCard from "./bid/BidCard";
 
 
 export default function CarChoice(){

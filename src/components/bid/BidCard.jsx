@@ -1,5 +1,6 @@
 import React from "react";
-import CustomButton from "./CustomButton";
+import CustomButton from "../CustomButton";
+import { Link } from 'react-router-dom'
 
 const BidCard = ({
     profilePic,
@@ -8,13 +9,12 @@ const BidCard = ({
     transportMeans,
     amount,
     imageUrl,
-    close
    }) => {
 
     return (
         
         <div className="min-h-screen bg-gray-500">
-              <div className="p-6 lg:h-fit flex flex-wrap gap-4 justify-center">
+            <div className="p-6 lg:h-fit flex flex-wrap gap-4 justify-center">
               <div className="h-fit min-w-[363px] w-full bg-[#EFF6E9] border-2 border-green-500 rounded-2xl flex p-3 gap-3">
                     {/* first section */}
                     <div className="w-3/5 h-full text-sm flex flex-col gap-3">
@@ -36,11 +36,23 @@ const BidCard = ({
                                 btnClick={() => close((prev) => !prev)}
                             />
 
-                            <CustomButton 
-                                name="Accept"
-                                extendedStyles={"w-full py-2 px-4 cursor-pointer text-center rounded-lg gap-2 text-base font-normal text-white bg-green-300"}
-                                btnClick={() => close((prev) => !prev)}
-                            />
+                            <Link to='/DriverCall'
+                               state={{
+                                profilePic,
+                                name,
+                                rating,
+                                distance: "800m (5mins away)",
+                                vehicleInfo: "Automatic | 3 seat | yellow",
+                                amount,
+                                imageUrl
+                              }}
+                            >
+                                <CustomButton 
+                                    name="Accept"
+                                    extendedStyles={"w-full py-2 px-4 cursor-pointer text-center rounded-lg gap-2 text-base font-normal text-white bg-green-300"}
+                                    btnClick={() => close((prev) => !prev)}
+                                />
+                            </Link>
                             
                         </div>
                     </div>
@@ -53,7 +65,7 @@ const BidCard = ({
                         </div>
                     </div>
                 </div>
-        </div>
+            </div>
         </div>
        
     )

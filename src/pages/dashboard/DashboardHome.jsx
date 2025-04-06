@@ -12,9 +12,8 @@ const DashboardHome = () => {
   return (
     <>
     {
-    userData?.role === "passenger" ? <PassengerDashboard/> : <DriverDashboard/>
+    userData?.role === "passenger" ? <PassengerDashboard {...userData} /> : <DriverDashboard/>
     }
-    
     </>
   )
 }

@@ -14,10 +14,18 @@ import { Otp } from '../pages/auth/Passengers/Otp';
 import { ChangePassword } from '../pages/auth/Passengers/Change-password';
 import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
-import BidCard from '../components/BidCard';
+import BidCard from '../components/bid/BidCard';
 import CarChoice from '../components/CarChoice';
-import LocationPopUp from '../components/LocationPopUp';
-import TestingCompent from '../pages/dashboard/TestingCompent';
+import LocationPopUp from '../components/location/LocationPopUp';
+import TestingComponent from '../pages/dashboard/TestingCompent';
+import MainPage from '../components/mainpage/MainPage';
+import Page from '../components/yourRoute/page';
+import Luggage from '../components/luggagesparts/luggage';
+import LookingFor from '../components/luggagesparts/LookingFor';
+import PickRide from '../components/PickRide';
+import Cancelled from '../components/luggagesparts/Cancelled';
+import DriverCall from '../components/driverCall/DriverCall';
+// import Header from '../layout/dashboard/header/Header';
 
 
 
@@ -42,10 +50,19 @@ const IndexRoute = () => {
       <Route path="/Change-password" element={<ChangePassword />} />
       <Route path="/cars" element={<CarChoice />} />
       <Route path="/LocationPopUp" element={<LocationPopUp />} />
+      <Route path="/mainpage" element={<MainPage />} />
+      <Route path="/page" element={<Page />} />
+      <Route path="/Luggage" element={<Luggage />} />
+      <Route path="/LookingFor" element={<LookingFor />} />
+      <Route path="/PickRide" element={<PickRide />} />
+      <Route path="/Cancelled" element={<Cancelled />} />
+      <Route path="/DriverCall" element={<DriverCall />} />
+      
 
       {/* Dashboard Route */}
       <Route path="/dashboard" element={<Dashboard/>} > 
-       <Route path="testing"  element={<TestingCompent/>}/>
+       <Route path="testing"  element={<TestingComponent/>}/>
+       {/* <Route path="header"  element={<Header/>}/> */}
       </Route>
     </Routes>
     </Router>
