@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import BidCard from "../../components/bid/BidCard";
 
-import keke from "/src/assets/images/user-icon.png";
+import userIcon from "/src/assets/images/user-icon.png";
 import tricyle from "/src/assets/images/image 5.png";
+import motor from "/src/assets/images/city-ride-car.svg"
+import bike from "/src/assets/images/bike-main.png"
 import UpComingCard from "../../components/UpComingCard";
 
-import PickRide from "../../components/PickRide";
-import Page from "../../components/yourRoute/page";
+
 import MainPage from "../../components/mainpage/MainPage";
 
 const TestingComponent = () => {
@@ -19,12 +20,30 @@ const TestingComponent = () => {
       const response = [
         {
           id: 1,
-          profilePic: keke,
+          profilePic: userIcon,
           imageUrl: tricyle,
           name: "James",
           rating: 4.7,
           transportMeans: "Keke",
           amount: "2000",
+        },
+        {
+          id: 1,
+          profilePic: userIcon,
+          imageUrl: motor,
+          name: "John",
+          rating: 5.7,
+          transportMeans: "motor",
+          amount: "3000",
+        },
+        {
+          id: 1,
+          profilePic: userIcon,
+          imageUrl: bike,
+          name: "Nedu",
+          rating: 4.8,
+          transportMeans: "keke",
+          amount: "4000",
         },
       
       ];
@@ -43,7 +62,7 @@ const TestingComponent = () => {
   return (
     <div className="relative">
       <div className="p-4 lg:h-fit w-full flex flex-wrap gap-4 justify-center">
-        {bids.map((bid) => (
+        {/* {bids.map((bid) => (
           <BidCard 
             key={bid.id}
             profilePic={bid.profilePic}
@@ -53,12 +72,13 @@ const TestingComponent = () => {
             transportMeans={bid.transportMeans}
             amount={bid.amount}
           />
-        ))}
+        ))} */}
       </div>
       
-      {/* <UpComingCard tabResponses={obj}/>
+       {/* <UpComingCard tabResponses={obj}/> */}
      
-      {/* <MainPage /> */}
+      { <MainPage />}
+      
     </div>
   );
 };

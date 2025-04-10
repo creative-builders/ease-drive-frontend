@@ -38,7 +38,7 @@ export default function Luggage(){
         <div className='min-h-screen w-full bg-[url(/Group.png)] flex flex-col items-center justify-around gap-14'>
             <Header />
             <BackArrow  extendedStyles='top-24 xl:top-24 left-2 xl:left-20' />
-            <article className='h-17 flex w-4/5 xl:w-[667px] px-4 py-6 mt-24 items-center gap-6 rounded-2xl bg-[#fff]'>
+            <article className='h-17 flex w-11/12 xl:w-[667px] px-4 py-6 mt-24 items-center gap-6 rounded-2xl bg-[#fff]'>
                 <img src={locate} alt="" />
                 <input type="text" className='w-4/5 indent-2 text-xl outline-0 bg-transparent focus:outline-none focus:ring-0 placeholder:text-[#444]' placeholder='UNN 2nd gate' />
             </article>

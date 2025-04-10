@@ -25,6 +25,9 @@ import LookingFor from '../components/luggagesparts/LookingFor';
 import PickRide from '../components/PickRide';
 import Cancelled from '../components/luggagesparts/Cancelled';
 import DriverCall from '../components/driverCall/DriverCall';
+import EditProfile from '../components/personalProfile/EditProfile';
+import Setting from '../components/personalProfile/Setting';
+import Password from '../components/personalProfile/Password';
 // import Header from '../layout/dashboard/header/Header';
 
 
@@ -57,6 +60,9 @@ const IndexRoute = () => {
       <Route path="/PickRide" element={<PickRide />} />
       <Route path="/Cancelled" element={<Cancelled />} />
       <Route path="/DriverCall" element={<DriverCall />} />
+      <Route path="/EditProfile" element={<EditProfile />} />
+      <Route path="/Setting" element={<Setting />} />
+      <Route path="/Password" element={<Password />} />
       
 
       {/* Dashboard Route */}

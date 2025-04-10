@@ -13,7 +13,7 @@ const BidCard = ({
 
     return (
         
-        <div className="min-h-screen bg-gray-500">
+        <div className=" bg-gray-500">
             <div className="p-6 lg:h-fit flex flex-wrap gap-4 justify-center">
               <div className="h-fit min-w-[363px] w-full bg-[#EFF6E9] border-2 border-green-500 rounded-2xl flex p-3 gap-3">
                     {/* first section */}

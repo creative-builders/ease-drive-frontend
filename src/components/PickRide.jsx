@@ -5,11 +5,13 @@ import bike from '../assets/images/bike-main.png'
 import motor from '../assets/images/Car.png'
 import Search from '../assets/images/search.png'
 import locate from '../assets/images/location-icon.png'
+import BackArrow from './BackArrow'
+import Header from '../layout/dashboard/header/Header'
 
 
 export default function PickRide({ selected, setSelected }){
 
-    // const [selected, setSelected] = useState(null);
+    // const [selectedRide, setSelectedRide] = useState(null);
 
     const options = [
         { id: 1, image: keke, text: "Keke ride" },
@@ -17,32 +19,41 @@ export default function PickRide({ selected, setSelected }){
         { id: 3, image: motor, text: "Shuttle ride" },
     ];
 
-    const handleSubmit = (id) => {
-        setSelected(id)
-        setSelectedRide(id)
+    const handleSubmit = (option) => {
+        setSelected(option.id)
+        console.log("Selected image", option.image);
+        
     }
 
+    // const handleSubmit = (option) => {
+    //     setSelected(option.id)
+    //     setSelectedRide(option.id)
+    //     console.log("Selected image", option.image);
+        
+    // }
+
     return(
-        <div className='min-h-screen w-full bg-[url(/Group.png)] flex flex-col items-center justify-around'>
-           
-            <div className="w-3/5 xl:w-[413px] inline-flex px-2 py-3 justify-center items-center gap-2 rounded-3xl bg-[#20AE3A]">
+        <div className='min-h-screen w-full bg-[url(/Group.png)] flex flex-col px-0 xl:px-2 items-center gap-4 justify-around'>
+            {/* <Header /> */}
+           <BackArrow extendedStyles={"top-20 xl:top-24 left-4 xl:left-20"} />
+            <div className="w-11/12 xl:w-[413px] inline-flex px-2 py-3 justify-center items-center gap-2 rounded-3xl bg-[#20AE3A]">
                <span className='text-white font-[poppins] text-base xl:text-3xl not-italic font-medium leading-normal capitalize'>set your pickup place</span>
                <img src={arrow} alt="" className='h-6 w-6' />
             </div>
-            <main className='w-full xl:w-[1176px] h-[462px] xl:h-[450px] flex flex-col items-center justify-around mb-0 xl:mb-8 rounded-t-[32px] rounded-r-[32px] rounded-b-none flex-shrink-0 bg-white'>
+            <main className='w-full xl:w-[1176px] h-[462px] xl:h-[450px] flex flex-col items-center justify-around mb-[-50px] xl:mb-8 rounded-t-[32px] rounded-r-[32px] rounded-b-none flex-shrink-0 bg-white'>
                <h2 className='text-center font-[poppins] text-2xl not-italic font-normal leading-normal'>Select your ride</h2>
                <figure className='w-4/5 xl:w-2/4 gap-5 flex items-center justify-evenly'>
 
                 {options.map((option) => (
                     <div
                     key={option.id}
-                    className={`cursor-pointer flex w-2/4 xl:w-44 h-[73px] xl:h-[121px] px-[1px] py-4 flex-col justify-center items-center gap-1 rounded-lg transition-all duration-300 ${
+                    className={`cursor-pointer flex w-2/4 xl:w-44 h-[78px] xl:h-[121px] px-[1px] py-4 flex-col justify-center items-center gap-1 rounded-lg transition-all duration-300 ${
                         selected === option.id ? 'bg-[#20AE3A] text-white' : 'bg-[#EEFDF1] text-[#1E1E1E]'
                     }`}
-                    onClick={() => handleSubmit(option.id)}
+                    onClick={() => handleSubmit(option)}
                     >
                     <img src={option.image} className='w-10 xl:w-[77px] h-9 xl:h-[71px]' alt={option.text} />
-                    <p className='font-[poppins] text-center text-base xl:text-xl font-normal not-italic leading-normal'>
+                    <p className='font-[poppins] text-center text-xs xl:text-xl font-normal not-italic leading-normal'>
                         {option.text}
                     </p>
                     </div>
