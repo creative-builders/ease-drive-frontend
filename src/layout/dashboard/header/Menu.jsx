@@ -6,10 +6,14 @@ import booking from '../../../assets/icons/booings.png'
 import Notification from '../../../assets/icons/Notification.png'
 import userIcon from '../../../assets/images/user-icon.png'
 import dropdown from '../../../assets/icons/dropdown-arrow.png'
+import { useRecoilValue } from 'recoil'
+import { userAtom } from '../../../components/atoms/userAtom'
 
 const Menu = ({ setIsOpen }) => {
+   const userData = useRecoilValue(userAtom);
+   
   return (
-    <div className="flex items-center justify-between p-3 xl:justify-around gap-5 border border-red-950 h-16 w-full">
+    <div className="flex items-center justify-between p-3 xl:justify-around gap-5 h-16 w-full">
         <h2 className='text-[#20AE3A] font-[Arial] text-xl not-italic font-bold leading-normal'>Ease Drive</h2>
         <ul className='gap-5 hidden xl:flex justify-around h-12 w-[400px] top-3 text-white'>
             <li>
@@ -37,7 +41,7 @@ const Menu = ({ setIsOpen }) => {
             <div
               className="h-10 w-10 rounded-full" 
             >
-              <img src={userIcon} alt="" className='h-full w-full rounded-full' />
+              <img src={userData?.profileImage || userIcon} alt="" className='h-full w-full rounded-full' />
             </div>
             <img src={dropdown} alt="" className='h-2 w-2 fill-black lg:fill-white ml-[-45px] lg:ml-6 cursor-pointer' onClick={() => setIsOpen(true)} />
             <p className='text-white font-[Arial] hidden xl:flex text-sm font-normal not-italic leading-normal'>Mabel Okoro</p>

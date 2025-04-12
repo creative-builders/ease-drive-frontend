@@ -7,8 +7,6 @@ import DriverDashboard from "./DriverDashboard";
 const DashboardHome = () => {
  const userData = useRecoilValue(userAtom);
 
- console.log(userData)
-
   return (
     <>
     {
