@@ -8,6 +8,7 @@ import userIcon from '../../../assets/images/user-icon.png'
 import dropdown from '../../../assets/icons/dropdown-arrow.png'
 import { useRecoilValue } from 'recoil'
 import { userAtom } from '../../../components/atoms/userAtom'
+import UserIcon from '../../../assets/icons/UserIcon'
 
 const Menu = ({ setIsOpen }) => {
    const userData = useRecoilValue(userAtom);
