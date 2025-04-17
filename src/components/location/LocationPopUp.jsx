@@ -1,13 +1,14 @@
 import React from 'react';
 import Location from '/src/assets/images/Location.png';
+import Header from '../../layout/dashboard/header/Header';
 
 const LocationPopUp = ({ close, setSelected }) => {
 
-  const handleBackgroundClick = (e) => {
-    if (e.target.id === "popup-overlay") {
-      close(false);
-    }
-  };
+  // const handleBackgroundClick = (e) => {
+  //   if (e.target.id === "popup-overlay") {
+  //     close(false);
+  //   }
+  // };
 
   const handleUseLocation = () => {
     close(false);        
@@ -18,9 +19,10 @@ const LocationPopUp = ({ close, setSelected }) => {
     <div
       id="popup-overlay"
       // onClick={handleBackgroundClick}
-      className="min-h-screen w-full flex items-center justify-center fixed top-0 bg-[url(/Map.png)]"
+      className="min-h-screen w-full flex flex-col items-center gap-6 fixed top-0 bg-[url(/Map.png)]"
     >
-      <div className="h-[459px] sm:h-fit-content w-4/5 xl:w-[788px] bg-white flex flex-col items-center justify-around gap-5 p-4 rounded-xl">
+      <Header />
+      <div className="h-[459px] sm:h-fit-content w-4/5 xl:w-[788px] bg-white flex flex-col m-auto items-center justify-around gap-5 p-4 rounded-xl">
         <div className="h-28 w-28 rounded-full">
           <img className='h-full w-full' src={Location} alt="" />
         </div>

@@ -7,6 +7,7 @@ import motor from '../assets/images/Car.png'
 import Search from '../assets/images/search.png'
 import locate from '../assets/images/location-icon.png'
 import BackArrow from './BackArrow'
+import Header from '../layout/dashboard/header/Header'
 
 
 export default function PickRideSecond({ selected, setSelected }){
@@ -20,14 +21,14 @@ export default function PickRideSecond({ selected, setSelected }){
     ];
 
     return(
-        <div className='min-h-screen w-full bg-[url(/Group.png)] flex flex-col items-center justify-around'>
-           
+        <div className='h-screen w-full bg-[url(/Group.png)] flex flex-col items-center justify-around gap-6 overflow-y-scroll'>
+           <Header />
             <BackArrow extendedStyles='top-20 xl:top-24 left-4 xl:left-20' />
             <article className='h-14 xl:h-17 flex w-4/5 xl:w-[667px] px-4 py-6 items-center gap-6 rounded-2xl bg-[#fff]'>
                 <img src={locate} alt="" />
                 <input type="text" className='w-4/5 indent-2 text-xl focus:outline-none focus:ring-0 outline-0 bg-transparent placeholder:text-[#444]' placeholder='UNN 2nd gate' />
             </article>
-            <main className='w-full xl:w-[1176px] h-[462px] xl:h-[450px] flex flex-col items-center justify-around mb-[-50px] xl:mb-8 rounded-t-[32px] rounded-r-[32px] rounded-b-none flex-shrink-0 bg-white'>
+            <main className='w-full xl:w-[1176px] h-[462px] xl:h-[420px] flex flex-col items-center justify-around mb-[-50px] xl:mb-0 rounded-t-[32px] rounded-r-[32px] rounded-b-none flex-shrink-0 bg-white'>
                <h2 className='text-center font-[poppins] text-2xl not-italic font-normal leading-normal'>Select your ride</h2>
                <figure className='w-4/5 xl:w-2/4 gap-5 flex items-center justify-evenly'>
 

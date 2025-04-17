@@ -61,8 +61,8 @@ const TestingComponent = () => {
 
   return (
     <div className="relative">
-      <div className="p-4 lg:h-fit w-full flex flex-wrap gap-4 justify-center">
-        {/* {bids.map((bid) => (
+      {/* <div className="p-4 lg:h-fit w-full flex flex-wrap gap-4 justify-center">
+        {bids.map((bid) => (
           <BidCard 
             key={bid.id}
             profilePic={bid.profilePic}
@@ -72,8 +72,8 @@ const TestingComponent = () => {
             transportMeans={bid.transportMeans}
             amount={bid.amount}
           />
-        ))} */}
-      </div>
+        ))}
+      </div> */}
       
        {/* <UpComingCard tabResponses={obj}/> */}
      

@@ -6,7 +6,7 @@ import Profile from '../../../components/personalProfile/Profile'
 const NavBar = () => {
   const [isOpen,setIsOpen] = useState(false)
   return (
-    <div className='w-full relative overflow-hidden border bg-transparent xl:bg-[#161616]'>
+    <div className='w-full relative overflow-hidden bg-transparent md:bg-[#161616]'>
       <Menu setIsOpen={setIsOpen}/>
       <Profile isOpen={isOpen} setIsOpen={setIsOpen}/>
     </div>

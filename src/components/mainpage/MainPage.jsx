@@ -9,8 +9,8 @@ export default function MainPage() {
     const [isOpen, setIsOpen] = useState(true);
 
     return (
-        <div className='min-h-screen w-full bg-[url(/MapMain.png)] overflow-y-hidden'>
-            <Header />
+        <div className=' h-screen w-full bg-[url(/MapMain.png)] overflow-y-hidden'>
+            {/* <Header /> */}
 
             {/* Show popup only when isOpen is true */}
             {isOpen && <LocationPopUp close={setIsOpen} setSelected={setSelectedOption} />}

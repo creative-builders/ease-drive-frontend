@@ -33,14 +33,14 @@ export default function PickRide({ selected, setSelected }){
     // }
 
     return(
-        <div className='min-h-screen w-full bg-[url(/Group.png)] flex flex-col px-0 xl:px-2 items-center gap-4 justify-around'>
-            {/* <Header /> */}
+        <div className='h-screen w-full bg-[url(/Group.png)] flex flex-col px-0  items-center gap-12 justify-around'>
+            <Header />
            <BackArrow extendedStyles={"top-20 xl:top-24 left-4 xl:left-20"} />
             <div className="w-11/12 xl:w-[413px] inline-flex px-2 py-3 justify-center items-center gap-2 rounded-3xl bg-[#20AE3A]">
                <span className='text-white font-[poppins] text-base xl:text-3xl not-italic font-medium leading-normal capitalize'>set your pickup place</span>
                <img src={arrow} alt="" className='h-6 w-6' />
             </div>
-            <main className='w-full xl:w-[1176px] h-[462px] xl:h-[450px] flex flex-col items-center justify-around mb-[-50px] xl:mb-8 rounded-t-[32px] rounded-r-[32px] rounded-b-none flex-shrink-0 bg-white'>
+            <main className='w-full xl:w-[1176px] h-[462px] xl:h-[420px] flex flex-col items-center justify-around mb-[-50px] xl:mb-0 rounded-t-[32px] rounded-r-[32px] rounded-b-none flex-shrink-0 bg-white'>
                <h2 className='text-center font-[poppins] text-2xl not-italic font-normal leading-normal'>Select your ride</h2>
                <figure className='w-4/5 xl:w-2/4 gap-5 flex items-center justify-evenly'>
 
