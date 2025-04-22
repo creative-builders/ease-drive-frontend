@@ -1,8 +1,9 @@
 import React from 'react'
-import locate from '../../assets/images/location-icon.png'
+import locate from '../../assets/images/Location-map .png'
 import Header from '../../layout/dashboard/header/Header'
 import { useLocation } from 'react-router-dom';
 import BackArrow from '../BackArrow';
+import IconMap from '../../assets/icons/NewIcon.png'
 
 // import CustomButton from '../CustomButton';
 
@@ -18,7 +19,7 @@ export default function DriverCall(){
             <Header />
             <BackArrow extendedStyles={"top-32 left-10 xl:left-24"} />
              <article className='h-17 flex w-4/5 xl:w-[667px] px-4 py-6 mt-24 items-center gap-6 rounded-2xl bg-[#fff]'>
-                <img src={locate} alt="" />
+                <img src={IconMap} alt="" />
                 <input type="text" className='w-4/5 indent-2 text-xl outline-0 bg-transparent focus:outline-none focus:ring-0 placeholder:text-[#444]' placeholder='UNN 2nd gate' />
             </article>
             <main className='w-full xl:w-[1176px] h-[452px] flex flex-col bg-[#F8FDF9] p-3 mb-[-150px] xl:mb-0 items-center justify-around mt-8 rounded-t-[32px] rounded-r-[32px] rounded-b-none flex-shrink-0'>

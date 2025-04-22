@@ -2,9 +2,9 @@ import React from 'react'
 import NavBar from './NavBar'
 
 
-const Header = () => {
+const Header = ({ extendedStyles }) => {
   return (
-   <NavBar />
+   <NavBar navStyle={extendedStyles} />
   )
 }
 

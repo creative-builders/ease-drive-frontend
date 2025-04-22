@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Header from '../../layout/dashboard/header/Header'
 import emoji from '../../assets/images/downcast-face-with-sweat-svgrepo-com 1.png'
 import BackArrow from '../BackArrow';
-import CustomButton from '../CustomButton';
+// import CustomButton from '../CustomButton';
 
 export default function Cancelled() {
 
@@ -38,7 +38,7 @@ export default function Cancelled() {
         <div className=''>
          <Header />
          <BackArrow extendedStyles={'top-20 xl:top-24 left-2 xl:left-20'} />
-         <main className="h-full w-full mx-auto xl:w-8/12 px-2 py-4 flex flex-col gap-5 items-center justify-around">
+         <main className="h-full w-full mx-auto xl:w-8/12 px-2 py-4 flex flex-col gap-5 items-center justify-around mt-20">
              <h2 className='text-[#000] font-[poppins] text-xl xl:text-3xl font-semibold not-italic leading-normal'>Cancel Ride</h2>
              <p className='text-[#444] font-[poppins] text-sm xl:text-2xl font-normal not-italic leading-normal'>please select the reason for the Cancelletion</p>
              <div className=" w-full h-fit flex flex-col items-center justify-evenly gap-2">
@@ -63,11 +63,6 @@ export default function Cancelled() {
                 ))}
              </div>
 
-              {/* <CustomButton 
-                name="Submit"
-                extendedStyles={"p-3 lg:p-4 rounded-lg w-full"}
-                onClick={() => setIsOpen(true)}
-              /> */}
 
               <button
               className="p-3 lg:p-4 rounded-lg w-full bg-[#20AE3A] text-white inline-flex items-center justify-center gap-3"

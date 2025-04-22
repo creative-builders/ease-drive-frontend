@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import BookingButtons from "./BookingButtons";
-import BackArrow from "./BackArrow";
+import BookingButtons from "../BookingButtons";
+import BackArrow from "../BackArrow";
 
 const UpComingCard = ({tabResponses}) => {
   const [activeTab, setActiveTab] = useState(null);
