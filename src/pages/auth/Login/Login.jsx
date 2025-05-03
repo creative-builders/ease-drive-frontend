@@ -8,9 +8,14 @@ import LoadingSpinner from "../../../components/LoadingSpinner";
 import toast from "react-hot-toast";
 import GoogleAuth from "../../../components/GoogleAuth";
 import { loginAuth } from "../../../store/auth/general/api";
+import GoogleAuthV2 from "../../../components/GoogleAuthV2";
+import GoogleAuthV3 from "../../../components/GoogleAuthV3";
+import { userAtom } from "../../../components/atoms/userAtom";
+import { useRecoilValue } from "recoil";
 
 const Login = () => {
     const navigate =  useNavigate();
+    const setUserData = useRecoilValue(userAtom)
     const [activeTab, setActiveTab] = useState("Email Address");
     const tabs = ["Email Address", "Phone Number"];
     const [togglePassword, setTogglePassword] = useState(false);
@@ -42,6 +47,8 @@ const Login = () => {
     const { mutate:submitLogin, isLoading } = useMutation(loginAuth, {
         onSuccess: (response) => {
         toast.success(response?.message);
+        console.log(response.data)
+        localStorage.setItem("current_user",JSON.stringify(response.data));
         navigate("/dashboard");
         setInputs( prev => ({
         ...prev,
@@ -51,7 +58,7 @@ const Login = () => {
 
         },
         onError : (error) => {
-        toast.error(error.message)
+        toast.error(error.response.data.message || error.message)
         }
     })
 
@@ -140,7 +147,8 @@ const Login = () => {
 
                      {/* Google Login Component */}
                     <div className="flex justify-center mb-16 p-4 ">
-                    <GoogleAuth/>
+                    {/* <GoogleAuth/> */}
+                    <GoogleAuthV3/>
                     </div>
 
                     <div className="flex justify-center gap-x-2">
