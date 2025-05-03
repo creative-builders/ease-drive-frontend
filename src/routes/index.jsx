@@ -18,7 +18,6 @@ import Dashboard from '../pages/dashboard';
 import LocationPopUp from '../components/location/LocationPopUp';
 import TestingComponent from '../pages/dashboard/TestingCompent';
 import MainPage from '../components/mainpage/MainPage';
-import Page from '../components/yourRoute/page';
 import LookingFor from '../components/luggagesparts/LookingFor';
 import PickRide from '../components/PickRide';
 import Cancelled from '../components/luggagesparts/Cancelled';
@@ -27,7 +26,8 @@ import EditProfile from '../components/personalProfile/EditProfile';
 import Setting from '../components/personalProfile/Setting';
 import Password from '../components/personalProfile/Password';
 import Luggage from '../components/luggagesparts/Luggage';
-import Bidder from '../components/bidders/bidder';
+import Page from '../components/yourRoute/YourRoute';
+import Bidder from '../components/bidders/Bidders';
 // import Header from '../layout/dashboard/header/Header';
 
 
