@@ -147,7 +147,6 @@ const Login = () => {
 
                      {/* Google Login Component */}
                     <div className="flex justify-center mb-16 p-4 ">
-                    {/* <GoogleAuth/> */}
                     <GoogleAuthV3/>
                     </div>
 
