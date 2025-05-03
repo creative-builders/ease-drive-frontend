@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import CustomButton from "./CustomButton"
 
 
@@ -8,21 +9,22 @@ const ServiceCard = ({
  title,
  description,
 }) => {
+  const navigate = useNavigate();
   return (
     <div 
-    style={{background:`${bgColor}`}}
-    className={`mb-[42px] inline-block rounded min-h-[392px] w-full mx-auto overflow-x-hidden`}>
+    // style={{background:`${bgColor}`}}
+    className={`relative mb-[42px] border p-4 border-2 border-green-300 rounded-2xl inline-block rounded min-h-[471px] xl:min-h-[672px] w-full overflow-x-hidden`}>
     <div 
-    style={{background:`url(${imgSrc}) no-repeat lightgray 50% / contain`}}
-    className="mb-4 h-[340px] w-full rounded">
+    style={{background:`url(${imgSrc}) no-repeat lightgray 50% / cover`}}
+    className="mb-4 min-h-[260px] xl:min-h-[472px] w-full rounded-t-[24px]">
         {/* This div has no content as it serves for the background purpose */}
     </div>
-     <div className="p-4">
-     <h3 className="mb-[13px] text-left text-2xl font-bold text-gray-900 lg:text-[2rem] ">{title}</h3>
-    <p className="mb-[18px] text-left text-xs font-normal text-gray-900 lg:text-base">{description}</p>
+    <div className="absolute left-0 bottom-4 mx-4 p-4 bg-white min-h-[193px] xl:min-h-[248px] rounded-[24px] p-2">
+     <h3 className="mb-2 text-left text-base xl:text-xl font-bold text-gray-900">{title}</h3>
+    <p className="mb-2 text-[#666464] text-left text-xs font-normal text-gray-900 lg:text-base">{description}</p>
     <CustomButton
-     title={"Book Now"}
-     extendedStyles={"flex mb-4"}
+     extendedStyles={"flex p-2 xl:p-4 rounded-lg"}
+     btnClick={() => navigate('/login')}
     />
      </div>
     </div>

@@ -19,13 +19,13 @@ const generateIntialState = () => {
     return initialState;
 }
 
-const[formData,setFormData] = useState(generateIntialState)
+const[formData,setFormData] = useState(generateIntialState);
 
 const handleUpdateFormData = (e) => {
     setFormData(prev => ({...prev,[e.target.name]:e.target.value}))
 }
 return(
-<FormContext.Provider value={{ formData, handleUpdateFormData}}>
+<FormContext.Provider value={{ formData, setFormData, handleUpdateFormData}}>
     {children}
 </FormContext.Provider>
  );
