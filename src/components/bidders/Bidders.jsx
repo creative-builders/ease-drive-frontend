@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import BidCard from "../../components/bid/BidCard";
+import BidCard from "../bid/BidCard";
 
 import userIcon from "/src/assets/images/user-icon.png";
 import tricyle from "/src/assets/images/image 5.png";
