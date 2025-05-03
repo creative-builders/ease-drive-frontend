@@ -1,16 +1,15 @@
 import CustomButton from "../CustomButton"
-import SectionLabel from "../SectionLabel"
-import safetyImage from "../../assets/images/safety-image.svg"
+import safetyImage from "../../assets/images/safety-image.jpg"
 import { useNavigate } from "react-router-dom"
 import { useRecoilValue } from "recoil"
 import { userAtom } from "../atoms/userAtom"
 
 const YourSafety = () => {
     const navigate =  useNavigate();
-     const userData = useRecoilValue(userAtom);
+    const userData = useRecoilValue(userAtom);
   return (
   <section 
-  style={{background:`url(${safetyImage}) light-gray  50% /cover no-repeat`}}
+  style={{background:`url(${safetyImage}) no-repeat lightgray 50% / cover`}}
   className='min-h-[815px] text-center'>
     <div className="bg-black flex min-h-[318px]">
       <div className="basis-[78%] pb-[32px] m-auto">

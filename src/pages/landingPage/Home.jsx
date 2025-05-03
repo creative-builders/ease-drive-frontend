@@ -8,20 +8,20 @@ import CustomButton from '../../components/CustomButton';
 
 import headerBannerImage from "../../assets/images/header-banner-img.png"
 import Footer from '../../layout/footer/Footer';
-import WhyUS from '../../components/landing page/WhyChooseUS';
 import WhyChooseUS from '../../components/landing page/WhyChooseUS';
 import OurServices from '../../components/landing page/OurServices';
 import YourSafety from '../../components/landing page/YourSafety';
+import { useButtonNavigation } from '../../hooks/useButtonNavigation';
 
 
 const Home = () => {
-  const navigate = useNavigate();
+  const handleButtonClick = useButtonNavigation();
   return (
     <>
      <div 
       //  style={{background: `url(${headerBannerImage}) no-repeat lightgray center /cover`}}
       className="h-screen relative mb-[56px]">
-        <div className="relative z-10">
+        <div className="relative z-8 border border-red-900">
         <Header/>
         </div>
         <div className="relative z-10 flex h-full">
@@ -58,14 +58,15 @@ const Home = () => {
       <YourSafety/>
 
       <section className='mb-4'>
-        <p className='text-center text-xs lg:text-xl font-normal'>Experience a simpler, better way <br /> to commute</p>
         <div className="flex bg-[#293D2D] min-h-[408px] rounded-[32px] mb-[112px] mx-auto">
           <div className="basis-[48%] mr-auto ml-[30px] lg:ml-[52px] my-auto">
           <h4 className='mb-4 text-white text-xl lg:text-2xl font-bold '>All of our routes displayed at a glance.</h4>
           <p className='mb-4 text-white font-normal text-sm xl:text-xl'>We are bringing all our routes to you. Simply search for a route along your way and book a ride.</p>
           <CustomButton 
           name='View all routes'
-          extendedStyles={"rounded-lg"}/>
+          extendedStyles={"flex p-2 xl:p-4 rounded-lg"}
+          btnClick={() => handleButtonClick("/login")}
+          />
           </div>
         </div>
       </section>

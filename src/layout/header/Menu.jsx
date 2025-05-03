@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom"
 import CustomButton from "../../components/CustomButton"
+import { useButtonNavigation } from "../../hooks/useButtonNavigation";
 
 
 const Menu = () => {
-    const navigate = useNavigate();
-
-    const handleButtonClick = (path) => navigate(path);
+    const handleButtonClick = useButtonNavigation();
 
   return (
     <div className="flex justify-between items-center">
