@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom"
 import CustomButton from "../../components/CustomButton"
+import { useButtonNavigation } from "../../hooks/useButtonNavigation";
 
 
 const Menu = () => {
-    const navigate = useNavigate();
-
-    const handleButtonClick = (path) => navigate(path);
+    const handleButtonClick = useButtonNavigation();
 
   return (
     <div className="flex justify-between items-center">
@@ -13,7 +12,7 @@ const Menu = () => {
         <div>
             <CustomButton 
             name="Create Account"
-            extendedStyles={"rounded-full p-3 lg:p-4"}
+            extendedStyles={"rounded-full p-2 lg:p-4 text-xs lg:text-base font-bold"}
             btnClick={() => handleButtonClick("/signup-as")}
             />
         </div>
