@@ -11,7 +11,6 @@ const GoogleAuthV3 = ({ role = "passenger" }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  const setUserData = useRecoilValue(userAtom)
   
   // Google Login Function
   const login = useGoogleLogin({
