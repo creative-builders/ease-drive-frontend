@@ -10,7 +10,7 @@ const PassengerDashboard = ({
 
   return (
     <div>
-      {/* <TestingCompent/> */}
+      <TestingCompent/>
        <Header/>
     </div>
   )
