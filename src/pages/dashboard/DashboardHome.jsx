@@ -7,14 +7,11 @@ import DriverDashboard from "./DriverDashboard";
 const DashboardHome = () => {
  const userData = useRecoilValue(userAtom);
 
- console.log(userData)
-
   return (
     <>
     {
-    userData?.role === "passenger" ? <PassengerDashboard/> : <DriverDashboard/>
+    userData?.role === "passenger" ? <PassengerDashboard {...userData} /> : <DriverDashboard/>
     }
-    
     </>
   )
 }
