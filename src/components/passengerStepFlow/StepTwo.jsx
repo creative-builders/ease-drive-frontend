@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { passengerSignUpAuth } from "../../store/auth/passenger/api";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import GoogleAuthV3 from "../GoogleAuthV3";
 
 const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
     const{ formData , setFormData,  handleUpdateFormData } = useStepFlowContext();
@@ -99,7 +100,7 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
             <div className="mb-4">
             <CustomButton
             name="Continue"
-            extendedStyles={"w-full"}
+            extendedStyles={"inline-block mb-8 w-full p-4 rounded-lg"}
             isLoading={isLoading}
             />
         </div>
@@ -114,9 +115,13 @@ const StepTwo = ({nextStep, prevStep, step , totalSteps}) => {
                     Continue with Google
                     </span>
                 </button> */}
-                <div className="flex justify-center mb-16 p-4 ">
-                    <GoogleAuth role="passenger" />
-                </div>
+                
+                 {/* Google Login Component */}
+                 <div className="flex justify-center mb-16 p-4 ">
+                    <GoogleAuthV3/>
+                 </div>
+
+        
 
                 <div className="lg:hidden flex justify-center gap-x-2">
                     <p>Already have an account ?</p>
