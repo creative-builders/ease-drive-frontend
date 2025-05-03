@@ -1,8 +1,18 @@
+import React from 'react'
+import TestingCompent from './TestingCompent'
+import Header from '../../layout/dashboard/header/Header'
 
+const PassengerDashboard = ({
+  profileImage,
+  firstName,
+  lastName
+}) => {
 
-const PassengerDashboard = () => {
   return (
-    <div>Welcome to the Passenger Dashboard</div>
+    <div>
+      <TestingCompent/>
+       <Header/>
+    </div>
   )
 }
 

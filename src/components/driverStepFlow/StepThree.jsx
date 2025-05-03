@@ -16,6 +16,7 @@ const StepThree = ({nextStep, prevStep, step , totalSteps}) => {
                <p>Already have an account?</p>
                <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
             </ul>
+            
          </header>
          <h2 className='font-base lg:text-3xl font-normal capitalize'>Create a driver account</h2>
          <div className="text-center mb-[29px]">
@@ -42,7 +43,7 @@ const StepThree = ({nextStep, prevStep, step , totalSteps}) => {
 
                <CustomButton 
                   name="Next"
-                  extendedStyles={"w-full"}
+                  extendedStyles={"w-full p-3 lg:p-4"}
                   btnClick={() => nextStep()}
                />
             </div>

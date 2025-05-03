@@ -9,6 +9,7 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 const StepOne = ({ nextStep, step, totalSteps }) =>{
 
+
     const{ formData , handleUpdateFormData } = useStepFlowContext();
     const [togglePassword, setTogglePassword] = useState(false);
     const [toggleConfirmPassword, setToggleConfirmPassword] = useState(false);
@@ -125,7 +126,7 @@ const handleToggleConfirmPassword = () => {
           </div>
          <CustomButton 
             name="Continue"
-            extendedStyles={"w-full"}
+            extendedStyles={"w-full p-3 lg:p-4"}
             btnClick={() => nextStep()}
           />
          <div className="line h-[20px] w-11/12 flex justify-around items-center">
