@@ -57,6 +57,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from "../../layout/dashboard/header/Header";
 import Cancelled from '../../assets/images/canelled.png';
+import LocationMap from '../../assets/images/Location.png';
 
 const LocationPopUp = ({ close, setSelected, setPopupActionType }) => {
   const [showModal, setShowModal] = useState(false);
@@ -103,11 +104,11 @@ const LocationPopUp = ({ close, setSelected, setPopupActionType }) => {
 
         {/* Location Image */}
         <div className="h-28 w-28 rounded-full">
-          <img className="h-full w-full" src="/src/assets/images/Location.png" alt="Location icon" />
+          <img className="h-full w-full" src={LocationMap} alt="Location icon" />
         </div>
 
         {/* Modal Text */}
-        <h2 className="capitalize text-2xl font-medium text-center">enable your location</h2>
+        <h2 className="text-2xl font-medium text-center">Enable your location</h2>
         <p className="text-center text-sm text-[#A0A0A0] mt-3 w-full sm:w-[280px]">
           Choose your location to start finding requests around you
         </p>
