@@ -62,7 +62,7 @@
 // don't touch yet
 
 import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import logout from '../../assets/images/Logout.png'
 import setting from '../../assets/images/setting.png'
 import userIcon from '../../assets/images/user-icon.png'
@@ -71,6 +71,7 @@ import Camera from '../../assets/images/camera.png'
 import Canelled from '../../assets/images/canelled.png'
 import { userAtom } from '../atoms/userAtom'
 import { useRecoilValue } from 'recoil'
+import LogoutButton from '../../pages/auth/logout/LogoutButton'
 
 const Profile = ({ setIsOpen, isOpen }) => {
   const fileInputRef = useRef(null);
@@ -129,22 +130,19 @@ const Profile = ({ setIsOpen, isOpen }) => {
         </article>
 
         <section className='h-fit gap-8 w-full flex flex-col'>
-          <Link to={'/EditProfile'}>
+          <NavLink to="edit-profile">
             <div className="flex items-center justify-start gap-4 cursor-pointer">
               <img src={user} alt="" />
               <span>Edit profile</span>
             </div>
-          </Link>
-          <Link to={'/Setting'}>
+          </NavLink>
+          <NavLink to="settings">
             <div className="flex items-center justify-start gap-4 cursor-pointer">
               <img src={setting} alt="" />
               <span>Setting</span>
             </div>
-          </Link>
-          <div className="flex items-center justify-start gap-4 cursor-pointer">
-            <img src={logout} alt="" />
-            <span>Log out</span>
-          </div>
+          </NavLink>
+           <LogoutButton/>
         </section>
       </main>
     </div>

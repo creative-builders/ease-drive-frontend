@@ -6,10 +6,10 @@ import CustomButton from '../CustomButton';
 
 export default function EditProfile(){
     return(
-        <div className='bg-[#444444]'>
+        <div className='bg-[#444444] mt-20'>
             <BackArrow extendedStyles={"top-10 xl:top-16 left-0 xl:left-[480px]"} />
             <main className='min-h-screen xl:h-[934px] w-full xl:w-[430px] p-2 m-auto flex flex-col items-start justify-around bg-[#F6F7F6]'>
-                <h2 className='text-[#000]font-[poppins] text-base not-italic font-bold leading-normal'>EaseDrive</h2>
+                {/* <h2 className='text-[#000]font-[poppins] text-base not-italic font-bold leading-normal'>EaseDrive</h2> */}
                 <article className='h-fit w-40 mx-auto flex flex-col gap-4 items-center'>
                     <p className='text-[#000] font-[poppins] text-xl not-italic font-medium leading-normal'>Edit profile</p>
                     <div className="h-24 w-24 rounded-full">

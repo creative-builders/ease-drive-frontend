@@ -1,7 +1,6 @@
 
-import TestingCompent from './TestingCompent'
+import { Outlet } from 'react-router-dom'
 import Header from '../../layout/dashboard/header/Header'
-
 const PassengerDashboard = ({
   profileImage,
   firstName,
@@ -11,7 +10,7 @@ const PassengerDashboard = ({
   return (
     <div>
        <Header/>
-       <TestingCompent/>
+       <Outlet/>
     </div>
   )
 }

@@ -22,7 +22,7 @@ const Menu = ({ setIsOpen }) => {
 
   return (
     <div className="flex items-center justify-between p-3 lg:justify-around gap-5 h-16 w-full">
-      <Link to={'/'}>
+      <Link to={'/dashboard'}>
         <h2 className='text-black md:text-[#20AE3A] font-[poppins] xl:font-[Arial] text-base xl:text-xl not-italic font-bold leading-normal'>Ease Drive</h2>
       </Link>
 
