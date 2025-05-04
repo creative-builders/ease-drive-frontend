@@ -1,11 +1,9 @@
-import { useState } from "react"
+
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext"
 import CustomButton from "../CustomButton";
 import SectionLabel from "../SectionLabel";
 import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import signupLeftCar from "../../../src/assets/images/signup-left-car.jpg"
-import GoogleAuth from "../GoogleAuth";
 import GoogleAuthV3 from "../GoogleAuthV3";
 
 const StepOne = ({ nextStep, step, totalSteps }) => {

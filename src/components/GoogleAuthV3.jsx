@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import CustomButton from "./CustomButton";
 import { FcGoogle } from "react-icons/fc";
 import { googleAuth } from "../store/auth/general/api";
-import { userAtom } from "./atoms/userAtom";
-import { useRecoilValue } from "recoil";
+
 
 const GoogleAuthV3 = ({ role = "passenger" }) => {
   const navigate = useNavigate();
@@ -40,7 +39,7 @@ const GoogleAuthV3 = ({ role = "passenger" }) => {
     };
 
     registerWithGoogle();
-  }, [user, role]); // Runs only when `user` or `role` changes
+  }, [user, role, navigate]); // Runs only when `user` or `role` changes
 
   return (
     <>
