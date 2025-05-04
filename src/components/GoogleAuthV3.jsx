@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import CustomButton from "./CustomButton";
 import { FcGoogle } from "react-icons/fc";
 import { googleAuth } from "../store/auth/general/api";
-
+import { userAtom } from "./atoms/userAtom";
+import { useSetRecoilState } from "recoil";
 
 const GoogleAuthV3 = ({ role = "passenger" }) => {
+  const setUserAtom = useSetRecoilState(userAtom);
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -27,6 +29,7 @@ const GoogleAuthV3 = ({ role = "passenger" }) => {
         const data = await googleAuth({ role, access_token });
 
         localStorage.setItem("current_user",JSON.stringify(data.data));
+        setUserAtom(data.data)
         
         //navigate to the dashboard
         
