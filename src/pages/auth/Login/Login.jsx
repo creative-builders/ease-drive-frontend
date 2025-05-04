@@ -7,10 +7,13 @@ import LoadingSpinner from "../../../components/LoadingSpinner";
 import toast from "react-hot-toast";
 import { loginAuth } from "../../../store/auth/general/api";
 import GoogleAuthV3 from "../../../components/GoogleAuthV3";
+import { userAtom } from "../../../components/atoms/userAtom";
+import { useSetRecoilState } from "recoil";
 
 
 const Login = () => {
     const navigate =  useNavigate();
+    const setUser = useSetRecoilState(userAtom);
     const [activeTab, setActiveTab] = useState("Email Address");
     const tabs = ["Email Address", "Phone Number"];
     const [togglePassword, setTogglePassword] = useState(false);
@@ -44,6 +47,7 @@ const Login = () => {
         toast.success(response?.message);
         console.log(response.data)
         localStorage.setItem("current_user",JSON.stringify(response.data));
+        setUser(response.data);
         navigate("/dashboard");
         setInputs( prev => ({
         ...prev,

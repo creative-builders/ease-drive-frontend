@@ -22,12 +22,14 @@ import LookingFor from '../components/luggagesparts/LookingFor';
 import PickRide from '../components/PickRide';
 import Cancelled from '../components/luggagesparts/Cancelled';
 import DriverCall from '../components/driverCall/DriverCall';
-import EditProfile from '../components/personalProfile/EditProfile';
 import Setting from '../components/personalProfile/Setting';
 import Password from '../components/personalProfile/Password';
 import Luggage from '../components/luggagesparts/Luggage';
 import Page from '../components/yourRoute/YourRoute';
 import Bidder from '../components/bidders/Bidders';
+import EditProfile from '../components/personalProfile/EditProfile';
+import PassengerDashboard from '../pages/dashboard/PassengerDashboard';
+import DashboardHome from '../pages/dashboard/DashboardHome';
 // import Header from '../layout/dashboard/header/Header';
 
 
@@ -60,15 +62,15 @@ const IndexRoute = () => {
       <Route path="/PickRide" element={<PickRide />} />
       <Route path="/Cancelled" element={<Cancelled />} />
       <Route path="/DriverCall" element={<DriverCall />} />
-      <Route path="/EditProfile" element={<EditProfile />} />
-      <Route path="/Setting" element={<Setting />} />
       <Route path="/Password" element={<Password />} />
       {/* <Route path="/BidCard" element={<BidCard />} /> */}
       
 
       {/* Dashboard Route */}
-      <Route path="/dashboard" element={<Dashboard/>} > 
-       {/* <Route path="testing"  element={<TestingComponent/>}/> */}
+      <Route path="/dashboard" element={<Dashboard/>}> 
+       <Route index element={<TestingComponent />} />
+       <Route path="edit-profile" element={<EditProfile />} />
+       <Route path="settings" element={<Setting />} />
       </Route>
     </Routes>
     </Router>
