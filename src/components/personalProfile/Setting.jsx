@@ -6,13 +6,13 @@ import BackArrow from '../BackArrow'
 
 export default function Setting(){
     return(
-        <div className="bg-[#444444]">
+        <div className="bg-[#444444] mt-20">
             <main className='min-h-screen xl:h-[434px] bg-[#F6F7F6]'>
                 <BackArrow extendedStyles={'top-[60px] xl:top-16 left-0 xl:left-[480px]'} />
                <div className="h-fit  w-full xl:w-[430px] p-2 gap-6 m-auto flex flex-col items-start justify-center">
 
 
-               <h2 className='text-[#000] font-[poppins] text-base not-italic font-bold leading-normal'>EaseDrive</h2>
+               {/* <h2 className='text-[#000] font-[poppins] text-base not-italic font-bold leading-normal'>EaseDrive</h2> */}
                 <p className='text-[#000] font-[poppins] m-auto text-xl not-italic font-medium leading-normal'>Setting</p>
                 <section className='w-full p-2 flex flex-col items-start gap-5'>
                     <Link className='w-full' to={'/Password'}>
