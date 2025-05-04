@@ -69,12 +69,18 @@ import userIcon from '../../assets/images/user-icon.png'
 import user from '../../assets/images/smallPro.png'
 import Camera from '../../assets/images/camera.png'
 import Canelled from '../../assets/images/canelled.png'
+import { userAtom } from '../atoms/userAtom'
+import { useRecoilValue } from 'recoil'
 
 const Profile = ({ setIsOpen, isOpen }) => {
-  if (!isOpen) return null; // Only render when open
+  const fileInputRef = useRef(null);
+  const userData = useRecoilValue(userAtom);  // Assuming you're using Recoil for state management
 
-  const fileInputRef = useRef(null)
-  const [profilePic, setProfilePic] = useState(userIcon)
+  const [profilePic, setProfilePic] = useState(userData?.profileImage); // Default to userIcon if no image is set
+
+
+
+  if (!isOpen) return null; // Only render when open
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
@@ -118,8 +124,8 @@ const Profile = ({ setIsOpen, isOpen }) => {
           />
         </div>
         <article className='h-16 w-fit'>
-          <h2 className='text-[#414141] font-[poppins] text-base font-medium not-italic leading-normal'>Mabel Okoro</h2>
-          <p className='text-[#414141] font-[poppins] text-[12px] font-light not-italic leading-normal'>mabel.faustina.okoro@gmail.com</p>
+          <h2 className='text-[#414141] font-[poppins] text-base font-medium not-italic leading-normal'>{userData?.fullName}</h2>
+          <p className='text-[#414141] font-[poppins] text-[12px] font-light not-italic leading-normal'>{userData?.email}</p>
         </article>
 
         <section className='h-fit gap-8 w-full flex flex-col'>

@@ -68,7 +68,7 @@ const IndexRoute = () => {
 
       {/* Dashboard Route */}
       <Route path="/dashboard" element={<Dashboard/>} > 
-       <Route path="testing"  element={<TestingComponent/>}/>
+       {/* <Route path="testing"  element={<TestingComponent/>}/> */}
       </Route>
     </Routes>
     </Router>
