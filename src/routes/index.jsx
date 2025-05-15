@@ -14,6 +14,7 @@ import { Otp } from '../pages/auth/Passengers/Otp';
 import { ChangePassword } from '../pages/auth/Passengers/Change-password';
 import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
+import CheckEmailFile from '../pages/auth/Passengers/CheckEmailFile';
 
 
 
@@ -36,6 +37,7 @@ const IndexRoute = () => {
       <Route path="/Forgot-password" element={<ForgotPassword />} />
       <Route path="/Otp" element={<Otp />} />
       <Route path="/Change-password" element={<ChangePassword />} />
+      <Route path="/CheckEmailFile" element={<CheckEmailFile />} />
 
       {/* Dashboard Route */}
       <Route path="/dashboard" element={<Dashboard/>} />

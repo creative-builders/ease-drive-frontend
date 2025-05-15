@@ -4,6 +4,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useMutation } from "@tanstack/react-query";
 import { resetPassword } from '../../../store/auth/changePass/api';
 import toast from "react-hot-toast";
+import Emoji from "../../../assets/images/confirm-email-emoji.svg"
 
 export const ChangePassword = () => {
     const navigate = useNavigate();
@@ -36,13 +37,17 @@ export const ChangePassword = () => {
     };
 
     return (
-        <div className='min-h-screen bg-gray-500'>
+        <div className='min-h-screen bg-[#F6F7F6]'>
             <div className='w-11/12 mx-auto xl:w-8/12 px-2 py-4'>
-                <h2 className="font-bold text-base text-center text-gray-950 mb-[51px]">
+                <h2 className="font-[poppins] text-[#20AE3A] text-xl md:text-4xl font-bold text-center mb-[51px]">
                     <Link to="/">EaseDrive</Link>
                 </h2>
-                <h3 className="mb-4 text-xl text-gray-950 font-bold">Welcome back</h3>
-                <p className="text-gray-600 mb-16">Enter a new Password</p>
+                <div className="flex items-center gap-2 justify-center">
+                    <h3 className="mb-4 text-2xl text-[#000000] font-medium font-[poppins] text-center leading-normal">Set your new password</h3>
+                    <img className='h-8 w-8 mt-[-20px]' src={Emoji} alt="" />
+                </div>
+                
+                <p className="text-[#444444] font-medium mb-16 text-sm md:text-base text-center">You go fit set your new password now but e go different from your old password.</p>
 
                 <form onSubmit={handleSubmit}>
                     <div className="mb-[30px] relative">
@@ -86,7 +91,7 @@ export const ChangePassword = () => {
                             `}
                         disabled={!isFormValid || isLoading}
                     >
-                        <span className="text-bold text-base text-white">{isLoading ? "Submitting..." : "Submit"}</span>
+                        <span className="text-bold text-base text-white">{isLoading ? "Submitting..." : "Reset Password"}</span>
                     </button>
                 </form>
             </div>
