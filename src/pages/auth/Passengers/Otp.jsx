@@ -52,14 +52,14 @@ export const Otp = () => {
             </div>
 
             <Link to={isOtpComplete ? "/Change-password" : "#"}>
-            <button
-                className={`mb-8 w-full mx-auto p-4 rounded-lg ${
-                    isOtpComplete ? "bg-green-500" : "bg-green-200 cursor-not-allowed"
-                }`}
-                disabled={!isOtpComplete}
-                >
-                    <span className="font-bold text-base text-white">Continue</span>
-            </button>
+                <button
+                    className={`mb-8 w-full mx-auto p-4 rounded-lg ${
+                        isOtpComplete ? "bg-green-500" : "bg-green-200 cursor-not-allowed"
+                    }`}
+                    disabled={!isOtpComplete}
+                    >
+                        <span className="font-bold text-base text-white">Continue</span>
+                </button>
             </Link>
 
             <div className="flex justify-center gap-x-2">

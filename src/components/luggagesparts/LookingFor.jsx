@@ -49,7 +49,7 @@ export default function LookingFor() {
   return (
     <div className='min-h-screen w-full bg-[url(/Group.png)] flex flex-col items-center justify-around gap-14 relative'>
       <Header />
-      <BackArrow extendedStyles={'top-20 xl:top-24 left-2 xl:left-20'} />
+      {/* <BackArrow extendedStyles={'top-20 xl:top-24 left-2 xl:left-20'} /> */}
       
        
       <article className='h-17 flex w-11/12 xl:w-[667px] px-4 py-6 mt-24 items-center gap-6 rounded-2xl bg-[#fff]'>
@@ -84,7 +84,7 @@ export default function LookingFor() {
                 <CustomButton
                   name="Cancel Ride"
                   extendedStyles={"p-2 lg:p-2 rounded-lg w-full"}
-                  onClick={() => setIsOpen(true)}
+                  btnClick={() => setIsOpen(true)}
                 />
               </Link>
             </section>

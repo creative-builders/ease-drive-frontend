@@ -44,7 +44,7 @@ export default function Cancelled() {
   return (
     <div>
       <Header />
-      <BackArrow extendedStyles={'top-20 xl:top-24 left-2 xl:left-20'} />
+      {/* <BackArrow extendedStyles={'top-20 xl:top-24 left-2 xl:left-20'} /> */}
       <main className="h-full w-full mx-auto xl:w-8/12 px-2 py-4 flex flex-col gap-5 items-center justify-around mt-20">
         <h2 className='text-[#000] font-poppins text-xl xl:text-3xl font-semibold not-italic leading-normal'>Cancel Ride</h2>
         <p className='text-[#444] font-poppins text-sm xl:text-2xl font-normal not-italic leading-normal'>
