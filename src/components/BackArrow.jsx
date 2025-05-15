@@ -15,8 +15,8 @@ const BackArrow = ({extendedStyles}) =>{
     }
 
    return(
-    <div className={`${extendedStyles} inline-flex items-center gap-2 z-0 md:z-10 absolute left-6`} onClick={handleGoBack}>
-        <img className='h-6 w-6 cursor-pointer' src={arrow} alt="" />
+    <div className={`${extendedStyles} inline-flex items-center gap-2 z-0 md:z-10 absolute left-6 cursor-pointer`} onClick={handleGoBack}>
+        <img className='h-6 w-6' src={arrow} alt="" />
         <span className='text-[12px] not-italic font-normal leading-normal'>back</span>
     </div>
    )

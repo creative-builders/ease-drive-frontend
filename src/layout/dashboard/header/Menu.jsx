@@ -14,6 +14,7 @@ const Menu = ({ setIsOpen }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Home'); // 👈 new: active tab
   const userData = useRecoilValue(userAtom);
+  console.log(userData)
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
@@ -103,8 +104,8 @@ const Menu = ({ setIsOpen }) => {
               )
             }
           </div>
-          <img src={dropdown} alt="caret-down" className='h-2 w-3 flex md:hidden lg:ml-6 cursor-pointer' onClick={() => setIsOpen(true)} />
-          <p className='text-white font-[Arial] hidden xl:flex text-sm font-normal not-italic leading-normal'>{userData?.fullName}</p>
+          {/* <p className='text-white font-[Arial] hidden xl:flex text-sm font-normal not-italic leading-normal'>{userData?.fullName}</p> */}
+          <img src={dropdown} alt="caret-down" className="h-2 w-3 flex lg:ml-4 cursor-pointer filter lg:invert" onClick={() => setIsOpen(true)} />
         </article>
       </div>
     </div>

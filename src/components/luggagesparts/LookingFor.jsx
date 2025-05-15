@@ -120,7 +120,7 @@ export default function LookingFor() {
                 <Link className='w-full' to='/Cancelled'>
                   <CustomButton
                     name="Cancel Ride"
-                    extendedStyles={"p-2 lg:p-2 rounded-lg w-full"}
+                    extendedStyles={"p-2 lg:p-2 rounded-lg w-full bg-transparent text-green-400"}
                     onClick={() => setIsOpen(true)}
                   />
                 </Link>
