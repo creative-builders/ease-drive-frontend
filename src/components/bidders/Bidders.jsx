@@ -60,7 +60,7 @@ const Bidder = () =>{
 
 
   return(
-    <div className='relative mt-16 -z-20 border border-blue-600'>
+    <div className='relative mt-16 z-10'>
       <div className="p-4 lg:h-fit w-full flex flex-wrap gap-4 justify-center">
         {bids.map((bid) => (
           <BidCard 
