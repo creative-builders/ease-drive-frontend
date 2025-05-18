@@ -130,13 +130,13 @@ const Profile = ({ setIsOpen, isOpen }) => {
         </article>
 
         <section className='h-fit gap-8 w-full flex flex-col'>
-          <NavLink to="edit-profile">
+          <NavLink to="/dashboard/edit-profile">
             <div className="flex items-center justify-start gap-4 cursor-pointer">
               <img src={user} alt="" />
               <span>Edit profile</span>
             </div>
           </NavLink>
-          <NavLink to="settings">
+          <NavLink to="/dashboard/settings">
             <div className="flex items-center justify-start gap-4 cursor-pointer">
               <img src={setting} alt="" />
               <span>Setting</span>

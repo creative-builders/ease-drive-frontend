@@ -47,31 +47,33 @@ const IndexRoute = () => {
       <Route path="/activate" element={<ActivateAccount/>} />
       <Route path="/passengers-signup" element={<PassengersSignup />} />
       <Route path="/driver-signup" element={<DriverSignup />} />
-      <Route path="/DriVerify" element={<DriVerify />} />
-      <Route path="/DrivUpload" element={<DrivUpload />} />
-      <Route path="/DrivPlace" element={<DrivPlace />} />
+      <Route path="/Dri-verify" element={<DriVerify />} />
+      <Route path="/Driv-upload" element={<DrivUpload />} />
+      <Route path="/Driv-place" element={<DrivPlace />} />
       <Route path="/Forgot-password" element={<ForgotPassword />} />
       <Route path="/Otp" element={<Otp />} />
       <Route path="/Change-password" element={<ChangePassword />} />
-      <Route path="/Bidder" element={<Bidder />} />
-      <Route path="/LocationPopUp" element={<LocationPopUp />} />
-      <Route path="/mainpage" element={<MainPage />} />
-      <Route path="/page" element={<Page />} />
-      <Route path="/Luggage" element={<Luggage />} />
-      <Route path="/LookingFor" element={<LookingFor />} />
-      <Route path="/PickRide" element={<PickRide />} />
-      <Route path="/Cancelled" element={<Cancelled />} />
-      <Route path="/DriverCall" element={<DriverCall />} />
+      
       <Route path="/Password" element={<Password />} />
       {/* <Route path="/BidCard" element={<BidCard />} /> */}
       
 
       {/* Dashboard Route */}
-      <Route path="/dashboard" element={<Dashboard/>}> 
-       <Route index element={<TestingComponent />} />
-       <Route path="edit-profile" element={<EditProfile />} />
-       <Route path="settings" element={<Setting />} />
+      <Route path="/dashboard" element={<PassengerDashboard />}> 
+        <Route index element={<TestingComponent />} />
+        <Route path="edit-profile" element={<EditProfile />} />
+        <Route path="settings" element={<Setting />} />
+        <Route path="location-popUp" element={<LocationPopUp />} />
+        <Route path="mainpage" element={<MainPage />} />
+        <Route path="page" element={<Page />} />
+        <Route path="luggage" element={<Luggage />} />
+        <Route path="looking-for" element={<LookingFor />} />
+        <Route path="pick-ride" element={<PickRide />} />
+        <Route path="cancelled" element={<Cancelled />} />
+        <Route path="bidder" element={<Bidder />} />
+        <Route path="driver-call" element={<DriverCall />} />
       </Route>
+
     </Routes>
     </Router>
   )

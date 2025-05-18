@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Header from '../../layout/dashboard/header/Header';
 import IconMap from '../../assets/icons/NewIcon.png';
 // import locate from '../../assets/images/Location-map .png'
-// import BackArrow from '../BackArrow';
+import BackArrow from '../BackArrow';
 
 export default function DriverCall() {
   const location = useLocation();
@@ -40,7 +40,7 @@ export default function DriverCall() {
   return (
     <div className='min-h-screen w-full bg-[url(/Group.png)] flex flex-col items-center justify-around gap-14'>
       <Header />
-      {/* <BackArrow extendedStyles="top-32 left-10 xl:left-24" /> */}
+      <BackArrow extendedStyles="top-20 left-10 xl:left-24" />
 
       <article className='h-17 flex w-4/5 xl:w-[667px] px-4 py-6 mt-24 items-center gap-6 rounded-2xl bg-[#fff]'>
         <img src={IconMap} alt="location-icon" />

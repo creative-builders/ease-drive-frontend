@@ -36,9 +36,9 @@ export default function PickRide({ selected, setSelected }){
     return(
         <div className='h-screen w-full bg-[url(/Group.png)] flex flex-col px-0  items-center gap-12 justify-around'>
             <Header />
-           <BackArrow extendedStyles={"top-20 xl:top-24 left-4 xl:left-20"} />
+           <BackArrow extendedStyles={"top-20 left-10 xl:left-24"} />
 
-            <Link to="/Page" className='w-11/12 flex items-center justify-center'>
+            <Link to="/dashboard/Page" className='w-11/12 flex items-center justify-center'>
                 <div className="w-11/12 xl:w-[413px] ml-2 inline-flex px-2 py-3 justify-center items-center gap-2 rounded-3xl bg-[#20AE3A] mt-28">
                 <span className='text-white font-[poppins] text-base xl:text-3xl not-italic font-medium leading-normal capitalize'>set your pickup place</span>
                 <img src={arrow} alt="" className='h-6 w-6' />

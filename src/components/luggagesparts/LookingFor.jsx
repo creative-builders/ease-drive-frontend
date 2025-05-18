@@ -20,7 +20,7 @@ export default function LookingFor() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      navigate('/Bidder');
+      navigate('/dashboard/bidder');
     }, 15000);
   };
   
@@ -36,7 +36,7 @@ export default function LookingFor() {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(interval);
-          setIsOpen(true); // Show cover when progress hits 100
+          setIsOpen(true);
           return 100;
         }
         return prev + (100 / 15);
@@ -49,7 +49,7 @@ export default function LookingFor() {
   return (
     <div className='min-h-screen w-full bg-[url(/Group.png)] flex flex-col items-center justify-around gap-14 relative'>
       <Header />
-      {/* <BackArrow extendedStyles={'top-20 xl:top-24 left-2 xl:left-20'} /> */}
+       <BackArrow extendedStyles={'top-20 left-10 xl:left-24'} />
       
        
       <article className='h-17 flex w-11/12 xl:w-[667px] px-4 py-6 mt-24 items-center gap-6 rounded-2xl bg-[#fff]'>
@@ -80,7 +80,7 @@ export default function LookingFor() {
               <div className="h-17 w-20 bg-[#DEFFE4] rounded-[50%] flex flex-col items-center justify-center">
                 <img src={motor} className='h-2/4 w-2/4 object-contain' alt="" />
               </div>
-              <Link className='w-full' to='/Cancelled'>
+              <Link className='w-full' to='/dashboard/Cancelled'>
                 <CustomButton
                   name="Cancel Ride"
                   extendedStyles={"p-2 lg:p-2 rounded-lg w-full"}
@@ -117,7 +117,7 @@ export default function LookingFor() {
                 <div className="h-17 w-20 bg-[#DEFFE4] rounded-[50%] flex flex-col items-center justify-center">
                   <img src={motor} className='h-2/4 w-2/4 object-contain' alt="" />
                 </div>
-                <Link className='w-full' to='/Cancelled'>
+                <Link className='w-full' to='/dashboard/cancelled'>
                   <CustomButton
                     name="Cancel Ride"
                     extendedStyles={"p-2 lg:p-2 rounded-lg w-full bg-transparent text-green-400"}

@@ -34,7 +34,7 @@ export default function Luggage() {
             }
         }
     
-        navigate('/LookingFor')
+        navigate('/dashboard/looking-for')
     };
     
     
@@ -64,7 +64,7 @@ export default function Luggage() {
     return (
         <div className='min-h-screen w-full bg-[url(/Group.png)] flex flex-col items-center justify-around gap-14'>
             <Header />
-            {/* <BackArrow extendedStyles='top-24 xl:top-24 left-2 xl:left-20' /> */}
+            <BackArrow extendedStyles='top-20 left-10 xl:left-24' />
             
             <article className='h-17 flex w-11/12 xl:w-[667px] px-4 py-6 mt-24 items-center gap-6 rounded-2xl bg-[#fff]'>
                 <img src={IconMap} alt="" />
