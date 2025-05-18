@@ -12,10 +12,10 @@ return (
                 <Link to="/">EaseDrive</Link> 
             </h2>
             <div className="flex items-center gap-2 justify-center">
-            <h3 className="mb-4 text-2xl text-[#000000] font-medium font-[poppins] text-center leading-normal">Forget Password</h3>
+            <h3 className="mb-4 text-2xl text-[#000000] font-medium font-[poppins] text-center leading-normal">Check your Email</h3>
             <img className='h-8 w-8 mt-[-20px]' src={Emoji} alt="" />
             </div>
-            <p className="text-[#444444] font-medium mb-16 text-sm md:text-base text-center">Abeg no Vex, we’ll send you Instructions on how to get a new password</p>
+            <p className="text-[#444444] font-medium mb-16 text-sm md:text-base text-center">We do send link to your email open am make you reset your password.</p>
 
             <form >
                 
@@ -33,12 +33,15 @@ return (
 
                 
             </form>
-            <Link 
+            
+            <div className="flex items-center justify-center">
+                <Link 
                     to="/Otp"
-                    className="w-full mx-auto p-2 rounded-lg bg-transparent text-[#20AE3A] text-center"
+                    className="w-2/5 p-2 rounded-lg bg-transparent text-[#20AE3A] text-center"
                 >
                     Continue to enter OTP
-            </Link>
+                </Link>
+            </div>
            
         </div>
         <Link className='flex gap-2 w-40 mx-auto' to={'/login'}>

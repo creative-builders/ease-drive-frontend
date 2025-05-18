@@ -22,7 +22,7 @@ export const ChangePassword = () => {
     const { mutate: submitResetPassword, isLoading } = useMutation(resetPassword, {
         onSuccess: () => {
             setFormData({ password: "", confirmPassword: "" });
-            navigate("/login");
+            navigate("/Reset-password");
         },
         onError: (error) => {
             toast.error(error.message);
