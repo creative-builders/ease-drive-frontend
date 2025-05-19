@@ -24,7 +24,7 @@ export const ForgotPassword = () => {
             navigate("/Otp"); 
         },
         onError: (error) => {
-            toast.error(error?.response?.data?.message === "No account associated with this email"? `${error?.response?.data?.message} enter email associated with this account ` : error?.response?.data?.message)
+            toast.error(error?.response?.data?.message === "No account associated with this email"? `${error?.response?.data?.message} ` : error?.response?.data?.message)
         },
     });
 
