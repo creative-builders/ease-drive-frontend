@@ -52,12 +52,24 @@ export default function PickRide({ selected, setSelected }){
                 {options.map((option) => (
                     <div
                     key={option.id}
-                    className={`cursor-pointer flex w-2/4 xl:w-44 h-[78px] xl:h-[121px] px-[1px] py-4 flex-col justify-center items-center gap-1 rounded-lg transition-all duration-300 ${
+                    className={`cursor-pointer flex w-2/4 md:w-44 h-[78px] md:h-[121px] px-[1px] py-4 flex-col justify-center items-center gap-1 rounded-lg transition-all duration-300 ${
                         selected === option.id ? 'bg-[#20AE3A] text-white' : 'bg-[#EEFDF1] text-[#1E1E1E]'
                     }`}
                     onClick={() => handleSubmit(option)}
                     >
-                    <img src={option.image} className='w-10 xl:w-[77px] h-9 xl:h-[71px]' alt={option.text} />
+                    <img src={option.image}
+                     className={`w-10 md:w-[77px] h-9 md:h-[71px]
+                        ${
+                            option.text === "Shuttle ride"
+                            ? 'h-6 md:h-[71px] w-8 md:w-[77px]': ''
+                        }
+                        ${
+                            option.text === "Keke ride"
+                            ? 'h-7 md:h-[71px] w-8 md:w-[77px] ': ''
+                        }`}
+                      alt={option.text} 
+                      
+                    />
                     <p className='font-[poppins] text-center text-xs xl:text-xl font-normal not-italic leading-normal'>
                         {option.text}
                     </p>
