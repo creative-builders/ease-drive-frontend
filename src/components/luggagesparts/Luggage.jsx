@@ -96,7 +96,7 @@ export default function Luggage() {
                     </div>
 
                     {/* Radio buttons */}
-                    <article className='h-10 w-3/5 xl:w-72 inline-flex items-center gap-5 p-2'>
+                    <label htmlFor='without-luggage' className='h-10 w-3/5 xl:w-72 inline-flex items-center gap-5 p-2'>
                         <input
                             className='h-5 w-5 border border-[#20AE3A] rounded-none'
                             type="radio"
@@ -106,9 +106,9 @@ export default function Luggage() {
                             onChange={() => handleRadioChange('without-luggage')}
                         />
                         <span className='text-[12px] xl:text-base font-medium'>Without luggage</span>
-                    </article>
+                    </label>
 
-                    <article className='h-10 w-3/5 xl:w-72 inline-flex items-center gap-5 p-2'>
+                    <label htmlFor='with-luggages' className='h-10 w-3/5 xl:w-72 inline-flex items-center gap-5 p-2'>
                         <input
                             className='h-5 w-5 border border-[#20AE3A] rounded-none'
                             type="radio"
@@ -118,12 +118,12 @@ export default function Luggage() {
                             onChange={() => handleRadioChange('with-luggages')}
                         />
                         <span className='text-[12px] xl:text-base font-medium'>With luggages</span>
-                    </article>
+                    </label>
 
                     {/* Luggage upload */}
                     {selectedOption === 'with-luggages' && (
                         <section className='flex flex-col mt-5 h-[280px] w-full gap-6 p-2 relative'>
-                            <p className='text-[#5A5A5A] text-[20px] leading-6 font-medium capitalize'>
+                            <p className='text-[#5A5A5A] text-base lg:text-xl leading-6 font-medium capitalize'>
                                 upload picture of your luggages
                             </p>
                             <label
@@ -166,9 +166,6 @@ export default function Luggage() {
                         btnClick={handleSubmit}
                         
                     />
-                    
-                    
-
                 </figure>
             </main>
         </div>

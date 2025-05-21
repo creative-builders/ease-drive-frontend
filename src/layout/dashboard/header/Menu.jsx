@@ -14,7 +14,9 @@ const Menu = ({ setIsOpen }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Home'); // 👈 new: active tab
   const userData = useRecoilValue(userAtom);
-  console.log(userData)
+  // console.log(userData)
+
+  // console.log(userData?.profileImage)
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
