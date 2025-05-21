@@ -14,6 +14,8 @@ import { Otp } from '../pages/auth/Passengers/Otp';
 import { ChangePassword } from '../pages/auth/Passengers/Change-password';
 import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
+import CheckEmailFile from '../pages/auth/Passengers/CheckEmailFile';
+import ResetPassword from '../pages/auth/Passengers/Reset-password';
 // import BidCard from '../components/bid/BidCard';
 import LocationPopUp from '../components/location/LocationPopUp';
 import TestingComponent from '../pages/dashboard/TestingCompent';
@@ -54,6 +56,17 @@ const IndexRoute = () => {
       <Route path="/Otp" element={<Otp />} />
       <Route path="/Change-password" element={<ChangePassword />} />
       
+      <Route path="/Check-email" element={<CheckEmailFile />} />
+      <Route path="/Reset-password" element={<ResetPassword />} />
+      <Route path="/Bidder" element={<Bidder />} />
+      <Route path="/LocationPopUp" element={<LocationPopUp />} />
+      <Route path="/mainpage" element={<MainPage />} />
+      <Route path="/page" element={<Page />} />
+      <Route path="/Luggage" element={<Luggage />} />
+      <Route path="/LookingFor" element={<LookingFor />} />
+      <Route path="/PickRide" element={<PickRide />} />
+      <Route path="/Cancelled" element={<Cancelled />} />
+      <Route path="/DriverCall" element={<DriverCall />} />
       <Route path="/Password" element={<Password />} />
       {/* <Route path="/BidCard" element={<BidCard />} /> */}
       
