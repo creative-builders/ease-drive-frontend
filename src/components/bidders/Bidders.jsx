@@ -26,7 +26,7 @@ const Bidder = () =>{
           amount: "2000",
         },
         {
-          id: 1,
+          id: 2,
           profilePic: userIcon,
           imageUrl: motor,
           name: "John",
@@ -35,7 +35,7 @@ const Bidder = () =>{
           amount: "3000",
         },
         {
-          id: 1,
+          id: 3,
           profilePic: userIcon,
           imageUrl: bike,
           name: "Nedu",
@@ -48,12 +48,20 @@ const Bidder = () =>{
       setBids(response);
     };
 
+    console.log(bids.map(bid => bid.id));
     fetchBids();
   }, []);
 
+  useEffect(() => {
+  if (bids.length > 0) {
+    console.log(bids.map(bid => bid.id));
+  }
+}, [bids]);
+
+
   return(
-    <div className='relative'>
-        <div className="p-4 lg:h-fit w-full flex flex-wrap gap-4 justify-center">
+    <div className='relative mt-16 z-10'>
+      <div className="p-4 lg:h-fit w-full flex flex-wrap gap-4 justify-center">
         {bids.map((bid) => (
           <BidCard 
             key={bid.id}

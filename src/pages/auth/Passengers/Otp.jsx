@@ -107,12 +107,27 @@ export const Otp = () => {
                     {/* </Link> */}
                 </form>
 
+            <Link to={isOtpComplete ? "/Change-password" : "#"}>
+                <button
+                    className={`mb-8 w-full mx-auto p-4 rounded-lg ${
+                        isOtpComplete ? "bg-green-500" : "bg-green-200 cursor-not-allowed"
+                    }`}
+                    disabled={!isOtpComplete}
+                    >
+                        <span className="font-bold text-base text-white">Continue</span>
+                </button>
+            </Link>
+
+            <div className="flex justify-center gap-x-2">
+                <p className="details">Didn't receive the OTP? <a href="#" className="text-green-300" id="resendOtp">Resend OTP</a></p>
+                {/* <button>verify otp</button> */}
                 <div className="flex justify-center gap-x-2">
                     <Link to={"/Forgot-password"} className="details">
                         Didn't receive the OTP? <a href="#" className="text-green-300" id="resendOtp">Resend OTP</a>
                     </Link>
                 </div>
             </div>
+        </div>
         </div>
     );
 };

@@ -11,6 +11,8 @@ const BidCard = ({
     imageUrl,
    }) => {
 
+    console.log(CustomButton)
+
     return (
         
         <div className=" bg-gray-500">
@@ -36,23 +38,22 @@ const BidCard = ({
                                 btnClick={() => close((prev) => !prev)}
                             />
 
-                            <Link to='/DriverCall'
-                               state={{
-                                profilePic,
-                                name,
-                                rating,
-                                distance: "800m (5mins away)",
-                                vehicleInfo: "Automatic | 3 seat | yellow",
-                                amount,
-                                imageUrl
-                              }}
-                            >
-                                <CustomButton 
-                                    name="Accept"
-                                    extendedStyles={"w-full py-2 px-4 cursor-pointer text-center rounded-lg gap-2 text-base font-normal text-white bg-green-300"}
-                                    btnClick={() => close((prev) => !prev)}
-                                />
-                            </Link>
+                        <CustomButton 
+                            name="Accept"
+                            extendedStyles="w-full py-2 px-4 cursor-pointer text-center rounded-lg gap-2 text-base font-normal text-white bg-green-300"
+                            
+                            navigateTo="/dashboard/driver-call"
+                            navigateState={{
+                            profilePic,
+                            name,
+                            rating,
+                            distance: "800m (5mins away)",
+                            vehicleInfo: "Automatic | 3 seat | yellow",
+                            amount,
+                            imageUrl
+                            }}
+                        />  
+
                             
                         </div>
                     </div>
