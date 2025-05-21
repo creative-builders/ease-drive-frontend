@@ -14,20 +14,24 @@ import { Otp } from '../pages/auth/Passengers/Otp';
 import { ChangePassword } from '../pages/auth/Passengers/Change-password';
 import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
+import CheckEmailFile from '../pages/auth/Passengers/CheckEmailFile';
+import ResetPassword from '../pages/auth/Passengers/Reset-password';
 // import BidCard from '../components/bid/BidCard';
 import LocationPopUp from '../components/location/LocationPopUp';
 import TestingComponent from '../pages/dashboard/TestingCompent';
 import MainPage from '../components/mainpage/MainPage';
-import Page from '../components/yourRoute/page';
 import LookingFor from '../components/luggagesparts/LookingFor';
 import PickRide from '../components/PickRide';
 import Cancelled from '../components/luggagesparts/Cancelled';
 import DriverCall from '../components/driverCall/DriverCall';
-import EditProfile from '../components/personalProfile/EditProfile';
 import Setting from '../components/personalProfile/Setting';
 import Password from '../components/personalProfile/Password';
 import Luggage from '../components/luggagesparts/Luggage';
-import Bidder from '../components/bidders/bidder';
+import Page from '../components/yourRoute/YourRoute';
+import Bidder from '../components/bidders/Bidders';
+import EditProfile from '../components/personalProfile/EditProfile';
+import PassengerDashboard from '../pages/dashboard/PassengerDashboard';
+import DashboardHome from '../pages/dashboard/DashboardHome';
 // import Header from '../layout/dashboard/header/Header';
 
 
@@ -45,12 +49,15 @@ const IndexRoute = () => {
       <Route path="/activate" element={<ActivateAccount/>} />
       <Route path="/passengers-signup" element={<PassengersSignup />} />
       <Route path="/driver-signup" element={<DriverSignup />} />
-      <Route path="/DriVerify" element={<DriVerify />} />
-      <Route path="/DrivUpload" element={<DrivUpload />} />
-      <Route path="/DrivPlace" element={<DrivPlace />} />
+      <Route path="/Dri-verify" element={<DriVerify />} />
+      <Route path="/Driv-upload" element={<DrivUpload />} />
+      <Route path="/Driv-place" element={<DrivPlace />} />
       <Route path="/Forgot-password" element={<ForgotPassword />} />
       <Route path="/Otp" element={<Otp />} />
       <Route path="/Change-password" element={<ChangePassword />} />
+      
+      <Route path="/Check-email" element={<CheckEmailFile />} />
+      <Route path="/Reset-password" element={<ResetPassword />} />
       <Route path="/Bidder" element={<Bidder />} />
       <Route path="/LocationPopUp" element={<LocationPopUp />} />
       <Route path="/mainpage" element={<MainPage />} />
@@ -60,16 +67,26 @@ const IndexRoute = () => {
       <Route path="/PickRide" element={<PickRide />} />
       <Route path="/Cancelled" element={<Cancelled />} />
       <Route path="/DriverCall" element={<DriverCall />} />
-      <Route path="/EditProfile" element={<EditProfile />} />
-      <Route path="/Setting" element={<Setting />} />
       <Route path="/Password" element={<Password />} />
       {/* <Route path="/BidCard" element={<BidCard />} /> */}
       
 
       {/* Dashboard Route */}
-      <Route path="/dashboard" element={<Dashboard/>} > 
-       <Route path="testing"  element={<TestingComponent/>}/>
+      <Route path="/dashboard" element={<PassengerDashboard />}> 
+        <Route index element={<TestingComponent />} />
+        <Route path="edit-profile" element={<EditProfile />} />
+        <Route path="settings" element={<Setting />} />
+        <Route path="location-popUp" element={<LocationPopUp />} />
+        <Route path="mainpage" element={<MainPage />} />
+        <Route path="page" element={<Page />} />
+        <Route path="luggage" element={<Luggage />} />
+        <Route path="looking-for" element={<LookingFor />} />
+        <Route path="pick-ride" element={<PickRide />} />
+        <Route path="cancelled" element={<Cancelled />} />
+        <Route path="bidder" element={<Bidder />} />
+        <Route path="driver-call" element={<DriverCall />} />
       </Route>
+
     </Routes>
     </Router>
   )

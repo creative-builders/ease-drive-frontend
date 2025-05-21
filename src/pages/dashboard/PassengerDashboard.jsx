@@ -1,7 +1,6 @@
-import React from 'react'
-import TestingCompent from './TestingCompent'
-import Header from '../../layout/dashboard/header/Header'
 
+import { Outlet } from 'react-router-dom'
+import Header from '../../layout/dashboard/header/Header'
 const PassengerDashboard = ({
   profileImage,
   firstName,
@@ -10,8 +9,8 @@ const PassengerDashboard = ({
 
   return (
     <div>
-      <TestingCompent/>
        <Header/>
+       <Outlet/>
     </div>
   )
 }

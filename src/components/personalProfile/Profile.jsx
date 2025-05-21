@@ -62,19 +62,26 @@
 // don't touch yet
 
 import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import logout from '../../assets/images/Logout.png'
 import setting from '../../assets/images/setting.png'
 import userIcon from '../../assets/images/user-icon.png'
 import user from '../../assets/images/smallPro.png'
 import Camera from '../../assets/images/camera.png'
 import Canelled from '../../assets/images/canelled.png'
+import { userAtom } from '../atoms/userAtom'
+import { useRecoilValue } from 'recoil'
+import LogoutButton from '../../pages/auth/logout/LogoutButton'
 
 const Profile = ({ setIsOpen, isOpen }) => {
-  if (!isOpen) return null; // Only render when open
+  const fileInputRef = useRef(null);
+  const userData = useRecoilValue(userAtom);  // Assuming you're using Recoil for state management
 
-  const fileInputRef = useRef(null)
-  const [profilePic, setProfilePic] = useState(userIcon)
+  const [profilePic, setProfilePic] = useState(userData?.profileImage); // Default to userIcon if no image is set
+
+
+
+  if (!isOpen) return null; // Only render when open
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
@@ -118,27 +125,24 @@ const Profile = ({ setIsOpen, isOpen }) => {
           />
         </div>
         <article className='h-16 w-fit'>
-          <h2 className='text-[#414141] font-[poppins] text-base font-medium not-italic leading-normal'>Mabel Okoro</h2>
-          <p className='text-[#414141] font-[poppins] text-[12px] font-light not-italic leading-normal'>mabel.faustina.okoro@gmail.com</p>
+          <h2 className='text-[#414141] font-[poppins] text-base font-medium not-italic leading-normal'>{userData?.fullName}</h2>
+          <p className='text-[#414141] font-[poppins] text-[12px] font-light not-italic leading-normal'>{userData?.email}</p>
         </article>
 
         <section className='h-fit gap-8 w-full flex flex-col'>
-          <Link to={'/EditProfile'}>
+          <NavLink to="/dashboard/edit-profile">
             <div className="flex items-center justify-start gap-4 cursor-pointer">
               <img src={user} alt="" />
               <span>Edit profile</span>
             </div>
-          </Link>
-          <Link to={'/Setting'}>
+          </NavLink>
+          <NavLink to="/dashboard/settings">
             <div className="flex items-center justify-start gap-4 cursor-pointer">
               <img src={setting} alt="" />
               <span>Setting</span>
             </div>
-          </Link>
-          <div className="flex items-center justify-start gap-4 cursor-pointer">
-            <img src={logout} alt="" />
-            <span>Log out</span>
-          </div>
+          </NavLink>
+           <LogoutButton/>
         </section>
       </main>
     </div>

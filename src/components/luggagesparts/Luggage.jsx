@@ -9,6 +9,7 @@ import Header from '../../layout/dashboard/header/Header';
 import BackArrow from '../BackArrow';
 import toast from "react-hot-toast";
 import IconMap from '../../assets/icons/NewIcon.png'
+import { useLocation } from 'react-router-dom';
 
 export default function Luggage() {
     const [showLuggageUpload, setShowLuggageUpload] = useState(false);
@@ -17,22 +18,15 @@ export default function Luggage() {
     const [selectedOption, setSelectedOption] = useState('');
     const navigate = useNavigate();
 
-
-    // const handleSubmit = () => {
-    //     // console.log("click me again")
-    //         if (selectedOption) {
-    //             navigate('/LookingFor');
-    //         } else {
-    //         toast.error('Please select an option before proceeding.')
-    //     }
-    // };
+    const location = useLocation();
+    const { from, to } = location.state || {};
 
     const handleSubmit = () => {
         if (!selectedOption) {
             toast.error('Please select an option before proceeding.');
             return;
         }
-    
+        console.log("Button clicked!");
         if (selectedOption === 'with-luggages') {
             if (!file || !previewUrl) {
                 toast.error('Please upload an image of your luggage.');
@@ -40,7 +34,7 @@ export default function Luggage() {
             }
         }
     
-        navigate('/LookingFor');
+        navigate('/dashboard/looking-for')
     };
     
     
@@ -70,7 +64,7 @@ export default function Luggage() {
     return (
         <div className='min-h-screen w-full bg-[url(/Group.png)] flex flex-col items-center justify-around gap-14'>
             <Header />
-            <BackArrow extendedStyles='top-24 xl:top-24 left-2 xl:left-20' />
+            <BackArrow extendedStyles='top-20 left-10 xl:left-24' />
             
             <article className='h-17 flex w-11/12 xl:w-[667px] px-4 py-6 mt-24 items-center gap-6 rounded-2xl bg-[#fff]'>
                 <img src={IconMap} alt="" />
@@ -89,7 +83,7 @@ export default function Luggage() {
                         <img src={Search} alt="" className='mt-1' />
                         <div className="w-60 flex flex-col gap-2">
                             <h2 className='font-[poppins] text-base font-medium leading-9'>Current Location</h2>
-                            <p className='text-[#B8B8B8] text-[12px] leading-[18px]'>unn 2nd gate</p>
+                            <p className='text-[#B8B8B8] text-[12px] leading-[18px]'>{from || "unn 2nd gate"}</p>
                         </div>
                     </div>
 
@@ -97,12 +91,12 @@ export default function Luggage() {
                         <img src={locate} alt="" className='mt-1' />
                         <div className="w-60 flex flex-col gap-2">
                             <h2 className='font-[poppins] text-base font-medium leading-9'>To</h2>
-                            <p className='text-[#B8B8B8] text-[12px] leading-[18px]'>Ogeige market</p>
+                            <p className='text-[#B8B8B8] text-[12px] leading-[18px]'>{to || "Ogige market"}</p>
                         </div>
                     </div>
 
                     {/* Radio buttons */}
-                    <article className='h-10 w-3/5 xl:w-72 inline-flex items-center gap-5 p-2'>
+                    <label htmlFor='without-luggage' className='h-10 w-3/5 xl:w-72 inline-flex items-center gap-5 p-2'>
                         <input
                             className='h-5 w-5 border border-[#20AE3A] rounded-none'
                             type="radio"
@@ -112,9 +106,9 @@ export default function Luggage() {
                             onChange={() => handleRadioChange('without-luggage')}
                         />
                         <span className='text-[12px] xl:text-base font-medium'>Without luggage</span>
-                    </article>
+                    </label>
 
-                    <article className='h-10 w-3/5 xl:w-72 inline-flex items-center gap-5 p-2'>
+                    <label htmlFor='with-luggages' className='h-10 w-3/5 xl:w-72 inline-flex items-center gap-5 p-2'>
                         <input
                             className='h-5 w-5 border border-[#20AE3A] rounded-none'
                             type="radio"
@@ -124,12 +118,12 @@ export default function Luggage() {
                             onChange={() => handleRadioChange('with-luggages')}
                         />
                         <span className='text-[12px] xl:text-base font-medium'>With luggages</span>
-                    </article>
+                    </label>
 
                     {/* Luggage upload */}
                     {selectedOption === 'with-luggages' && (
                         <section className='flex flex-col mt-5 h-[280px] w-full gap-6 p-2 relative'>
-                            <p className='text-[#5A5A5A] text-[20px] leading-6 font-medium capitalize'>
+                            <p className='text-[#5A5A5A] text-base lg:text-xl leading-6 font-medium capitalize'>
                                 upload picture of your luggages
                             </p>
                             <label
@@ -170,8 +164,8 @@ export default function Luggage() {
                         name={selectedOption ? 'Send Request' : 'Continue'}
                         extendedStyles="p-3 lg:p-4 w-full"
                         btnClick={handleSubmit}
+                        
                     />
-
                 </figure>
             </main>
         </div>

@@ -1,19 +1,25 @@
-import { useRecoilValue } from "recoil"
-import { userAtom } from "../../components/atoms/userAtom"
+import { useRecoilValue } from "recoil";
+import { userAtom } from "../../components/atoms/userAtom";
 import PassengerDashboard from "./PassengerDashboard";
 import DriverDashboard from "./DriverDashboard";
-
+import Login from "../auth/Login/Login";
+import { Navigate } from "react-router-dom";
 
 const DashboardHome = () => {
- const userData = useRecoilValue(userAtom);
+  const userData = useRecoilValue(userAtom);
 
-  return (
-    <>
-    {
-    userData?.role === "passenger" ? <PassengerDashboard {...userData} /> : <DriverDashboard/>
-    }
-    </>
-  )
-}
+  if (!userData || !userData.role) {
+    return <Navigate to={"/login"} />;
+  }
 
-export default DashboardHome
+  switch (userData.role) {
+    case "passenger":
+      return <PassengerDashboard {...userData} />;
+    case "driver":
+      return <DriverDashboard />;
+    default:
+      return <Navigate to={"/login"} />;
+  }
+};
+
+export default DashboardHome;
