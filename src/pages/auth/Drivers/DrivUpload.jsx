@@ -7,13 +7,23 @@ const DrivUpload = () =>{
 
     const [imagePreview, setImagePreview] = useState(null);
 
+    // const handleFileChange = (event) => {
+    //     const file = event.target.files[0];
+    //     if (file) {
+    //     const imageUrl = URL.createObjectURL(file);
+    //     setImagePreview(imageUrl);
+    //     }
+    // }
+
     const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
+    const file = event.target.files[0];
+    if (file) {
         const imageUrl = URL.createObjectURL(file);
         setImagePreview(imageUrl);
-        }
     }
+    console.log(event.target.files);
+    };
+
 
    return(
     <div className='min-h-screen bg-gray-500 w-full flex flex-col items-center gap-5'>
@@ -51,15 +61,25 @@ const DrivUpload = () =>{
                     <img className="cursor-pointer h-10 w-12" src={Frame} alt="Upload Icon" />
                     )}
                 </label>
-                <input
+                {/* <input
                  type="file"
                  accept="image/png, image/jpeg, image/jpg"
                  id="upload"
                  required
                  hidden
-                //  onChange={(e) => console.log(e.target.files)}
+                 onChange={(e) => console.log(e.target.files)}
                  onChange={handleFileChange}
-                 />
+                 /> */}
+
+                 <input
+                    type="file"
+                    accept="image/png, image/jpeg, image/jpg"
+                    id="upload"
+                    required
+                    hidden
+                    onChange={handleFileChange}
+                    />
+
             </article>
 
         </form>

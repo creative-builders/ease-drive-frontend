@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import SectionLabel from '../SectionLabel';
 import CustomButton from "../CustomButton"
-import { FcGoogle } from "react-icons/fc";
+import GoogleAuth from "../GoogleAuth";
+// import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
@@ -133,13 +134,17 @@ const handleToggleConfirmPassword = () => {
          <span className=' border-b-2 w-2/5 border-gray-600'></span> OR <span className=' border-b-2 w-2/5 border-gray-600'></span>
          </div>
           {/* <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div> */}
-          <button 
+          {/* <button 
             className="inline-block mb-6 w-full p-6 gap-2 bg-gray-300 rounded-lg">
               <span className="text-bold text-base text-gray-950 flex justify-center items-center gap-x-2">
               <FcGoogle size={20} />
               Continue with Google
               </span>
-          </button>
+          </button> */}
+
+          <div className="flex justify-center mb-16 p-4 ">
+            <GoogleAuth/>
+          </div>
          
          <p className='pair text-sm md:hidden'>Already have an account? <Link className='text-green-500' to={"/login"}>Login</Link></p>
          
