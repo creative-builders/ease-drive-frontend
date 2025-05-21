@@ -4,13 +4,18 @@ import Frame from '/Frame.png';
 import Svg from '/Vector.svg'
 import SectionLabel from '../SectionLabel';
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
+import { useMutation } from "@tanstack/react-query";
+import { driverSignUpAuth } from "../../store/auth/driver/api";
+import toast from "react-hot-toast";
+import CustomButton from "../CustomButton"
 
-const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
-    const { formData, handleUpdateFormData } = useStepFlowContext();
+const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
+   const{ formData , setFormData,  handleUpdateFormData } = useStepFlowContext();
     const [progress, setProgress] = useState(0);
     const [uploadComplete, setUploadComplete] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
-    const [uploading, setUploading] = useState(false);
+     const[isVerified,setIsVerified] = useState("");
+     const [uploading, setUploading] = useState(false);
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -34,7 +39,48 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
                 setUploading(false);
             }
         }, 300);
-    };    
+    };  
+    
+    const {mutate:submitdriverSignUpAuth , isLoading} = useMutation(driverSignUpAuth,{
+          onSuccess:(response) => {
+          console.log(response?.message);
+          setIsVerified(response?.message);
+          setFormData( prev => ({
+              ...prev,
+                firstName: "", 
+                lastName: "", 
+                phoneNumber: "", 
+                email: "",
+                password: "",
+                confirmPassword: "", 
+                documentType: "", 
+                documentID: "", 
+                dob: "", 
+                sectionAddress: "",
+                documentURL: ""
+            }))
+          },
+          onError: (error) => {
+            toast.error(error?.status >= 400 ? error?.response?.data?.message : error?.message)
+          }
+        })
+
+        const handleSubmit = (e) => {
+            e.preventDefault();
+        
+            if (!formData.sectionAddress || !selectedFile) {
+                toast.error("Please Fill in the necessary spaces");
+                return;
+            }
+        
+            submitdriverSignUpAuth({
+                ...formData,
+                role: "driver"
+            });
+        };
+        
+
+        console.log(formData)
 
     return (
         <div className='min-h-screen w-full flex flex-col items-center gap-5 bg-[#F0F1F1]'>
@@ -52,7 +98,12 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
             <section className='h-fit items-center p-1 md:h-fit w-full md:w-4/5 flex flex-col items-left justify-center gap-4 mb-4 rounded-lg border-0 md:border border-green-600'>
                 <p className='text-xl'>Identity Verification</p>
                 <span className='text-center md:text-left text-sm'>This Information will help us know you more</span>
-                <form className='h-fit md:h-fit w-full p-4 flex flex-col gap-4 relative' action="">
+                <form onSubmit={handleSubmit} className='h-fit md:h-fit w-full p-4 flex flex-col gap-4 relative' action="">
+
+                     {/* check verification */}
+                    {
+                    isVerified && <div className="border border-green-300 rounded-md text-green-700 p-2 mb-4">{isVerified}</div>
+                    }
                     <article className='h-20 w-full flex flex-col items-left gap-2'>
                         <label htmlFor="place">Address</label>
                         <input placeholder='Enter your address' 
@@ -70,10 +121,10 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
                             type="file"
                             accept=".pdf, .doc, .docx, .xls, .xlsx, .txt, .png, .jpg, .jpeg, .gif, .svg"
                             id="upload"
-                            required
+                            // required
                             hidden
-                            name="picture"
                             onChange={handleFileChange}
+                            // value={formData.documentURL}
                         />
                         <label
                             className={`relative flex items-center justify-center border bg-[#FEFEFE] rounded-lg ${uploadComplete ? 'h-20 w-3/5' : 'h-72 w-full'}`}
@@ -112,6 +163,20 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
                             </p>
                         )}
                     </article>
+
+                    {/* <button
+                        className='h-12 w-28 cursor-pointer rounded-lg bg-green-600 text-white'
+                        isLoading={isLoading}
+                    >
+                        submit
+                    </button> */}
+                    <div className="mb-4">
+                        <CustomButton
+                        name="submit"
+                        // extendedStyles={"w-full"}
+                        isLoading={isLoading}
+                        />
+                    </div>
                 </form>
                 <div className="h-16 w-4/5 items-center md:w-2/5 gap-10 flex justify-end">
                     {/* <button 
@@ -121,17 +186,12 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
                     >
                         Skip Now
                     </button> */}
-                    <button
-                        name="Submit"
-                        className='h-12 w-28 cursor-pointer rounded-lg bg-green-600 text-white'
-                        onClick={() => nextStep()}
-                    >
-                        Submit
-                    </button>      
+
+                
                 </div>
             </section>
         </div>
     );
 };
-
+  
 export default StepFour;

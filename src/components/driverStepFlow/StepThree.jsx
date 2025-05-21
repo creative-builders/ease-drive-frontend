@@ -28,8 +28,8 @@ const StepThree = ({nextStep, prevStep, step , totalSteps}) => {
             <div className='h-fit md:h-3/5 w-full p-4 flex flex-col gap-8 relative'>
                <article className='h-20 w-full flex flex-col items-left gap-2'>
                   <label htmlFor="place">Address</label>
-                  <select className='h-12 w-full border outline-none indent-3 rounded-lg p-6'
-                     name="sectionAddress"
+                  <select className='h-12 w-full border outline-none indent-3 rounded-lg'
+                     name=" documentURL"
                      id="place"
                   >
                      <option value="" defaultValue></option>

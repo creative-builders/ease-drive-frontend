@@ -14,6 +14,8 @@ import { Otp } from '../pages/auth/Passengers/Otp';
 import { ChangePassword } from '../pages/auth/Passengers/Change-password';
 import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
+import CheckEmailFile from '../pages/auth/Passengers/CheckEmailFile';
+import ResetPassword from '../pages/auth/Passengers/Reset-password';
 // import BidCard from '../components/bid/BidCard';
 import LocationPopUp from '../components/location/LocationPopUp';
 import TestingComponent from '../pages/dashboard/TestingCompent';
@@ -47,12 +49,15 @@ const IndexRoute = () => {
       <Route path="/activate" element={<ActivateAccount/>} />
       <Route path="/passengers-signup" element={<PassengersSignup />} />
       <Route path="/driver-signup" element={<DriverSignup />} />
-      <Route path="/DriVerify" element={<DriVerify />} />
-      <Route path="/DrivUpload" element={<DrivUpload />} />
-      <Route path="/DrivPlace" element={<DrivPlace />} />
+      <Route path="/Dri-verify" element={<DriVerify />} />
+      <Route path="/Driv-upload" element={<DrivUpload />} />
+      <Route path="/Driv-place" element={<DrivPlace />} />
       <Route path="/Forgot-password" element={<ForgotPassword />} />
       <Route path="/Otp" element={<Otp />} />
       <Route path="/Change-password" element={<ChangePassword />} />
+      
+      <Route path="/Check-email" element={<CheckEmailFile />} />
+      <Route path="/Reset-password" element={<ResetPassword />} />
       <Route path="/Bidder" element={<Bidder />} />
       <Route path="/LocationPopUp" element={<LocationPopUp />} />
       <Route path="/mainpage" element={<MainPage />} />
@@ -67,11 +72,21 @@ const IndexRoute = () => {
       
 
       {/* Dashboard Route */}
-      <Route path="/dashboard" element={<Dashboard/>}> 
-       <Route index element={<TestingComponent />} />
-       <Route path="edit-profile" element={<EditProfile />} />
-       <Route path="settings" element={<Setting />} />
+      <Route path="/dashboard" element={<PassengerDashboard />}> 
+        <Route index element={<TestingComponent />} />
+        <Route path="edit-profile" element={<EditProfile />} />
+        <Route path="settings" element={<Setting />} />
+        <Route path="location-popUp" element={<LocationPopUp />} />
+        <Route path="mainpage" element={<MainPage />} />
+        <Route path="page" element={<Page />} />
+        <Route path="luggage" element={<Luggage />} />
+        <Route path="looking-for" element={<LookingFor />} />
+        <Route path="pick-ride" element={<PickRide />} />
+        <Route path="cancelled" element={<Cancelled />} />
+        <Route path="bidder" element={<Bidder />} />
+        <Route path="driver-call" element={<DriverCall />} />
       </Route>
+
     </Routes>
     </Router>
   )

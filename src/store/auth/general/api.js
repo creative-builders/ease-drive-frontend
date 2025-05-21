@@ -39,6 +39,8 @@ export const googleAuth = async( { access_token, role }) => {
 
 
 //Forgot Pssword APIs
+
+
 export const sendResetPasswordOTP = async(credentials) => {
     const response = await axiosInstancePrivate.post(`/auth/send-otp`, credentials);
     return response.data;

@@ -36,9 +36,9 @@ export default function PickRide({ selected, setSelected }){
     return(
         <div className='h-screen w-full bg-[url(/Group.png)] flex flex-col px-0  items-center gap-12 justify-around'>
             <Header />
-           <BackArrow extendedStyles={"top-20 xl:top-24 left-4 xl:left-20"} />
+           <BackArrow extendedStyles={"top-20 left-10 xl:left-24"} />
 
-            <Link to="/Page" className='w-11/12 flex items-center justify-center'>
+            <Link to="/dashboard/Page" className='w-11/12 flex items-center justify-center'>
                 <div className="w-11/12 xl:w-[413px] ml-2 inline-flex px-2 py-3 justify-center items-center gap-2 rounded-3xl bg-[#20AE3A] mt-28">
                 <span className='text-white font-[poppins] text-base xl:text-3xl not-italic font-medium leading-normal capitalize'>set your pickup place</span>
                 <img src={arrow} alt="" className='h-6 w-6' />
@@ -52,12 +52,24 @@ export default function PickRide({ selected, setSelected }){
                 {options.map((option) => (
                     <div
                     key={option.id}
-                    className={`cursor-pointer flex w-2/4 xl:w-44 h-[78px] xl:h-[121px] px-[1px] py-4 flex-col justify-center items-center gap-1 rounded-lg transition-all duration-300 ${
+                    className={`cursor-pointer flex w-2/4 md:w-44 h-[78px] md:h-[121px] px-[1px] py-4 flex-col justify-center items-center gap-1 rounded-lg transition-all duration-300 ${
                         selected === option.id ? 'bg-[#20AE3A] text-white' : 'bg-[#EEFDF1] text-[#1E1E1E]'
                     }`}
                     onClick={() => handleSubmit(option)}
                     >
-                    <img src={option.image} className='w-10 xl:w-[77px] h-9 xl:h-[71px]' alt={option.text} />
+                    <img src={option.image}
+                     className={`w-10 md:w-[77px] h-9 md:h-[71px]
+                        ${
+                            option.text === "Shuttle ride"
+                            ? 'h-6 md:h-[71px] w-8 md:w-[77px]': ''
+                        }
+                        ${
+                            option.text === "Keke ride"
+                            ? 'h-7 md:h-[71px] w-8 md:w-[77px] ': ''
+                        }`}
+                      alt={option.text} 
+                      
+                    />
                     <p className='font-[poppins] text-center text-xs xl:text-xl font-normal not-italic leading-normal'>
                         {option.text}
                     </p>
