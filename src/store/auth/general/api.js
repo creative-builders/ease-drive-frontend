@@ -27,11 +27,34 @@ export const activateUser = async({ queryKey }) => {
 }
 
 
+export const googleAuth = async( { access_token, role }) => {
+    const response = await axiosInstancePrivate.post(`/auth/google`,
+     { access_token , role}
+    );
+
+ return response.data;
+
+}
+
 
 
 //Forgot Pssword APIs
 
 
+export const sendResetPasswordOTP = async(credentials) => {
+    const response = await axiosInstancePrivate.post(`/auth/send-otp`, credentials);
+    return response.data;
+    
+}
+export const verifyResetPssowordOTP = async(credentials) => {
+    const response = await axiosInstancePrivate.put(`/auth/verify-otp`, credentials);
+    return response.data;
+    
+}
+export const resetPassword = async(credentials) => {
+    const response = await axiosInstancePrivate.put(`/auth/reset-password`, credentials);
+    return response.data;
+}
 
 
 

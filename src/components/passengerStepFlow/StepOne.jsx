@@ -1,11 +1,10 @@
-import { useState } from "react"
+
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext"
 import CustomButton from "../CustomButton";
 import SectionLabel from "../SectionLabel";
 import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import signupLeftCar from "../../../src/assets/images/signup-left-car.jpg"
-import GoogleAuth from "../GoogleAuth";
+import GoogleAuthV3 from "../GoogleAuthV3";
 
 const StepOne = ({ nextStep, step, totalSteps }) => {
    const{ formData , handleUpdateFormData } = useStepFlowContext();
@@ -86,7 +85,7 @@ const StepOne = ({ nextStep, step, totalSteps }) => {
             <div className="mb-4">
             <CustomButton 
             name="Continue"
-            extendedStyles={"w-full"}
+            extendedStyles={"inline-block mb-8 w-full p-4 rounded-lg"}
             btnClick={() => nextStep()}
             />
             </div>
@@ -103,7 +102,7 @@ const StepOne = ({ nextStep, step, totalSteps }) => {
                     </span>
                 </button> */}
                 <div className="flex justify-center mb-16 p-4 ">
-                    <GoogleAuth/>
+                    <GoogleAuthV3/>
                  </div>
 
                 <div className="lg:hidden flex justify-center gap-x-2">

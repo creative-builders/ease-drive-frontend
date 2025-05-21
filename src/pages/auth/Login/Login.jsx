@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
-// import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import TabSelector from "../../../components/TabSelector/TabSelector";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useMutation } from "@tanstack/react-query";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import toast from "react-hot-toast";
-import GoogleAuth from "../../../components/GoogleAuth";
 import { loginAuth } from "../../../store/auth/general/api";
+import GoogleAuthV3 from "../../../components/GoogleAuthV3";
+import { userAtom } from "../../../components/atoms/userAtom";
+import { useSetRecoilState } from "recoil";
+
 
 const Login = () => {
     const navigate =  useNavigate();
+    const setUser = useSetRecoilState(userAtom);
     const [activeTab, setActiveTab] = useState("Email Address");
     const tabs = ["Email Address", "Phone Number"];
     const [togglePassword, setTogglePassword] = useState(false);
@@ -42,6 +45,9 @@ const Login = () => {
     const { mutate:submitLogin, isLoading } = useMutation(loginAuth, {
         onSuccess: (response) => {
         toast.success(response?.message);
+        console.log(response.data)
+        localStorage.setItem("current_user",JSON.stringify(response.data));
+        setUser(response.data);
         navigate("/dashboard");
         setInputs( prev => ({
         ...prev,
@@ -115,7 +121,7 @@ const Login = () => {
 
                     {/* Login Button */}
                     <button
-                        type="submit"
+                    type="submit"
                        className={`inline-block mb-8 w-full p-4 rounded-lg transition-all duration-300 
                         ${ isFormValid ? "bg-green-300 hover:bg-green-700" : "bg-green-200 cursor-not-allowed"}`
                         }
@@ -129,18 +135,9 @@ const Login = () => {
                     {/* Or use Google auth */}
                     <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div>
 
-                    {/* Google Login button */}
-                    {/* <button 
-                        className="inline-block mb-16 w-full p-4 bg-gray-300 rounded-lg">
-                        <span className="text-bold text-base text-gray-950 flex justify-center items-center gap-x-2">
-                            <FcGoogle size={20} />
-                            Continue with Google
-                        </span>
-                    </button> */}
-
                      {/* Google Login Component */}
                     <div className="flex justify-center mb-16 p-4 ">
-                    <GoogleAuth/>
+                    <GoogleAuthV3/>
                     </div>
 
                     <div className="flex justify-center gap-x-2">
