@@ -24,7 +24,7 @@ export const ForgotPassword = () => {
             navigate("/Otp"); 
         },
         onError: (error) => {
-            toast.error(error?.response?.data?.message === "No account associated with this email"? `${error?.response?.data?.message} enter email associated with this account ` : error?.response?.data?.message)
+            toast.error(error?.response?.data?.message === "No account associated with this email"? `${error?.response?.data?.message} ` : error?.response?.data?.message)
         },
     });
 
@@ -59,7 +59,7 @@ export const ForgotPassword = () => {
                         //     Verification email sent! <br />
                         //     <Link to="/Otp" className="text-blue-500 underline">Go to OTP page</Link> {/* ✅ Navigate after success */}
                         // </div>
-                        navigate("/CheckEmailFile")
+                        navigate("/Check-email")
                     )}
                     <div className="mb-4">
                         <label htmlFor="email">Enter your email</label>
