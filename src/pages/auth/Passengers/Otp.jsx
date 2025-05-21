@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Links, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { verifyResetPssowordOTP } from '../../../store/auth/otp/api';
 import toast from "react-hot-toast";
@@ -108,9 +108,9 @@ export const Otp = () => {
                 </form>
 
                 <div className="flex justify-center gap-x-2">
-                    <p className="details">
+                    <Link to={"/Forgot-password"} className="details">
                         Didn't receive the OTP? <a href="#" className="text-green-300" id="resendOtp">Resend OTP</a>
-                    </p>
+                    </Link>
                 </div>
             </div>
         </div>
