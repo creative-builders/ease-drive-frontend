@@ -165,7 +165,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
                     </article>
 
                     {/* <button
-                        className='h-12 w-28 cursor-pointer rounded-lg bg-green-600 text-white'
+                        className='h-12 w-28 cursor-pointer  bg-green-600 text-white'
                         isLoading={isLoading}
                     >
                         submit
@@ -173,7 +173,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
                     <div className="mb-4">
                         <CustomButton
                         name="submit"
-                        // extendedStyles={"w-full"}
+                        extendedStyles={"w-20 md:w-40 rounded-lg p-2"}
                         isLoading={isLoading}
                         />
                     </div>

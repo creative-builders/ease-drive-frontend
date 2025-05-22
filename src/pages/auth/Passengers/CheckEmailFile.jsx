@@ -37,16 +37,16 @@ return (
             <div className="flex items-center justify-center">
                 <Link 
                     to="/Otp"
-                    className="w-2/5 p-2 rounded-lg bg-transparent text-[#20AE3A] text-center"
+                    className="w-full md:w-2/5 p-2 rounded-lg bg-transparent text-[#20AE3A] text-center text-sm md:text-xl"
                 >
-                    Continue to enter OTP
+                   <p> Continue to enter OTP</p>
                 </Link>
             </div>
            
         </div>
         <Link className='flex gap-2 w-40 mx-auto' to={'/login'}>
             <img src={Backarrow} alt="" />
-            <p className='font-[poppins] font-normal text-base'>back to log in</p>
+            <p className='font-[poppins] font-normal text-sm md:text-base'>back to log in</p>
         </Link>
     </div>
 )
