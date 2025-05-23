@@ -23,12 +23,7 @@ export default function LookingFor() {
       navigate('/dashboard/bidder');
     }, 15000);
   };
-  
-  // const handleBackgroundClick = (e) => {
-  //   if (e.target.id === "popup-overlay") {
-  //     setIsOpen(false);
-  //   }
-  // };
+
 
   // Progress bar animation logic
   useEffect(() => {

@@ -164,12 +164,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
                         )}
                     </article>
 
-                    {/* <button
-                        className='h-12 w-28 cursor-pointer  bg-green-600 text-white'
-                        isLoading={isLoading}
-                    >
-                        submit
-                    </button> */}
+                  
                     <div className="mb-4">
                         <CustomButton
                         name="submit"
@@ -179,13 +174,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
                     </div>
                 </form>
                 <div className="h-16 w-4/5 items-center md:w-2/5 gap-10 flex justify-end">
-                    {/* <button 
-                        name="Skip Now"
-                        className='h-12 w-28 cursor-pointer rounded-lg border border-green-600'
-                        onClick={() => nextStep()}
-                    >
-                        Skip Now
-                    </button> */}
+                    
 
                 
                 </div>
