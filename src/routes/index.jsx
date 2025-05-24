@@ -72,7 +72,7 @@ const IndexRoute = () => {
       
 
       {/* Dashboard Route */}
-      <Route path="/dashboard" element={<PassengerDashboard />}> 
+      <Route path="/dashboard" element={<DashboardHome />}> 
         {/* <Route index element={<MainPage />} /> */}
         <Route path="edit-profile" element={<EditProfile />} />
         <Route path="settings" element={<Setting />} />
