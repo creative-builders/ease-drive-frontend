@@ -32,7 +32,7 @@ import Bidder from '../components/bidders/Bidders';
 import EditProfile from '../components/personalProfile/EditProfile';
 import PassengerDashboard from '../pages/dashboard/PassengerDashboard';
 import DashboardHome from '../pages/dashboard/DashboardHome';
-// import Header from '../layout/dashboard/header/Header';
+// import Grids from '../components/reuseable/Grids';
 
 
 
@@ -68,7 +68,7 @@ const IndexRoute = () => {
       <Route path="/Cancelled" element={<Cancelled />} />
       <Route path="/DriverCall" element={<DriverCall />} />
       <Route path="/Password" element={<Password />} />
-      {/* <Route path="/BidCard" element={<BidCard />} /> */}
+      {/* <Route path="/grid-cards" element={<Grids />} /> */}
       
 
       {/* Dashboard Route */}
