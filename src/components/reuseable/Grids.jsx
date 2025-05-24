@@ -37,40 +37,4 @@ export default Grids;
 
 
 
-// import React from "react";
-// import FeaturesGrid from "./components/FeaturesGrid";
 
-// // SVG imports (adjust path if needed)
-// import { ReactComponent as PricingIcon } from "./assets/icons/pricing.svg";
-// import { ReactComponent as ClockIcon } from "./assets/icons/clock.svg";
-// import { ReactComponent as ShieldIcon } from "./assets/icons/shield.svg";
-// import { ReactComponent as CustomIcon } from "./assets/icons/custom.svg";
-
-// const featuresData = [
-//   {
-//     icon: <PricingIcon className="w-full h-full text-green-600" />,
-//     title: "Student-Friendly",
-//     subtitle: "Pricing",
-//   },
-//   {
-//     icon: <ClockIcon className="w-full h-full text-green-600" />,
-//     title: "Fast and",
-//     subtitle: "Reliable",
-//   },
-//   {
-//     icon: <ShieldIcon className="w-full h-full text-green-600" />,
-//     title: "Safe and",
-//     subtitle: "Trusted Drivers",
-//   },
-//   {
-//     icon: <CustomIcon className="w-full h-full text-green-600" />,
-//     title: "Customized",
-//     subtitle: "Booking Options",
-//   },
-// ];
-
-// const App = () => {
-//   return <FeaturesGrid features={featuresData} />;
-// };
-
-// export default App;
