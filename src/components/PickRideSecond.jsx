@@ -13,9 +13,13 @@ import { useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
 
 
-export default function PickRideSecond({ selected, setSelected }){
+export default function PickRideSecond({ 
+    selected, 
+    setSelected,
+    initialPickUpValue
+}){
     const navigate = useNavigate();
-    const [pickupLocation, setPickupLocation] = useState("");
+    const [pickupLocation, setPickupLocation] = useState(initialPickUpValue);
 
     // const [selected, setSelected] = useState(null);
 

@@ -18,7 +18,7 @@ import CheckEmailFile from '../pages/auth/Passengers/CheckEmailFile';
 import ResetPassword from '../pages/auth/Passengers/Reset-password';
 // import BidCard from '../components/bid/BidCard';
 import LocationPopUp from '../components/location/LocationPopUp';
-import TestingComponent from '../pages/dashboard/TestingCompent';
+// import TestingComponent from '../pages/dashboard/TestingCompent';
 import MainPage from '../components/mainpage/MainPage';
 import LookingFor from '../components/luggagesparts/LookingFor';
 import PickRide from '../components/PickRide';
@@ -73,11 +73,11 @@ const IndexRoute = () => {
 
       {/* Dashboard Route */}
       <Route path="/dashboard" element={<PassengerDashboard />}> 
-        <Route index element={<TestingComponent />} />
+        {/* <Route index element={<MainPage />} /> */}
         <Route path="edit-profile" element={<EditProfile />} />
         <Route path="settings" element={<Setting />} />
-        <Route path="location-popUp" element={<LocationPopUp />} />
-        <Route path="mainpage" element={<MainPage />} />
+        {/* <Route path="location-popUp" element={<LocationPopUp />} /> */}
+        {/* <Route path="mainpage" element={<MainPage />} /> */}
         <Route path="page" element={<Page />} />
         <Route path="luggage" element={<Luggage />} />
         <Route path="looking-for" element={<LookingFor />} />

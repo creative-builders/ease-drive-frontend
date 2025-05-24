@@ -1,155 +1,88 @@
-
-// import React, { useState, useEffect } from 'react';
-// import Header from "../../layout/dashboard/header/Header";
-// import Cancelled from '../../assets/images/canelled.png';
-// import LocationMap from '../../assets/images/Location.png';
-
-// const LocationPopUp = ({ close, setSelected, setPopupActionType }) => {
-//   const [showModal, setShowModal] = useState(false);
-
-//   useEffect(() => {
-//     setShowModal(true);
-//   }, []);
-
-//   // When user clicks "Use My Location"
-//   const handleUseLocation = () => {
-//     setPopupActionType('use-location');
-//     close(false); 
-//     setSelected(null);
-//   };
-
-//   // When user clicks "Cancel"
-//   const handleCancel = () => {
-//     setPopupActionType('cancel');
-//     close(false);
-//   };
-
-//   return (
-//     <div
-//       id="popup-overlay"
-//       className="min-h-screen w-full flex flex-col items-center gap-6 top-0 left-0 bg-[url(/Map.png)] bg-cover bg-center relative"
-//     >
-//       <div className="absolute inset-0 bg-black/50"></div>
-//       <Header />
-
-//       {/* Modal */}
-//       <div
-//         className={`h-[459px] sm:h-fit-content w-4/5 xl:w-[788px] bg-white flex flex-col m-auto items-center justify-around gap-5 p-4 rounded-xl z-10
-//           transition-all duration-700 ease-out
-//           ${showModal ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
-//         `}
-//       >
-//         {/* Cancel Button */}
-//         <img 
-//           src={Cancelled} 
-//           alt="Cancel" 
-//           className='h-4 w-4 cursor-pointer right-16 top-6 absolute' 
-//           onClick={handleCancel}
-//         />
-
-//         {/* Location Image */}
-//         <div className="h-28 w-28 rounded-full">
-//           <img className="h-full w-full" src={LocationMap} alt="Location icon" />
-//         </div>
-
-//         {/* Modal Text */}
-//         <h2 className="text-2xl font-medium text-center">Enable your location</h2>
-//         <p className="text-center text-sm text-[#A0A0A0] mt-3 w-full sm:w-[280px]">
-//           Choose your location to start finding requests around you
-//         </p>
-
-//         {/* Use My Location Button */}
-//         <button
-//           onClick={handleUseLocation}
-//           className="h-14 w-full rounded-lg bg-[#20AE3A] text-white inline-flex items-center justify-center gap-3"
-//         >
-//           Use my location
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default LocationPopUp;
-
-
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import CancelledIcon from "../../assets/images/canelled.png";
+import LocationMap from "../../assets/images/Location.png";
 import Header from "../../layout/dashboard/header/Header";
-import LocationMap from '../../assets/images/Location.png';
-import Cancelled from '../../assets/images/canelled.png';
+import toast from "react-hot-toast";
 
-const LocationPopUp = ({ close, setSelected, setPopupActionType }) => {
+
+const LocationPopUp = ({ 
+  close, 
+  setSelected, 
+  setPopupActionType,
+  handleOverlayClick,
+  handleCancel,
+  handleUseLocation,
+  coords,
+  locationName
+   }) => {
+
   const [showModal, setShowModal] = useState(false);
-
   useEffect(() => {
     setShowModal(true);
-  }, []);
-
-  // User clicks "Use My Location"
-  const handleUseLocation = () => {
-    setPopupActionType('use-location');
-    close(false);
-    setSelected(null);
-  };
-
-  // User clicks "Cancel" or overlay
-  const handleCancel = () => {
-    setPopupActionType('cancel');
-    close(false);
-  };
-
-  // Handle overlay click to close
-  const handleOverlayClick = (e) => {
-    if (e.target.id === 'popup-overlay') {
-      handleCancel();
-    }
-  };
-
+  },[])
   return (
-        <div
+    <div
       id="popup-overlay"
       onClick={handleOverlayClick}
-      className="min-h-screen w-full flex flex-col items-center gap-6 top-0 left-0 bg-[url(/Map.png)] bg-cover bg-center relative bg-black/50"
+      className="fixed inset-0 bg-black/60 z-50 flex flex-col items-center justify-center"
     >
-      <Header />
+      {/* <Header /> */}
 
-      {/* Modal */}
       <div
-        onClick={(e) => e.stopPropagation()} // Prevent closing when modal itself is clicked
-        className={`h-[459px] sm:h-fit w-4/5 xl:w-[788px] bg-white flex flex-col m-auto items-center justify-around gap-5 p-4 rounded-xl z-10
-          transition-all duration-700 ease-out
-          ${showModal ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
-        `}
+        onClick={(e) => e.stopPropagation()}
+        className={`bg-white rounded-xl shadow-xl p-6 w-11/12 sm:w-3/5 xl:w-[700px] transition-all duration-500 ease-in-out transform ${
+          showModal ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        }`}
       >
         {/* Cancel Button */}
-        <img 
-          src={Cancelled} 
-          alt="Cancel" 
-          className='h-4 w-4 cursor-pointer right-16 top-6 absolute' 
-          onClick={handleCancel}
-        />
-
-        {/* Location Image */}
-        <div className="h-28 w-28 rounded-full">
-          <img className="h-full w-full" src={LocationMap} alt="Location icon" />
-        </div>
-
-        {/* Modal Text */}
-        <h2 className="text-2xl font-medium text-center">Enable your location</h2>
-        <p className="text-center text-sm text-[#A0A0A0] mt-3 w-full sm:w-[280px]">
-          Choose your location to start finding requests around you
-        </p>
-
-        {/* Use My Location Button */}
         <button
-          onClick={handleUseLocation}
-          className="h-14 w-full rounded-lg bg-[#20AE3A] text-white inline-flex items-center justify-center gap-3"
+          onClick={handleCancel}
+          className="absolute top-4 right-6 text-gray-500 hover:text-red-500"
         >
-          Use my location
+          <img src={CancelledIcon} alt="Cancel" className="h-5 w-5" />
         </button>
+
+        <div className="flex flex-col items-center text-center">
+          <img
+            src={LocationMap}
+            alt="Location"
+            className="w-24 h-24 rounded-full mb-4"
+          />
+          <h2 className="text-2xl font-semibold">Enable your location</h2>
+          <p className="text-gray-500 mt-2 w-full sm:w-3/4">
+            Choose your location to start finding requests around you.
+          </p>
+
+          <button
+            onClick={handleUseLocation}
+            className="mt-6 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
+          >
+            Use my location
+          </button>
+
+          {coords && (
+            <div className="mt-6 w-full h-64 rounded-lg overflow-hidden shadow">
+              <MapContainer
+                center={[coords.lat, coords.lon]}
+                zoom={13}
+                scrollWheelZoom={false}
+                className="h-full w-full"
+              >
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={[coords.lat, coords.lon]}>
+                  <Popup>
+                    {locationName || "Your location"}
+                  </Popup>
+                </Marker>
+              </MapContainer>
+            </div>
+          )}
+        </div>
       </div>
     </div>
-
   );
 };
 
