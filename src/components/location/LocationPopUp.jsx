@@ -71,7 +71,7 @@ const LocationPopUp = ({
           btnClick={handleUseLocation}
           />
 
-          {coords && (
+          {/* {coords && (
             <div className="mt-6 w-full h-64 rounded-lg overflow-hidden shadow">
               <MapContainer
                 center={[coords.lat, coords.lon]}
@@ -89,7 +89,7 @@ const LocationPopUp = ({
                 </Marker>
               </MapContainer>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

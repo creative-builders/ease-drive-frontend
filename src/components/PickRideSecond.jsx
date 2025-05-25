@@ -56,8 +56,8 @@ export default function PickRideSecond({
     
 
     return(
-        <div className='h-screen w-full bg-[url(/Group.png)] flex flex-col items-center justify-around gap-6 overflow-y-scroll'>
-           <Header />
+        <div className='h-screen w-full flex flex-col items-center justify-around gap-6 overflow-y-scroll'>
+           {/* <Header /> */}
             <BackArrow extendedStyles='top-20 left-10 xl:left-24' />
             <article className='h-14 xl:h-17 flex w-4/5 xl:w-[667px] px-4 py-6 items-center mt-28 gap-6 rounded-2xl bg-[#fff]'>
                 <img src={IconMap} alt="" />
