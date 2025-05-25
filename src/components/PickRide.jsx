@@ -34,8 +34,8 @@ export default function PickRide({ selected, setSelected }){
     // }
 
     return(
-        <div className='h-screen w-full bg-[url(/Group.png)] flex flex-col px-0  items-center gap-12 justify-around'>
-            <Header />
+        <div className='h-screen w-full flex flex-col px-0  items-center gap-12 justify-around'>
+            {/* <Header /> */}
            <BackArrow extendedStyles={"top-20 left-10 xl:left-24"} />
 
             <Link to="/dashboard/Page" className='w-11/12 flex items-center justify-center'>
