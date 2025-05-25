@@ -10,6 +10,7 @@ import BackArrow from '../BackArrow';
 import toast from "react-hot-toast";
 import IconMap from '../../assets/icons/NewIcon.png'
 import { useLocation } from 'react-router-dom';
+import { fr } from 'date-fns/locale';
 
 export default function Luggage() {
     const [showLuggageUpload, setShowLuggageUpload] = useState(false);
@@ -26,7 +27,7 @@ export default function Luggage() {
             toast.error('Please select an option before proceeding.');
             return;
         }
-        console.log("Button clicked!");
+        // console.log("Button clicked!");
         if (selectedOption === 'with-luggages') {
             if (!file || !previewUrl) {
                 toast.error('Please upload an image of your luggage.');
@@ -66,14 +67,16 @@ export default function Luggage() {
             <Header />
             <BackArrow extendedStyles='top-20 left-10 xl:left-24' />
             
-            <article className='h-17 flex w-11/12 xl:w-[667px] px-4 py-6 mt-24 items-center gap-6 rounded-2xl bg-[#fff]'>
+            <label htmlFor='current-location' className='h-17 flex w-11/12 xl:w-[667px] px-4 py-6 mt-24 items-center gap-6 rounded-2xl bg-[#fff]'>
                 <img src={IconMap} alt="" />
                 <input
                     type="text"
                     className='w-4/5 indent-2 text-xl outline-0 bg-transparent focus:outline-none focus:ring-0 placeholder:text-[#444]'
                     placeholder='UNN 2nd gate'
+                    value={from}
+                    id='current-location'
                 />
-            </article>
+            </label>
 
             <main className='w-full xl:w-[1176px] h-fit flex flex-col bg-[#F8FDF9] p-3 items-center justify-around mt-8 rounded-t-[32px] rounded-r-[32px] rounded-b-none flex-shrink-0'>
                 <figure className='w-4/5 xl:w-4/5 gap-6 flex flex-col items-start justify-end h-fit'>
