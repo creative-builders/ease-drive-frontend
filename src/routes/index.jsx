@@ -32,6 +32,7 @@ import Bidder from '../components/bidders/Bidders';
 import EditProfile from '../components/personalProfile/EditProfile';
 import PassengerDashboard from '../pages/dashboard/PassengerDashboard';
 import DashboardHome from '../pages/dashboard/DashboardHome';
+import UpComingCard from '../components/Upcomings/UpComingCard';
 // import Header from '../layout/dashboard/header/Header';
 
 
@@ -74,6 +75,7 @@ const IndexRoute = () => {
       {/* Dashboard Route */}
       <Route path="/dashboard" element={<DashboardHome />}> 
         {/* <Route index element={<MainPage />} /> */}
+        <Route path="my-bookings" element={<UpComingCard/>} />
         <Route path="edit-profile" element={<EditProfile />} />
         <Route path="settings" element={<Setting />} />
         {/* <Route path="location-popUp" element={<LocationPopUp />} /> */}

@@ -3,6 +3,8 @@ import { Outlet } from 'react-router-dom'
 import Header from '../../layout/dashboard/header/Header'
 import { useEffect, useState } from 'react';
 import LocationPopUp from '../../components/location/LocationPopUp';
+import toast from 'react-hot-toast';
+import { MapContainer, TileLayer } from 'react-leaflet';
 const PassengerDashboard = ({
   profileImage,
   firstName,
@@ -14,6 +16,7 @@ const PassengerDashboard = ({
   const [popupActionType, setPopupActionType] = useState(null); 
   const [coords, setCoords] = useState(null);
   const [locationName, setLocationName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // setShowModal(true);
@@ -22,6 +25,8 @@ const PassengerDashboard = ({
 
   const getLocationName = async (lat, lon) => {
     try {
+      setLoading(true);
+      // Fetch location name from OpenStreetMap Nominatim API
       const response = await fetch(
         `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
       );
@@ -30,6 +35,9 @@ const PassengerDashboard = ({
     } catch (err) {
       console.error("Failed to fetch location name:", err);
       return "";
+    }
+    finally{
+      setLoading(false);
     }
   };
 
@@ -54,7 +62,7 @@ const PassengerDashboard = ({
       },
       (error) => {
         console.error("Location error:", error.message);
-        toast.error("Location error:", error.message);
+        toast.error("Location access denied or unavailable. Please allow location access in your browser settings.");
         setPopupActionType("cancel");
         close(false);
       },
@@ -79,6 +87,7 @@ const PassengerDashboard = ({
     }
   };
 
+
   return (
     <div>
        <Header/>
@@ -86,9 +95,29 @@ const PassengerDashboard = ({
        {/* <div className='overflow-auto  border border-4 border-blue-950'>
          <Outlet/>
        </div> */}
-       <div className="pt-16 mt-4 border border-blue-950">
-         <p className='text-center'>Welcome to the Passenegr Dashboard page</p>
-       </div>
+       <div 
+       style={{}}
+       className="z-4 bg-white relative w-full min-h-screen pt-16 mt-4 border border-2 border-red-950">
+
+      {/* Background Image */}
+      <div className="min-h-screen w-full flex flex-col items-center gap-6 top-0 left-0 bg-[url(/Map.png)] bg-cover bg-center relative"></div>
+      
+
+      {/*With Background Map */}
+      {coords && (
+        <div className="absolute top-0 left-0 w-full h-full z-0">
+          <MapContainer
+            center={[coords.lat, coords.lon]}
+            zoom={13}
+            scrollWheelZoom={false}
+            className="w-full h-full pointer-events-none" // prevents blocking content
+          >
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          </MapContainer>
+        </div>
+      )}
+       <Outlet/>
+      </div>
 
 
        { isOpen  &&  (
@@ -101,6 +130,7 @@ const PassengerDashboard = ({
           coords={coords}
           locationName={locationName}
           handleCancel={handleCancel}
+          loading={loading}
           />
         )}
     </div>

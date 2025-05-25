@@ -4,6 +4,7 @@ import CancelledIcon from "../../assets/images/canelled.png";
 import LocationMap from "../../assets/images/Location.png";
 import Header from "../../layout/dashboard/header/Header";
 import toast from "react-hot-toast";
+import CustomButton from "../CustomButton";
 
 
 const LocationPopUp = ({ 
@@ -14,13 +15,15 @@ const LocationPopUp = ({
   handleCancel,
   handleUseLocation,
   coords,
-  locationName
+  locationName,
+  loading
    }) => {
 
   const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     setShowModal(true);
   },[])
+
   return (
     <div
       id="popup-overlay"
@@ -30,11 +33,11 @@ const LocationPopUp = ({
       {/* <Header /> */}
 
       <div
-        onClick={(e) => e.stopPropagation()}
-        className={`bg-white rounded-xl shadow-xl p-6 w-11/12 sm:w-3/5 xl:w-[700px] transition-all duration-500 ease-in-out transform ${
-          showModal ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}
-      >
+        className={`h-[459px] sm:h-fit-content w-4/5 xl:w-[788px] bg-white flex flex-col m-auto items-center justify-around gap-5 p-4 rounded-xl z-10
+          transition-all duration-700 ease-out
+          ${showModal ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
+      `}>
+
         {/* Cancel Button */}
         <button
           onClick={handleCancel}
@@ -49,17 +52,24 @@ const LocationPopUp = ({
             alt="Location"
             className="w-24 h-24 rounded-full mb-4"
           />
-          <h2 className="text-2xl font-semibold">Enable your location</h2>
+          {/* <h2 className="text-2xl font-semibold">Enable your location</h2>
           <p className="text-gray-500 mt-2 w-full sm:w-3/4">
             Choose your location to start finding requests around you.
+          </p> */}
+
+          {/* Modal Text */}
+          <h2 className="text-2xl font-medium text-center">Enable your location</h2>
+
+          <p className="mb-[40px] text-center text-sm text-[#A0A0A0] mt-3 w-full sm:w-[280px]">
+            Choose your location to start finding requests around you
           </p>
 
-          <button
-            onClick={handleUseLocation}
-            className="mt-6 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
-          >
-            Use my location
-          </button>
+          <CustomButton
+          isLoading={loading}
+          name="Use my location"
+          extendedStyles="h-14 w-full font-normal rounded-lg bg-[#20AE3A] text-white inline-flex items-center justify-center gap-3 disabled:opacity-50"
+          btnClick={handleUseLocation}
+          />
 
           {coords && (
             <div className="mt-6 w-full h-64 rounded-lg overflow-hidden shadow">
