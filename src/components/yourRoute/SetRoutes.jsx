@@ -7,10 +7,12 @@ import CustomButton from '../CustomButton';
 // import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import RideSelectorLocationIcon from '../../assets/icons/RideSelectorLocationIcon';
+import SearchIcon from '../../assets/icons/SearchIcon';
 
 
 
-const Page = ({ extendedStyles }) => {
+const SetRoutes = ({ extendedStyles }) => {
     const [activeInput, setActiveInput] = useState('whereTo');
     const [whereTo, setWhereTo] = useState('');
     const [ogigeMarket, setOgigeMarket] = useState('');
@@ -42,7 +44,7 @@ const Page = ({ extendedStyles }) => {
     }
 
     return (
-        <div className='min-h-screen bg-white flex flex-col'>
+        <div className='h-screen bg-white flex flex-col'>
 
             <BackArrow extendedStyles='top-28 xl:top-24 left-8 xl:left-48' />
 
@@ -57,8 +59,8 @@ const Page = ({ extendedStyles }) => {
                     className={`h-16 w-full xl:w-[835px] flex px-4 py-6 items-center gap-6 flex-shrink-0 rounded-2xl bg-white transition-all duration-300 ${
                         activeInput === 'whereTo' ? 'border border-[#20AE3A]' : ''
                     }`}
-                >
-                    <img src={search} className='h-4 w-4' alt="" />
+                  >
+                    <SearchIcon/>
                     <input
                         type="text"
                         placeholder="Where to ?"
@@ -74,7 +76,8 @@ const Page = ({ extendedStyles }) => {
                         activeInput === 'ogigeMarket' ? 'border border-[#20AE3A]' : ''
                     }`}
                 >
-                    <img src={location} className="h-4 w-4" alt="" />
+                
+                    <RideSelectorLocationIcon width="18px" height="22px"/>
 
                     <input
                         type="text"
@@ -89,7 +92,7 @@ const Page = ({ extendedStyles }) => {
 
                 <CustomButton 
                     name="Continue"
-                    extendedStyles={"w-full p-3 lg:p-4"}
+                    extendedStyles={"w-full text-base xl:text-2xl rounded-lg p-3 font-medium lg:p-4"}
                     btnClick={ContinueButton}
                 />
             </div>
@@ -98,4 +101,4 @@ const Page = ({ extendedStyles }) => {
     );
 };
 
-export default Page;
+export default SetRoutes;

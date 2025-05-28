@@ -1,4 +1,4 @@
-import React from 'react'
+
 import arrow from '/src/assets/images/arrow-left.png'
 import{ useNavigate } from 'react-router-dom'
  

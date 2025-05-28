@@ -27,12 +27,13 @@ import DriverCall from '../components/driverCall/DriverCall';
 import Setting from '../components/personalProfile/Setting';
 import Password from '../components/personalProfile/Password';
 import Luggage from '../components/luggagesparts/Luggage';
-import Page from '../components/yourRoute/YourRoute';
 import Bidder from '../components/bidders/Bidders';
 import EditProfile from '../components/personalProfile/EditProfile';
-import PassengerDashboard from '../pages/dashboard/PassengerDashboard';
+// import PassengerDashboard from '../pages/dashboard/passenger/PassengerDashboard';
 import DashboardHome from '../pages/dashboard/DashboardHome';
 import UpComingCard from '../components/Upcomings/UpComingCard';
+import PassengerDashboardIndex from '../pages/dashboard/passenger';
+import SetRoutes from '../components/yourRoute/SetRoutes';
 // import Header from '../layout/dashboard/header/Header';
 
 
@@ -60,9 +61,8 @@ const IndexRoute = () => {
       <Route path="/Check-email" element={<CheckEmailFile />} />
       <Route path="/Reset-password" element={<ResetPassword />} />
       <Route path="/Bidder" element={<Bidder />} />
-      <Route path="/LocationPopUp" element={<LocationPopUp />} />
+      {/* <Route path="/LocationPopUp" element={<LocationPopUp />} /> */}
       <Route path="/mainpage" element={<MainPage />} />
-      <Route path="/page" element={<Page />} />
       <Route path="/Luggage" element={<Luggage />} />
       <Route path="/LookingFor" element={<LookingFor />} />
       <Route path="/PickRide" element={<PickRide />} />
@@ -74,13 +74,13 @@ const IndexRoute = () => {
 
       {/* Dashboard Route */}
       <Route path="/dashboard" element={<DashboardHome />}> 
-        {/* <Route index element={<MainPage />} /> */}
+        <Route index element={<PassengerDashboardIndex/>} />
         <Route path="my-bookings" element={<UpComingCard/>} />
         <Route path="edit-profile" element={<EditProfile />} />
         <Route path="settings" element={<Setting />} />
         {/* <Route path="location-popUp" element={<LocationPopUp />} /> */}
         {/* <Route path="mainpage" element={<MainPage />} /> */}
-        <Route path="page" element={<Page />} />
+        <Route path="set-routes" element={<SetRoutes />} />
         <Route path="luggage" element={<Luggage />} />
         <Route path="looking-for" element={<LookingFor />} />
         <Route path="pick-ride" element={<PickRide />} />
