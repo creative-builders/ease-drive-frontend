@@ -53,7 +53,7 @@ export default function LookingFor() {
   console.log(routeLocation)
 
   return (
-    <div className='min-h-screen w-full bg-[url(/Group.png)] flex flex-col items-center justify-around gap-14 relative'>
+    <div className='min-h-screen w-full flex flex-col items-center justify-around gap-14 relative'>
       <Header />
        <BackArrow extendedStyles={'top-20 left-10 xl:left-24'} />
       

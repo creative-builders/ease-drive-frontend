@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import BookingButtons from "../BookingButtons";
 import BackArrow from "../BackArrow";
 
-const UpComingCard = ({tabResponses}) => {
+const BookingsCard = ({tabResponses}) => {
   const [activeTab, setActiveTab] = useState(null);
 
   //   const tabResponses = {
@@ -42,4 +42,4 @@ const UpComingCard = ({tabResponses}) => {
   );
 };
 
-export default UpComingCard;
+export default BookingsCard;

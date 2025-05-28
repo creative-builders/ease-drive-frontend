@@ -66,7 +66,7 @@ export default function Luggage() {
     };
 
     return (
-        <div className='min-h-screen w-full bg-[url(/Group.png)] flex flex-col items-center justify-around gap-14'>
+        <div className='min-h-screen w-full flex flex-col items-center justify-around gap-14'>
             <Header />
             <BackArrow extendedStyles='top-20 left-10 xl:left-24' />
             
