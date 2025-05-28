@@ -4,10 +4,8 @@ import arrow from '../assets/images/Frame (4).png'
 import keke from '../assets/images/keke-main.png'
 import bike from '../assets/images/bike-main.png'
 import motor from '../assets/images/Car.png'
-// import locate from '../assets/images/Location-map .png'
 import Imap from '../assets/icons/IconMain.png'
 import BackArrow from './BackArrow'
-import Header from '../layout/dashboard/header/Header'
 
 
 export default function PickRide({ selected, setSelected }){
@@ -26,16 +24,9 @@ export default function PickRide({ selected, setSelected }){
         
     }
 
-    // const handleSubmit = (option) => {
-    //     setSelected(option.id)
-    //     setSelectedRide(option.id)
-    //     console.log("Selected image", option.image);
-        
-    // }
-
     return(
-        <div className='h-screen w-full bg-[url(/Group.png)] flex flex-col px-0  items-center gap-12 justify-around'>
-            <Header />
+        <div className='h-screen w-full flex flex-col px-0  items-center gap-12 justify-around'>
+            {/* <Header /> */}
            <BackArrow extendedStyles={"top-20 left-10 xl:left-24"} />
 
             <Link to="/dashboard/Page" className='w-11/12 flex items-center justify-center'>

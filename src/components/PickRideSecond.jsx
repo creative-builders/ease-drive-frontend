@@ -13,9 +13,13 @@ import { useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
 
 
-export default function PickRideSecond({ selected, setSelected }){
+export default function PickRideSecond({ 
+    selected, 
+    setSelected,
+    initialPickUpValue
+}){
     const navigate = useNavigate();
-    const [pickupLocation, setPickupLocation] = useState("");
+    const [pickupLocation, setPickupLocation] = useState(initialPickUpValue);
 
     // const [selected, setSelected] = useState(null);
 
@@ -24,20 +28,6 @@ export default function PickRideSecond({ selected, setSelected }){
         { id: 2, image: bike, text: "Okada ride" },
         { id: 3, image: motor, text: "Shuttle ride" },
     ];
-
-    // const handleNextPage = () => {
-    //     if (!selected) {
-    //       toast.error("Please select a ride first.");
-    //       return;
-    //     }
-    
-    //     if (!pickupLocation.trim()) {
-    //       toast.error("Please enter your pickup location.");
-    //       return;
-    //     }
-    
-    //     navigate("/Page", { state: { pickupLocation } });
-    // };
 
     const handleNextPage = () => {
         if (!selected) {
@@ -52,8 +42,8 @@ export default function PickRideSecond({ selected, setSelected }){
     
 
     return(
-        <div className='h-screen w-full bg-[url(/Group.png)] flex flex-col items-center justify-around gap-6 overflow-y-scroll'>
-           <Header />
+        <div className='h-screen w-full flex flex-col items-center justify-around gap-6 overflow-y-scroll'>
+           {/* <Header /> */}
             <BackArrow extendedStyles='top-20 left-10 xl:left-24' />
             <article className='h-14 xl:h-17 flex w-4/5 xl:w-[667px] px-4 py-6 items-center mt-28 gap-6 rounded-2xl bg-[#fff]'>
                 <img src={IconMap} alt="" />
