@@ -1,12 +1,12 @@
 
 import { Outlet } from 'react-router-dom'
-import Header from '../../layout/dashboard/header/Header'
+import Header from '../../../layout/dashboard/header/Header'
 import { useEffect, useState } from 'react';
-import LocationPopUp from '../../components/location/LocationPopUp';
+import LocationPopUp from '../../../components/location/LocationPopUp';
 import toast from 'react-hot-toast';
 import { MapContainer, TileLayer } from 'react-leaflet';
-import PickRideSecond from '../../components/PickRideSecond';
-import PickRide from '../../components/PickRide';
+import PickRideSecond from '../../../components/PickRideSecond';
+import PickRide from '../../../components/PickRide';
 const PassengerDashboard = ({
   profileImage,
   firstName,

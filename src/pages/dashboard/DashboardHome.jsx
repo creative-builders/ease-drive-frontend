@@ -1,8 +1,7 @@
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../../components/atoms/userAtom";
-import PassengerDashboard from "./PassengerDashboard";
-import DriverDashboard from "./DriverDashboard";
-import Login from "../auth/Login/Login";
+import PassengerDashboard from "./passenger/PassengerDashboard";
+import DriverDashboard from "./driver/DriverDashboard";
 import { Navigate } from "react-router-dom";
 
 const DashboardHome = () => {
