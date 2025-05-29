@@ -1,15 +1,15 @@
 
-import MainPage from "../../components/mainpage/MainPage";
+// import MainPage from "../../components/mainpage/MainPage";
 
-const TestingComponent = () => {
+// const TestingComponent = () => {
   
-  return (
-    <div className="relative">
+//   return (
+//     <div className="relative">
      
-      { <MainPage />}
+//       { <MainPage />}
       
-    </div>
-  );
-};
+//     </div>
+//   );
+// };
 
-export default TestingComponent;
+// export default TestingComponent;

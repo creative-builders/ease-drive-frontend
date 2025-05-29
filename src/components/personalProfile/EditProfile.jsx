@@ -9,7 +9,7 @@ export default function EditProfile(){
       const user = useRecoilValue(userAtom);
       
     return(
-        <div className='mt-20'>
+        <div>
             <BackArrow extendedStyles={"top-20 xl:top-24 left-0 xl:left-[480px]"} />
             <main className='min-h-screen xl:h-[930px] w-full xl:w-[430px] p-2 m-auto flex flex-col items-start justify-around bg-[#F6F7F6]'>
                 {/* <h2 className='text-[#000]font-[poppins] text-base not-italic font-bold leading-normal'>EaseDrive</h2> */}

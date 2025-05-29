@@ -6,7 +6,7 @@ import BackArrow from '../BackArrow'
 
 export default function Setting(){
     return(
-        <div className=" mt-16">
+        <div>
             <main className='h-[calc(100vh-80px)] bg-[#F6F7F6]'>
                 <BackArrow extendedStyles={'top-[60px] transform translate-y-4 md:translate-y-6  left-0 xl:left-[480px] z-50'} />
                <div className="h-fit   w-full xl:w-[430px] p-2 gap-6 m-auto flex flex-col items-start justify-center">

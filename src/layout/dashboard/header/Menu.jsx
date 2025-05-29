@@ -58,7 +58,7 @@ const Menu = ({ setIsOpen }) => {
               transition-all duration-300 ease-in-out
             `}
           >
-            <Link className='flex items-center pb-1 gap-2 justify-between'>
+            <Link to={"/dashboard"} className='flex items-center pb-1 gap-2 justify-between'>
               <span className='text-sm order-1 md:order-2'>Home</span>
               <img src={home} alt="Home" className="h-5 w-5 md:invert order-2 md:order-1 md:brightness-0" />
             </Link>
@@ -67,7 +67,7 @@ const Menu = ({ setIsOpen }) => {
 
           <li onClick={() => handleTabClick('My Bookings')}
               className={`${activeTab === 'My Bookings' ? 'border-b-2 border-green-500' : ''}`}>
-            <Link className='flex items-center pb-1 gap-2 justify-between'>
+            <Link to={"/dashboard/my-bookings"} className='flex items-center pb-1 gap-2 justify-between'>
               <span className='text-sm order-1 md:order-2'>My Bookings</span>
               <img src={booking} alt="Bookings" className="h-6 w-6 md:invert order-2 md:order-1 md:brightness-0" />
             </Link>

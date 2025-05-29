@@ -17,6 +17,9 @@ const Page = ({ extendedStyles }) => {
     const navigate = useNavigate();
     const routeLocation = useLocation();
 
+
+    // console.log(routeLocation)
+
     useEffect(() => {
         if (routeLocation.state?.pickupLocation) {
             setOgigeMarket(routeLocation.state.pickupLocation);
@@ -27,13 +30,13 @@ const Page = ({ extendedStyles }) => {
 
 
     const ContinueButton = () =>{
-        console.log('Where to:', whereTo);
-        console.log('Destination:', ogigeMarket);
+        // console.log('Where to:', whereTo);
+        // console.log('Destination:', ogigeMarket);
 
         navigate('/dashboard/luggage', {
             state: {
-                from: whereTo,
-                to: ogigeMarket,
+                to: whereTo,
+                from: ogigeMarket,
             },
         });
     }
