@@ -29,20 +29,6 @@ export default function PickRideSecond({
         { id: 3, image: motor, text: "Shuttle ride" },
     ];
 
-    // const handleNextPage = () => {
-    //     if (!selected) {
-    //       toast.error("Please select a ride first.");
-    //       return;
-    //     }
-    
-    //     if (!pickupLocation.trim()) {
-    //       toast.error("Please enter your pickup location.");
-    //       return;
-    //     }
-    
-    //     navigate("/Page", { state: { pickupLocation } });
-    // };
-
     const handleNextPage = () => {
         if (!selected) {
           toast.error("Please select a ride first.");

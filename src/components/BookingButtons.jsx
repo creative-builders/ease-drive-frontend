@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 
 const BookingButtons = ({ setActiveTab,buttons:tabs }) => {
-  const [activeTab, setTab] = useState("Upcoming");
+  const [activeTab, setTab] = useState("upcoming");
 
   const handleClick = (tabName) => {
     setTab(tabName);
     setActiveTab(tabName);
   };
 
-  // const tabs = ["Upcoming", "Completed", "Cancelled"];
+  // const tabs = ["Pending", "Completed", "Canceled"];
 
   return (
-    <div className="inline-flex items-center gap-4 rounded-md border border-[#20AE3A] bg-[#EFF5E9] mt-9">
+    <div className="inline-flex w-96 items-center justify-between gap-4 rounded-md border border-[#20AE3A] bg-[#EFF5E9] mt-9">
       {tabs.map((tab) => (
         <button
           key={tab}

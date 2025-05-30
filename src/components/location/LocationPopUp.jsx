@@ -8,14 +8,9 @@ import CustomButton from "../CustomButton";
 
 
 const LocationPopUp = ({ 
-  close, 
-  setSelected, 
-  setPopupActionType,
   handleOverlayClick,
   handleCancel,
   handleUseLocation,
-  coords,
-  locationName,
   loading
    }) => {
 

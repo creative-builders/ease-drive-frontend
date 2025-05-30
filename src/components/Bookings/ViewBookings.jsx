@@ -1,9 +1,10 @@
-import React from 'react'
-
-import UpComingCard from "./UpComingCard";
 
 
-const UpComingDisplay = () =>{
+import BookingsCard from "./BookingsCard";
+
+
+
+const ViewBookings = () =>{
 
     const obj = {
         Upcoming: "currently there's no upcoming",
@@ -14,9 +15,9 @@ const UpComingDisplay = () =>{
     return(
         <div className="relative">
 
-            <UpComingCard tabResponses={obj}/>
+            <BookingsCard tabResponses={obj}/>
 
         </div>
     )
 }
-export default UpComingDisplay
+export default ViewBookings
