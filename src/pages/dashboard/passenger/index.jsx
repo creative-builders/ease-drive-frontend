@@ -5,6 +5,8 @@ import LocationPopUp from '../../../components/location/LocationPopUp';
 import PickRide from '../../../components/PickRide';
 import PickRideSecond from '../../../components/PickRideSecond';
 import RideSelector from '../../../components/RideSelector';
+import { locationAtom } from '../../../components/atoms/locationAtom'
+import { useSetRecoilState } from "recoil";
 
 
 const PassengerDashboardIndex = () => {
@@ -14,6 +16,8 @@ const PassengerDashboardIndex = () => {
     const [popupActionType, setPopupActionType] = useState(null);
     const [locationName, setLocationName] = useState('');
     const [loading, setLoading] = useState(false);
+    const setUserLocation = useSetRecoilState(locationAtom);
+
   
     const getLocationName = async (lat, lon) => {
       try {
@@ -40,6 +44,7 @@ const PassengerDashboardIndex = () => {
           const location = await getLocationName(latitude, longitude);
           setCoords({ lat: latitude, lon: longitude });
           setLocationName(location);
+          setUserLocation(location)
           setPopupActionType("use-location");
           setIsOpen(false);
         },

@@ -5,22 +5,28 @@ import BookingDetails from "./BookingDetails";
 import { userAtom } from '../atoms/userAtom'
 import { useRecoilValue } from 'recoil'
 import { useLocation } from 'react-router-dom';
+import { locationAtom } from '../../components/atoms/locationAtom'
 
 const BookingsCard = () => {
   const [activeTab, setActiveTab] = useState("upcoming");
   const userData = useRecoilValue(userAtom);
-  // const location = useLocation();
-  // const pickupLocation = location.state?.pickupLocation;
+  
   
 const pickupLocation = userData?.location || "Nuskka";
 
 const bookings = [
-    { id: 1, username: "Jane Doe", location: pickupLocation, status: "upcoming", time: "10:00 AM, May 30" },
-    { id: 2, username: "John Smith", location: pickupLocation, status: "completed", time: "done" },
-    { id: 3, username: "Alex Bright", location: pickupLocation, status: "cancelled", time: "cancel" },
+    { id: 0, status: "upcoming", time: "10:00 AM, May 30" },
+    { id: 1, status: "completed", time: "done" },
+    { id: 2, status: "completed", time: "done" },
+    { id: 3, status: "cancelled", time: "cancel" },
+    { id: 4, status: "cancelled", time: "cancel" },
+    { id: 5, status: "cancelled", time: "cancel" },
   ];
   
-
+  const userLocation = useRecoilValue(locationAtom)
+  const currentUserLocation = userLocation.split(",").slice(0,2).join('')
+  // console.log(userLocation)
+  // console.log(currentUserLocation)
  
   const buttonsLabel = ["upcoming", "completed", "cancelled"];
 
@@ -63,7 +69,7 @@ const bookings = [
                 key={booking.id}
                 // username={booking.username}
                 username={userData?.fullName}
-                location={booking.location}
+                location={currentUserLocation}
                 time={booking.time}
                 status={booking.status}
               />
