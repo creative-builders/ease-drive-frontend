@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import LocationPopUp from '../../../components/location/LocationPopUp';
-import PickRide from '../../../components/PickRide';
-import PickRideSecond from '../../../components/PickRideSecond';
 import RideSelector from '../../../components/RideSelector';
 
 
