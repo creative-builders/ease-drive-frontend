@@ -33,6 +33,7 @@ import DashboardHome from '../pages/dashboard/DashboardHome';
 import PassengerDashboardIndex from '../pages/dashboard/passenger';
 import SetRoutes from '../components/yourRoute/SetRoutes';
 import ViewBookings from '../components/Bookings/ViewBookings';
+import DriverDashboard from '../components/driverdashboardFolders/DriverDashboard';
 // import Header from '../layout/dashboard/header/Header';
 
 
@@ -68,7 +69,7 @@ const IndexRoute = () => {
       <Route path="/Cancelled" element={<Cancelled />} />
       <Route path="/DriverCall" element={<DriverCall />} />
       <Route path="/Password" element={<Password />} />
-      {/* <Route path="/BidCard" element={<BidCard />} /> */}
+      <Route path="/drivers" element={<DriverDashboard />} />
       
 
       {/* Dashboard Route */}
