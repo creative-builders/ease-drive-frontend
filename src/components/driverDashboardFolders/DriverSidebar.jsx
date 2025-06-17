@@ -8,9 +8,9 @@ const items = [
     { id: 2, label: "Request", icon: message },
     { id: 3, label: "History", icon: menu },
     { id: 4, label: "Earning", icon: scan },
-]
+];
 
-const DriverSidebar = ({ className }) => {
+const DriverSidebar = ({ className, activeTab, setActiveTab }) => {
 
     const [active, setActive] = useState("Dashboard");
     console.log(message);
@@ -20,11 +20,11 @@ const DriverSidebar = ({ className }) => {
 
         <main className="h-72 mt-16 flex flex-col items-center justify-between p-2">
             {items.map((item) => {
-                const isActive = active === item.label;
+                const isActive = activeTab === item.label;
                 return (
                 <article
                     key={item.id}
-                    onClick={() => setActive(item.label)}
+                    onClick={() => setActiveTab(item.label)}
                     className={`h-12 w-4/5 cursor-pointer px-4 flex items-center justify-evenly transition-all duration-200 
                     
                     ${

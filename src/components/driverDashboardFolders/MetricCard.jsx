@@ -14,7 +14,7 @@ const MetricCard = ({
 
   return (
     <div
-      className={`bg-blue-50 p-6 rounded-2xl shadow-md border border-blue-500 flex justify-between items-center w-full max-w-sm mx-auto font-inter ${className}`}
+      className={`bg-blue-50 p-6 rounded-2xl shadow-md flex justify-between items-center w-full max-w-sm mx-auto font-inter ${className}`}
       // style={{ minWidth: '320px' }}
     >
       {/* Left section */}
