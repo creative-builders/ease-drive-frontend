@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import SectionLabel from '../SectionLabel';
 import CustomButton from "../CustomButton"
-import GoogleAuth from "../GoogleAuth";
+
 // import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import GoogleAuthV3 from '../GoogleAuthV3';
 
 
 const StepOne = ({ nextStep, step, totalSteps }) =>{
@@ -39,7 +40,7 @@ const handleToggleConfirmPassword = () => {
             title={`${step} Step of ${totalSteps}`}
            />
         </div>
-       <section className='border-0 md:border border-green-600 h-fit p-4 w-full rounded-lg flex flex-col items-center justify-center gap-4'>
+       <section className='border-0 md:border border-green-600 h-fit p-4 w-full rounded-lg flex flex-col items-center  gap-4'>
          <p className='text-2xl'>Let's get started</p>
          <span className='text-center text-sm'>Enter your name, phone number and email address,and <br /> we'll send you a four digit code to confirm it</span>
          <div className='h-fit md:h-3/5 w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-4'>
@@ -131,21 +132,14 @@ const handleToggleConfirmPassword = () => {
             btnClick={() => nextStep()}
           />
          <div className="line h-[20px] w-11/12 flex justify-around items-center">
-         <span className=' border-b-2 w-2/5 border-gray-600'></span> OR <span className=' border-b-2 w-2/5 border-gray-600'></span>
          </div>
-          {/* <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div> */}
-          {/* <button 
-            className="inline-block mb-6 w-full p-6 gap-2 bg-gray-300 rounded-lg">
-              <span className="text-bold text-base text-gray-950 flex justify-center items-center gap-x-2">
-              <FcGoogle size={20} />
-              Continue with Google
-              </span>
-          </button> */}
 
-          <div className="flex justify-center mb-16 p-4 ">
-            <GoogleAuth/>
-          </div>
-         
+           {/* Or use Google auth */}
+          <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div>
+
+            <div className="flex justify-center mb-16 p-4 ">
+              <GoogleAuthV3 role='driver'/>
+            </div>
          <p className='pair text-sm md:hidden'>Already have an account? <Link className='text-green-500' to={"/login"}>Login</Link></p>
          
        </section> 
