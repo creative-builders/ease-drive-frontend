@@ -93,14 +93,6 @@ const StepOne = ({ nextStep, step, totalSteps }) => {
               {/* Or use Google auth */}
                 <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div>
 
-                {/* Google Login button*/}
-                {/* <button 
-                 className="inline-block mb-16 lg:mb-0 w-full p-4 bg-gray-300 rounded-lg">
-                    <span className="text-bold text-base text-gray-950 flex justify-center items-center gap-x-2">
-                    <FcGoogle size={20} />
-                    Continue with Google
-                    </span>
-                </button> */}
                 <div className="flex justify-center mb-16 p-4 ">
                     <GoogleAuthV3/>
                  </div>
