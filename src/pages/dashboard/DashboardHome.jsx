@@ -7,6 +7,8 @@ import { Navigate } from "react-router-dom";
 const DashboardHome = () => {
   const userData = useRecoilValue(userAtom);
 
+  // console.log(userData)
+
   if (!userData || !userData.role) {
     return <Navigate to={"/login"} />;
   }
