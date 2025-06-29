@@ -53,7 +53,7 @@ const Signupd = () =>{
          <button className='inline-block w-full p-4 bg-gray-300 rounded-lg'>
          <span className="text-bold text-base text-gray-950 flex justify-center items-center gap-x-2">
             <FcGoogle size={20} />
-            Continue with Google
+            {/* Continue with Google */}
             </span>
           </button>
          {/* <p className='pair text-sm hidden'>Already have an account? <a className='text-green-500' href="">Login</a></p> */}
