@@ -7,7 +7,6 @@ import { useRecoilValue } from 'recoil';
 
 export default function EditProfile(){
       const user = useRecoilValue(userAtom);
-      console.log(user)
       
     return(
         <div>

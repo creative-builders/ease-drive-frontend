@@ -5,13 +5,6 @@ import BackArrow from "../BackArrow";
 const BookingsCard = ({tabResponses}) => {
   const [activeTab, setActiveTab] = useState(null);
 
-  //   const tabResponses = {
-  //    Upcoming: "currently there's no upcoming",
-  //    Completed: "Sorry no completed",
-  //    Canelled: "Here are the cancelled",
-  //  };
-
-  
 
  const buttonsLabel = []
  for(let k in tabResponses){
