@@ -33,6 +33,8 @@ import DashboardHome from '../pages/dashboard/DashboardHome';
 import PassengerDashboardIndex from '../pages/dashboard/passenger';
 import SetRoutes from '../components/yourRoute/SetRoutes';
 import ViewBookings from '../components/Bookings/ViewBookings';
+import DriverBoard from '../components/driverDashboardFolders/DriverBoard';
+import DataStatus from '../components/driverDashboardFolders/DataStatus';
 // import Header from '../layout/dashboard/header/Header';
 
 
@@ -60,7 +62,6 @@ const IndexRoute = () => {
       <Route path="/Check-email" element={<CheckEmailFile />} />
       <Route path="/Reset-password" element={<ResetPassword />} />
       <Route path="/Bidder" element={<Bidder />} />
-      {/* <Route path="/LocationPopUp" element={<LocationPopUp />} /> */}
       <Route path="/mainpage" element={<MainPage />} />
       <Route path="/Luggage" element={<Luggage />} />
       <Route path="/LookingFor" element={<LookingFor />} />
@@ -68,7 +69,8 @@ const IndexRoute = () => {
       <Route path="/Cancelled" element={<Cancelled />} />
       <Route path="/DriverCall" element={<DriverCall />} />
       <Route path="/Password" element={<Password />} />
-      {/* <Route path="/BidCard" element={<BidCard />} /> */}
+      <Route path="/drivers" element={<DriverBoard />} />
+      <Route path="/rides" element={<DataStatus />} />
       
 
       {/* Dashboard Route */}
