@@ -65,7 +65,7 @@ const Login = () => {
         {/* Left Section - Login Form */}
         <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
           <div className="flex items-center mb-6">
-            <img src={carImage} alt="Car Icon" className="h-8 w-8 mr-2" /> {/* Assuming you have a car-icon.png in your public folder */}
+            <img src={carImage} alt="Car Icon" className="h-8 w-8 mr-2" />
             <h1 className="text-3xl font-bold text-black">Ease Drive</h1>
           </div>
 
@@ -125,7 +125,6 @@ const Login = () => {
             </div>
             <CustomButton
                 type="submit"
-                // className="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-700 transition duration-300 text-lg font-semibold"
                 name="Log in"
                 isLoading={isLoading}
                 className={`inline-block mb-8 w-full p-3 rounded-md transition-all duration-300 
