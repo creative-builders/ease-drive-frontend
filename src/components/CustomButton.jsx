@@ -11,7 +11,8 @@ const CustomButton = ({
     btnClick,
     navigateTo,
     navigateState,
-    isLoading=false
+    isLoading=false,
+    children,
 }) => {
     const navigate = useNavigate();
 
@@ -34,7 +35,12 @@ const CustomButton = ({
     <button 
       onClick={handleClick}
      className={`${sizeClasses} ${className} ${extendedStyles} flex items-center justify-center bg-green-300 text-gray-100 font-bold `}>
-     {isLoading ? <LoadingSpinner className="animate-spin" /> : name}
+     {/* {isLoading ? <LoadingSpinner className="animate-spin" /> : name} */}
+     {isLoading ? (
+        <LoadingSpinner className="animate-spin" />
+      ) : (
+        children || name
+      )}
     </button>
   )
 }
