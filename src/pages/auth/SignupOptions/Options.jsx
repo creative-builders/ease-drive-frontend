@@ -44,8 +44,8 @@ export default function Option() {
   // };
 
   return (
-    <div className="h-screen lg:flex lg:flex-row lg:gap-x-[45px] lg:items-center">
-      <div className='flex flex-col md:flex-row items-center justify-center gap-5 w-full max-w-8xl mx-auto p-6 bg-white rounded-xl'>
+    <div className="min-h-screen bg-gray-500">
+      <div className='w-11/12 flex items-center justify-around mx-auto xl:w-10/12 px-2 py-4 border border-red-500'>
         {/* Left side - options */}
         <div className="w-full flex flex-col items-center justify-between md:w-1/2 space-y-6">
           <div className="flex flex-col md:flex-row items-center space-x-2">
@@ -66,7 +66,7 @@ export default function Option() {
               description="Enjoy safe rides with live tracking and flexible payments"
               selected={selectedOption === '/passengers-signup'}
               onClick={() => handleSelect('/passengers-signup')}
-              className={`cursor-pointer flex items-center justify-between p-4 rounded-lg border transition ${
+              className={`cursor-pointer flex items-center justify-between p-2 rounded-lg border transition ${
               selectedOption === '/passengers-signup' ? 'bg-blue-50 border-blue-500' : 'bg-gray-50'
             }`}
             />
@@ -77,7 +77,7 @@ export default function Option() {
               description="Earn on your schedule by driving anytime."
                selected={selectedOption === '/driver-signup'}
               onClick={() => handleSelect('/driver-signup')}
-              className={`cursor-pointer flex items-center justify-between p-4 rounded-lg border transition ${
+              className={`cursor-pointer flex items-center justify-between p-2 rounded-lg border transition ${
                  selectedOption === '/driver-signup' ? 'bg-yellow-50 border-yellow-500' : 'bg-gray-50'
               }`}
             />
@@ -87,8 +87,8 @@ export default function Option() {
           <CustomButton
              btnClick={() => navigate(selectedOption)}
             name='Continue'
-            className={`mt-4 w-full md:w-11/12 bg-green-700 hover:bg-green-800 text-white font-semibold p-4 rounded-lg ${
-              !selectedOption ? 'opacity-50 cursor-not-allowed' : ''
+            className={`mt-4 w-full md:w-11/13 bg-green-700 hover:bg-green-800 text-white font-semibold p-4 rounded-lg ${
+              !selectedOption ? 'opacity-80 cursor-not-allowed' : ''
             }`}
             disabled={!selectedOption}
           />
@@ -101,7 +101,7 @@ export default function Option() {
         </div>
 
         {/* Right side - image */}
-        <div className="h-108 w-3/5 mt-2 hidden md:flex">
+        <div className="h-108 w-2/5 mt-2 hidden md:flex">
           <img
             src={sideImage}
             alt="Campus shuttle"
