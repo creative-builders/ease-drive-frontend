@@ -12,6 +12,7 @@ import WhyChooseUS from '../../components/landing page/WhyChooseUS';
 import OurServices from '../../components/landing page/OurServices';
 import YourSafety from '../../components/landing page/YourSafety';
 import { useButtonNavigation } from '../../hooks/useButtonNavigation';
+import FaqSection from '../../components/landing page/Faq';
 
 
 const Home = () => {
@@ -72,7 +73,8 @@ const Home = () => {
       </section>
 
     </div>
-    <Footer/>
+    <FaqSection/>
+    {/* <Footer/> */}
     </>
   );
 };
