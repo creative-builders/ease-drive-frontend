@@ -35,6 +35,7 @@ import SetRoutes from '../components/yourRoute/SetRoutes';
 import ViewBookings from '../components/Bookings/ViewBookings';
 import DriverBoard from '../components/driverDashboardFolders/DriverBoard';
 import DataStatus from '../components/driverDashboardFolders/DataStatus';
+import DriverCreate from '../components/driverStepFlow/DriverCreate';
 // import Header from '../layout/dashboard/header/Header';
 
 
@@ -52,6 +53,7 @@ const IndexRoute = () => {
       <Route path="/activate" element={<ActivateAccount/>} />
       <Route path="/passengers-signup" element={<PassengersSignup />} />
       <Route path="/driver-signup" element={<DriverSignup />} />
+      <Route path="/driver-create" element={<DriverCreate />} />
       <Route path="/Dri-verify" element={<DriVerify />} />
       <Route path="/Driv-upload" element={<DrivUpload />} />
       <Route path="/Driv-place" element={<DrivPlace />} />

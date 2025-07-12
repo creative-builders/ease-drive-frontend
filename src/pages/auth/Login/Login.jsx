@@ -69,7 +69,7 @@ const Login = () => {
             <h1 className="text-3xl font-bold text-black">Ease Drive</h1>
           </div>
 
-          <h2 className="text-xl font-semibold text-gray-800 mb-6">Sign up as</h2>
+          <h2 className="text-xl font-semibold text-gray-800 mb-6">Login</h2>
 
           <form onSubmit={handleSubmit}>
             <div className="mb-4">

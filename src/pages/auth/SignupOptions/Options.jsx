@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import carImage from '../../../assets/images/Car.svg';
+// import carImage from '/Car.svg';
 import sideImage from '../../../assets/images/image.svg';
 import frameCar from '../../../assets/images/Frame-car.svg';
 import framewatch from '../../../assets/images/Frame-clock.svg';
@@ -39,13 +40,13 @@ export default function Option() {
     setSelectedOption(option);
   };
 
-  // const handleContinue = () => {
-  //   if (selectedOption) navigate(`/${selectedOption}`);
-  // };
+  const handleContinue = () => {
+    if (selectedOption) navigate(`/${selectedOption}`);
+  };
 
   return (
     <div className="min-h-screen bg-gray-500">
-      <div className='w-11/12 flex items-center justify-around mx-auto xl:w-10/12 px-2 py-4 border border-red-500'>
+      <div className='w-11/12 flex items-center justify-around mx-auto xl:w-10/12 px-2 py-4'>
         {/* Left side - options */}
         <div className="w-full flex flex-col items-center justify-between md:w-1/2 space-y-6">
           <div className="flex flex-col md:flex-row items-center space-x-2">
@@ -75,10 +76,10 @@ export default function Option() {
               icon={framewatch}
               title="I want to Drive"
               description="Earn on your schedule by driving anytime."
-               selected={selectedOption === '/driver-signup'}
-              onClick={() => handleSelect('/driver-signup')}
+               selected={selectedOption === '/driver-create'}
+              onClick={() => handleSelect('/driver-create')}
               className={`cursor-pointer flex items-center justify-between p-2 rounded-lg border transition ${
-                 selectedOption === '/driver-signup' ? 'bg-yellow-50 border-yellow-500' : 'bg-gray-50'
+                 selectedOption === '/driver-create' ? 'bg-yellow-50 border-yellow-500' : 'bg-gray-50'
               }`}
             />
 
