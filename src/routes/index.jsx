@@ -2,7 +2,6 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../pages/landingPage/Home';
-import { HomePage } from '../pages/newLandingPage/HomePage';
 import Options from '../pages/auth/SignupOptions/Options';
 import DriVerify from '../pages/auth/Drivers/DriVerify';
 import DrivUpload from '../pages/auth/Drivers/DrivUpload';
@@ -48,7 +47,6 @@ const IndexRoute = () => {
     <Router>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/easedrive" element={<HomePage />} />
       <Route path="/signup-as" element={<Options />} />
       <Route path="/login" element={<Login/>} />
       <Route path="/activate" element={<ActivateAccount/>} />
