@@ -1,0 +1,15 @@
+<svg width="22" height="123" viewBox="0 0 22 123" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="7" y="3.96045" width="8" height="9" rx="4" fill="#333333"/>
+<foreignObject x="0" y="0" width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(0px);clip-path:url(#bgblur_0_238_2094_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="0">
+<rect x="3" y="0.460449" width="16" height="16" rx="8" fill="#DEFAE2"/>
+<rect x="6" y="3.46045" width="10" height="10" rx="5" fill="#4847EB"/>
+</g>
+<rect x="10.5" y="18.4604" width="1" height="77" stroke="#A1A1A1"/>
+<rect y="100.96" width="22" height="22" rx="11" fill="#F1FCF2"/>
+<path d="M12.1 110.127C12.1 110.735 11.6075 111.227 11 111.227C10.3925 111.227 9.90002 110.735 9.90002 110.127C9.90002 109.52 10.3925 109.027 11 109.027C11.6075 109.027 12.1 109.52 12.1 110.127Z" stroke="#4847EB"/>
+<path d="M11.7903 115.314C11.5783 115.515 11.295 115.627 11.0001 115.627C10.7052 115.627 10.4218 115.515 10.2098 115.314C8.26839 113.462 5.66667 111.393 6.93545 108.39C7.62147 106.766 9.26822 105.727 11.0001 105.727C12.7319 105.727 14.3787 106.766 15.0647 108.39C16.3319 111.39 13.7365 113.469 11.7903 115.314Z" stroke="#4847EB"/>
+<path d="M14.3 116.727C14.3 117.335 12.8225 117.827 11 117.827C9.17741 117.827 7.69995 117.335 7.69995 116.727" stroke="#4847EB" stroke-linecap="round"/>
+<defs>
+<clipPath id="bgblur_0_238_2094_clip_path" transform="translate(0 0)"><rect x="3" y="0.460449" width="16" height="16" rx="8"/>
+</clipPath></defs>
+</svg>
