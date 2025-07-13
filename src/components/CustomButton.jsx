@@ -1,24 +1,40 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "./LoadingSpinner";
 
 
 const CustomButton = ({
     extendedStyles,
-    name = "Learn More",
+    name = "Book Now",
     size = "sm",
-    btnClick
+    className = "",
+    btnClick,
+    navigateTo,
+    navigateState,
+    isLoading=false
 }) => {
+    const navigate = useNavigate();
 
     const sizes = {
-	sm: 'text-base leading-normal',
-	md: 'text-xl leading-normal',
+    sm: 'text-base leading-normal',
+    md: 'text-xl leading-normal',
     }
 
     const sizeClasses = sizes[size];
+
+     const handleClick = () => {
+    if (navigateTo) {
+      navigate(navigateTo, { state: navigateState });
+    } else if (btnClick) {
+      btnClick();
+    }
+  };
   
   return (
     <button 
-     onClick={btnClick}
-     className={`${extendedStyles} ${sizeClasses} px-3 py-2 lg:px-4 lg:py-4  inner-block rounded-lg bg-green-300 text-gray-100 font-bold `}>
-     {name}
+      onClick={handleClick}
+     className={`${sizeClasses} ${className} ${extendedStyles} flex items-center justify-center bg-green-300 text-gray-100 font-bold `}>
+     {isLoading ? <LoadingSpinner className="animate-spin" /> : name}
     </button>
   )
 }
