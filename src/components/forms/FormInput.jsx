@@ -2,7 +2,7 @@
 
 export default function FormInput({
   label,
-  type = "text",
+  type = "",
   id,
   name,
   value,
@@ -11,12 +11,12 @@ export default function FormInput({
   required,
   error,
   className = "",
-  leftIcon,         // JSX element (e.g. <img ... />)
-  rightIcon,        // Optional JSX element (like show/hide password toggle)
-  inputClassName = "", // Optional override for input styles
+  leftIcon,         
+  rightIcon,        
+  inputClassName = "",
 }) {
   return (
-    <div className={`mb-4 ${className}`}>
+    <div className={`mb-4t ${className}`}>
       {label && (
         <label htmlFor={id} className="block text-gray-700 text-sm font-medium mb-2">
           {label}
@@ -36,9 +36,9 @@ export default function FormInput({
           onChange={onChange}
           required={required}
           placeholder={placeholder}
-          className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ${
+          className={`w-full px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ${
             leftIcon ? "pl-10" : ""
-          } ${rightIcon ? "pr-10" : ""} ${inputClassName}`}
+          } ${rightIcon ? "pr-10" : ""} placeholder-gray-600 ${inputClassName}`}
         />
         {rightIcon && (
           <span className="absolute inset-y-0 right-0 flex items-center pr-3">

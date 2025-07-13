@@ -143,12 +143,12 @@ import arrowDown from "../../assets/icons/arrow-down-01.svg"
                 leftIcon={iconCity}
                 rightIcon={arrowDown}
                 options={["Enugu", "Ebonyi", "Imo", "Calabar"]}
-                isRounded
+                // isRounded
                 placeholder="Select a city"
                 selectClassName="indent-4"
               />
               
-             <Link to={'driver-signup'}>
+             <Link to={'/driver-signup'}>
               <CustomButton
                 type="submit"
                 name="Log in"

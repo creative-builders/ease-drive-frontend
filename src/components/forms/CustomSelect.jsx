@@ -42,7 +42,7 @@ export default function CustomSelect({
           onChange={onChange}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          className={`w-full border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-500 appearance-none text-sm bg-white ${baseStyles} ${selectClassName}`} // <- Add it here
+          className={`w-full border border-gray-400 focus:outline-none focus:ring-1 focus:ring-green-500 appearance-none text-sm bg-white ${baseStyles} ${selectClassName}`} // <- Add it here
         >
           <option value="">{placeholder}</option>
           {options.map((opt, index) => (

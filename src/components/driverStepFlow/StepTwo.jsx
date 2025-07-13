@@ -118,20 +118,51 @@
 // export default StepTwo;
 
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import carImage from '../../assets/images/Car.svg';
 import sideImage from '../../assets/images/image.svg'
 import SectionLabel from '../SectionLabel';
+import BackArrow from '../BackArrow';
+import CustomSelect from '../forms/CustomSelect';
+import arrowDown from "../../assets/icons/arrow-down-01.svg"
+import iconCity from "../../assets/icons/city-02.svg"
+import iconCar from "../../assets/icons/car-01.svg"
+import FormInput from '../forms/FormInput';
+import driverLise from "../../assets/icons/driver-lisence.svg"
+import driverSeat from "../../assets/icons/airplane-seat.svg"
+import driverColor from "../../assets/icons/colors.svg"
+import downloadIcon from "../../assets/icons/upload-icon.svg"
 
-export default function StepTwo() {
+
+export default function StepTwo({ nextStep, prevStep, step, totalSteps }) {
   const [plateNumber, setPlateNumber] = useState('EUG20456');
   const [vehicleColor, setVehicleColor] = useState('Black');
-  const [seatColor, setSeatColor] = useState('Black');
+  const [seatNumber, setSeatNumber] = useState('');
+  const [VehicleType, setVehicleType] = useState('');
+  const [location, setLocation] = useState('');
+
+   const fileInputRef = useRef();
+    const [previewImages, setPreviewImages] = useState([]);
+  
+    const handleClick = () => {
+      fileInputRef.current.click();
+    };
+  
+    const handleFileChange = (e) => {
+      const files = Array.from(e.target.files);
+  
+      const validImages = files.filter((file) =>
+        file.type === "image/jpeg" || file.type === "image/png"
+      );
+  
+      const previews = validImages.map((file) => URL.createObjectURL(file));
+      setPreviewImages(previews);
+    };
 
   return (
     <div className="min-h-screen w-full flex flex-col md:flex-row bg-white">
       {/* Left Form Section */}
-      <div className="w-full md:w-1/2 p-6 md:p-10">
+      <div className="w-full md:w-1/2 p-6 md:p-10 relative">
         {/* Header */}
         <div className="flex items-center space-x-2 mb-6">
           <img src={carImage} alt="Ease Drive" className="h-8 w-8 md:h-10 md:w-10" />
@@ -141,81 +172,81 @@ export default function StepTwo() {
         {/* Title & Description */}
         <div className="mb-4">
           <article className="text-xl md:text-2xl font-semibold font-[inter]">
-            <span>Vehicle Information </span>
+            <span className='font-[inter] font-bold text-3xl align-middle'>Vehicle Information </span>
             <div className="text-center mb-[29px]">
               <SectionLabel title={`${step} Step of ${totalSteps}`} />
             </div>
           </article>
-          <p className="text-sm text-gray-600 mt-1 font-[inter]">Ensure your vehicle image is clean, recent, and shows the number plate.</p>
+          <p className="font-[inter] font-bold text-base align-middle">Ensure your vehicle image is clean, recent, and shows the number plate.</p>
         </div>
 
+          <BackArrow
+            extendedStyles="top-36 left-8 absolute"
+            onClick={() => prevStep()}
+          />
+
         {/* Form Fields */}
+
         <div className="space-y-4">
           {/* Vehicle Type */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Vehicle Type</label>
-            <div className="relative">
-              <select className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2 focus:ring-green-500 focus:outline-none">
-                <option>Keke</option>
-                <option>Bus</option>
-                <option>Car</option>
-              </select>
-              {/* <Icon icon="ic:baseline-directions-car" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" /> */}
-            </div>
-          </div>
+          <CustomSelect
+            label="Vehicle Type"
+            value={VehicleType}
+            onChange={(e) => setVehicleType(e.target.value)}
+            leftIcon={iconCar}
+            rightIcon={arrowDown}
+            options={["Keke", "Bus", "Car"]}
+            placeholder="Car"
+          />
 
           {/* Plate Number */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Plate Number</label>
-            <div className="relative">
-              <input
-                type="text"
-                value={plateNumber}
-                onChange={(e) => setPlateNumber(e.target.value)}
-                className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2 focus:ring-green-500 focus:outline-none"
-              />
-              {/* <Icon icon="mdi:car-brake-parking" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" /> */}
-            </div>
-          </div>
+          <FormInput
+            label="Plate Number"
+            id="PlateNumber"
+            type='text'
+            value={plateNumber}
+            onChange={(e) => setPlateNumber(e.target.value)}
+            placeholder="Enter document Id number"
+            required
+            leftIcon={<img src={driverLise} className="h-5 w-5" alt="" />}
+          />
 
           {/* Service Area */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Service Area (Location)</label>
-            <div className="relative">
-              <select className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2 focus:ring-green-500 focus:outline-none">
-                <option>Main-Gate</option>
-                <option>Back-Gate</option>
-              </select>
-              {/* <Icon icon="mdi:map-marker" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" /> */}
-            </div>
-          </div>
+          <CustomSelect
+            label="Service Area (Location)"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            leftIcon={iconCity}
+            rightIcon={arrowDown}
+            options={["Main-Gate", "Back-Gate"]}
+            // isRounded
+            placeholder="UNN"
+            selectClassName=""
+          />
 
           {/* Vehicle Colour */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Vehicle Colour</label>
-              <div className="relative">
-                <input
-                  type="text"
-                  value={vehicleColor}
-                  onChange={(e) => setVehicleColor(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2 focus:ring-green-500 focus:outline-none"
-                />
-                {/* <Icon icon="mdi:palette" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" /> */}
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Number of Seats</label>
-              <div className="relative">
-                <input
-                  type="text"
-                  value={seatColor}
-                  onChange={(e) => setSeatColor(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2 focus:ring-green-500 focus:outline-none"
-                />
-                {/* <Icon icon="mdi:seat" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" /> */}
-              </div>
-            </div>
+            <FormInput
+              label="Vehicle Colour"
+              id="VehicleColour"
+              type='text'
+              value={vehicleColor}
+              onChange={(e) => setVehicleColor(e.target.value)}
+              placeholder="black"
+              required
+              leftIcon={<img src={driverColor} className="h-5 w-5" alt="" />}
+            />
+            
+            <FormInput
+              label="Vehicle Colour"
+              id="VehicleColour"
+              type='text'
+              value={seatNumber}
+              onChange={(e) => setSeatNumber(e.target.value)}
+              placeholder="black"
+              required
+              leftIcon={<img src={driverSeat} className="h-5 w-5" alt="" />}
+            />
           </div>
 
           {/* Upload Photo */}
@@ -223,18 +254,45 @@ export default function StepTwo() {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Upload Vehicle Photo (front, Back and side)
             </label>
-            <p className="text-xs text-gray-500 mb-2">
+            <p className="text-xs text-gray-600 mb-2">
               You can upload up to 4 images (JPG, PNG). Maximum file size: 2MB per image
             </p>
-            <div className="border border-gray-300 rounded-md p-4 flex flex-col items-center justify-center text-center">
-              {/* <Icon icon="ic:round-add" className="text-gray-400 text-3xl mb-2" /> */}
-              <button className="text-sm text-white bg-green-600 hover:bg-green-700 px-4 py-2 rounded">Upload photos</button>
+            {/* Hidden file input */}
+            <input
+              type="file"
+              multiple
+              accept=".jpg,.jpeg,.png"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              className="hidden"
+            />
+            <div onClick={handleClick} className="border border-gray-300 rounded-md p-4 flex flex-col items-center justify-center text-center">
+              {previewImages.length === 0 ? (
+                <>
+                  <img src={downloadIcon} className="h-16 w-20" alt="Upload Icon" />
+                  <p className="text-xs mt-2 text-gray-500">Click to upload</p>
+                </>
+              ) : (
+              <div className="grid grid-cols-2 gap-2 w-full">
+                {previewImages.map((src, index) => (
+                  <img
+                    key={index}
+                    src={src}
+                    alt={`preview-${index}`}
+                    className="w-full h-full object-cover rounded-md border-2"
+                  />
+                ))}
+              </div>
+              )}
             </div>
           </div>
         </div>
 
         {/* Continue Button */}
-        <button className="mt-6 w-full bg-green-700 hover:bg-green-800 text-white font-semibold p-4 rounded-lg">
+        <button 
+        className="mt-6 w-full bg-green-700 hover:bg-green-800 text-white font-semibold p-4 rounded-lg"
+        onClick={() => nextStep()}
+        >
           Continue
         </button>
       </div>
@@ -242,7 +300,7 @@ export default function StepTwo() {
       {/* Right Image Section */}
       <div className="w-full md:w-1/2 hidden md:flex items-center justify-center p-4">
         <img
-          src={sideImage}  // replace with actual image path
+          src={sideImage}
           alt="Driver in vehicle"
           className="rounded-xl w-full max-w-[90%] object-cover"
         />
