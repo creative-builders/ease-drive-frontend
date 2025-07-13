@@ -19,7 +19,21 @@ export default {
          100:"#DCFFDC",
          200:"#D4F9DB",
          300:"#20AE3A",
-        }
+        },
+        light: "#FDFDFD",
+        headHighlight: "#127C71", 
+        primary:{
+          50:"#F1FCF2",
+          100: "#DEFAE2",
+          600: "#20AE3A",
+          700: "#1A7B2C",
+        },
+        pink:{
+          50:"#FFCC0014"
+        },
+        cardBg: "#F3F7FF",
+        cardOverlay: "#E7E7E726",
+        white: "#FFFFFF",
       },
       height:{
         106: "450px",
