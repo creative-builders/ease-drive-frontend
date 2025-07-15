@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
- import sideImage from '../../assets/images/image.svg'
- import carImage from '../../assets/images/car.svg'
- import CustomButton from '../CustomButton'
- import GoogleAuthV3 from "../GoogleAuthV3";
-  import { Link, useNavigate } from "react-router-dom";
-  import { FiEye, FiEyeOff } from "react-icons/fi";
-  import passlock from "../../assets/icons/lock-password (1).svg"
-  import profilelock from "../../assets/icons/user-03 (1).svg"
-  import { userAtom } from "../atoms/userAtom";
- import { useSetRecoilState } from "recoil";
-  import { useMutation } from "@tanstack/react-query";
- import LoadingSpinner from "../LoadingSpinner";
- import toast from "react-hot-toast";
- import { loginAuth } from "../../store/auth/general/api";
- import iconEmail from "../../assets/icons/mail-at-sign-01.svg"
- import iconPhone from "../../assets/icons/call-02.svg"
+import sideImage from '../../assets/images/sideImage.png';
+import carImage from '../../assets/images/car.svg'
+import CustomButton from '../CustomButton'
+import GoogleAuthV3 from "../GoogleAuthV3";
+import { Link, useNavigate } from "react-router-dom";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import passlock from "../../assets/icons/lock-password (1).svg"
+import profilelock from "../../assets/icons/user-03 (1).svg"
+import { userAtom } from "../atoms/userAtom";
+import { useSetRecoilState } from "recoil";
+import { useMutation } from "@tanstack/react-query";
+import LoadingSpinner from "../LoadingSpinner";
+import toast from "react-hot-toast";
+import { loginAuth } from "../../store/auth/general/api";
+import iconEmail from "../../assets/icons/mail-at-sign-01.svg"
+import iconPhone from "../../assets/icons/call-02.svg"
 import { FiChevronDown } from "react-icons/fi";
- import iconCity from "../../assets/icons/city-02.svg"
+import iconCity from "../../assets/icons/city-02.svg"
 import FormInput from '../forms/FormInput';
 import CustomSelect from '../forms/CustomSelect';
 import arrowDown from "../../assets/icons/arrow-down-01.svg"
@@ -71,18 +71,20 @@ import arrowDown from "../../assets/icons/arrow-down-01.svg"
          const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   
    return (
-     <div className="min-h-screen bg-gray-500">
+     <div className="min-h-screen bg-[rgba(255, 255, 255, 1)]">
        <div className="w-full flex mx-auto xl:w-10/12 px-2 py-4">
          {/* Left Section - Login Form */}
          <div className="w-full md:w-1/2 flex flex-col justify-center p-6 lg:p-8">
-           <div className="flex items-center mb-6">
-             <img src={carImage} alt="Car Icon" className="h-8 w-8 mr-2" />
-             <h1 className="text-3xl font-bold text-black">Ease Drive</h1>
-           </div>
+           <div className="flex flex-row gap-0 md:gap-3 items-center">
+              <span className="h-12 md:h-14 w-12 md:w-16 flex items-center justify-center ">
+                <img src={carImage} className='w-[33px] md:w-[65px] h-[30px] md:h-[59px]' alt="Ease Drive Logo" />
+              </span>
+              <h1 className="font-[inter] font-extrabold text-[18px] md:text-4xl italic leading-[100%] tracking-normal">Ease Drive</h1>
+            </div>
  
            <div className='flex flex-col items-left justify-center mb-6'>
-              <h2 className="font-[inter] text-2xl font-bold text-gray-800">Create an account</h2>
-              <p className='font-[inter] font-medium text-base not-italic '>Please enter your details to get started</p>
+              <h2 className="font-[inter] text-[18px] md:text-[26px] leading-[36px] tracking-normal align-middle font-bold text-gray-800">Create an account</h2>
+              <p className='font-[inter] font-medium text-[12px] md:text-[18px] leading-[140%] tracking-normal align-middle'>Please enter your details to get started</p>
            </div>
  
            <form onSubmit={handleSubmit} className=''>
@@ -94,7 +96,8 @@ import arrowDown from "../../assets/icons/arrow-down-01.svg"
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Enter your full name"
                 required
-                leftIcon={<img src={profilelock} className="h-5 w-5" alt="" />}
+                inputClassName = "indent-4 flex items-center justify-center"
+                leftIcon={<img src={profilelock} className="h-[18px] md:h-8 w-[18px] md:w-8" alt="" />}
               />
 
              <FormInput
@@ -104,7 +107,8 @@ import arrowDown from "../../assets/icons/arrow-down-01.svg"
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your full email"
                 required
-                leftIcon={<img src={iconEmail} className="h-5 w-5" alt="" />}
+                inputClassName = "indent-4 flex items-center justify-center"
+                leftIcon={<img src={iconEmail} className="h-[18px] md:h-8 w-[18px] md:w-8" alt="" />}
               />
 
               <FormInput
@@ -115,7 +119,8 @@ import arrowDown from "../../assets/icons/arrow-down-01.svg"
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
                 required
-                leftIcon={<img src={passlock} className="h-5 w-5" alt="" />}
+                inputClassName = "indent-4 flex items-center justify-center"
+                leftIcon={<img src={passlock} className="h-[18px] md:h-8 w-[18px] md:w-8" alt="" />}
                 rightIcon={
                   <span
                     className="cursor-pointer"
@@ -133,14 +138,15 @@ import arrowDown from "../../assets/icons/arrow-down-01.svg"
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="Enter your phone number"
                 required
-                leftIcon={<img src={iconPhone} className="h-5 w-5" alt="" />}
+                inputClassName = "indent-4 flex items-center justify-center"
+                leftIcon={<img src={iconPhone} className="h-[18px] md:h-8 w-[18px] md:w-8" alt="" />}
               />
 
               <CustomSelect
                 label="City"
                 value={City}
                 onChange={(e) => setCity(e.target.value)}
-                leftIcon={iconCity}
+                leftIcon={<img src={iconCity} className="h-[18px] md:h-8 w-[18px] md:w-8" alt="" />}
                 rightIcon={arrowDown}
                 options={["Enugu", "Ebonyi", "Imo", "Calabar"]}
                 // isRounded
@@ -167,9 +173,9 @@ import arrowDown from "../../assets/icons/arrow-down-01.svg"
            </form>
  
            <div className="flex justify-between text-sm mt-2">
-             <p className="text-gray-700">
+             <p className="font-[inter] font-medium text-[14px] leading-[150%] tracking-normal align-middle">
                Already have an account?{' '}
-               <Link to={''} className='text-green-600 hover:underline font-medium'>
+               <Link to={'/driver-password'} className='text-green-600 hover:underlinefont-[inter] font-medium text-[14px] leading-[150%] tracking-normal align-middle'>
                   Login
                </Link>
                
@@ -189,13 +195,13 @@ import arrowDown from "../../assets/icons/arrow-down-01.svg"
          </div>
  
          {/* Right Section - Image */}
-         <div className="hidden md:block md:w-1/2">
-           <img
-             src={sideImage} 
-             alt="Public Transport"
-             className="w-full min-h-max object-contain mt-14 rounded-xl"
-           />
-         </div>
+          <div className="h-[881px] w-[528px] ml-12 mt-2 hidden md:flex">
+            <img
+              src={sideImage}
+              alt="Public Transport"
+              className="rounded-[45px] w-full object-cover"
+            />
+          </div>
        </div>
      </div>
    );

@@ -36,6 +36,8 @@ import ViewBookings from '../components/Bookings/ViewBookings';
 import DriverBoard from '../components/driverDashboardFolders/DriverBoard';
 import DataStatus from '../components/driverDashboardFolders/DataStatus';
 import DriverCreate from '../components/driverStepFlow/DriverCreate';
+import DriverLogin from '../pages/auth/driver-login';
+import DriverForgetPass from '../components/driverStepFlow/DriverForgetPass';
 // import Header from '../layout/dashboard/header/Header';
 
 
@@ -54,7 +56,9 @@ const IndexRoute = () => {
       <Route path="/passengers-signup" element={<PassengersSignup />} />
       <Route path="/driver-signup" element={<DriverSignup />} />
       <Route path="/driver-create" element={<DriverCreate />} />
-      <Route path="/Dri-verify" element={<DriVerify />} />
+      <Route path="/driver-password" element={<DriverForgetPass />} />
+      <Route path="/driver-login" element={<DriverLogin />} />
+      <Route path="/driver-verify" element={<DriVerify />} />
       <Route path="/Driv-upload" element={<DrivUpload />} />
       <Route path="/Driv-place" element={<DrivPlace />} />
       <Route path="/Forgot-password" element={<ForgotPassword />} />
