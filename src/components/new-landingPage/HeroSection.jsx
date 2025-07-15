@@ -16,9 +16,11 @@ export const HeroSection = () => {
 
     if (!heroSection || !leftContent || !rightImage) return;
 
+    // Entrance animation handler
     const handleIntersection = (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
+          // Entrance animations
           leftContent.style.transform = 'translateY(0)';
           leftContent.style.opacity = '1';
           rightImage.style.transform = 'translateY(0)';
@@ -27,24 +29,28 @@ export const HeroSection = () => {
       });
     };
 
+    // Scroll parallax handler
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const heroHeight = heroSection.offsetHeight;
       const scrollPercent = Math.min(scrollPosition / heroHeight, 1);
-
+      
       leftContent.style.transform = `translateY(${scrollPercent * 20}px)`;
       rightImage.style.transform = `translateY(${scrollPercent * 40}px)`;
     };
 
+    // Set initial states for entrance animation
     leftContent.style.transform = 'translateY(30px)';
     leftContent.style.opacity = '0';
     leftContent.style.transition = 'transform 0.6s ease-out, opacity 0.6s ease-out';
-
+    
     rightImage.style.transform = 'translateY(60px)';
     rightImage.style.opacity = '0';
     rightImage.style.transition = 'transform 0.8s ease-out, opacity 0.8s ease-out';
 
-    const observer = new IntersectionObserver(handleIntersection, { threshold: 0.1 });
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.1
+    });
     observer.observe(heroSection);
 
     window.addEventListener('scroll', handleScroll);
@@ -58,14 +64,15 @@ export const HeroSection = () => {
     <Container>
       <section 
         ref={heroSectionRef}
-        className="hero-section mx-auto max-w-[1133px] min-h-[502px] py-10 px-4 md:px-6 overflow-hidden"
+        className="hero-section mx-auto max-w-[1133px] min-h-[502px] py-10 px-0 sm:px-4 overflow-hidden"
       >
-        <div className="flex flex-col  items-start gap-6 md:gap-8 lg:gap-[77px]">
+        <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-[77px]">
           {/* Left Side Content */}
           <div 
             ref={leftContentRef}
-            className="hero-left-content w-full md:basis-3/5 md:flex-shrink-0 p-4 rounded-lg"
+            className="hero-left-content flex-1 w-full p-4 rounded-lg"
           >
+            {/* Tagline - with individual animation */}
             <div className="mb-2 animate-fade-in" style={{ animationDelay: '0.2s' }}>
               <CustomButton
                 width="180px"
@@ -83,15 +90,16 @@ export const HeroSection = () => {
               </CustomButton>
             </div>
 
+            {/* Heading */}
             <div className="w-full max-w-[1000px] pt-2 space-y-2">
-              <h1 className="font-inter font-extrabold text-3xl sm:text-5xl md:text-6xl leading-[100%] animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <h1 className="font-inter font-extrabold text-3xl sm:text-6xl leading-[100%] animate-fade-in" style={{ animationDelay: '0.3s' }}>
                 Easy Rides
               </h1>
               <div className="flex items-start gap-3 sm:gap-6 pt-1 sm:pt-2 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                <h2 className="font-inter font-semibold text-3xl sm:text-5xl md:text-6xl leading-[100%] mt-1 sm:mt-2">
+                <h2 className="font-inter font-semibold text-3xl sm:text-6xl leading-[100%] mt-1 sm:mt-2">
                   with
                 </h2>
-                <h2 className="font-inter font-semibold text-3xl sm:text-5xl md:text-6xl leading-[100%] mt-1 sm:mt-2">
+                <h2 className="font-inter font-semibold text-3xl sm:text-6xl leading-[100%] mt-1 sm:mt-2">
                   <LogoWave
                     text="EaseDrive"
                     className="inherit-text"
@@ -100,28 +108,30 @@ export const HeroSection = () => {
                     svgWidthsm="sm:w-[290px]"
                     svgHeight="h-[33px]"
                     svgGapsm="sm:-mt-1.5"
-                    svgGap="-mt-1.5"
+                    svgGap="-mt-15"
                   />
                 </h2>
               </div>
             </div>
 
+            {/* Description */}
             <div className="w-full max-w-[1000px] pt-2 sm:pt-4 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-              <p className="text-[#333333] font-inter font-normal text-xs sm:text-base md:text-lg leading-[120%]">
+              <p className="text-[#333333] font-inter font-normal text-xs sm:text-lg leading-[120%]">
                 Get picked up in minutes by a top-rated driver and <br />
                 enjoy a smooth, stress-free ride to your destination.
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:items-start gap-3 pt-4 md:pt-6 w-full max-w-[1000px] min-h-[121px] animate-fade-in" style={{ animationDelay: '0.6s' }}>
-              <div className="flex flex-col w-[25px] md:w-[30px] h-[90px] md:h-[125px]">
+            {/* Search Inputs */}
+            <div className="flex items-start gap-2 pt-4 -ml-2 w-full max-w-[1000px] h-[109px] sm:h-[121px] animate-fade-in" style={{ animationDelay: '0.6s' }}>
+              <div className="flex flex-col w-[25px] h-[90px] sm:w-[30px] sm:h-[125px]">
                 <img
                   src="/s-line.svg"
                   alt="decorative line"
                   className="h-full object-contain"
                 />
               </div>
-              <div className="flex flex-col gap-2 w-full md:w-[480px]">
+              <div className="flex flex-col gap-2 w-[320px] sm:w-[458px]">
                 <input
                   type="text"
                   placeholder="My Current Location"
@@ -138,7 +148,10 @@ export const HeroSection = () => {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-6 md:pt-10 w-full max-w-[1000px] animate-fade-in" style={{ animationDelay: '0.7s' }}>
+            {/* Action Buttons */}
+            <div className="flex gap-2 pt-6 sm:pt-12 w-full max-w-[1000px] animate-fade-in" style={{ animationDelay: '0.7s' }}>
+             
+             
               <CustomButton
                 width="167px"
                 height="50px"
@@ -176,7 +189,7 @@ export const HeroSection = () => {
           {/* Right Side Image */}
           <div 
             ref={rightImageRef}
-            className="hero-right-image w-full md:basis-2/5 md:flex-shrink-0 md:h-[420px] lg:h-[496px] h-full opacity-100 m-auto px-4"
+            className="hero-right-image w-full sm:w-[507px] sm:h-[496px] h-full opacity-100 lg:opacity-100 m-auto px-4"
           >
             <img
               src="/mobile-1.png"
@@ -187,6 +200,7 @@ export const HeroSection = () => {
         </div>
       </section>
 
+      {/* Add this to your global CSS */}
       <style jsx>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }

@@ -85,7 +85,7 @@ export const HowItWorksSection = () => {
                     {/* Cards Section with parallax */}
                     <motion.div
                         style={{ y: yCards, scale: scaleCards }}
-                        className="flex flex-row flex-wrap md:h-full md:px-40 md:flex md:flex-row md:justify-center  md:flex-wrap justify-center items-center gap-[18px] sm:mt-4 -mt-6 sm:pt-2
+                        className="flex flex-row flex-wrap  justify-center items-center gap-[18px] sm:mt-4 -mt-6 sm:pt-2
                       w-full sm:w-[1173px] h-[796px] sm:h-[1106px] opacity-100 rotate-0 bg-light"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}

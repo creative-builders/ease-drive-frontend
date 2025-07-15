@@ -42,12 +42,12 @@ export const KeyFeaturesSection = () => {
     <Container>
       <section 
         ref={sectionRef}
-        className="mx-auto max-w-7xl md:flex-col md:max-w-full py-10 px-4 sm:px-0 pt-20"
+        className="mx-auto max-w-7xl md:max-w-full py-10 px-4 sm:px-0 pt-20"
       >
         <motion.div 
           style={{ opacity }}
           className="flex flex-col lg:flex-row md:flex-col items-start gap-10 lg:gap-20 bg-white 
-                    rounded-[20px] sm:rounded-[25px] sm:w-[1132px] w-full md:w-[100%] md:h-full
+                    rounded-[20px] sm:rounded-[25px] sm:w-[1132px] w-full 
                     sm:h-[762px] h-[1152px] sm:p-[40px] p-4 mx-auto md:m-auto md:items-center"
         >
           {/* Left Feature Cards with parallax */}
@@ -83,7 +83,7 @@ export const KeyFeaturesSection = () => {
           {/* Right Content with parallax */}
           <motion.div 
             style={{ y: yRight }}
-            className="w-full lg:w-1/ md:items-center flex flex-col gap-6 pt-4 text-right"
+            className="w-full lg:w-1/2 flex flex-col gap-6 pt-4 text-right"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -109,7 +109,7 @@ export const KeyFeaturesSection = () => {
                   svgWidthsm="sm:w-[290px]"
                   svgHeight="h-[33px]"
                   svgGap="mt-[-2px]"
-                  svgGapsm="-mt-2"
+                  svgGapsm="sm:mt-1"
                 />
               </motion.h2>
 
