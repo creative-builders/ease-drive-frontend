@@ -3,10 +3,11 @@ export default function Container({ children }) {
   return (
     <div
       className="
-        max-w-[1440px] 
+       
         w-full 
-        
+        md:w-full
         mx-auto 
+        m-auto
         sm:px-6      // ≥ 640px
         md:px-10     // ≥ 768px
         lg:px-16     // ≥ 1024px

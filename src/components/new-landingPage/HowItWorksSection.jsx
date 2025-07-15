@@ -55,7 +55,7 @@ export const HowItWorksSection = () => {
         <Container>
             <section
                 ref={sectionRef}
-                className="mx-auto max-w-[1133px] min-h-[502px] py-1 pt-20 px-0 sm:px-0 "
+                className="mx-auto max-w-[1133px] min-h-[502px] py-1 pt-10 px-0 sm:px-0 "
             >
                 <div className="flex flex-col items-center lg:flex-col sm:gap-10 lg:gap-[0px]">
 
@@ -75,8 +75,9 @@ export const HowItWorksSection = () => {
                                 svgWidth="w-[150px]"
                                 svgWidthsm="sm:w-[290px]"
                                 svgHeight="h-[33px]"
-                                svgGap="mt-4"
-                                svgGapsm="-mt-2"
+                                svgGap="-mt-1"
+                                svgGapsm="sm:mt-4"
+                              
                             />
                         </h2>
                     </motion.div>
@@ -84,7 +85,7 @@ export const HowItWorksSection = () => {
                     {/* Cards Section with parallax */}
                     <motion.div
                         style={{ y: yCards, scale: scaleCards }}
-                        className="flex flex-row flex-wrap justify-center items-center gap-[18px] pt-2
+                        className="flex flex-row flex-wrap md:h-full md:px-40 md:flex md:flex-row md:justify-center  md:flex-wrap justify-center items-center gap-[18px] sm:mt-4 -mt-6 sm:pt-2
                       w-full sm:w-[1173px] h-[796px] sm:h-[1106px] opacity-100 rotate-0 bg-light"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}

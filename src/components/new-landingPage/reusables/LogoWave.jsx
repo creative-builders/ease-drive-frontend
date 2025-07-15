@@ -6,18 +6,20 @@ export default function LogoWave({
   svgWidthsm = '',
   svgWidth = '',
   svgHeight = '',
+  svgGap,
+  svgGapsm
   
 }) {
   return (
     <span className={`inline-flex flex-col items-start relative ${className}`}>
       
       {/* Label text */}
-      <span className={`font-inherit text-inherit leading-inherit ${tStyle}`}>
+      <span className={`font-inter  leading-inherit ${tStyle} `}>
         {text}
       </span>
 
       {/* SVG underline */}
-      <span className="svgline">
+      <span className={`${svgGap} ${svgGapsm}` }>
         <svg
           className={`${svgWidth} ${svgWidthsm} ${svgHeight}`}
           viewBox="0 0 293 33"
