@@ -48,12 +48,12 @@ export const KeyFeaturesSection = () => {
           style={{ opacity }}
           className="flex flex-col lg:flex-row md:flex-col items-start gap-10 lg:gap-20 bg-white 
                     rounded-[20px] sm:rounded-[25px] sm:w-[1132px] w-full 
-                    sm:h-[762px] h-[1152px] sm:p-[40px] p-4 mx-auto md:m-auto md:items-center"
+                    sm:h-[762px] h-[1152px] sm:p-[40px] p-4 mx-auto  md:items-center md:w-[100%] md:h-full"
         >
           {/* Left Feature Cards with parallax */}
           <motion.div 
             style={{ y: yLeft }}
-            className="w-full md:w-[100%] md:items-center lg:w-1/2 flex flex-col gap-12 rounded-3xl p-0 sm:p-6"
+            className="w-full  md:items-center lg:w-1/2 flex flex-col gap-12 rounded-3xl p-0 sm:p-6"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}

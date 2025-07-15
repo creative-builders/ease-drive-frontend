@@ -62,7 +62,7 @@ export const HowItWorksSection = () => {
                     {/* Section Heading with parallax */}
                     <motion.div
                         style={{ y: yHeading }}
-                        className="heading-text flex w-full justify-center"
+                        className="heading-text flex w-full justify-center "
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -86,7 +86,7 @@ export const HowItWorksSection = () => {
                     <motion.div
                         style={{ y: yCards, scale: scaleCards }}
                         className="flex flex-row flex-wrap  justify-center items-center gap-[18px] sm:mt-4 -mt-6 sm:pt-2
-                      w-full sm:w-[1173px] h-[796px] sm:h-[1106px] opacity-100 rotate-0 bg-light"
+                      w-full sm:w-[1173px] h-[796px] sm:h-[1106px] opacity-100 rotate-0 bg-light h-full lg:px-0 lg:items-center md:h-full md:px-40 md:items-center "
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
