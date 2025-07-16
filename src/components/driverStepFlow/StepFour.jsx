@@ -9,6 +9,7 @@ import BackArrow from '../BackArrow';
 import SectionLabel from '../SectionLabel';
 import fly from '../../assets/images/you-are-set-img.png'
 import cancel from '../../assets/icons/cancel.svg'
+import CustomButton from '../CustomButton'
 
 
 export default function StepFour({ prevStep, step, totalSteps}) {
@@ -93,28 +94,29 @@ export default function StepFour({ prevStep, step, totalSteps}) {
 
             {/* Upload text */}
             <button
-                type="button"
-                onClick={handleClick}
-                className="mt-3 text-sm font-medium text-indigo-600 hover:underline"
+              type="button"
+              onClick={handleClick}
+              className="mt-3 text-sm font-medium text-indigo-600 hover:underline"
             >
-                Upload Profile Photo
+              Upload Profile Photo
             </button>
         </div>
 
         {/* Buttons */}
         <div className="flex flex-col gap-3">
-          <button 
+          <CustomButton 
             onClick={handleOpenModal}
-            className="w-full py-3 bg-green-100 text-green-600 rounded-lg font-semibold"
+            extendedStyles="w-full py-3 bg-green-50 text-green-600 rounded-lg font-semibold"
           >
             Skip
-          </button>
-          <button 
+          </CustomButton>
+
+          <CustomButton 
            onClick={handleOpenModal}
             className="w-full py-3 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold"
           >
             Submit
-          </button>
+          </CustomButton>
         </div>
       </div>
 
@@ -151,12 +153,13 @@ export default function StepFour({ prevStep, step, totalSteps}) {
             </p>
 
             {/* Continue Button */}
-            <button
-              className="w-full py-3 bg-green-700 hover:bg-green-800 text-white rounded-2xl font-semibold"
-              onClick={handleContinue}
+           
+            <CustomButton
+             onClick={handleContinue}
+             className="w-full py-3 bg-green-700 hover:bg-green-800 text-white rounded-2xl font-semibold"
             >
               Continue
-            </button>
+            </CustomButton>
           </div>
         </div>
       )}

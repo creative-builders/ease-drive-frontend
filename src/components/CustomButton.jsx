@@ -34,7 +34,7 @@ const CustomButton = ({
   return (
     <button 
       onClick={handleClick}
-     className={`${sizeClasses} ${className} ${extendedStyles} flex items-center justify-center bg-green-300 text-gray-100 font-bold `}>
+     className={`${sizeClasses} ${className} flex items-center justify-center bg-green-300 text-gray-100 font-bold ${extendedStyles}`}>
      {/* {isLoading ? <LoadingSpinner className="animate-spin" /> : name} */}
      {isLoading ? (
         <LoadingSpinner className="animate-spin" />

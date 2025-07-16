@@ -66,7 +66,7 @@ import FormInput from '../../../components/forms/FormInput';
            <form onSubmit={handleSubmit} className=''>
 
              <FormInput
-                label="Your Email"
+                label="Enter email/Phone Number"
                 id="email"
                 value={Email}
                 onChange={(e) => setEmail(e.target.value)}

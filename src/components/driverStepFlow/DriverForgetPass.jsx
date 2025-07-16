@@ -75,12 +75,13 @@ import eamilIcon from '../../assets/icons/check-email-icon.svg'
                             </span>
                         </CustomButton>
                     </Link> */}
-                    <button 
+                    
+                    <CustomButton
                         onClick={handleOpenModal}
                         className="w-full py-3 bg-green-600 text-white mt-4 rounded-lg font-semibold"
                     >
                         Send
-                    </button>
+                    </CustomButton>
                 </form>
     
                 <div className="flex justify-between text-sm mt-2">
