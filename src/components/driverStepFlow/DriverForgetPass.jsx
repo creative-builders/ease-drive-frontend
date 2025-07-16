@@ -44,7 +44,7 @@ import eamilIcon from '../../assets/icons/check-email-icon.svg'
     
                 <div className='flex flex-col items-left justify-center mb-6'>
                     <h2 className="font-[inter] text-[18px] md:text-[26px] leading-[36px] tracking-normal align-middle font-bold">Forgot Password</h2>
-                    <p className='font-[inter] font-medium text-[12px] md:text-[18px] leading-[100%] tracking-normal align-middle'>Enter your email and we'll send you otp to change your password</p>
+                    <p className='font-[inter] font-medium text-[12px] md:text-[18px] leading-[100%] tracking-normal align-middle'>Enter your email and we'll send you verification code to reset your password</p>
                 </div>
     
                 <form onSubmit={handleSubmit} className=''>
@@ -86,7 +86,7 @@ import eamilIcon from '../../assets/icons/check-email-icon.svg'
                 <div className="flex justify-between text-sm mt-2">
                     <p className="font-[inter] font-medium text-[14px] leading-[150%] tracking-normal align-middle">
                     Already have an account?{' '}
-                    <Link to={''} className='text-green-600 hover:underlinefont-[inter] font-medium text-[14px] leading-[150%] tracking-normal align-middle'>
+                    <Link to={'/driver-login'} className='text-green-600 hover:underlinefont-[inter] font-medium text-[14px] leading-[150%] tracking-normal align-middle'>
                         Login
                     </Link>
                     </p>
@@ -108,7 +108,7 @@ import eamilIcon from '../../assets/icons/check-email-icon.svg'
         
         {showModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-            <div className="h-72 flex text-center relative flex-col items-center justify-around gap-2 p-2 w-4/5 md:max-w-md bg-white rounded-[32px]">
+            <div className="h-72 flex text-center relative flex-col items-center justify-around gap-2 px-3 py-8 w-4/5 md:max-w-md bg-white rounded-[32px]">
             {/* Cancel Icon */}
             <img
                 src={cancel}
@@ -130,9 +130,11 @@ import eamilIcon from '../../assets/icons/check-email-icon.svg'
             </p>
 
             {/* Continue Button */}
-            <span>
-                Resend in 03:59
-            </span>
+            <p className='font-[inter] font-medium text-[18px] leading-[150%] tracking-normal align-middle'>
+                <span className='font-[inter] font-medium text-[18px] leading-[150%] tracking-normal align-middle text-[#4847eb]'>
+                    Resend in 03:59
+                </span>
+            </p>
             </div>
         </div>
         )}

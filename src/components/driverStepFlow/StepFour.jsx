@@ -129,7 +129,7 @@ export default function StepFour({ prevStep, step, totalSteps}) {
 
       {showModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-          <div className="h-72 flex text-center relative flex-col items-center justify-around gap-2 p-2 w-4/5 md:max-w-md bg-white rounded-[32px]">
+          <div className="h-72 flex text-center relative flex-col items-center justify-around gap-2 px-3 py-8 w-4/5 md:max-w-md bg-white rounded-[32px]">
             {/* Cancel Icon */}
             <img
               src={cancel}
