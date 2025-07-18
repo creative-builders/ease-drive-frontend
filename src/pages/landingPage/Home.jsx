@@ -10,11 +10,11 @@ import Footer from '../../layout/footer/Footer'
     return (
         <div className="bg-[#FDFDFD] min-h-screen">
             <Header/>
-            {/* <HeroSection />
+            <HeroSection />
             <WhySection />
             <HowItWorksSection />
             <KeyFeaturesSection />
-            <FaqSection/> */}
+            <FaqSection/>
             <Footer/>
         </div>
     )

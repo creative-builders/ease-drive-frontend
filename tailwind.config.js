@@ -19,6 +19,7 @@ export default {
          100:"#DCFFDC",
          200:"#D4F9DB",
          300:"#20AE3A",
+         900:"#175023"
         },
         light: "#FDFDFD",
         headHighlight: "#127C71", 
