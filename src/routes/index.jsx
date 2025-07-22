@@ -35,6 +35,7 @@ import SetRoutes from '../components/yourRoute/SetRoutes';
 import ViewBookings from '../components/Bookings/ViewBookings';
 import DriverBoard from '../components/driverDashboardFolders/DriverBoard';
 import DataStatus from '../components/driverDashboardFolders/DataStatus';
+import Profile from '../uI/Profile';
 // import Header from '../layout/dashboard/header/Header';
 
 
@@ -65,7 +66,7 @@ const IndexRoute = () => {
       <Route path="/mainpage" element={<MainPage />} />
       <Route path="/Luggage" element={<Luggage />} />
       <Route path="/LookingFor" element={<LookingFor />} />
-      {/* <Route path="/PickRide" element={<PickRide />} /> */}
+      <Route path="/profile" element={<Profile />} />
       <Route path="/Cancelled" element={<Cancelled />} />
       <Route path="/DriverCall" element={<DriverCall />} />
       <Route path="/Password" element={<Password />} />
