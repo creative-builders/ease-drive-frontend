@@ -6,6 +6,10 @@ import { Divider } from "../../components/Divider/Divider";
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const socialMediaLinks = [
+    "https://www.facebook.com/share/1CH8YjifDU/",
+    "https://www.instagram.com/geteasedrive?utm_source=qr&igsh=MTlyNXltcTZkYzdwcg=="
+  ]
   return (
     <>
     <div>
