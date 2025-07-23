@@ -1,12 +1,16 @@
+import { Divider } from "../../components/Divider/Divider"
 import Menu from "./Menu"
 
 
 
 const NavBar = () => {
   return (
-    <div className="fixed z-40 left-0 bg-white px-4 lg:px-8 py-4 rounded-[48px] w-full" >
+     <>
+    <div className="px-4 lg:px-[98px] py-4 w-full" >
         <Menu/>
     </div>
+     <Divider/>
+     </>
   )
 }
 
