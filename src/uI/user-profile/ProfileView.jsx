@@ -7,7 +7,7 @@ import profile from '../../assets/images/profile-user.png'
 
 const ProfileView = ({ onEdit }) => {
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md h-fit gap-4 flex flex-col">
+    <div className="bg-white rounded-2xl p-6 shadow-md h-[683px] gap-4 flex flex-col">
       <div className="flex items-center justify-between">
         {/* User Info */}
         <div className="flex items-center space-x-4">
@@ -19,7 +19,7 @@ const ProfileView = ({ onEdit }) => {
 
         {/* Edit Button */}
         <button
-          className="text-blue-600 font-medium"
+          className="text-blue-600 font-[inter] font-semibold text-base leading-[100%] tracking-normal top-0 right-6 absolute md:static"
           onClick={onEdit}
         >
           Edit
