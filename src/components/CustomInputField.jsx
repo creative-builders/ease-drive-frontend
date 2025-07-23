@@ -8,7 +8,9 @@ export const CustomInputField = ({
     type = "text",
     value,
     onChange,
-    children
+    name,
+    children,
+    onFormChange
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     const isPassword = type === "password";
@@ -24,7 +26,8 @@ export const CustomInputField = ({
                     type={isPassword && showPassword ? "text" : type}
                     placeholder={placeholder}
                     value={value}
-                    onChange={onChange}
+                    name={name}
+                    onChange={onFormChange}
                     className="w-full border-none outline-none focus:outline-none focus:ring-0 
              placeholder-placeholder  lg:text-[18px] max-990:text-[12px] font-inter"
                 />

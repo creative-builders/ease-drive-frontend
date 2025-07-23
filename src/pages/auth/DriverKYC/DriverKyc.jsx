@@ -14,8 +14,12 @@ export const DriverKycPage = () => {
 
    // Corrected Initial State (Now it's an object instead of an array)
    const initialInputFields = {
-      firstName: "", lastName: "", phoneNumber: "", email: "", password: "",
-      confirmPassword: "", documentType: "", documentID: "", dob: "", documentURL: ""
+       
+      documentType: "", documentID: "", dob: "", documentURL: ""
+      , meansOfIdentification: "", bankName:"",
+       bankAccountNumber:"", bankAccountHolderName:"",
+        vehiclePhotos:[], vehicleColor:"", numberOfSeats:"", serviceArea:"", 
+        plateNumber:"", vehicleType:"", profileImage:[], documentID: "", documentPhotos:[]
    };
 
    // const [signupData, setSignupData] = useState(initialInputFields);

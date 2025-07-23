@@ -3,6 +3,8 @@ import SectionLabel from '../SectionLabel'
 import { CustomInputField } from '../CustomInputField'
 import { CustomSelectField } from "../CustomSelectField"
 import { useState, useRef } from 'react';
+import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
+
 
 import CustomButton from '../CustomButton';
 
@@ -11,10 +13,7 @@ import addfile from '../../assets/images/addFile.svg'
 import { CarIcon } from '../../assets/icons/CarIcon'
 import { AddFileIcon } from '../../assets/icons/AddFileIcon'
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
-import { ColorIcon } from '../../assets/icons/ColorIcon'
-import { SeatIcon } from '../../assets/icons/SeatIcon'
-import { LocationIcon } from '../../assets/icons/LocationIcon';
-import { LocationHomeIcon } from '../../assets/icons/LocationHomeIcon';
+
 
 
 export const StepThree = ({ nextStep, step, totalSteps }) => {
@@ -23,15 +22,31 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
    const [checked, setChecked] = useState(false);
    const [agreed, setAgreed] = useState(false);
    const [error, setError] = useState("");
+   const { formData, handleUpdateFormData } = useStepFlowContext();
+   const [errors, setErrors] = useState({});
+
 
 
 
    const handleNext = () => {
-      if (agreed) {
-         setError("");
-         nextStep();
-      } else {
-         setError("You must agree to the terms to continue.");
+      const newErrors = {};
+
+      if (!formData.bankName) {
+         newErrors.bankName = "Please select your bank";
+      }
+
+      if (!formData.bankAccountHolderName || formData.bankAccountHolderName.trim() === "") {
+         newErrors.bankAccountHolderName = "Please provide a name";
+      }
+      if (!formData.bankAccountNumber || formData.bankAccountNumber.trim() === "") {
+         newErrors.bankAccountNumber = "Please provide account number";
+      }
+
+
+      setErrors(newErrors);
+
+      if (Object.keys(newErrors).length === 0) {
+         nextStep(); // Proceed only if no validation error
       }
    };
 
@@ -79,6 +94,9 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                            // iconSrc="/city-02.svg"
                            // value={formData.city}
                            // onChange={handleCityChange}
+                           name="bankName"
+                           value={formData.bankName}
+                           onChange={handleUpdateFormData}
                            options={[
                               "Access Bank",
                               "Zenith Bank",
@@ -101,29 +119,41 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                            <CarIcon className="w-6 h-6 text-gray-500" />
 
                         </CustomSelectField>
+                        {errors.bankName && (
+                           <p className="text-red-500 text-sm -mt-2">{errors.bankName}</p>
+                        )}
 
                         <CustomInputField
                            label="Account Number"
                            // iconSrc="/call-02.svg"
                            placeholder="Enter Account Number"
+                           name="bankAccountNumber"
+                           value={formData.bankAccountNumber}
+                           onFormChange={handleUpdateFormData}
                            type="text"
-                        // value={formData.phone}
-                        // onChange={handleChange("phone")}
+
                         >
                            <PlateNumberIcon className="w-6 h-6 text-gray-500" />
                         </CustomInputField>
+                        {errors.bankAccountNumber && (
+                           <p className="text-red-500 text-sm -mt-2">{errors.bankAccountNumber}</p>
+                        )}
 
                         <CustomInputField
                            label="Account Holder’s Name"
                            // iconSrc="/call-02.svg"
                            placeholder="Enter Account Holder’s Name"
                            type="text"
-                        // value={formData.phone}
-                        // onChange={handleChange("phone")}
+                           name="bankAccountHolderName"
+                           value={formData.bankAccountHolderName}
+                           onFormChange={handleUpdateFormData}
+
                         >
                            <PlateNumberIcon className="w-6 h-6 text-gray-500" />
                         </CustomInputField>
-
+                        {errors.bankAccountHolderName && (
+                           <p className="text-red-500 text-sm -mt-2">{errors.bankAccountHolderName}</p>
+                        )}
                      </form>
 
                   </div>
@@ -167,8 +197,8 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
 
                   <CustomButton
                      name="Continue"
-                     extendedStyles={"w-full p-3 lg:p-4"}
-                     btnClick={handleNext}
+                     extendedStyles={"w-full p-3 lg:p-4 rounded-lg"}
+                     btnClick={() => handleNext()}
                   />
 
                </div>

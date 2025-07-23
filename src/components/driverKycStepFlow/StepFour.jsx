@@ -4,7 +4,7 @@ import { ProfileUploadIcon } from '../../assets/icons/ProfileUploadIcon';
 import ErrorPopup from "../ErrorPopup";
 import { Modal } from '../Modal';
 import { RockedIconSuccess } from '../../assets/icons/RocketIconSucess';
-
+import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 
 import CustomButton from '../CustomButton';
 
@@ -15,6 +15,9 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
     const [showModal, setShowModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [showErrorPopup, setShowErrorPopup] = useState(false);
+    const { formData, handleUpdateFormData } = useStepFlowContext();
+    const [errors, setErrors] = useState({});
+    const [selectedFiles, setSelectedFiles] = useState([]);
 
     const handleUploadClick = () => {
         fileInputRef.current.click();
@@ -33,14 +36,41 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
         }
     };
 
-    const handleNext = () => {
-        if (agreed) {
-            // nextStep();
+    const handleNext = (e) => {
+        const newErrors = {};
+        const file = e.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            // setSelectedFile(file);
+            setPreviewUrl(URL.createObjectURL(file));
+        }
+
+        if (!formData.vehicleType) {
+            newErrors.vehicleType = "Please select you vehicle type";
+        }
+
+        if (!formData.plateNumber || formData.plateNumber.trim() === "") {
+            newErrors.plateNumber = "Please provide plate number";
+        }
+
+        if (selectedFiles.length === 0) {
+            newErrors.files = "Please upload at least one document image";
+        }
+
+        setErrors(newErrors);
+
+        if (Object.keys(newErrors).length === 0) {
+
             setShowModal(true);
-        } else {
-            showError('You must agree to the terms to continue.');
         }
     };
+    // const handleNext = () => {
+    //     if (agreed) {
+    //         // nextStep();
+    //         setShowModal(true);
+    //     } else {
+    //         showError('You must agree to the terms to continue.');
+    //     }
+    // };
     const closeModal = () => {
         setShowModal(false);
 
@@ -79,6 +109,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                             </div>
                         </div>
 
+
                         <div className="flex w-full">
                             <div className="flex-col flex justify-center items-center w-full mt-4">
                                 {previewUrl ? (
@@ -101,8 +132,14 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                                     type="file"
                                     ref={fileInputRef}
                                     className="hidden"
+                                    name="profileImage"
                                     accept="image/*"
-                                    onChange={handleFileChange}
+                                    onChange={(e) => {
+                                        const files = Array.from(e.target.files);
+                                        setSelectedFiles(files);
+                                        handleUpdateFormData("profileImage", files);
+                                        handleFileChange(e)
+                                    }}
                                 />
                             </div>
                         </div>
@@ -117,7 +154,8 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                             Skip
                         </button>
 
-                        <CustomButton name="Submit" extendedStyles="w-full p-3 lg:p-4" btnClick={handleNext} />
+                        <CustomButton name="Submit" extendedStyles="w-full p-3 lg:p-4 rounded-lg"
+                            btnClick={() => handleNext(e)} />
                     </div>
 
                     <div className="lg:w-[617px] lg:h-[765px] max-990:hidden lg:p-5 gap-8 opacity-100 flex items-center justify-center">
@@ -126,10 +164,10 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                 </div>
             </div>
             {showModal && (
-                <Modal closeModal={closeModal} title="You're all set" 
-                bodyText={` Thanks for signing up! We’re reviewing your documents. 
+                <Modal closeModal={closeModal} title="You're all set"
+                    bodyText={` Thanks for signing up! We’re reviewing your documents. 
                 You’ll be notified within 24 hours when you’re approved to start accepting rides`} modalIcon={<RockedIconSuccess />}  >
-                    <CustomButton  name="Proceed to Dashboard" extendedStyles="w-full p-3 lg:p-4 mb-6 mt-4" />
+                    <CustomButton name="Proceed to Dashboard" extendedStyles="w-full p-3 lg:p-4 mb-6 mt-4" />
                 </Modal >
             )}
         </div>
