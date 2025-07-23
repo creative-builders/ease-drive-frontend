@@ -5,7 +5,11 @@ import { CustomSelectField } from "../CustomSelectField"
 import { useState, useRef } from 'react';
 import { FaChevronDown } from "react-icons/fa";
 import addfile from '../../assets/images/addFile.svg'
+import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
+import { AddFileIcon } from '../../assets/icons/AddFileIcon';
 
+
+import CustomButton from '../CustomButton';
 
 export const StepOne = ({ nextStep, step, totalSteps }) => {
 
@@ -22,30 +26,31 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
   };
 
   return (
-    <div lassName="bg-[#FDFDFD] min-h-screen">
+    <div lassName="bg-[#FDFDFD] min-h-screen lg:h-full  ">
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="bg-white lg:w-[1216px] lg:h-[800px] max-990:w-[90%] max-990:h-[95vh] max-990:m-auto pt-12 pb-12 opacity-100 flex flex-row items-center">
+        <div className="bg-white lg:w-[1216px] lg:h-[800px] max-990:w-[90%] max-990:h-[] max-990:m-auto max-990:flex
+         lg:pt-12 lg:pb-12 opacity-100 max-990:flex max-990:justify-center flex flex-row items-center max-990:py-auto">
           <div className="lg:w-[637px] lg:h-[734px] max-990:w-[100%] max-990:h-[90vh] max-990:m-auto 
-          max-990:flex max-990:justify-center max-990:items-center max-990:ml-0
+          max-990:flex max-990:justify-center max-990:items-center max-990:ml-0 py-auto
          ml-6  p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
-            <div className="lg:w-[556px] lg:h-[59px] max-990:w-[182px] max-990:h-[108px] max-990:flex max-990:flex-col
-                   gap-[7.38px] opacity-100 -mb-4 ">
-              <div className='flex flex-row max-990:flex max-990:flex-col w-full  items-center  justify-start gap-2'>
-                <img src='/logocar.svg' className='lg:w-[65px] lg:h-[59px]' />
-                <h1 className="font-inter text-[#1E1E1E] italic font-bold lg:text-[36px] max-990:text-[34px] leading-[100%]">
+            <div className="lg:w-[556px] lg:h-[59px] max-990:w-[100%] max-990:h-[] max-990:flex max-990:flex-col
+                   gap-[7.38px] opacity-100 lg:-mb-4 ">
+              <div className='flex flex-row max-990:flex max-990:flex-row w-full max-990:items-center 
+              max-990:w-full items-center  justify-start gap-2'>
+                <img src='/logocar.svg' className='lg:w-[65px] lg:h-[59px] max-990:w-[32px] max-990:h-[32px]' />
+                <h1 className="font-inter text-[#1E1E1E] italic font-bold lg:text-[36px] max-990:text-[18px] leading-[100%]">
                   Ease Drive
                 </h1>
 
               </div>
             </div>
 
-
-            <div className="lg:w-[556px] lg:h-[] max-990:w-[347px] max-990:h-[429px] justify-between lg:gap-14 opacity-100 flex flex-row items-start">
-              <div className='text-left'>
-                <h4 className="font-inter text-[#1E1E1E] italic font-semibold lg:text-[26px] max-990:text-[24px] leading-[100%]">
+            <div className="lg:w-[556px] lg:h-[] max-990:w-[347px] max-990:h-[] justify-between opacity-100 flex flex-row items-start">
+              <div className='text-left lg:w-[50%] max-990:w-[50%]'>
+                <h4 className="font-inter text-[#1E1E1E] italic font-semibold lg:text-[26px] max-990:text-[18px] leading-[100%]">
                   KYC Verification
                 </h4>
-                <p className=" font-medium text-center text-[#333333] lg:text-[18px] max-990:text-[16px] font-inter lg:pb- pt-2">
+                <p className=" font-medium text-left text-[#333333] lg:text-[18px] max-990:text-[14px] font-inter lg:pb- pt-2">
                   Personal Identity Verification
                 </p>
               </div>
@@ -62,11 +67,15 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
                 <CustomSelectField
                   label="Means of Identification"
                   iconSrc="/city-02.svg"
+                  defaultHolder ="Select Means of Identification"
                   // value={formData.city}
                   // onChange={handleCityChange}
                   options={["NIN", "Voter’s Card", "International Passport", "National ID Card"]}
                   rightIcon={FaChevronDown}
-                />
+                >
+                  <PlateNumberIcon className="w-6 h-6 text-gray-500" />
+                </CustomSelectField>
+
                 <CustomInputField
                   label="Document ID"
                   iconSrc="/call-02.svg"
@@ -74,7 +83,9 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
                   type="tel"
                 // value={formData.phone}
                 // onChange={handleChange("phone")}
-                />
+                >
+                  <PlateNumberIcon className="w-6 h-6 text-gray-500" />
+                </CustomInputField>
 
               </form>
 
@@ -92,12 +103,9 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
 
               <div className="flex-col flex justify-center items-center w-full  mt-4">
 
-                <img
-                  src={addfile}
-                  alt="Upload Icon"
-                  onClick={handleUploadClick}
-                  className="cursor-pointer w-20 h-20 mb-4"
-                />
+
+                <AddFileIcon className="w-20 h-20 mb-4 cursor-pointer"  onClick={handleUploadClick} />
+
 
                 <button
                   type="button"
@@ -128,13 +136,11 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="w-full bg-green-700 text-white rounded-xl py-4 text-[18px] font-bold disabled:opacity-50"
-
-            >
-              Continue
-            </button>
+            <CustomButton
+              name="Continue"
+              extendedStyles={"w-full p-3 lg:p-4"}
+              btnClick={() => nextStep()}
+            />
 
           </div>
 

@@ -8,6 +8,7 @@ export const CustomInputField = ({
     type = "text",
     value,
     onChange,
+    children
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     const isPassword = type === "password";
@@ -15,15 +16,10 @@ export const CustomInputField = ({
     return (
         <div>
             <label className="block lg:text-[18px] mb-1 max-990:text-[16px] w-full font-medium text-[#333333]">{label}</label>
-            <div className="flex items-center border border-[#A1A1A1] w-full lg:rounded-[16px] max-990:rounded-[8px] max-990:px-4 max-990:py-3 lg:px-4 lg:py-3">
-                {iconSrc && (
-                    <img
-                        src={iconSrc}
-                        alt="icon"
-                        className="lg:w-[32px] lg:h-[32px] max-990:w-[18px] max-990:h-[18px]  object-contain mr-2"
-                    />
-                    
-                )}
+            <div className="flex items-center border border-[#A1A1A1] w-full lg:rounded-[16px] max-990:rounded-[8px] max-990:px-4 max-990:py-1 lg:px-4 lg:py-3">
+                <div className="lg:w-[32px] lg:h-[32px] max-990:w-[18px] max-990:h-[18px]  mt-[6px]">
+                        {children}
+                    </div>
                 <input
                     type={isPassword && showPassword ? "text" : type}
                     placeholder={placeholder}

@@ -10,8 +10,12 @@ import { CustomSelectField } from "../../../components/CustomSelectField";
 import { CountdownTimer } from "../../../components/CountdownTimer";
 import { Modal } from "../../../components/Modal";
 import ErrorPopup from "../../../components/ErrorPopup";
-import { EyesOpen } from "../../../assets/icons/EyesOpen";
 import { EmailSent } from "../../../assets/icons/EmailSent";
+import { LocationHomeIcon } from "../../../assets/icons/LocationHomeIcon";
+import { UserIcon } from "../../../assets/icons/UserIcon";
+import { MailIcon } from "../../../assets/icons/MailIcon";
+import { LockedIcon } from "../../../assets/icons/LockedIcon";
+import { CallIcon } from "../../../assets/icons/CallIcon";
 
 export const DriverSignupForm = () => {
     const [formData, setFormData] = useState({
@@ -163,20 +167,24 @@ export const DriverSignupForm = () => {
                 <form className="space-y-4" onSubmit={handleSubmit}>
                     <CustomInputField
                         label="Full Name"
-                        iconSrc="/user-03.svg"
+                        // iconSrc="/user-03.svg"
                         placeholder="Enter your full name"
                         value={formData.fullName}
                         onChange={handleChange("fullName")}
-                    />
+                    >
+                        <UserIcon className="w-6 h-6 text-gray-500" />
+                    </CustomInputField>
 
                     <CustomInputField
                         label="Enter Email"
-                        iconSrc="/mail.svg"
+                        // iconSrc="/mail.svg"
                         placeholder="Enter your email address"
                         type="email"
                         value={formData.email}
                         onChange={handleChange("email")}
-                    />
+                    >
+                        <MailIcon className="w-6 h-6 text-gray-500" />
+                    </CustomInputField>
 
                     <CustomInputField
                         label="Enter Password"
@@ -187,7 +195,7 @@ export const DriverSignupForm = () => {
                         onChange={handleChange("password")}
                         rightIcon={<FiEye className="text-gray-400 cursor-pointer" />}
                     >
-                        <EyesOpen />
+                        <LockedIcon className="w-6 h-6 text-gray-500" />
                     </CustomInputField>
 
                     <CustomInputField
@@ -198,7 +206,9 @@ export const DriverSignupForm = () => {
                         value={formData.confirmpassword}
                         onChange={handleChange("confirmpassword")}
                         rightIcon={<FiEye className="text-gray-400 cursor-pointer" />}
-                    />
+                    >
+                        <LockedIcon className="w-6 h-6 text-gray-500" />
+                    </CustomInputField>
 
                     <CustomInputField
                         label="Enter Phone number"
@@ -207,16 +217,21 @@ export const DriverSignupForm = () => {
                         type="tel"
                         value={formData.phone}
                         onChange={handleChange("phone")}
-                    />
+                    >   <CallIcon className="w-6 h-6 text-gray-500" />
+                    </CustomInputField>
+
 
                     <CustomSelectField
                         label="Enter City"
                         iconSrc="/city-02.svg"
                         value={formData.city}
+                        defaultHolder="Select City"
                         onChange={handleCityChange}
                         options={["Anambra", "Lagos", "Kano"]}
                         rightIcon={FaChevronDown}
-                    />
+                    >
+                        <LocationHomeIcon className="w-6 h-6 text-gray-500" />
+                    </CustomSelectField >
 
                     <button
                         type="submit"
@@ -252,8 +267,8 @@ export const DriverSignupForm = () => {
 
             {/* Success Modal */}
             {showModal && (
-                 <Modal closeModal={closeModal} title="Check Your Email" bodyText={` We’ve sent a verification link to ${" "}
-                                ${formData.email}, kindly click on it to continue.` } modalIcon={<EmailSent />}>
+                <Modal closeModal={closeModal} title="Check Your Email" bodyText={` We’ve sent a verification link to ${" "}
+                                ${formData.email}, kindly click on it to continue.`} modalIcon={<EmailSent />}>
                     <CountdownTimer
                         minutes={3}
                         title="Resend"

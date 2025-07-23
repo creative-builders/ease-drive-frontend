@@ -1,9 +1,9 @@
 import { useState } from "react";
 // import StepOne from '../../../components/driverStepFlow/StepOne';
-import {StepOne} from '../../../components/driverKycStepFlow/StepOne';
-import StepTwo from '../../../components/driverKycStepFlow/StepTwo';
-import StepThree from '../../../components/driverKycStepFlow/StepThree';
-import StepFour from '../../../components/driverKycStepFlow/StepFour';
+import { StepOne } from '../../../components/driverKycStepFlow/StepOne';
+import { StepTwo } from '../../../components/driverKycStepFlow/StepTwo';
+import { StepThree } from '../../../components/driverKycStepFlow/StepThree';
+import { StepFour} from  '../../../components/driverKycStepFlow/StepFour';
 import { FormProvider } from "../../../hooks/useStepFlowFormContext";
 // import { useMutation } from "@tanstack/react-query"; 
 // import { driverSignUpAuth } from "../../../store/auth/driver/api";
@@ -50,12 +50,12 @@ export const DriverKycPage = () => {
    //    console.log("Submitting API call with:", signupData); // Debugging log
    //    submitSignup(signupData);
    // };
-console.log(step, totalSteps)
+   console.log(step, totalSteps)
    return (
       <FormProvider initialInputFields={Object.keys(initialInputFields)}>
-          <div className="h-full w-full">
+         <div className="h-full w-full">
             {step === 1 && <StepOne nextStep={nextStep} step={step} totalSteps={totalSteps} />}
-           {step === 2 && <StepTwo nextStep={nextStep} prevStep={prevStep} step={step} totalSteps={totalSteps} />}
+            {step === 2 && <StepTwo nextStep={nextStep} prevStep={prevStep} step={step} totalSteps={totalSteps} />}
             {step === 3 && <StepThree nextStep={nextStep} prevStep={prevStep} step={step} totalSteps={totalSteps} />}
             {step === 4 && (
                <StepFour
@@ -68,7 +68,7 @@ console.log(step, totalSteps)
                // isLoading={isLoading}
                />
             )}
-         </div> 
+         </div>
       </FormProvider>
    );
 };

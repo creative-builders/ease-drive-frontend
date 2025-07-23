@@ -12,7 +12,7 @@ import Sicon from '../assets/icons/Search-icon.png';
 import BackArrow from './BackArrow';
 import RideSelectorLocationIcon from '../assets/icons/RideSelectorLocationIcon';
 import SearchIcon from '../assets/icons/SearchIcon';
-import LocationIcon from '../assets/icons/LocationIcon';
+import { LocationIcon } from '../assets/icons/LocationIcon';
 
 const RideSelector = ({
   selected,

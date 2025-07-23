@@ -1,118 +1,206 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
-import { CgChevronDown } from "react-icons/cg";
-import SectionLabel from '../SectionLabel';
-import BackArrow from '../BackArrow';
+import React from 'react'
+import SectionLabel from '../SectionLabel'
+import { CustomInputField } from '../CustomInputField'
+import { CustomSelectField } from "../CustomSelectField"
+import { useState, useRef } from 'react';
 
-const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
-  const { formData, handleUpdateFormData } = useStepFlowContext();
-  const [isOpen, setIsOpen] = useState(false);
+import CustomButton from '../CustomButton';
+import { FaChevronDown } from "react-icons/fa";
+import addfile from '../../assets/images/addFile.svg'
+import { CarIcon } from '../../assets/icons/CarIcon'
+import { AddFileIcon } from '../../assets/icons/AddFileIcon'
+import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
+import { ColorIcon } from '../../assets/icons/ColorIcon'
+import { SeatIcon } from '../../assets/icons/SeatIcon'
+import { LocationIcon } from '../../assets/icons/LocationIcon';
+import { LocationHomeIcon } from '../../assets/icons/LocationHomeIcon';
+
+
+export const StepTwo = ({ nextStep, step, totalSteps }) => {
+
+  const fileInputRef = useRef(null);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+
+  const handleUploadClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    setSelectedFiles(files);
+  };
 
   return (
-    <div className='bg-[#F0F1F1] min-h-screen w-full flex flex-col items-center gap-5'>
-      <header className='h-20 w-full flex items-center justify-around'>
-        <p className='ml-4 xl:ml-[-220px] uppercase md:uppercase text-2xl font-bold'>
-          <Link to={"/"}>ease drive</Link>
-        </p>
-        <ul className='h-16 w-96 hidden md:flex items-center justify-between'>
-          <p>Already have an account?</p>
-          <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
-        </ul>
-      </header>
-      <BackArrow extendedStyles="top-16 left-8" />
+    <div lassName=" min-h-screen lg:h-full max-990:h-[95vh] ">
+      <div className="flex items-center justify-center h-full min-h-screen bg-gray-100">
+        <div className="bg-white lg:w-[1216px] lg:h-[990px] max-990:w-[90%] max-990:h-[95vh] max-990:m-auto py-6 lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center">
+          <div className="lg:w-[637px] lg:h-[734px] max-990:w-[100%] max-990:h-[90vh] max-990:m-auto 
+          max-990:flex max-990:justify-center max-990:items-center max-990:ml-0
+         ml-6  p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
+            <div className="lg:w-[556px] lg:h-[59px] max-990:w-[100%] max-990:h-[108px] max-990:flex max-990:flex-col
+                   gap-[7.38px] opacity-100 lg:-mb-4 ">
+              <div className='flex flex-row max-990:flex max-990:flex-row w-full max-990:items-center max-990:w-full items-center  justify-start gap-2'>
+                <img src='/logocar.svg' className='lg:w-[65px] lg:h-[59px] max-990:w-[32px] max-990:h-[32px]' />
+                <h1 className="font-inter text-[#1E1E1E] italic font-bold lg:text-[36px] max-990:text-[18px] leading-[100%]">
+                  Ease Drive
+                </h1>
 
-      <div className="text-center mb-[29px]">
-        <SectionLabel title={`${step} Step of ${totalSteps}`} />
+              </div>
+            </div>
+
+
+            <div className="lg:w-[556px] lg:h-[] max-990:w-[347px] max-990:h-[429px] justify-between opacity-100 flex flex-row items-start">
+              <div className='text-left lg:w-[60%] max-990:w-[70%]'>
+                <h4 className="font-inter text-[#1E1E1E] italic font-semibold lg:text-[26px] max-990:text-[18px] leading-[100%]">
+                  Vehicle Information
+                </h4>
+                <p className=" font-medium text-left text-[#333333] lg:text-[18px] max-990:text-[14px] font-inter lg:pb- pt-2">
+                  Ensure your vehicle image is clean, recent, and shows the number plate.
+                </p>
+              </div>
+              <div>
+                <SectionLabel className="text-[#3733CF] bg-custom-gradient"
+
+                  title={` Step ${step}  of ${totalSteps}`}
+                />
+              </div>
+              {/* Content here */}
+            </div>
+            <div className='flex w-[100%]'>
+              <form className="space-y-4 w-[100%]">
+                <CustomSelectField
+                  label="Vehicle Type"
+                  defaultHolder="Select Vehicle Type"
+                  // iconSrc="/city-02.svg"
+                  // value={formData.city}
+                  // onChange={handleCityChange}
+                  options={["Keke", "Car", "Shuttle Bus", "Motorcycle", "Regular Bus", "Truck"]}
+                  rightIcon={FaChevronDown}
+                >
+                  <CarIcon className="w-6 h-6 text-gray-500" />
+
+                </CustomSelectField>
+
+                <CustomInputField
+                  label="Plate Number"
+                  // iconSrc="/call-02.svg"
+                  placeholder="Enter Vehicle Plate  Number"
+                  type="text"
+                // value={formData.phone}
+                // onChange={handleChange("phone")}
+                >
+                  <PlateNumberIcon className="w-6 h-6 text-gray-500" />
+                </CustomInputField>
+
+                <CustomSelectField
+                  label="Service Area (Location)"
+                  // iconSrc="/city-02.svg"
+                  // value={formData.city}
+                  // onChange={handleCityChange}
+                  defaultHolder="Select Service Area"
+                  options={["Odenigwe", "Hill-Top", "Main gate", "Behind Flat", "Odeim gate",]}
+                  rightIcon={FaChevronDown}
+                >
+                  <LocationHomeIcon className="w-6 h-6 text-gray-500" />
+                </CustomSelectField>
+
+                {/* <CustomInputField
+                  label="Service Area (Location)"
+                  iconSrc="/call-02.svg"
+                  placeholder="Enter your usual route"
+                  type="text"
+                // value={formData.phone}
+                // onChange={handleChange("phone")}
+                /> */}
+
+                <div className='flex flex-row w-full gap-4'>
+                  <CustomInputField
+                    label="Number Seats"
+                    iconSrc="/user-03.svg"
+                    placeholder="e.g 4"
+                    type="text"
+                  // value={formData.phone}
+                  // onChange={handleChange("phone")}
+                  >
+                    <SeatIcon className="w-6 h-6 text-gray-500" />
+                  </CustomInputField>
+
+                  <CustomInputField
+                    label="Vehicle Color"
+                    // iconSrc="/call-02.svg"
+                    placeholder="e.g Black"
+                    type="text"
+                  // value={formData.phone}
+                  // onChange={handleChange("phone")}
+                  >
+                    <ColorIcon className="w-6 h-6 text-gray-500" />
+                  </CustomInputField>
+                </div>
+
+
+              </form>
+
+            </div>
+
+            <div className=' flex flex-col  w-full -mt-4'>
+              <div className='flex-col justify-start flex items-start w-full'>
+                <p className=" font-semibold text-left text-[#333333] lg:text-[18px] max-990:text-[14px] font-inter lg:pb- pt-2">
+                  Upload Vehicle Photo (front, Back and side)
+                </p>
+                <p className=" font-medium text-ledt text-[#333333] lg:text-[14px] max-990:text-[8px] font-inter -pt-2">
+                  You can upload up to 4 images (JPG, PNG). Maximum file size: 5MB per image
+                </p>
+              </div>
+
+              <div className="flex-col flex justify-center items-center w-full  mt-4">
+                <AddFileIcon className="w-20 h-20 mb-4 cursor-pointer" onClick={handleUploadClick} />
+
+
+                <button
+                  type="button"
+                  onClick={handleUploadClick}
+                  className="lg:w-[30%] max-990:w-[50%] bg-green-200 text-gray-400 rounded-xl py-1.5 lg:text-[16px] max-990:text-[10px] font-bold mb-4"
+                >
+                  Upload Photos
+                </button>
+
+                {/* Hidden File Input */}
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  className="hidden"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  multiple
+                />
+
+                {/* File Name List */}
+                {selectedFiles.length > 0 && (
+                  <ul className="w-[80%] mt-2 text-sm  text-gray-600 list-disc list-inside">
+                    {selectedFiles.map((file, index) => (
+                      <li key={index}>{file.name}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+
+            <CustomButton
+              name="Continue"
+              extendedStyles={"w-full p-3 lg:p-4"}
+              btnClick={() => nextStep()}
+            />
+
+          </div>
+
+          <div className="lg:w-[617px] lg:h-[765px] max-990:hidden lg:p-5 gap-8 opacity-100  flex items-center justify-center">
+            <img src="/optionimg.png" alt="" className='lg:w-[528px] lg:h-[623px] lg:rounded-[45px]' />
+          </div>
+
+
+
+        </div>
       </div>
-      <h2 className='text-3xl font-normal capitalize'>KYC Verification</h2>
-      <p className="flex text-center gap-3 text-sm">
-        <Link to="/DriVerify"><span>Identity Verification</span></Link>
-        <Link to="/DrivUpload"><span>Address Verification</span></Link>
-      </p>
-
-      <section className='h-fit items-center md:h-108 w-full md:w-4/5 flex flex-col items-left justify-center gap-4 rounded-lg border-0 md:border border-green-600'>
-        <p className='text-xl'>Identity Verification</p>
-        <span className='text-left text-sm'>This Information will help us know you more</span>
-
-        <div className='h-full md:h-3/5 w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-4 relative'>
-          <article className='h-20 w-full flex flex-col items-left gap-2 relative'>
-            <label htmlFor="identification">Means of Identification</label>
-            <select
-              className='h-20 w-full border outline-none gap-6 rounded-lg'
-              name="documentType"
-              id="identification"
-              onChange={handleUpdateFormData}
-              value={formData.documentType || ""}
-              onFocus={() => setIsOpen(true)}
-              onBlur={() => setIsOpen(false)}
-            >
-              <option value="" disabled>Preference ID</option>
-              <option value="NIN">NIN</option>
-              <option value="Driving License">Driving Lisense</option>
-              <option value="Voters Card">Voters Card</option>
-              <option value="Birth Certificate">Birth Certificate</option>
-              <option value="International Passport">International Passport</option>
-            </select>
-            
-            <CgChevronDown
-              className={`absolute right-4 top-1/2 cursor-pointer translate-y-1/2 inline-block transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}
-              fontSize={'18px'}
-            />
-          </article>
-
-          <article className='h-20 w-full flex flex-col items-left gap-2'>
-            <label htmlFor="documentID">Document ID</label>
-            <input
-              className='h-12 w-full border outline-none gap-6 rounded-lg'
-              type="number"
-              name="documentID"
-              id="documentID"
-              onChange={handleUpdateFormData}
-              value={formData.documentID || ""}
-            />
-          </article>
-
-          <article className='h-20 w-full flex flex-col items-left gap-2'>
-            <label htmlFor="date">Date of Birth</label>
-            <input
-              className='h-12 w-full border outline-none gap-6 rounded-lg'
-              type="date"
-              name="dob"
-              id="date"
-              onChange={handleUpdateFormData}
-              value={formData.dob || ""}
-            />
-          </article>
-        </div>
-
-        <div className="h-16 w-3/4 items-center md:w-2/5 gap-10 flex justify-end md:mt-[-80px] translate-x-0 md:translate-x-52">
-          <button
-            name="Skip Now"
-            className='h-12 w-32 cursor-pointer rounded-lg border border-green-600'
-            onClick={() => nextStep()}
-          >
-            Skip Now
-          </button>
-          <button
-            name="Next"
-            className='h-12 w-32 cursor-pointer rounded-lg bg-green-600 text-white'
-            onClick={() => nextStep()}
-          >
-            Next
-          </button>
-        </div>
-
-        <div className="hidden h-[20px] w-full justify-around items-center">
-          <span className=' border-b-2 w-2/5 border-black '></span> Or <span className=' border-b-2 w-2/5 border-black'></span>
-        </div>
-
-        <Link to={"/login"}>
-          <p className='pair mb-4 text-sm md:hidden'>Already have an account? <span className='text-green-500'>Login</span></p>
-        </Link>
-      </section>
     </div>
-  );
-};
-
-export default StepTwo;
+  )
+}

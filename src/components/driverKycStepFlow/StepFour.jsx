@@ -1,197 +1,112 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Frame from '/Frame.png';
-import Svg from '/Vector.svg'
+import React, { useState, useRef } from 'react';
 import SectionLabel from '../SectionLabel';
-import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
-import { useMutation } from "@tanstack/react-query";
-import { driverSignUpAuth } from "../../store/auth/driver/api";
-import toast from "react-hot-toast";
-import CustomButton from "../CustomButton"
+import { CustomInputField } from '../CustomInputField';
+import { CustomSelectField } from '../CustomSelectField';
+import { ProfileUploadIcon } from '../../assets/icons/ProfileUploadIcon';
 
-const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
-   const{ formData , setFormData,  handleUpdateFormData } = useStepFlowContext();
-    const [progress, setProgress] = useState(0);
-    const [uploadComplete, setUploadComplete] = useState(false);
-    const [selectedFile, setSelectedFile] = useState(null);
-     const[isVerified,setIsVerified] = useState("");
-     const [uploading, setUploading] = useState(false);
+import CustomButton from '../CustomButton';
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-    
-        const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
-    
-        setSelectedFile(`${file.name}  (${fileSizeMB} MB)`);
-        setProgress(0);
-        setUploadComplete(false);
-        setUploading(true);
-    
-        let uploadProgress = 0;
-        const interval = setInterval(() => {
-            uploadProgress += 10;
-            setProgress(uploadProgress);
-    
-            if (uploadProgress >= 100) {
-                clearInterval(interval);
-                setUploadComplete(true);
-                setUploading(false);
-            }
-        }, 300);
-    };  
-    
-    const {mutate:submitdriverSignUpAuth , isLoading} = useMutation(driverSignUpAuth,{
-          onSuccess:(response) => {
-          console.log(response?.message);
-          setIsVerified(response?.message);
-          setFormData( prev => ({
-              ...prev,
-                firstName: "", 
-                lastName: "", 
-                phoneNumber: "", 
-                email: "",
-                password: "",
-                confirmPassword: "", 
-                documentType: "", 
-                documentID: "", 
-                dob: "", 
-                sectionAddress: "",
-                documentURL: ""
-            }))
-          },
-          onError: (error) => {
-            toast.error(error?.status >= 400 ? error?.response?.data?.message : error?.message)
-          }
-        })
+export const StepFour = ({ nextStep, step, totalSteps }) => {
+  const fileInputRef = useRef(null);
+  const [agreed, setAgreed] = useState(false);
+  const [error, setError] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
 
-        const handleSubmit = (e) => {
-            e.preventDefault();
-        
-            if (!formData.sectionAddress || !selectedFile) {
-                toast.error("Please Fill in the necessary spaces");
-                return;
-            }
-        
-            submitdriverSignUpAuth({
-                ...formData,
-                role: "driver"
-            });
-        };
-        
+  const handleUploadClick = () => {
+    fileInputRef.current.click();
+  };
 
-        console.log(formData)
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      setSelectedFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
 
-    return (
-        <div className='min-h-screen w-full flex flex-col items-center gap-5 bg-[#F0F1F1]'>
-            <header className='h-20 w-full flex items-center justify-around'>
-                <p className='ml-4 xl:ml-[-220px] uppercase md:uppercase text-2xl font-bold'><Link to={"/"}>ease drive</Link></p>
-                <ul className='h-16 w-96 hidden md:flex items-center justify-between'>
-                    <p>Already have an account?</p>
-                    <Link to="/login" className="text-green-300 border border-green-300 px-6 py-3 rounded-lg">Login</Link>
-                </ul>
-            </header>
-            <div className="text-center mb-[29px]">
-                <SectionLabel title={`${step} Step of ${totalSteps}`} />
+  const handleNext = () => {
+    if (agreed) {
+      setError('');
+      nextStep();
+    } else {
+      setError('You must agree to the terms to continue.');
+    }
+  };
+
+  return (
+    <div className="min-h-screen lg:h-full max-990:h-[]">
+      <div className="flex items-center justify-center h-full min-h-screen bg-gray-100">
+        <div className="bg-white lg:w-[1216px] lg:h-[700px] max-990:w-[90%] max-990:h-[] max-990:m-auto py-6 lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center">
+          <div className="lg:w-[637px] max-990:w-full max-990:h-[60vh] lg:h-[90vh] max-990:m-auto max-990:ml-0 ml-6 p-5 gap-8 bg-white flex flex-col items-center justify-center">
+            <div className="lg:w-[556px] max-990:w-full max-990:flex max-990:flex-col gap-[7.38px] opacity-100 lg:-mb-4">
+              <div className="flex flex-row items-center justify-start gap-2">
+                <img src="/logocar.svg" className="lg:w-[65px] lg:h-[59px] max-990:w-[32px] max-990:h-[32px]" />
+                <h1 className="font-inter text-[#1E1E1E] italic font-bold lg:text-[36px] max-990:text-[18px] leading-[100%]">
+                  Ease Drive
+                </h1>
+              </div>
             </div>
-            <h2 className='text-xl md:text-3xl font-normal capitalize'>KYC Verification</h2>
-            <section className='h-fit items-center p-1 md:h-fit w-full md:w-4/5 flex flex-col items-left justify-center gap-4 mb-4 rounded-lg border-0 md:border border-green-600'>
-                <p className='text-xl'>Identity Verification</p>
-                <span className='text-center md:text-left text-sm'>This Information will help us know you more</span>
-                <form onSubmit={handleSubmit} className='h-fit md:h-fit w-full p-4 flex flex-col gap-4 relative' action="">
 
-                     {/* check verification */}
-                    {
-                    isVerified && <div className="border border-green-300 rounded-md text-green-700 p-2 mb-4">{isVerified}</div>
-                    }
-                    <article className='h-20 w-full flex flex-col items-left gap-2'>
-                        <label htmlFor="place">Address</label>
-                        <input placeholder='Enter your address' 
-                            className='h-12 w-full border outline-none p-6 rounded-lg'
-                            type="text"
-                            name="sectionAddress"
-                            id="place"
-                            onChange={handleUpdateFormData}
-                            value={formData.sectionAddress}
-                        />
-                    </article>
-                    <article className='flex flex-col items-left mt-5'>
-                        <p className='text-sm md:text-base'>Upload Document (Electric bills, water bills, waste bills, etc.)</p>
-                        <input
-                            type="file"
-                            accept=".pdf, .doc, .docx, .xls, .xlsx, .txt, .png, .jpg, .jpeg, .gif, .svg"
-                            id="upload"
-                            // required
-                            hidden
-                            onChange={handleFileChange}
-                            // value={formData.documentURL}
-                        />
-                        <label
-                            className={`relative flex items-center justify-center border bg-[#FEFEFE] rounded-lg ${uploadComplete ? 'h-20 w-3/5' : 'h-72 w-full'}`}
-                            htmlFor="upload"
-                        >
-                            {uploadComplete ? (
-                                <div className="w-3/4 mx-auto flex flex-row-reverse items-center gap-2">
-                                    <span className="text-black-600 font-light text-sm md:font-medium">{selectedFile}</span>
-                                    <span className="text-green-500 text-lg"><img className='h-8 w-10' src={Svg} alt="" /></span>
-                                </div>
-                            ) : (
-                                <div className="w-2/5 flex flex-col items-center gap-2">
-                                    <img className="cursor-pointer h-10 w-12" src={Frame} alt="Upload Icon" />
-                                    {uploading && (
-                                        <div className="relative w-4/5 bg-gray-200 h-4 rounded-lg mt-3 overflow-hidden">
-                                            <div
-                                                className="h-full bg-green-600 transition-all duration-300 flex"
-                                                style={{ width: `${progress}%` }}
-                                            >
-                                               <span className="absolute inset-0 flex items-center justify-center text-black font-bold">
-                                                    {progress}%
-                                                </span>
-                                            </div>
-                                            
-                                        </div>
-                                    )}
-                                </div>
-                            )}
-                        </label>
-                        {uploadComplete && (
-                            <p
-                                className="cursor-pointer font-semibold text-sm md:text-base text-green-300 mt-2"
-                                onClick={() => document.getElementById('upload').click()}
-                            >
-                                Change Document
-                            </p>
-                        )}
-                    </article>
+            <div className="lg:w-[556px] max-990:w-[347px] justify-between opacity-100 flex flex-row items-start">
+              <div className="text-left lg:w-[60%] max-990:w-[70%]">
+                <h4 className="font-inter text-[#1E1E1E] italic font-semibold lg:text-[26px] max-990:text-[18px] leading-[100%]">
+                  Upload Profile Photo
+                </h4>
+                <p className="font-medium text-left text-[#333333] lg:text-[18px] max-990:text-[14px] font-inter pt-2">
+                  Show face clearly, no filters or group photos
+                </p>
+              </div>
+              <div>
+                <SectionLabel className="text-[#3733CF] bg-custom-gradient" title={`Step ${step} of ${totalSteps}`} />
+              </div>
+            </div>
 
-                    {/* <button
-                        className='h-12 w-28 cursor-pointer rounded-lg bg-green-600 text-white'
-                        isLoading={isLoading}
-                    >
-                        submit
-                    </button> */}
-                    <div className="mb-4">
-                        <CustomButton
-                        name="submit"
-                        // extendedStyles={"w-full"}
-                        isLoading={isLoading}
-                        />
-                    </div>
-                </form>
-                <div className="h-16 w-4/5 items-center md:w-2/5 gap-10 flex justify-end">
-                    {/* <button 
-                        name="Skip Now"
-                        className='h-12 w-28 cursor-pointer rounded-lg border border-green-600'
-                        onClick={() => nextStep()}
-                    >
-                        Skip Now
-                    </button> */}
+            <div className="flex w-full">
+              <div className="flex-col flex justify-center items-center w-full mt-4">
+                {previewUrl ? (
+                  <img
+                    src={previewUrl}
+                    alt="Preview"
+                    className="w-32 h-32 object-cover rounded-full border border-gray-300"
+                    onClick={handleUploadClick}
+                  />
+                ) : (
+                  <ProfileUploadIcon className="w-30 h-30 cursor-pointer" onClick={handleUploadClick} />
+                )}
+                <p
+                  onClick={handleUploadClick}
+                  className="font-regular cursor-pointer text-center text-[#4847EB] lg:text-[20px] max-990:text-[14px] font-inter pt-2"
+                >
+                  Upload Profile Photo
+                </p>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  className="hidden"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
+              </div>
+            </div>
 
-                
-                </div>
-            </section>
+            
+
+            <button
+              type="button"
+              className="lg:w-full max-990:w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
+            >
+              Skip
+            </button>
+
+            <CustomButton name="Submit" extendedStyles="w-full p-3 lg:p-4" btnClick={handleNext} />
+          </div>
+
+          <div className="lg:w-[617px] lg:h-[765px] max-990:hidden lg:p-5 gap-8 opacity-100 flex items-center justify-center">
+            <img src="/optionimg.png" alt="Visual" className="lg:w-[528px] lg:h-[623px] rounded-[45px]" />
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
-  
-export default StepFour;

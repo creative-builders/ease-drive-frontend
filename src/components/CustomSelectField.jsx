@@ -7,7 +7,9 @@ export const CustomSelectField = ({
     value,
     onChange,
     options = [],
+    defaultHolder,
     rightIcon: RightIcon,
+    children
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
@@ -31,15 +33,20 @@ export const CustomSelectField = ({
                 lg:rounded-[16px] max-990:rounded-[8px] lg:px-4 lg:py-3 max-990:px-4 max-990:py-3 cursor-pointer"
                 onClick={() => setIsOpen(!isOpen)}
             >
-                <div className="flex items-center w-[100%]">
-                     {iconSrc && (
+                <div className="flex items-center w-[100%] items-center justify-center">
+                    <div className="lg:w-[32px] lg:h-[32px] max-990:w-[18px] max-990:h-[18px] mr-2 mt-[6px]">
+                        {children}
+                    </div>
+
+                    {/* {iconSrc && (
                     <img
                         src={iconSrc}
                         alt="icon"
                         className="lg:w-[32px] lg:h-[32px] max-990:w-[18px] max-990:h-[18px] object-contain mr-2"
                     />
-                )}
-                    <span className=" text-gray-400 w-full outline-none text-placeholder lg:text-[18px] max-990:text-[12px] font-inter">{value || "Select option"}</span>
+                )} */}
+                    <span className=" text-gray-400 w-full outline-none text-placeholder lg:text-[18px] 
+                    max-990:text-[12px] font-inter">{value || defaultHolder}</span>
                 </div>
                 {RightIcon && (
                     <span className="ml-auto text-gray-400 pointer-events-none">
