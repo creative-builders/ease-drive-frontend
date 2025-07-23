@@ -5,7 +5,7 @@ export default {
     extend: {
       colors:{
         gray:{
-         100:"#F5F5F5",
+         100:"#DEFAE2",
          200:"#E1F4E5",
          300:"#F0F1F1",
          400:"#444444",
@@ -17,9 +17,17 @@ export default {
         },
         placeholder: "#AEAEB2",
         green:{
-         100:"#DCFFDC",
+          50:"#F1FCF2",
+         100:"#DEFAE2",
          200:"#D4F9DB",
          300:"#20AE3A",
+         600:"#20AE3A",
+         700:"#1A7B2C",
+         900:"#175023",
+         950:"#072C0F"
+        },
+        accent:{
+          100:"#EDF3FF"
         },
         light: "#FDFDFD",
         headHighlight: "#127C71", 
@@ -35,6 +43,9 @@ export default {
         cardBg: "#F3F7FF",
         cardOverlay: "#E7E7E726",
         white: "#FFFFFF",
+      },
+     borderRadius:{
+        'lg32':"32px"
       },
       height:{
         106: "450px",
