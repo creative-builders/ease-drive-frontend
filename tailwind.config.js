@@ -15,6 +15,7 @@ export default {
          900:"#1E1E1E",
          950:"#000000",
         },
+        placeholder: "#AEAEB2",
         green:{
          100:"#DCFFDC",
          200:"#D4F9DB",
@@ -41,11 +42,21 @@ export default {
         39: "40px",
         17: "80px"
       },
+        fontFamily: {
+        inter: ["Inter", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
+      },
+       screens: {
+        'max-990': { max: '990px' }, // applies from 0px to 990px
+      },
       width:{
         211: "200px",
         91: "95%",
         7: "650px"
-      }
+      },
+      backgroundImage: {
+        'custom-gradient': 'linear-gradient(123.39deg, #FDFDFD 3.85%, #F4EDFA 35.05%, #F1FBF2 57.05%, #EEE1F8 79.94%, #FDFDFD 99.96%)',
+      },
     },
   },
   plugins: [require("@tailwindcss/forms")],
