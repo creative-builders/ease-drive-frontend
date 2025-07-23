@@ -16,6 +16,7 @@ import { UserIcon } from "../../../assets/icons/UserIcon";
 import { MailIcon } from "../../../assets/icons/MailIcon";
 import { LockedIcon } from "../../../assets/icons/LockedIcon";
 import { CallIcon } from "../../../assets/icons/CallIcon";
+import GoogleAuthV3 from "../../../components/GoogleAuthV3";
 
 export const DriverSignupForm = () => {
     const [formData, setFormData] = useState({
@@ -255,14 +256,15 @@ export const DriverSignupForm = () => {
                     <hr className="flex-grow border-gray-300" />
                 </div>
 
-                <button
+                {/* <button
                     onClick={() => handleSignupWithGoogle()}
                     className="w-full border rounded-xl py-3 flex items-center justify-center text-[20px] font-medium"
                     disabled={isGoogleLoading}
                 >
                     <FcGoogle className="mr-2 text-xl" />
                     {isGoogleLoading ? "Connecting to Google..." : "Continue with Google"}
-                </button>
+                </button> */}
+                <GoogleAuthV3 />
             </div>
 
             {/* Success Modal */}

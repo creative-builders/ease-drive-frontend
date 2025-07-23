@@ -50,7 +50,7 @@ export const DriverKycPage = () => {
    //    console.log("Submitting API call with:", signupData); // Debugging log
    //    submitSignup(signupData);
    // };
-   console.log(step, totalSteps)
+   // console.log(step, totalSteps)
    return (
       <FormProvider initialInputFields={Object.keys(initialInputFields)}>
          <div className="h-full w-full">

@@ -28,7 +28,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file && file.type.startsWith('image/')) {
-            setSelectedFile(file);
+            // setSelectedFile(file);
             setPreviewUrl(URL.createObjectURL(file));
         }
     };
