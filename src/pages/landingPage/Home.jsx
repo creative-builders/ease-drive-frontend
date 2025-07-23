@@ -5,6 +5,7 @@ import { KeyFeaturesSection } from '../../components/new-landingPage/KeyFeatures
 import FaqSection from '../../components/landing page/Faq'
 import Header from '../../layout/header'
 import Footer from '../../layout/footer/Footer'
+import { GetTheApp } from '../../components/landing page/GetTheApp'
 
  const Home = () => {
     return (
@@ -15,6 +16,7 @@ import Footer from '../../layout/footer/Footer'
             <HowItWorksSection />
             <KeyFeaturesSection />
             <FaqSection/>
+            <GetTheApp/>
             <Footer/>
         </div>
     )

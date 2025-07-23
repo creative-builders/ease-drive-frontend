@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom"
 import carImage from "../../assets/images/Car.png"
+import footerBanner from "../../assets/images/footer-banner.svg"
+import { Divider } from "../../components/Divider/Divider";
 
 
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
     <>
-    <div className="lg:mb-[189px] bg-white flex">
-      <div className="lg:flex px-4 lg:basis-[calc(100%-153px)] mx-auto">
+    <div>
+      <img className="mx-auto mb-[120px] lg:mb-16 px-3" src={footerBanner} alt="footer banner" />
+    </div>
+    <div className="lg:mb-[119px] flex">
+      <div className="lg:flex px-4 lg:basis-[calc(100%-153px)] lg:mx-auto">
         <ul className="flex flex-col basis-full flex-wrap lg:flex-row justify-between">
           <li className="lg:basis-[397px] mb-8 lg:mb-0" >
             <Link className="mb-4 lg:mb-5 flex items-center italic font-bold text-base lg:text-2xl text-gray-900">
@@ -43,9 +48,9 @@ const Footer = () => {
     </div>
 
     {/* divider */}
-     <div className="border-t border-gray-300 my-4"></div>
+    <Divider/>
       
-      <div className="px-4 flex gap-y-2 flex-col lg:flex-row lg:justify-around lg:items-center">
+      <div className="p-4 flex gap-y-2 flex-col lg:flex-row lg:justify-around lg:items-center">
         <p className="text-xs font-normal lg:text-lg">&copy; { year } easedrive. All rights reserved.</p>
         <p className="text-xs font-normal lg:text-lg">Privacy Policy</p>
         <p className="text-xs font-normal lg:text-lg">Terms of use</p>

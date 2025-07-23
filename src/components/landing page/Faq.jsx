@@ -37,20 +37,20 @@ const FaqSection = () => {
 
   return (
     <section className="mb-[83px] w-full px-4 lg:px-[154px] mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold mb-6 text-center">FAQs</h2>
+      <h2 className="text-2xl lg:text-5xl font-bold mb-4 lg:mb-[30px] text-center">FAQs</h2>
       <div className="space-y-4">
         {faqs.map((faq, index) => {
           const isOpen = openIndexes.includes(index);
           return (
             <div
               key={index}
-              className="border border-gray-300 rounded-lg shadow-sm transition"
+              className="bg-white p-4 lg:px-[49px] border border-gray-100 rounded-[32px] shadow-sm transition"
             >
               <button
-                className="flex items-center justify-between w-full p-4 text-left"
+                className="flex items-center justify-between w-full text-left"
                 onClick={() => toggleFaq(index)}
               >
-                <span className="text-lg font-bold">{faq.question}</span>
+                <span className={`${isOpen ? "mb-[17px] lg:mb-3" : "mb-0"} text-base lg:text-2xl font-bold`}>{faq.question}</span>
                 {isOpen ? (
                   <FaChevronUp className="text-gray-800" />
                 ) : (
@@ -58,7 +58,7 @@ const FaqSection = () => {
                 )}
               </button>
               {isOpen && (
-                <div className="px-4 pb-4 text-gray-700 font-normal">{faq.answer}</div>
+                <div className="text-xs leading-normal lg:text-[18px] text-gray-700 font-normal">{faq.answer}</div>
               )}
             </div>
           );
