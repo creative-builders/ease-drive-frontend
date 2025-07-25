@@ -1,3 +1,9 @@
+// import { useState, isValidElement, cloneElement } from "react";
+import { useState } from "react";
+
+import { FiEye, FiEyeOff } from "react-icons/fi";
+
+
 export default function FormInput({
   label,
   type = "",
@@ -9,14 +15,24 @@ export default function FormInput({
   required,
   error,
   className = "",
-  leftIcon,         
-  rightIcon,        
+  leftIcon,
+  rightIcon,
   inputClassName = "",
 }) {
+  const [showPassword, setShowPassword] = useState(false);
+  const isPasswordType = type === "password";
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  // Determine which icon to show
+  const visibilityIcon = showPassword ?  <FiEyeOff size={16} /> : <FiEye size={16} />;
+
   return (
     <div className={`mb-4 ${className}`}>
       {label && (
-        <label htmlFor={id} className="block font-[inter] text-[14px] leading-[100%] tracking-normal font-medium mb-2">
+        <label htmlFor={id} className="block text-[14px] font-medium mb-2">
           {label}
         </label>
       )}
@@ -27,18 +43,31 @@ export default function FormInput({
           </span>
         )}
         <input
-          type={type}
+          type={isPasswordType && showPassword ? "text" : type}
           id={id}
           name={name}
           value={value}
           onChange={onChange}
           required={required}
           placeholder={placeholder}
-          className={`w-full px-5 py-2 gap-2 border border-gray-300 mb-2 rounded-2xl focus:outline-none focus:ring-0 focus:ring-transparent ${
+          className={`w-full px-5 py-2 border border-gray-300 rounded-2xl focus:outline-none placeholder-gray-200 ${
             leftIcon ? "pl-10" : ""
-          } ${rightIcon ? "pr-10" : ""} placeholder-gray-200 ${inputClassName}`}
+          } ${rightIcon ? "pr-10" : ""} ${inputClassName}`}
         />
-        {rightIcon && (
+        {isPasswordType && rightIcon && (
+          <span
+            className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
+            onClick={togglePasswordVisibility}
+          >
+            {visibilityIcon}
+          </span>
+        )}
+        {/* {!isPasswordType && rightIcon && (
+          <span className="absolute inset-y-0 right-0 flex items-center pr-3">
+            {rightIcon}
+          </span>
+        )} */}
+        {type !== "password" && rightIcon && (
           <span className="absolute inset-y-0 right-0 flex items-center pr-3">
             {rightIcon}
           </span>

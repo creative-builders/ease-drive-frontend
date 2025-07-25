@@ -1,3 +1,4 @@
+import React, { useRef, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import Camera from '../../assets/icons/Camera';
 import UserIcon from '../../assets/icons/UserIcon';
@@ -11,8 +12,26 @@ import CustomButton from "../../components/CustomButton";
 
 
 const EditProfileView = ({ onClose }) => {
+
+  const [profileImage, setProfileImage] = useState(profile);
+  const fileInputRef = useRef(null);
+
+  const handleIconClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setProfileImage(imageUrl);
+     console.log(imageUrl)
+    }
+  };
+ 
+
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md h-[683px] flex flex-col gap-24">
+    <div className="bg-white rounded-2xl p-6 shadow-md h-[683px] w-full md:w-[439px] flex flex-col gap-20">
       <figure className="">
         <div className="flex items-center space-x-2 mb-4">
           <button onClick={onClose}>
@@ -22,8 +41,22 @@ const EditProfileView = ({ onClose }) => {
         </div>
 
         <div className="flex items-center space-x-4 relative">
-          <img src={profile} alt="Profile" className="w-14 h-14 rounded-full" />
-          <Camera className="w-4 h-4 absolute left-7 cursor-pointer bottom-3" />
+          <img
+            src={profileImage}
+            alt="Profile"
+            className="w-14 h-14 rounded-full object-cover"
+          />
+          <Camera
+            className="w-4 h-4 absolute left-7 cursor-pointer bottom-3"
+            onClick={handleIconClick}
+          />
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            className="hidden"
+            onChange={handleFileChange}
+          />
         </div>
 
         <form className="gap-4 mt-4" action="">
@@ -34,7 +67,7 @@ const EditProfileView = ({ onClose }) => {
               // value={plateNumber}
               // onChange={(e) => setPlateNumber(e.target.value)}
               placeholder="Enter document Id number"
-              inputClassName = "indent-4 flex items-center justify-center"
+              inputClassName = "indent-1 flex items-center justify-center"
               required
               leftIcon={<UserIcon />}
           />
@@ -46,7 +79,7 @@ const EditProfileView = ({ onClose }) => {
               // value={plateNumber}
               // onChange={(e) => setPlateNumber(e.target.value)}
               placeholder="Enter document Id number"
-              inputClassName = "indent-4 flex items-center justify-center"
+              inputClassName = "indent-1 flex items-center justify-center"
               required
               leftIcon={<EmailTwo />}
           />
@@ -58,32 +91,31 @@ const EditProfileView = ({ onClose }) => {
               // value={plateNumber}
               // onChange={(e) => setPlateNumber(e.target.value)}
               placeholder="Enter document Id number"
-              inputClassName = "indent-4 flex items-center justify-center"
+              inputClassName = "indent-1 flex items-center justify-center"
               required
               leftIcon={<CallTwo className="text-gray-200" />}
           />
 
           <FormInput
-              label="Password"
-              id="password"
-              type='password'
-              // value={plateNumber}
-              // onChange={(e) => setPlateNumber(e.target.value)}
-              placeholder="Enter document Id number"
-              inputClassName = "indent-4 flex items-center justify-center"
-              required
-              leftIcon={<LockIcon />}
-              rightIcon={<EyeIcon />}
-
+            label="Password"
+            id="password"
+            type='password'
+            // value={plateNumber}
+            // onChange={(e) => setPlateNumber(e.target.value)}
+            placeholder="Enter document Id number"
+            inputClassName = "indent-1 flex items-center justify-center"
+            required
+            leftIcon={<LockIcon />}
+            rightIcon={<EyeIcon />}
           />
 
-          <p className="font-[inter] font-medium text-base leading-[100%] tracking-normal text-left mt-4 text-blue-600">forget password</p>
+          <p className="font-medium text-base leading-[100%] tracking-normal text-left mt-4 text-blue-600">forget password</p>
         </form>
       </figure>
 
       <CustomButton
-        name="submit"
-        className="px-4 py-4 w-full rounded-2xl gap-2 mt-6 bg-green-400"
+        name="Save"
+        className="px-4 py-4 w-full rounded-2xl gap-2 mt-6 bg-primary-700"
         />
 
     </div>

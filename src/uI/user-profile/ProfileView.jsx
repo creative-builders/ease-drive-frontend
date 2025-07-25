@@ -29,12 +29,12 @@ const ProfileView = ({ onEdit }) => {
       {/* The rest of personal info... */}
       
         <section className='h-32 gap-2 p-2 border-b-[1px] border-gray-100'>
-            <h2 className='font-[inter] font-medium text-[18px] leading-[100%] tracking-normal capitalize'>personal information</h2>
+            <h2 className='font-medium text-[18px] leading-[100%] tracking-normal capitalize'>personal information</h2>
             <div className='flex px-2 py-3 items-center justify-start gap-2'>
             <EmailIcon />
             <input 
                 type="email" 
-                className='h-6 w-40 font-[inter] font-medium text-[14px] leading-6 tracking-normal border-none'
+                className='h-6 w-48 sm:w-40 font-medium text-[14px] rounded-lg leading-6 tracking-normal border-none'
                 placeholder="solobachi45@gmail.com" 
                 id=""
             />
@@ -44,7 +44,7 @@ const ProfileView = ({ onEdit }) => {
             <CallIcon />
             <input 
                 type="number" 
-                className='h-6 w-40 font-[inter] font-medium text-[14px] leading-6 tracking-normal border-none'
+                className='h-6 w-48 sm:w-40 font-medium rounded-lg text-[14px] leading-6 tracking-normal border-none'
                 placeholder="solobachi45@gmail.com" 
                 id=""
             />
@@ -53,20 +53,20 @@ const ProfileView = ({ onEdit }) => {
 
         <section className='h-14 gap-5 flex px-3 py-2 border-b-[1px] border-gray-100'>
            <PromoIcon />
-           <p className='font-[inter] font-medium text-[14px] leading-6 tracking-normal'>Promo card</p>
+           <p className='font-medium text-[14px] leading-6 tracking-normal'>Promo card</p>
         </section>
 
         <section className='h-32 gap-2 p-2 border-b-[1px] border-gray-100'>
-            <p className='font-[inter] font-medium text-[18px] leading-[100%] tracking-normal capitalize'>account</p>
+            <p className='font-medium text-[18px] leading-[100%] tracking-normal capitalize'>account</p>
 
             <div className='flex px-2 py-3 items-center justify-start gap-2 cursor-pointer'>
             <LogoutIcon />
-            <p className='font-[inter] font-medium text-[14px] leading-6 tracking-normal text-red-500'>log out</p>
+            <p className='font-medium text-[14px] leading-6 tracking-normal text-red-500'>log out</p>
             </div>
 
             <div className='flex px-2 py-3 items-center justify-start gap-2 cursor-pointer'>
             <DelectIcon />
-            <p className='font-[inter] font-medium text-[14px] leading-6 tracking-normal text-red-500'>delect account</p>
+            <p className='font-medium text-[14px] leading-6 tracking-normal text-red-500'>delete account</p>
             </div>
         </section>
     </div>
