@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import TabSelector from "../../../components/TabSelector/TabSelector";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useMutation } from "@tanstack/react-query";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import toast from "react-hot-toast";
@@ -7,12 +9,6 @@ import { loginAuth } from "../../../store/auth/general/api";
 import GoogleAuthV3 from "../../../components/GoogleAuthV3";
 import { userAtom } from "../../../components/atoms/userAtom";
 import { useSetRecoilState } from "recoil";
-import leftImage from "../../../assets/images/auth-left-image.png";
-import carImage from "../../../assets/images/Car.png"
-import { EyeOpenIcon } from "../../../assets/icons/EyeOpenIcon";
-import { EyeCloseIcon } from "../../../assets/icons/EyeCloseIcon";
-import { LockPasswordIcon } from "../../../assets/icons/LockPasswordIcon";
-import { EmailSignedIcon } from "../../../assets/icons/EmailSignedIcon";
 
 
 const Login = () => {
@@ -27,6 +23,9 @@ const Login = () => {
      password:""
     })
 
+    const handleClick  = (tabName) => {
+        setActiveTab(tabName);
+    };
     
     const handleTogglePassword = () => {
         setTogglePassword((prev) => !prev);
@@ -69,29 +68,29 @@ const Login = () => {
     };
 
     return (
-        <div className='min-h-screen flex justify-center gap-x-[31px] bg-gray-500'>
-            <div className='basis-[607px] px-4 py-4'>
-             <Link to={"/"} className="mb-4 lg:mb-5 flex items-center italic font-bold text-base lg:text-2xl text-gray-900">
-                  <img src={carImage} alt="Ease Drive Logo" />
-                  <h2>Ease Drive</h2>          
-              </Link>
-                <h3 className="mb-4 text-xl text-gray-950 font-bold">Login</h3>
+        <div className='min-h-screen bg-gray-500'>
+            <div className='w-11/12 mx-auto xl:w-8/12 px-2 py-4'>
+                <h2 className="font-bold text-base text-center text-gray-950 mb-[51px]">
+                    <Link to="/">EaseDrive</Link>
+                </h2>
+                <h3 className="mb-4 text-xl text-gray-950 font-bold">Welcome back</h3>
+                <p className="text-gray-600 mb-16">Log into your EaseDrive account.</p>
+
+                {/* Tab Selector Section */}
+                {/* <TabSelector
+                    extendedStyles={"mb-[34px]"}
+                    tabs={tabs}
+                    handleClick={handleClick}
+                    activeTab={activeTab}
+                /> */}
                 <form onSubmit={handleSubmit}>
-                    <div className="mb-4 relative">
-                        <label 
-                        className="block mb-4 text-sm lg:text-lg"
-                        htmlFor="email_phone_number"
-                        > 
-                        Enter Email/Phone Number 
+                    <div className="mb-4">
+                        <label className="text-gray-400 mb-2 block" htmlFor={activeTab === "Email Address" ? "email" :"phoneNumber"}>
+                            {activeTab === "Email Address" ? "Email Address" : "Phone Number"} 
                         </label>
-                        <span 
-                           className="inline-block absolute left-4 top-1/2 cursor-pointer translate-y-1/2">
-                            <EmailSignedIcon/>
-                        </span> 
                         <input 
-                            className="px-6 lg:px-5 rounded-lg border border-neutral-400 text-neutral-400 w-full bg-gray-white placeholder-gray-2"
+                            className="p-4 rounded-lg w-full bg-gray-300"
                             type={activeTab === "Email Address" ? "email" : "tel"} 
-                            placeholder="Enter your email address/Phone Number"
                             name={"email"} 
                             id={"email"} 
                             value={inputs.email}
@@ -100,15 +99,10 @@ const Login = () => {
                     </div>
 
                     <div className="mb-[45px] relative">
-                        <label className="block mb-4 text-sm lg:text-lg" htmlFor="password">Enter Password</label>
-                         <span 
-                           className="inline-block absolute left-4 top-1/2 cursor-pointer translate-y-1/2">
-                            <LockPasswordIcon/>
-                        </span> 
+                        <label className="text-gray-400 mb-2 block" htmlFor="password">Password</label>
                         <input 
-                            className="px-1.5 pl-10 lg:px-5 rounded-lg border border-neutral-400 w-full bg-gray-white placeholder-gray-2"
+                            className="p-4 rounded-lg w-full bg-gray-300"
                             type={togglePassword ? "text" : "password"}
-                            placeholder="Enter your password"
                             name="password"
                             id="password"
                             value={inputs.password}
@@ -121,34 +115,39 @@ const Login = () => {
                         <span 
                             onClick={handleTogglePassword}
                             className="inline-block absolute right-4 top-1/2 cursor-pointer translate-y-1/2">
-                            {togglePassword ? <EyeOpenIcon/> : <EyeCloseIcon/>} 
+                            {togglePassword ? <FiEyeOff fontSize={"18"}/> : <FiEye fontSize={"18"}/>} 
                         </span>
                     </div>
 
                     {/* Login Button */}
                     <button
                     type="submit"
-                       className={`inline-block mb-8 w-full px-1.5 h-[72px] rounded-lg transition-all duration-300 
+                       className={`inline-block mb-8 w-full p-4 rounded-lg transition-all duration-300 
                         ${ isFormValid ? "bg-green-300 hover:bg-green-700" : "bg-green-200 cursor-not-allowed"}`
                         }
                         disabled={!isFormValid}
                     >
                         <span className="text-bold text-base text-white flex items-center justify-center">
-                       { isLoading ? <LoadingSpinner className="animate-spin"/> : "Login"}
+                       { isLoading ? <LoadingSpinner className="animate-spin"/> : "Login to EaseDrive"}
                         </span>
                     </button>
 
                     {/* Or use Google auth */}
-                    <div className="flex mb-2 lg:mb-4 items-center gap-x-4 before:flex-1 before:border-neutral-400 before:border-t after:flex-1 after:border-neutral-400 after:border-t"> or </div>
+                    <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div>
 
                      {/* Google Login Component */}
                     <div className="flex justify-center mb-16 p-4 ">
                     <GoogleAuthV3/>
                     </div>
+
+                    <div className="flex justify-center gap-x-2">
+                        <p>Don &apos; t have an account?</p>
+                        <Link to="/signup-as" className="text-green-300">Sign Up </Link>
+                    </div>
                 </form>
             </div>
-            <div className="basis-[528px] flex hidden lg:block">
-                <img src={leftImage} alt="login left image" />
+            <div className="flex hidden lg:block">
+
             </div>
         </div>
     );
