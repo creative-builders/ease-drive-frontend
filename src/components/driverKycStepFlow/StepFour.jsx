@@ -5,11 +5,16 @@ import ErrorPopup from "../ErrorPopup";
 import { Modal } from '../Modal';
 import { RockedIconSuccess } from '../../assets/icons/RocketIconSucess';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
+import axios from 'axios';
+
+import { useSearchParams } from 'react-router-dom';
 
 import CustomButton from '../CustomButton';
+import { number } from 'framer-motion';
 
 export const StepFour = ({ nextStep, step, totalSteps }) => {
     const fileInputRef = useRef(null);
+    const [searchParams] = useSearchParams();
     const [agreed, setAgreed] = useState(true);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [showModal, setShowModal] = useState(false);
@@ -27,40 +32,83 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
         setErrorMessage(msg);
         setShowErrorPopup(true);
     };
-
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        if (file && file.type.startsWith('image/')) {
-            // setSelectedFile(file);
+        if (file && file.type.startsWith("image/")) {
             setPreviewUrl(URL.createObjectURL(file));
         }
+        setSelectedFiles(file); // save the file for later use
     };
 
-    const handleNext = (e) => {
+    const token = searchParams.get("whois");
+
+    const handleSkip = () => {
+        setShowModal(true);
+        console.log(token);
+    };
+
+    const handleNext = async () => {
         const newErrors = {};
-        const file = e.target.files[0];
-        if (file && file.type.startsWith('image/')) {
-            // setSelectedFile(file);
-            setPreviewUrl(URL.createObjectURL(file));
-        }
 
         if (!formData.vehicleType) {
             newErrors.vehicleType = "Please select you vehicle type";
+            showError("Please select you vehicle type");
         }
 
         if (!formData.plateNumber || formData.plateNumber.trim() === "") {
             newErrors.plateNumber = "Please provide plate number";
+            showError("Please provide plate number");
         }
 
         if (selectedFiles.length === 0) {
+            showError("Please upload prpfile image or just skip ");
             newErrors.files = "Please upload at least one document image";
         }
 
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
+            console.log(token)
+            console.log(formData)
 
-            setShowModal(true);
+            const _formData = new FormData();
+            console.log(formData.plateNumber.toString())
+
+            _formData.append("documentType", formData.documentType);
+            _formData.append("documentID", formData.documentID);
+            _formData.append("meansOfIdentification", formData.meansOfIdentification);
+            _formData.append("documentPhotos", formData.documentPhotoS); // multiple calls for each file
+
+            // rideInfo.*
+            _formData.append("vehicleType", formData.vehicleType);
+           
+            _formData.append("vehiclePhotos", formData.vehiclePhotos);
+            _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
+            _formData.append("vehicleColor", formData.vehicleColor);
+            _formData.append("serviceArea", formData.serviceArea);
+            _formData.append("numberOfSeats", formData.numberOfSeats);
+
+
+            // bankDetails.*
+            _formData.append("bankAccountHolderName", formData.bankAccountHolderName);
+            _formData.append("bankName", formData.bankName);
+            _formData.append("bankAccountNumber", formData.bankAccountNumber);
+            _formData.append("transactionPin", "2345");
+
+            // images
+            _formData.append("profileImage", formData.profileImage[0]); // Assuming profileImage is an array of files
+
+            try {
+                const data = await axios.put(`http://localhost:8000/api/driver/driverkyc?whois=${token}`, _formData)
+
+                console.log("KYC data updated successfully:", data);
+                setShowModal(true);
+            } catch (error) {
+                console.error("Error updating KYC data:", error);
+                showError("Failed to update KYC data. Please try again.");
+            }
+            // setShowModal(true);
+            // console.log(token)
         }
     };
     // const handleNext = () => {
@@ -149,13 +197,13 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                         <button
                             type="button"
                             className="lg:w-full max-990:w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
-                            onClick={handleNext}
+                            onClick={() => handleSkip()}
                         >
                             Skip
                         </button>
 
                         <CustomButton name="Submit" extendedStyles="w-full p-3 lg:p-4 rounded-lg"
-                            btnClick={() => handleNext(e)} />
+                            btnClick={() => handleNext()} />
                     </div>
 
                     <div className="lg:w-[617px] lg:h-[765px] max-990:hidden lg:p-5 gap-8 opacity-100 flex items-center justify-center">

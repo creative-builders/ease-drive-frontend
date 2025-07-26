@@ -70,7 +70,7 @@ export const DriverSignupForm = () => {
         };
 
         const response = await axios.post(
-            "http://localhost:8000/api/auth/register/driver",
+            "http://localhost:8000/api/auth/register/driver", 
             driverData
         );
 
@@ -110,25 +110,9 @@ export const DriverSignupForm = () => {
         });
     };
 
-    // Google signup mutation
-    const signupWithGoogle = async () => {
-        const response = await axios.post("http://localhost:8000/api/auth/google");
-        return response.data;
-    };
+   
 
-    const {
-        mutate: handleSignupWithGoogle,
-        isPending: isGoogleLoading,
-    } = useMutation({
-        mutationFn: signupWithGoogle,
-        onSuccess: () => {
-            showError("Google signup successful.");
-        },
-        onError: (error) => {
-            showError(error?.response?.data?.message || error.message);
-        },
-    });
-
+   
     // Auto-dismiss error popup
     useEffect(() => {
         if (showErrorPopup) {
@@ -141,7 +125,7 @@ export const DriverSignupForm = () => {
     }, [showErrorPopup]);
 
     return (
-        <div className="lg:flex lg:w-[669px] lg:h-[1077px] h-full items-center justify-center px-4 relative lg:pb-10 max-900:py-4">
+        <div className="lg:flex lg:w-[669px] lg:h-[1077px] h-full items-center justify-center px-4 relative lg:pt-4 max-900:py-4">
             <ErrorPopup
                 message={errorMessage}
                 show={showErrorPopup}
@@ -171,7 +155,7 @@ export const DriverSignupForm = () => {
                         // iconSrc="/user-03.svg"
                         placeholder="Enter your full name"
                         value={formData.fullName}
-                        onChange={handleChange("fullName")}
+                        onFormChange={handleChange("fullName")}
                     >
                         <UserIcon className="w-6 h-6 text-gray-500" />
                     </CustomInputField>
@@ -182,7 +166,7 @@ export const DriverSignupForm = () => {
                         placeholder="Enter your email address"
                         type="email"
                         value={formData.email}
-                        onChange={handleChange("email")}
+                        onFormChange={handleChange("email")}
                     >
                         <MailIcon className="w-6 h-6 text-gray-500" />
                     </CustomInputField>
@@ -193,7 +177,7 @@ export const DriverSignupForm = () => {
                         placeholder="Enter your password"
                         type="password"
                         value={formData.password}
-                        onChange={handleChange("password")}
+                        onFormChange={handleChange("password")}
                         rightIcon={<FiEye className="text-gray-400 cursor-pointer" />}
                     >
                         <LockedIcon className="w-6 h-6 text-gray-500" />
@@ -205,7 +189,7 @@ export const DriverSignupForm = () => {
                         placeholder="Re-enter your password"
                         type="password"
                         value={formData.confirmpassword}
-                        onChange={handleChange("confirmpassword")}
+                        onFormChange={handleChange("confirmpassword")}
                         rightIcon={<FiEye className="text-gray-400 cursor-pointer" />}
                     >
                         <LockedIcon className="w-6 h-6 text-gray-500" />
@@ -217,7 +201,7 @@ export const DriverSignupForm = () => {
                         placeholder="Enter your phone number"
                         type="tel"
                         value={formData.phone}
-                        onChange={handleChange("phone")}
+                        onFormChange={handleChange("phone")}
                     >   <CallIcon className="w-6 h-6 text-gray-500" />
                     </CustomInputField>
 

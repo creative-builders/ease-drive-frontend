@@ -11,6 +11,7 @@ export const CustomSelectField = ({
   defaultHolder,
   rightIcon: RightIcon,
   children,
+  onFormChange, // ✅ Add onFormChange prop
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -63,13 +64,22 @@ export const CustomSelectField = ({
             <li
               key={idx}
               onClick={() => {
-                // ✅ Simulate event for handleUpdateFormData
-                onChange({ target: { name, value: opt } });
+                if (typeof onChange === "function") {
+                  if (typeof name === "string") {
+                    // If name is provided, simulate event or call with name+value
+                    onChange.length === 1
+                      ? onChange({ target: { name, value: opt } }) // e.g., handleUpdateFormData(e)
+                      : onChange(name, opt); // e.g., handleUpdateFormData("city", opt)
+                  } else {
+                    // No name? Just pass value
+                    onChange(opt);
+                  }
+                }
+
                 setIsOpen(false);
               }}
-              className={`px-4 py-2 text-[16px] hover:bg-gray-100 cursor-pointer ${
-                opt === value ? "bg-gray-100 font-semibold" : ""
-              }`}
+              className={`px-4 py-2 text-[16px] hover:bg-gray-100 cursor-pointer ${opt === value ? "bg-gray-100 font-semibold" : ""
+                }`}
             >
               {opt}
             </li>

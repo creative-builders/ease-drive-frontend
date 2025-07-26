@@ -3,7 +3,7 @@ import { useState } from "react";
 import { StepOne } from '../../../components/driverKycStepFlow/StepOne';
 import { StepTwo } from '../../../components/driverKycStepFlow/StepTwo';
 import { StepThree } from '../../../components/driverKycStepFlow/StepThree';
-import { StepFour} from  '../../../components/driverKycStepFlow/StepFour';
+import { StepFour } from '../../../components/driverKycStepFlow/StepFour';
 import { FormProvider } from "../../../hooks/useStepFlowFormContext";
 // import { useMutation } from "@tanstack/react-query"; 
 // import { driverSignUpAuth } from "../../../store/auth/driver/api";
@@ -14,12 +14,24 @@ export const DriverKycPage = () => {
 
    // Corrected Initial State (Now it's an object instead of an array)
    const initialInputFields = {
-       
-      documentType: "", documentID: "", dob: "", documentURL: ""
-      , meansOfIdentification: "", bankName:"",
-       bankAccountNumber:"", bankAccountHolderName:"",
-        vehiclePhotos:[], vehicleColor:"", numberOfSeats:"", serviceArea:"", 
-        plateNumber:"", vehicleType:"", profileImage:[], documentID: "", documentPhotos:[]
+
+      documentType: "", 
+    
+      dob: "", 
+      documentURL: "", 
+      meansOfIdentification: "", 
+      bankName: "",
+      bankAccountNumber: "", 
+      bankAccountHolderName: "",
+      vehiclePhotos: [], 
+      vehicleColor: "", 
+      numberOfSeats: "", 
+      serviceArea: "",
+      plateNumber: "", 
+      vehicleType: "", 
+      profileImage: [],
+      documentID: "", 
+      documentPhotos: []
    };
 
    // const [signupData, setSignupData] = useState(initialInputFields);
