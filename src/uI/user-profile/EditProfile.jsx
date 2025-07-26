@@ -115,7 +115,7 @@ const EditProfileView = ({ onClose }) => {
 
       <CustomButton
         name="Save"
-        className="px-4 py-4 w-full rounded-2xl gap-2 mt-6 bg-primary-700"
+        className="px-4 py-4 w-full rounded-2xl gap-2 mt-6 bg-green-700"
         />
 
     </div>
