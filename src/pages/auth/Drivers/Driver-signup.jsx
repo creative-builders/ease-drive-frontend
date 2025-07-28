@@ -14,7 +14,7 @@ const DriverSignupPage = () => {
    // Corrected Initial State (Now it's an object instead of an array)
    const initialInputFields = {
       firstName: "", lastName: "", phoneNumber: "", email: "", password: "",
-      confirmPassword: "", documentType: "", documentID: "", dob: "", documentURL: ""
+      confirmPassword: "",meansOfIdentification: "", identificationNumber: "", documentType: "", documentID: "", dob: "", documentURL: ""
    };
 
    // const [signupData, setSignupData] = useState(initialInputFields);

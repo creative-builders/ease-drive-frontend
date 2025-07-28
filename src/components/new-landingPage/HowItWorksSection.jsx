@@ -21,7 +21,7 @@ export const HowItWorksSection = () => {
     const cards = [
         {
             number: "1",
-            imgSrc: "/how1 (4).png",
+            imgSrc: "/how1.png",
             title: "Download the App & Sign up",
             desc: "Create an account as a rider or driver using your phone number or email."
         },

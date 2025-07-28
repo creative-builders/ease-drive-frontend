@@ -8,7 +8,8 @@ import DrivUpload from '../pages/auth/Drivers/DrivUpload';
 import DrivPlace from '../pages/auth/Drivers/DrivPlace';
 import PassengersSignup from '../pages/auth/Passengers/PassengersSignup';
 import Login from '../pages/auth/Login/Login';
-import DriverSignup from '../pages/auth/Drivers/Driver-signup';
+// import DriverSignup from '../pages/auth/Drivers/Driver-signup';
+import { DriverSignup } from '../pages/auth/driverSignup/DriverSignup';
 import { ForgotPassword } from '../pages/auth/Passengers/Forgot-password';
 import { Otp } from '../pages/auth/Passengers/Otp';
 import { ChangePassword } from '../pages/auth/Passengers/Change-password';
@@ -35,10 +36,11 @@ import SetRoutes from '../components/yourRoute/SetRoutes';
 import ViewBookings from '../components/Bookings/ViewBookings';
 import DriverBoard from '../components/driverDashboardFolders/DriverBoard';
 import DataStatus from '../components/driverDashboardFolders/DataStatus';
+import { SignupOptions} from '../pages/auth/SignupOptions/SignupOptions';
 // import Header from '../layout/dashboard/header/Header';
 
 
-
+import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
 
 
 
@@ -47,11 +49,12 @@ const IndexRoute = () => {
     <Router>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/signup-as" element={<Options />} />
+      <Route path="/signup-as" element={<SignupOptions />} />
       <Route path="/login" element={<Login/>} />
       <Route path="/activate" element={<ActivateAccount/>} />
       <Route path="/passengers-signup" element={<PassengersSignup />} />
       <Route path="/driver-signup" element={<DriverSignup />} />
+      <Route path="/driver-kyc" element={<DriverKycPage />} />
       <Route path="/Dri-verify" element={<DriVerify />} />
       <Route path="/Driv-upload" element={<DrivUpload />} />
       <Route path="/Driv-place" element={<DrivPlace />} />
