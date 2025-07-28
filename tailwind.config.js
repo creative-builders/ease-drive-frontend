@@ -30,7 +30,8 @@ export default {
           400:"#A1A1A1"
         },
         accent:{
-          100:"#EDF3FF"
+          100:"#EDF3FF",
+          500:"#5E69F6"
         },
         light: "#FDFDFD",
         headHighlight: "#127C71", 

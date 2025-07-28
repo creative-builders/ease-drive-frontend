@@ -1,157 +1,186 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import LoadingSpinner from "../../../components/LoadingSpinner";
 import toast from "react-hot-toast";
-import { loginAuth } from "../../../store/auth/general/api";
-import GoogleAuthV3 from "../../../components/GoogleAuthV3";
-import { userAtom } from "../../../components/atoms/userAtom";
 import { useSetRecoilState } from "recoil";
+import { loginAuth } from "../../../store/auth/general/api";
+import { userAtom } from "../../../components/atoms/userAtom";
+import GoogleAuthV3 from "../../../components/GoogleAuthV3";
+import LoadingSpinner from "../../../components/LoadingSpinner";
+
 import leftImage from "../../../assets/images/auth-left-image.png";
-import carImage from "../../../assets/images/Car.png"
+import carImage from "../../../assets/images/Car.png";
+
 import { EyeOpenIcon } from "../../../assets/icons/EyeOpenIcon";
 import { EyeCloseIcon } from "../../../assets/icons/EyeCloseIcon";
 import { LockPasswordIcon } from "../../../assets/icons/LockPasswordIcon";
 import { EmailSignedIcon } from "../../../assets/icons/EmailSignedIcon";
-
+import { AlertCircle } from "../../../assets/icons/AlertCircle";
 
 const Login = () => {
-    const navigate =  useNavigate();
-    const setUser = useSetRecoilState(userAtom);
-    const [activeTab, setActiveTab] = useState("Email Address");
-    const tabs = ["Email Address", "Phone Number"];
-    const [togglePassword, setTogglePassword] = useState(false);
-    const [isFormValid, setIsFormValid] = useState(false);
-    const [inputs, setInputs] = useState({
-     email:"",
-     password:""
-    })
+  const navigate = useNavigate();
+  const setUser = useSetRecoilState(userAtom);
 
-    
-    const handleTogglePassword = () => {
-        setTogglePassword((prev) => !prev);
-    };
+  const [togglePassword, setTogglePassword] = useState(false);
+  const [inputTouched, setInputTouched] = useState(false);
+  const [inputs, setInputs] = useState({
+    email_or_phone: "",
+    password: "",
+  });
 
-    const handleChange = (e) => {
-        setInputs(prev => ({...prev,[e.target.name]:e.target.value}));
-    }
+  const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputs.email_or_phone);
+  const isPhone = /^[0-9]{10,}$/.test(inputs.email_or_phone);
+  const isPasswordValid = inputs.password.length >= 5;
 
-    useEffect(() => {
-        const isEmailValid = activeTab === "Email Address" ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputs.email) : true;
-        const isPhoneValid = activeTab === "Phone Number" ? /^[0-9]{10,}$/.test(inputs.email) : true;
-        const isPasswordValid = inputs.password.length >= 6;
-        setIsFormValid(inputs.email && inputs.password && (isEmailValid || isPhoneValid) && isPasswordValid);
-    }, [inputs.email, inputs.password, activeTab]);
+  const showInputError =
+    inputTouched && inputs.email_or_phone && !(isEmail || isPhone);
+  const showPasswordError = inputTouched && inputs.password.length > 0 && !isPasswordValid;
 
-    const { mutate:submitLogin, isLoading } = useMutation(loginAuth, {
-        onSuccess: (response) => {
-        toast.success(response?.message);
-        console.log(response.data)
-        localStorage.setItem("current_user",JSON.stringify(response.data));
-        setUser(response.data);
-        navigate("/dashboard");
-        setInputs( prev => ({
-        ...prev,
-        email:"",
-        password:""
-        }))
+  const isFormValid = inputs.email_or_phone && inputs.password && (isEmail || isPhone) && isPasswordValid;
 
-        },
-        onError : (error) => {
-        toast.error(error.response.data.message || error.message)
-        }
-    })
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setInputTouched(true);
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        submitLogin(inputs)
+  const handleTogglePassword = () => setTogglePassword((prev) => !prev);
 
-    };
+  const { mutate: submitLogin, isLoading } = useMutation(loginAuth, {
+    onSuccess: (response) => {
+      toast.success(response?.message);
+      localStorage.setItem("current_user", JSON.stringify(response.data));
+      setUser(response.data);
+      navigate("/dashboard");
+      setInputs({ email_or_phone: "", password: "" });
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.message || error.message);
+    },
+  });
 
-    return (
-        <div className='min-h-screen flex justify-center gap-x-[31px] bg-gray-500'>
-            <div className='basis-[607px] px-4 py-4'>
-             <Link to={"/"} className="mb-4 lg:mb-5 flex items-center italic font-bold text-base lg:text-2xl text-gray-900">
-                  <img src={carImage} alt="Ease Drive Logo" />
-                  <h2>Ease Drive</h2>          
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitLogin(inputs);
+  };
+
+  return (
+    <div className="min-h-screen flex justify-center gap-x-[31px] bg-gray-500">
+      {/* LEFT SIDE */}
+      <div className="basis-[607px] px-4 py-4">
+        <Link to="/" className="mb-4 lg:mb-5 flex items-center italic font-bold text-base lg:text-2xl text-gray-900">
+          <img src={carImage} alt="Ease Drive Logo" />
+          <h2>Ease Drive</h2>
+        </Link>
+
+        <h3 className="mb-4 text-xl text-gray-950 font-bold">Login</h3>
+
+        <form onSubmit={handleSubmit}>
+          {/* Email/Phone Field */}
+          <div className="mb-4 relative">
+            <label htmlFor="email_or_phone" className="block mb-2 text-sm lg:text-lg">
+              Enter Email/Phone Number
+            </label>
+
+            <span className="absolute left-2 top-1/2 text-gray-400">
+              <EmailSignedIcon />
+            </span>
+
+            <input
+              type="text"
+              name="email_or_phone"
+              id="email_or_phone"
+              placeholder="Enter your email or phone number"
+              value={inputs.email_or_phone}
+              onChange={handleChange}
+              className={`lg:px-10 pl-10 rounded-lg w-full bg-white placeholder-gray-400 text-neutral-700 
+                ${showInputError ? "border border-red-500" : "border border-neutral-400"}`}
+            />
+            {showInputError && (
+              <div className="mt-2 flex items-center gap-x-1.5 text-red-500 text-sm">
+                <AlertCircle />
+                <span>Invalid email or phone number</span>
+              </div>
+            )}
+          </div>
+
+          {/* Password Field */}
+          <div className="mb-4 relative">
+            <label htmlFor="password" className="block mb-2 text-sm lg:text-lg">
+              Enter Password
+            </label>
+
+            <span className="absolute left-2 top-1/2 text-gray-400">
+              <LockPasswordIcon />
+            </span>
+
+            <input
+              type={togglePassword ? "text" : "password"}
+              name="password"
+              id="password"
+              placeholder="Enter your password"
+              value={inputs.password}
+              onChange={handleChange}
+              className="lg:px-10 pl-10 pr-11 rounded-lg border border-neutral-400 w-full bg-white placeholder-gray-400 text-neutral-700"
+            />
+
+            <span
+              onClick={handleTogglePassword}
+              className="absolute right-4 top-1/2 cursor-pointer text-gray-500"
+            >
+              {togglePassword ? <EyeOpenIcon /> : <EyeCloseIcon />}
+            </span>
+
+            {showPasswordError && (
+              <div className="mt-2 flex items-center gap-x-1.5 text-red-500 text-sm">
+                <AlertCircle />
+                <span>Password must be at least 5 characters</span>
+              </div>
+            )}
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={!isFormValid}
+            className={`inline-block mb-2 w-full px-1.5 h-[52px] rounded-lg transition-all duration-300 
+              ${isFormValid ? "bg-green-500 hover:bg-green-600" : "bg-green-200 cursor-not-allowed"}`}
+          >
+            <span className="text-white font-semibold flex items-center justify-center">
+              {isLoading ? <LoadingSpinner className="animate-spin" /> : "Login"}
+            </span>
+          </button>
+
+          {/* Footer Links */}
+          <div className="mb-8 flex justify-between items-center text-sm">
+            <span className="text-gray-700">
+              Don’t have an account?
+              <Link to="/signup-as" className="text-accent-500 ml-1 font-medium">
+                Create One
               </Link>
-                <h3 className="mb-4 text-xl text-gray-950 font-bold">Login</h3>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4 relative">
-                        <label 
-                        className="block mb-4 text-sm lg:text-lg"
-                        htmlFor="email_phone_number"
-                        > 
-                        Enter Email/Phone Number 
-                        </label>
-                        <span 
-                           className="inline-block absolute left-4 top-1/2 cursor-pointer translate-y-1/2">
-                            <EmailSignedIcon/>
-                        </span> 
-                        <input 
-                            className="px-6 lg:px-5 rounded-lg border border-neutral-400 text-neutral-400 w-full bg-gray-white placeholder-gray-2"
-                            type={activeTab === "Email Address" ? "email" : "tel"} 
-                            placeholder="Enter your email address/Phone Number"
-                            name={"email"} 
-                            id={"email"} 
-                            value={inputs.email}
-                            onChange={handleChange}
-                        />
-                    </div>
+            </span>
+            <Link to="/Forgot-password" className="text-accent-500 font-medium">
+              Forgot Password
+            </Link>
+          </div>
 
-                    <div className="mb-[45px] relative">
-                        <label className="block mb-4 text-sm lg:text-lg" htmlFor="password">Enter Password</label>
-                         <span 
-                           className="inline-block absolute left-4 top-1/2 cursor-pointer translate-y-1/2">
-                            <LockPasswordIcon/>
-                        </span> 
-                        <input 
-                            className="px-1.5 pl-10 lg:px-5 rounded-lg border border-neutral-400 w-full bg-gray-white placeholder-gray-2"
-                            type={togglePassword ? "text" : "password"}
-                            placeholder="Enter your password"
-                            name="password"
-                            id="password"
-                            value={inputs.password}
-                            onChange={handleChange}
-                        />
-                        <p className="absolute text-sm right-4 top-4/5 mt-2 text-green-400 cursor-pointer">
-                            <Link to={"/Forgot-password"}>Forgot Password</Link>
-                        </p>
+          {/* Divider */}
+          <div className="flex mb-4 items-center gap-x-4 before:flex-1 before:border-neutral-400 before:border-t after:flex-1 after:border-neutral-400 after:border-t text-sm text-gray-500">
+            or
+          </div>
 
-                        <span 
-                            onClick={handleTogglePassword}
-                            className="inline-block absolute right-4 top-1/2 cursor-pointer translate-y-1/2">
-                            {togglePassword ? <EyeOpenIcon/> : <EyeCloseIcon/>} 
-                        </span>
-                    </div>
+          {/* Google Login */}
+          <div className="flex justify-center mb-16 p-4">
+            <GoogleAuthV3 />
+          </div>
+        </form>
+      </div>
 
-                    {/* Login Button */}
-                    <button
-                    type="submit"
-                       className={`inline-block mb-8 w-full px-1.5 h-[72px] rounded-lg transition-all duration-300 
-                        ${ isFormValid ? "bg-green-300 hover:bg-green-700" : "bg-green-200 cursor-not-allowed"}`
-                        }
-                        disabled={!isFormValid}
-                    >
-                        <span className="text-bold text-base text-white flex items-center justify-center">
-                       { isLoading ? <LoadingSpinner className="animate-spin"/> : "Login"}
-                        </span>
-                    </button>
-
-                    {/* Or use Google auth */}
-                    <div className="flex mb-2 lg:mb-4 items-center gap-x-4 before:flex-1 before:border-neutral-400 before:border-t after:flex-1 after:border-neutral-400 after:border-t"> or </div>
-
-                     {/* Google Login Component */}
-                    <div className="flex justify-center mb-16 p-4 ">
-                    <GoogleAuthV3/>
-                    </div>
-                </form>
-            </div>
-            <div className="basis-[528px] flex hidden lg:block">
-                <img src={leftImage} alt="login left image" />
-            </div>
-        </div>
-    );
-}
+      {/* RIGHT SIDE */}
+      <div className="basis-[528px] hidden lg:flex">
+        <img src={leftImage} alt="login illustration" />
+      </div>
+    </div>
+  );
+};
 
 export default Login;
