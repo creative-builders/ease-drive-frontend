@@ -135,7 +135,7 @@ export const DriverSignupForm = () => {
             <div className="w-full">
                 {/* Logo & Title */}
                 <div className="flex items-center gap-4">
-                    <img src="/logocar.svg" alt="car" className="w-[64px] h-[60px]" />
+                    <img src="/ease-drivelogo.png" alt="car" className="lg:w-[64px] lg:h-[64px] max-990:w-[45px] max-990:h-[45px]" />
                     <h1 className="font-inter text-[#1E1E1E] italic font-bold text-[36px]">
                         Ease Drive
                     </h1>

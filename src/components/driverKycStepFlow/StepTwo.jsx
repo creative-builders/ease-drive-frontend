@@ -62,10 +62,10 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
           <div className="lg:w-[637px] lg:h-[734px] max-990:w-[100%] max-990:h-[90vh] max-990:m-auto 
           max-990:flex max-990:justify-center max-990:items-center max-990:ml-0
          ml-6  p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
-            <div className="lg:w-[556px] lg:h-[59px] max-990:w-[100%] max-990:h-[108px] max-990:flex max-990:flex-col
-                   gap-[7.38px] opacity-100 lg:-mb-4 ">
+            <div className="lg:w-[100%] lg:h-[59px] max-990:w-[100%] max-990:h-[108px] max-990:flex max-990:flex-col
+                   gap-[7.38px] opacity-100 lg:-mb-2 ">
               <div className='flex flex-row max-990:flex max-990:flex-row w-full max-990:items-center max-990:w-full items-center  justify-start gap-2'>
-                <img src='/logocar.svg' className='lg:w-[65px] lg:h-[59px] max-990:w-[32px] max-990:h-[32px]' />
+                <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] max-990:w-[45px] max-990:h-[45px] mr-2' />
                 <h1 className="font-inter text-[#1E1E1E] italic font-bold lg:text-[36px] max-990:text-[18px] leading-[100%]">
                   Ease Drive
                 </h1>
@@ -74,7 +74,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
             </div>
 
 
-            <div className="lg:w-[556px] lg:h-[] max-990:w-[347px] max-990:h-[429px] justify-between opacity-100 flex flex-row items-start">
+            <div className="lg:w-[100%] lg:h-[] max-990:w-[347px] max-990:h-[429px] justify-between opacity-100 flex flex-row items-start">
               <div className='text-left lg:w-[60%] max-990:w-[70%]'>
                 <h4 className="font-inter text-[#1E1E1E] italic font-semibold lg:text-[26px] max-990:text-[18px] leading-[100%]">
                   Vehicle Information
@@ -105,7 +105,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   options={["Keke", "Car", "Shuttle Bus", "Motorcycle", "Regular Bus", "Truck"]}
                   rightIcon={FaChevronDown}
                 >
-                  <CarIcon className="w-6 h-6 text-gray-500" />
+                  <CarIcon className="w-8 h-8 text-gray-500" />
 
                 </CustomSelectField>
                 {errors.vehicleType && (
@@ -121,7 +121,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   type="text"
 
                 >
-                  <PlateNumberIcon className="w-6 h-6 text-gray-500" />
+                  <PlateNumberIcon className="w-8 h-8 text-gray-500" />
                 </CustomInputField>
                  {errors.plateNumber && (
                 <p className="text-red-500 text-sm -mt-2">{errors.plateNumber}</p>
@@ -137,7 +137,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   options={["Odenigwe", "Hill-Top", "Main gate", "Behind Flat", "Odeim gate",]}
                   rightIcon={FaChevronDown}
                 >
-                  <LocationHomeIcon className="w-6 h-6 text-gray-500" />
+                  <LocationHomeIcon className="w-8 h-8 text-gray-500" />
                 </CustomSelectField>
 
                 {/* <CustomInputField
@@ -158,7 +158,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                     placeholder="e.g 4"
                     type="text"
                   >
-                    <SeatIcon className="w-6 h-6 text-gray-500" />
+                    <SeatIcon className="w-8 h-8 text-gray-500" />
                   </CustomInputField>
 
                   <CustomInputField
@@ -172,7 +172,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   // value={formData.phone}
                   // onChange={handleChange("phone")}
                   >
-                    <ColorIcon className="w-6 h-6 text-gray-500" />
+                    <ColorIcon className="w-8 h-8 text-gray-500" />
                   </CustomInputField>
                 </div>
 
@@ -233,8 +233,8 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
           </div>
 
-          <div className="lg:w-[617px] lg:h-[765px] max-990:hidden lg:p-5 gap-8 opacity-100  flex items-center justify-center">
-            <img src="/optionimg.png" alt="" className='lg:w-[528px] lg:h-[623px] lg:rounded-[45px]' />
+          <div className="lg:w-[528px] lg:h-[881px] max-990:hidden lg:p-5 gap-8 opacity-100  flex items-center justify-center">
+          <img src="/signup-banner-l.png" alt="" className=' lg:rounded-[45px]' />
           </div>
 
 

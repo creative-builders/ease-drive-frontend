@@ -81,7 +81,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
 
             // rideInfo.*
             _formData.append("vehicleType", formData.vehicleType);
-           
+
             _formData.append("vehiclePhotos", formData.vehiclePhotos);
             _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
             _formData.append("vehicleColor", formData.vehicleColor);
@@ -134,9 +134,9 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
             <div className="flex items-center justify-center h-full min-h-screen bg-gray-100">
                 <div className="bg-white lg:w-[1216px] lg:h-[700px] max-990:w-[90%] max-990:h-[] max-990:m-auto py-6 lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center">
                     <div className="lg:w-[637px] max-990:w-full max-990:h-[60vh] lg:h-[90vh] max-990:m-auto max-990:ml-0 ml-6 p-5 gap-8 bg-white flex flex-col items-center justify-center">
-                        <div className="lg:w-[556px] max-990:w-full max-990:flex max-990:flex-col gap-[7.38px] opacity-100 lg:-mb-4">
+                        <div className="lg:w-[556px] max-990:w-full max-990:flex max-990:flex-col gap-[7.38px] opacity-100 ">
                             <div className="flex flex-row items-center justify-start gap-2">
-                                <img src="/logocar.svg" className="lg:w-[65px] lg:h-[59px] max-990:w-[32px] max-990:h-[32px]" />
+                                <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] max-990:w-[45px] max-990:h-[45px] mr-2' />
                                 <h1 className="font-inter text-[#1E1E1E] italic font-bold lg:text-[36px] max-990:text-[18px] leading-[100%]">
                                     Ease Drive
                                 </h1>
@@ -206,8 +206,8 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                             btnClick={() => handleNext()} />
                     </div>
 
-                    <div className="lg:w-[617px] lg:h-[765px] max-990:hidden lg:p-5 gap-8 opacity-100 flex items-center justify-center">
-                        <img src="/optionimg.png" alt="Visual" className="lg:w-[528px] lg:h-[623px] rounded-[45px]" />
+                    <div className="lg:w-[528px] lg:h-[638px] max-990:hidden opacity-100 rounded-[45px]">
+                        <img src="/signup-banner.png" alt="" className='lg:rounded-[45px]' />
                     </div>
                 </div>
             </div>

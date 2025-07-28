@@ -11,7 +11,7 @@ export const SignupOptions = () => {
           <div className="lg:w-[556px] lg:h-[59px] max-990:w-[182px] max-990:h-[108px] max-990:flex max-990:flex-col
            gap-[7.38px] opacity-100 ">
             <div className='flex flex-row max-990:flex max-990:flex-col w-full  items-center justify-center gap-2'>
-              <img src='/logocar.svg' className='lg:w-[65px] lg:h-[59px]' />
+              <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] max-990:w-[45px] max-990:h-[45px] lg:mr-2 ' />
               <h1 className="font-inter text-[#1E1E1E] italic font-bold lg:text-[36px] max-990:text-[34px] leading-[100%]">
                 Ease Drive
               </h1>
@@ -51,7 +51,7 @@ export const SignupOptions = () => {
         </div>
 
         <div className="lg:w-[617px] lg:h-[765px] max-990:hidden lg:p-5 gap-8 opacity-100  flex items-center justify-center">
-          <img src="/optionimg.png" alt="" className='lg:w-[528px] lg:h-[623px] lg:rounded-[45px]' />
+          <img src="/signup-banner.png" alt="" className='lg:w-[528px] lg:h-[623px] lg:rounded-[45px]' />
         </div> 
        
 

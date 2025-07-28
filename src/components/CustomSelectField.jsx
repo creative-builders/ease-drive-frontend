@@ -39,7 +39,7 @@ export const CustomSelectField = ({
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center w-[100%] items-center justify-center">
-          <div className="lg:w-[32px] lg:h-[32px] max-990:w-[18px] max-990:h-[18px] mr-2 mt-[6px]">
+          <div className="lg:w-[32px] lg:h-[32px] max-990:w-[18px] max-990:h-[18px] mr-2 ">
             {children}
           </div>
 

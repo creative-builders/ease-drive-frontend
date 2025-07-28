@@ -13,6 +13,8 @@ import addfile from '../../assets/images/addFile.svg'
 import { CarIcon } from '../../assets/icons/CarIcon'
 import { AddFileIcon } from '../../assets/icons/AddFileIcon'
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
+import { CreditCardIcon } from '../../assets/icons/CreditCardIcon';
+import { BankHouseIcon } from '../../assets/icons/BankHouseIcon';
 
 
 
@@ -57,11 +59,11 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                <div className="lg:w-[637px] lg:h-[734px] max-990:w-[100%] max-990:h-[70vh] max-990:m-auto 
           max-990:flex max-990:justify-center max-990:items-center max-990:ml-0
          ml-6  p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
-                  <div className="lg:w-[556px] lg:h-[59px] max-990:w-[100%] max-990:h-[] max-990:flex max-990:flex-col
-                   gap-[7.38px] opacity-100 lg:-mb-4 ">
+                  <div className="lg:w-[100%] lg:h-[59px] max-990:w-[100%] max-990:h-[] max-990:flex max-990:flex-col
+                   gap-[7.38px] opacity-100  ">
                      <div className='flex flex-row max-990:flex max-990:flex-row w-full max-990:items-center max-990:w-full items-center  justify-start gap-2'>
-                        <img src='/logocar.svg' className='lg:w-[65px] lg:h-[59px] max-990:w-[32px] max-990:h-[32px]' />
-                        <h1 className="font-inter text-[#1E1E1E] italic font-bold lg:text-[36px] max-990:text-[18px] leading-[100%]">
+                        <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] max-990:w-[45px] max-990:h-[45px] mr-2' />
+                        <h1 className="font-inter text-[#1E1E1E] italic font-bold lg:text-[36px] max-990:text-[18px] leading-[120%]">
                            Ease Drive
                         </h1>
 
@@ -116,7 +118,7 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                            ]}
                            rightIcon={FaChevronDown}
                         >
-                           <CarIcon className="w-6 h-6 text-gray-500" />
+                           <BankHouseIcon className="w-8 h-8 text-gray-500" />
 
                         </CustomSelectField>
                         {errors.bankName && (
@@ -133,7 +135,7 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                            type="text"
 
                         >
-                           <PlateNumberIcon className="w-6 h-6 text-gray-500" />
+                           <CreditCardIcon className="w-8 h-8 text-gray-500" />
                         </CustomInputField>
                         {errors.bankAccountNumber && (
                            <p className="text-red-500 text-sm -mt-2">{errors.bankAccountNumber}</p>
@@ -149,7 +151,7 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                            onFormChange={handleUpdateFormData}
 
                         >
-                           <PlateNumberIcon className="w-6 h-6 text-gray-500" />
+                           <PlateNumberIcon className="w-8 h-8 text-gray-500" />
                         </CustomInputField>
                         {errors.bankAccountHolderName && (
                            <p className="text-red-500 text-sm -mt-2">{errors.bankAccountHolderName}</p>
@@ -203,8 +205,8 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
 
                </div>
 
-               <div className="lg:w-[617px] lg:h-[765px] max-990:hidden lg:p-5 gap-8 opacity-100  flex items-center justify-center">
-                  <img src="/optionimg.png" alt="" className='lg:w-[528px] lg:h-[623px] lg:rounded-[45px]' />
+               <div className="lg:w-[528px] lg:h-[638px] max-990:hidden opacity-100 rounded-[45px]">
+                  <img src="/signup-banner.png" alt="" className='lg:w-[528px] lg:h-[623px] lg:rounded-[45px]' />
                </div>
 
 
