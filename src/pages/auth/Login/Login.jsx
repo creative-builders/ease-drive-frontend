@@ -65,7 +65,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)]">
-      <div className="bg-white basis-[94%] lg:basis-[calc(100% - 1226px)] flex">
+      <div className="flex h-[724px] bg-white p-4 lg:px-[40.5px] lg:py-[50.5px]">
         {/* LEFT SIDE */}
       <div className="basis-[607px] px-4 py-4">
 
@@ -152,7 +152,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={!isFormValid}
-            className={`inline-block mb-2 w-full px-1.5 h-[45px] lg:h-[60px] rounded-lg transition-all duration-300 
+            className={`inline-block w-full px-1.5 h-[45px] lg:h-[60px] rounded-lg transition-all duration-300 
               ${isFormValid ? "bg-green-500 hover:bg-green-600" : "bg-green-200 cursor-not-allowed"}`}
           >
             <span className="text-white font-semibold flex items-center justify-center">
@@ -174,7 +174,7 @@ const Login = () => {
           </div>
 
           {/* Divider */}
-          <div className="flex mb-4 items-center gap-x-4 before:flex-1 before:border-neutral-400 before:border-t after:flex-1 after:border-neutral-400 after:border-t text-sm text-gray-950">
+          <div className="flex mb-[26px] items-center gap-x-4 before:flex-1 before:border-neutral-400 before:border-t after:flex-1 after:border-neutral-400 after:border-t text-sm text-gray-950">
             or
           </div>
 
@@ -186,8 +186,8 @@ const Login = () => {
       </div>
 
       {/* RIGHT SIDE */}
-      <div className="basis-[528px] hidden lg:flex">
-        <img src={leftImage} alt="login illustration" />
+      <div className="lg:basis-[528px] rounded-[45px] lg:h-[623px] hidden lg:flex">
+        <img src={leftImage} className="rounded-[45px]" alt="login illustration" />
       </div>
       </div>
     </div>
