@@ -1,9 +1,9 @@
 import EmailIcon from '../../assets/icons/EmailIcon';
-import CallIcon from '../../assets/icons/CallIcon';
 import PromoIcon from '../../assets/icons/PromoIcon';
-import LogoutIcon from '../../assets/icons/LogoutIcon';
+import { LogoutIcon } from '../../assets/icons/LogoutIcon';
 import DelectIcon from '../../assets/icons/DelectIcon';
 import profile from '../../assets/images/profile-user.png'
+import { CallIcon } from '../../assets/icons/CallIcon';
 
 const ProfileView = ({ onEdit }) => {
   return (
