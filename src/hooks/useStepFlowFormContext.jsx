@@ -11,19 +11,24 @@ export const FormProvider = ({ children, initialInputFields = [] }) => {
     return initialState;
   };
 
-const[formData,setFormData] = useState(generateIntialState);
-const [inputTouched, setInputTouched] = useState(false);
+  const [formData, setFormData] = useState(generateIntialState());
 
-const handleUpdateFormData = (e) => {
-    setFormData(prev => ({...prev,[e.target.name]:e.target.value}));
-    setInputTouched(true);
-}
-return(
-<FormContext.Provider value={{ formData, inputTouched, setFormData, handleUpdateFormData}}>
-    {children}
-</FormContext.Provider>
- );
-}
+  const handleUpdateFormData = (eOrKey, value) => {
+    if (typeof eOrKey === "string") {
+      // Direct key-value update
+      setFormData((prev) => ({
+        ...prev,
+        [eOrKey]: value,
+      }));
+    } else if (eOrKey?.target?.name) {
+      // Event-based update
+      const { name, value } = eOrKey.target;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
 
   return (
     <FormContext.Provider value={{ formData, setFormData, handleUpdateFormData }}>
