@@ -6,7 +6,7 @@ import Options from '../pages/auth/SignupOptions/Options';
 import DriVerify from '../pages/auth/Drivers/DriVerify';
 import DrivUpload from '../pages/auth/Drivers/DrivUpload';
 import DrivPlace from '../pages/auth/Drivers/DrivPlace';
-import PassengersSignup from '../pages/auth/Passengers/PassengersSignup';
+import { RegisterPassenger } from '../pages/auth/Passengers/PassengersSignup';
 import Login from '../pages/auth/Login/Login';
 // import DriverSignup from '../pages/auth/Drivers/Driver-signup';
 import { DriverSignup } from '../pages/auth/driverSignup/DriverSignup';
@@ -52,7 +52,7 @@ const IndexRoute = () => {
       <Route path="/signup-as" element={<SignupOptions />} />
       <Route path="/login" element={<Login/>} />
       <Route path="/activate" element={<ActivateAccount/>} />
-      <Route path="/passengers-signup" element={<PassengersSignup />} />
+      <Route path="/passengers-signup" element={<RegisterPassenger />} />
       <Route path="/driver-signup" element={<DriverSignup />} />
       <Route path="/driver-kyc" element={<DriverKycPage />} />
       <Route path="/Dri-verify" element={<DriVerify />} />

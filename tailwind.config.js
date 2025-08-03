@@ -5,6 +5,7 @@ export default {
     extend: {
       colors:{
         gray:{
+         2:"#AEAEB2",
          100:"#DEFAE2",
          200:"#E1F4E5",
          300:"#F0F1F1",
@@ -27,11 +28,12 @@ export default {
          900:"#175023",
          950:"#072C0F"
         },
-        blue:{
-            800:"#3733CF"
+        neutral:{
+          400:"#A1A1A1"
         },
         accent:{
-          100:"#EDF3FF"
+          100:"#EDF3FF",
+          500:"#5E69F6"
         },
         light: "#FDFDFD",
         headHighlight: "#127C71", 
