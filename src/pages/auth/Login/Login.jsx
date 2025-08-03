@@ -1,153 +1,153 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
-import TabSelector from "../../../components/TabSelector/TabSelector";
-import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useMutation } from "@tanstack/react-query";
-import LoadingSpinner from "../../../components/LoadingSpinner";
 import toast from "react-hot-toast";
-import { loginAuth } from "../../../store/auth/general/api";
-import GoogleAuthV3 from "../../../components/GoogleAuthV3";
-import { userAtom } from "../../../components/atoms/userAtom";
 import { useSetRecoilState } from "recoil";
+import { loginAuth } from "../../../store/auth/general/api";
+import { userAtom } from "../../../components/atoms/userAtom";
+import GoogleAuthV3 from "../../../components/GoogleAuthV3";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 
+import leftImage from "./left-image.png";
+
+import { EyeOpenIcon } from "../../../assets/icons/EyeOpenIcon";
+import { EyeCloseIcon } from "../../../assets/icons/EyeCloseIcon";
+import { LockPasswordIcon } from "../../../assets/icons/LockPasswordIcon";
+import { EmailSignedIcon } from "../../../assets/icons/EmailSignedIcon";
+import { LogoText } from "../../../components/LogoText";
+import { InputField } from "../../../components/customFormFields/InputField";
 
 const Login = () => {
-    const navigate =  useNavigate();
-    const setUser = useSetRecoilState(userAtom);
-    const [activeTab, setActiveTab] = useState("Email Address");
-    const tabs = ["Email Address", "Phone Number"];
-    const [togglePassword, setTogglePassword] = useState(false);
-    const [isFormValid, setIsFormValid] = useState(false);
-    const [inputs, setInputs] = useState({
-     email:"",
-     password:""
-    })
+  const navigate = useNavigate();
+  const setUser = useSetRecoilState(userAtom);
 
-    const handleClick  = (tabName) => {
-        setActiveTab(tabName);
-    };
-    
-    const handleTogglePassword = () => {
-        setTogglePassword((prev) => !prev);
-    };
+  const [showPassword, setShowPassword] = useState(false);
+  const [inputTouched, setInputTouched] = useState(false);
+  const [inputs, setInputs] = useState({
+    email_or_phone: "",
+    password: "",
+  });
 
-    const handleChange = (e) => {
-        setInputs(prev => ({...prev,[e.target.name]:e.target.value}));
-    }
+  const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputs.email_or_phone);
+  const isPhone = /^[0-9]{10,}$/.test(inputs.email_or_phone);
+  const isPasswordValid = inputs.password.length >= 5;
 
-    useEffect(() => {
-        const isEmailValid = activeTab === "Email Address" ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputs.email) : true;
-        const isPhoneValid = activeTab === "Phone Number" ? /^[0-9]{10,}$/.test(inputs.email) : true;
-        const isPasswordValid = inputs.password.length >= 6;
-        setIsFormValid(inputs.email && inputs.password && (isEmailValid || isPhoneValid) && isPasswordValid);
-    }, [inputs.email, inputs.password, activeTab]);
+  const showInputError =
+   inputTouched && inputs.email_or_phone && !(isEmail || isPhone);
 
-    const { mutate:submitLogin, isLoading } = useMutation(loginAuth, {
-        onSuccess: (response) => {
-        toast.success(response?.message);
-        console.log(response.data)
-        localStorage.setItem("current_user",JSON.stringify(response.data));
-        setUser(response.data);
-        navigate("/dashboard");
-        setInputs( prev => ({
-        ...prev,
-        email:"",
-        password:""
-        }))
+  const showPasswordError = inputTouched && inputs.password.length > 0 && !isPasswordValid;
 
-        },
-        onError : (error) => {
-        toast.error(error.response.data.message || error.message)
-        }
-    })
+  const isFormValid = inputs.email_or_phone && inputs.password && (isEmail || isPhone) && isPasswordValid;
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        submitLogin(inputs)
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setInputTouched(true);
+  };
 
-    };
+  const handleTogglePassword = () => setShowPassword((prev) => !prev);
 
-    return (
-        <div className='min-h-screen bg-gray-500'>
-            <div className='w-11/12 mx-auto xl:w-8/12 px-2 py-4'>
-                <h2 className="font-bold text-base text-center text-gray-950 mb-[51px]">
-                    <Link to="/">EaseDrive</Link>
-                </h2>
-                <h3 className="mb-4 text-xl text-gray-950 font-bold">Welcome back</h3>
-                <p className="text-gray-600 mb-16">Log into your EaseDrive account.</p>
+  const { mutate: submitLogin, isLoading } = useMutation(loginAuth, {
+    onSuccess: (response) => {
+      toast.success(response?.message);
+      localStorage.setItem("current_user", JSON.stringify(response.data));
+      setUser(response.data);
+      navigate("/dashboard");
+      setInputs({ email_or_phone: "", password: "" });
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.message || error.message);
+    },
+  });
 
-                {/* Tab Selector Section */}
-                <TabSelector
-                    extendedStyles={"mb-[34px]"}
-                    tabs={tabs}
-                    handleClick={handleClick}
-                    activeTab={activeTab}
-                />
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label className="text-gray-400 mb-2 block" htmlFor={activeTab === "Email Address" ? "email" :"phoneNumber"}>
-                            {activeTab === "Email Address" ? "Email Address" : "Phone Number"} 
-                        </label>
-                        <input 
-                            className="p-4 rounded-lg w-full bg-gray-300"
-                            type={activeTab === "Email Address" ? "email" : "tel"} 
-                            name={"email"} 
-                            id={"email"} 
-                            value={inputs.email}
-                            onChange={handleChange}
-                        />
-                    </div>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitLogin(inputs);
+  };
 
-                    <div className="mb-[45px] relative">
-                        <label className="text-gray-400 mb-2 block" htmlFor="password">Password</label>
-                        <input 
-                            className="p-4 rounded-lg w-full bg-gray-300"
-                            type={togglePassword ? "text" : "password"}
-                            name="password"
-                            id="password"
-                            value={inputs.password}
-                            onChange={handleChange}
-                        />
-                        <p className="absolute text-sm right-4 top-4/5 mt-2 text-green-400 cursor-pointer">
-                            <Link to={"/Forgot-password"}>Forgot Password</Link>
-                        </p>
+  return (
+    <div className="min-h-screen flex flex-col lg:flex-row lg:items-center justify-center bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)]">
+      <div className="flex justify-center gap-x-[31px] bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)] lg:bg-white lg:bg-none shadow-[0_1px_15.5px_0_rgba(0,0,0,0.05)] p-4 lg:px-[40.5px]">
+        {/* LEFT SIDE */}
+      <div className="basis-[340px] bg-white lg:basis-[607px] py-[30px] px-1.5 lg:py-[40px] px-4">
 
-                        <span 
-                            onClick={handleTogglePassword}
-                            className="inline-block absolute right-4 top-1/2 cursor-pointer translate-y-1/2">
-                            {togglePassword ? <FiEyeOff fontSize={"18"}/> : <FiEye fontSize={"18"}/>} 
-                        </span>
-                    </div>
+      <Link to={"/"} className="mb-4 block lg:mb-8">
+        <LogoText/>
+      </Link>
 
-                    {/* Login Button */}
-                    <button
-                    type="submit"
-                       className={`inline-block mb-8 w-full p-4 rounded-lg transition-all duration-300 
-                        ${ isFormValid ? "bg-green-300 hover:bg-green-700" : "bg-green-200 cursor-not-allowed"}`
-                        }
-                        disabled={!isFormValid}
-                    >
-                        <span className="text-bold text-base text-white flex items-center justify-center">
-                       { isLoading ? <LoadingSpinner className="animate-spin"/> : "Login to EaseDrive"}
-                        </span>
-                    </button>
+        <h3 className="mb-4 lg:mb-8 text-lg lg:text-2xl text-gray-950 font-bold">Login</h3>
 
-                    {/* Or use Google auth */}
-                    <div className="flex mb-8 items-center gap-2 before:flex-1 before:border-gray-950 before:border-t after:flex-1 after:border-gray-950 after:border-t"> OR</div>
+        <form onSubmit={handleSubmit}>
+          <InputField
+          label="Enter Email/Phone Number"
+          name="email_or_phone"
+          type="text"
+          placeholder="Enter your email or phone number"
+          value={inputs.email_or_phone}
+          onChange={handleChange}
+          leftIcon={EmailSignedIcon}
+          error={showInputError ? "Invalid email or phone number" : ""}
+          />
 
-                     {/* Google Login Component */}
-                    <div className="flex justify-center mb-16 p-4 ">
-                    <GoogleAuthV3/>
-                    </div>
+          <InputField
+          label="Enter Password"
+          name="password"
+          placeholder="Enter your password"
+          value={inputs.password}
+          onChange={handleChange}
+          leftIcon={LockPasswordIcon}
+          error={showPasswordError ? "Password must be at least 5 characters" : ""}
+          toggleable
+          showPassword={showPassword}
+          handleTogglePassword={handleTogglePassword}
+          rightIconOpen={EyeOpenIcon}
+          rightIconClose={EyeCloseIcon}
+          isPassword
 
-                    <div className="flex justify-center gap-x-2">
-                        <p>Don &apos; t have an account?</p>
-                        <Link to="/signup-as" className="text-green-300">Sign Up </Link>
-                    </div>
-                </form>
-            </div>
-        </div>
-    );
-}
+          />
+
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={!isFormValid}
+            className={`inline-block mb-2 w-full px-1.5 h-[45px] lg:h-[60px] rounded-lg transition-all duration-300 
+              ${isFormValid ? "bg-green-500 hover:bg-green-600" : "bg-green-200 cursor-not-allowed"}`}
+          >
+            <span className="text-white font-semibold flex items-center justify-center">
+              {isLoading ? <LoadingSpinner className="animate-spin" /> : "Login"}
+            </span>
+          </button>
+
+          {/* Footer Links */}
+          <div className="mb-8 flex justify-between items-center">
+            <span className="text-gray-700 text-[8px] md:text-sm">
+              Don’t have an account?
+              <Link to="/signup-as" className="text-accent-500 ml-1 font-medium ">
+                Create One
+              </Link>
+            </span>
+            <Link to="/Forgot-password" className="text-accent-500 font-medium text-[8px] md:text-sm">
+              Forgot Password
+            </Link>
+          </div>
+
+          {/* Divider */}
+          <div className="flex mb-[26px] items-center gap-x-4 before:flex-1 before:border-neutral-400 before:border-t after:flex-1 after:border-neutral-400 after:border-t text-sm text-gray-950">
+            or
+          </div>
+
+          {/* Google auth Login */}
+          <GoogleAuthV3 />
+        </form>
+      </div>
+
+      {/* RIGHT SIDE */}
+      <div className="lg:basis-[528px] rounded-[45px] h-[623px] hidden lg:flex">
+        <img src={leftImage} className="rounded-[45px]" alt="login illustration" />
+      </div>
+      </div>
+    </div>
+  );
+};
 
 export default Login;
