@@ -125,7 +125,9 @@ export const DriverSignupForm = () => {
     }, [showErrorPopup]);
 
     return (
-        <div className="lg:flex lg:w-[669px] lg:h-[1077px] h-full items-center justify-center px-4 relative lg:pt-4 max-900:py-4">
+        <div className="lg:flex lg:w-[669px] lg:h-[1077px]
+        w-full
+         h-full items-center justify-center px-4 relative lg:pt-4 max-900:py-4">
             <ErrorPopup
                 message={errorMessage}
                 show={showErrorPopup}
@@ -135,7 +137,7 @@ export const DriverSignupForm = () => {
             <div className="w-full">
                 {/* Logo & Title */}
                 <div className="flex items-center gap-4">
-                    <img src="/ease-drivelogo.png" alt="car" className="lg:w-[64px] lg:h-[64px] max-990:w-[45px] max-990:h-[45px]" />
+                    <img src="/ease-drivelogo.png" alt="car" className="lg:w-[64px] lg:h-[64px] w-[45px] h-[45px]" />
                     <h1 className="font-inter text-[#1E1E1E] italic font-bold text-[36px]">
                         Ease Drive
                     </h1>
@@ -157,7 +159,7 @@ export const DriverSignupForm = () => {
                         value={formData.fullName}
                         onFormChange={handleChange("fullName")}
                     >
-                        <UserIcon className="w-6 h-6 text-gray-500" />
+                        <UserIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                     </CustomInputField>
 
                     <CustomInputField
@@ -168,7 +170,7 @@ export const DriverSignupForm = () => {
                         value={formData.email}
                         onFormChange={handleChange("email")}
                     >
-                        <MailIcon className="w-6 h-6 text-gray-500" />
+                        <MailIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                     </CustomInputField>
 
                     <CustomInputField
@@ -180,42 +182,39 @@ export const DriverSignupForm = () => {
                         onFormChange={handleChange("password")}
                         rightIcon={<FiEye className="text-gray-400 cursor-pointer" />}
                     >
-                        <LockedIcon className="w-6 h-6 text-gray-500" />
+                        <LockedIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                     </CustomInputField>
 
                     <CustomInputField
                         label="Confirm Password"
-                        iconSrc="/lock-password.svg"
                         placeholder="Re-enter your password"
                         type="password"
                         value={formData.confirmpassword}
                         onFormChange={handleChange("confirmpassword")}
                         rightIcon={<FiEye className="text-gray-400 cursor-pointer" />}
                     >
-                        <LockedIcon className="w-6 h-6 text-gray-500" />
+                        <LockedIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                     </CustomInputField>
 
                     <CustomInputField
                         label="Enter Phone number"
-                        iconSrc="/call-02.svg"
                         placeholder="Enter your phone number"
                         type="tel"
                         value={formData.phone}
                         onFormChange={handleChange("phone")}
-                    >   <CallIcon className="w-6 h-6 text-gray-500" />
+                    >   <CallIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                     </CustomInputField>
 
 
                     <CustomSelectField
                         label="Enter City"
-                        iconSrc="/city-02.svg"
                         value={formData.city}
                         defaultHolder="Select City"
                         onChange={handleCityChange}
                         options={["Anambra", "Lagos", "Kano"]}
                         rightIcon={FaChevronDown}
                     >
-                        <LocationHomeIcon className="w-6 h-6 text-gray-500" />
+                        <LocationHomeIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                     </CustomSelectField >
 
                     <button

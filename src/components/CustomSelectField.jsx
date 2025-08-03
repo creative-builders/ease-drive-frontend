@@ -11,7 +11,7 @@ export const CustomSelectField = ({
   defaultHolder,
   rightIcon: RightIcon,
   children,
-  onFormChange, // ✅ Add onFormChange prop
+  onFormChange, 
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -29,23 +29,23 @@ export const CustomSelectField = ({
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <label className="block lg:text-[18px] mb-1 max-990:text-[16px] w-[100%] font-medium text-[#333333]">
+      <label className="block lg:text-[18px] mb-1 text-[16px] w-[100%] font-medium text-gray-800">
         {label}
       </label>
 
       <div
         className="flex items-center justify-between border border-[#A1A1A1] 
-          lg:rounded-[16px] max-990:rounded-[8px] lg:px-4 lg:py-3 max-990:px-4 max-990:py-3 cursor-pointer"
+          lg:rounded-[16px] rounded-[8px] lg:px-4 lg:py-3 px-4 py-3 cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center w-[100%] items-center justify-center">
-          <div className="lg:w-[32px] lg:h-[32px] max-990:w-[18px] max-990:h-[18px] mr-2 ">
+          <div className="lg:w-[32px] lg:h-[32px] w-[18px] h-[18px] mr-4 ">
             {children}
           </div>
 
           <span
             className="text-gray-400 w-full outline-none text-placeholder lg:text-[18px] 
-              max-990:text-[12px] font-inter"
+            text-[12px] font-inter"
           >
             {value || defaultHolder}
           </span>

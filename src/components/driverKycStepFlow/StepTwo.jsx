@@ -56,35 +56,34 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
   };
 
   return (
-    <div lassName=" min-h-screen lg:h-full max-990:h-[95vh] ">
-      <div className="flex items-center justify-center h-full min-h-screen bg-gray-100">
-        <div className="bg-white lg:w-[1216px] lg:h-[990px] max-990:w-[90%] max-990:h-[95vh] max-990:m-auto py-6 lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center">
-          <div className="lg:w-[637px] lg:h-[734px] max-990:w-[100%] max-990:h-[90vh] max-990:m-auto 
-          max-990:flex max-990:justify-center max-990:items-center max-990:ml-0
-         ml-6  p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
-            <div className="lg:w-[100%] lg:h-[59px] max-990:w-[100%] max-990:h-[108px] max-990:flex max-990:flex-col
-                   gap-[7.38px] opacity-100 lg:-mb-2 ">
-              <div className='flex flex-row max-990:flex max-990:flex-row w-full max-990:items-center max-990:w-full items-center  justify-start gap-2'>
-                <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] max-990:w-[45px] max-990:h-[45px] mr-2' />
-                <h1 className="font-inter text-[#1E1E1E] italic font-bold lg:text-[36px] max-990:text-[18px] leading-[100%]">
+    <div lassName=" min-h-screen lg:h-full ">
+      <div className="flex items-center justify-center  min-h-screen ">
+        <div className="bg-white lg:w-[1216px] lg:h-[990px] w-[100%] h-[100%] m-auto lg:pt-12 lg:pb-12
+         opacity-100 flex flex-row items-center">
+          <div className="lg:w-[637px] lg:h-[734px] w-[100%] h-[100%] m-auto 
+          flex justify-center items-center ml-0
+           p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
+            <div className="lg:w-[100%] w-full flex flex-col  gap-[7px] opacity-100 ">
+              <div className="flex flex-row items-center justify-start gap-2">
+                <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
+                <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-[18px] leading-[100%]">
                   Ease Drive
                 </h1>
-
               </div>
             </div>
 
 
-            <div className="lg:w-[100%] lg:h-[] max-990:w-[347px] max-990:h-[429px] justify-between opacity-100 flex flex-row items-start">
-              <div className='text-left lg:w-[60%] max-990:w-[70%]'>
-                <h4 className="font-inter text-[#1E1E1E] italic font-semibold lg:text-[26px] max-990:text-[18px] leading-[100%]">
+            <div className="lg:w-[100%] lg:h-[] w-[347px] justify-between opacity-100 flex flex-row items-start">
+              <div className='text-left lg:w-[60%] w-[70%]'>
+                <h4 className="font-inter text-gray-700 italic font-semibold lg:text-[26px] text-[18px] leading-[100%]">
                   Vehicle Information
                 </h4>
-                <p className=" font-medium text-left text-[#333333] lg:text-[18px] max-990:text-[14px] font-inter lg:pb- pt-2">
+                <p className=" font-medium text-left text-gray-800 lg:text-[18px] text-[14px] font-inter lg:pb- pt-2">
                   Ensure your vehicle image is clean, recent, and shows the number plate.
                 </p>
               </div>
               <div>
-                <SectionLabel className="text-[#3733CF] bg-custom-gradient"
+                <SectionLabel className="text-blue-800 bg-custom-gradient"
 
                   title={` Step ${step}  of ${totalSteps}`}
                 />
@@ -105,7 +104,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   options={["Keke", "Car", "Shuttle Bus", "Motorcycle", "Regular Bus", "Truck"]}
                   rightIcon={FaChevronDown}
                 >
-                  <CarIcon className="w-8 h-8 text-gray-500" />
+                  <CarIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
 
                 </CustomSelectField>
                 {errors.vehicleType && (
@@ -121,11 +120,11 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   type="text"
 
                 >
-                  <PlateNumberIcon className="w-8 h-8 text-gray-500" />
+                  <PlateNumberIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                 </CustomInputField>
-                 {errors.plateNumber && (
-                <p className="text-red-500 text-sm -mt-2">{errors.plateNumber}</p>
-              )}
+                {errors.plateNumber && (
+                  <p className="text-red-500 text-sm -mt-2">{errors.plateNumber}</p>
+                )}
 
                 <CustomSelectField
                   label="Service Area (Location)"
@@ -137,7 +136,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   options={["Odenigwe", "Hill-Top", "Main gate", "Behind Flat", "Odeim gate",]}
                   rightIcon={FaChevronDown}
                 >
-                  <LocationHomeIcon className="w-8 h-8 text-gray-500" />
+                  <LocationHomeIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                 </CustomSelectField>
 
                 {/* <CustomInputField
@@ -158,7 +157,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                     placeholder="e.g 4"
                     type="text"
                   >
-                    <SeatIcon className="w-8 h-8 text-gray-500" />
+                    <SeatIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                   </CustomInputField>
 
                   <CustomInputField
@@ -172,7 +171,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   // value={formData.phone}
                   // onChange={handleChange("phone")}
                   >
-                    <ColorIcon className="w-8 h-8 text-gray-500" />
+                    <ColorIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                   </CustomInputField>
                 </div>
 
@@ -183,10 +182,10 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
             {/* Upload Section */}
             <div className="flex flex-col w-full -mt-4">
-              <p className="font-semibold text-left text-[#333333] lg:text-[18px] max-990:text-[16px] font-inter pt-2">
+              <p className="font-semibold text-left text-gray-800 lg:text-[18px] text-[16px] font-inter pt-2">
                 Upload a document
               </p>
-              <p className="font-medium text-left text-[#333333] lg:text-[14px] font-inter">
+              <p className="font-medium text-left text-gray-800 lg:text-[14px] text-[12px] font-inter">
                 You can upload up to 4 images (JPG, PNG). Max size: 5MB each
               </p>
 
@@ -195,7 +194,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                 <button
                   type="button"
                   onClick={handleUploadClick}
-                  className="lg:w-[30%] max-990:w-[50%] bg-green-200 text-gray-400 rounded-xl py-1.5 text-[18px] font-bold mb-4"
+                  className="lg:w-[30%] w-[50%] bg-green-200 text-gray-400 rounded-xl py-1.5 text-[18px] font-bold mb-4"
                 >
                   Upload Photos
                 </button>
@@ -233,8 +232,8 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
           </div>
 
-          <div className="lg:w-[528px] lg:h-[881px] max-990:hidden lg:p-5 gap-8 opacity-100  flex items-center justify-center">
-          <img src="/signup-banner-l.png" alt="" className=' lg:rounded-[45px]' />
+          <div className="lg:w-[528px] lg:h-[881px] hidden md:block lg:p-5 gap-8 opacity-100  flex items-center justify-center">
+            <img src="/signup-banner-l.png" alt="" className=' lg:rounded-[45px]' />
           </div>
 
 
