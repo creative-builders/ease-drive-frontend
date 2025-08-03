@@ -37,7 +37,7 @@ const Signupd = () =>{
             <input className='h-12 w-full border outline-none indent-3' type="email" />
            </article>
 
-           <article className='pa md:h-20 w-full flex flex-col items-left gap-2'>
+           {/* <article className='pa md:h-20 w-full flex flex-col items-left gap-2'>
             <label htmlFor="">Password</label>
             <input className='h-12 w-full border outline-none indent-3' type="password" />
            </article>
@@ -45,7 +45,7 @@ const Signupd = () =>{
            <article className='pa h-20 w-full flex flex-col items-left gap-2'>
             <label htmlFor="">Confirm password</label>
             <input className='h-12 w-full border outline-none indent-3' type="password" />
-           </article>
+           </article> */}
          </form>
          <div className="line h-[20px] w-full flex justify-around items-center">
          <span className=' border-b-2 w-2/5 border-black'></span> Or <span className=' border-b-2 w-2/5 border-black'></span>

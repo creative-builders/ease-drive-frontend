@@ -1,4 +1,4 @@
-const UserIcon = (props) => {
+export const ProfileIcon = (props) => {
   return (
    <svg 
     width="40" 
