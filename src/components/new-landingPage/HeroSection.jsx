@@ -160,7 +160,7 @@ export const HeroSection = () => {
                 borderColor="#20AE3A"
                 backgroundColor="#1A7B2C"
                 className="text-white font-inter hover:scale-[1.03] transition-transform"
-                urlLink="/passengers-signup"
+                urlLink="/signup-as"
               >
                 <span className="font-medium text-xs leading-[100%]">
                   Book a Ride
@@ -176,7 +176,7 @@ export const HeroSection = () => {
                 borderColor="#20AE3A"
                 backgroundColor="#FDFDFD"
                 className="text-primary-600 font-inter hover:scale-[1.03] transition-transform"
-                urlLink="/driver-signup"
+                urlLink="/signup-as"
               >
                 <span className="font-medium text-xs leading-[100%]">
                   Become a Driver

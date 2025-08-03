@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, } from 'react';
 import { Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import Frame from '/Frame.png';
 import Svg from '/Vector.svg'
 import SectionLabel from '../SectionLabel';
@@ -9,78 +10,82 @@ import { driverSignUpAuth } from "../../store/auth/driver/api";
 import toast from "react-hot-toast";
 import CustomButton from "../CustomButton"
 
-const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
-   const{ formData , setFormData,  handleUpdateFormData } = useStepFlowContext();
+const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
+    const { formData, setFormData, handleUpdateFormData } = useStepFlowContext();
+    const [searchParams] = useSearchParams();
     const [progress, setProgress] = useState(0);
     const [uploadComplete, setUploadComplete] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
-     const[isVerified,setIsVerified] = useState("");
-     const [uploading, setUploading] = useState(false);
+    const [isVerified, setIsVerified] = useState("");
+    const [uploading, setUploading] = useState(false);
+
+    const token = searchParams.get("token");
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
-    
+
         const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
-    
+
         setSelectedFile(`${file.name}  (${fileSizeMB} MB)`);
         setProgress(0);
         setUploadComplete(false);
         setUploading(true);
-    
+
         let uploadProgress = 0;
         const interval = setInterval(() => {
             uploadProgress += 10;
             setProgress(uploadProgress);
-    
+
             if (uploadProgress >= 100) {
                 clearInterval(interval);
                 setUploadComplete(true);
                 setUploading(false);
             }
         }, 300);
-    };  
-    
-    const {mutate:submitdriverSignUpAuth , isLoading} = useMutation(driverSignUpAuth,{
-          onSuccess:(response) => {
-          console.log(response?.message);
-          setIsVerified(response?.message);
-          setFormData( prev => ({
-              ...prev,
-                firstName: "", 
-                lastName: "", 
-                phoneNumber: "", 
+    };
+
+    const { mutate: submitdriverSignUpAuth, isLoading } = useMutation(driverSignUpAuth, {
+        onSuccess: (response) => {
+            console.log(response?.message);
+            setIsVerified(response?.message);
+            setFormData(prev => ({
+                ...prev,
+                firstName: "",
+                lastName: "",
+                phoneNumber: "",
                 email: "",
                 password: "",
-                confirmPassword: "", 
-                documentType: "", 
-                documentID: "", 
-                dob: "", 
+                confirmPassword: "",
+                documentType: "",
+                documentID: "",
+                dob: "",
                 sectionAddress: "",
                 documentURL: ""
             }))
-          },
-          onError: (error) => {
+        },
+        onError: (error) => {
             toast.error(error?.status >= 400 ? error?.response?.data?.message : error?.message)
-          }
-        })
+        }
+    })
 
-        const handleSubmit = (e) => {
-            e.preventDefault();
-        
-            if (!formData.sectionAddress || !selectedFile) {
-                toast.error("Please Fill in the necessary spaces");
-                return;
-            }
-        
-            submitdriverSignUpAuth({
-                ...formData,
-                role: "driver"
-            });
-        };
-        
+    const handleSubmit = (e) => {
+        e.preventDefault();
+      console.log(token)    
 
-        console.log(formData)
+        if (!formData.sectionAddress || !selectedFile) {
+            toast.error("Please Fill in the necessary spaces");
+            return;
+        }
+
+        submitdriverSignUpAuth({
+            ...formData,
+            role: "driver"
+        });
+    };
+
+
+    console.log(formData)
 
     return (
         <div className='min-h-screen w-full flex flex-col items-center gap-5 bg-[#F0F1F1]'>
@@ -100,13 +105,13 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
                 <span className='text-center md:text-left text-sm'>This Information will help us know you more</span>
                 <form onSubmit={handleSubmit} className='h-fit md:h-fit w-full p-4 flex flex-col gap-4 relative' action="">
 
-                     {/* check verification */}
+                    {/* check verification */}
                     {
-                    isVerified && <div className="border border-green-300 rounded-md text-green-700 p-2 mb-4">{isVerified}</div>
+                        isVerified && <div className="border border-green-300 rounded-md text-green-700 p-2 mb-4">{isVerified}</div>
                     }
                     <article className='h-20 w-full flex flex-col items-left gap-2'>
                         <label htmlFor="place">Address</label>
-                        <input placeholder='Enter your address' 
+                        <input placeholder='Enter your address'
                             className='h-12 w-full border outline-none p-6 rounded-lg'
                             type="text"
                             name="sectionAddress"
@@ -124,7 +129,7 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
                             // required
                             hidden
                             onChange={handleFileChange}
-                            // value={formData.documentURL}
+                        // value={formData.documentURL}
                         />
                         <label
                             className={`relative flex items-center justify-center border bg-[#FEFEFE] rounded-lg ${uploadComplete ? 'h-20 w-3/5' : 'h-72 w-full'}`}
@@ -144,11 +149,11 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
                                                 className="h-full bg-green-600 transition-all duration-300 flex"
                                                 style={{ width: `${progress}%` }}
                                             >
-                                               <span className="absolute inset-0 flex items-center justify-center text-black font-bold">
+                                                <span className="absolute inset-0 flex items-center justify-center text-black font-bold">
                                                     {progress}%
                                                 </span>
                                             </div>
-                                            
+
                                         </div>
                                     )}
                                 </div>
@@ -172,9 +177,9 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
                     </button> */}
                     <div className="mb-4">
                         <CustomButton
-                        name="submit"
-                        // extendedStyles={"w-full"}
-                        isLoading={isLoading}
+                            name="submit"
+                            // extendedStyles={"w-full"}
+                            isLoading={isLoading}
                         />
                     </div>
                 </form>
@@ -187,11 +192,11 @@ const StepFour = ({ nextStep, prevStep, step, totalSteps}) => {
                         Skip Now
                     </button> */}
 
-                
+
                 </div>
             </section>
         </div>
     );
 };
-  
+
 export default StepFour;

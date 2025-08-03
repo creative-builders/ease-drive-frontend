@@ -1,23 +1,15 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState } from 'react';
 
-const FormContext  = createContext();
+const FormContext = createContext();
 
-export const  FormProvider = ({ children, initialInputFields = [] }) => {
-// const [formData,setFormData] = useState({
-//  firstName:"",
-//  lastName:"",
-//  phoneNumber:"",
-//  email:"",
-//  password:"",
-//  confirmPassword:""
-// })
-const generateIntialState = () => {
+export const FormProvider = ({ children, initialInputFields = [] }) => {
+  const generateIntialState = () => {
     const initialState = {};
-    initialInputFields.forEach(inputField => {
-        initialState[inputField] = ""
-    })
+    initialInputFields.forEach((inputField) => {
+      initialState[inputField] = "";
+    });
     return initialState;
-}
+  };
 
 const[formData,setFormData] = useState(generateIntialState);
 const [inputTouched, setInputTouched] = useState(false);
@@ -33,4 +25,11 @@ return(
  );
 }
 
-export const useStepFlowContext = () => useContext(FormContext)
+  return (
+    <FormContext.Provider value={{ formData, setFormData, handleUpdateFormData }}>
+      {children}
+    </FormContext.Provider>
+  );
+};
+
+export const useStepFlowContext = () => useContext(FormContext);
