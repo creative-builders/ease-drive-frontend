@@ -47,14 +47,14 @@ const GoogleAuthV3 = ({ role = "passenger" }) => {
   return (
     <>
       {loading ? (
-        <CustomButton extendedStyles="inline-block mb-8 w-full p-4 rounded-lg" isLoading={loading} />
+        <CustomButton extendedStyles="inline-block w-full p-4 rounded-lg" isLoading={loading} />
       ) : (
         <button
           onClick={(e) => {
             e.preventDefault();
             login();
           }}
-          className="inline-block border border-neutral-400 mb-16 w-full p-4 bg-gray-300 rounded-lg"
+          className="inline-block h-[50px] lg:h-[60px] border border-neutral-400 w-full p-4 bg-gray-300 rounded-lg"
         >
           <span className="font-bold text-xs lg:text-base text-gray-950 flex justify-center items-center gap-x-2">
             <FcGoogle size={20} />

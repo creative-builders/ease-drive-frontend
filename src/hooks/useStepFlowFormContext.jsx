@@ -20,12 +20,14 @@ const generateIntialState = () => {
 }
 
 const[formData,setFormData] = useState(generateIntialState);
+const [inputTouched, setInputTouched] = useState(false);
 
 const handleUpdateFormData = (e) => {
-    setFormData(prev => ({...prev,[e.target.name]:e.target.value}))
+    setFormData(prev => ({...prev,[e.target.name]:e.target.value}));
+    setInputTouched(true);
 }
 return(
-<FormContext.Provider value={{ formData, setFormData, handleUpdateFormData}}>
+<FormContext.Provider value={{ formData, inputTouched, setFormData, handleUpdateFormData}}>
     {children}
 </FormContext.Provider>
  );

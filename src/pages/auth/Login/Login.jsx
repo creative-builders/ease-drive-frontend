@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -14,14 +14,14 @@ import { EyeOpenIcon } from "../../../assets/icons/EyeOpenIcon";
 import { EyeCloseIcon } from "../../../assets/icons/EyeCloseIcon";
 import { LockPasswordIcon } from "../../../assets/icons/LockPasswordIcon";
 import { EmailSignedIcon } from "../../../assets/icons/EmailSignedIcon";
-import { AlertCircle } from "../../../assets/icons/AlertCircle";
 import { LogoText } from "../../../components/LogoText";
+import { InputField } from "../../../components/customFormFields/InputField";
 
 const Login = () => {
   const navigate = useNavigate();
   const setUser = useSetRecoilState(userAtom);
 
-  const [togglePassword, setTogglePassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [inputTouched, setInputTouched] = useState(false);
   const [inputs, setInputs] = useState({
     email_or_phone: "",
@@ -34,6 +34,7 @@ const Login = () => {
 
   const showInputError =
    inputTouched && inputs.email_or_phone && !(isEmail || isPhone);
+
   const showPasswordError = inputTouched && inputs.password.length > 0 && !isPasswordValid;
 
   const isFormValid = inputs.email_or_phone && inputs.password && (isEmail || isPhone) && isPasswordValid;
@@ -43,7 +44,7 @@ const Login = () => {
     setInputTouched(true);
   };
 
-  const handleTogglePassword = () => setTogglePassword((prev) => !prev);
+  const handleTogglePassword = () => setShowPassword((prev) => !prev);
 
   const { mutate: submitLogin, isLoading } = useMutation(loginAuth, {
     onSuccess: (response) => {
@@ -64,95 +65,52 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)]">
-      <div className="flex h-[724px] bg-white p-4 lg:px-[40.5px] lg:py-[50.5px]">
+    <div className="min-h-screen flex flex-col lg:flex-row lg:items-center justify-center bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)]">
+      <div className="flex justify-center gap-x-[31px] bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)] lg:bg-white lg:bg-none shadow-[0_1px_15.5px_0_rgba(0,0,0,0.05)] p-4 lg:px-[40.5px]">
         {/* LEFT SIDE */}
-      <div className="basis-[607px] px-4 py-4">
+      <div className="basis-[340px] bg-white lg:basis-[607px] py-[30px] px-1.5 lg:py-[40px] px-4">
 
-      <div className="mb-4 lg:mb-8">
+      <Link to={"/"} className="mb-4 block lg:mb-8">
         <LogoText/>
-      </div>
+      </Link>
 
-        <h3 className="mb-4 text-xl text-gray-950 font-bold">Login</h3>
+        <h3 className="mb-4 lg:mb-8 text-lg lg:text-2xl text-gray-950 font-bold">Login</h3>
 
         <form onSubmit={handleSubmit}>
-          {/* Email/Phone Field */}
-          <div className="mb-4 relative">
-            <label htmlFor="email_or_phone" className="block mb-2 text-sm lg:text-lg">
-              Enter Email/Phone Number
-            </label>
-            
-            <div className={`
-              flex items-center gap-x-2 px-1.5 lg:px-4 h-[45px] lg:h-[54px]  border border-neutral-400 rounded-md lg:rounded-lg bg-white
-              ${showInputError ? "border border-red-500" : "border border-neutral-400"}
-              `}>
-              
-            <EmailSignedIcon className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px]"/>
+          <InputField
+          label="Enter Email/Phone Number"
+          name="email_or_phone"
+          type="text"
+          placeholder="Enter your email or phone number"
+          value={inputs.email_or_phone}
+          onChange={handleChange}
+          leftIcon={EmailSignedIcon}
+          error={showInputError ? "Invalid email or phone number" : ""}
+          />
 
-            <input
-              type="text"
-              name="email_or_phone"
-              id="email_or_phone"
-              placeholder="Enter your email or phone number"
-              value={inputs.email_or_phone}
-              onChange={handleChange}
-              className={`w-full bg-white border-none focus:border-none focus:ring-0 placeholder-gray-400 text-neutral-700 text-xs lg:text-lg`}
-            />
-            </div>
-       
-            {showInputError && (
-              <div className="mt-2 flex items-center gap-x-1.5 text-red-500 text-sm">
-                <AlertCircle stroke="#ff0000" />
-                <span>Invalid email or phone number</span>
-              </div>
-            )}
-          </div>
+          <InputField
+          label="Enter Password"
+          name="password"
+          placeholder="Enter your password"
+          value={inputs.password}
+          onChange={handleChange}
+          leftIcon={LockPasswordIcon}
+          error={showPasswordError ? "Password must be at least 5 characters" : ""}
+          toggleable
+          showPassword={showPassword}
+          handleTogglePassword={handleTogglePassword}
+          rightIconOpen={EyeOpenIcon}
+          rightIconClose={EyeCloseIcon}
+          isPassword
 
-          {/* Password Field */}
-          <div className="mb-4 lg:mb-8 relative">
-            <label htmlFor="password" className="block mb-2 text-sm lg:text-lg">
-              Enter Password
-            </label>
+          />
 
-          <div className={`
-            flex items-center gap-x-2 px-1.5 lg:px-4 h-[45px] lg:h-[54px] border border-neutral-400 rounded-md lg:rounded-lg bg-white
-            ${showPasswordError ? "border border-red-500" : "border border-neutral-400"}
-            `}>
-    
-           <LockPasswordIcon className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px]" />
-
-            <input
-              type={togglePassword ? "text" : "password"}
-              name="password"
-              id="password"
-              placeholder="Enter your password"
-              value={inputs.password}
-              onChange={handleChange}
-              className="w-full bg-white border-none focus:border-none focus:ring-0 placeholder-gray-400 text-neutral-700 text-xs lg:text-lg"
-            />
-
-            <span
-              onClick={handleTogglePassword}
-              className="text-gray-500 cursor-pointer"
-            >
-              {togglePassword ? <EyeOpenIcon className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px]" /> : <EyeCloseIcon className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px]" />}
-            </span>
-
-          </div>
-
-            {showPasswordError && (
-              <div className="mt-2 flex items-center gap-x-1.5 text-red-500 text-sm">
-                <AlertCircle  stroke="#ff0000" />
-                <span>Password must be at least 5 characters</span>
-              </div>
-            )}
-          </div>
 
           {/* Submit Button */}
           <button
             type="submit"
             disabled={!isFormValid}
-            className={`inline-block w-full px-1.5 h-[45px] lg:h-[60px] rounded-lg transition-all duration-300 
+            className={`inline-block mb-2 w-full px-1.5 h-[45px] lg:h-[60px] rounded-lg transition-all duration-300 
               ${isFormValid ? "bg-green-500 hover:bg-green-600" : "bg-green-200 cursor-not-allowed"}`}
           >
             <span className="text-white font-semibold flex items-center justify-center">
@@ -178,15 +136,13 @@ const Login = () => {
             or
           </div>
 
-          {/* Google Login */}
-          <div className="flex justify-center p-4">
-            <GoogleAuthV3 />
-          </div>
+          {/* Google auth Login */}
+          <GoogleAuthV3 />
         </form>
       </div>
 
       {/* RIGHT SIDE */}
-      <div className="lg:basis-[528px] rounded-[45px] lg:h-[623px] hidden lg:flex">
+      <div className="lg:basis-[528px] rounded-[45px] h-[623px] hidden lg:flex">
         <img src={leftImage} className="rounded-[45px]" alt="login illustration" />
       </div>
       </div>
