@@ -10,9 +10,9 @@ export const SignupOptions = () => {
           <div className="lg:w-[637px] lg:h-[765px] w-[100%] h-[90vh] 
        m-auto flex justify-center items-center ml-0
           p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
-            <div className="lg:w-[556px] lg:h-[89px] w-[182px] h-[68px] flex flex-col
-           gap-[7.38px] opacity-100 pt-4 md:pt-2">
-              <div className='lg:flex flex-row flex  flex-col w-full  items-center justify-center gap-2'>
+            <div className="lg:w-[556px] lg:h-[59px] w-[182px] h-[68px] flex flex-col
+                    gap-[7.38px] opacity-100 pt-4 md:pt-2">
+              <div className='lg:flex flex-row flex  flex-col lg:flex-row w-full  items-center justify-center gap-2'>
                 <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] lg:mr-2 ' />
                 <h1 className="font-inter text-gray-800 italic font-bold lg:text-[36px] text-[34px] leading-[100%]">
                   Ease Drive
@@ -55,8 +55,8 @@ export const SignupOptions = () => {
 
           </div>
 
-         <div className="lg:w-[528px] lg:h-[638px] md:block opacity-100 rounded-[45px]">
-              <img src="/signup-banner.png" alt="Signup Banner " className='lg:w-[528px] lg:h-[623px] lg:rounded-[45px]' />
+          <div className="lg:w-[528px] lg:h-[638px] md:block opacity-100 rounded-[45px]">
+            <img src="/signup-banner.png" alt="Signup Banner " className='lg:w-[528px] lg:h-[623px] lg:rounded-[45px]' />
           </div>
 
 

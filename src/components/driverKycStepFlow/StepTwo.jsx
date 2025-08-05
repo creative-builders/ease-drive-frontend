@@ -35,7 +35,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
   const handleNext = () => {
     const newErrors = {};
-
+console.log(formData)
     if (!formData.vehicleType) {
       newErrors.vehicleType = "Please select you vehicle type";
     }

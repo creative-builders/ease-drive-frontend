@@ -29,7 +29,7 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
 
    const handleNext = () => {
       const newErrors = {};
-
+console.log(formData)
       if (!formData.bankName) {
          newErrors.bankName = "Please select your bank";
       }

@@ -49,7 +49,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
 
     const handleNext = async () => {
         const newErrors = {};
-
+        console.log(formData)
         if (!formData.vehicleType) {
             newErrors.vehicleType = "Please select you vehicle type";
             showError("Please select you vehicle type");
@@ -77,16 +77,26 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
             _formData.append("documentType", formData.documentType);
             _formData.append("documentID", formData.documentID);
             _formData.append("meansOfIdentification", formData.meansOfIdentification);
-            _formData.append("documentPhotos", formData.documentPhotoS); // multiple calls for each file
+            // _formData.append("documentPhotos", formData.documentPhotos); // multiple calls for each file
 
             // rideInfo.*
             _formData.append("vehicleType", formData.vehicleType);
 
-            _formData.append("vehiclePhotos", formData.vehiclePhotos);
+            // _formData.append("vehiclePhotos", formData.vehiclePhotos);
             _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
             _formData.append("vehicleColor", formData.vehicleColor);
             _formData.append("serviceArea", formData.serviceArea);
             _formData.append("numberOfSeats", formData.numberOfSeats);
+
+            // Append each Document Photo
+            formData.documentPhotos.forEach((file) => {
+                _formData.append("documentPhotos", file);
+            });
+
+            // Append each Vehicle Photo
+            formData.vehiclePhotos.forEach((file) => {
+                _formData.append("vehiclePhotos", file);
+            });
 
 
             // bankDetails.*

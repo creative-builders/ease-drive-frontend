@@ -28,7 +28,8 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
 
   const handleNext = () => {
     const newErrors = {};
-
+    
+   console.log(formData)
     if (!formData.meansOfIdentification) {
       newErrors.meansOfIdentification = "Please select means of identification";
     }
