@@ -1,57 +1,73 @@
-import React, { useState } from 'react';
-import VehicleForm from './VehicleForm';
 
-const Profile = () => {
-  const [showVehicleForm, setShowVehicleForm] = useState(false);
+import { CallIcon } from "../assets/icons/CallIcon";
+import { EmailSignedIcon } from "../assets/icons/EmailSignedIcon";
 
+
+const Profile = ({ onEdit }) => {
   return (
-    <div className="container mx-auto p-4">
-        {!showVehicleForm ? (
-        <div className="profile-view w-full md:w-1/2">
-          {/* === Profile Header === */}
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold">Profile</h2>
-          </div>
-
-          {/* === Personal Info === */}
-          <div className="mt-4 space-y-2">
-            <p><strong>Full Name:</strong> Abubakar Job Chukwuemeka ✅</p>
-            <p><strong>Email:</strong> Johndub@xyzmail.com</p>
-            <p><strong>Phone:</strong> +2349077647845</p>
-            <p><strong>Location:</strong> UNN Hostel C, Nsukka</p>
-          </div>
-
-          {/* === Vehicle Info === */}
-          <div className="mt-6 border-t pt-4">
-            <div className="flex justify-between items-center">
-              <h3 className="font-semibold">Vehicle Information</h3>
-              <button
-                className="text-blue-500 text-sm"
-                onClick={() => setShowVehicleForm(true)}
-              >
-                Edit
-              </button>
-            </div>
-            <ul className="mt-2 space-y-1">
-              <li><strong>Type:</strong> Keke</li>
-              <li><strong>Color:</strong> Black</li>
-              <li><strong>Plate:</strong> EUG20456</li>
-              <li><strong>Service Area:</strong> Main-Gate</li>
-              <li><strong>Document:</strong> Document ID</li>
-            </ul>
-          </div>
-
-          {/* === Account Options === */}
-          <div className="mt-6 border-t pt-4 text-red-500 space-y-2">
-            <button>Log Out</button>
-            <button>Delete Account</button>
+    <div className="bg-white rounded-2xl p-6 shadow-md h-[683px] gap-4 flex flex-col">
+      <div className="flex items-center justify-between">
+        {/* User Info */}
+        <div className="flex items-center space-x-4">
+          {/* <img src={profile} alt="Profile" className="w-14 h-14 rounded-full" /> */}
+          <div>
+            <h2 className="font-semibold text-lg">John Ndubuisi Chukwuemeka</h2>
           </div>
         </div>
-        ) : (
-            <VehicleForm onBack={() => setShowVehicleForm(false)} />
-        )}
+
+        {/* Edit Button */}
+        <button
+          className="text-blue-600 font-[inter] font-semibold text-base leading-[100%] tracking-normal top-0 right-6 absolute md:static"
+          onClick={onEdit}
+        >
+          Edit
+        </button>
+      </div>
+
+      {/* The rest of personal info... */}
+      
+        <section className='h-32 gap-2 p-2 border-b-[1px] border-gray-100'>
+            <h2 className='font-medium text-[18px] leading-[100%] tracking-normal capitalize'>personal information</h2>
+            <div className='flex px-2 py-3 items-center justify-start gap-2'>
+            <EmailSignedIcon />
+            <input 
+                type="email" 
+                className='h-6 w-48 sm:w-40 font-medium text-[14px] rounded-lg leading-6 tracking-normal border-none'
+                placeholder="solobachi45@gmail.com" 
+                id=""
+            />
+            </div>
+
+            <div className='flex px-2 py-3 items-center justify-start gap-2'>
+            <CallIcon />
+            <input 
+                type="number" 
+                className='h-6 w-48 sm:w-40 font-medium rounded-lg text-[14px] leading-6 tracking-normal border-none'
+                placeholder="solobachi45@gmail.com" 
+                id=""
+            />
+            </div>
+        </section>
+
+        <section className='h-14 gap-5 flex px-3 py-2 border-b-[1px] border-gray-100'>
+           {/* <PromoIcon /> */}
+           <p className='font-medium text-[14px] leading-6 tracking-normal'>Promo card</p>
+        </section>
+
+        <section className='h-32 gap-2 p-2 border-b-[1px] border-gray-100'>
+            <p className='font-medium text-[18px] leading-[100%] tracking-normal capitalize'>account</p>
+
+            <div className='flex px-2 py-3 items-center justify-start gap-2 cursor-pointer'>
+            {/* <LogoutIcon /> */}
+            <p className='font-medium text-[14px] leading-6 tracking-normal text-red-500'>log out</p>
+            </div>
+
+            <div className='flex px-2 py-3 items-center justify-start gap-2 cursor-pointer'>
+            {/* <DelectIcon /> */}
+            <p className='font-medium text-[14px] leading-6 tracking-normal text-red-500'>delete account</p>
+            </div>
+        </section>
     </div>
   );
 };
-
-export default Profile;
+export default Profile
