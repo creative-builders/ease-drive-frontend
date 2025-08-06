@@ -18,8 +18,8 @@ export const CustomInputField = ({
     return (
         <div>
             <label className="block lg:text-[18px] mb-1 text-[16px] w-full font-medium text-gray-800">{label}</label>
-            <div className="flex items-center border border-[#A1A1A1] w-full lg:rounded-[16px] 
-           rounded-[8px] px-4 py-1 lg:px-4 lg:py-3">
+            <div className="flex items-center border border-[#A1A1A1] w-full lg:rounded-[10px] 
+           rounded-[8px] px-4 py-1 lg:px-4 lg:py-2">
                 <div className="lg:w-[32px] lg:h-[32px] w-[18px] h-[18px] mr-1">
                     {children}
                 </div>

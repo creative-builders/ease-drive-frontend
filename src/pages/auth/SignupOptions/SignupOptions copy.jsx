@@ -35,7 +35,7 @@ export const SignupOptions = () => {
               <RideOptionSelector />
               {/* Content here */}
             </div>
-            <div className="lg:mt-16 gap-8 opacity-100 ">
+            <div className="lg:w-[556px] lg:h-[125px] pt-12 gap-8 opacity-100 ">
 
               <div className='flex lg:gap-12 gap-12 items-center justify-center flex-row py-6'>
                 <a href="">
