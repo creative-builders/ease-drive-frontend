@@ -36,7 +36,6 @@ import SetRoutes from '../components/yourRoute/SetRoutes';
 import ViewBookings from '../components/Bookings/ViewBookings';
 import DriverBoard from '../components/driverDashboardFolders/DriverBoard';
 import DataStatus from '../components/driverDashboardFolders/DataStatus';
-import Profile from '../uI/Profile';
 import { SignupOptions} from '../pages/auth/SignupOptions/SignupOptions';
 // import Header from '../layout/dashboard/header/Header';
 
