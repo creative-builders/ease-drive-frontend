@@ -35,7 +35,7 @@ import DataStatus from '../components/driverDashboardFolders/DataStatus';
 import { SignupOptions} from '../pages/auth/SignupOptions/SignupOptions';
 
 import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
-import Profile from '../ui/Profile';
+import ProfilePage from '../ui/ProfilePge';
 
 
 
@@ -68,7 +68,7 @@ const IndexRoute = () => {
       <Route path="/Password" element={<Password />} />
       <Route path="/drivers" element={<DriverBoard />} />
       <Route path="/rides" element={<DataStatus />} />
-      <Route path="/driver-profile" element={<Profile />} />
+      <Route path="/driver-profile" element={<ProfilePage />} />
       
 
       {/* Dashboard Route */}

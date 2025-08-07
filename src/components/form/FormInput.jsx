@@ -32,7 +32,7 @@ export default function FormInput({
   return (
     <div className={`mb-4 ${className}`}>
       {label && (
-        <label htmlFor={id} className="block text-[14px] font-medium mb-2">
+        <label htmlFor={id} className="block text-[14px] font-medium leading-normal not-italic mb-2">
           {label}
         </label>
       )}
@@ -50,7 +50,7 @@ export default function FormInput({
           onChange={onChange}
           required={required}
           placeholder={placeholder}
-          className={`w-full px-5 py-2 border border-gray-300 rounded-2xl focus:outline-none placeholder-gray-200 ${
+          className={`w-full px-5 py-2 border border-gray-300 rounded-2xl focus:outline-none placeholder-[#AEAEB2] ${
             leftIcon ? "pl-10" : ""
           } ${rightIcon ? "pr-10" : ""} ${inputClassName}`}
         />

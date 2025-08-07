@@ -1,19 +1,19 @@
 import React, { useRef, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
-import Camera from '../../assets/icons/Camera';;
-import EmailTwo from '../../assets/icons/EmailTwo';
-import CallTwo from '../../assets/icons/CallTwo';
-import EyeIcon from '../../assets/icons/EyeIcon';
-import LockIcon from '../../assets/icons/LockIcon';
-import profile from '../../assets/images/profile-user.png'
-import FormInput from "../../components/form/FormInput";
-import CustomButton from "../../components/CustomButton";
-import { UserIcon } from "../../assets/icons/UserIcon";
+import { CameraIcon } from "../assets/icons/CameraIcon";
+import { UserIcon } from "../assets/icons/UserIcon";
+import FormInput from "../components/form/FormInput"
+import { LockedIcon } from "../assets/icons/LockedIcon";
+import { EyeOpenIcon } from "../assets/icons/EyeOpenIcon";
+import CustomButton from "../components/CustomButton";
+import picture from "../assets/images/driver-picture.png"
+import { EmailSignedIcon } from "../assets/icons/EmailSignedIcon";
+import { CallIcon } from "../assets/icons/CallIcon";
 
 
 const VehicleForm = ({ onClose }) => {
 
-  const [profileImage, setProfileImage] = useState(profile);
+  const [profileImage, setProfileImage] = useState(picture);
   const fileInputRef = useRef(null);
 
   const handleIconClick = () => {
@@ -39,14 +39,14 @@ const VehicleForm = ({ onClose }) => {
           </button>
           <h2 className="text-lg font-semibold">Personal Information</h2>
         </div>
-
+         <button className="p-2 flex sm:hidden align-center text-[#4847EB] text-base leading-normal not-italic tracking-normal absolute top-3 right-2">Save</button>
         <div className="flex items-center space-x-4 relative">
           <img
             src={profileImage}
             alt="Profile"
             className="w-14 h-14 rounded-full object-cover"
           />
-          <Camera
+          <CameraIcon
             className="w-4 h-4 absolute left-7 cursor-pointer bottom-3"
             onClick={handleIconClick}
           />
@@ -64,58 +64,50 @@ const VehicleForm = ({ onClose }) => {
               label="full name"
               id="name"
               type='text'
-              // value={plateNumber}
-              // onChange={(e) => setPlateNumber(e.target.value)}
               placeholder="Enter document Id number"
               inputClassName = "indent-1 flex items-center justify-center"
               required
-              leftIcon={<UserIcon />}
+              leftIcon={<UserIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />}
           />
 
           <FormInput
               label="Email"
               id="email"
               type='email'
-              // value={plateNumber}
-              // onChange={(e) => setPlateNumber(e.target.value)}
               placeholder="Enter document Id number"
               inputClassName = "indent-1 flex items-center justify-center"
               required
-              leftIcon={<EmailTwo />}
+              leftIcon={<EmailSignedIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />}
           />
 
           <FormInput
               label="Phone number"
               id="number"
               type='number'
-              // value={plateNumber}
-              // onChange={(e) => setPlateNumber(e.target.value)}
               placeholder="Enter document Id number"
               inputClassName = "indent-1 flex items-center justify-center"
               required
-              leftIcon={<CallTwo className="text-gray-200" />}
+              leftIcon={<CallIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />}
           />
 
           <FormInput
-            label="Password"
+            label="Update Password"
             id="password"
             type='password'
-            // value={plateNumber}
-            // onChange={(e) => setPlateNumber(e.target.value)}
             placeholder="Enter document Id number"
             inputClassName = "indent-1 flex items-center justify-center"
             required
-            leftIcon={<LockIcon />}
-            rightIcon={<EyeIcon />}
+            leftIcon={<LockedIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />}
+            rightIcon={<EyeOpenIcon />}
           />
 
-          <p className="font-medium text-base leading-[100%] tracking-normal text-left mt-4 text-blue-600">forget password</p>
+          <p className="font-medium text-base md:text-base leading-normal not-italic tracking-normal text-left mt-4 text-[#4847EB]">change password</p>
         </form>
       </figure>
 
       <CustomButton
         name="Save"
-        className="px-4 py-4 w-full rounded-2xl gap-2 mt-6 bg-green-700"
+        className="hidden sm:flex px-4 py-4 w-full rounded-2xl gap-2 mt-6 bg-green-700"
         />
 
     </div>

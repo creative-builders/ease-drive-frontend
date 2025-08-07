@@ -1,4 +1,5 @@
-// import { Icon } from "@iconify/react";
+import { ArrowDown } from "../../assets/icons/ArrowDown";
+// import { BsArrowDown } from "react-icons/bs";
 import { useState } from "react";
 
 export default function CustomSelect({
@@ -8,7 +9,7 @@ export default function CustomSelect({
   value,
   onChange,
   leftIcon,
-  rightIcon = "mdi:chevron-down",
+  rightIcon =  <ArrowDown/> ,
   isRounded = false,
   placeholder = "Select an option",
   className = "",
@@ -23,7 +24,7 @@ export default function CustomSelect({
 
   return (
     <div className={`space-y-1 ${className}`}>
-      {label && <label className="text-sm font-medium text-black">{label}</label>}
+      {label && <label className="text-sm text-[14px] leading-normal not-italic font-medium text-black">{label}</label>}
 
       <div className="relative w-full">
         {leftIcon && (
@@ -35,14 +36,13 @@ export default function CustomSelect({
             )}
           </span>
         )}
-
         <select
           {...props}
           value={value}
           onChange={onChange}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          className={`w-full border border-gray-300 rounded-2xl px-5 py-2 gap-3 focus:outline-none focus:ring-1 focus:ring-green-500 appearance-none text-sm bg-white ${baseStyles} ${selectClassName}`}
+          className={`w-full border border-gray-300 px-5 py-2 gap-3 focus:outline-none focus:ring-1 focus:ring-green-500 appearance-none text-sm bg-white placeholder:text-[#888] ${baseStyles} ${selectClassName}`}
         >
           <option value="">{placeholder}</option>
           {options.map((opt, index) => (
