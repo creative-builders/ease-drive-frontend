@@ -11,7 +11,6 @@ import { EmailSignedIcon } from "../../../assets/icons/EmailSignedIcon";
 import { LogoText } from "../../../components/LogoText";
 import { InputField } from "../../../components/customFormFields/InputField";
 import { Modal } from "../../../components/Modal";
-import { input } from "framer-motion/client";
 import { EmailSent } from "../../../assets/icons/EmailSent";
 import CountdownTimer from "../../../components/CountdownTimer";
 
@@ -86,7 +85,7 @@ export const ForgotPassword = () => {
 
         <h3 className="mb-4 lg:mb-8 text-lg lg:text-2xl text-gray-950 font-bold">Forgot Password</h3>
          <p className="mb-4 lg:mb-8 text-xs lg:text-lg font-medium">
-            Enter your email and we'll send you a verification code to reset your Password
+            Enter your email and we&apos;ll send you a verification code to reset your Password
         </p>
 
         <form onSubmit={handleSubmit}>
