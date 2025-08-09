@@ -10,6 +10,10 @@ import leftImage from "./left-image.png";
 import { EmailSignedIcon } from "../../../assets/icons/EmailSignedIcon";
 import { LogoText } from "../../../components/LogoText";
 import { InputField } from "../../../components/customFormFields/InputField";
+import { Modal } from "../../../components/Modal";
+import { input } from "framer-motion/client";
+import { EmailSent } from "../../../assets/icons/EmailSent";
+import CountdownTimer from "../../../components/CountdownTimer";
 
 export const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -37,7 +41,6 @@ export const ForgotPassword = () => {
         onSuccess: () => {
             setIsVerified(true); 
             // localStorage.setItem("userEmail", formData.email);
-             setInputs({ email: "",});
         },
         onError: (error) => {
          toast.error(error?.response?.data?.message === "No account associated with this email"? `${error?.response?.data?.message} ` : error?.response?.data?.message)
@@ -53,7 +56,25 @@ export const ForgotPassword = () => {
         submitSendResetPasswordOTP({ email: inputs.email });
     };
 
+    const closeModal = () => {
+        setIsVerified(false)
+        setInputs({ email: "",});
+        navigate("/forgot-password/otp");
+    }
+
   return (
+       <>
+       {/* Success Modal */}
+       {isVerified && (
+        <Modal closeModal={closeModal} title="Check Your Email" bodyText={` We’ve sent a verification code to ${" "}
+         ${inputs?.email}, kindly check your email to continue.`} modalIcon={<EmailSent />}>
+        <CountdownTimer
+         minutes={1}
+         title="Continue"
+         onSubmit={() => navigate("/forgot-password/otp")}            
+        />
+      </Modal >
+    )}
     <div className="min-h-screen flex flex-col lg:flex-row lg:items-center justify-center bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)]">
       <div className="flex justify-center gap-x-[31px] bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)] lg:bg-white lg:bg-none shadow-[0_1px_15.5px_0_rgba(0,0,0,0.05)] p-4 lg:px-[40.5px]">
         {/* LEFT SIDE */}
@@ -110,6 +131,7 @@ export const ForgotPassword = () => {
       </div>
       </div>
     </div>
+    </>
   );
 };
 

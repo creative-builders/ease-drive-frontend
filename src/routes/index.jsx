@@ -59,7 +59,7 @@ const IndexRoute = () => {
       <Route path="/Driv-upload" element={<DrivUpload />} />
       <Route path="/Driv-place" element={<DrivPlace />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/Otp" element={<Otp />} />
+      <Route path="/forgot-password/otp" element={<Otp />} />
       <Route path="/Change-password" element={<ChangePassword />} />
       
       <Route path="/Check-email" element={<CheckEmailFile />} />
