@@ -1,4 +1,4 @@
-// import { useState, isValidElement, cloneElement } from "react";
+
 import { useState } from "react";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
@@ -50,7 +50,7 @@ export default function FormInput({
           onChange={onChange}
           required={required}
           placeholder={placeholder}
-          className={`w-full px-5 py-2 border border-gray-300 rounded-2xl focus:outline-none placeholder-[#AEAEB2] ${
+          className={`w-full px-5 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:border-gray-300 focus:ring-0 placeholder-[#AEAEB2] ${
             leftIcon ? "pl-10" : ""
           } ${rightIcon ? "pr-10" : ""} ${inputClassName}`}
         />

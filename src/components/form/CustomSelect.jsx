@@ -1,6 +1,6 @@
-import { ArrowDown } from "../../assets/icons/ArrowDown";
-// import { BsArrowDown } from "react-icons/bs";
+
 import { useState } from "react";
+import { ArrowDown } from "../../assets/icons/ArrowDown";
 
 export default function CustomSelect({
   label,
@@ -9,59 +9,89 @@ export default function CustomSelect({
   value,
   onChange,
   leftIcon,
-  rightIcon =  <ArrowDown/> ,
+  rightIcon = <ArrowDown />,
   isRounded = false,
   placeholder = "Select an option",
   className = "",
-  selectClassName = "", // <-- NEW
+  selectClassName = "",
   ...props
 }) {
-  const [isFocused, setIsFocused] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const baseStyles = isRounded
-    ? "px-6 py-2 pr-10 rounded-full"
+    ? "px-6 py-2 pr-10 rounded-[8px]"
     : "pl-10 pr-10 py-2 rounded-md";
 
-  return (
-    <div className={`space-y-1 ${className}`}>
-      {label && <label className="text-sm text-[14px] leading-normal not-italic font-medium text-black">{label}</label>}
+  const handleSelect = (option) => {
+    onChange && onChange({ target: { value: option } });
+    setIsOpen(false);
+  };
 
-      <div className="relative w-full">
+  return (
+    <div className={`space-y-1 relative ${className}`}>
+      {/* Label */}
+      {label && (
+        <label className="text-sm text-[14px] leading-normal not-italic font-medium text-black">
+          {label}
+        </label>
+      )}
+
+      {/* Dropdown Button */}
+      <div
+        className={`flex items-center justify-between border border-gray-300 cursor-pointer bg-white ${baseStyles} ${selectClassName}`}
+        onClick={() => setIsOpen((prev) => !prev)}
+        {...props}
+      >
+        {/* Left icon */}
         {leftIcon && (
-          <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+          <span className="flex items-center pl-0 mr-2">
             {typeof leftIcon === "string" ? (
-              <img src={leftIcon} alt="icon" className="h-5 w-5 text-gray-400" />
+              <img
+                src={leftIcon}
+                alt="icon"
+                className="h-5 w-5 text-gray-400"
+              />
             ) : (
               leftIcon
             )}
           </span>
         )}
-        <select
-          {...props}
-          value={value}
-          onChange={onChange}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          className={`w-full border border-gray-300 px-5 py-2 gap-3 focus:outline-none focus:ring-1 focus:ring-green-500 appearance-none text-sm bg-white placeholder:text-[#888] ${baseStyles} ${selectClassName}`}
-        >
-          <option value="">{placeholder}</option>
-          {options.map((opt, index) => (
-            <option key={index} value={opt}>
-              {opt}
-            </option>
-          ))}
-        </select>
 
-        <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-          <img
-            src={rightIcon}
-            className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${
-              isFocused ? "rotate-180" : ""
-            }`}
-          />
+        {/* Selected text / placeholder */}
+        <span
+          className={`flex-1 text-left truncate ${
+            value ? "text-black" : "text-gray-400"
+          }`}
+        >
+          {value || placeholder}
+        </span>
+
+        {/* Right icon */}
+        <span
+          className={`ml-2 text-gray-400 transition-transform duration-300 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        >
+          {rightIcon}
         </span>
       </div>
 
+      {/* Dropdown List */}
+      {isOpen && (
+        <ul className="absolute z-10 bg-white mt-1 w-full border border-gray-300 rounded-xl shadow-md max-h-60 overflow-y-auto">
+          {options.map((opt, index) => (
+            <li
+              key={index}
+              onClick={() => handleSelect(opt)}
+              className="px-4 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
+            >
+              {opt}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {/* Error message */}
       {error && <p className="text-sm text-red-500">{error}</p>}
     </div>
   );

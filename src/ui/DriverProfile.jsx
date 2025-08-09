@@ -16,9 +16,9 @@ import { DeleteIcon } from "../assets/icons/DeleteIcon.jsx";
 
 const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
 
-  // console.log(onEdit)
+ 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md h-fit gap-4 flex flex-col border border-red-400">
+    <div className="bg-white rounded-2xl p-6 shadow-md gap-4 flex flex-col">
       <div className="flex items-center justify-between">
         {/* User Info */}
         <div className="flex items-center space-x-4">
@@ -37,7 +37,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
         <button
           className="text-[#4847EB] font-medium not-italic md:font-semibold text-base leading-normal md:leading-[100%] tracking-normal"
           onClick={onEditVehicle}
-        //    top-0 right-6 absolute md:static
+        
         >
           Edit
         </button>
@@ -45,15 +45,15 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
 
       {/* The rest of personal info... */}
       
-        <section className=' gap-2 p-2 border-b-[1px] border-gray-100'>
+        <section className=' gap-2 p-2 border-b-[1px] border-[#E7E7E7]'>
             <h2 className='font-semibold md:font-medium text-base md:text-[18px] leading-normal md:leading-[100%] tracking-normal capitalize'>personal information</h2>
             <div className='flex px-2 py-3 items-center justify-start gap-2'>
             <EmailSignedIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
-                type="email" 
-                className='h-6 w-48 sm:w-40 font-medium text-[14px] pl-0 rounded-lg leading-6 tracking-normal not-italic border-none placeholder:text-[#888]'
-                placeholder="solobachi45@gmail.com" 
-                id=""
+              type="email" 
+              className='h-6 w-48 sm:w-40 font-medium text-[14px] pl-0 rounded-lg leading-6 tracking-normal not-italic border-none outline-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
+              placeholder="solobachi45@gmail.com" 
+              id=""
             />
             </div>
 
@@ -61,7 +61,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <CallIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
                 type="number" 
-                className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888]'
+                className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
                 placeholder="+234097654567" 
                 id=""
             />
@@ -71,14 +71,14 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <HouseBuilding className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
                 type="text" 
-                className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888]'
+                className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
                 placeholder="enugu" 
                 id=""
             />
             </div>
         </section>
 
-        <section className=' gap-2 p-2 relative border-b-[1px] border-gray-100'>
+        <section className=' gap-2 p-2 relative border-b-[1px] border-[#E7E7E7]'>
 
           <button
           className="text-[#4847EB] font-medium absolute right-2 top-2 not-italic md:font-semibold text-base leading-normal md:leading-[100%] tracking-normal"
@@ -92,7 +92,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <CarIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="email" 
-              className='h-6 w-48 sm:w-40 font-medium text-[14px] pl-0 rounded-lg leading-6 tracking-normal not-italic border-none placeholder:text-[#888]'
+              className='h-6 w-48 sm:w-40 font-medium text-[14px] pl-0 rounded-lg leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="solobachi45@gmail.com" 
               id=""
             />
@@ -102,7 +102,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <ColorIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
-              className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888]'
+              className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="Black" 
               id=""
             />
@@ -112,7 +112,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <CallIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
-              className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888]'
+              className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="EUG20456" 
               id=""
             />
@@ -122,7 +122,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <LocationHomeIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
-              className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888]'
+              className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="Main-Gate" 
               id=""
             />
@@ -132,26 +132,26 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <PlateNumberIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
-              className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888]'
+              className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="Main-Gate" 
               id=""
             />
           </div>
         </section>
 
-        <section className='gap-2 p-2 border-b-[1px] border-gray-100'>
+        <section className='gap-2 p-2 border-b-[1px] border-[#E7E7E7]'>
           <div className='flex px-2 py-3 items-center justify-start gap-2'>
             <CustomerService className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
-              className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888]'
+              className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="Main-Gate" 
               id=""
             />
           </div>
         </section>
 
-        <section className='h-32 gap-2 p-2 border-b-[1px] border-gray-100'>
+        <section className='h-32 gap-2 p-2 border-b-[1px] border-[#E7E7E7]'>
             <p className='font-semibold md:font-medium text-[14px] md:text-[18px] leading-6 md:leading-[100%] tracking-normal capitalize'>account</p>
 
             <div className='flex px-2 py-3 items-center justify-start gap-2 cursor-pointer'>
