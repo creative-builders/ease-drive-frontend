@@ -58,9 +58,9 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
   return (
     <div lassName=" min-h-screen lg:h-full ">
       <div className="flex items-center justify-center  min-h-screen ">
-        <div className="bg-white lg:w-[1216px] lg:h-[990px] w-[100%] h-[100%] m-auto lg:pt-12 lg:pb-12
+        <div className=" lg:w-[1216px] lg:h-[990px] w-[100%] h-[100%] m-auto lg:pt-12 lg:pb-12
          opacity-100 flex flex-row items-center">
-          <div className="lg:w-[637px] lg:h-[734px] w-[100%] h-[100%] m-auto 
+          <div className="lg:w-[637px] lg:h-[734px] w-[360px]  h-[100%] m-auto 
           flex justify-center items-center ml-0
            p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
             <div className="lg:w-[100%] w-full flex flex-col  gap-[7px] opacity-100 ">

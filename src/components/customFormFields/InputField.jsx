@@ -17,6 +17,7 @@ export const InputField = ({
   handleTogglePassword,
   rightIconOpen: RightIconOpen,
   rightIconClose: RightIconClose,
+  children
 }) => {
  
 const inputType = isPassword ? (showPassword ? "text" : "password") : type;
@@ -48,6 +49,7 @@ const inputType = isPassword ? (showPassword ? "text" : "password") : type;
 
         {isPassword && handleTogglePassword && (
           <span onClick={handleTogglePassword} className="text-gray-500 cursor-pointer">
+           <RightIconOpen />
             {showPassword ? (
               <RightIconOpen className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px]" />
             ) : (
