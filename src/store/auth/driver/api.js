@@ -22,10 +22,18 @@ export const driverSignUpAuth = async (credentials) => {
     }
 };
 
-export const driverKYCUpdate = async (credentials) => {
-    console.log("API Function Called with:", credentials); // Debugging log
+
+
+export const driverKYCUpdate = async ({ credentials, token }) => {
+    console.log("API Function Called with:", credentials);
     try {
-        const response = await axiosInstancePrivate.post(`/auth/register/driver`, credentials);
+        const response = await axiosInstancePrivate.put(
+            `/driver/driverkyc?whois=${token}`,
+            credentials,
+            {
+                headers: { "Content-Type": "multipart/form-data" }
+            }
+        );
         console.log("API Response:", response.data);
         return response.data;
     } catch (error) {

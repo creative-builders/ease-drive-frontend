@@ -54,7 +54,7 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
         <div className="bg-white lg:w-[1216px] lg:h-[800px] w-[90%] m-auto flex
          lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center py-auto">
 
-          <div className="lg:w-[637px] lg:h-[734px] w-full h-[] 
+          <div className="lg:w-[637px] lg:h-[734px]  w-[400px] pt-4
           p-5 gap-6 bg-white flex flex-col items-center justify-center">
             {/* Logo */}
             <div className="lg:w-[100%] w-full flex flex-col  gap-[7px] opacity-100 ">

@@ -1,12 +1,15 @@
 import React, { useState, useRef } from 'react';
+
 import SectionLabel from '../SectionLabel';
 import { ProfileUploadIcon } from '../../assets/icons/ProfileUploadIcon';
 import ErrorPopup from "../ErrorPopup";
 import { Modal } from '../Modal';
+
+import { useMutation } from "@tanstack/react-query";
 import { RockedIconSuccess } from '../../assets/icons/RocketIconSucess';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import axios from 'axios';
-
+import { driverKYCUpdate } from "../../store/auth/driver/api"
 import { useSearchParams } from 'react-router-dom';
 
 import CustomButton from '../CustomButton';
@@ -41,7 +44,6 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
     };
 
     const token = searchParams.get("whois");
-
     const _formData = new FormData();
     _formData.append("documentType", formData.documentType);
     _formData.append("documentID", formData.documentID);
@@ -74,58 +76,125 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
     _formData.append("profileImage", formData.profileImage[0]); // Assuming profileImage is an array of files
 
 
-    const handleSkip = async () => {
-        const newErrors = {};
-      if (Object.keys(newErrors).length === 0) {
-
-            try {
-                const data = await axios.put(`http://localhost:8000/api/driver/driverkyc?whois=${token}`, _formData)
-
+    const { mutate: submitDriverKYC, isLoading } = useMutation(
+        driverKYCUpdate,
+        {
+            onSuccess: (data) => {
                 console.log("KYC data updated successfully:", data);
                 setShowModal(true);
-            } catch (error) {
-                console.error("Error updating KYC data:", error);
-                showError("Failed to update KYC data. Please try again.");
+            },
+            onError: (error) => {
+                showError(error.response?.data?.message || error.message);
             }
-            // setShowModal(true);
-            // console.log(token)
         }
-    };
+    );
 
-    const handleNext = async () => {
-   setSubmitting(!submitting)
+
+
+    const handleNext = () => {
         const newErrors = {};
-        if (selectedFiles.length === 0) {
-            showError("Please upload prpfile image or just skip ");
+
+        if (!formData.profileImage || formData.profileImage.length === 0) {
+            showError("Please upload profile image or just skip");
             newErrors.files = "Please upload at least one document image";
         }
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
+            const _formData = new FormData();
+            _formData.append("documentType", formData.documentType);
+            _formData.append("documentID", formData.documentID);
+            _formData.append("meansOfIdentification", formData.meansOfIdentification);
+            _formData.append("vehicleType", formData.vehicleType);
 
+            _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
+            _formData.append("vehicleColor", formData.vehicleColor);
+            _formData.append("serviceArea", formData.serviceArea);
+            _formData.append("numberOfSeats", formData.numberOfSeats);
 
-            try {
-                setSubmitting(!submitting)
-                const data = await axios.put(`http://localhost:8000/api/driver/driverkyc?whois=${token}`, _formData)
+            // Append document photos
+            formData.documentPhotos.forEach((file) => {
+                _formData.append("documentPhotos", file);
+            });
 
-                console.log("KYC data updated successfully:", data);
-                setShowModal(true);
-            } catch (error) {
-                console.error("Error updating KYC data:", error);
-                showError("Failed to update KYC data. Please try again.");
-            }
-            // setShowModal(true);
-            // console.log(token)
+            // Append vehicle photos
+            formData.vehiclePhotos.forEach((file) => {
+                _formData.append("vehiclePhotos", file);
+            });
+
+            // Bank details
+            _formData.append("bankAccountHolderName", formData.bankAccountHolderName);
+            _formData.append("bankName", formData.bankName);
+            _formData.append("bankAccountNumber", formData.bankAccountNumber);
+            _formData.append("transactionPin", "2345");
+
+            // Profile image
+            _formData.append("profileImage", formData.profileImage[0]);
+
+            // Submit via React Query
+            submitDriverKYC({ credentials: _formData, token });
         }
     };
-    // const handleNext = () => {
-    //     if (agreed) {
-    //         // nextStep();
-    //         setShowModal(true);
-    //     } else {
-    //         showError('You must agree to the terms to continue.');
+
+
+      const handleSkip = () => {
+        
+        if (Object.keys(newErrors).length === 0) {
+            const _formData = new FormData();
+            _formData.append("documentType", formData.documentType);
+            _formData.append("documentID", formData.documentID);
+            _formData.append("meansOfIdentification", formData.meansOfIdentification);
+            _formData.append("vehicleType", formData.vehicleType);
+
+            _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
+            _formData.append("vehicleColor", formData.vehicleColor);
+            _formData.append("serviceArea", formData.serviceArea);
+            _formData.append("numberOfSeats", formData.numberOfSeats);
+
+            // Append document photos
+            formData.documentPhotos.forEach((file) => {
+                _formData.append("documentPhotos", file);
+            });
+
+            // Append vehicle photos
+            formData.vehiclePhotos.forEach((file) => {
+                _formData.append("vehiclePhotos", file);
+            });
+
+            // Bank details
+            _formData.append("bankAccountHolderName", formData.bankAccountHolderName);
+            _formData.append("bankName", formData.bankName);
+            _formData.append("bankAccountNumber", formData.bankAccountNumber);
+            _formData.append("transactionPin", "2345");
+
+            // Profile image
+            _formData.append("profileImage", formData.profileImage[0]);
+
+            // Submit via React Query
+            submitDriverKYC({ credentials: _formData, token });
+        }
+    };
+
+    // const handleSkip = async () => {
+    //     const newErrors = {};
+    //     if (Object.keys(newErrors).length === 0) {
+
+    //         try {
+    //             const data = await axios.put(`http://localhost:8000/api/driver/driverkyc?whois=${token}`, _formData)
+
+    //             console.log("KYC data updated successfully:", data);
+    //             setShowModal(true);
+    //         } catch (error) {
+    //             console.error("Error updating KYC data:", error);
+    //             showError("Failed to update KYC data. Please try again.");
+    //         }
+    //         // setShowModal(true);
+    //         // console.log(token)
     //     }
     // };
+
+    
+
     const closeModal = () => {
         setShowModal(false);
 
@@ -141,7 +210,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
             <div className="flex items-center justify-center h-full min-h-screen ">
                 <div className="bg-white lg:w-[1216px] lg:h-[700px] w-[100%] 
                 m-auto py-6 lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center">
-                    <div className="lg:w-[637px] w-full h-[60vh] lg:h-[90vh] m-auto 
+                    <div className="lg:w-[637px] w-[360px] h-[85vh] lg:h-[90vh] m-auto 
                     p-5 gap-8 bg-white flex flex-col items-center justify-center">
                         <div className="lg:w-[100%] w-full flex flex-col  gap-[7px] opacity-100 ">
                             <div className="flex flex-row items-center justify-start gap-2">
@@ -212,7 +281,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                             Skip
                         </button>
 
-                        <CustomButton name={submitting ? "Submitting": "Submit"} extendedStyles="w-full p-3 lg:p-4 rounded-lg"
+                        <CustomButton name={submitting ? "Submitting" : "Submit"} extendedStyles="w-full p-3 lg:p-4 rounded-lg"
                             btnClick={() => handleNext()} />
                     </div>
 

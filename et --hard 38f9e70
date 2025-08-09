@@ -1,0 +1,244 @@
+[33m4482829[m[33m ([m[1;36mHEAD -> [m[1;32mstaging-v2[m[33m)[m file upload fixed
+[33m38f9e70[m[33m ([m[1;31morigin/staging-v2[m[33m)[m Merge pull request #101 from creative-builders/complete-auth-logic
+[33ma66a409[m[33m ([m[1;31morigin/complete-auth-logic[m[33m)[m added vercel.json
+[33md739e89[m Merge pull request #98 from creative-builders/new-landing-page
+[33m1f0ccfb[m feat: cleanups and fixes
+[33mb234281[m Merged from Staging-V2
+[33m2bb7178[m Merge pull request #97 from creative-builders/driver-signup-task
+[33m0020572[m Done with the Login and Passenger Signup
+[33me24d130[m still working on the login screen
+[33m7393ef0[m done with login
+[33m75145fb[m[33m ([m[1;31morigin/driver-signup-task[m[33m)[m review correction
+[33mf757aa3[m Merge pull request #96 from creative-builders/driver-signup-task
+[33mdec67a3[m zone id error fix
+[33m0bd250b[m new changes on the branch
+[33mc54ecbf[m Merge pull request #94 from creative-builders/driver-signup-task
+[33m02adde1[m Logo/banner updates
+[33mbf681ee[m recentupdate
+[33mb668505[m started working on the login page
+[33m47beb9f[m formdata
+[33m8f7540d[m updates
+[33m3ab3cd6[m updates
+[33m03e8f3d[m added scocial media links
+[33m07b1fd4[m modalsuccess sttepflow
+[33mbdc95c9[m stepflow
+[33mb07e44c[m first commit
+[33mb2f4f79[m Merge pull request #92 from creative-builders/new-landing-page
+[33ma0865eb[m[33m ([m[1;31morigin/new-landing-page[m[33m)[m Done with icons extraction and did some finishing touches on the landing page
+[33m423f0d3[m refactored some stylings in the footer page
+[33m98e5525[m done with the footer design
+[33m9f10115[m merged from the staging
+[33mfbe26ef[m[33m ([m[1;32mdev[m[33m)[m Merge pull request #90 from creative-builders/staging-v2
+[33mc223c10[m Merge pull request #89 from creative-builders/landing-page-task
+[33m6b2b02f[m updated landingPage dir
+[33mc093f40[m how
+[33m5e39173[m new-landingpag
+[33mab27e96[m done with the faq asked questions
+[33m8e9be98[m Merge pull request #88 from creative-builders/staging-v2
+[33me60e653[m added new staging branch
+[33m929bb1d[m Merge pull request #87 from creative-builders/dev-old
+[33m9026d0d[m[33m ([m[1;31morigin/dev-old[m[33m)[m fixed some otp bug
+[33mebe72c6[m Merge pull request #84 from creative-builders/staging
+[33mb7f26bd[m Merge pull request #81 from creative-builders/driver-ui-staging
+[33m1060224[m Merge branch 'staging' of https://github.com/creative-builders/ease-drive-frontend into staging
+[33m0d93d6a[m Merge pull request #83 from creative-builders/staging
+[33mc44db1d[m Merge pull request #82 from creative-builders/driver-auth
+[33m103a435[m mades some fixes and cleanups
+[33m2189a1e[m just added some few features to the dashboard
+[33mb67f4c9[m fix:implement some changes for better UI interface
+[33m4a6070f[m feat: intigrate the first page for the driver dashboard only
+[33mfb9bd88[m made some fixes
+[33m7ac9381[m Merge pull request #80 from creative-builders/staging
+[33m195ab4e[m Merge pull request #79 from creative-builders/passenger-login
+[33m67fc98b[m renamed some components on the dashboard
+[33m1b61a2d[m Merge pull request #77 from creative-builders/staging
+[33m8b038f7[m Merge pull request #75 from creative-builders/passenger-login
+[33mf7faff5[m refactored dashboard components v2
+[33m1080cb2[m Merge pull request #74 from creative-builders/staging
+[33mf2ee002[m Merge pull request #73 from creative-builders/passenger-login
+[33mb3ecd49[m refactored dsahboard v1
+[33m2b2e62e[m fixing the bg image map
+[33m1914827[m fixed dashboard log out routing issue
+[33me24774b[m started working on dashboard code refactoring
+[33m31eb322[m Merge pull request #71 from creative-builders/staging
+[33m7d4b299[m Merge pull request #69 from creative-builders/dashboard-components
+[33m85a8954[m fixed some minor bugs
+[33m1c6fdb9[m merged from staging
+[33m6cad08c[m Merge pull request #70 from creative-builders/Driver-auth
+[33m60bd9aa[m updaated Driver auth branch
+[33m5aff6a7[m megerd from the staging
+[33m0f1f540[m merged from Driver auth
+[33m795a690[m corrected the image height
+[33mf261c81[m corrected a bulk
+[33m465f75c[m changes
+[33m49b2320[m finished every update for Driver-auth
+[33m6102be2[m made some corrections for better optimalization
+[33m6aacfa7[m fixed wrong password message
+[33mb9504f7[m makes some corrections in the dashboard-componets branch
+[33mfc1a9ce[m just make some changes on the auth-page on the Driver-auth branch
+[33mafca248[m code refactoring version 1
+[33m65deb7e[m Merge pull request #68 from creative-builders/staging
+[33mc73d817[m Merge pull request #67 from creative-builders/passenger-login
+[33me0fb0d9[m refactored google auth to setUser data
+[33md47ee51[m Merge pull request #66 from creative-builders/staging
+[33mdc88b8f[m Merge pull request #65 from creative-builders/passenger-login
+[33mf3df066[m refactored the edit user profile opage
+[33m9abf078[m code refactoring
+[33mefa6d84[m Merge pull request #64 from creative-builders/staging
+[33m0083cc6[m Merge pull request #63 from creative-builders/passenger-login
+[33m9a26a3e[m fixed location icon popup
+[33m9841c59[m Merge pull request #62 from creative-builders/staging
+[33m1212cc2[m Merge pull request #61 from creative-builders/passenger-login
+[33m5cde465[m updated the fetching logic for the profile picture
+[33m7630916[m Merge pull request #60 from creative-builders/staging
+[33m159dd71[m Merge pull request #59 from creative-builders/passenger-login
+[33m89e2c13[m component naming bug fixes
+[33m2350bb5[m Merge pull request #57 from creative-builders/staging
+[33m762ce7e[m Merge pull request #56 from creative-builders/passenger-login
+[33m7e9fbf0[m added google auth in the passenger signup
+[33mf313ede[m Merge pull request #54 from creative-builders/staging
+[33m8c61f60[m Merge pull request #51 from creative-builders/dashboard-components
+[33m2ffacad[m resolved the merge conflicts
+[33mdf9835f[m pulled from tne staging
+[33mc03c5d7[m uncommented the testing component logic
+[33mc0c2f4d[m Merge pull request #53 from creative-builders/staging
+[33md6aef84[m Merge pull request #52 from creative-builders/passenger-login
+[33m22305ee[m updated the landing page design
+[33m47deb32[m completed my task from my own end
+[33m23fb2fc[m updating the profile element
+[33mb6801bd[m completed the remaining task for the nav
+[33m3c94666[m added icon style pattern
+[33m6a4aa2d[m did some reviews
+[33m926b091[m completed updates from the passenger dashboard
+[33m339bb5a[m updating the passengers dashboard
+[33mba438b4[m checking out
+[33m7ee7cc8[m updated code repo
+[33mb8aa558[m updating the upcoming components
+[33m439ca89[m little implementation
+[33m46a9e10[m modified service card feature
+[33m2403109[m 70% donw with the landing page
+[33m25fce18[m updating
+[33m12d6ee2[m commiting messages
+[33m9204119[m correcting some update
+[33m25513b3[m done with the footer design
+[33mf05439e[m uodated corrections
+[33me40054c[m create the location popUp
+[33ma768b5d[m made some reviews
+[33m40397a5[m bid-card implementation
+[33m0e641b0[m Merge pull request #50 from creative-builders/staging
+[33m1339e8a[m Merge pull request #49 from creative-builders/passenger-login
+[33mb8bef42[m started integrating react recoil
+[33m1934d7f[m popping
+[33me33e9f3[m Merge branch 'driver-dev' of https://github.com/creative-builders/ease-drive-frontend into Driver-auth
+[33ma26e7b5[m small changes
+[33mecde13f[m added react recoil
+[33md482884[m implemented corrections
+[33mc4aee0d[m changes
+[33md8f0400[m perpedicular
+[33ma2bfa91[m commiting
+[33m683fb41[m small changes
+[33m479cf7b[m merged from staging
+[33m2615489[m commiting
+[33mdeafd18[m correction
+[33m604bd9a[m ignored .env files
+[33mb7aa153[m still trying to make changes
+[33m164a0c0[m updated google auth logic
+[33m23bd8b3[m commiting changes
+[33m53cd60e[m Merge pull request #47 from creative-builders/staging
+[33m0fca79f[m Merge pull request #46 from creative-builders/passenger-login
+[33m44ab08e[m authentication updates and cleanups
+[33m4ac0275[m Could not resolve the customization of google auth button, made some fixes and cleanups
+[33m358b327[m Merge pull request #45 from creative-builders/staging
+[33m8967f2a[m Merge pull request #44 from creative-builders/passenger-login
+[33md9db318[m done integrating google auth
+[33mc3b4835[m little update
+[33m45141b0[m Merge pull request #42 from creative-builders/staging
+[33m661fe18[m Merge pull request #41 from creative-builders/passenger-login
+[33m9e82cab[m activate account fixes and cleanups
+[33ma8ccf84[m Merge pull request #40 from creative-builders/staging
+[33m7b383af[m Merge pull request #39 from creative-builders/passenger-login
+[33m57bae8e[m added some queries
+[33m9ea3ed6[m Merge pull request #38 from creative-builders/staging
+[33m664bfa3[m Merge pull request #37 from creative-builders/passenger-login
+[33m64f7f7a[m cleanups and fixes
+[33m705b0d8[m added activate user logic
+[33m286b697[m Merge pull request #35 from creative-builders/passenger-login
+[33mb3721ca[m Started Integrating Login Endpoint
+[33m79e79d2[m Merge pull request #34 from creative-builders/Driver-auth
+[33ma348f0f[m small correction
+[33m44d76f8[m code clean up
+[33mc7bcbb6[m pushing
+[33mcb993ca[m code clean up
+[33m6eb17c7[m small corrections
+[33meb784b4[m small changes
+[33mc663df6[m Implementation of new files
+[33mbadbf50[m corrections
+[33mcb718f9[m Merge pull request #33 from creative-builders/staging
+[33ma04155d[m Merge pull request #32 from creative-builders/passenger-login
+[33m44032ff[m landing page modification
+[33m2a22615[m fixed signup options screen
+[33m6f89546[m Added left singup for the passenger auth
+[33m71152c0[m Merge pull request #31 from creative-builders/staging
+[33m413121c[m Merge pull request #30 from creative-builders/passenger-login
+[33mb4ae5f9[m Done passenger signup UI
+[33m0bec312[m Done with passenger login stepflow
+[33m3060a0c[m Merge pull request #29 from creative-builders/staging
+[33m106fa4b[m Merge pull request #28 from creative-builders/Driver-auth
+[33m86ea43a[m updating changes
+[33m30f3b7e[m minial changes
+[33m4eef04b[m Merge pull request #27 from creative-builders/staging
+[33m29fb013[m Merge pull request #15 from creative-builders/Driver-auth
+[33m85e23c4[m Merge pull request #25 from creative-builders/passenger-login
+[33m7a1272a[m Fixed a bug on step one
+[33m0e78da0[m Done with passenger step one
+[33m2399cc1[m small changes
+[33m6cdaed2[m small changes on the UI
+[33mb489bd7[m implementing the update corrections
+[33mfea37fa[m making the neccesary correctins
+[33m6ab344c[m implemnting some functionality in driver auth page
+[33mc4c1752[m small change
+[33m2b6442a[m correcting changes
+[33mf6fd5ae[m updating the driverStepFlow page
+[33m63dfb47[m Started working on the step flow
+[33m2219e44[m Merge pull request #22 from creative-builders/passenger-login
+[33mfaa3cc9[m Merge pull request #21 from creative-builders/passenger-login
+[33m23a68eb[m Added netlify rerouting file
+[33mf8adc37[m Merge pull request #19 from creative-builders/staging
+[33mbf07430[m merge from staging
+[33mb530544[m Merge pull request #18 from creative-builders/passenger-login
+[33mc246e69[m updated signup logic
+[33m969b8ee[m Merge pull request #17 from creative-builders/passenger-login
+[33m366683c[m Re routed the passenger login to login
+[33mb6b5a92[m Merge pull request #16 from creative-builders/passenger-login
+[33m1e0c4b7[m step flow setup
+[33m2e9fa91[m new branch updates
+[33mb7d6976[m Merge pull request #12 from creative-builders/staging
+[33maad772c[m Done with the setup files
+[33ma097633[m Set in Progress 2
+[33m839e81b[m Set up in Progress 1
+[33m38595c4[m Standard setup
+[33mbd875a1[m Merge pull request #11 from creative-builders/passenger-login
+[33m01a40c4[m Merged from the task-2 branch
+[33m176cf32[m Merge pull request #10 from creative-builders/task-2
+[33mdb8bec2[m modify updates
+[33m3a6a620[m Done with Passenger Login
+[33m0731cfa[m Merge pull request #8 from creative-builders/staging
+[33me253246[m reverted package-lock-json issue
+[33m50506e0[m Second Merge from Task-2 branch
+[33m863b6c4[m Merge pull request #7 from creative-builders/task-2
+[33m80ce8b7[m Correction update
+[33mc738ab4[m Minor Update
+[33m3f57ee5[m task completed
+[33mcb73ff7[m toggling
+[33m7e766ee[m still starting
+[33m1af9f89[m starting
+[33m3b683bb[m Merge pull request #5 from creative-builders/staging
+[33mc14b33e[m Added footer component
+[33medf51ec[m Merge pull request #4 from creative-builders/task-2
+[33m7a0a1f6[m festus commits
+[33m9f70b1c[m Merge pull request #2 from creative-builders/staging
+[33mdfb27f8[m Installed some packages to the staging branch
+[33m1ff0f1c[m added other setup folders
+[33m532523d[m Added setup folders
+[33md1c89fc[m Setup Packages
+[33m13f2116[m Initial commit
