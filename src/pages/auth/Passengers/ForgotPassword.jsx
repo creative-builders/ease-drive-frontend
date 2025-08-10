@@ -69,7 +69,7 @@ export const ForgotPassword = () => {
          ${inputs?.email}, kindly check your email to continue.`} modalIcon={<EmailSent />}>
         <CountdownTimer
          minutes={1}
-         title="Continue"
+         title="Resend"
          onSubmit={() => navigate("/forgot-password/otp")}            
         />
       </Modal >
