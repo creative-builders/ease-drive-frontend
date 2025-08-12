@@ -35,7 +35,7 @@ const NotificationsPage = () => {
   ];
 
   return (
-        <div className="gap-5 items-center justify-center md:p-10 md:bg-[#f2f5f6] relative">
+        <div className=" gap-5 items-center justify-center md:p-10 lg:bg-[#f2f5f6] relative">
             <h2 className="font-semibold text-[18px] md:text-[28px] leading-normal not-italic text-center md:text-left ml-5 md:ml-0 mt-5 md:mt-0">Notifications</h2>
             <Notifications notifications={notifications} />
         </div>
