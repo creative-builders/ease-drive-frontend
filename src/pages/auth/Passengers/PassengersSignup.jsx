@@ -1,5 +1,5 @@
 import { useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { passengerSignUpAuth } from "../../../store/auth/passenger/api";
@@ -30,13 +30,14 @@ const PassengerSignUp = () => {
     handleUpdateFormData,
   } = useStepFlowContext();
 
-  console.log(formData)
 
   const [showPassword, setShowPassword] = useState(false);
   const [successResponse, setSuccessResponse] = useState({
     isSuccess: false,
     message:""
   })
+
+  const navigate = useNavigate();
 
   const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData?.email || "");
   const isPhone = /^[0-9]{10,}$/.test(formData?.phoneNumber || "");
@@ -85,7 +86,8 @@ const PassengerSignUp = () => {
   };
 
   const closeModal = () => {
-   setSuccessResponse((prev) => ({...prev, isSuccess: false}))
+   setSuccessResponse((prev) => ({...prev, isSuccess: false}));
+   navigate("/login")
   }
 
   return (
@@ -96,7 +98,7 @@ const PassengerSignUp = () => {
           <CountdownTimer
              minutes={1}
              title="Continue"
-            //  onSubmit={() => navigate("/forgot-password/otp")}            
+             onSubmit={() => navigate("/login")}            
         />
        </Modal >
     )}
@@ -151,9 +153,9 @@ const PassengerSignUp = () => {
                   ? "Password must be at least 5 characters"
                   : ""
               }
-              toggleable
-              toggleState={showPassword}
-              onToggle={() => setShowPassword((prev) => !prev)}
+              isPassword
+              showPassword={showPassword}
+              handleTogglePassword={() => setShowPassword((prev) => !prev)}
               rightIconOpen={EyeOpenIcon}
               rightIconClose={EyeCloseIcon}
             />

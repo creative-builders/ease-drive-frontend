@@ -6,30 +6,28 @@ import { sendResetPasswordOTP } from "../../../store/auth/general/api";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 
 import leftImage from "./left-image.png";
-
-import { EmailSignedIcon } from "../../../assets/icons/EmailSignedIcon";
 import { LogoText } from "../../../components/LogoText";
 import { InputField } from "../../../components/customFormFields/InputField";
-import { Modal } from "../../../components/Modal";
-import { EmailSent } from "../../../assets/icons/EmailSent";
-import CountdownTimer from "../../../components/CountdownTimer";
+import { LockPasswordIcon } from "../../../assets/icons/LockPasswordIcon";
+import { EyeOpenIcon } from "../../../assets/icons/EyeOpenIcon";
+import { EyeCloseIcon } from "../../../assets/icons/EyeCloseIcon";
 
-export const ForgotPassword = () => {
-  const navigate = useNavigate();
- const [isVerified, setIsVerified] = useState(false);
 
+export const ResetPassword = () => {
   const [inputTouched, setInputTouched] = useState(false);
+  const[showPassword, setShowPassword] = useState(false);
+
   const [inputs, setInputs] = useState({
-    email: "",
+    newPassword: "",
   });
 
-  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputs.email);
+//   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputs.email);
+  const isPasswordValid = (inputs?.newPassword || "").length >= 5;
 
+    const showPasswordError =
+    inputTouched && inputs?.newPassword.length > 0 && !isPasswordValid;
 
-  const showInputError =
-   inputTouched && inputs.email && !isValidEmail;
-
-  const isFormValid = inputs.email  && isValidEmail;
+  const isFormValid = inputs.newPassword  && isPasswordValid;
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -38,7 +36,6 @@ export const ForgotPassword = () => {
   
     const { mutate: submitSendResetPasswordOTP, isLoading } = useMutation(sendResetPasswordOTP, {
         onSuccess: () => {
-            setIsVerified(true); 
             // localStorage.setItem("userEmail", formData.email);
         },
         onError: (error) => {
@@ -48,32 +45,17 @@ export const ForgotPassword = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!isValidEmail) {
+        if (!isPasswordValid) {
             alert("Please enter a valid email.");
             return;
         }
-        submitSendResetPasswordOTP({ email: inputs.email });
+        submitSendResetPasswordOTP({ newPassword : inputs.newPassword });
     };
 
-    const closeModal = () => {
-        setIsVerified(false)
-        setInputs({ email: "",});
-    }
 
   return (
        <>
-       {/* Success Modal */}
-       {isVerified && (
-        <Modal closeModal={closeModal} title="Check Your Email" bodyText={` We’ve sent a verification code to ${" "}
-         ${inputs?.email}, kindly check your email to continue.`} modalIcon={<EmailSent />}>
-        <CountdownTimer
-         minutes={1}
-         title={`${isLoading ? "Sending" : "Resend"}`}
-         onSubmit={handleSubmit}            
-        />
-      </Modal >
-    )}
-    <div className="min-h-screen flex flex-col lg:flex-row lg:items-center justify-center bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)]">
+     <div className="min-h-screen flex flex-col lg:flex-row lg:items-center justify-center bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)]">
       <div className="flex justify-center gap-x-[31px] bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)] lg:bg-white lg:bg-none shadow-[0_1px_15.5px_0_rgba(0,0,0,0.05)] p-4 lg:px-[40.5px]">
         {/* LEFT SIDE */}
       <div className="basis-[340px] bg-white lg:basis-[607px] py-[30px] px-1.5 lg:py-[40px] px-4">
@@ -82,22 +64,28 @@ export const ForgotPassword = () => {
         <LogoText/>
       </Link>
 
-        <h3 className="mb-4 lg:mb-8 text-lg lg:text-2xl text-gray-950 font-bold">Forgot Password</h3>
+        <h3 className="mb-4 lg:mb-8 text-lg lg:text-2xl text-gray-950 font-bold">Change Password</h3>
          <p className="mb-4 lg:mb-8 text-xs lg:text-lg font-medium">
-            Enter your email and we&apos;ll send you a verification code to reset your Password
+            Enter your New Password and use it whenever you want to login
         </p>
 
         <form onSubmit={handleSubmit}>
           <InputField
-          label="Enter Email"
-          name="email"
-          type="text"
-          placeholder="Enter your email"
-          value={inputs.email}
+          label="Enter New your password"
+          name="newPassword"
+          type="password"
+          placeholder="Enter your password"
+          value={inputs.newPassword}
           onChange={handleChange}
-          leftIcon={EmailSignedIcon}
-          error={showInputError ? "we could not find this email, kindly recheck." : ""}
+          leftIcon={LockPasswordIcon}
+          showPassword={showPassword}
+          isPassword
+          handleTogglePassword={() => setShowPassword((prev) => !prev)}
+          rightIconOpen={EyeOpenIcon}
+          rightIconClose={EyeCloseIcon}
+          error={ showPasswordError ? "Password must be at least 5 characters." : ""}
           />
+    
 
           {/* Submit Button */}
           <button
@@ -107,7 +95,7 @@ export const ForgotPassword = () => {
               ${isFormValid ? "bg-green-500 hover:bg-green-600" : "bg-green-200 cursor-not-allowed"}`}
           >
             <span className="text-white font-semibold flex items-center justify-center">
-              {isLoading ? <LoadingSpinner className="animate-spin" /> : "Send Link"}
+              {isLoading ? <LoadingSpinner className="animate-spin" /> : "Continue"}
             </span>
           </button>
 
