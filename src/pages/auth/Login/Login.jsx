@@ -126,7 +126,7 @@ const Login = () => {
                 Create One
               </Link>
             </span>
-            <Link to="/Forgot-password" className="text-accent-500 font-medium text-[8px] md:text-sm">
+            <Link to="/forgot-password" className="text-accent-500 font-medium text-[8px] md:text-sm">
               Forgot Password
             </Link>
           </div>
@@ -142,7 +142,7 @@ const Login = () => {
       </div>
 
       {/* RIGHT SIDE */}
-      <div className="lg:basis-[528px] rounded-[45px] h-[623px] hidden lg:flex">
+      <div className="lg:basis-[528px] rounded-[45px] h-[623px] hidden lg:flex lg:justify-end">
         <img src={leftImage} className="rounded-[45px]" alt="login illustration" />
       </div>
       </div>
