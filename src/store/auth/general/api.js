@@ -3,8 +3,8 @@ import axios from "axios";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const axiosInstancePrivate = axios.create({
-    // baseURL: baseUrl,
-    baseURL: "http://localhost:8000/api",
+    baseURL: baseUrl,
+    // baseURL: "http://localhost:8000/api",
     withCredentials: true
   });
 

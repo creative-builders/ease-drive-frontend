@@ -195,6 +195,15 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
 
                   </div>
 
+                  <button
+                     type="button"
+                     className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
+                     onClick={() => {
+                        nextStep()
+                     }}>
+                     Skip
+                  </button>
+
                   <CustomButton
                      name="Continue"
                      extendedStyles={"w-full p-3 lg:p-4 rounded-lg"}
