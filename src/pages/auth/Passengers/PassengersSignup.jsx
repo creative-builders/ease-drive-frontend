@@ -1,5 +1,5 @@
 import { useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { passengerSignUpAuth } from "../../../store/auth/passenger/api";
@@ -17,6 +17,9 @@ import { UserIcon } from "../../../assets/icons/UserIcon"
 import { LogoText } from "../../../components/LogoText";
 import { InputField } from "../../../components/customFormFields/InputField";
 import { FormProvider, useStepFlowContext } from "../../../hooks/useStepFlowFormContext";
+import CountdownTimer from "../../../components/CountdownTimer";
+import { EmailSent } from "../../../assets/icons/EmailSent";
+import { Modal } from "../../../components/Modal";
 
 
 const PassengerSignUp = () => {
@@ -27,9 +30,14 @@ const PassengerSignUp = () => {
     handleUpdateFormData,
   } = useStepFlowContext();
 
-  console.log(formData)
 
   const [showPassword, setShowPassword] = useState(false);
+  const [successResponse, setSuccessResponse] = useState({
+    isSuccess: false,
+    message:""
+  })
+
+  const navigate = useNavigate();
 
   const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData?.email || "");
   const isPhone = /^[0-9]{10,}$/.test(formData?.phoneNumber || "");
@@ -37,7 +45,7 @@ const PassengerSignUp = () => {
   const isFullNameValid = (formData?.fullName || "").length >= 3;
 
   const emailOrPhoneValid = isEmail || isPhone;
-  const isFormValid = emailOrPhoneValid && isPasswordValid && isFullNameValid;
+  const isFormValid = emailOrPhoneValid && isPasswordValid && isFullNameValid && isPhone;
 
   const showPhoneError =
     inputTouched && !!formData?.phoneNumber && !isPhone;
@@ -54,7 +62,8 @@ const PassengerSignUp = () => {
   const { mutate: submitPassengerDetails, isLoading } = useMutation(
     passengerSignUpAuth,
     {
-      onSuccess: () => {
+      onSuccess: (response) => {
+        setSuccessResponse(prev => ({...prev, message: response.message, isSuccess: true}))
         setFormData((prev) => ({
           ...prev,
           fullName: "",
@@ -76,7 +85,23 @@ const PassengerSignUp = () => {
     submitPassengerDetails({ ...formData, role: "passenger" });
   };
 
+  const closeModal = () => {
+   setSuccessResponse((prev) => ({...prev, isSuccess: false}));
+   navigate("/login")
+  }
+
   return (
+    <>
+    {/* Show Modal */}
+       {successResponse?.isSuccess && (
+         <Modal closeModal={closeModal} title="Check Your Email" bodyText={successResponse?.message} modalIcon={<EmailSent />}>
+          <CountdownTimer
+             minutes={1}
+             title="Continue"
+             onSubmit={() => navigate("/login")}            
+        />
+       </Modal >
+    )}
     <div className="min-h-screen flex flex-col lg:flex-row lg:items-center justify-center bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)]">
       <div className="flex justify-center gap-x-[31px] bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)] lg:bg-white lg:bg-none shadow-[0_1px_15.5px_0_rgba(0,0,0,0.05)] p-4 lg:px-[40.5px]">
         {/* LEFT SIDE */}
@@ -128,9 +153,9 @@ const PassengerSignUp = () => {
                   ? "Password must be at least 5 characters"
                   : ""
               }
-              toggleable
-              toggleState={showPassword}
-              onToggle={() => setShowPassword((prev) => !prev)}
+              isPassword
+              showPassword={showPassword}
+              handleTogglePassword={() => setShowPassword((prev) => !prev)}
               rightIconOpen={EyeOpenIcon}
               rightIconClose={EyeCloseIcon}
             />
@@ -196,6 +221,7 @@ const PassengerSignUp = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
