@@ -3,8 +3,8 @@ import axios from "axios";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const axiosInstancePrivate = axios.create({
-    // baseURL: baseUrl,
-    baseURL: "http://localhost:8000/api",
+    baseURL: baseUrl,
+    // baseURL: "http://localhost:8000/api",
     withCredentials: true
   });
 
@@ -47,11 +47,7 @@ export const sendResetPasswordOTP = async(credentials) => {
     return response.data;
     
 }
-export const verifyResetPssowordOTP = async(credentials) => {
-    const response = await axiosInstancePrivate.put(`/auth/verify-otp`, credentials);
-    return response.data;
-    
-}
+
 export const resetPassword = async(credentials) => {
     const response = await axiosInstancePrivate.put(`/auth/reset-password`, credentials);
     return response.data;
