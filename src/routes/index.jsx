@@ -10,7 +10,6 @@ import { RegisterPassenger } from '../pages/auth/Passengers/PassengersSignup';
 import Login from '../pages/auth/Login/Login';
 // import DriverSignup from '../pages/auth/Drivers/Driver-signup';
 import { DriverSignup } from '../pages/auth/driverSignup/DriverSignup';
-import { ChangePassword } from '../pages/auth/Passengers/Change-password';
 import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
 import CheckEmailFile from '../pages/auth/Passengers/CheckEmailFile';
@@ -58,7 +57,7 @@ const IndexRoute = () => {
       <Route path="/Driv-upload" element={<DrivUpload />} />
       <Route path="/Driv-place" element={<DrivPlace />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/Change-password" element={<ChangePassword />} />
+  
       
       <Route path="/Check-email" element={<CheckEmailFile />} />
       <Route path="/reset-password" element={<ResetPassword />} />
