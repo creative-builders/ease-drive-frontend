@@ -103,7 +103,7 @@ export const ForgotPassword = () => {
             type="submit"
             disabled={!isFormValid}
             className={`inline-block mb-2 w-full px-1.5 h-[45px] lg:h-[60px] rounded-lg transition-all duration-300 
-              ${isFormValid ? "bg-green-500 hover:bg-green-600" : "bg-green-200 cursor-not-allowed"}`}
+              ${isFormValid ? "bg-green-700 hover:bg-green-800" : "bg-green-200 cursor-not-allowed"}`}
           >
             <span className="text-white font-semibold flex items-center justify-center">
               {isLoading ? <LoadingSpinner className="animate-spin" /> : "Send Link"}

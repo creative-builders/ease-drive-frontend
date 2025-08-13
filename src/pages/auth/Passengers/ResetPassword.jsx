@@ -1,8 +1,8 @@
 import { useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { sendResetPasswordOTP } from "../../../store/auth/general/api";
+import { resetPassword} from "../../../store/auth/general/api";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 
 import leftImage from "./left-image.png";
@@ -16,13 +16,18 @@ import { EyeCloseIcon } from "../../../assets/icons/EyeCloseIcon";
 export const ResetPassword = () => {
   const [inputTouched, setInputTouched] = useState(false);
   const[showPassword, setShowPassword] = useState(false);
+  const [searchParams, _] = useSearchParams();
+  const navigate = useNavigate();
+
+  const resetToken = searchParams.get("reset-token");
+
 
   const [inputs, setInputs] = useState({
     newPassword: "",
   });
 
 //   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputs.email);
-  const isPasswordValid = (inputs?.newPassword || "").length >= 5;
+  const isPasswordValid = (inputs?.newPassword || "").length >= 6;
 
     const showPasswordError =
     inputTouched && inputs?.newPassword.length > 0 && !isPasswordValid;
@@ -34,9 +39,10 @@ export const ResetPassword = () => {
     setInputTouched(true);
   };
   
-    const { mutate: submitSendResetPasswordOTP, isLoading } = useMutation(sendResetPasswordOTP, {
-        onSuccess: () => {
-            // localStorage.setItem("userEmail", formData.email);
+    const { mutate: submitSendResetPassword, isLoading } = useMutation(resetPassword, {
+        onSuccess: (response) => {
+         toast.success(response?.message);
+         navigate("/login")
         },
         onError: (error) => {
          toast.error(error?.response?.data?.message === "No account associated with this email"? `${error?.response?.data?.message} ` : error?.response?.data?.message)
@@ -49,7 +55,10 @@ export const ResetPassword = () => {
             alert("Please enter a valid email.");
             return;
         }
-        submitSendResetPasswordOTP({ newPassword : inputs.newPassword });
+        submitSendResetPassword({ 
+            newPassword : inputs.newPassword, 
+            passwordToken: resetToken 
+        });
     };
 
 
@@ -92,22 +101,12 @@ export const ResetPassword = () => {
             type="submit"
             disabled={!isFormValid}
             className={`inline-block mb-2 w-full px-1.5 h-[45px] lg:h-[60px] rounded-lg transition-all duration-300 
-              ${isFormValid ? "bg-green-500 hover:bg-green-600" : "bg-green-200 cursor-not-allowed"}`}
+              ${isFormValid ? "bg-green-700 hover:bg-green-800" : "bg-green-200 cursor-not-allowed"}`}
           >
             <span className="text-white font-semibold flex items-center justify-center">
               {isLoading ? <LoadingSpinner className="animate-spin" /> : "Continue"}
             </span>
           </button>
-
-          {/* Footer Links */}
-           <div className="mb-8 flex justify-between items-center">
-              <span className="text-gray-700 text-[8px] md:text-sm">
-                Already have an account?
-                <Link to="/login" className="text-accent-500 ml-1 font-medium">
-                  Login
-                </Link>
-              </span>
-            </div>
         </form>
       </div>
 
