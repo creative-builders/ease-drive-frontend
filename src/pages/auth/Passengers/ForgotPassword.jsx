@@ -1,5 +1,5 @@
 import { useState} from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { sendResetPasswordOTP } from "../../../store/auth/general/api";
@@ -15,7 +15,6 @@ import { EmailSent } from "../../../assets/icons/EmailSent";
 import CountdownTimer from "../../../components/CountdownTimer";
 
 export const ForgotPassword = () => {
-  const navigate = useNavigate();
  const [isVerified, setIsVerified] = useState(false);
 
   const [inputTouched, setInputTouched] = useState(false);
