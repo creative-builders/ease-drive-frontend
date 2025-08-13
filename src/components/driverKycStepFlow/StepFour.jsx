@@ -4,13 +4,14 @@ import SectionLabel from '../SectionLabel';
 import { ProfileUploadIcon } from '../../assets/icons/ProfileUploadIcon';
 import ErrorPopup from "../ErrorPopup";
 import { Modal } from '../Modal';
-
+import LoadingSpinner from '../LoadingSpinner';
 import { useMutation } from "@tanstack/react-query";
 import { RockedIconSuccess } from '../../assets/icons/RocketIconSucess';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import axios from 'axios';
 import { driverKYCUpdate } from "../../store/auth/driver/api"
 import { useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import CustomButton from '../CustomButton';
 import { number } from 'framer-motion';
@@ -25,6 +26,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
     const [showErrorPopup, setShowErrorPopup] = useState(false);
     const { formData, handleUpdateFormData } = useStepFlowContext();
     const [errors, setErrors] = useState({});
+    const [isSumitting, setisSubmitting] = useState(false)
     const [selectedFiles, setSelectedFiles] = useState([]);
 
     const handleUploadClick = () => {
@@ -44,36 +46,36 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
     };
 
     const token = searchParams.get("whois");
-    const _formData = new FormData();
-    _formData.append("documentType", formData.documentType);
-    _formData.append("documentID", formData.documentID);
-    _formData.append("meansOfIdentification", formData.meansOfIdentification);
-    _formData.append("vehicleType", formData.vehicleType);
+    // const _formData = new FormData();
+    // _formData.append("documentType", formData.documentType);
+    // _formData.append("documentID", formData.documentID);
+    // _formData.append("meansOfIdentification", formData.meansOfIdentification);
+    // _formData.append("vehicleType", formData.vehicleType);
 
-    _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
-    _formData.append("vehicleColor", formData.vehicleColor);
-    _formData.append("serviceArea", formData.serviceArea);
-    _formData.append("numberOfSeats", formData.numberOfSeats);
+    // _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
+    // _formData.append("vehicleColor", formData.vehicleColor);
+    // _formData.append("serviceArea", formData.serviceArea);
+    // _formData.append("numberOfSeats", formData.numberOfSeats);
 
-    // Append each Document Photo
-    formData.documentPhotos.forEach((file) => {
-        _formData.append("documentPhotos", file);
-    });
+    // // Append each Document Photo
+    // formData.documentPhotos.forEach((file) => {
+    //     _formData.append("documentPhotos", file);
+    // });
 
-    // Append each Vehicle Photo
-    formData.vehiclePhotos.forEach((file) => {
-        _formData.append("vehiclePhotos", file);
-    });
+    // // Append each Vehicle Photo
+    // formData.vehiclePhotos.forEach((file) => {
+    //     _formData.append("vehiclePhotos", file);
+    // });
 
 
-    // bankDetails.*
-    _formData.append("bankAccountHolderName", formData.bankAccountHolderName);
-    _formData.append("bankName", formData.bankName);
-    _formData.append("bankAccountNumber", formData.bankAccountNumber);
-    _formData.append("transactionPin", "2345");
+    // // bankDetails.*
+    // _formData.append("bankAccountHolderName", formData.bankAccountHolderName);
+    // _formData.append("bankName", formData.bankName);
+    // _formData.append("bankAccountNumber", formData.bankAccountNumber);
+    // _formData.append("transactionPin", "2345");
 
-    // images
-    _formData.append("profileImage", formData.profileImage[0]); // Assuming profileImage is an array of files
+    // // images
+    // _formData.append("profileImage", formData.profileImage[0]); // Assuming profileImage is an array of files
 
 
     const { mutate: submitDriverKYC, isLoading } = useMutation(
@@ -81,6 +83,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
         {
             onSuccess: (data) => {
                 console.log("KYC data updated successfully:", data);
+                setisSubmitting(false)
                 setShowModal(true);
             },
             onError: (error) => {
@@ -137,8 +140,8 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
     };
 
 
-      const handleSkip = () => {
-        
+    const handleSkip = () => {
+
         if (Object.keys(newErrors).length === 0) {
             const _formData = new FormData();
             _formData.append("documentType", formData.documentType);
@@ -193,7 +196,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
     //     }
     // };
 
-    
+
 
     const closeModal = () => {
         setShowModal(false);
@@ -276,13 +279,33 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                         <button
                             type="button"
                             className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
-                            onClick={() => handleSkip()}
-                        >
+                            onClick={()=>{
+                                setisSubmitting(!isSumitting)
+                                handleSkip()
+                            }}>
                             Skip
                         </button>
 
-                        <CustomButton name={submitting ? "Submitting" : "Submit"} extendedStyles="w-full p-3 lg:p-4 rounded-lg"
-                            btnClick={() => handleNext()} />
+                        {/* <CustomButton name={submitting ? "Submitting" : "Submit"} extendedStyles="w-full p-3 lg:p-4 rounded-lg"
+                            btnClick={() => handleNext()} /> */}
+
+                        <button
+                            type="submit"
+                            onClick={()=>{
+                                setisSubmitting(!isSumitting)
+                                handleNext()
+                            }}
+                        
+                            className={`inline-block  mb-2 w-full px-1.5 lg:p-4 p-2 h-[45px] lg:h-[60px] rounded-lg transition-all duration-300 bg-green-700 hover:bg-green-600 `}
+                        >
+                            <span className="text-white font-semibold flex items-center justify-center">
+                                {isSumitting ? (
+                                    <LoadingSpinner className="animate-spin" />
+                                ) : (
+                                    "Submit"
+                                )}
+                            </span>
+                        </button>
                     </div>
 
                     <div className="lg:w-[528px] lg:h-[638px] hidden md:block opacity-100 rounded-[45px]">
@@ -293,8 +316,12 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
             {showModal && (
                 <Modal closeModal={closeModal} title="You're all set"
                     bodyText={` Thanks for signing up! We’re reviewing your documents. 
-                You’ll be notified within 24 hours when you’re approved to start accepting rides`} modalIcon={<RockedIconSuccess />}  >
-                    <CustomButton name="Proceed to Dashboard" extendedStyles="w-full p-3 lg:p-4 mb-6 mt-4" />
+                   You’ll be notified within 24 hours when you’re approved to start accepting rides`} modalIcon={<RockedIconSuccess />}  >
+                    <Link to="/login" className="text-green-300">
+                        <CustomButton name="Proceed to Dashboard" extendedStyles="w-full p-3 lg:p-4 rounded-lg mb-6 mt-4" />
+
+                    </Link>
+
                 </Modal >
             )}
         </div>

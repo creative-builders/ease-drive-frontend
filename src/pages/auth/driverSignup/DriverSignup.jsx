@@ -62,8 +62,7 @@ export const DriverSignup = () => {
     const showPasswordError =
         inputTouched && formData?.password.length > 0 && !isPasswordValid;
 
-    const showConfirmPasswordErrorr =
-        inputTouched && formData?.confirmpassword.length > 0 && !isCPasswordValid;
+
 
     const showFullNameError =
         inputTouched && formData?.fullName.length > 0 && !isFullNameValid;
@@ -217,7 +216,7 @@ export const DriverSignup = () => {
                             type="submit"
                             disabled={!isFormValid}
                             className={`inline-block mt-6 mb-2 w-full px-1.5 h-[45px] lg:h-[60px] rounded-lg transition-all duration-300 
-                ${isFormValid
+                            ${isFormValid
                                     ? "bg-green-500 hover:bg-green-600"
                                     : "bg-green-200 cursor-not-allowed"
                                 }`}
@@ -265,7 +264,7 @@ export const DriverSignup = () => {
                 <Modal closeModal={closeModal} title="Check Your Email" bodyText={` We’ve sent a verification link to ${" "}
                                             ${formData.email}, kindly click on it to continue.`} modalIcon={<EmailSent />}>
                     <CountdownTimer
-                        minutes={3}
+                        minutes={1}
                         title="Resend"
                         onSubmit={handleSubmitAction}
                     />

@@ -28,7 +28,7 @@ export const driverKYCUpdate = async ({ credentials, token }) => {
     console.log("API Function Called with:", credentials);
     try {
         const response = await axiosInstancePrivate.put(
-            `/driver/driverkyc?whois=${token}`,
+            `v1/users/update/driverkyc?whois=${token}`,
             credentials,
             {
                 headers: { "Content-Type": "multipart/form-data" }
