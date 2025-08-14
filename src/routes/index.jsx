@@ -12,7 +12,8 @@ import { DriverSignup } from '../pages/auth/driverSignup/DriverSignup';
 import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
 import CheckEmailFile from '../pages/auth/Passengers/CheckEmailFile';
-import ResetPassword from '../pages/auth/Passengers/Reset-password';
+// import BidCard from '../components/bid/BidCard';
+// import TestingComponent from '../pages/dashboard/TestingCompent';
 import MainPage from '../components/mainpage/MainPage';
 import LookingFor from '../components/luggagesparts/LookingFor';
 import PickRide from '../components/PickRide';
@@ -33,7 +34,10 @@ import { SignupOptions} from '../pages/auth/SignupOptions/SignupOptions';
 
 
 import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
+import { ForgotPassword } from '../pages/auth/Passengers/ForgotPassword';
+import { ResetPassword } from '../pages/auth/Passengers/ResetPassword';
 import NotificationsPage from '../ui/NotificationPage';
+import NotFoundPage from '../ui/NotFoundPage';
 
 
 
@@ -66,6 +70,7 @@ const IndexRoute = () => {
       <Route path="/drivers" element={<DriverBoard />} />
       <Route path="/rides" element={<DataStatus />} />
       <Route path="/notifications" element={<NotificationsPage />} />
+      <Route path="/not-found" element={<NotFoundPage />} />
       
 
       {/* Dashboard Route */}
