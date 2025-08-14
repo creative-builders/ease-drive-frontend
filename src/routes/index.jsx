@@ -9,9 +9,6 @@ import DrivPlace from '../pages/auth/Drivers/DrivPlace';
 import { RegisterPassenger } from '../pages/auth/Passengers/PassengersSignup';
 import Login from '../pages/auth/Login/Login';
 import { DriverSignup } from '../pages/auth/driverSignup/DriverSignup';
-import { ForgotPassword } from '../pages/auth/Passengers/Forgot-password';
-import { Otp } from '../pages/auth/Passengers/Otp';
-import { ChangePassword } from '../pages/auth/Passengers/Change-password';
 import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
 import CheckEmailFile from '../pages/auth/Passengers/CheckEmailFile';
@@ -54,12 +51,11 @@ const IndexRoute = () => {
       <Route path="/Dri-verify" element={<DriVerify />} />
       <Route path="/Driv-upload" element={<DrivUpload />} />
       <Route path="/Driv-place" element={<DrivPlace />} />
-      <Route path="/Forgot-password" element={<ForgotPassword />} />
-      <Route path="/Otp" element={<Otp />} />
-      <Route path="/Change-password" element={<ChangePassword />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+  
       
       <Route path="/Check-email" element={<CheckEmailFile />} />
-      <Route path="/Reset-password" element={<ResetPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/Bidder" element={<Bidder />} />
       <Route path="/mainpage" element={<MainPage />} />
       <Route path="/Luggage" element={<Luggage />} />
