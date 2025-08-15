@@ -39,6 +39,7 @@ import { SignupOptions} from '../pages/auth/SignupOptions/SignupOptions';
 import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
 import { ForgotPassword } from '../pages/auth/Passengers/ForgotPassword';
 import { ResetPassword } from '../pages/auth/Passengers/ResetPassword';
+import DriverView from '../components/ui/DriverView';
 
 
 
@@ -65,12 +66,12 @@ const IndexRoute = () => {
       <Route path="/mainpage" element={<MainPage />} />
       <Route path="/Luggage" element={<Luggage />} />
       <Route path="/LookingFor" element={<LookingFor />} />
-      {/* <Route path="/PickRide" element={<PickRide />} /> */}
       <Route path="/Cancelled" element={<Cancelled />} />
       <Route path="/DriverCall" element={<DriverCall />} />
       <Route path="/Password" element={<Password />} />
       <Route path="/drivers" element={<DriverBoard />} />
       <Route path="/rides" element={<DataStatus />} />
+      <Route path="/views" element={<DriverView />} />
       
 
       {/* Dashboard Route */}
@@ -79,8 +80,6 @@ const IndexRoute = () => {
         <Route path="my-bookings" element={<ViewBookings/>} />
         <Route path="edit-profile" element={<EditProfile />} />
         <Route path="settings" element={<Setting />} />
-        {/* <Route path="location-popUp" element={<LocationPopUp />} /> */}
-        {/* <Route path="mainpage" element={<MainPage />} /> */}
         <Route path="set-routes" element={<SetRoutes />} />
         <Route path="luggage" element={<Luggage />} />
         <Route path="looking-for" element={<LookingFor />} />
