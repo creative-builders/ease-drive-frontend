@@ -20,13 +20,6 @@ export default function RecentTrips() {
 
   return (
     <div className="bg-white shadow rounded-lg p-4 border">
-      {/* <div className="flex justify-between items-center mb-4">
-        <h2 className="font-semibold text-2xl not-italic leading-normal">Recent Trips</h2>
-        <a href="#" className="text-[#5E69F6] text-base font-medium not-italic leading-normal">
-        
-          <img src={week} alt="" />
-        </a>
-      </div> */}
 
       <div className="flex justify-between items-center mb-4 relative">
         <h2 className="font-semibold text-2xl">Recent Trips</h2>

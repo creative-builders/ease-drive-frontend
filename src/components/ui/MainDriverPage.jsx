@@ -12,11 +12,9 @@ import { Star } from "../../assets/icons/Star";
 export default function MainDriverPage() {
   return (
     <div className="p-6 space-y-6">
-      {/* Top Greeting */}
       <DriverHeader />
 
       {/* Stats */}
-      {/* className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] items-center justify-center gap-4 p-2" */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCards title="Total Trips" value="132" subtitle="Trips completed this month" change="+3.2%" image={<CarIcon className="h-5 w-5" />} />
         <StatsCards title="Current Earnings" value="₦5,200" subtitle="Earnings this month" change="+3.2%" image={<BitcoinBag />} />

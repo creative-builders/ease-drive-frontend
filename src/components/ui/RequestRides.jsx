@@ -31,7 +31,7 @@ export default function RideRequests() {
         <a href="#" className="text-[#2ABD45] text-sm text-right not-italic font-semibold leading-normal">View all</a>
       </div>
       {rides.map((ride, i) => (
-        <div key={i} className="flex items-start gap-3 mb-4">
+        <div key={i} className="flex items-start gap-3 mb-4 border-b-[1px] border-[#E7E7E7]">
           <img src={ride.img} alt={ride.name} className="w-10 h-10 rounded-full" />
           <div>
             <h3 className="font-semibold text-base not-italic leading-normal text-[#000]">{ride.name}</h3>
