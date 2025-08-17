@@ -1,6 +1,6 @@
 import { isToday, isYesterday, format, formatDistanceToNow } from "date-fns";
 import Notification from "../assets/images/notifications.png";
-import user from "../assets/images/profile-image.png"
+import UserAvatar from "../assets/icons/UserAvatar"
 
 function groupNotifications(notifications) {
   return notifications.reduce((groups, note) => {
@@ -42,7 +42,7 @@ export default function Notifications({ notifications }) {
             {grouped[group].map((note) => (
               <div key={note.id} className="h-fit md:h-[90px] flex items-start flex-shrink-0 gap-1 md:gap-2 p-4">
                 <img
-                  src={user}
+                  src={<UserAvatar />}
                   alt="profile"
                   className="w-[50px] h-[51px] justify-center items-center gap-4 bg-white rounded-full"
                 />
