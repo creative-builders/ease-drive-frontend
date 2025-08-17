@@ -1,9 +1,10 @@
-import EmailIcon from '../../assets/icons/EmailIcon';
+
 import PromoIcon from '../../assets/icons/PromoIcon';
 import { LogoutIcon } from '../../assets/icons/LogoutIcon';
-import DelectIcon from '../../assets/icons/DelectIcon';
 import profile from '../../assets/images/profile-user.png'
-import { CallIcon } from '../../assets/icons/CallIcon';
+import { PhoneIcon } from '../../assets/icons/PhoneIcon';
+import { EmailSignedIcon } from '../../assets/icons/EmailSignedIcon';
+import { DelectIcon } from '../../assets/icons/DelectIcon';
 
 const ProfileView = ({ onEdit }) => {
   return (
@@ -31,7 +32,7 @@ const ProfileView = ({ onEdit }) => {
         <section className='h-32 gap-2 p-2 border-b-[1px] border-gray-100'>
             <h2 className='font-medium text-[18px] leading-[100%] tracking-normal capitalize'>personal information</h2>
             <div className='flex px-2 py-3 items-center justify-start gap-2'>
-            <EmailIcon />
+            <EmailSignedIcon />
             <input 
                 type="email" 
                 className='h-6 w-48 sm:w-40 font-medium text-[14px] rounded-lg leading-6 tracking-normal border-none'
@@ -41,7 +42,7 @@ const ProfileView = ({ onEdit }) => {
             </div>
 
             <div className='flex px-2 py-3 items-center justify-start gap-2'>
-            <CallIcon />
+            <PhoneIcon />
             <input 
                 type="number" 
                 className='h-6 w-48 sm:w-40 font-medium rounded-lg text-[14px] leading-6 tracking-normal border-none'

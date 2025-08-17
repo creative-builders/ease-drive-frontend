@@ -1,14 +1,19 @@
 import React, { useRef, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
-import Camera from '../../assets/icons/Camera';;
+// import Camera from '../../assets/icons/Camera';;
 import EmailTwo from '../../assets/icons/EmailTwo';
 import CallTwo from '../../assets/icons/CallTwo';
-import EyeIcon from '../../assets/icons/EyeIcon';
-import LockIcon from '../../assets/icons/LockIcon';
+// import EyeIcon from '../../assets/icons/EyeIcon';
+// import LockIcon from '../../assets/icons/LockIcon';
 import profile from '../../assets/images/profile-user.png'
 import FormInput from "../../components/form/FormInput";
 import CustomButton from "../../components/CustomButton";
 import { UserIcon } from "../../assets/icons/UserIcon";
+import { CameraIcon } from "../../assets/icons/CameraIcon";
+import { EyeOpenIcon } from "../../assets/icons/EyeOpenIcon";
+import { LockedIcon } from "../../assets/icons/LockedIcon";
+import { EmailSignedIcon } from "../../assets/icons/EmailSignedIcon";
+import { CallIcon } from "../../assets/icons/CallIcon";
 
 
 const EditProfileView = ({ onClose }) => {
@@ -46,7 +51,7 @@ const EditProfileView = ({ onClose }) => {
             alt="Profile"
             className="w-14 h-14 rounded-full object-cover"
           />
-          <Camera
+          <CameraIcon
             className="w-4 h-4 absolute left-7 cursor-pointer bottom-3"
             onClick={handleIconClick}
           />
@@ -81,7 +86,7 @@ const EditProfileView = ({ onClose }) => {
               placeholder="Enter document Id number"
               inputClassName = "indent-1 flex items-center justify-center"
               required
-              leftIcon={<EmailTwo />}
+              leftIcon={<EmailSignedIcon />}
           />
 
           <FormInput
@@ -93,7 +98,7 @@ const EditProfileView = ({ onClose }) => {
               placeholder="Enter document Id number"
               inputClassName = "indent-1 flex items-center justify-center"
               required
-              leftIcon={<CallTwo className="text-gray-200" />}
+              leftIcon={<CallIcon className="text-gray-200" />}
           />
 
           <FormInput
@@ -105,8 +110,8 @@ const EditProfileView = ({ onClose }) => {
             placeholder="Enter document Id number"
             inputClassName = "indent-1 flex items-center justify-center"
             required
-            leftIcon={<LockIcon />}
-            rightIcon={<EyeIcon />}
+            leftIcon={<LockedIcon />}
+            rightIcon={<EyeOpenIcon />}
           />
 
           <p className="font-medium text-base leading-[100%] tracking-normal text-left mt-4 text-blue-600">forget password</p>

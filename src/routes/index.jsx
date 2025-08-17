@@ -39,6 +39,7 @@ import { SignupOptions} from '../pages/auth/SignupOptions/SignupOptions';
 import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
 import { ForgotPassword } from '../pages/auth/Passengers/ForgotPassword';
 import { ResetPassword } from '../pages/auth/Passengers/ResetPassword';
+import Profile from '../uI/Profile';
 
 
 

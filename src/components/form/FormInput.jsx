@@ -2,6 +2,8 @@
 import { useState } from "react";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { EyeOpenIcon } from "../../assets/icons/EyeOpenIcon";
+import { EyeCloseIcon } from "../../assets/icons/EyeCloseIcon";
 
 
 export default function FormInput({
@@ -27,7 +29,7 @@ export default function FormInput({
   };
 
   // Determine which icon to show
-  const visibilityIcon = showPassword ?  <FiEyeOff size={16} /> : <FiEye size={16} />;
+  const visibilityIcon = showPassword ?  <EyeOpenIcon size={16} /> : <EyeCloseIcon size={16} />;
 
   return (
     <div className={`mb-4 ${className}`}>
