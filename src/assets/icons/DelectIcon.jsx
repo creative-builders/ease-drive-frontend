@@ -1,4 +1,4 @@
-export const DeleteIcon = (props) => (
+export const DelectIcon = (props) => (
   <svg
     width={24}
     height={24}

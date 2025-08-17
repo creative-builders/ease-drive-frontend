@@ -1,7 +1,6 @@
 import picture from "../assets/images/driver-picture.png"
 import verify from "../assets/images/Create account.png"
 import star from "../assets/icons/starVector.svg"
-import { CallIcon } from "../assets/icons/CallIcon";
 import { EmailSignedIcon } from "../assets/icons/EmailSignedIcon"
 import { LocationIcon } from "../assets/icons/LocationIcon"; 
 import { LocationHomeIcon } from "../assets/icons/LocationHomeIcon";
@@ -11,7 +10,8 @@ import { HouseBuilding } from "../assets/icons/HouseBuilding.jsx";
 import { PlateNumberIcon } from "../assets/icons/PlateNumberIcon.jsx";
 import { CustomerService } from "../assets/icons/CustomerService.jsx";
 import { LogoutIcon } from "../assets/icons/LogoutIcon.jsx";
-import { DeleteIcon } from "../assets/icons/DeleteIcon.jsx";
+import { DelectIcon } from "../assets/icons/DelectIcon.jsx";
+import { PhoneIcon } from "../assets/icons/PhoneIcon.jsx";
 
 
 const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
@@ -58,7 +58,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             </div>
 
             <div className='flex px-2 py-3 items-center justify-start gap-2'>
-            <CallIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
+            <PhoneIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
                 type="number" 
                 className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
@@ -109,7 +109,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
           </div>
 
           <div className='flex px-2 py-3 items-center justify-start gap-2'>
-            <CallIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
+            <PhoneIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
               className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
@@ -160,7 +160,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             </div>
 
             <div className='flex px-2 py-3 items-center justify-start gap-2 cursor-pointer'>
-            <DeleteIcon className="h-[18px] md:h-6 w-[18px] md:w-6" />
+            <DelectIcon className="h-[18px] md:h-6 w-[18px] md:w-6" />
             <p className='font-medium text-[14px] leading-6 tracking-normal text-red-500'>delete account</p>
             </div>
         </section>
