@@ -125,35 +125,37 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
     };
 
     return (
-        <div className="min-h-screen lg:h-full max-990:h-[]">
+        <div className="min-h-screen lg:h-full ">
             <ErrorPopup
                 message={errorMessage}
                 show={showErrorPopup}
                 onClose={() => setShowErrorPopup(false)}
             />
-            <div className="flex items-center justify-center h-full min-h-screen bg-gray-100">
-                <div className="bg-white lg:w-[1216px] lg:h-[700px] max-990:w-[90%] max-990:h-[] max-990:m-auto py-6 lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center">
-                    <div className="lg:w-[637px] max-990:w-full max-990:h-[60vh] lg:h-[90vh] max-990:m-auto max-990:ml-0 ml-6 p-5 gap-8 bg-white flex flex-col items-center justify-center">
-                        <div className="lg:w-[556px] max-990:w-full max-990:flex max-990:flex-col gap-[7.38px] opacity-100 ">
+            <div className="flex items-center justify-center h-full min-h-screen ">
+                <div className="bg-white lg:w-[1216px] lg:h-[700px] w-[100%] 
+                m-auto py-6 lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center">
+                    <div className="lg:w-[637px] w-full h-[60vh] lg:h-[90vh] m-auto 
+                    p-5 gap-8 bg-white flex flex-col items-center justify-center">
+                        <div className="lg:w-[100%] w-full flex flex-col  gap-[7px] opacity-100 ">
                             <div className="flex flex-row items-center justify-start gap-2">
-                                <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] max-990:w-[45px] max-990:h-[45px] mr-2' />
-                                <h1 className="font-inter text-[#1E1E1E] italic font-bold lg:text-[36px] max-990:text-[18px] leading-[100%]">
+                                <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
+                                <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-[18px] leading-[100%]">
                                     Ease Drive
                                 </h1>
                             </div>
                         </div>
 
-                        <div className="lg:w-[556px] max-990:w-[347px] justify-between opacity-100 flex flex-row items-start">
-                            <div className="text-left lg:w-[60%] max-990:w-[70%]">
-                                <h4 className="font-inter text-[#1E1E1E] italic font-semibold lg:text-[26px] max-990:text-[18px] leading-[100%]">
+                        <div className="lg:w-[100%] w-[347px] justify-between opacity-100 flex flex-row items-start">
+                            <div className="text-left lg:w-[60%] w-[70%]">
+                                <h4 className="font-inter text-gray-700 italic font-semibold lg:text-[26px] text-[18px] leading-[100%]">
                                     Upload Profile Photo
                                 </h4>
-                                <p className="font-medium text-left text-[#333333] lg:text-[18px] max-990:text-[14px] font-inter pt-2">
+                                <p className="font-medium text-left text-gray-800 lg:text-[18px] text-[14px] font-inter pt-2">
                                     Show face clearly, no filters or group photos
                                 </p>
                             </div>
                             <div>
-                                <SectionLabel className="text-[#3733CF] bg-custom-gradient" title={`Step ${step} of ${totalSteps}`} />
+                                <SectionLabel className="text-blue-800 bg-custom-gradient" title={`Step ${step} of ${totalSteps}`} />
                             </div>
                         </div>
 
@@ -172,7 +174,8 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                                 )}
                                 <p
                                     onClick={handleUploadClick}
-                                    className="font-regular cursor-pointer text-center text-[#4847EB] lg:text-[20px] max-990:text-[14px] font-inter pt-2"
+                                    className="font-regular cursor-pointer text-center text-gray-70
+                                    lg:text-[20px] text-[14px] font-inter pt-2"
                                 >
                                     Upload Profile Photo
                                 </p>
@@ -196,7 +199,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
 
                         <button
                             type="button"
-                            className="lg:w-full max-990:w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
+                            className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
                             onClick={() => handleSkip()}
                         >
                             Skip
@@ -206,8 +209,8 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                             btnClick={() => handleNext()} />
                     </div>
 
-                    <div className="lg:w-[528px] lg:h-[638px] max-990:hidden opacity-100 rounded-[45px]">
-                        <img src="/signup-banner.png" alt="" className='lg:rounded-[45px]' />
+                    <div className="lg:w-[528px] lg:h-[638px] hidden md:block opacity-100 rounded-[45px]">
+                        <img src="/signup-banner.png" alt="Signup banner" className='lg:rounded-[45px]' />
                     </div>
                 </div>
             </div>

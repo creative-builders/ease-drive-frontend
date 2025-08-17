@@ -1,22 +1,26 @@
 import { Link } from "react-router-dom"
-import carImage from "../../assets/images/Car.png"
-import footerBanner from "../../assets/images/footer-banner.svg"
+import footerBanner from "../../assets/images/footer-banner.png"
 import { Divider } from "../../components/Divider/Divider";
+import { EaseDriveLogo } from "../../assets/icons/EaseDriveLogo";
 
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const socialMediaLinks = [
+    "https://www.facebook.com/share/1CH8YjifDU/",
+    "https://www.instagram.com/geteasedrive?utm_source=qr&igsh=MTlyNXltcTZkYzdwcg=="
+  ]
   return (
     <>
-    <div>
-      <img className="mx-auto mb-[120px] lg:mb-16 px-3" src={footerBanner} alt="footer banner" />
+    <div className="mb-[62px] lg:mb-16 ">
+      <img className="rounded-t-[84px] lg:rounded-t-[132px] mx-auto px-3" src={footerBanner} alt="footer banner" />
     </div>
     <div className="lg:mb-[119px] flex">
       <div className="lg:flex px-4 lg:basis-[calc(100%-153px)] lg:mx-auto">
         <ul className="flex flex-col basis-full flex-wrap lg:flex-row justify-between">
           <li className="lg:basis-[397px] mb-8 lg:mb-0" >
-            <Link className="mb-4 lg:mb-5 flex items-center italic font-bold text-base lg:text-2xl text-gray-900">
-            <img src={carImage} alt="Ease Drive Logo" />
+            <Link className="mb-4 lg:mb-5 flex gap-x-1.5 lg:gap-x-3 items-center italic font-bold text-base lg:text-2xl text-gray-900">
+            <EaseDriveLogo/>
              <span>Ease Drive</span>
             </Link>
             <ul>

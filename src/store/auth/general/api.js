@@ -46,11 +46,7 @@ export const sendResetPasswordOTP = async(credentials) => {
     return response.data;
     
 }
-export const verifyResetPssowordOTP = async(credentials) => {
-    const response = await axiosInstancePrivate.put(`/auth/verify-otp`, credentials);
-    return response.data;
-    
-}
+
 export const resetPassword = async(credentials) => {
     const response = await axiosInstancePrivate.put(`/auth/reset-password`, credentials);
     return response.data;

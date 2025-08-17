@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import CustomButton from "../../components/CustomButton";
-import carImage from "../../assets/images/Car.png";
 import { HamburgerIcon } from "../../assets/icons/HamburgerIcon";
 import { CloseMenuIcon } from "../../assets/icons/CloseMenuIcon";
 import NavLinkItem from "./NavLinkItem";
+import { EaseDriveLogo } from "../../assets/icons/EaseDriveLogo";
 
 const Menu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,8 +21,8 @@ const Menu = () => {
   return (
     <div className="relative flex justify-between items-center">
       <h2 className="flex items-center gap-x-1.5 text-lg lg:text-2xl italic font-bold text-gray-900">
-        <img src={carImage} alt="ease drive logo" />
-        <span>EaseDrive</span>
+        <EaseDriveLogo className="lg:w-[44px] lg:h-[44px]"/>
+        <span className="block">EaseDrive</span>
       </h2>
 
       {/* Hamburger / Close Icon */}

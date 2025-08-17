@@ -9,9 +9,6 @@ import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import CustomButton from '../CustomButton';
 
 import { FaChevronDown } from "react-icons/fa";
-import addfile from '../../assets/images/addFile.svg'
-import { CarIcon } from '../../assets/icons/CarIcon'
-import { AddFileIcon } from '../../assets/icons/AddFileIcon'
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
 import { CreditCardIcon } from '../../assets/icons/CreditCardIcon';
 import { BankHouseIcon } from '../../assets/icons/BankHouseIcon';
@@ -53,17 +50,18 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
    };
 
    return (
-      <div lassName=" min-h-screen lg:h-full max-990:h-[] ">
-         <div className="flex items-center justify-center h-full min-h-screen bg-gray-100">
-            <div className="bg-white lg:w-[1216px] lg:h-[740px] max-990:w-[90%] max-990:h-[] max-990:m-auto py-6 lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center">
-               <div className="lg:w-[637px] lg:h-[734px] max-990:w-[100%] max-990:h-[70vh] max-990:m-auto 
-          max-990:flex max-990:justify-center max-990:items-center max-990:ml-0
-         ml-6  p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
-                  <div className="lg:w-[100%] lg:h-[59px] max-990:w-[100%] max-990:h-[] max-990:flex max-990:flex-col
+      <div lassName=" min-h-screen lg:h-full m ">
+         <div className="flex items-center justify-center h-full min-h-screen ">
+            <div className="bg-white lg:w-[1216px] lg:h-[740px] w-[100%]  m-auto py-6  lg:pb-12 
+            opacity-100 flex flex-row justify-center items-center">
+               <div className="lg:w-[637px] w-[100%] h-[70vh] m-auto 
+                  flex justify-center items-center 
+                p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
+                  <div className="lg:w-[100%] lg:h-[59px] w-[100%]  flex flex-col
                    gap-[7.38px] opacity-100  ">
-                     <div className='flex flex-row max-990:flex max-990:flex-row w-full max-990:items-center max-990:w-full items-center  justify-start gap-2'>
-                        <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] max-990:w-[45px] max-990:h-[45px] mr-2' />
-                        <h1 className="font-inter text-[#1E1E1E] italic font-bold lg:text-[36px] max-990:text-[18px] leading-[120%]">
+                     <div className='flex-row flex  w-full items-center  items-center  justify-start gap-2'>
+                        <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
+                        <h1 className="font-inter text-gary-700 italic font-bold lg:text-[36px] text-[18px] leading-[120%]">
                            Ease Drive
                         </h1>
 
@@ -71,17 +69,17 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                   </div>
 
 
-                  <div className="lg:w-[556px] lg:h-[] max-990:w-[347px] max-990:h-[] justify-between opacity-100 flex flex-row items-start">
-                     <div className='text-left lg:w-[60%] max-990:w-[70%]'>
-                        <h4 className="font-inter text-[#1E1E1E] italic font-semibold lg:text-[26px] max-990:text-[18px] leading-[100%]">
+                  <div className="lg:w-[100%]  w-[100%]  justify-between opacity-100 flex flex-row items-start">
+                     <div className='text-left lg:w-[60%] w-[70%]'>
+                        <h4 className="font-inter text-gray-700  font-semibold lg:text-[26px] text-[18px] leading-[100%]">
                            Bank/Wallet Setup
                         </h4>
-                        <p className=" font-medium text-left text-[#333333] lg:text-[18px] max-990:text-[14px] font-inter lg:pb- pt-2">
+                        <p className=" font-medium text-left text-gray-800 lg:text-[18px] text-[14px] font-inter lg:pb- pt-2">
                            Your payments will be sent here. Please confirm the details are correct.
                         </p>
                      </div>
                      <div>
-                        <SectionLabel className="text-[#3733CF] bg-custom-gradient"
+                        <SectionLabel className="text-blue-800 bg-custom-gradient"
 
                            title={` Step ${step}  of ${totalSteps}`}
                         />
@@ -118,7 +116,7 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                            ]}
                            rightIcon={FaChevronDown}
                         >
-                           <BankHouseIcon className="w-8 h-8 text-gray-500" />
+                           <BankHouseIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
 
                         </CustomSelectField>
                         {errors.bankName && (
@@ -135,7 +133,7 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                            type="text"
 
                         >
-                           <CreditCardIcon className="w-8 h-8 text-gray-500" />
+                           <CreditCardIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                         </CustomInputField>
                         {errors.bankAccountNumber && (
                            <p className="text-red-500 text-sm -mt-2">{errors.bankAccountNumber}</p>
@@ -151,7 +149,7 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                            onFormChange={handleUpdateFormData}
 
                         >
-                           <PlateNumberIcon className="w-8 h-8 text-gray-500" />
+                           <PlateNumberIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                         </CustomInputField>
                         {errors.bankAccountHolderName && (
                            <p className="text-red-500 text-sm -mt-2">{errors.bankAccountHolderName}</p>
@@ -187,12 +185,12 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                            )}
                         </div>
 
-                        <span className={`${agreed ? "text-green-600" : "text-[#333333]"} lg:text-[14px] max-990:text-[12px] font-inter`}>
+                        <span className={`${agreed ? "text-green-600" : "text-gray-800"} lg:text-[14px] text-[12px] font-inter`}>
                            I agree to the driver guidelines and terms of service.
                         </span>
                      </label>
 
-                     {error && <p className="text-red-500 lg:text-[14px] max-990:text-[12px] font-inter">{error}</p>}
+                     {error && <p className="text-red-500 lg:text-[14px] text-[12px] font-inter">{error}</p>}
 
 
                   </div>
@@ -205,8 +203,8 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
 
                </div>
 
-               <div className="lg:w-[528px] lg:h-[638px] max-990:hidden opacity-100 rounded-[45px]">
-                  <img src="/signup-banner.png" alt="" className='lg:w-[528px] lg:h-[623px] lg:rounded-[45px]' />
+               <div className="lg:w-[528px] lg:h-[638px] hidden md:block opacity-100 rounded-[45px]">
+                  <img src="/signup-banner.png" alt="Signup banner" className=' lg:rounded-[45px]' />
                </div>
 
 
