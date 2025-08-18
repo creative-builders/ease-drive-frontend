@@ -29,7 +29,7 @@ export const CustomSelectField = ({
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <label className="block lg:text-[18px] mb-1 text-[16px] w-[100%] font-medium text-gray-800">
+      <label className="block lg:text-[18px] mb-1 text-[16px] w-[100%] font-normal text-gray-800">
         {label}
       </label>
 

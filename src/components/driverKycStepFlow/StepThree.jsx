@@ -1,13 +1,10 @@
 import React from 'react'
 import SectionLabel from '../SectionLabel'
-import { CustomInputField } from '../CustomInputField'
-import { CustomSelectField } from "../CustomSelectField"
+import { CustomSelectField } from "../customFormFields/CustomSelectField"
 import { useState, useRef } from 'react';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
-
-
+import { InputField } from '../customFormFields/InputField';
 import CustomButton from '../CustomButton';
-
 import { FaChevronDown } from "react-icons/fa";
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
 import { CreditCardIcon } from '../../assets/icons/CreditCardIcon';
@@ -21,8 +18,24 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
    const [checked, setChecked] = useState(false);
    const [agreed, setAgreed] = useState(false);
    const [error, setError] = useState("");
-   const { formData, handleUpdateFormData } = useStepFlowContext();
+
+   const {
+      formData,
+      inputTouched,
+      setFormData,
+      handleUpdateFormData,
+   } = useStepFlowContext();
+
    const [errors, setErrors] = useState({});
+
+
+   const isaccountNumberValid = (formData?.bankAccountNumber || "").length >= 10;
+   const showaccountNumbererror =
+      inputTouched && formData?.bankAccountNumber.length > 0 && !isaccountNumberValid;
+
+   const isaccountNameValid = (formData?.bankAccountHolderName || "").length >= 3;
+   const showaccountNameerror =
+      inputTouched && formData?.bankAccountHolderName.length > 0 && !isaccountNameValid;
 
 
 
@@ -123,34 +136,39 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                            <p className="text-red-500 text-sm -mt-2">{errors.bankName}</p>
                         )}
 
-                        <CustomInputField
+
+                        <InputField
                            label="Account Number"
                            // iconSrc="/call-02.svg"
                            placeholder="Enter Account Number"
                            name="bankAccountNumber"
                            value={formData.bankAccountNumber}
-                           onFormChange={handleUpdateFormData}
-                           type="text"
+                           onChange={handleUpdateFormData}
+                           leftIcon={CreditCardIcon}
+                           error={
+                              showaccountNumbererror ? " Account Number must be at least 10 characters" : ""
+                           }
+                        />
 
-                        >
-                           <CreditCardIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
-                        </CustomInputField>
+
+                        <InputField
+                           label="Account Holder’s Name"
+                           // iconSrc="/call-02.svg"
+                           placeholder="Enter Account Holder’s Name"
+                           name="bankAccountHolderName"
+                           value={formData.bankAccountHolderName}
+                           onChange={handleUpdateFormData}
+                           leftIcon={PlateNumberIcon}
+                           error={
+                              showaccountNameerror ? " Account Holder’s Name must be greater than 3 characters" : ""
+                           }
+                        />
+
+
                         {errors.bankAccountNumber && (
                            <p className="text-red-500 text-sm -mt-2">{errors.bankAccountNumber}</p>
                         )}
 
-                        <CustomInputField
-                           label="Account Holder’s Name"
-                           // iconSrc="/call-02.svg"
-                           placeholder="Enter Account Holder’s Name"
-                           type="text"
-                           name="bankAccountHolderName"
-                           value={formData.bankAccountHolderName}
-                           onFormChange={handleUpdateFormData}
-
-                        >
-                           <PlateNumberIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
-                        </CustomInputField>
                         {errors.bankAccountHolderName && (
                            <p className="text-red-500 text-sm -mt-2">{errors.bankAccountHolderName}</p>
                         )}

@@ -1,19 +1,23 @@
 import React, { useState, useRef } from 'react';
 import SectionLabel from '../SectionLabel';
-import { CustomInputField } from '../CustomInputField';
-import { CustomSelectField } from "../CustomSelectField";
+import { CustomSelectField } from "../customFormFields/CustomSelectField";
 import { FaChevronDown } from "react-icons/fa";
-import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon';
 import { AddFileIcon } from '../../assets/icons/AddFileIcon';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import { DocumentIcon } from '../../assets/icons/DocumentIcon';
 import { IdCardIcon } from '../../assets/icons/IdCardIcon';
+import { InputField } from '../customFormFields/InputField';
 import CustomButton from '../CustomButton';
 
 export const StepOne = ({ nextStep, step, totalSteps }) => {
   const fileInputRef = useRef(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const { formData, handleUpdateFormData } = useStepFlowContext();
+  const {
+    formData,
+    inputTouched,
+    setFormData,
+    handleUpdateFormData,
+  } = useStepFlowContext();
 
   const [errors, setErrors] = useState({});
 
@@ -26,9 +30,15 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
     setSelectedFiles(files);
   };
 
+  const isDocumentValid = (formData?.documentID || "").length >= 15;
+  const showDocumenterror =
+    inputTouched && formData?.documentID.length > 0 && !isDocumentValid;
+
+
 
   const handleNext = () => {
     const newErrors = {};
+    console.log("Form Data:", formData);
 
     if (!formData.meansOfIdentification) {
       newErrors.meansOfIdentification = "Please select means of identification";
@@ -100,16 +110,17 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
                 <p className="text-red-500 text-sm -mt-2">{errors.meansOfIdentification}</p>
               )}
 
-              <CustomInputField
+              <InputField
                 label="Document ID"
                 name="documentID"
                 placeholder="Enter Document ID Number"
                 value={formData.documentID}
-                onFormChange={handleUpdateFormData}
-              >
-                <IdCardIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
-              </CustomInputField>
-
+                onChange={handleUpdateFormData}
+                leftIcon={IdCardIcon}
+                error={
+                  showDocumenterror ? "Document ID must be at least 3 characters" : ""
+                }
+              />
               {errors.documentID && (
                 <p className="text-red-500 text-sm -mt-2">{errors.documentID}</p>
               )}

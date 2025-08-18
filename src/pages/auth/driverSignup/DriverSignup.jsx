@@ -19,7 +19,7 @@ import { UserIcon } from "../../../assets/icons/UserIcon"
 import { LogoText } from "../../../components/LogoText";
 import { InputField } from "../../../components/customFormFields/InputField";
 import { FormProvider, useStepFlowContext } from "../../../hooks/useStepFlowFormContext";
-import { CustomSelectField } from "../../../components/CustomSelectField";
+import { CustomSelectField } from "../../../components/customFormFields/CustomSelectField";
 import { LocationHomeIcon } from "../../../assets/icons/LocationHomeIcon";
 import { Modal } from "../../../components/Modal";
 import { EmailSent } from "../../../assets/icons/EmailSent";

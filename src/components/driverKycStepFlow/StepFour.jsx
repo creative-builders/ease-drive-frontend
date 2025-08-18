@@ -46,37 +46,6 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
     };
 
     const token = searchParams.get("whois");
-    // const _formData = new FormData();
-    // _formData.append("documentType", formData.documentType);
-    // _formData.append("documentID", formData.documentID);
-    // _formData.append("meansOfIdentification", formData.meansOfIdentification);
-    // _formData.append("vehicleType", formData.vehicleType);
-
-    // _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
-    // _formData.append("vehicleColor", formData.vehicleColor);
-    // _formData.append("serviceArea", formData.serviceArea);
-    // _formData.append("numberOfSeats", formData.numberOfSeats);
-
-    // // Append each Document Photo
-    // formData.documentPhotos.forEach((file) => {
-    //     _formData.append("documentPhotos", file);
-    // });
-
-    // // Append each Vehicle Photo
-    // formData.vehiclePhotos.forEach((file) => {
-    //     _formData.append("vehiclePhotos", file);
-    // });
-
-
-    // // bankDetails.*
-    // _formData.append("bankAccountHolderName", formData.bankAccountHolderName);
-    // _formData.append("bankName", formData.bankName);
-    // _formData.append("bankAccountNumber", formData.bankAccountNumber);
-    // _formData.append("transactionPin", "2345");
-
-    // // images
-    // _formData.append("profileImage", formData.profileImage[0]); // Assuming profileImage is an array of files
-
 
     const { mutate: submitDriverKYC, isLoading } = useMutation(
         driverKYCUpdate,
@@ -91,8 +60,6 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
             }
         }
     );
-
-
 
     const handleNext = () => {
         const newErrors = {};
@@ -178,23 +145,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
         }
     };
 
-    // const handleSkip = async () => {
-    //     const newErrors = {};
-    //     if (Object.keys(newErrors).length === 0) {
 
-    //         try {
-    //             const data = await axios.put(`http://localhost:8000/api/driver/driverkyc?whois=${token}`, _formData)
-
-    //             console.log("KYC data updated successfully:", data);
-    //             setShowModal(true);
-    //         } catch (error) {
-    //             console.error("Error updating KYC data:", error);
-    //             showError("Failed to update KYC data. Please try again.");
-    //         }
-    //         // setShowModal(true);
-    //         // console.log(token)
-    //     }
-    // };
 
 
 
@@ -286,8 +237,6 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                             Skip
                         </button>
 
-                        {/* <CustomButton name={submitting ? "Submitting" : "Submit"} extendedStyles="w-full p-3 lg:p-4 rounded-lg"
-                            btnClick={() => handleNext()} /> */}
 
                         <button
                             type="submit"

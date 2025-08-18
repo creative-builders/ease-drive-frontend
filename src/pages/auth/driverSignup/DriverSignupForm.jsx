@@ -6,7 +6,7 @@ import { FiEye } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
 
 import { CustomInputField } from "../../../components/CustomInputField";
-import { CustomSelectField } from "../../../components/CustomSelectField";
+import { CustomSelectField } from "../../../components/customFormFields/CustomSelectField";
 import { CountdownTimer } from "../../../components/CountdownTimer";
 import { Modal } from "../../../components/Modal";
 import ErrorPopup from "../../../components/ErrorPopup";
