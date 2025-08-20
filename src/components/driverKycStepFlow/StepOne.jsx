@@ -8,6 +8,7 @@ import { DocumentIcon } from '../../assets/icons/DocumentIcon';
 import { IdCardIcon } from '../../assets/icons/IdCardIcon';
 import { InputField } from '../customFormFields/InputField';
 import CustomButton from '../CustomButton';
+import { Link } from 'react-router-dom';
 
 export const StepOne = ({ nextStep, step, totalSteps }) => {
   const fileInputRef = useRef(null);
@@ -37,7 +38,7 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
 
   const handleNext = () => {
     const newErrors = {};
-    console.log("Form Data:", formData);
+    // console.log("Form Data:", formData);
 
     if (!formData.meansOfIdentification) {
       newErrors.meansOfIdentification = "Please select means of identification";
@@ -68,12 +69,14 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
           p-5 gap-6 bg-white flex flex-col items-center justify-center">
             {/* Logo */}
             <div className="lg:w-[100%] w-full flex flex-col  gap-[7px] opacity-100 ">
+              <Link to="/"> 
               <div className="flex flex-row items-center justify-start gap-2">
                 <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
                 <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-[18px] leading-[100%]">
                   Ease Drive
                 </h1>
               </div>
+              </Link>
             </div>
             {/* Section Header */}
             <div className="lg:w-[100%] w-[100%] justify-between flex flex-row items-start">

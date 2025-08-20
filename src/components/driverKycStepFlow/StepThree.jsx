@@ -9,7 +9,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
 import { CreditCardIcon } from '../../assets/icons/CreditCardIcon';
 import { BankHouseIcon } from '../../assets/icons/BankHouseIcon';
-
+import { Link } from 'react-router-dom';
 
 export const StepThree = ({ nextStep, step, totalSteps }) => {
 
@@ -68,6 +68,7 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                 p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
                   <div className="lg:w-[100%] lg:h-[59px] w-[100%]  flex flex-col
                    gap-[7.38px] opacity-100  ">
+                     <Link to="/"> 
                      <div className='flex-row flex  w-full items-center  items-center  justify-start gap-2'>
                         <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
                         <h1 className="font-inter text-gary-700 italic font-bold lg:text-[36px] text-[18px] leading-[120%]">
@@ -75,6 +76,7 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                         </h1>
 
                      </div>
+                     </Link >
                   </div>
 
                   <div className="lg:w-[100%]  w-[100%]  justify-between opacity-100 flex flex-row items-start">

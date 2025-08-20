@@ -164,12 +164,14 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                     <div className="lg:w-[637px] w-[360px] h-[85vh] lg:h-[90vh] m-auto 
                     p-5 gap-8 bg-white flex flex-col items-center justify-center">
                         <div className="lg:w-[100%] w-full flex flex-col  gap-[7px] opacity-100 ">
+                            <Link to="/"> 
                             <div className="flex flex-row items-center justify-start gap-2">
                                 <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
                                 <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-[18px] leading-[100%]">
                                     Ease Drive
                                 </h1>
                             </div>
+                            </Link>
                         </div>
 
                         <div className="lg:w-[100%] w-[347px] justify-between opacity-100 flex flex-row items-start">
