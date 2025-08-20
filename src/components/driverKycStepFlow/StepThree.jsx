@@ -230,7 +230,7 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
 
                </div>
 
-               <div className="lg:w-[528px] lg:h-[638px] hidden md:block opacity-100 rounded-[45px]">
+               <div className="lg:w-[528px] lg:h-[638px] hidden lg:block opacity-100 rounded-[45px]">
                   <img src="/signup-banner.png" alt="Signup banner" className=' lg:rounded-[45px]' />
                </div>
 

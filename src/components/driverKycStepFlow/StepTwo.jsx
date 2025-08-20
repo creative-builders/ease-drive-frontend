@@ -246,7 +246,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
           </div>
 
-          <div className="lg:w-[528px] lg:h-[881px] hidden md:block lg:p-5 gap-8 opacity-100  flex items-center justify-center">
+          <div className="lg:w-[528px] lg:h-[881px] hidden lg:block lg:p-5 gap-8 opacity-100  flex items-center justify-center">
             <img src="/signup-banner-l.png" alt="" className=' lg:rounded-[45px]' />
           </div>
 

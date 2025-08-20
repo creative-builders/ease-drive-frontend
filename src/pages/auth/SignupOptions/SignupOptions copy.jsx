@@ -55,7 +55,7 @@ export const SignupOptions = () => {
 
           </div>
 
-          <div className="lg:w-[528px] lg:h-[638px] md:block opacity-100 rounded-[45px]">
+          <div className="lg:w-[528px] lg:h-[638px] lg:block opacity-100 rounded-[45px]">
             <img src="/signup-banner.png" alt="Signup Banner " className='lg:w-[528px] lg:h-[623px] lg:rounded-[45px]' />
           </div>
 
