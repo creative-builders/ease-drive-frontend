@@ -1,5 +1,6 @@
 import React from 'react'
 import RideOptionSelector from "./RideOptionSelector"
+import {Link} from "react-router-dom"
 
 export const SignupOptions = () => {
   return (
@@ -17,13 +18,15 @@ export const SignupOptions = () => {
           p-8 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
                 <div className="lg:w-[556px] lg:h-[59px] w-[182px] h-[68px] flex flex-col
                     gap-[7.38px] opacity-100 pt-4 md:pt-2">
+                  <Link to="/"> 
                   <div className='lg:flex flex-row flex  flex-col lg:flex-row w-full  items-center justify-center gap-2'>
                     <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] lg:mr-2 ' />
                     <h1 className="font-inter text-gray-800 italic font-bold lg:text-[36px] text-[34px] leading-[100%]">
                       Ease Drive
                     </h1>
-
+                    
                   </div>
+                  </Link>
 
                 </div>
 

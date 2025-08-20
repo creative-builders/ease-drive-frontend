@@ -75,7 +75,7 @@ const RideOptionSelector = () => {
                 {selected !== "" && (<button
                     className="bg-green-700 lg:w-[556px] lg:h-[72px] w-[347px] h-[45px] px-[10px] rounded-[16px]
                      opacity-100 text-white flex items-center justify-center gap-[10px] text-lg font-medium"
-                    onClick={() => selected === "" ? navigate("/easesignup") :
+                    onClick={() => selected === "" ? null :
                         navigate(`/${selected}`)
                     }
                 >
