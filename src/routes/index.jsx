@@ -85,6 +85,10 @@ const IndexRoute = () => {
         <Route path="driver-call" element={<DriverCall />} />
       </Route>
 
+
+      {/* Not found */}
+      <Route path="*" element={<NotFoundPage />} />
+
     </Routes>
     </Router>
   )
