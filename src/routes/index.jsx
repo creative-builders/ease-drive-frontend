@@ -8,7 +8,6 @@ import DrivUpload from '../pages/auth/Drivers/DrivUpload';
 import DrivPlace from '../pages/auth/Drivers/DrivPlace';
 import { RegisterPassenger } from '../pages/auth/Passengers/PassengersSignup';
 import Login from '../pages/auth/Login/Login';
-// import DriverSignup from '../pages/auth/Drivers/Driver-signup';
 import { DriverSignup } from '../pages/auth/driverSignup/DriverSignup';
 import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
@@ -25,21 +24,20 @@ import Password from '../components/personalProfile/Password';
 import Luggage from '../components/luggagesparts/Luggage';
 import Bidder from '../components/bidders/Bidders';
 import EditProfile from '../components/personalProfile/EditProfile';
-// import PassengerDashboard from '../pages/dashboard/passenger/PassengerDashboard';
 import DashboardHome from '../pages/dashboard/DashboardHome';
 import PassengerDashboardIndex from '../pages/dashboard/passenger';
 import SetRoutes from '../components/yourRoute/SetRoutes';
 import ViewBookings from '../components/Bookings/ViewBookings';
 import DriverBoard from '../components/driverDashboardFolders/DriverBoard';
 import DataStatus from '../components/driverDashboardFolders/DataStatus';
-import { RegisterDriver } from '../pages/auth/driverSignup/DriverSignup';
-import { SignupOptions } from '../pages/auth/SignupOptions/SignupOptions';
-// import Header from '../layout/dashboard/header/Header';
+import { SignupOptions} from '../pages/auth/SignupOptions/SignupOptions';
 
 
 import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
 import { ForgotPassword } from '../pages/auth/Passengers/ForgotPassword';
 import { ResetPassword } from '../pages/auth/Passengers/ResetPassword';
+import NotificationsPage from '../ui/NotificationPage';
+import NotFoundPage from '../ui/NotFoundPage';
 
 
 
@@ -52,7 +50,7 @@ const IndexRoute = () => {
       <Route path="/login" element={<Login/>} />
       <Route path="/activate" element={<ActivateAccount/>} />
       <Route path="/passengers-signup" element={<RegisterPassenger />} />
-      <Route path="/driver-signup" element={<RegisterDriver />} />
+      <Route path="/driver-signup" element={<DriverSignup />} />
       <Route path="/driver-kyc" element={<DriverKycPage />} />
       <Route path="/Dri-verify" element={<DriVerify />} />
       <Route path="/Driv-upload" element={<DrivUpload />} />
@@ -66,32 +64,33 @@ const IndexRoute = () => {
       <Route path="/mainpage" element={<MainPage />} />
       <Route path="/Luggage" element={<Luggage />} />
       <Route path="/LookingFor" element={<LookingFor />} />
-      {/* <Route path="/PickRide" element={<PickRide />} /> */}
       <Route path="/Cancelled" element={<Cancelled />} />
       <Route path="/DriverCall" element={<DriverCall />} />
       <Route path="/Password" element={<Password />} />
       <Route path="/drivers" element={<DriverBoard />} />
       <Route path="/rides" element={<DataStatus />} />
+      <Route path="/notifications" element={<NotificationsPage />} />
+      <Route path="/not-found" element={<NotFoundPage />} />
       
 
-        {/* Dashboard Route */}
-        <Route path="/dashboard" element={<DashboardHome />}>
-          <Route index element={<PassengerDashboardIndex />} />
-          <Route path="my-bookings" element={<ViewBookings />} />
-          <Route path="edit-profile" element={<EditProfile />} />
-          <Route path="settings" element={<Setting />} />
-          {/* <Route path="location-popUp" element={<LocationPopUp />} /> */}
-          {/* <Route path="mainpage" element={<MainPage />} /> */}
-          <Route path="set-routes" element={<SetRoutes />} />
-          <Route path="luggage" element={<Luggage />} />
-          <Route path="looking-for" element={<LookingFor />} />
-          <Route path="pick-ride" element={<PickRide />} />
-          <Route path="cancelled" element={<Cancelled />} />
-          <Route path="bidder" element={<Bidder />} />
-          <Route path="driver-call" element={<DriverCall />} />
-        </Route>
+      {/* Dashboard Route */}
+      <Route path="/dashboard" element={<DashboardHome />}> 
+        <Route index element={<PassengerDashboardIndex/>} />
+        <Route path="my-bookings" element={<ViewBookings/>} />
+        <Route path="edit-profile" element={<EditProfile />} />
+        <Route path="settings" element={<Setting />} />
+        {/* <Route path="location-popUp" element={<LocationPopUp />} /> */}
+        {/* <Route path="mainpage" element={<MainPage />} /> */}
+        <Route path="set-routes" element={<SetRoutes />} />
+        <Route path="luggage" element={<Luggage />} />
+        <Route path="looking-for" element={<LookingFor />} />
+        <Route path="pick-ride" element={<PickRide />} />
+        <Route path="cancelled" element={<Cancelled />} />
+        <Route path="bidder" element={<Bidder />} />
+        <Route path="driver-call" element={<DriverCall />} />
+      </Route>
 
-      </Routes>
+    </Routes>
     </Router>
   )
 }

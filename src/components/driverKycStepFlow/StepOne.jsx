@@ -1,23 +1,19 @@
 import React, { useState, useRef } from 'react';
 import SectionLabel from '../SectionLabel';
-import { CustomSelectField } from "../customFormFields/CustomSelectField";
+import { CustomInputField } from '../CustomInputField';
+import { CustomSelectField } from "../CustomSelectField";
 import { FaChevronDown } from "react-icons/fa";
+import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon';
 import { AddFileIcon } from '../../assets/icons/AddFileIcon';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import { DocumentIcon } from '../../assets/icons/DocumentIcon';
 import { IdCardIcon } from '../../assets/icons/IdCardIcon';
-import { InputField } from '../customFormFields/InputField';
 import CustomButton from '../CustomButton';
 
 export const StepOne = ({ nextStep, step, totalSteps }) => {
   const fileInputRef = useRef(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const {
-    formData,
-    inputTouched,
-    setFormData,
-    handleUpdateFormData,
-  } = useStepFlowContext();
+  const { formData, handleUpdateFormData } = useStepFlowContext();
 
   const [errors, setErrors] = useState({});
 
@@ -30,15 +26,8 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
     setSelectedFiles(files);
   };
 
-  const isDocumentValid = (formData?.documentID || "").length >= 15;
-  const showDocumenterror =
-    inputTouched && formData?.documentID.length > 0 && !isDocumentValid;
-
-
-
   const handleNext = () => {
     const newErrors = {};
-    console.log("Form Data:", formData);
 
     if (!formData.meansOfIdentification) {
       newErrors.meansOfIdentification = "Please select means of identification";
@@ -65,7 +54,7 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
         <div className="bg-white lg:w-[1216px] lg:h-[800px] w-[90%] m-auto flex
          lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center py-auto">
 
-          <div className="lg:w-[637px] lg:h-[734px]  w-[400px] pt-4
+          <div className="lg:w-[637px] lg:h-[734px] w-full h-[] 
           p-5 gap-6 bg-white flex flex-col items-center justify-center">
             {/* Logo */}
             <div className="lg:w-[100%] w-full flex flex-col  gap-[7px] opacity-100 ">
@@ -110,17 +99,16 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
                 <p className="text-red-500 text-sm -mt-2">{errors.meansOfIdentification}</p>
               )}
 
-              <InputField
+              <CustomInputField
                 label="Document ID"
                 name="documentID"
                 placeholder="Enter Document ID Number"
                 value={formData.documentID}
-                onChange={handleUpdateFormData}
-                leftIcon={IdCardIcon}
-                error={
-                  showDocumenterror ? "Document ID must be at least 3 characters" : ""
-                }
-              />
+                onFormChange={handleUpdateFormData}
+              >
+                <IdCardIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
+              </CustomInputField>
+
               {errors.documentID && (
                 <p className="text-red-500 text-sm -mt-2">{errors.documentID}</p>
               )}
@@ -170,14 +158,6 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
               </div>
             </div>
 
-            <button
-              type="button"
-              className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
-              onClick={() => {
-                nextStep()
-              }}>
-              Skip
-            </button>
 
             <CustomButton
               name="Continue"

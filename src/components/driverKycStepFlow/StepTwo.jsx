@@ -1,31 +1,27 @@
 import React from 'react'
 import SectionLabel from '../SectionLabel'
-import { CustomSelectField } from "../customFormFields/CustomSelectField"
+import { CustomInputField } from '../CustomInputField'
+import { CustomSelectField } from "../CustomSelectField"
 import { useState, useRef } from 'react';
 
 import CustomButton from '../CustomButton';
 import { FaChevronDown } from "react-icons/fa";
+import addfile from '../../assets/images/addFile.svg'
 import { CarIcon } from '../../assets/icons/CarIcon'
 import { AddFileIcon } from '../../assets/icons/AddFileIcon'
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
 import { ColorIcon } from '../../assets/icons/ColorIcon'
 import { SeatIcon } from '../../assets/icons/SeatIcon'
+import { LocationIcon } from '../../assets/icons/LocationIcon';
 import { LocationHomeIcon } from '../../assets/icons/LocationHomeIcon';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
-import { InputField } from '../customFormFields/InputField';
-
 
 
 export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
   const fileInputRef = useRef(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const {
-    formData,
-    inputTouched,
-    setFormData,
-    handleUpdateFormData,
-  } = useStepFlowContext();
+  const { formData, handleUpdateFormData } = useStepFlowContext();
   const [errors, setErrors] = useState({});
 
   const handleUploadClick = () => {
@@ -36,11 +32,6 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
     const files = Array.from(e.target.files);
     setSelectedFiles(files);
   };
-
-  const isplateNumberValid = (formData?.plateNumber || "").length >= 15;
-  const showplateNumbererror =
-    inputTouched && formData?.plateNumber.length > 0 && !isplateNumberValid;
-
 
   const handleNext = () => {
     const newErrors = {};
@@ -67,9 +58,9 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
   return (
     <div lassName=" min-h-screen lg:h-full ">
       <div className="flex items-center justify-center  min-h-screen ">
-        <div className=" lg:w-[1216px] lg:h-[1090px] w-[100%] h-[100%] m-auto lg:pt-12 lg:pb-12
+        <div className="bg-white lg:w-[1216px] lg:h-[990px] w-[100%] h-[100%] m-auto lg:pt-12 lg:pb-12
          opacity-100 flex flex-row items-center">
-          <div className="lg:w-[637px] lg:h-[764px] w-[360px]  h-[100%] m-auto 
+          <div className="lg:w-[637px] lg:h-[734px] w-[100%] h-[100%] m-auto 
           flex justify-center items-center ml-0
            p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
             <div className="lg:w-[100%] w-full flex flex-col  gap-[7px] opacity-100 ">
@@ -119,20 +110,18 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                 {errors.vehicleType && (
                   <p className="text-red-500 text-sm -mt-2">{errors.vehicleType}</p>
                 )}
-
-                <InputField
+                <CustomInputField
                   label="Plate Number"
                   name="plateNumber"
-                  placeholder="Enter Vehicle Plate  Number"
                   value={formData.plateNumber}
-                  onChange={handleUpdateFormData}
-                  leftIcon={PlateNumberIcon}
-                  error={
-                    showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-                  }
-                />
+                  onFormChange={handleUpdateFormData}
 
-              
+                  placeholder="Enter Vehicle Plate  Number"
+                  type="text"
+
+                >
+                  <PlateNumberIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
+                </CustomInputField>
                 {errors.plateNumber && (
                   <p className="text-red-500 text-sm -mt-2">{errors.plateNumber}</p>
                 )}
@@ -150,36 +139,42 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   <LocationHomeIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                 </CustomSelectField>
 
+                {/* <CustomInputField
+                  label="Service Area (Location)"
+                  iconSrc="/call-02.svg"
+                  placeholder="Enter your usual route"
+                  type="text"
+                // value={formData.phone}
+                // onChange={handleChange("phone")}
+                /> */}
 
                 <div className='flex flex-row w-full gap-4'>
-
-                  <InputField
+                  <CustomInputField
                     label="Number Seats"
                     name="numberOfSeats"
                     value={formData.numberOfSeats}
+                    onFormChange={handleUpdateFormData}
                     placeholder="e.g 4"
-                    onChange={handleUpdateFormData}
-                    leftIcon={SeatIcon}
-                  // error={
-                  //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-                  // }
-                  />
+                    type="text"
+                  >
+                    <SeatIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
+                  </CustomInputField>
 
-                
-
-                  <InputField
+                  <CustomInputField
                     label="Vehicle Color"
                     name="vehicleColor"
                     value={formData.vehicleColor}
+                    onFormChange={handleUpdateFormData}
+                    // iconSrc="/call-02.svg"
                     placeholder="e.g Black"
-                    onChange={handleUpdateFormData}
-                    leftIcon={ColorIcon}
-                  // error={
-                  //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-                  // }
-                  />
-
+                    type="text"
+                  // value={formData.phone}
+                  // onChange={handleChange("phone")}
+                  >
+                    <ColorIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
+                  </CustomInputField>
                 </div>
+
 
               </form>
 
@@ -228,15 +223,6 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                 )}
               </div>
             </div>
-
-            <button
-              type="button"
-              className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
-              onClick={() => {
-                nextStep()
-              }}>
-              Skip
-            </button>
 
             <CustomButton
               name="Continue"
