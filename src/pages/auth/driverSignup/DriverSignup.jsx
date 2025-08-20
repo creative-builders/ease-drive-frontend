@@ -67,7 +67,7 @@ export const DriverSignup = () => {
     const showFullNameError =
         inputTouched && formData?.fullName.length > 0 && !isFullNameValid;
 
-    const showPasswordmismached = inputTouched && formData?.password !== formData?.confirmPassword;
+    // const showPasswordmismached = inputTouched && formData?.password !== formData?.confirmPassword;
 
     const closeModal = () => {
         setShowModal(false);
@@ -168,7 +168,7 @@ export const DriverSignup = () => {
 
 
 
-                        <InputField
+                        {/* <InputField
                             label="Confirm Password"
                             name="confirmPassword"
                             placeholder="Re-enter your password"
@@ -185,7 +185,7 @@ export const DriverSignup = () => {
                             onToggle={() => setShowPassword((prev) => !prev)}
                             rightIconOpen={EyeOpenIcon}
                             rightIconClose={EyeCloseIcon}
-                        />
+                        /> */}
 
 
                         <InputField
@@ -277,7 +277,7 @@ export const DriverSignup = () => {
 
 export const RegisterDriver = () => {
 
-    const initialInputFields = ["fullName", "phoneNumber", "email", "password", "confirmPassword", "city"];
+    const initialInputFields = ["fullName", "phoneNumber", "email", "password", "city"];
 
     return (
         <FormProvider initialInputFields={initialInputFields}>
