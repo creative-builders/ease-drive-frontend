@@ -1,40 +1,30 @@
-import { createContext, useContext, useState } from 'react';
 
-const FormContext = createContext();
+import { createContext, useContext, useState } from 'react'
 
-export const FormProvider = ({ children, initialInputFields = [] }) => {
-  const generateIntialState = () => {
+const FormContext  = createContext();
+
+export const  FormProvider = ({ children, initialInputFields = [] }) => {
+const generateIntialState = () => {
     const initialState = {};
-    initialInputFields.forEach((inputField) => {
-      initialState[inputField] = "";
-    });
+    initialInputFields.forEach(inputField => {
+        initialState[inputField] = ""
+    })
     return initialState;
-  };
+}
 
-  const [formData, setFormData] = useState(generateIntialState());
+const[formData,setFormData] = useState(generateIntialState);
+const [inputTouched, setInputTouched] = useState(false);
 
-  const handleUpdateFormData = (eOrKey, value) => {
-    if (typeof eOrKey === "string") {
-      // Direct key-value update
-      setFormData((prev) => ({
-        ...prev,
-        [eOrKey]: value,
-      }));
-    } else if (eOrKey?.target?.name) {
-      // Event-based update
-      const { name, value } = eOrKey.target;
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-  };
+const handleUpdateFormData = (e) => {
+    setFormData(prev => ({...prev,[e.target.name]:e.target.value}));
+    setInputTouched(true);
+}
+return(
+<FormContext.Provider value={{ formData, inputTouched, setFormData, handleUpdateFormData}}>
+    {children}
+</FormContext.Provider>
+ );
+}
 
-  return (
-    <FormContext.Provider value={{ formData, setFormData, handleUpdateFormData }}>
-      {children}
-    </FormContext.Provider>
-  );
-};
+export const useStepFlowContext = () => useContext(FormContext)
 
-export const useStepFlowContext = () => useContext(FormContext);
