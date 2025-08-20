@@ -5,7 +5,7 @@ export const LocationIcon = (props) => {
       width="19"
       height="22"
       viewBox="0 0 19 22"
-      fill="#1E1E1E"
+      fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
