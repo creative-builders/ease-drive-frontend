@@ -3,7 +3,6 @@ import SectionLabel from '../SectionLabel';
 import { CustomInputField } from '../CustomInputField';
 import { CustomSelectField } from "../CustomSelectField";
 import { FaChevronDown } from "react-icons/fa";
-import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon';
 import { AddFileIcon } from '../../assets/icons/AddFileIcon';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import { DocumentIcon } from '../../assets/icons/DocumentIcon';

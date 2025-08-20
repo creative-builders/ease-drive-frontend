@@ -29,7 +29,8 @@ export default {
          950:"#072C0F"
         },
         neutral:{
-          400:"#A1A1A1"
+          400:"#A1A1A1",
+          200:"#F6F6F6"
         },
         accent:{
           100:"#EDF3FF",
@@ -41,7 +42,7 @@ export default {
           50:"#F1FCF2",
           100: "#DEFAE2",
           600: "#20AE3A",
-          700: "#1A7B2C",
+          700: "#181d19ff",
         },
         pink:{
           50:"#FFCC0014"
