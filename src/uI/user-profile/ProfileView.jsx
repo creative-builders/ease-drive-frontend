@@ -34,7 +34,9 @@ const ProfileView = ({ onEdit }) => {
             <div className='flex px-2 py-3 items-center justify-start gap-2'>
             <EmailSignedIcon />
             <input 
-                type="email" 
+                type="email"
+                readOnly
+                onFocus={(e)=>e.target.blur()} 
                 className='h-6 w-48 sm:w-40 font-medium text-[14px] rounded-lg leading-6 tracking-normal border-none'
                 placeholder="solobachi45@gmail.com" 
                 id=""
@@ -45,6 +47,8 @@ const ProfileView = ({ onEdit }) => {
             <PhoneIcon />
             <input 
                 type="number" 
+                readOnly
+                onFocus={(e)=>e.target.blur()}
                 className='h-6 w-48 sm:w-40 font-medium rounded-lg text-[14px] leading-6 tracking-normal border-none'
                 placeholder="solobachi45@gmail.com" 
                 id=""

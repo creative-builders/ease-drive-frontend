@@ -1,10 +1,5 @@
 import React, { useRef, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
-// import Camera from '../../assets/icons/Camera';;
-import EmailTwo from '../../assets/icons/EmailTwo';
-import CallTwo from '../../assets/icons/CallTwo';
-// import EyeIcon from '../../assets/icons/EyeIcon';
-// import LockIcon from '../../assets/icons/LockIcon';
 import profile from '../../assets/images/profile-user.png'
 import FormInput from "../../components/form/FormInput";
 import CustomButton from "../../components/CustomButton";
