@@ -14,7 +14,6 @@ import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import CustomButton from '../CustomButton';
-import { number } from 'framer-motion';
 
 export const StepFour = ({ nextStep, step, totalSteps }) => {
     const fileInputRef = useRef(null);
