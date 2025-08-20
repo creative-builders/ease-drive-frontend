@@ -3,7 +3,7 @@ import RideOptionSelector from "./RideOptionSelector"
 
 export const SignupOptions = () => {
   return (
-    <div lassName=" min-h-screen">
+    <div className=" min-h-screen">
       <div className="min-h-screen flex flex-col lg:flex-row lg:items-center 
       justify-center bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)]">
         <div className="flex justify-center gap-x-[31px] bg-gradient-to-r
@@ -59,7 +59,7 @@ export const SignupOptions = () => {
 
               </div>
 
-              <div className="lg:w-[528px] lg:h-[638px] md:block opacity-100 rounded-[45px]">
+              <div className="lg:w-[528px] lg:h-[638px] lg:block opacity-100 rounded-[45px]">
                 <img src="/signup-banner.png" alt="Signup Banner " className='lg:w-[528px] lg:h-[623px] lg:rounded-[45px]' />
               </div>
 
