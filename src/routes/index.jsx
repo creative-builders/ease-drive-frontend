@@ -29,13 +29,15 @@ import ViewBookings from '../components/Bookings/ViewBookings';
 import DriverBoard from '../components/driverDashboardFolders/DriverBoard';
 import DataStatus from '../components/driverDashboardFolders/DataStatus';
 import { SignupOptions} from '../pages/auth/SignupOptions/SignupOptions';
+import {RegisterDriver} from "../pages/auth/driverSignup/DriverSignup"
 
 
 import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
 import { ForgotPassword } from '../pages/auth/Passengers/ForgotPassword';
 import { ResetPassword } from '../pages/auth/Passengers/ResetPassword';
-import NotificationsPage from '../ui/NotificationPage';
+// import NotificationsPage from '../ui/NotificationPage';
 import NotFoundPage from '../ui/NotFoundPage';
+
 
 
 
@@ -48,7 +50,7 @@ const IndexRoute = () => {
       <Route path="/login" element={<Login/>} />
       <Route path="/activate" element={<ActivateAccount/>} />
       <Route path="/passengers-signup" element={<RegisterPassenger />} />
-      <Route path="/driver-signup" element={<DriverSignup />} />
+      <Route path="/driver-signup" element={<RegisterDriver />} />
       <Route path="/driver-kyc" element={<DriverKycPage />} />
       <Route path="/Dri-verify" element={<DriVerify />} />
       <Route path="/Driv-upload" element={<DrivUpload />} />
@@ -67,8 +69,7 @@ const IndexRoute = () => {
       <Route path="/Password" element={<Password />} />
       <Route path="/drivers" element={<DriverBoard />} />
       <Route path="/rides" element={<DataStatus />} />
-      <Route path="/notifications" element={<NotificationsPage />} />
-      <Route path="/not-found" element={<NotFoundPage />} />
+      {/* <Route path="/driver-profile" element={<ProfilePage/>} /> */}
       
 
       {/* Dashboard Route */}
@@ -77,8 +78,6 @@ const IndexRoute = () => {
         <Route path="my-bookings" element={<ViewBookings/>} />
         <Route path="edit-profile" element={<EditProfile />} />
         <Route path="settings" element={<Setting />} />
-        {/* <Route path="location-popUp" element={<LocationPopUp />} /> */}
-        {/* <Route path="mainpage" element={<MainPage />} /> */}
         <Route path="set-routes" element={<SetRoutes />} />
         <Route path="luggage" element={<Luggage />} />
         <Route path="looking-for" element={<LookingFor />} />
@@ -87,6 +86,10 @@ const IndexRoute = () => {
         <Route path="bidder" element={<Bidder />} />
         <Route path="driver-call" element={<DriverCall />} />
       </Route>
+
+
+      {/* Not found */}
+      <Route path="*" element={<NotFoundPage />} />
 
     </Routes>
     </Router>
