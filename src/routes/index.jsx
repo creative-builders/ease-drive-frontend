@@ -8,13 +8,10 @@ import DrivUpload from '../pages/auth/Drivers/DrivUpload';
 import DrivPlace from '../pages/auth/Drivers/DrivPlace';
 import { RegisterPassenger } from '../pages/auth/Passengers/PassengersSignup';
 import Login from '../pages/auth/Login/Login';
-// import DriverSignup from '../pages/auth/Drivers/Driver-signup';
 import { DriverSignup } from '../pages/auth/driverSignup/DriverSignup';
 import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
 import CheckEmailFile from '../pages/auth/Passengers/CheckEmailFile';
-// import BidCard from '../components/bid/BidCard';
-// import TestingComponent from '../pages/dashboard/TestingCompent';
 import MainPage from '../components/mainpage/MainPage';
 import LookingFor from '../components/luggagesparts/LookingFor';
 import PickRide from '../components/PickRide';
@@ -25,7 +22,6 @@ import Password from '../components/personalProfile/Password';
 import Luggage from '../components/luggagesparts/Luggage';
 import Bidder from '../components/bidders/Bidders';
 import EditProfile from '../components/personalProfile/EditProfile';
-// import PassengerDashboard from '../pages/dashboard/passenger/PassengerDashboard';
 import DashboardHome from '../pages/dashboard/DashboardHome';
 import PassengerDashboardIndex from '../pages/dashboard/passenger';
 import SetRoutes from '../components/yourRoute/SetRoutes';
@@ -33,7 +29,6 @@ import ViewBookings from '../components/Bookings/ViewBookings';
 import DriverBoard from '../components/driverDashboardFolders/DriverBoard';
 import DataStatus from '../components/driverDashboardFolders/DataStatus';
 import { SignupOptions} from '../pages/auth/SignupOptions/SignupOptions';
-// import Header from '../layout/dashboard/header/Header';
 
 
 import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
@@ -72,6 +67,8 @@ const IndexRoute = () => {
       <Route path="/Password" element={<Password />} />
       <Route path="/drivers" element={<DriverBoard />} />
       <Route path="/rides" element={<DataStatus />} />
+      <Route path="/notifications" element={<NotificationsPage />} />
+      <Route path="/not-found" element={<NotFoundPage />} />
       
 
       {/* Dashboard Route */}
