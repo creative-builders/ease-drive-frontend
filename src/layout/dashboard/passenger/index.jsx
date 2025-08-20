@@ -1,6 +1,9 @@
 import { Outlet } from "react-router-dom"
-import { Navbar } from "../../../components/dashboard/layout/NavBar"
+
+
+
 import BackgroundMap from "../../../components/dashboard/BackgroundMap"
+import {Navbar} from "../../../components/dashboard/layout/Navbar"
 import { useState } from "react";
 
 

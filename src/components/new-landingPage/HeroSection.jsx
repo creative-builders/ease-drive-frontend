@@ -3,7 +3,9 @@ import Container from './reusables/Container';
 import CustomButton from './reusables/CustomButton';
 import LogoWave from './reusables/LogoWave';
 import { FiSearch } from 'react-icons/fi';
-
+import {BlueCircleIcon} from '../../assets/icons/BlueCircleIcon';
+import { LocationUnderIcon } from '../../assets/icons/LocationUnderIcon';
+import { LineIcon } from '../../assets/icons/LineIcon';
 export const HeroSection = () => {
   const heroSectionRef = useRef(null);
   const leftContentRef = useRef(null);
@@ -123,12 +125,17 @@ export const HeroSection = () => {
 
             {/* Search Inputs */}
             <div className="flex items-start gap-2 pt-4 -ml-2 w-full max-w-[1000px] h-[109px] sm:h-[121px] animate-fade-in" style={{ animationDelay: '0.6s' }}>
-              <div className="flex flex-col w-[25px] h-[90px] sm:w-[30px] sm:h-[125px]">
-                <img
+              <div className="flex flex-col w-[25px] h-[90px] sm:w-[30px] sm:h-[125px] justify-center items-center relative">
+                {/* <img
                   src="/s-line.svg"
                   alt="decorative line"
                   className="h-full object-contain"
-                />
+                /> */}
+
+                <BlueCircleIcon className="w-4 h-4 lg:w-4 lg:h-4 sm:w-6 sm:h-6 text-[#4847EB] " />
+                <LineIcon className="w-2 h-[79px] sm:w-2 sm:h-[100px] my-1 text-[#A1A1A1]" />
+                <LocationUnderIcon className="w-6 h-6 sm:w-8 sm" />
+                
               </div>
               <div className="flex flex-col gap-2 w-[320px] sm:w-[458px]">
                 <input
