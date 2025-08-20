@@ -1,12 +1,13 @@
 import { MapPin, RefreshCw, Filter } from "lucide-react";
+import CustomButton from "../CustomButton";
 import { Info } from "./Info";
 
 export function Requests() {
   return (
-    <div className="py-2.5 relative top-20 left-10 inline-flex flex-col justify-start items-start gap-4">
+    <div className="py-2.5 relative top-0 left- h-full inline-flex flex-col justify-start items-start gap-4">
       {/* Header */}
 
-   
+
       {/* Body */}
       <div className="inline-flex justify-start items-start gap-4">
         <div className="w-[563px] inline-flex flex-col justify-start items-start gap-4">
@@ -36,9 +37,12 @@ export function Requests() {
 
               {/* Refresh button */}
               <button className="w-96 h-14 px-4 bg-Primary-700 rounded-2xl inline-flex justify-center items-center gap-2 hover:bg-Primary-600">
-                <RefreshCw className="w-5 h-5 text-Neutral-50" />
+
                 <span className="text-Neutral-50 text-lg font-medium font-['Inter']">
-                  Refresh
+                  <CustomButton name="Refresh" extendedStyles="w-full p-3 lg:p-4 rounded-lg">
+                    <RefreshCw className="w-5 h-5 ml-2 text-Neutral-50" />
+                  </CustomButton >
+
                 </span>
               </button>
             </div>
