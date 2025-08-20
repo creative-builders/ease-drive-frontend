@@ -53,10 +53,10 @@ const RideOptionSelector = () => {
                     </div>
 
                     {/* Right: Radio Button */}
-                    <div className="lg:w-[34px] lg:h-[34px] w-[28px] h-[24px] 
+                    <div className="lg:w-[34px] lg:h-[34px] w-[28px] h-[26px] 
                     lg:-mt-20 -mt-10 rounded-full border-2 border-green-600 flex items-center justify-center">
                         {selected === option.url && (
-                            <div className="lg:w-[24px] lg:h-[24px] w-[16px] h-[16px]  rounded-full bg-green-600" />
+                            <div className="lg:w-[24px] lg:h-[24px] w-[12px] h-[12px]  rounded-full bg-green-600" />
                         )}
                     </div>
                 </div>
