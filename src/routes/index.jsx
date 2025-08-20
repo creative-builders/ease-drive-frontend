@@ -8,7 +8,6 @@ import DrivUpload from '../pages/auth/Drivers/DrivUpload';
 import DrivPlace from '../pages/auth/Drivers/DrivPlace';
 import { RegisterPassenger } from '../pages/auth/Passengers/PassengersSignup';
 import Login from '../pages/auth/Login/Login';
-// import DriverSignup from '../pages/auth/Drivers/Driver-signup';
 import { DriverSignup } from '../pages/auth/driverSignup/DriverSignup';
 import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
@@ -25,7 +24,6 @@ import Password from '../components/personalProfile/Password';
 import Luggage from '../components/luggagesparts/Luggage';
 import Bidder from '../components/bidders/Bidders';
 import EditProfile from '../components/personalProfile/EditProfile';
-// import PassengerDashboard from '../pages/dashboard/passenger/PassengerDashboard';
 import DashboardHome from '../pages/dashboard/DashboardHome';
 import PassengerDashboardIndex from '../pages/dashboard/passenger';
 import SetRoutes from '../components/yourRoute/SetRoutes';
@@ -33,12 +31,13 @@ import ViewBookings from '../components/Bookings/ViewBookings';
 import DriverBoard from '../components/driverDashboardFolders/DriverBoard';
 import DataStatus from '../components/driverDashboardFolders/DataStatus';
 import { SignupOptions} from '../pages/auth/SignupOptions/SignupOptions';
-// import Header from '../layout/dashboard/header/Header';
 
 
 import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
 import { ForgotPassword } from '../pages/auth/Passengers/ForgotPassword';
 import { ResetPassword } from '../pages/auth/Passengers/ResetPassword';
+import NotificationsPage from '../ui/NotificationPage';
+import NotFoundPage from '../ui/NotFoundPage';
 
 
 
@@ -65,12 +64,13 @@ const IndexRoute = () => {
       <Route path="/mainpage" element={<MainPage />} />
       <Route path="/Luggage" element={<Luggage />} />
       <Route path="/LookingFor" element={<LookingFor />} />
-      {/* <Route path="/PickRide" element={<PickRide />} /> */}
       <Route path="/Cancelled" element={<Cancelled />} />
       <Route path="/DriverCall" element={<DriverCall />} />
       <Route path="/Password" element={<Password />} />
       <Route path="/drivers" element={<DriverBoard />} />
       <Route path="/rides" element={<DataStatus />} />
+      <Route path="/notifications" element={<NotificationsPage />} />
+      <Route path="/not-found" element={<NotFoundPage />} />
       
 
       {/* Dashboard Route */}
