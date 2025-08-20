@@ -1,13 +1,17 @@
 import React, { useState, useRef } from 'react';
+
 import SectionLabel from '../SectionLabel';
 import { ProfileUploadIcon } from '../../assets/icons/ProfileUploadIcon';
 import ErrorPopup from "../ErrorPopup";
 import { Modal } from '../Modal';
+import LoadingSpinner from '../LoadingSpinner';
+import { useMutation } from "@tanstack/react-query";
 import { RockedIconSuccess } from '../../assets/icons/RocketIconSucess';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import axios from 'axios';
-
+import { driverKYCUpdate } from "../../store/auth/driver/api"
 import { useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import CustomButton from '../CustomButton';
 import { number } from 'framer-motion';
@@ -15,13 +19,14 @@ import { number } from 'framer-motion';
 export const StepFour = ({ nextStep, step, totalSteps }) => {
     const fileInputRef = useRef(null);
     const [searchParams] = useSearchParams();
-    const [agreed, setAgreed] = useState(true);
+    const [submitting, setSubmitting] = useState(false);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [showErrorPopup, setShowErrorPopup] = useState(false);
     const { formData, handleUpdateFormData } = useStepFlowContext();
     const [errors, setErrors] = useState({});
+    const [isSumitting, setisSubmitting] = useState(false)
     const [selectedFiles, setSelectedFiles] = useState([]);
 
     const handleUploadClick = () => {
@@ -42,83 +47,106 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
 
     const token = searchParams.get("whois");
 
-    const handleSkip = () => {
-        setShowModal(true);
-        console.log(token);
-    };
+    const { mutate: submitDriverKYC, isLoading } = useMutation(
+        driverKYCUpdate,
+        {
+            onSuccess: (data) => {
+                console.log("KYC data updated successfully:", data);
+                setisSubmitting(false)
+                setShowModal(true);
+            },
+            onError: (error) => {
+                showError(error.response?.data?.message || error.message);
+            }
+        }
+    );
 
-    const handleNext = async () => {
+    const handleNext = () => {
         const newErrors = {};
 
-        if (!formData.vehicleType) {
-            newErrors.vehicleType = "Please select you vehicle type";
-            showError("Please select you vehicle type");
-        }
-
-        if (!formData.plateNumber || formData.plateNumber.trim() === "") {
-            newErrors.plateNumber = "Please provide plate number";
-            showError("Please provide plate number");
-        }
-
-        if (selectedFiles.length === 0) {
-            showError("Please upload prpfile image or just skip ");
+        if (!formData.profileImage || formData.profileImage.length === 0) {
+            showError("Please upload profile image or just skip");
             newErrors.files = "Please upload at least one document image";
         }
-
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-            console.log(token)
-            console.log(formData)
-
             const _formData = new FormData();
-            console.log(formData.plateNumber.toString())
-
             _formData.append("documentType", formData.documentType);
             _formData.append("documentID", formData.documentID);
             _formData.append("meansOfIdentification", formData.meansOfIdentification);
-            _formData.append("documentPhotos", formData.documentPhotoS); // multiple calls for each file
-
-            // rideInfo.*
             _formData.append("vehicleType", formData.vehicleType);
 
-            _formData.append("vehiclePhotos", formData.vehiclePhotos);
             _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
             _formData.append("vehicleColor", formData.vehicleColor);
             _formData.append("serviceArea", formData.serviceArea);
             _formData.append("numberOfSeats", formData.numberOfSeats);
 
+            // Append document photos
+            formData.documentPhotos.forEach((file) => {
+                _formData.append("documentPhotos", file);
+            });
 
-            // bankDetails.*
+            // Append vehicle photos
+            formData.vehiclePhotos.forEach((file) => {
+                _formData.append("vehiclePhotos", file);
+            });
+
+            // Bank details
             _formData.append("bankAccountHolderName", formData.bankAccountHolderName);
             _formData.append("bankName", formData.bankName);
             _formData.append("bankAccountNumber", formData.bankAccountNumber);
             _formData.append("transactionPin", "2345");
 
-            // images
-            _formData.append("profileImage", formData.profileImage[0]); // Assuming profileImage is an array of files
+            // Profile image
+            _formData.append("profileImage", formData.profileImage[0]);
 
-            try {
-                const data = await axios.put(`http://localhost:8000/api/driver/driverkyc?whois=${token}`, _formData)
-
-                console.log("KYC data updated successfully:", data);
-                setShowModal(true);
-            } catch (error) {
-                console.error("Error updating KYC data:", error);
-                showError("Failed to update KYC data. Please try again.");
-            }
-            // setShowModal(true);
-            // console.log(token)
+            // Submit via React Query
+            submitDriverKYC({ credentials: _formData, token });
         }
     };
-    // const handleNext = () => {
-    //     if (agreed) {
-    //         // nextStep();
-    //         setShowModal(true);
-    //     } else {
-    //         showError('You must agree to the terms to continue.');
-    //     }
-    // };
+
+    const handleSkip = () => {
+
+        if (Object.keys(newErrors).length === 0) {
+            const _formData = new FormData();
+            _formData.append("documentType", formData.documentType);
+            _formData.append("documentID", formData.documentID);
+            _formData.append("meansOfIdentification", formData.meansOfIdentification);
+            _formData.append("vehicleType", formData.vehicleType);
+
+            _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
+            _formData.append("vehicleColor", formData.vehicleColor);
+            _formData.append("serviceArea", formData.serviceArea);
+            _formData.append("numberOfSeats", formData.numberOfSeats);
+
+            // Append document photos
+            formData.documentPhotos.forEach((file) => {
+                _formData.append("documentPhotos", file);
+            });
+
+            // Append vehicle photos
+            formData.vehiclePhotos.forEach((file) => {
+                _formData.append("vehiclePhotos", file);
+            });
+
+            // Bank details
+            _formData.append("bankAccountHolderName", formData.bankAccountHolderName);
+            _formData.append("bankName", formData.bankName);
+            _formData.append("bankAccountNumber", formData.bankAccountNumber);
+            _formData.append("transactionPin", "2345");
+
+            // Profile image
+            _formData.append("profileImage", formData.profileImage[0]);
+
+            // Submit via React Query
+            submitDriverKYC({ credentials: _formData, token });
+        }
+    };
+
+
+
+
     const closeModal = () => {
         setShowModal(false);
 
@@ -134,7 +162,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
             <div className="flex items-center justify-center h-full min-h-screen ">
                 <div className="bg-white lg:w-[1216px] lg:h-[700px] w-[100%] 
                 m-auto py-6 lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center">
-                    <div className="lg:w-[637px] w-full h-[60vh] lg:h-[90vh] m-auto 
+                    <div className="lg:w-[637px] w-[360px] h-[85vh] lg:h-[90vh] m-auto 
                     p-5 gap-8 bg-white flex flex-col items-center justify-center">
                         <div className="lg:w-[100%] w-full flex flex-col  gap-[7px] opacity-100 ">
                             <div className="flex flex-row items-center justify-start gap-2">
@@ -158,7 +186,6 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                                 <SectionLabel className="text-blue-800 bg-custom-gradient" title={`Step ${step} of ${totalSteps}`} />
                             </div>
                         </div>
-
 
                         <div className="flex w-full">
                             <div className="flex-col flex justify-center items-center w-full mt-4">
@@ -196,17 +223,33 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                         </div>
 
 
-
                         <button
                             type="button"
                             className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
-                            onClick={() => handleSkip()}
-                        >
+                            onClick={()=>{
+                                setisSubmitting(!isSumitting)
+                                handleSkip()
+                            }}>
                             Skip
                         </button>
 
-                        <CustomButton name="Submit" extendedStyles="w-full p-3 lg:p-4 rounded-lg"
-                            btnClick={() => handleNext()} />
+                        <button
+                            type="submit"
+                            onClick={()=>{
+                                setisSubmitting(!isSumitting)
+                                handleNext()
+                            }}
+                        
+                            className={`inline-block  mb-2 w-full px-1.5 lg:p-4 p-2 h-[45px] lg:h-[60px] rounded-lg transition-all duration-300 bg-green-700 hover:bg-green-600 `}
+                        >
+                            <span className="text-white font-semibold flex items-center justify-center">
+                                {isSumitting ? (
+                                    <LoadingSpinner className="animate-spin" />
+                                ) : (
+                                    "Submit"
+                                )}
+                            </span>
+                        </button>
                     </div>
 
                     <div className="lg:w-[528px] lg:h-[638px] hidden lg:block opacity-100 rounded-[45px]">
@@ -217,10 +260,15 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
             {showModal && (
                 <Modal closeModal={closeModal} title="You're all set"
                     bodyText={` Thanks for signing up! We’re reviewing your documents. 
-                You’ll be notified within 24 hours when you’re approved to start accepting rides`} modalIcon={<RockedIconSuccess />}  >
-                    <CustomButton name="Proceed to Dashboard" extendedStyles="w-full p-3 lg:p-4 mb-6 mt-4" />
+                   You’ll be notified within 24 hours when you’re approved to start accepting rides`} modalIcon={<RockedIconSuccess />}  >
+                    <Link to="/login" className="text-green-300">
+                        <CustomButton name="Proceed to Dashboard" extendedStyles="w-full p-3 lg:p-4 rounded-lg mb-6 mt-4" />
+
+                    </Link>
+
                 </Modal >
             )}
         </div>
     );
 };
+
