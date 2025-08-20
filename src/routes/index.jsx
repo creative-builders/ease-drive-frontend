@@ -12,8 +12,6 @@ import { DriverSignup } from '../pages/auth/driverSignup/DriverSignup';
 import ActivateAccount from '../pages/auth/ActivateAccount';
 import Dashboard from '../pages/dashboard';
 import CheckEmailFile from '../pages/auth/Passengers/CheckEmailFile';
-// import BidCard from '../components/bid/BidCard';
-// import TestingComponent from '../pages/dashboard/TestingCompent';
 import MainPage from '../components/mainpage/MainPage';
 import LookingFor from '../components/luggagesparts/LookingFor';
 import PickRide from '../components/PickRide';
