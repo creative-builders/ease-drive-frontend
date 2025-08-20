@@ -15,7 +15,6 @@ const PassengerDashboardIndex = () => {
   
     const getLocationName = async (lat, lon) => {
       try {
-        setLoading(true);
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
         const data = await response.json();
         return data.display_name;
@@ -28,6 +27,8 @@ const PassengerDashboardIndex = () => {
     };
   
     const handleUseLocation = () => {
+      setLoading(true);
+      
       if (!navigator.geolocation) {
         toast.error("Geolocation is not supported by your browser.");
         return;
@@ -42,7 +43,7 @@ const PassengerDashboardIndex = () => {
           setIsOpen(false);
         },
         (error) => {
-          toast.error("Location access denied.");
+          toast.error(`Location access denied : ${error.message}`);
           setPopupActionType("cancel");
           setIsOpen(false);
         },
@@ -61,7 +62,7 @@ const PassengerDashboardIndex = () => {
   
     return (
       <>
-        {isOpen ? (
+        {isOpen && (
           <LocationPopUp
             setSelected={setSelectedOption}
             setPopupActionType={setPopupActionType}
@@ -72,18 +73,18 @@ const PassengerDashboardIndex = () => {
             handleCancel={handleCancel}
             loading={loading}
           />
-        ) : popupActionType === 'cancel' ? (
-          <RideSelector 
-          selected={selectedOption}
-          setSelected={setSelectedOption}
-          />
-        ) : (
-          <RideSelector
-            selected={selectedOption}
-            setSelected={setSelectedOption}
-            initialPickUpValue={locationName}
-            isLocationBased={true}
-          />
+        // ) : popupActionType === 'cancel' ? (
+        //   <RideSelector 
+        //   selected={selectedOption}
+        //   setSelected={setSelectedOption}
+        //   />
+        // ) : (
+        //   <RideSelector
+        //     selected={selectedOption}
+        //     setSelected={setSelectedOption}
+        //     initialPickUpValue={locationName}
+        //     isLocationBased={true}
+        //   />
         )}
       </>
     );
