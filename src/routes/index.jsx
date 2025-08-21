@@ -37,6 +37,10 @@ import { ForgotPassword } from '../pages/auth/Passengers/ForgotPassword';
 import { ResetPassword } from '../pages/auth/Passengers/ResetPassword';
 // import NotificationsPage from '../ui/NotificationPage';
 import NotFoundPage from '../ui/NotFoundPage';
+import DriverDashboard from '../pages/dashboard/driver/DriverDashboard';
+import { Rides } from '../pages/dashboard/passenger/Rides';
+import { Profile } from '../pages/dashboard/passenger/Profile';
+import Support from '../pages/dashboard/passenger/Support';
 
 
 
@@ -70,6 +74,9 @@ const IndexRoute = () => {
       <Route path="/drivers" element={<DriverBoard />} />
       <Route path="/rides" element={<DataStatus />} />
       {/* <Route path="/driver-profile" element={<ProfilePage/>} /> */}
+
+      {/* Testing routes */}
+      <Route path='/testing/dashboard' element={<DriverDashboard/>}/>
       
 
       {/* Dashboard Route */}
@@ -85,6 +92,11 @@ const IndexRoute = () => {
         <Route path="cancelled" element={<Cancelled />} />
         <Route path="bidder" element={<Bidder />} />
         <Route path="driver-call" element={<DriverCall />} />
+
+        {/* New Passenger Routes */}
+        <Route path="rides" element={<Rides />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="support" element={<Support />} />
       </Route>
 
 
