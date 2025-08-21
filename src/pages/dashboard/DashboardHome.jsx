@@ -7,8 +7,6 @@ import PassengerDashboard from "./passenger/PassengerDashboard";
 const DashboardHome = () => {
   const userData = useRecoilValue(userAtom);
 
-  // console.log(userData)
-
   if (!userData || !userData.role) {
     return <Navigate to={"/login"} />;
   }

@@ -7,7 +7,7 @@ import { googleAuth } from "../store/auth/general/api";
 import { userAtom } from "./atoms/userAtom";
 import { useSetRecoilState } from "recoil";
 
-const GoogleAuthV3 = ({ role = "passenger" }) => {
+const  GoogleAuthV3 = ({ role = "passenger" }) => {
   const setUserAtom = useSetRecoilState(userAtom);
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
