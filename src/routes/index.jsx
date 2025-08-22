@@ -35,6 +35,7 @@ import {RegisterDriver} from "../pages/auth/driverSignup/DriverSignup"
 import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
 import { ForgotPassword } from '../pages/auth/Passengers/ForgotPassword';
 import { ResetPassword } from '../pages/auth/Passengers/ResetPassword';
+import Profile from '../uI/Profile';
 // import NotificationsPage from '../ui/NotificationPage';
 import NotFoundPage from '../ui/NotFoundPage';
 import DriverDashboard from '../pages/dashboard/driver/DriverDashboard';
@@ -68,6 +69,7 @@ const IndexRoute = () => {
       <Route path="/mainpage" element={<MainPage />} />
       <Route path="/Luggage" element={<Luggage />} />
       <Route path="/LookingFor" element={<LookingFor />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="/Cancelled" element={<Cancelled />} />
       <Route path="/DriverCall" element={<DriverCall />} />
       <Route path="/Password" element={<Password />} />
