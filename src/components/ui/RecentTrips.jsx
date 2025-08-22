@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+// import { FilterIcon } from "../../assets/icons/filterIcon";
+import { FilterIcon } from "../../assets/icons/FilterIcon";
 
-import week from "../../assets/images/weekly.png"
+
 
 const trips = [
   { date: "17 July 2024", pickup: "Bello Hostel", dropoff: "SUB", status: "Pending", earnings: "₦1,200" },
@@ -46,6 +48,7 @@ export default function RecentTrips() {
                     selected === option ? "text-green-500 font-semibold" : ""
                   }`}
                 >
+                  <FilterIcon className="w-4 h-4" />
                   {option}
                 </div>
               ))}
