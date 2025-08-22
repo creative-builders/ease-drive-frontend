@@ -1,4 +1,5 @@
 
+import UserAvater from "../assets/icons/UserAvatar";
 import Notifications from "./Notifications";
 
 const NotificationsPage = () => {
@@ -7,28 +8,28 @@ const NotificationsPage = () => {
     {
       id: 1,
       type: "Upcoming Scheduled Trip",
-      profilePic: "/images/user1.png",
+      profilePic: <UserAvater/>,
       message: "Pickup at 9:00AM – Faculty of Engineering → Oggie Market",
       date: new Date()
     },
     {
       id: 2,
       type: "Earnings Update",
-      profilePic: "/images/user2.png",
+      profilePic: <UserAvater/>,
       message: "₦300 from your last trip has been added to your wallet.",
       date:  new Date(new Date().setDate(new Date().getDate() - 1))
     },
     {
       id: 3,
       type: "Earnings Update",
-      profilePic: "/images/user2.png",
+      profilePic: <UserAvater/>,
       message: "₦300 from your last trip has been added to your wallet.",
       date: new Date(2024, 6, 17, 21, 45)
     },
     {
         id: 4,
         type: "Ride Cancelled",
-        profilePic: "/images/user3.png",
+        profilePic: <UserAvater/>,
         message: "Your upcoming ride from Bello Hostel has been cancelled.",
         date: new Date(2024, 5, 16, 21, 45),
     },
