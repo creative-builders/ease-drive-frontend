@@ -1,7 +1,7 @@
 import * as React from "react";
 export const Skip = (props) => (
 
-    <div className="flex justify-center items-center gap-2">
+    <div className="flex justify-center items-center gap-1">
         <div>
             <h4 className="text-[#F48020] font-inter font-medium leading-relaxed text-xl ">{props.title}</h4>
         </div>

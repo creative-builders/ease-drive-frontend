@@ -162,7 +162,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
             <div className="flex items-center justify-center h-full min-h-screen ">
                 <div className="bg-white lg:w-[1116px] lg:h-[700px] w-[100%] 
                 m-auto py-6 lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center">
-                    <div className="lg:w-[637px] w-[360px] h-[85vh] lg:h-[90vh] m-auto 
+                    <div className="lg:w-[637px] w-[360px] h-[70vh] lg:h-[90vh] m-auto 
                     p-5 gap-8 bg-white flex flex-col items-center justify-center">
                         <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
                             <div className="flex flex-row items-center justify-start">
