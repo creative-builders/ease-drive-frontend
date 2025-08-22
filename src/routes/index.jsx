@@ -36,6 +36,7 @@ import { ForgotPassword } from '../pages/auth/Passengers/ForgotPassword';
 import { ResetPassword } from '../pages/auth/Passengers/ResetPassword';
 import NotificationsPage from '../ui/NotificationPage';
 import NotFoundPage from '../ui/NotFoundPage';
+import ProfilePage from '../uI/ProfilePge';
 
 
 
