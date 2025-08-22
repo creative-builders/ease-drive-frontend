@@ -13,6 +13,7 @@ import { SeatIcon } from '../../assets/icons/SeatIcon'
 import { LocationHomeIcon } from '../../assets/icons/LocationHomeIcon';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import { InputField } from '../customFormFields/InputField';
+import { Skip } from '../Skip';
 import { Link } from 'react-router-dom';
 
 
@@ -66,20 +67,26 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
   return (
     <div lassName=" min-h-screen lg:h-full ">
       <div className="flex items-center justify-center  min-h-screen ">
-        <div className=" lg:w-[1216px] lg:h-[1090px] w-[100%] h-[100%] m-auto lg:pt-12 lg:pb-12
-         opacity-100 flex flex-row items-center">
-          <div className="lg:w-[637px] lg:h-[764px] w-[360px]  h-[100%] m-auto 
+        <div className=" lg:w-[1116px] lg:h-[1000px] w-[100%] h-[100%] m-auto 
+         opacity-100 flex flex-row items-center py-auto">
+          <div className="lg:w-[637px] lg:h-[700px] w-[360px]  h-[100%] m-auto 
           flex justify-center items-center ml-0
            p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
-            <div className="lg:w-[100%] w-full flex flex-col  gap-[7px] opacity-100 ">
-              <Link to="/"> 
+            <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
+              <div className="flex flex-row items-center justify-start">
+                <SectionLabel
+                  className="text-blue-800 bg-custom-gradient"
+                  title={` Step ${step}  of ${totalSteps}`}
+                />
+                {/* <Link to="/"> 
               <div className="flex flex-row items-center justify-start gap-2">
                 <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
                 <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-[18px] leading-[100%]">
                   Ease Drive
                 </h1>
               </div>
-              </Link>
+              </Link> */}
+              </div>
             </div>
 
             <div className="lg:w-[100%] lg:h-[] w-[347px] justify-between opacity-100 flex flex-row items-start">
@@ -92,10 +99,10 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                 </p>
               </div>
               <div>
-                <SectionLabel className="text-blue-800 bg-custom-gradient"
+                <button onClick={() => nextStep()}>
+                  <Skip title="Skip" />
+                </button>
 
-                  title={` Step ${step}  of ${totalSteps}`}
-                />
               </div>
               {/* Content here */}
             </div>
@@ -132,7 +139,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   }
                 />
 
-              
+
                 {errors.plateNumber && (
                   <p className="text-red-500 text-sm -mt-2">{errors.plateNumber}</p>
                 )}
@@ -164,7 +171,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   // }
                   />
 
-                
+
 
                   <InputField
                     label="Vehicle Color"
@@ -228,14 +235,14 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
               </div>
             </div>
 
-            <button
+            {/* <button
               type="button"
               className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
               onClick={() => {
                 nextStep()
               }}>
               Skip
-            </button>
+            </button> */}
 
             <CustomButton
               name="Continue"
@@ -245,8 +252,8 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
           </div>
 
-          <div className="lg:w-[528px] lg:h-[881px] hidden lg:block lg:p-5 gap-8 opacity-100  flex items-center justify-center">
-            <img src="/signup-banner-l.png" alt="" className=' lg:rounded-[45px]' />
+          <div className="lg:w-[528px] lg:h-[960px] hidden lg:block lg:p-5 gap-8 opacity-100  flex items-center justify-center">
+            <img src="/signup-banner-l.png" alt="" className=' lg:rounded-[45px] h-full w-full' />
           </div>
 
 

@@ -8,6 +8,7 @@ import { DocumentIcon } from '../../assets/icons/DocumentIcon';
 import { IdCardIcon } from '../../assets/icons/IdCardIcon';
 import { InputField } from '../customFormFields/InputField';
 import CustomButton from '../CustomButton';
+import { Skip } from '../Skip';
 import { Link } from 'react-router-dom';
 
 export const StepOne = ({ nextStep, step, totalSteps }) => {
@@ -62,21 +63,27 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
   return (
     <div className=" min-h-screen lg:h-full">
       <div className="flex items-center justify-center min-h-screen ">
-        <div className="bg-white lg:w-[1216px] lg:h-[800px] w-[90%] m-auto flex
+        <div className="bg-white lg:w-[1116px] lg:h-[600px] w-[90%] m-auto flex
          lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center py-auto">
 
-          <div className="lg:w-[637px] lg:h-[734px]  w-[400px] pt-4
-          p-5 gap-6 bg-white flex flex-col items-center justify-center">
+          <div className="lg:w-[637px] lg:h-[734px]  w-[400px] 
+            p-5 gap-6 bg-white flex flex-col items-center justify-center">
             {/* Logo */}
-            <div className="lg:w-[100%] w-full flex flex-col  gap-[7px] opacity-100 ">
-              <Link to="/"> 
+            <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
+              <div className="flex flex-row items-center justify-start">
+                <SectionLabel
+                  className="text-blue-800 bg-custom-gradient"
+                  title={` Step ${step}  of ${totalSteps}`}
+                />
+                {/* <Link to="/"> 
               <div className="flex flex-row items-center justify-start gap-2">
                 <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
                 <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-[18px] leading-[100%]">
                   Ease Drive
                 </h1>
               </div>
-              </Link>
+              </Link> */}
+              </div>
             </div>
             {/* Section Header */}
             <div className="lg:w-[100%] w-[100%] justify-between flex flex-row items-start">
@@ -88,10 +95,10 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
                   Personal Identity Verification
                 </p>
               </div>
-              <SectionLabel
-                className="text-blue-800 bg-custom-gradient"
-                title={` Step ${step}  of ${totalSteps}`}
-              />
+              <button onClick={() => nextStep()}>
+                <Skip title="Skip" />
+              </button>
+
             </div>
 
             {/* Form Section */}
@@ -172,14 +179,14 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
               </div>
             </div>
 
-            <button
+            {/* <button
               type="button"
               className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
               onClick={() => {
                 nextStep()
               }}>
               Skip
-            </button>
+            </button> */}
 
             <CustomButton
               name="Continue"

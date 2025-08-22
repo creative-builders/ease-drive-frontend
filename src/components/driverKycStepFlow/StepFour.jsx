@@ -12,6 +12,7 @@ import axios from 'axios';
 import { driverKYCUpdate } from "../../store/auth/driver/api"
 import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import {Skip} from '../Skip'
 
 import CustomButton from '../CustomButton';
 
@@ -159,19 +160,25 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                 onClose={() => setShowErrorPopup(false)}
             />
             <div className="flex items-center justify-center h-full min-h-screen ">
-                <div className="bg-white lg:w-[1216px] lg:h-[700px] w-[100%] 
+                <div className="bg-white lg:w-[1116px] lg:h-[700px] w-[100%] 
                 m-auto py-6 lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center">
                     <div className="lg:w-[637px] w-[360px] h-[85vh] lg:h-[90vh] m-auto 
                     p-5 gap-8 bg-white flex flex-col items-center justify-center">
-                        <div className="lg:w-[100%] w-full flex flex-col  gap-[7px] opacity-100 ">
-                            <Link to="/"> 
-                            <div className="flex flex-row items-center justify-start gap-2">
-                                <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
-                                <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-[18px] leading-[100%]">
-                                    Ease Drive
-                                </h1>
+                        <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
+                            <div className="flex flex-row items-center justify-start">
+                                <SectionLabel
+                                    className="text-blue-800 bg-custom-gradient"
+                                    title={` Step ${step}  of ${totalSteps}`}
+                                />
+                                {/* <Link to="/"> 
+              <div className="flex flex-row items-center justify-start gap-2">
+                <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
+                <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-[18px] leading-[100%]">
+                  Ease Drive
+                </h1>
+              </div>
+              </Link> */}
                             </div>
-                            </Link>
                         </div>
 
                         <div className="lg:w-[100%] w-[347px] justify-between opacity-100 flex flex-row items-start">
@@ -184,7 +191,12 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                                 </p>
                             </div>
                             <div>
-                                <SectionLabel className="text-blue-800 bg-custom-gradient" title={`Step ${step} of ${totalSteps}`} />
+                                <Link to="/login">
+                                <button >
+                                    <Skip title="Skip" />
+                                </button>
+                                </Link>
+
                             </div>
                         </div>
 
@@ -224,23 +236,23 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                         </div>
 
 
-                        <button
+                        {/* <button
                             type="button"
                             className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
-                            onClick={()=>{
+                            onClick={() => {
                                 setisSubmitting(!isSumitting)
                                 handleSkip()
                             }}>
                             Skip
-                        </button>
+                        </button> */}
 
                         <button
                             type="submit"
-                            onClick={()=>{
+                            onClick={() => {
                                 setisSubmitting(!isSumitting)
                                 handleNext()
                             }}
-                        
+
                             className={`inline-block  mb-2 w-full px-1.5 lg:p-4 p-2 h-[45px] lg:h-[60px] rounded-lg transition-all duration-300 bg-green-700 hover:bg-green-600 `}
                         >
                             <span className="text-white font-semibold flex items-center justify-center">

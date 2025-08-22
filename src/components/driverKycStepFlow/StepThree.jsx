@@ -9,6 +9,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
 import { CreditCardIcon } from '../../assets/icons/CreditCardIcon';
 import { BankHouseIcon } from '../../assets/icons/BankHouseIcon';
+import {Skip} from '../Skip'
 import { Link } from 'react-router-dom';
 
 export const StepThree = ({ nextStep, step, totalSteps }) => {
@@ -61,22 +62,26 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
    return (
       <div lassName=" min-h-screen lg:h-full m ">
          <div className="flex items-center justify-center h-full min-h-screen ">
-            <div className="bg-white lg:w-[1216px] lg:h-[740px] w-[100%]  m-auto py-6  lg:pb-12 
+            <div className="bg-white lg:w-[1116px] lg:h-[700px] w-[100%]  m-auto py-6  lg:pb-12 
             opacity-100 flex flex-row justify-center items-center">
                <div className="lg:w-[637px] w-[100%] h-[90vh] m-auto 
                   flex justify-center items-center 
                 p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
-                  <div className="lg:w-[100%] lg:h-[59px] w-[100%]  flex flex-col
-                   gap-[7.38px] opacity-100  ">
-                     <Link to="/"> 
-                     <div className='flex-row flex  w-full items-center  items-center  justify-start gap-2'>
-                        <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
-                        <h1 className="font-inter text-gary-700 italic font-bold lg:text-[36px] text-[18px] leading-[120%]">
-                           Ease Drive
-                        </h1>
-
+                  <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
+                     <div className="flex flex-row items-center justify-start">
+                        <SectionLabel
+                           className="text-blue-800 bg-custom-gradient"
+                           title={` Step ${step}  of ${totalSteps}`}
+                        />
+                        {/* <Link to="/"> 
+              <div className="flex flex-row items-center justify-start gap-2">
+                <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
+                <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-[18px] leading-[100%]">
+                  Ease Drive
+                </h1>
+              </div>
+              </Link> */}
                      </div>
-                     </Link >
                   </div>
 
                   <div className="lg:w-[100%]  w-[100%]  justify-between opacity-100 flex flex-row items-start">
@@ -89,10 +94,10 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                         </p>
                      </div>
                      <div>
-                        <SectionLabel className="text-blue-800 bg-custom-gradient"
+                        <button onClick={() => nextStep()}>
+                           <Skip title="Skip" />
+                        </button>
 
-                           title={` Step ${step}  of ${totalSteps}`}
-                        />
                      </div>
                      {/* Content here */}
                   </div>
@@ -205,14 +210,14 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
 
                   </div>
 
-                  <button
+                  {/* <button
                      type="button"
                      className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
                      onClick={() => {
                         nextStep()
                      }}>
                      Skip
-                  </button>
+                  </button> */}
 
                   <CustomButton
                      name="Continue"
