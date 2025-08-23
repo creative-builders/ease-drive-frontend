@@ -8,10 +8,10 @@ export const SignupOptions = () => {
       <div className="min-h-screen flex flex-col lg:flex-row lg:items-center 
       justify-center bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)]">
         <div className="flex justify-center gap-x-[31px] bg-gradient-to-r
-     lg:w-[1264px]
+     lg:w-[1164px]
       lg:bg-white lg:bg-none shadow-[0_1px_15.5px_0_rgba(0,0,0,0.05)] p-4 lg:px-[40.5px]">
           <div className="flex items-center justify-center min-h-screen ">
-            <div className="bg-white lg:w-[1216px] lg:h-[830px] w-[90%] h-[90vh] 
+            <div className="bg-white lg:w-[1116px] lg:h-[830px] w-[90%] h-[90vh] 
      m-auto opacity-100 flex flex-row items-center">
               <div className="lg:w-[647px] lg:h-[765px] w-[100%] h-[95vh] 
        m-auto flex justify-center items-center ml-0
