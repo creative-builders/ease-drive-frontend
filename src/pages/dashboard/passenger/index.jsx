@@ -65,7 +65,7 @@ const PassengerDashboardIndex = () => {
     return (
       <>
         {/* show modal after reloading the dashboard */}
-        {
+        {/* {
           isOpen && (
           <Modal 
            closeModal={handleCancel}
@@ -73,8 +73,8 @@ const PassengerDashboardIndex = () => {
            bodyText={"Use My Current Location and Auto-fill the search bar with coordinates/nearest landmark"}
           />
           )
-        }
-        {/* {isOpen && (
+        } */}
+        {isOpen && (
           <LocationPopUp
             setSelected={setSelectedOption}
             setPopupActionType={setPopupActionType}
@@ -85,19 +85,19 @@ const PassengerDashboardIndex = () => {
             handleCancel={handleCancel}
             loading={loading}
           />
-        ) : popupActionType === 'cancel' ? (
-          <RideSelector 
-          selected={selectedOption}
-          setSelected={setSelectedOption}
-          />
-        ) : (
-          <RideSelector
-            selected={selectedOption}
-            setSelected={setSelectedOption}
-            initialPickUpValue={locationName}
-            isLocationBased={true}
-          />
-        )} */}
+        // ) : popupActionType === 'cancel' ? (
+        //   <RideSelector 
+        //   selected={selectedOption}
+        //   setSelected={setSelectedOption}
+        //   />
+        // ) : (
+        //   <RideSelector
+        //     selected={selectedOption}
+        //     setSelected={setSelectedOption}
+        //     initialPickUpValue={locationName}
+        //     isLocationBased={true}
+        //   />
+        )}
         <div className='flex gap-x-4'>
           <div className="bg-white rounded-[10px] p-4 min-w-full min-h-screen lg:min-w-[480px] lg:min-h-[734px]">
             <BackgroundMap coords={coords}/>
