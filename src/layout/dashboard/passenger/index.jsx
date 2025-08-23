@@ -16,8 +16,8 @@ export const PassengerLayout = () => {
      {/* <Navbar/> */}
      <div className="flex">
        <SideBarMenu/>
-        <div className="bg-custom-gradient basis-full">
-          <div className="mr-[22px] ml-[82px] mt-[29px] border border-red-500 min-h-screen">
+        <div className="bg-gradient-bg basis-full">
+          <div className="mr-[22px] ml-[82px] mt-[29px] min-h-screen">
             <Outlet context={{ coords, setCoords}}/>
           </div>
         </div>

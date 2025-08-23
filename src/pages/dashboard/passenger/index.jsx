@@ -3,6 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import LocationPopUp from '../../../components/location/LocationPopUp';
 import RideSelector from '../../../components/RideSelector';
+import BackgroundMap from '../../../components/dashboard/BackgroundMap';
 
 
 const PassengerDashboardIndex = () => {
@@ -62,6 +63,7 @@ const PassengerDashboardIndex = () => {
   
     return (
       <>
+        {/* show modal after reloading the dashboard */}
         {isOpen && (
           <LocationPopUp
             setSelected={setSelectedOption}
@@ -86,6 +88,15 @@ const PassengerDashboardIndex = () => {
         //     isLocationBased={true}
         //   />
         )}
+        <div className='flex gap-x-4'>
+          <div className="bg-white rounded-[10px] p-4 min-w-full min-h-screen lg:min-w-[480px] lg:min-h-[734px]">
+            <BackgroundMap coords={coords}/>
+          </div>
+           <div className='basis-full'>
+           <div className="mb-7 bg-white min-h-[210px] rounded-2xl"></div>
+           <div className="bg-white basis-full min-h-[210px] rounded-2xl"></div>
+           </div>
+        </div>
       </>
     );
   };
