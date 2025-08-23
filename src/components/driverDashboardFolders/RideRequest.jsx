@@ -18,7 +18,7 @@ export default function RideRequests() {
   return (
     <div className="w-full min-h-screen relative bg-gradient-to-br from-white via-purple-100 to-white overflow-hidden">
       <div className="flex w-full">
-        <div className="flex w-[100%] justify-center items-center mt-40 ml-10 h-full gap-4">
+        <div className="flex w-[100%] justify-center items-center mt-20 ml-10 h-full gap-4">
           {/* 1. If there are no requests */}
           {data.length === 0 ? (
             <Requests />
