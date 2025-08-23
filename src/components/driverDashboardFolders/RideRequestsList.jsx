@@ -20,7 +20,7 @@ export function RideRequestsList({ requests, onSelect }) {
 
   return (
     <div className="self-stretch px-5 py-3 pb-4 bg-white rounded-lg inline-flex flex-col justify-start items-start gap-2 relative">
-      <div className="w-[563px] inline-flex justify-start items-center gap-[40%]">
+      <div className="w-[560px] inline-flex justify-start items-center gap-[40%]">
         <div className="text-black text-xl font-semibold font-['Inter']">
           Ongoing Ride Requests
         </div>

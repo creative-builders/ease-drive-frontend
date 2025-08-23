@@ -299,7 +299,7 @@ export const RideRequestDetails = ({ request }) => {
                     <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-6 items-center lg:w-[633px] lg:h-[387px]">
                          <CloseMenuIcon className="absolute top-2 right-2 text-black" onClick={() =>{
                             setModalType(null);
-                            
+                            onBack();
                          }} />
 
                         <div className="lg:w-[107px] lg:h-[108px]">

@@ -2,7 +2,7 @@ import { LocationIcon } from "../../assets/icons/LocationIcon";
 
 export function RideRequestCard({ request }) {
   return (
-    <div className="self-stretch py-2.5 border-b border-Neutral-100 inline-flex justify-start items-center gap-4">
+    <div className="self-stretch w-full py-2.5 border-b border-Neutral-100 inline-flex justify-start items-center gap-4">
       <div className="flex justify-start items-center gap-2">
         <img
           className="w-20 h-20 relative rounded-[50px]"
