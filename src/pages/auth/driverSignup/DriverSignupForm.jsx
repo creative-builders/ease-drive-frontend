@@ -232,7 +232,7 @@ export const DriverSignupForm = () => {
 
                 <p className="text-[14px] font-medium mt-4">
                     Already have an account?{" "}
-                    <a href="#" className="text-blue-600 font-medium">
+                    <a href="/login" className="text-blue-600 font-medium">
                         Login
                     </a>
                 </p>
