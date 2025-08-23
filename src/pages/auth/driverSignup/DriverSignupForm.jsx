@@ -6,7 +6,7 @@ import { FiEye } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
 
 import { CustomInputField } from "../../../components/CustomInputField";
-import { CustomSelectField } from "../../../components/CustomSelectField";
+import { CustomSelectField } from "../../../components/customFormFields/CustomSelectField";
 import { CountdownTimer } from "../../../components/CountdownTimer";
 import { Modal } from "../../../components/Modal";
 import ErrorPopup from "../../../components/ErrorPopup";
@@ -17,6 +17,7 @@ import { MailIcon } from "../../../assets/icons/MailIcon";
 import { LockedIcon } from "../../../assets/icons/LockedIcon";
 import { CallIcon } from "../../../assets/icons/CallIcon";
 import GoogleAuthV3 from "../../../components/GoogleAuthV3";
+import { InputField } from "../../../components/customFormFields/InputField"; // Assuming you have this component
 
 export const DriverSignupForm = () => {
     const [formData, setFormData] = useState({
@@ -61,6 +62,7 @@ export const DriverSignupForm = () => {
         const driverData = {
             firstName,
             lastName,
+            fullName,
             email: formData.email,
             password: formData.password,
             confirmPassword: formData.confirmpassword,
@@ -162,6 +164,8 @@ export const DriverSignupForm = () => {
                         <UserIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                     </CustomInputField>
 
+
+                
                     <CustomInputField
                         label="Enter Email"
                         // iconSrc="/mail.svg"
@@ -228,7 +232,7 @@ export const DriverSignupForm = () => {
 
                 <p className="text-[14px] font-medium mt-4">
                     Already have an account?{" "}
-                    <a href="#" className="text-blue-600 font-medium">
+                    <a href="/login" className="text-blue-600 font-medium">
                         Login
                     </a>
                 </p>

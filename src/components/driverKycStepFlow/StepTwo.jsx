@@ -1,27 +1,32 @@
 import React from 'react'
 import SectionLabel from '../SectionLabel'
-import { CustomInputField } from '../CustomInputField'
-import { CustomSelectField } from "../CustomSelectField"
+import { CustomSelectField } from "../customFormFields/CustomSelectField"
 import { useState, useRef } from 'react';
 
 import CustomButton from '../CustomButton';
 import { FaChevronDown } from "react-icons/fa";
-import addfile from '../../assets/images/addFile.svg'
 import { CarIcon } from '../../assets/icons/CarIcon'
 import { AddFileIcon } from '../../assets/icons/AddFileIcon'
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
 import { ColorIcon } from '../../assets/icons/ColorIcon'
 import { SeatIcon } from '../../assets/icons/SeatIcon'
-import { LocationIcon } from '../../assets/icons/LocationIcon';
 import { LocationHomeIcon } from '../../assets/icons/LocationHomeIcon';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
+import { InputField } from '../customFormFields/InputField';
+import { Skip } from '../Skip';
+import { Link } from 'react-router-dom';
 
 
 export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
   const fileInputRef = useRef(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const { formData, handleUpdateFormData } = useStepFlowContext();
+  const {
+    formData,
+    inputTouched,
+    setFormData,
+    handleUpdateFormData,
+  } = useStepFlowContext();
   const [errors, setErrors] = useState({});
 
   const handleUploadClick = () => {
@@ -32,6 +37,10 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
     const files = Array.from(e.target.files);
     setSelectedFiles(files);
   };
+
+  const isplateNumberValid = (formData?.plateNumber || "").length >= 15;
+  const showplateNumbererror =
+    inputTouched && formData?.plateNumber.length > 0 && !isplateNumberValid;
 
   const handleNext = () => {
     const newErrors = {};
@@ -58,20 +67,27 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
   return (
     <div lassName=" min-h-screen lg:h-full ">
       <div className="flex items-center justify-center  min-h-screen ">
-        <div className="bg-white lg:w-[1216px] lg:h-[990px] w-[100%] h-[100%] m-auto lg:pt-12 lg:pb-12
-         opacity-100 flex flex-row items-center">
-          <div className="lg:w-[637px] lg:h-[734px] w-[100%] h-[100%] m-auto 
+        <div className=" lg:w-[1116px] lg:h-[1000px] w-[100%] h-[100%] m-auto 
+         opacity-100 flex flex-row items-center py-auto">
+          <div className="lg:w-[637px] lg:h-[700px] w-[360px]  h-[100%] m-auto 
           flex justify-center items-center ml-0
            p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
-            <div className="lg:w-[100%] w-full flex flex-col  gap-[7px] opacity-100 ">
+            <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
+              <div className="flex flex-row items-center justify-start">
+                <SectionLabel
+                  className="text-blue-800 bg-custom-gradient"
+                  title={` Step ${step}  of ${totalSteps}`}
+                />
+                {/* <Link to="/"> 
               <div className="flex flex-row items-center justify-start gap-2">
                 <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
                 <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-[18px] leading-[100%]">
                   Ease Drive
                 </h1>
               </div>
+              </Link> */}
+              </div>
             </div>
-
 
             <div className="lg:w-[100%] lg:h-[] w-[347px] justify-between opacity-100 flex flex-row items-start">
               <div className='text-left lg:w-[60%] w-[70%]'>
@@ -83,10 +99,10 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                 </p>
               </div>
               <div>
-                <SectionLabel className="text-blue-800 bg-custom-gradient"
+                <button onClick={() => nextStep()}>
+                  <Skip title="Skip" />
+                </button>
 
-                  title={` Step ${step}  of ${totalSteps}`}
-                />
               </div>
               {/* Content here */}
             </div>
@@ -110,18 +126,20 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                 {errors.vehicleType && (
                   <p className="text-red-500 text-sm -mt-2">{errors.vehicleType}</p>
                 )}
-                <CustomInputField
+
+                <InputField
                   label="Plate Number"
                   name="plateNumber"
-                  value={formData.plateNumber}
-                  onFormChange={handleUpdateFormData}
-
                   placeholder="Enter Vehicle Plate  Number"
-                  type="text"
+                  value={formData.plateNumber}
+                  onChange={handleUpdateFormData}
+                  leftIcon={PlateNumberIcon}
+                  error={
+                    showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+                  }
+                />
 
-                >
-                  <PlateNumberIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
-                </CustomInputField>
+
                 {errors.plateNumber && (
                   <p className="text-red-500 text-sm -mt-2">{errors.plateNumber}</p>
                 )}
@@ -139,42 +157,35 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   <LocationHomeIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
                 </CustomSelectField>
 
-                {/* <CustomInputField
-                  label="Service Area (Location)"
-                  iconSrc="/call-02.svg"
-                  placeholder="Enter your usual route"
-                  type="text"
-                // value={formData.phone}
-                // onChange={handleChange("phone")}
-                /> */}
-
                 <div className='flex flex-row w-full gap-4'>
-                  <CustomInputField
+
+                  <InputField
                     label="Number Seats"
                     name="numberOfSeats"
                     value={formData.numberOfSeats}
-                    onFormChange={handleUpdateFormData}
                     placeholder="e.g 4"
-                    type="text"
-                  >
-                    <SeatIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
-                  </CustomInputField>
+                    onChange={handleUpdateFormData}
+                    leftIcon={SeatIcon}
+                  // error={
+                  //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+                  // }
+                  />
 
-                  <CustomInputField
+
+
+                  <InputField
                     label="Vehicle Color"
                     name="vehicleColor"
                     value={formData.vehicleColor}
-                    onFormChange={handleUpdateFormData}
-                    // iconSrc="/call-02.svg"
                     placeholder="e.g Black"
-                    type="text"
-                  // value={formData.phone}
-                  // onChange={handleChange("phone")}
-                  >
-                    <ColorIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
-                  </CustomInputField>
-                </div>
+                    onChange={handleUpdateFormData}
+                    leftIcon={ColorIcon}
+                  // error={
+                  //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+                  // }
+                  />
 
+                </div>
 
               </form>
 
@@ -224,6 +235,15 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
               </div>
             </div>
 
+            {/* <button
+              type="button"
+              className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
+              onClick={() => {
+                nextStep()
+              }}>
+              Skip
+            </button> */}
+
             <CustomButton
               name="Continue"
               extendedStyles={"w-full p-3 lg:p-4 rounded-lg"}
@@ -232,10 +252,9 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
           </div>
 
-          <div className="lg:w-[528px] lg:h-[881px] hidden md:block lg:p-5 gap-8 opacity-100  flex items-center justify-center">
-            <img src="/signup-banner-l.png" alt="" className=' lg:rounded-[45px]' />
+          <div className="lg:w-[528px] lg:h-[960px] hidden lg:block lg:p-5 gap-8 opacity-100  flex items-center justify-center">
+            <img src="/signup-banner-l.png" alt="" className=' lg:rounded-[45px] h-full w-full' />
           </div>
-
 
 
         </div>

@@ -30,7 +30,7 @@ export default {
         },
         neutral:{
           400:"#A1A1A1",
-          200:"#F6F6F6"
+          950:"#262626",
         },
         accent:{
           100:"#EDF3FF",
@@ -41,6 +41,7 @@ export default {
         primary:{
           50:"#F1FCF2",
           100: "#DEFAE2",
+          500: "#2ABD45",
           600: "#20AE3A",
           700: "#181d19ff",
         },

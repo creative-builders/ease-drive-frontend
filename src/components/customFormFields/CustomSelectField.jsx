@@ -29,13 +29,13 @@ export const CustomSelectField = ({
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <label className="block lg:text-[18px] mb-1 text-[16px] w-[100%] font-medium text-gray-800">
+      <label className="block lg:text-[18px] mb-1 text-[16px] w-[100%] font-normal text-gray-800">
         {label}
       </label>
 
       <div
         className="flex items-center justify-between border border-[#A1A1A1] 
-          lg:rounded-[16px] rounded-[8px] lg:px-4 lg:py-3 px-4 py-3 cursor-pointer"
+          lg:rounded-[10px] rounded-[8px] lg:px-4 lg:py-3 px-4 py-3 cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center w-[100%] items-center justify-center">

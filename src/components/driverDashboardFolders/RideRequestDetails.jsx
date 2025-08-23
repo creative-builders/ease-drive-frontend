@@ -5,7 +5,7 @@ import { ClockIcon } from "../../assets/icons/ClockIcon";
 import { CloseMenuIcon } from "../../assets/icons/CloseMenuIcon";
 import { BiArrowBack, BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import ProgressBar from "../ProgressBar";
-import InputField from "../customFormFields/InputField"
+import {InputField} from "../customFormFields/InputField"
 
 export const RideRequestDetails = ({ request }) => {
   const {
