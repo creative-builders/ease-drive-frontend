@@ -8,7 +8,7 @@ const BackgroundMap = ({ coords }) => {
         {coords ? (
           <MapContainer
             center={[coords.lat, coords.lon]}
-            zoom={13}
+            zoom={15}
             scrollWheelZoom={false}
             className="w-full rounded-[10px] h-full pointer-events-none"
           >
