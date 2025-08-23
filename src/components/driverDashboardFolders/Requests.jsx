@@ -1,29 +1,27 @@
-import { MapPin, RefreshCw, Filter } from "lucide-react";
+
 import CustomButton from "../CustomButton";
-import {FilterIcon} from "../../assets/icons/FilterIcon";
+import { FilterIcon } from "../../assets/icons/FilterIcon";
 import { Info } from "./Info";
 
-export function Requests({request}) {
-  console.log(request)
-  return (
-    <div className="py-2.5 relative top-0 left- h-full inline-flex flex-col justify-start items-start gap-4">
-      {/* Header */}
+export function Requests({ request }) {
 
+  return (
+    <div className="py-2.5 relative  h-full inline-flex flex-col justify-start items-start gap-4">
 
       {/* Body */}
       <div className="inline-flex justify-start items-start gap-4">
-        <div className="w-[563px] inline-flex flex-col justify-start items-start gap-4">
-          <div className="self-stretch h-[853px] px-5 py-2.5 bg-white rounded-lg flex flex-col justify-start items-center gap-24">
+        <div className="lg:w-[563px] w-[95%] m-auto inline-flex flex-col lg:justify-start lg:items-start gap-4">
+          <div className="lg:self-stretch lg:h-[853px] h-[426px] px-5 py-2.5 bg-white rounded-lg flex flex-col justify-start items-center gap-24">
             {/* Subheader */}
-            <div className="w-[543px] inline-flex justify-between items-center">
-              <div className="text-black text-2xl font-semibold font-['Inter']">
+            <div className="lg:w-[543px] w-[346px] inline-flex justify-between items-center">
+              <div className="text-black lg:text-2xl text-[14px] font-semibold font-['Inter']">
                 Ongoing Ride Requests
               </div>
 
               {/* Filter button */}
-              
-              <div className="flex justify-start items-center gap-2">
-                <button className="w-24 h-10 p-2.5 rounded-lg flex justify-center items-center gap-2.5 hover:bg-Primary-50">
+
+              <div className="flex justify-start items-center gap-2 cursor-not-allowed">
+                <button className="w-24 h-10 p-2.5 rounded-lg  disabled  cursor-not-allowed flex justify-center items-center gap-2.5 hover:bg-Primary-50">
                   <span className="text-accent-500 text-base font-medium font-['Poppins']">
                     Filter
                   </span>
@@ -33,19 +31,15 @@ export function Requests({request}) {
             </div>
 
             {/* Empty State */}
-            <div className="flex flex-col justify-start items-center gap-52">
-              <div className="w-96 text-center text-neutral-300 text-lg font-medium font-['Inter']">
+            <div className="flex lg:w-[543px]   w-[346px] flex-col  justify-start items-center gap-52">
+              <div className="w-96 text-center text-neutral-300 lg:text-lg text-base font-medium font-['Inter']">
                 No Customer has requested for a ride yet.
               </div>
 
-              {/* Refresh button */}
-             
-                  <CustomButton name="Refresh" extendedStyles="w-full p-3 lg:p-4 rounded-lg">
-                    <RefreshCw className="w-5 h-5 ml-2 text-Neutral-50" />
-                  </CustomButton >
-
-                
-              
+            </div>
+            <div className="flex lg:w-[543px] w-[346px] flex-col  mt-[90%] justify-start items-center gap-52">
+              <CustomButton name="Refresh" extendedStyles="w-full p-3 lg:p-4 rounded-lg">
+              </CustomButton >
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { FilterIcon } from "../../assets/icons/FilterIcon";
 export function RideRequestsList({ requests, onSelect }) {
   const [filter, setFilter] = useState("Filter");
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [displayList, setDisplayList] = useState("block");
 
   // Sort based on filter
   const sortedRequests = [...requests].sort((a, b) => {
@@ -19,9 +20,9 @@ export function RideRequestsList({ requests, onSelect }) {
   });
 
   return (
-    <div className="self-stretch px-5 py-3 pb-4 bg-white rounded-lg inline-flex flex-col justify-start items-start gap-2 relative">
-      <div className="w-[560px] inline-flex justify-start items-center gap-[40%]">
-        <div className="text-black text-xl font-semibold font-['Inter']">
+    <div className={`self-stretch  px-5 py-3 pb-4 bg-white rounded-lg inline-flex flex-col lg:justify-start lg:items-start gap-2 relative`}>
+      <div className="lg:w-[560px] w-[325px] justify-center items-center inline-flex lg:justify-start lg:items-center gap-[10%] lg:gap-[40%]">
+        <div className="text-black lg:text-xl text-base font-semibold font-['Inter']">
           Ongoing Ride Requests
         </div>
 
@@ -31,7 +32,7 @@ export function RideRequestsList({ requests, onSelect }) {
             className="w-24 h-10 p-2.5 rounded-lg flex justify-center items-center gap-2.5 cursor-pointer"
             onClick={() => setDropdownOpen((prev) => !prev)}
           >
-            <div className="text-accent-500 text-base font-medium font-['Poppins']">
+            <div className="text-accent-500 lg:text-xl text-base font-medium font-['Poppins']">
               {filter}
             </div>
             <div className="w-6 h-6 relative">
