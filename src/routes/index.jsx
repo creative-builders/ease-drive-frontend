@@ -27,8 +27,8 @@ import PassengerDashboardIndex from '../pages/dashboard/passenger';
 import ViewBookings from '../components/Bookings/ViewBookings';
 import DriverBoard from '../components/driverDashboardFolders/DriverBoard';
 import DataStatus from '../components/driverDashboardFolders/DataStatus';
-import { SignupOptions} from '../pages/auth/SignupOptions/SignupOptions';
-import {RegisterDriver} from "../pages/auth/driverSignup/DriverSignup"
+import { SignupOptions } from '../pages/auth/SignupOptions/SignupOptions';
+import { RegisterDriver } from "../pages/auth/driverSignup/DriverSignup"
 
 
 import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
@@ -58,75 +58,75 @@ const IndexRoute = () => {
   const user = useRecoilValue(userAtom);
   return (
     <Router>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/signup-as" element={<SignupOptions />} />
-      <Route path="/login" element={<Login/>} />
-      <Route path="/activate" element={<ActivateAccount/>} />
-      <Route path="/passengers-signup" element={<RegisterPassenger />} />
-      <Route path="/driver-signup" element={<RegisterDriver />} />
-      <Route path="/driver-kyc" element={<DriverKycPage />} />
-      <Route path="/Dri-verify" element={<DriVerify />} />
-      <Route path="/Driv-upload" element={<DrivUpload />} />
-      <Route path="/Driv-place" element={<DrivPlace />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/notify" element={<NotificationsPage />} />
-  
-      
-      <Route path="/Check-email" element={<CheckEmailFile />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/Bidder" element={<Bidder />} />
-      <Route path="/mainpage" element={<MainPage />} />
-      <Route path="/Luggage" element={<Luggage />} />
-      <Route path="/LookingFor" element={<LookingFor />} />
-      <Route path="/Cancelled" element={<Cancelled />} />
-      <Route path="/DriverCall" element={<DriverCall />} />
-      <Route path="/Password" element={<Password />} />
-      <Route path="/drivers" element={<DriverBoard />} />
-      <Route path="/rides" element={<DataStatus />} />
-      <Route path="/views" element={<DriverView />} />
-      {/* <Route path="/driver-profile" element={<ProfilePage/>} /> */}
-      
-
-      {/* Dashboard Route */}
-      <Route path="/dashboard" element={<DashboardHome />}> 
-        <Route index element={user?.role === "passenger" ? 
-        <PassengerDashboardIndex/> : 
-        <DriverDashboardIndex/>
-         }
-         />
-        <Route path="my-bookings" element={<ViewBookings/>} />
-        <Route path="edit-profile" element={<EditProfile />} />
-        <Route path="settings" element={<Setting />} />
-
-        <Route path="luggage" element={<Luggage />} />
-        <Route path="looking-for" element={<LookingFor />} />
-        <Route path="pick-ride" element={<PickRide />} />
-        <Route path="cancelled" element={<Cancelled />} />
-        <Route path="bidder" element={<Bidder />} />
-        <Route path="driver-call" element={<DriverCall />} />
-
-        {/* New Passenger Routes */}
-        <Route path="rides" element={<Rides />} />
-        <Route path="profile" element={ 
-          user?.role === "passenger" ? 
-         <PassengerProfile /> :
-         <DriverProfile />} 
-         />
-        <Route path="support" element={<Support />} />
-
-        {/* New Driver Routes */}
-        <Route path="earnings" element={<Earnings />} />
-        <Route path="notifications" element={<Notifications />} />
-        <Route path="trips" element={<Trips />} />
-        <Route path="requests" element={<Requests />} />
-      </Route>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signup-as" element={<SignupOptions />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/activate" element={<ActivateAccount />} />
+        <Route path="/passengers-signup" element={<RegisterPassenger />} />
+        <Route path="/driver-signup" element={<RegisterDriver />} />
+        <Route path="/driver-kyc" element={<DriverKycPage />} />
+        <Route path="/Dri-verify" element={<DriVerify />} />
+        <Route path="/Driv-upload" element={<DrivUpload />} />
+        <Route path="/Driv-place" element={<DrivPlace />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/notify" element={<NotificationsPage />} />
 
 
-      {/* Not found */}
-      <Route path="*" element={<NotFoundPage />} />
+        <Route path="/Check-email" element={<CheckEmailFile />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/Bidder" element={<Bidder />} />
+        <Route path="/mainpage" element={<MainPage />} />
+        <Route path="/Luggage" element={<Luggage />} />
+        <Route path="/LookingFor" element={<LookingFor />} />
+        <Route path="/Cancelled" element={<Cancelled />} />
+        <Route path="/DriverCall" element={<DriverCall />} />
+        <Route path="/Password" element={<Password />} />
+        <Route path="/drivers" element={<DriverBoard />} />
+        <Route path="/rides" element={<DataStatus />} />
+        <Route path="/views" element={<DriverView />} />
+        {/* <Route path="/driver-profile" element={<ProfilePage/>} /> */}
 
-    </Routes>
+
+        {/* Dashboard Route */}
+        <Route path="/dashboard" element={<DashboardHome />}>
+          <Route index element={user?.role === "passenger" ?
+            <PassengerDashboardIndex /> :
+            <DriverDashboardIndex />
+          }
+          />
+          <Route path="my-bookings" element={<ViewBookings />} />
+          <Route path="edit-profile" element={<EditProfile />} />
+          <Route path="settings" element={<Setting />} />
+
+          <Route path="luggage" element={<Luggage />} />
+          <Route path="looking-for" element={<LookingFor />} />
+          <Route path="pick-ride" element={<PickRide />} />
+          <Route path="cancelled" element={<Cancelled />} />
+          <Route path="bidder" element={<Bidder />} />
+          <Route path="driver-call" element={<DriverCall />} />
+
+          {/* New Passenger Routes */}
+          <Route path="rides" element={<Rides />} />
+          <Route path="profile" element={
+            user?.role === "passenger" ?
+              <PassengerProfile /> :
+              <DriverProfile />}
+          />
+          <Route path="support" element={<Support />} />
+
+          {/* New Driver Routes */}
+          <Route path="earnings" element={<Earnings />} />
+          <Route path="notifications" element={<Notifications />} />
+          <Route path="trips" element={<Trips />} />
+          <Route path="requests" element={<Requests />} />
+        </Route>
+
+
+        {/* Not found */}
+        <Route path="*" element={<NotFoundPage />} />
+
+      </Routes>
     </Router>
   )
 }
