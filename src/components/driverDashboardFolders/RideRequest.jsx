@@ -2,6 +2,7 @@ import { useState } from "react";
 import { RideRequestsList } from "./RideRequestsList";
 import { RideRequestDetails } from "./RideRequestDetails";
 import { Requests } from "./Requests";
+import { LiveGPSIcon } from "../../assets/icons/LiveGPSIcon";
 
 
 
@@ -20,9 +21,18 @@ export function RideRequests() {
 
   return (
     // <div className="lg:w-full w-full min-h-screen relative bg-gradient-to-br from-white via-purple-100 to-white overflow-hidden">
-      <div className="flex lg:w-full w-[100%] lg:justify-start justify-center  ">
-        <div className="flex lg:w-[100%] w-[80%] lg:justify-start  justify-center m-auto items-start lg:mt-0 mt-4 lg:-ml-10 ml lg:h-full gap-4">
-           {/* 1. If there are no requests */}
+    <div className="flex lg:w-full w-[100%] lg:justify-start justify-center  ">
+      <div className="">
+        {/* 1. If there are no requests */}
+
+        {/* <div className="lg:w-[100%] w-[80%] flex  lg:justify-between justify-center m-auto lg:-ml-5 items-start py-2 mb-2">
+          <h2 className="lg:text-2xl font-semibold text-base">Customers Ride Request</h2>
+          <p className="lg:text-[16px]">
+            <LiveGPSIcon className="inline mr-4 mb-1" />
+            You’re currently at: UNN Hostel C, Nsukka</p>
+        </div> */}
+        <div className="flex lg:w-[100%] w-[80%] lg:justify-start justify-center m-auto items-start
+           lg:mt-0 mt-4 lg:-ml-10 ml lg:h-full gap-4">
           {requests.length === 0 ? (
             <Requests refresh={handleRefresh} />
           ) : (
@@ -51,6 +61,7 @@ export function RideRequests() {
           )}
         </div>
       </div>
+    </div>
     // </div>
   );
 }

@@ -75,7 +75,7 @@ export const RideRequestDetails = ({ request }) => {
 
     return (
         <div className="self-stretch px-5 py-3 pb-4 bg-white rounded-lg
-      inline-flex flex-col lg:w-[480px] w-[360px]   lg:justify-start justify-center lg:items-start gap-2 relative">
+      inline-flex flex-col lg:w-[460px] w-[360px]   lg:justify-start justify-center lg:items-start gap-2 relative">
             {/* Header */}
             <div className="self-stretch h-11 inline-flex lg:justify-start lg:items-center">
                 <div className="w-10 h-10 px-1 py-[3px] bg-white rounded-[32px]
