@@ -1,5 +1,5 @@
 
-const LiveGPSIcon = (props) => (
+export const LiveGPSIcon = (props) => (
   <svg
     width={18}
     height={18}
@@ -47,4 +47,3 @@ const LiveGPSIcon = (props) => (
     />
   </svg>
 );
-export default LiveGPSIcon;

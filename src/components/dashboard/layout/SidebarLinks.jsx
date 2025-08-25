@@ -1,8 +1,13 @@
+import { useRecoilValue } from "recoil"
 import { HomeIcon } from "../../../assets/icons/dashboard/HomeIcon"
 import { ProfileIcon } from "../../../assets/icons/dashboard/ProfileIcon"
 import { RidesIcon } from "../../../assets/icons/dashboard/RidesIcon"
 import { SupportIcon } from "../../../assets/icons/dashboard/SupportIcon"
+import { userAtom } from "../../atoms/userAtom"
 
+
+
+const user = useRecoilValue(userAtom);
 
 export const PassengerDashboardNavLinks = [
   {

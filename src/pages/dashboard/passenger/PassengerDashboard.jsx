@@ -1,8 +1,8 @@
-import { PassengerLayout } from "../../../layout/dashboard/passenger"
+import { DashboardLayout } from "../../../layout/dashboard"
 
 
 const PassengerDashboard = () => {
-  return <PassengerLayout/>
+  return <DashboardLayout/>
 }
 
 export default PassengerDashboard

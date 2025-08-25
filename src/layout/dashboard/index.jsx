@@ -2,22 +2,22 @@ import { Outlet } from "react-router-dom"
 
 
 
-import BackgroundMap from "../../../components/dashboard/BackgroundMap"
-import {Navbar} from "../../../components/dashboard/layout/Navbar"
+import BackgroundMap from "../../components/dashboard/BackgroundMap"
+import {Navbar} from "../../components/dashboard/layout/Navbar"
 import { useState } from "react";
-import { SideBarMenu } from "../../../components/dashboard/layout/SideBarMenu";
+import { SideBarMenu } from "../../components/dashboard/layout/SideBarMenu";
 
 
 
-export const PassengerLayout = () => {
+export const DashboardLayout = () => {
     const [coords, setCoords] = useState(null);
   return (
      <>
      {/* <Navbar/> */}
      <div className="flex">
        <SideBarMenu/>
-        <div className="bg-custom-gradient basis-full">
-          <div className="mr-[22px] ml-[82px] mt-[29px]">
+        <div className="bg-gradient-bg basis-full">
+          <div className="lg:mr-[22px] lg:ml-[82px] lg:mt-[29px] min-h-screen">
             <Outlet context={{ coords, setCoords}}/>
           </div>
         </div>
