@@ -53,10 +53,10 @@ const RideOptionSelector = () => {
                     </div>
 
                     {/* Right: Radio Button */}
-                    <div className="lg:w-[34px] lg:h-[34px] w-[28px] h-[26px] 
+                    <div className="lg:w-[34px] lg:h-[34px] w-[28px] h-[24px] 
                     lg:-mt-20 -mt-10 rounded-full border-2 border-green-600 flex items-center justify-center">
                         {selected === option.url && (
-                            <div className="lg:w-[24px] lg:h-[24px] w-[12px] h-[12px]  rounded-full bg-green-600" />
+                            <div className="lg:w-[24px] lg:h-[24px] w-[16px] h-[16px]  rounded-full bg-green-600" />
                         )}
                     </div>
                 </div>
@@ -66,7 +66,7 @@ const RideOptionSelector = () => {
                     className="bg-green-700 opacity-5 cursor-not-allowed lg:w-[556px] lg:h-[72px] 
                     w-[347px] h-[45px] px-[10px] rounded-[16px]
                       text-white flex items-center justify-center gap-[10px] text-lg font-medium"
-                    onClick={() => selected === "" ? navigate("/easesignup") :
+                    onClick={() => selected === "" ? null :
                         navigate(`/${selected}`)
                     }
                 >
@@ -75,7 +75,7 @@ const RideOptionSelector = () => {
                 {selected !== "" && (<button
                     className="bg-green-700 lg:w-[556px] lg:h-[72px] w-[347px] h-[45px] px-[10px] rounded-[16px]
                      opacity-100 text-white flex items-center justify-center gap-[10px] text-lg font-medium"
-                    onClick={() => selected === "" ? navigate("/easesignup") :
+                    onClick={() => selected === "" ? null :
                         navigate(`/${selected}`)
                     }
                 >

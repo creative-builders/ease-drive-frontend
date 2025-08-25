@@ -11,13 +11,14 @@ const CustomButton = ({
     btnClick,
     navigateTo,
     navigateState,
-    isLoading=false
+    isLoading=false,
+
 }) => {
     const navigate = useNavigate();
 
     const sizes = {
-    sm: 'text-base leading-normal',
-    md: 'text-xl leading-normal',
+    sm: 'text-xs lg:text-lg leading-normal',
+    lg: 'text-base lg:text-lg leading-normal',
     }
 
     const sizeClasses = sizes[size];
@@ -33,8 +34,10 @@ const CustomButton = ({
   return (
     <button 
      onClick={handleClick}
-     className={`${sizeClasses} ${className} ${extendedStyles} flex items-center justify-center bg-green-700 text-gray-100 font-medium`}>
+     className={`${sizeClasses} ${className} ${extendedStyles} flex items-center justify-center h-[45px] 
+     lg:h-[60px] bg-primary-700 text-gray-100 font-medium `}>
      {isLoading ? <LoadingSpinner className="animate-spin" /> : name}
+     
     </button>
   )
 }

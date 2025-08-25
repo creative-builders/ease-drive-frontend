@@ -1,8 +1,8 @@
 
 import { useNavigate } from 'react-router-dom';
-import logout from '../../../assets/images/Logout.png'
 import {  useSetRecoilState } from 'recoil';
 import { userAtom } from '../../../components/atoms/userAtom';
+import { LogoutIcon } from '../../../assets/icons/LogoutIcon';
 
 
 const LogoutButton = () => {
@@ -18,9 +18,8 @@ const LogoutButton = () => {
   return (
     <div 
       onClick={handleLogout}
-      className="flex items-center justify-start gap-4 cursor-pointer">
-      <img src={logout} alt="" />
-      <span>Log out</span>
+      className="lg:w-[54px] lg:h-[50px] rounded-2xl flex items-center justify-center bg-primary-50 cursor-pointer">
+        <LogoutIcon />
     </div>
   )
 }

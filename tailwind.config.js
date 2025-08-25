@@ -19,9 +19,12 @@ export default {
         },
         placeholder: "#AEAEB2",
         green:{
+          
           50:"#F1FCF2",
+
          100:"#DEFAE2",
          200:"#D4F9DB",
+         250:"#BEF4C7",
          300:"#20AE3A",
          600:"#20AE3A",
          700:"#1A7B2C",
@@ -29,7 +32,8 @@ export default {
          950:"#072C0F"
         },
         neutral:{
-          400:"#A1A1A1"
+          400:"#A1A1A1",
+          950:"#262626",
         },
         accent:{
           100:"#EDF3FF",
@@ -40,8 +44,9 @@ export default {
         primary:{
           50:"#F1FCF2",
           100: "#DEFAE2",
+          500: "#2ABD45",
           600: "#20AE3A",
-          700: "#1A7B2C",
+          700:"#1A7B2C",
         },
         pink:{
           50:"#FFCC0014"
@@ -73,6 +78,7 @@ export default {
       },
       backgroundImage: {
         'custom-gradient': 'linear-gradient(123.39deg, #FDFDFD 3.85%, #F4EDFA 35.05%, #ddddddc9 57.05%, #EEE1F8 79.94%, #FDFDFD 99.96%)',
+        "gradient-bg": "linear-gradient(123deg, #FDFDFD 3.85%, #F4EDFA 35.58%, #F1FBF2 56%, #EEE1F8 81.24%, #FDFDFD 101.6%);"
       },
     },
   },

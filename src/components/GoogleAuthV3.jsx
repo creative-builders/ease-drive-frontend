@@ -7,7 +7,7 @@ import { googleAuth } from "../store/auth/general/api";
 import { userAtom } from "./atoms/userAtom";
 import { useSetRecoilState } from "recoil";
 
-const GoogleAuthV3 = ({ role = "passenger" }) => {
+const  GoogleAuthV3 = ({ role = "passenger" }) => {
   const setUserAtom = useSetRecoilState(userAtom);
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -22,21 +22,21 @@ const GoogleAuthV3 = ({ role = "passenger" }) => {
   useEffect(() => {
     const registerWithGoogle = async () => {
       if (!user) return; // Prevent API call if user is null
+      let data;
 
       try {
         setLoading(true);
         const { access_token } = user;
-        const data = await googleAuth({ role, access_token });
+        data = await googleAuth({ role, access_token });
 
         localStorage.setItem("current_user",JSON.stringify(data.data));
-        setUserAtom(data.data)
-        
-        //navigate to the dashboard
+        setUserAtom(data.data);
         
       } catch (error) {
         console.error("Google Authentication Error:", error);
       } finally {
         setLoading(false);
+        setUserAtom(data.data)
         navigate("/dashboard");
       }
     };
