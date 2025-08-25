@@ -13,15 +13,15 @@ export const Modal = ({ closeModal, title, bodyText, modalIcon, children }) => {
 
                 <div className="flex flex-col items-center justify-center text-center">
 
-                    <div className="w-[106px] h-[99px]"  >
+                    <div className="lg:w-[105px] lg:h-[98px] w-[105px] h-[98px]"  >
                         {modalIcon}
                     </div>
-                    <h2 className="text-[32px] pt-4 font-bold text-[#333333]">
+                    <h2 className="lg:text-[32px] text-[14px] pt-4 font-bold text-[#333333]">
                         {title}
                     </h2>
-                    <p className="text-[18px] font-medium text-[#333333] pt-4">
-                        {bodyText}
 
+                    <p className="lg:text-[16px] text-[12px] font-medium text-[#333333] pt-4">
+                        {bodyText}
                     </p>
 
                     {children}
@@ -30,3 +30,4 @@ export const Modal = ({ closeModal, title, bodyText, modalIcon, children }) => {
         </div>
     )
 }
+

@@ -41,11 +41,10 @@ export default function Notifications({ notifications }) {
             <h3 className="text-xs md:text-base leading-normal not-italic font-semibold mb-2">{group}</h3>
             {grouped[group].map((note) => (
               <div key={note.id} className="h-fit md:h-[90px] flex items-start flex-shrink-0 gap-1 md:gap-2 p-4">
-                <img
-                  src={<UserAvatar />}
-                  alt="profile"
-                  className="w-[50px] h-[51px] justify-center items-center gap-4 bg-white rounded-full"
-                />
+                <div className="w-[50px] h-[51px] flex justify-center items-center bg-white rounded-full">
+                <UserAvatar />
+              </div>
+
                 <div>
                   <p className="font-semibold text-[#9C9C9C] text-[10px] md:text-[14px] not-italic leading-normal">{note.type}</p>
                   <p className="text-[#000] text-[10px] md:text-[14px] not-italic font-medium leading-normal">{note.message}</p>
