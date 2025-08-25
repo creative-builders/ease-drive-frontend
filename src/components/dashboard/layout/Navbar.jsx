@@ -12,7 +12,7 @@ export const Navbar = () => {
       <div className="flex justify-between ml-[360px] mr-[18px]">
         <SearchBox/>
         <div className="flex gap-x-3 items-center">
-          <p className="capitalize font-medium lg:text-lg">{user?.fullName}</p>
+          <p className="capitalize font-medium text-neutral-400 lg:text-lg">{user?.fullName}</p>
           <LogoutButton />
         </div>
       </div>
