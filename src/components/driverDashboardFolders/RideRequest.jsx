@@ -25,7 +25,7 @@ export function RideRequests() {
       <div className="">
         {/* 1. If there are no requests */}
 
-        <div className="lg:w-[1000px] w-[351px] flex lg:flex-row flex-col gap-1  lg:justify-between justify-center m-auto lg:-ml-5 items-start py-2 mt-2 mb-2">
+        <div className="lg:w-[990px] w-[351px] flex lg:flex-row flex-col gap-1  lg:justify-between justify-center m-auto lg:-ml-10 items-start py-2 mt-2 mb-2">
           <h2 className="lg:text-2xl font-semibold text-[18px]">Customers Ride Request</h2>
           <p className="lg:text-[16px] text-base">
             <LiveGPSIcon className="inline mr-4 mb-1" />
