@@ -36,6 +36,18 @@ import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
 import { ForgotPassword } from '../pages/auth/Passengers/ForgotPassword';
 import { ResetPassword } from '../pages/auth/Passengers/ResetPassword';
 import NotFoundPage from '../ui/NotFoundPage';
+import DriverDashboard from '../pages/dashboard/driver/DriverDashboard';
+import { Rides } from '../pages/dashboard/passenger/Rides';
+import { PassengerProfile } from '../pages/dashboard/passenger/PassengerProfile';
+import Support from '../pages/dashboard/passenger/Support';
+import { useRecoilValue } from 'recoil';
+import { userAtom } from '../components/atoms/userAtom';
+import { DriverDashboardIndex } from '../pages/dashboard/driver';
+import { Earnings } from '../pages/dashboard/driver/Earnings';
+import { Notifications } from '../pages/dashboard/driver/Notifications';
+import { Trips } from '../pages/dashboard/driver/Trips';
+import { DriverProfile } from '../pages/dashboard/driver/DriverProfile';
+import { Requests } from '../pages/dashboard/driver/Requests';
 import NotificationsPage from '../ui/NotificationPage';
 import DriverView from '../components/ui/DriverView';
 
@@ -43,6 +55,7 @@ import DriverView from '../components/ui/DriverView';
 
 
 const IndexRoute = () => {
+  const user = useRecoilValue(userAtom);
   return (
     <Router>
     <Routes>
@@ -77,7 +90,11 @@ const IndexRoute = () => {
 
       {/* Dashboard Route */}
       <Route path="/dashboard" element={<DashboardHome />}> 
-        <Route index element={<PassengerDashboardIndex/>} />
+        <Route index element={user.role === "passenger" ? 
+        <PassengerDashboardIndex/> : 
+        <DriverDashboardIndex/>
+         }
+         />
         <Route path="my-bookings" element={<ViewBookings/>} />
         <Route path="edit-profile" element={<EditProfile />} />
         <Route path="settings" element={<Setting />} />
@@ -88,6 +105,21 @@ const IndexRoute = () => {
         <Route path="cancelled" element={<Cancelled />} />
         <Route path="bidder" element={<Bidder />} />
         <Route path="driver-call" element={<DriverCall />} />
+
+        {/* New Passenger Routes */}
+        <Route path="rides" element={<Rides />} />
+        <Route path="profile" element={ 
+          user?.role === "passenger" ? 
+         <PassengerProfile /> :
+         <DriverProfile />} 
+         />
+        <Route path="support" element={<Support />} />
+
+        {/* New Driver Routes */}
+        <Route path="earnings" element={<Earnings />} />
+        <Route path="notifications" element={<Notifications />} />
+        <Route path="trips" element={<Trips />} />
+        <Route path="requests" element={<Requests />} />
       </Route>
 
 
