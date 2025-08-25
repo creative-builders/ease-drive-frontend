@@ -34,6 +34,10 @@ export const data = [
     luggage: [
       "https://randomuser.me/api/portraits/men/31.jpg",
       "https://randomuser.me/api/portraits/women/29.jpg",
+      "https://randomuser.me/api/portraits/men/31.jpg",
+      "https://randomuser.me/api/portraits/women/29.jpg",
+      "https://randomuser.me/api/portraits/men/31.jpg",
+      "https://randomuser.me/api/portraits/women/29.jpg",
     ],
     type: "Premium",
     time: "2:45 PM",

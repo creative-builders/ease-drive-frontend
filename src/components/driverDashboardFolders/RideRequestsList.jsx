@@ -20,8 +20,10 @@ export function RideRequestsList({ requests, onSelect }) {
   });
 
   return (
-    <div className={`self-stretch  px-5 py-3 pb-4 bg-white rounded-lg inline-flex flex-col lg:justify-start lg:items-start gap-2 relative`}>
-      <div className="lg:w-[560px] w-[325px] justify-center items-center inline-flex lg:justify-start lg:items-center gap-[10%] lg:gap-[40%]">
+    <div className={`self-stretch  px-5 py-3 pb-4 bg-white rounded-lg inline-flex flex-col
+     lg:justify-start justify-center lg:items-start gap-2 relative`}>
+      <div className="lg:w-[500px] w-[325px]  justify-center items-center 
+      inline-flex lg:justify-start lg:items-center gap-[10%] lg:gap-[30%]">
         <div className="text-black lg:text-xl text-base font-semibold font-['Inter']">
           Ongoing Ride Requests
         </div>

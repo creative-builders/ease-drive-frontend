@@ -24,7 +24,7 @@ export default {
 
          100:"#DEFAE2",
          200:"#D4F9DB",
-250:"#BEF4C7",
+         250:"#BEF4C7",
          300:"#20AE3A",
          600:"#20AE3A",
          700:"#1A7B2C",
