@@ -18,7 +18,7 @@ const LogoutButton = () => {
   return (
     <div 
       onClick={handleLogout}
-      className="flex items-center justify-start gap-4 cursor-pointer">
+      className="lg:w-[54px] lg:h-[50px] rounded-2xl flex items-center justify-center bg-primary-50 cursor-pointer">
         <LogoutIcon />
     </div>
   )
