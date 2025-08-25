@@ -2,13 +2,14 @@ import React, { useRef, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import { CameraIcon } from "../assets/icons/CameraIcon";
 import { UserIcon } from "../assets/icons/UserIcon";
-import FormInput from "../components/form/FormInput"
-import { LockedIcon } from "../assets/icons/LockedIcon";
 import { EyeOpenIcon } from "../assets/icons/EyeOpenIcon";
 import CustomButton from "../components/CustomButton";
 import picture from "../assets/images/driver-picture.png"
 import { EmailSignedIcon } from "../assets/icons/EmailSignedIcon";
-import { CallIcon } from "../assets/icons/CallIcon";
+import { LockPasswordIcon } from "../assets/icons/LockPasswordIcon";
+import { PhoneIcon } from "../assets/icons/PhoneIcon";
+import { InputField } from "../components/customFormFields/InputField";
+import { EyeCloseIcon } from "../assets/icons/EyeCloseIcon";
 
 
 const VehicleForm = ({ onClose }) => {
@@ -60,47 +61,56 @@ const VehicleForm = ({ onClose }) => {
         </div>
 
         <form className="gap-4 mt-4" action="">
-          <FormInput
-              label="full name"
-              id="name"
-              type='text'
-              placeholder="Enter document Id number"
-              inputClassName = "indent-1 flex items-center justify-center"
-              required
-              leftIcon={<UserIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />}
+
+          <InputField
+            label="full name"
+            name="name"
+            type="text"
+            placeholder="Enter document id Number"
+            leftIcon={UserIcon}
+            // error={
+            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+            // }
           />
 
-          <FormInput
-              label="Email"
-              id="email"
-              type='email'
-              placeholder="Enter document Id number"
-              inputClassName = "indent-1 flex items-center justify-center"
-              required
-              leftIcon={<EmailSignedIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />}
+          <InputField
+            label="Email"
+            name="email"
+            type="email"
+            placeholder="Enter document Id  Number"
+            leftIcon={EmailSignedIcon}
+            // error={
+            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+            // }
           />
 
-          <FormInput
-              label="Phone number"
-              id="number"
-              type='number'
-              placeholder="Enter document Id number"
-              inputClassName = "indent-1 flex items-center justify-center"
-              required
-              leftIcon={<CallIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />}
+          <InputField
+            label="Phone number"
+            id="number"
+            type="number"
+            placeholder="Enter Vehicle Plate  Number"
+            leftIcon={PhoneIcon}
+            // error={
+            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+            // }
           />
 
-          <FormInput
-            label="Update Password"
-            id="password"
-            type='password'
-            placeholder="Enter document Id number"
-            inputClassName = "indent-1 flex items-center justify-center"
-            required
-            leftIcon={<LockedIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />}
-            rightIcon={<EyeOpenIcon />}
-          />
 
+          <InputField
+            label="Enter Password"
+            name="password"
+            placeholder="Enter your password"
+            leftIcon={LockPasswordIcon}
+    
+            // error={showPasswordError ? "Password must be at least 5 characters" : ""}
+            // toggleable
+            // showPassword={showPassword}
+            // handleTogglePassword={handleTogglePassword}
+            rightIconOpen={EyeOpenIcon}
+            rightIconClose={EyeCloseIcon}
+            isPassword
+  
+            />
           <p className="font-medium text-base md:text-base leading-normal not-italic tracking-normal text-left mt-4 text-[#4847EB]">change password</p>
         </form>
       </figure>

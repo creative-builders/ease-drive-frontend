@@ -1,8 +1,6 @@
 import React, { useRef, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import { CameraIcon } from "../assets/icons/CameraIcon";
-import FormInput from "../components/form/FormInput";
-import CustomSelect from "../components/form/CustomSelect";
 import CustomButton from "../components/CustomButton";
 import picture from "../assets/images/driver-picture.png";
 import { CarIcon } from "../assets/icons/CarIcon";
@@ -12,6 +10,10 @@ import { SeatIcon } from "../assets/icons/SeatIcon";
 import { ColorIcon } from "../assets/icons/ColorIcon";
 import { Document } from "../assets/icons/Document";
 import UploadIcon from "../assets/images/add.png";
+import { CustomSelectField } from "../components/customFormFields/CustomSelectField";
+import { InputField } from "../components/customFormFields/InputField";
+import { FaChevronDown } from "react-icons/fa";
+import { LocationHomeIcon } from "../assets/icons/LocationHomeIcon";
 
 
 const Crendentials = ({ onClose }) => {
@@ -70,85 +72,81 @@ const Crendentials = ({ onClose }) => {
         </div>
 
         <form className="gap-4 mt-4" action="">
-          <FormInput
+
+          <InputField
             label="Vehicle type"
-            id="vehicleType"
+            name="vehicleType"
             type="text"
-            placeholder="Enter document Id number"
-            inputClassName="indent-1 flex items-center justify-center rounded-lg"
-            required
-            leftIcon={
-              <CarIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
-            }
+            placeholder="Enter Vehicle Plate  Number"
+            leftIcon={CarIcon}
+            // error={
+            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+            // }
           />
+        
+          <InputField 
+              label="Plate Number"
+              name="plateNumber"
+              placeholder="Enter Vehicle Plate  Number"
+              leftIcon={PlateNumberIcon}
+              // error={
+              //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+              // }
+            />
 
-          <FormInput
-            label="Plate Number"
-            id="plateNumber"
-            type="text"
-            placeholder="Enter your new plate number"
-            inputClassName="indent-1 flex items-center justify-center rounded-lg"
-            required
-            leftIcon={
-              <PlateNumberIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
-            }
-          />
-
-          <CustomSelect
-            label="Service area (location)"
+          <CustomSelectField
+            label="Service Area (Location)"
+            name="serviceArea"
             value={selectedCity}
-            onChange={(e) => setSelectedCity(e.target.value)}
-            leftIcon={<HouseBuilding className="h-6 w-6 text-[#888]" />}
-            options={["Main Gate", "UNN Hostel C", "Zik's Flat", "Library"]}
-            placeholder="Choose service location"
-            isRounded
-          />
+            defaultHolder="Choose service location"
+            options={["Odenigwe", "Hill-Top", "Main gate", "Behind Flat", "Odeim gate",]}
+            rightIcon={FaChevronDown}
+          >
+            <LocationHomeIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
+          </CustomSelectField>
 
 
           <div className="flex space-x-2 items-center justify-between mt-3">
-            <FormInput
-              label="Vehicle Color"
-              id="vehicleColor"
+            
+            <InputField
+              label="vehicle Color"
+              name="vehicleColor"
               type="text"
               placeholder="Eg.black"
-              inputClassName="indent-1 flex items-center justify-center rounded-lg"
-              required
-              leftIcon={
-                <ColorIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
-              }
+              leftIcon={ColorIcon}
+              // error={
+              //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+              // }
             />
 
-            <FormInput
-              label="Number of Seat"
-              id="seatCount"
+            <InputField
+              label="Number of seat"
+              name="seatCount"
               type="text"
               placeholder="Eg.4"
-              inputClassName="indent-1 flex items-center justify-center rounded-lg"
-              required
-              leftIcon={
-                <SeatIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
-                
-              }
+              leftIcon={SeatIcon}
+              // error={
+              //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+              // }
             />
           </div>
 
-          <FormInput
+          <InputField
             label="Document ID"
-            id="driverLicence"
+            name="driverLicence"
             type="text"
-            placeholder="Driver’s licence"
-            inputClassName="indent-1 flex items-center justify-center rounded-lg"
-            required
-            leftIcon={
-              <Document className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
-            }
+            placeholder="Driver's licence"
+            leftIcon={Document}
+            // error={
+            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+            // }
           />
 
           <div>
-            <label className="text-base not-italic leading-[150%] font-medium text-gray-700 mb-1">
+            <label className="text-base md:text-xl not-italic leading-[150%] font-medium text-gray-700 mb-1">
               Upload Vehicle photos (front, back and size)
             </label>
-            <p className="text-xs not-italic leading-normal font-medium align-middle mb-2">
+            <p className="block mb-2 text-sm lg:text-base">
               You can upload up to 4 images (JPG, PNG). Maximum file size: 2MB
               per image
             </p>

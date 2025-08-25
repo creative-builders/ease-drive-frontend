@@ -36,6 +36,10 @@ import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
 import { ForgotPassword } from '../pages/auth/Passengers/ForgotPassword';
 import { ResetPassword } from '../pages/auth/Passengers/ResetPassword';
 import NotFoundPage from '../ui/NotFoundPage';
+import DriverView from '../components/DashboardForDrivers/DriverView';
+import Profile from '../uI/Profile';
+import ProfilePage from '../uI/ProfilePage';
+import NotificationsPage from '../uI/NotificationPage';
 import DriverDashboard from '../pages/dashboard/driver/DriverDashboard';
 import { Rides } from '../pages/dashboard/passenger/Rides';
 import { PassengerProfile } from '../pages/dashboard/passenger/PassengerProfile';
@@ -48,8 +52,6 @@ import { Notifications } from '../pages/dashboard/driver/Notifications';
 import { Trips } from '../pages/dashboard/driver/Trips';
 import { DriverProfile } from '../pages/dashboard/driver/DriverProfile';
 import { Requests } from '../pages/dashboard/driver/Requests';
-import NotificationsPage from '../ui/NotificationPage';
-import DriverView from '../components/ui/DriverView';
 
 
 
@@ -70,7 +72,7 @@ const IndexRoute = () => {
       <Route path="/Driv-upload" element={<DrivUpload />} />
       <Route path="/Driv-place" element={<DrivPlace />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/notify" element={<NotificationsPage />} />
+      <Route path="/notification" element={<NotificationsPage />} />
   
       
       <Route path="/Check-email" element={<CheckEmailFile />} />
@@ -85,7 +87,8 @@ const IndexRoute = () => {
       <Route path="/drivers" element={<DriverBoard />} />
       <Route path="/rides" element={<DataStatus />} />
       <Route path="/views" element={<DriverView />} />
-      {/* <Route path="/driver-profile" element={<ProfilePage/>} /> */}
+      <Route path="/driver-profile" element={<ProfilePage />} />
+      <Route path="/user-profile" element={<Profile />} />
       
 
       {/* Dashboard Route */}

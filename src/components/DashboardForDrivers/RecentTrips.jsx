@@ -44,7 +44,7 @@ export default function RecentTrips() {
                 <div
                   key={option}
                   onClick={() => handleSelect(option)}
-                  className={`px-4 py-2 cursor-pointer hover:bg-gray-500 w-full border-[#E7E7E7] border-b-2 ${
+                  className={`px-4 py-2 cursor-pointer hover:bg-gray-500 w-full border-red-500 border-b-2 ${
                     selected === option ? "text-green-500 font-semibold" : ""
                   }`}
                 >
