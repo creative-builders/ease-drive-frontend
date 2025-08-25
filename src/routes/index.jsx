@@ -24,7 +24,6 @@ import Bidder from '../components/bidders/Bidders';
 import EditProfile from '../components/personalProfile/EditProfile';
 import DashboardHome from '../pages/dashboard/DashboardHome';
 import PassengerDashboardIndex from '../pages/dashboard/passenger';
-import SetRoutes from '../components/yourRoute/SetRoutes';
 import ViewBookings from '../components/Bookings/ViewBookings';
 import DriverBoard from '../components/driverDashboardFolders/DriverBoard';
 import DataStatus from '../components/driverDashboardFolders/DataStatus';
@@ -52,6 +51,7 @@ import { Notifications } from '../pages/dashboard/driver/Notifications';
 import { Trips } from '../pages/dashboard/driver/Trips';
 import { DriverProfile } from '../pages/dashboard/driver/DriverProfile';
 import { Requests } from '../pages/dashboard/driver/Requests';
+import ProtectedRoutes from './ProtectedRoutes';
 
 
 
@@ -93,7 +93,7 @@ const IndexRoute = () => {
 
       {/* Dashboard Route */}
       <Route path="/dashboard" element={<DashboardHome />}> 
-        <Route index element={user.role === "passenger" ? 
+        <Route index element={user?.role === "passenger" ? 
         <PassengerDashboardIndex/> : 
         <DriverDashboardIndex/>
          }
@@ -101,7 +101,7 @@ const IndexRoute = () => {
         <Route path="my-bookings" element={<ViewBookings/>} />
         <Route path="edit-profile" element={<EditProfile />} />
         <Route path="settings" element={<Setting />} />
-        <Route path="set-routes" element={<SetRoutes />} />
+
         <Route path="luggage" element={<Luggage />} />
         <Route path="looking-for" element={<LookingFor />} />
         <Route path="pick-ride" element={<PickRide />} />
