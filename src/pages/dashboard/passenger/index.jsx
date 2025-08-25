@@ -22,7 +22,7 @@ const PassengerDashboardIndex = () => {
       const data = await response.json();
       return data.display_name;
     } catch (err) {
-      toast.error("Failed to fetch location name", err?.message);
+      toast.error("Failed to fetch location name, Please try again", err?.message);
       return "";
     } finally {
       setLoading(false);
@@ -47,7 +47,7 @@ const PassengerDashboardIndex = () => {
         setLocationEnabled(true); // 👈 slide up
       },
       (error) => {
-        toast.error(`Location access denied : ${error.message}`);
+        toast.error(`Location access denied, Please try again : ${error.message}`);
         setPopupActionType("cancel");
         setIsOpen(false);
       },
