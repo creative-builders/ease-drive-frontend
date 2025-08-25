@@ -6,12 +6,18 @@ import CustomButton from "../../components/CustomButton";
 import { UserIcon } from "../../assets/icons/UserIcon";
 import { CameraIcon } from "../../assets/icons/CameraIcon";
 import { EyeOpenIcon } from "../../assets/icons/EyeOpenIcon";
-import { LockedIcon } from "../../assets/icons/LockedIcon";
+import { EyeCloseIcon } from "../../assets/icons/EyeCloseIcon";
 import { EmailSignedIcon } from "../../assets/icons/EmailSignedIcon";
-import { CallIcon } from "../../assets/icons/CallIcon";
+import { PhoneIcon } from "../../assets/icons/PhoneIcon";
+import { LockPasswordIcon } from "../../assets/icons/LockPasswordIcon";
+import { InputField } from "../../components/customFormFields/InputField";
 
 
 const EditProfileView = ({ onClose }) => {
+
+   const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => setShowPassword((prev) => !prev);
 
   const [profileImage, setProfileImage] = useState(profile);
   const fileInputRef = useRef(null);
@@ -60,54 +66,56 @@ const EditProfileView = ({ onClose }) => {
         </div>
 
         <form className="gap-4 mt-4" action="">
-          <FormInput
-              label="full name"
-              id="name"
-              type='text'
-              // value={plateNumber}
-              // onChange={(e) => setPlateNumber(e.target.value)}
-              placeholder="Enter document Id number"
-              inputClassName = "indent-1 flex items-center justify-center"
-              required
-              leftIcon={<UserIcon />}
+
+          <InputField
+            label="full name"
+            name="name"
+            type="text"
+            placeholder="Enter your name"
+            leftIcon={UserIcon}
+            // error={
+            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+            // }
           />
 
-          <FormInput
-              label="Email"
-              id="email"
-              type='email'
-              // value={plateNumber}
-              // onChange={(e) => setPlateNumber(e.target.value)}
-              placeholder="Enter document Id number"
-              inputClassName = "indent-1 flex items-center justify-center"
-              required
-              leftIcon={<EmailSignedIcon />}
+          <InputField
+            label="Email"
+            name="email"
+            type="email"
+            placeholder="Enter document Id  Number"
+            leftIcon={EmailSignedIcon}
+            // error={
+            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+            // }
           />
 
-          <FormInput
-              label="Phone number"
-              id="number"
-              type='number'
-              // value={plateNumber}
-              // onChange={(e) => setPlateNumber(e.target.value)}
-              placeholder="Enter document Id number"
-              inputClassName = "indent-1 flex items-center justify-center"
-              required
-              leftIcon={<CallIcon className="text-gray-200" />}
+          <InputField
+            label="Phone Number"
+            name="number"
+            type="number"
+            placeholder="Enter your phone  Number"
+            leftIcon={PhoneIcon}
+            // error={
+            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+            // }
           />
 
-          <FormInput
-            label="Password"
-            id="password"
-            type='password'
-            // value={plateNumber}
-            // onChange={(e) => setPlateNumber(e.target.value)}
-            placeholder="Enter document Id number"
-            inputClassName = "indent-1 flex items-center justify-center"
-            required
-            leftIcon={<LockedIcon />}
-            rightIcon={<EyeOpenIcon />}
-          />
+          <InputField
+            label="Enter Password"
+            name="password"
+            placeholder="Enter your password"
+            // value={inputs.password}
+            // onChange={handleChange}
+            leftIcon={LockPasswordIcon}
+            // error={showPasswordError ? "Password must be at least 5 characters" : ""}
+            toggleable
+            showPassword={showPassword}
+            handleTogglePassword={handleTogglePassword}
+            rightIconOpen={EyeOpenIcon}
+            rightIconClose={EyeCloseIcon}
+            isPassword
+  
+            />
 
           <p className="font-medium text-base leading-[100%] tracking-normal text-left mt-4 text-blue-600">forget password</p>
         </form>

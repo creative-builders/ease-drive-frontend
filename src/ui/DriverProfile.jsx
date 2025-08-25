@@ -51,6 +51,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <EmailSignedIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="email" 
+              readOnly
               className='h-6 w-48 sm:w-40 font-medium text-[14px] pl-0 rounded-lg leading-6 tracking-normal not-italic border-none outline-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="solobachi45@gmail.com" 
               id=""
@@ -60,7 +61,8 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <div className='flex px-2 py-3 items-center justify-start gap-2'>
             <PhoneIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
-                type="number" 
+                type="number"
+                readOnly 
                 className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
                 placeholder="+234097654567" 
                 id=""
@@ -71,6 +73,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <HouseBuilding className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
                 type="text" 
+                readOnly
                 className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
                 placeholder="enugu" 
                 id=""
@@ -91,7 +94,8 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
           <div className='flex px-2 py-3 items-center justify-start gap-2'>
             <CarIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
-              type="email" 
+              type="email"
+              readOnly 
               className='h-6 w-48 sm:w-40 font-medium text-[14px] pl-0 rounded-lg leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="solobachi45@gmail.com" 
               id=""
@@ -102,6 +106,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <ColorIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
+              readOnly
               className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="Black" 
               id=""
@@ -112,6 +117,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <PhoneIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
+              readOnly
               className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="EUG20456" 
               id=""
@@ -122,6 +128,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <LocationHomeIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
+              readOnly
               className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="Main-Gate" 
               id=""
@@ -132,6 +139,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <PlateNumberIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
+              readOnly
               className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="Main-Gate" 
               id=""
@@ -144,6 +152,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <CustomerService className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
+              readOnly
               className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="Main-Gate" 
               id=""
