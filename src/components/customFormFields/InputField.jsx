@@ -5,6 +5,7 @@ import { AlertCircle } from "../../assets/icons/AlertCircle";
 
 export const InputField = ({
   label,
+  extendedStyles,
   name,
   type = "text",
   placeholder,
@@ -17,6 +18,7 @@ export const InputField = ({
   handleTogglePassword,
   rightIconOpen: RightIconOpen,
   rightIconClose: RightIconClose,
+  rightIcon: RightIcon
 }) => {
  
 const inputType = isPassword ? (showPassword ? "text" : "password") : type;
@@ -30,7 +32,7 @@ const inputType = isPassword ? (showPassword ? "text" : "password") : type;
       )}
 
       <div
-        className={`flex items-center gap-x-2 px-1.5 lg:px-4 h-[45px] lg:h-[54px] border rounded-md lg:rounded-lg bg-white transition-colors
+        className={`flex items-center gap-x-2 px-1.5 lg:px-4 h-[45px] lg:h-[54px] border rounded-md lg:rounded-lg bg-white transition-colors ${extendedStyles} 
           ${error ? "border-red-500" : "border-neutral-400"}
         `}
       >
@@ -43,7 +45,7 @@ const inputType = isPassword ? (showPassword ? "text" : "password") : type;
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          className="w-full bg-white border-none focus:border-none focus:ring-0 placeholder-neutral-400 text-neutral-400 text-xs lg:text-lg"
+          className={`w-full bg-white border-none focus:border-none focus:ring-0 placeholder-neutral-400 text-neutral-400 text-xs lg:text-lg`}
         />
 
         {isPassword && handleTogglePassword && (
@@ -55,6 +57,8 @@ const inputType = isPassword ? (showPassword ? "text" : "password") : type;
             )}
           </span>
         )}
+
+        {RightIcon && <RightIcon className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px]" />}
       </div>
 
       {error && (
