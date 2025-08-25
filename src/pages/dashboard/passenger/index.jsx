@@ -5,6 +5,8 @@ import LocationPopUp from '../../../components/location/LocationPopUp';
 import RideSelector from '../../../components/RideSelector';
 import BackgroundMap from '../../../components/dashboard/BackgroundMap';
 import { Modal } from '../../../components/Modal';
+import { LiveGPSIcon } from '../../../assets/icons/LiveGPSIcon';
+import CustomButton from '../../../components/CustomButton';
 
 
 const PassengerDashboardIndex = () => {
@@ -65,16 +67,25 @@ const PassengerDashboardIndex = () => {
     return (
       <>
         {/* show modal after reloading the dashboard */}
-        {/* {
+        {
           isOpen && (
           <Modal 
            closeModal={handleCancel}
+           modalIcon={<LiveGPSIcon/>}
            title={"Allow access to your live location"}
            bodyText={"Use My Current Location and Auto-fill the search bar with coordinates/nearest landmark"}
+          >
+         <CustomButton
+          isLoading={loading}
+          name="Allow Access"
+          extendedStyles="w-full font-normal rounded-2xl bg-[#20AE3A] text-white inline-flex items-center justify-center gap-3 disabled:opacity-50"
+          size='lg'
+          btnClick={handleUseLocation}
           />
+          </Modal>
           )
-        } */}
-        {isOpen && (
+        }
+        {/* {isOpen && (
           <LocationPopUp
             setSelected={setSelectedOption}
             setPopupActionType={setPopupActionType}
@@ -85,19 +96,19 @@ const PassengerDashboardIndex = () => {
             handleCancel={handleCancel}
             loading={loading}
           />
-        // ) : popupActionType === 'cancel' ? (
-        //   <RideSelector 
-        //   selected={selectedOption}
-        //   setSelected={setSelectedOption}
-        //   />
-        // ) : (
-        //   <RideSelector
-        //     selected={selectedOption}
-        //     setSelected={setSelectedOption}
-        //     initialPickUpValue={locationName}
-        //     isLocationBased={true}
-        //   />
-        )}
+        ) : popupActionType === 'cancel' ? (
+          <RideSelector 
+          selected={selectedOption}
+          setSelected={setSelectedOption}
+          />
+        ) : (
+          <RideSelector
+            selected={selectedOption}
+            setSelected={setSelectedOption}
+            initialPickUpValue={locationName}
+            isLocationBased={true}
+          />
+        )} */}
         <div className='flex gap-x-4'>
           <div className="bg-white rounded-[10px] p-4 min-w-full min-h-screen lg:min-w-[480px] lg:min-h-[734px]">
             <BackgroundMap coords={coords}/>
