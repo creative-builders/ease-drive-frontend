@@ -1,15 +1,9 @@
-import DriverBoard from "../../../components/driverDashboardFolders/DriverBoard"
-import RideRequests from "../../../components/driverDashboardFolders/RideRequest"
+
+import { DashboardLayout } from "../../../layout/dashboard"
 
 
 const DriverDashboard = () => {
-  return (
-    <div>
-      {/* <TestingCompent/> */}
-      {/* <h4>Welcome to Driver Page</h4> */}
-      <RideRequests />
-    </div>
-  )
+  return <DashboardLayout/>
 }
 
 export default DriverDashboard
