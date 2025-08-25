@@ -63,9 +63,8 @@
 
 import React, { useRef, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import logout from '../../assets/images/Logout.png'
 import setting from '../../assets/images/setting.png'
-import userIcon from '../../assets/images/user-icon.png'
+
 import user from '../../assets/images/smallPro.png'
 import Camera from '../../assets/images/camera.png'
 import Canelled from '../../assets/images/canelled.png'

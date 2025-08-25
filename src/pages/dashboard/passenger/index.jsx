@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import LocationPopUp from '../../../components/location/LocationPopUp';
-import RideSelector from '../../../components/RideSelector';
 import BackgroundMap from '../../../components/dashboard/BackgroundMap';
 import { Modal } from '../../../components/Modal';
 import { LiveGPSIcon } from '../../../assets/icons/LiveGPSIcon';
