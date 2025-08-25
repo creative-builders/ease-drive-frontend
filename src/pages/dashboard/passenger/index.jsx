@@ -91,7 +91,7 @@ const PassengerDashboardIndex = () => {
 
         {/* bottom sheet */}
         <div
-          className={`w-full transform transition-transform duration-500 lg:basis-full p-4 bg-white lg:bg-transparent fixed bottom-0 left-0 z-[1008] lg:relative rounded-t-2xl
+          className={`w-full transform transition-transform duration-500 lg:basis-full p-4 bg-white lg:bg-transparent fixed bottom-0 left-0 z-[1008] lg:relative rounded-t-[32px]
           ${locationEnabled ? "translate-y-0" : "translate-y-full"} 
           `}
         >

@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom"
 
 
-export const SidebarNavLink = ({ icon: Icon, href, title}) => {
+export const SidebarNavLink = ({ icon: Icon, href, title, onClick}) => {
   return (
-    <NavLink end to = { href !== "/dashboard" ? `/dashboard${href}` : href }>
+    <NavLink onClick={onClick} end to = { href !== "/dashboard" ? `/dashboard${href}` : href }>
         {
         ({ isActive }) => (
           <div className={`${isActive ? "bg-primary-5 0 rounded-[36px]" :"bg-white"} mb-2 lg:mb-4 flex gap-x-1.5 flex-row items-center px-[13px] py-[7px]`}>

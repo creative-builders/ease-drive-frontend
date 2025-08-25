@@ -10,6 +10,7 @@ export const SearchBox = () => {
             type="text"
             rightIcon={SearchIcon}
             extendedStyles="lg:rounded-[18px]"
+            containerStyles={"mb-[0px]"}
           />
    </div>
   )
