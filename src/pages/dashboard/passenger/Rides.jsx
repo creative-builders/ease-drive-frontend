@@ -2,6 +2,6 @@
 
 export const Rides = () => {
   return (
-    <div>Rides</div>
+    <div className="text-center">Rides</div>
   )
 }
