@@ -3,9 +3,9 @@ export const LocationIcon = (props) => {
   return (
     <svg
       width="19"
-      height="22"
+      height="19"
       viewBox="0 0 19 22"
-      fill="currentColor"
+        fill={props.fill || `#1E1E1E`}
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >

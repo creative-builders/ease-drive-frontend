@@ -14,7 +14,7 @@ export const DashboardLayout = () => {
      <div className="flex">
        <SideBarMenu/>
         <div className="bg-gradient-bg basis-full">
-          <div className="lg:mr-[22px] lg:ml-[362px] lg:mt-[29px] min-h-screen">
+          <div className="lg:mr-[22px] lg:ml-[362px] mt-[72px] lg:mt-[29px] min-h-screen">
             <Outlet context={{ coords, setCoords}}/>
           </div>
         </div>
