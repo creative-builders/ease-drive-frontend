@@ -7,6 +7,9 @@ export const InputField = ({
   label,
   extendedStyles,
   containerStyles,
+  labelStyles,
+  inputTextStyles,
+  inputWrapperStyles,
   name,
   type = "text",
   placeholder,
@@ -27,13 +30,13 @@ const inputType = isPassword ? (showPassword ? "text" : "password") : type;
   return (
     <div className={`${containerStyles} mb-4 relative`}>
       {label && (
-        <label htmlFor={name} className="block mb-2 text-sm lg:text-lg">
+        <label htmlFor={name} className={`${labelStyles} block mb-2 text-sm lg:text-lg`}>
           {label}
         </label>
       )}
 
       <div
-        className={`flex items-center gap-x-2 px-1.5 lg:px-4 h-[45px] lg:h-[54px] border rounded-md lg:rounded-lg bg-white transition-colors ${extendedStyles} 
+        className={`${inputWrapperStyles} flex items-center gap-x-2 px-1.5 lg:px-4 h-[45px] lg:h-[54px] border rounded-md lg:rounded-lg bg-white transition-colors ${extendedStyles} 
           ${error ? "border-red-500" : "border-neutral-400"}
         `}
       >
@@ -46,7 +49,7 @@ const inputType = isPassword ? (showPassword ? "text" : "password") : type;
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          className={`w-full bg-white border-none focus:border-none focus:ring-0 placeholder-neutral-400 text-neutral-400 text-xs lg:text-lg`}
+          className={`${inputTextStyles} w-full bg-white border-none focus:border-none focus:ring-0 placeholder-neutral-400 text-neutral-400 text-xs lg:text-lg`}
         />
 
         {isPassword && handleTogglePassword && (
