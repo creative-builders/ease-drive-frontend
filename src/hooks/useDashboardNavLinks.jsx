@@ -69,7 +69,6 @@ const dashboardNavConfig = {
 
 export const useDashboardNavLinks = () => {
   const user = useRecoilValue(userAtom);
-  console.log(user)
 
   // default to passenger if role is missing
   const role = user?.role || "passenger";

@@ -6,6 +6,7 @@ import { AlertCircle } from "../../assets/icons/AlertCircle";
 export const InputField = ({
   label,
   extendedStyles,
+  containerStyles,
   name,
   type = "text",
   placeholder,
@@ -24,7 +25,7 @@ export const InputField = ({
 const inputType = isPassword ? (showPassword ? "text" : "password") : type;
 
   return (
-    <div className="mb-4 relative">
+    <div className={`${containerStyles} mb-4 relative`}>
       {label && (
         <label htmlFor={name} className="block mb-2 text-sm lg:text-lg">
           {label}
