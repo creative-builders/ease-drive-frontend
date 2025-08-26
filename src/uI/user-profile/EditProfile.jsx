@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import profile from '../../assets/images/profile-user.png'
-import FormInput from "../../components/form/FormInput";
 import CustomButton from "../../components/CustomButton";
 import { UserIcon } from "../../assets/icons/UserIcon";
 import { CameraIcon } from "../../assets/icons/CameraIcon";
@@ -13,7 +12,7 @@ import { LockPasswordIcon } from "../../assets/icons/LockPasswordIcon";
 import { InputField } from "../../components/customFormFields/InputField";
 
 
-const EditProfileView = ({ onClose }) => {
+export const EditProfileView = ({ onClose }) => {
 
    const [showPassword, setShowPassword] = useState(false);
 
@@ -37,7 +36,7 @@ const EditProfileView = ({ onClose }) => {
  
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md h-[683px] w-full md:w-[439px] flex flex-col gap-20">
+    <div className="bg-white rounded-2xl p-6 shadow-md h-fit md:h-[783px] w-full md:w-[439px] flex flex-col gap-20">
       <figure className="">
         <div className="flex items-center space-x-2 mb-4">
           <button onClick={onClose}>
@@ -129,4 +128,3 @@ const EditProfileView = ({ onClose }) => {
     </div>
   );
 };
-export default EditProfileView 

@@ -8,7 +8,7 @@ import { DelectIcon } from '../../assets/icons/DelectIcon';
 
 const ProfileView = ({ onEdit }) => {
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md h-[683px] gap-4 flex flex-col">
+    <div className="bg-white rounded-2xl p-6 shadow-md md:h-[783px] gap-4 flex flex-col">
       <div className="flex items-center justify-between">
         {/* User Info */}
         <div className="flex items-center space-x-4">

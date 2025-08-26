@@ -14,11 +14,11 @@ import { DelectIcon } from "../assets/icons/DelectIcon.jsx";
 import { PhoneIcon } from "../assets/icons/PhoneIcon.jsx";
 
 
-const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
+export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
 
  
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md gap-4 flex flex-col">
+    <div className="bg-white rounded-2xl p-6 shadow-md gap-4 flex flex-col h-[980px]">
       <div className="flex items-center justify-between">
         {/* User Info */}
         <div className="flex items-center space-x-4">
@@ -176,4 +176,3 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
     </div>
   );
 };
-export default DriverProfile

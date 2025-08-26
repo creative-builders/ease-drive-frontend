@@ -32,7 +32,7 @@ const VehicleForm = ({ onClose }) => {
  
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md h-[683px] w-full md:w-[439px] flex flex-col gap-20 sm:mt-[-145px]">
+    <div className="bg-white rounded-2xl p-6 shadow-md h-fit w-full md:w-[439px] flex flex-col gap-20 sm:mt-[-195px]">
       <figure className="">
         <div className="flex items-center space-x-2 mb-4">
           <button onClick={onClose}>

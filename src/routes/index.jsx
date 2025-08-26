@@ -38,7 +38,7 @@ import NotFoundPage from '../ui/NotFoundPage';
 import DriverView from '../components/DashboardForDrivers/DriverView';
 import Profile from '../uI/Profile';
 import ProfilePage from '../uI/ProfilePage';
-import NotificationsPage from '../uI/NotificationPage';
+// import NotificationsPage from '../uI/NotificationPage';
 import DriverDashboard from '../pages/dashboard/driver/DriverDashboard';
 import { Rides } from '../pages/dashboard/passenger/Rides';
 import { PassengerProfile } from '../pages/dashboard/passenger/PassengerProfile';
@@ -47,11 +47,13 @@ import { useRecoilValue } from 'recoil';
 import { userAtom } from '../components/atoms/userAtom';
 import { DriverDashboardIndex } from '../pages/dashboard/driver';
 import { Earnings } from '../pages/dashboard/driver/Earnings';
-import { Notifications } from '../pages/dashboard/driver/Notifications';
+// import { Notifications } from '../pages/dashboard/driver/Notifications';
 import { Trips } from '../pages/dashboard/driver/Trips';
-import { DriverProfile } from '../pages/dashboard/driver/DriverProfile';
+import DriverProfile from '../pages/dashboard/driver/DriverProfile';
 import { Requests } from '../pages/dashboard/driver/Requests';
 import ProtectedRoutes from './ProtectedRoutes';
+import Notifications from '../uI/Notifications';
+import { NotificationsPage } from '../uI/NotificationPage';
 
 
 

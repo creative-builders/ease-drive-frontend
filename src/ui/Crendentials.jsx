@@ -142,11 +142,11 @@ const Crendentials = ({ onClose }) => {
             // }
           />
 
-          <div>
-            <label className="text-base md:text-xl not-italic leading-[150%] font-medium text-gray-700 mb-1">
+          <div className="">
+            <label className="text-base not-italic leading-[150%] font-medium text-gray-700 mb-1">
               Upload Vehicle photos (front, back and size)
             </label>
-            <p className="block mb-2 text-sm lg:text-base">
+            <p className="block mb-2 text-sm lg:text-sm">
               You can upload up to 4 images (JPG, PNG). Maximum file size: 2MB
               per image
             </p>
@@ -187,7 +187,7 @@ const Crendentials = ({ onClose }) => {
 
       <CustomButton
         name="Save"
-        className="hidden sm:flex px-4 py-4 w-full rounded-2xl gap-2 mt-6 bg-green-700"
+        className="hidden sm:flex px-4 py-4 w-full rounded-2xl gap-2 mt-0 bg-green-700"
       />
     </div>
   );
