@@ -5,6 +5,11 @@ import BackgroundMap from "../../../components/dashboard/BackgroundMap";
 import { Modal } from "../../../components/Modal";
 import { LiveGPSIcon } from "../../../assets/icons/LiveGPSIcon";
 import CustomButton from "../../../components/CustomButton";
+import { InputField } from "../../../components/customFormFields/InputField";
+import { useSetRecoilState } from "recoil";
+import { locationAtom } from "../../../components/atoms/locationAtom";
+import { ChooseDestination } from "../../../components/dashboard/ChooseDestination";
+import { SelectRide } from "../../../components/dashboard/SelectRide";
 
 const PassengerDashboardIndex = () => {
   const { coords, setCoords } = useOutletContext();
@@ -13,6 +18,7 @@ const PassengerDashboardIndex = () => {
   const [locationName, setLocationName] = useState("");
   const [loading, setLoading] = useState(false);
   const [locationEnabled, setLocationEnabled] = useState(false);
+  const setLiveLocation = useSetRecoilState(locationAtom)
 
   const getLocationName = async (lat, lon) => {
     try {
@@ -42,6 +48,7 @@ const PassengerDashboardIndex = () => {
         const location = await getLocationName(latitude, longitude);
         setCoords({ lat: latitude, lon: longitude });
         setLocationName(location);
+        setLiveLocation(location);
         setPopupActionType("use-location");
         setIsOpen(false);
         setLocationEnabled(true); // 👈 slide up
@@ -91,12 +98,12 @@ const PassengerDashboardIndex = () => {
 
         {/* bottom sheet */}
         <div
-          className={`w-full transform transition-transform duration-500 lg:basis-full p-4 bg-white lg:bg-transparent fixed bottom-0 left-0 z-[1008] lg:relative rounded-t-[32px]
+          className={`w-full transform transition-transform duration-500 lg:basis-full p-4 lg:p-0 bg-white lg:bg-transparent fixed bottom-0 left-0 z-[1008] lg:relative rounded-t-[32px]
           ${locationEnabled ? "translate-y-0" : "translate-y-full"} 
           `}
         >
-          <div className="mb-7 bg-white min-h-[210px] rounded-2xl"></div>
-          <div className="bg-white basis-full min-h-[210px] rounded-2xl"></div>
+          <ChooseDestination />
+          <SelectRide/>
         </div>
       </div>
     </>
