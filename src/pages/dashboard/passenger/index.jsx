@@ -83,7 +83,7 @@ const PassengerDashboardIndex = () => {
           <CustomButton
             isLoading={loading}
             name="Allow Access"
-            extendedStyles="w-full h-[45px] lg:h-[60px] px-4 font-normal rounded-2xl bg-[#20AE3A] text-white inline-flex items-center justify-center gap-3 disabled:opacity-50"
+            extendedStyles="w-full h-[45px] lg:h-[60px] px-4 font-medium rounded-2xl bg-primary-700 text-white flex items-center justify-center"
             size="lg"
             btnClick={handleUseLocation}
           />
