@@ -44,6 +44,7 @@ export default {
         primary:{
           50:"#F1FCF2",
           100: "#DEFAE2",
+          300:"#8BEA9B",
           500: "#2ABD45",
           600: "#20AE3A",
           700:"#1A7B2C",
