@@ -32,7 +32,7 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
     setSelectedFiles(files);
   };
 
-  const isDocumentValid = (formData?.documentID || "").length >= 15;
+  const isDocumentValid = (formData?.documentID || "").length >= 9;
   const showDocumenterror =
     inputTouched && formData?.documentID.length > 0 && !isDocumentValid;
 
@@ -127,7 +127,7 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
                 onChange={handleUpdateFormData}
                 leftIcon={IdCardIcon}
                 error={
-                  showDocumenterror ? "Document ID must be at least 3 characters" : ""
+                  showDocumenterror ? "Document ID must be at least 11 characters" : ""
                 }
               />
               {errors.documentID && (
