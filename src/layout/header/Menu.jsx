@@ -65,7 +65,7 @@ const Menu = () => {
          <Link to="/signup-as" onClick={closeMenu} className="block">
           <CustomButton
            name="Sign Up"
-           extendedStyles="rounded-lg w-[145px] h-[48px] lg:h-[54px] p-4 text-sm lg:text-lg text-white font-medium"
+           extendedStyles="rounded-lg bg-primary-700 w-[145px] h-[48px] lg:h-[54px] p-4 text-sm lg:text-lg text-white font-medium"
           />
         </Link>
       </li>
@@ -93,7 +93,7 @@ const Menu = () => {
             <Link to="/signup-as" className="block">
               <CustomButton
                 name="Sign Up"
-                extendedStyles="rounded-lg w-[145px] h-[48px] lg:h-[54px] p-4 text-sm lg:text-lg text-white font-medium"
+                extendedStyles="rounded-lg bg-primary-700  w-[145px] h-[48px] lg:h-[54px] p-4 text-sm lg:text-lg text-white font-medium"
               />
             </Link>
           </li>

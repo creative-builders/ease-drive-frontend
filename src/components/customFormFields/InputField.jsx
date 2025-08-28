@@ -15,6 +15,8 @@ export const InputField = ({
   placeholder,
   value,
   onChange,
+  onFocus,
+  onBlur,
   leftIcon: LeftIcon,
   error,
   isPassword = false,
@@ -49,6 +51,8 @@ const inputType = isPassword ? (showPassword ? "text" : "password") : type;
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
           className={`${inputTextStyles} w-full bg-white border-none focus:border-none focus:ring-0 placeholder-neutral-400 text-neutral-400 text-xs lg:text-lg`}
         />
 
