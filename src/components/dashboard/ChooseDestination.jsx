@@ -6,7 +6,9 @@ import { SearchIcon } from "../../assets/icons/SearchIcon"
 import { Divider } from "../Divider/Divider"
 
 
-export const ChooseDestination = () => {
+export const ChooseDestination = ({
+  onFocus,
+}) => {
   const [liveLocation,_]  = useRecoilState(locationAtom);
   
   return (
@@ -24,6 +26,7 @@ export const ChooseDestination = () => {
               inputWrapperStyles={"h-[40px] lg:h-[49px]"}
               inputTextStyles={"text-neutral-950"}
               value={liveLocation}
+              onFocus={onFocus}
             />
             <InputField 
               label={"To Where"}
@@ -31,6 +34,7 @@ export const ChooseDestination = () => {
               inputWrapperStyles={"h-[40px] lg:h-[49px]"}
               placeholder={"Enter your Destination"}
               rightIcon={SearchIcon}
+              onFocus={onFocus}
             />
         </div>
          <Divider/>

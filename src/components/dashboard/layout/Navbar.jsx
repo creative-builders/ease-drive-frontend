@@ -9,9 +9,11 @@ import { SidebarNavLink } from "./NavLink";
 import { useDashboardNavLinks } from "../../../hooks/useDashboardNavLinks";
 import { LogoText } from "../../LogoText";
 
-export const Navbar = () => {
+export const Navbar = ({
+  isMenuOpen,
+  setIsMenuOpen
+}) => {
   const user = useRecoilValue(userAtom);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navLinks =  useDashboardNavLinks();
 
   // Lock/unlock scroll when menu is open
@@ -23,7 +25,7 @@ export const Navbar = () => {
   // }, [isMenuOpen]);
 
   return (
-    <nav className="p-4 bg-transparent fixed lg:relative w-full top-0 left-0 z-[1020] pt-[18px] lg:pb-4 min-h-[63px]">
+    <nav className={`p-4 bg-transparent fixed lg:relative w-full top-0 left-0 ${isMenuOpen ? "z-[1014]" : "z-1010"} pt-4 lg:pb-4 min-h-[63px]`}>
       <div className="flex flex-row justify-between items-center gap-x-4 lg:ml-[360px] lg:mr-[18px]">
         <SearchBox />
 

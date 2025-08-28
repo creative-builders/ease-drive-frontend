@@ -44,7 +44,7 @@ const LogoutButton = ({ text }) => {
      }
       <div 
       onClick={() => setOpenModal(true)}
-      className="w-[126px] h-[48px] px-[13px] bg-primary-50 rounded-lg36 lg:w-[54px] lg:h-[50px] rounded-2xl flex items-center lg:justify-center bg-primary-50 cursor-pointer">
+      className="w-[126px] h-[48px] px-[13px] bg-primary-50 rounded-36 lg:w-[54px] lg:h-[50px] rounded-2xl flex items-center lg:justify-center bg-primary-50 cursor-pointer">
       <LogoutIcon/> 
       <span className='text-primary-500'>{ text }</span>
     </div>
