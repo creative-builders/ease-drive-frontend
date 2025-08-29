@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import EditProfileView from "./user-profile/EditProfile";
+import { EditProfileView } from "./user-profile/EditProfile";
 import ProfileView from "./user-profile/ProfileView";
 import useIsMobile from "../hooks/useIsMobile";
 

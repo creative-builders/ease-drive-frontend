@@ -1,6 +1,5 @@
 import { isToday, isYesterday, format, formatDistanceToNow } from "date-fns";
-import Notification from "../assets/images/notifications.png";
-import UserAvatar from "../assets/icons/UserAvatar"
+import  Notification  from "../assets/images/notification-backgroud.png";
 
 function groupNotifications(notifications) {
   return notifications.reduce((groups, note) => {
@@ -29,7 +28,7 @@ function formatNotificationTime(date) {
   return format(date, "dd MMM yyyy | hh:mm a");
 }
 
-export default function Notifications({ notifications }) {
+export default function Notifications({ notifications = [] }) {
   const grouped = groupNotifications(notifications);
   const hasNotifications = notifications.length > 0;
 
@@ -42,8 +41,8 @@ export default function Notifications({ notifications }) {
             {grouped[group].map((note) => (
               <div key={note.id} className="h-fit md:h-[90px] flex items-start flex-shrink-0 gap-1 md:gap-2 p-4">
                 <div className="w-[50px] h-[51px] flex justify-center items-center bg-white rounded-full">
-                <UserAvatar />
-              </div>
+                  {note.profilePic}
+               </div>
 
                 <div>
                   <p className="font-semibold text-[#9C9C9C] text-[10px] md:text-[14px] not-italic leading-normal">{note.type}</p>

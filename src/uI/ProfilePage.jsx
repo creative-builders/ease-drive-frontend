@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useIsMobile from "../hooks/useIsMobile";
 import VehicleForm from "./VehicleForm";
-import DriverProfile from "./DriverProfile";
+import { DriverProfile } from "./DriverProfile";
 import Crendentials from "./Crendentials";
 
 const ProfilePage = () => {

@@ -1,4 +1,4 @@
-import picture from "../assets/images/driver-picture.png"
+import fallbackProfile from "../assets/images/driver-picture.png"
 import verify from "../assets/images/Create account.png"
 import star from "../assets/icons/starVector.svg"
 import { EmailSignedIcon } from "../assets/icons/EmailSignedIcon"
@@ -12,20 +12,30 @@ import { CustomerService } from "../assets/icons/CustomerService.jsx";
 import { LogoutIcon } from "../assets/icons/LogoutIcon.jsx";
 import { DelectIcon } from "../assets/icons/DelectIcon.jsx";
 import { PhoneIcon } from "../assets/icons/PhoneIcon.jsx";
+import LogoutButton from "../pages/auth/logout/LogoutButton.jsx";
+import { userAtom } from "../components/atoms/userAtom.jsx";
+import { useRecoilValue } from "recoil";
+import React, { useState } from "react";
 
 
-const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
+export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
 
- 
+  const userData = useRecoilValue(userAtom);
+   const [profileImage, setProfileImage] = useState(
+      userData?.profileImage || fallbackProfile
+    );
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md gap-4 flex flex-col">
+    <div className="bg-white rounded-2xl p-6 shadow-md gap-4 flex flex-col h-[980px]">
       <div className="flex items-center justify-between">
         {/* User Info */}
         <div className="flex items-center space-x-4">
-          <img src={picture} alt="Driver" className="w-14 h-14 rounded-full" />
+          <img src={userData?.profileImage || fallbackProfile}
+           alt="Driver" 
+           className="w-14 h-14 rounded-full"
+            />
           <div className="flex flex-col space-y-1">
             <div className="flex flex-col md:flex-row space-x-4">
-              <h2 className="font-semibold not-italic leading-normal text-base">John Ndubuisi Chukwuemeka</h2>
+              <h2 className="font-semibold not-italic leading-normal text-base">{userData?.fullName || "John Ndubuisi Chukwuemeka"}</h2>
               <div><img src={verify} alt="" /></div>
             </div>
             <p className="hidden md:flex items-center gap-1 not-italic text-base leading-6 font-bold"> <LocationIcon className="w-4 h-4 text-green-600" /> You’re currently at: <span className="font-medium">UNN Hostel C, Nsukka</span></p>
@@ -51,8 +61,9 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <EmailSignedIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="email" 
-              className='h-6 w-48 sm:w-40 font-medium text-[14px] pl-0 rounded-lg leading-6 tracking-normal not-italic border-none outline-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
-              placeholder="solobachi45@gmail.com" 
+              readOnly
+              className='h-6 w-48 sm:w-40 font-medium text-[14px] pl-0 rounded-lg leading-6 tracking-normal not-italic border-none outline-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0' 
+              placeholder={userData?.email || "Enter email"} 
               id=""
             />
             </div>
@@ -60,9 +71,10 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <div className='flex px-2 py-3 items-center justify-start gap-2'>
             <PhoneIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
-                type="number" 
+                type="number"
+                readOnly 
                 className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
-                placeholder="+234097654567" 
+                placeholder={userData?.phone || "Enter phone number"}  
                 id=""
             />
             </div>
@@ -71,6 +83,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <HouseBuilding className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
                 type="text" 
+                readOnly
                 className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
                 placeholder="enugu" 
                 id=""
@@ -91,9 +104,10 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
           <div className='flex px-2 py-3 items-center justify-start gap-2'>
             <CarIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
-              type="email" 
+              type="email"
+              readOnly 
               className='h-6 w-48 sm:w-40 font-medium text-[14px] pl-0 rounded-lg leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
-              placeholder="solobachi45@gmail.com" 
+              placeholder={userData?.email || "Enter email"} 
               id=""
             />
           </div>
@@ -102,6 +116,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <ColorIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
+              readOnly
               className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="Black" 
               id=""
@@ -112,6 +127,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <PhoneIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
+              readOnly
               className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="EUG20456" 
               id=""
@@ -122,6 +138,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <LocationHomeIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
+              readOnly
               className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="Main-Gate" 
               id=""
@@ -132,6 +149,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <PlateNumberIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
+              readOnly
               className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="Main-Gate" 
               id=""
@@ -144,6 +162,7 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <CustomerService className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />
             <input 
               type="number" 
+              readOnly
               className='h-6 w-48 sm:w-40 font-medium rounded-lg pl-0 text-[14px] leading-6 tracking-normal not-italic border-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0'
               placeholder="Main-Gate" 
               id=""
@@ -151,15 +170,15 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
           </div>
         </section>
 
-        <section className='h-32 gap-2 p-2 border-b-[1px] border-[#E7E7E7]'>
+        <section className='h-36 gap-2 p-2 border-b-[1px] border-[#E7E7E7]'>
             <p className='font-semibold md:font-medium text-[14px] md:text-[18px] leading-6 md:leading-[100%] tracking-normal capitalize'>account</p>
 
             <div className='flex px-2 py-3 items-center justify-start gap-2 cursor-pointer'>
-            <LogoutIcon className="text-[#FE2A22] h-[18px] md:h-6 w-[18px] md:w-6" />
+             <LogoutButton className="bg-transparent" />
             <p className='font-medium text-[14px] leading-6 tracking-normal text-red-500'>log out</p>
             </div>
 
-            <div className='flex px-2 py-3 items-center justify-start gap-2 cursor-pointer'>
+            <div className='flex px-2 mb-2 py-3 items-center justify-start gap-2 cursor-pointer'>
             <DelectIcon className="h-[18px] md:h-6 w-[18px] md:w-6" />
             <p className='font-medium text-[14px] leading-6 tracking-normal text-red-500'>delete account</p>
             </div>
@@ -167,4 +186,3 @@ const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
     </div>
   );
 };
-export default DriverProfile
