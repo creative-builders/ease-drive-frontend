@@ -4,18 +4,24 @@ import { CameraIcon } from "../assets/icons/CameraIcon";
 import { UserIcon } from "../assets/icons/UserIcon";
 import { EyeOpenIcon } from "../assets/icons/EyeOpenIcon";
 import CustomButton from "../components/CustomButton";
-import picture from "../assets/images/driver-picture.png"
+import fallbackProfile from "../assets/images/driver-picture.png"
 import { EmailSignedIcon } from "../assets/icons/EmailSignedIcon";
 import { LockPasswordIcon } from "../assets/icons/LockPasswordIcon";
 import { PhoneIcon } from "../assets/icons/PhoneIcon";
 import { InputField } from "../components/customFormFields/InputField";
 import { EyeCloseIcon } from "../assets/icons/EyeCloseIcon";
+import { userAtom } from "../components/atoms/userAtom";
+import { useRecoilValue } from "recoil";
+import { Modal } from "../components/Modal";
 
 
 const VehicleForm = ({ onClose }) => {
   
+const userData = useRecoilValue(userAtom);
+   const [profileImage, setProfileImage] = useState(
+      userData?.profileImage || fallbackProfile
+    );
 
-  const [profileImage, setProfileImage] = useState(picture);
   const fileInputRef = useRef(null);
 
   const handleIconClick = () => {
@@ -31,6 +37,14 @@ const VehicleForm = ({ onClose }) => {
     }
   };
  
+  const [isOpen, setIsOpen] = useState(false); // start closed
+  const [email, setEmail] = useState("");
+
+    const handleSendLink = () => {
+    console.log("Sending link to:", email);
+    // call API here
+    setIsOpen(false);
+  };
 
   return (
     <div className="bg-white rounded-2xl p-6 shadow-md h-fit w-full md:w-[439px] flex flex-col gap-20 sm:mt-[-195px]">
@@ -112,7 +126,12 @@ const VehicleForm = ({ onClose }) => {
             isPassword
   
             />
-          <p className="font-medium text-base md:text-base leading-normal not-italic tracking-normal text-left mt-4 text-[#4847EB]">change password</p>
+          <p
+            onClick={() => setIsOpen(true)}
+            className="font-medium text-base leading-[100%] tracking-normal text-left mt-4 text-blue-600 cursor-pointer"
+          >
+            Forgot password
+          </p>
         </form>
       </figure>
 
@@ -120,7 +139,38 @@ const VehicleForm = ({ onClose }) => {
         name="Save"
         className="hidden sm:flex px-4 py-4 w-full rounded-2xl gap-2 mt-6 bg-green-700"
         />
+      {isOpen && (
+        <Modal
+          closeModal={() => setIsOpen(false)}
+          title="Forgot Password"
+          bodyText="Enter your email and we'll send you a verification code to reset your Password"
+          modalIcon={<EmailSignedIcon />}
+        >
+          <div className="w-full mt-6">
+            <label className="block text-left font-medium text-sm mb-2">
+              Enter Email
+            </label>
+            
+            <InputField
+              // label="Email"
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              leftIcon={EmailSignedIcon}
+              onChange={(e) => setEmail(e.target.value)}
+              // error={
+              //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+              // }
+            />
 
+            <CustomButton
+              name="Send Link"
+              btnClick={handleSendLink}
+              extendedStyles="w-full h-[48px] mt-6 bg-green-700 text-white rounded-xl font-semibold"
+            />
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };

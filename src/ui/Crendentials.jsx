@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import { CameraIcon } from "../assets/icons/CameraIcon";
 import CustomButton from "../components/CustomButton";
-import picture from "../assets/images/driver-picture.png";
+import fallbackProfile from "../assets/images/driver-picture.png";
 import { CarIcon } from "../assets/icons/CarIcon";
 import { PlateNumberIcon } from "../assets/icons/PlateNumberIcon";
 import { HouseBuilding } from "../assets/icons/HouseBuilding";
@@ -14,24 +14,37 @@ import { CustomSelectField } from "../components/customFormFields/CustomSelectFi
 import { InputField } from "../components/customFormFields/InputField";
 import { FaChevronDown } from "react-icons/fa";
 import { LocationHomeIcon } from "../assets/icons/LocationHomeIcon";
+import { userAtom } from "../components/atoms/userAtom";
+import { useRecoilValue } from "recoil";
 
 
 const Crendentials = ({ onClose }) => {
   const profileImageRef = useRef(null);
   const documentUploadRef = useRef(null);
 
-  const [profileImage, setProfileImage] = useState(picture);
   const [previewImages, setPreviewImages] = useState([]);
   const [selectedCity, setSelectedCity] = useState();
 
-  const handleProfileImageClick = () => profileImageRef.current.click();
+  const userData = useRecoilValue(userAtom);
+     const [profileImage, setProfileImage] = useState(
+        userData?.profileImage || fallbackProfile
+      );
 
-  const handleProfileImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setProfileImage(URL.createObjectURL(file));
-    }
-  };
+    const handleProfileImageClick = () => {
+      if (profileImageRef.current) {
+        profileImageRef.current.click();
+      }
+    };
+
+  
+    const handleProfileImageChange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const imageUrl = URL.createObjectURL(file);
+        setProfileImage(imageUrl);
+       console.log(imageUrl)
+      }
+    };
 
   const handleDocumentsChange = (e) => {
     const files = Array.from(e.target.files).filter(

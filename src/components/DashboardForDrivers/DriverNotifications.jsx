@@ -63,12 +63,8 @@ export default function DriverNotifications() {
     <div className="bg-white shadow rounded-lg p-4 border">
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-semibold text-[#000] text-[14px] md:text-2xl">Notifications</h2>
-        <a
-          href="#"
-          className="text-[#2ABD45] text-sm font-semibold"
-        >
-          View all
-        </a>
+        
+        <Link className="text-[#2ABD45] text-sm font-semibold" to={'/dashboard/notifications'}>View all</Link>
       </div>
 
       {hasNotifications ? (

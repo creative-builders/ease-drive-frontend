@@ -1,4 +1,4 @@
-import picture from "../assets/images/driver-picture.png"
+import fallbackProfile from "../assets/images/driver-picture.png"
 import verify from "../assets/images/Create account.png"
 import star from "../assets/icons/starVector.svg"
 import { EmailSignedIcon } from "../assets/icons/EmailSignedIcon"
@@ -15,20 +15,27 @@ import { PhoneIcon } from "../assets/icons/PhoneIcon.jsx";
 import LogoutButton from "../pages/auth/logout/LogoutButton.jsx";
 import { userAtom } from "../components/atoms/userAtom.jsx";
 import { useRecoilValue } from "recoil";
+import React, { useState } from "react";
 
 
 export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
 
   const userData = useRecoilValue(userAtom);
+   const [profileImage, setProfileImage] = useState(
+      userData?.profileImage || fallbackProfile
+    );
   return (
     <div className="bg-white rounded-2xl p-6 shadow-md gap-4 flex flex-col h-[980px]">
       <div className="flex items-center justify-between">
         {/* User Info */}
         <div className="flex items-center space-x-4">
-          <img src={picture} alt="Driver" className="w-14 h-14 rounded-full" />
+          <img src={userData?.profileImage || fallbackProfile}
+           alt="Driver" 
+           className="w-14 h-14 rounded-full"
+            />
           <div className="flex flex-col space-y-1">
             <div className="flex flex-col md:flex-row space-x-4">
-              <h2 className="font-semibold not-italic leading-normal text-base">{userData?.fullName}</h2>
+              <h2 className="font-semibold not-italic leading-normal text-base">{userData?.fullName || "John Ndubuisi Chukwuemeka"}</h2>
               <div><img src={verify} alt="" /></div>
             </div>
             <p className="hidden md:flex items-center gap-1 not-italic text-base leading-6 font-bold"> <LocationIcon className="w-4 h-4 text-green-600" /> You’re currently at: <span className="font-medium">UNN Hostel C, Nsukka</span></p>
