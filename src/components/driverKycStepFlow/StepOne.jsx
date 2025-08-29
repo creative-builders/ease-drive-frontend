@@ -112,8 +112,9 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
                 options={["NIN", "Driver's License", "International Passport", "Voter’s Card"]}
                 defaultHolder="Select means of identification"
                 rightIcon={FaChevronDown}
+                leftIcon={DocumentIcon}
               >
-                <DocumentIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
+                {/* <DocumentIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" /> */}
               </CustomSelectField>
               {errors.meansOfIdentification && (
                 <p className="text-red-500 text-sm -mt-2">{errors.meansOfIdentification}</p>
@@ -190,7 +191,7 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
 
             <CustomButton
               name="Continue"
-              extendedStyles="w-full p-3 lg:p-4 rounded-lg"
+              extendedStyles="w-full p-3 bg-green-700 lg:p-4 rounded-lg"
               btnClick={handleNext}
             />
           </div>
