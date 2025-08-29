@@ -22,7 +22,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
     const [searchParams] = useSearchParams();
     const [submitting, setSubmitting] = useState(false);
     const [previewUrl, setPreviewUrl] = useState(null);
-    const [showModal, setShowModal] = useState(true);
+    const [showModal, setShowModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [showErrorPopup, setShowErrorPopup] = useState(false);
     const { formData, handleUpdateFormData } = useStepFlowContext();
@@ -288,7 +288,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                     <Link to="/login" className="text-green-300">
                         <CustomButton
                             name="Proceed to Dashboard"
-                            extendedStyles="w-full p-3 lg:p-4 rounded-lg mb-6 mt-4"
+                            extendedStyles="w-full p-3 bg-green-700 lg:p-4 rounded-lg mb-6 mt-4"
                         />
                     </Link>
                 </Modal>

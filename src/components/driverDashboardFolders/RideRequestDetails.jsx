@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomButton from "../CustomButton";
 import { DateIcon } from "../../assets/icons/DateIcon";
 import { ClockIcon } from "../../assets/icons/ClockIcon";
@@ -12,7 +12,7 @@ import { SuccessIcon } from "../../assets/icons/SuccesIcon";
 import { FailureIcon } from "../../assets/icons/FailureIcon";
 
 
-export const RideRequestDetails = ({ request }) => {
+export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) => {
     const {
         name,
         avatar,
@@ -31,6 +31,11 @@ export const RideRequestDetails = ({ request }) => {
     const [isAmountEmpty, setIsAmountEmpty] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
+    const [progress, setProgress] = useState(0);
+
+    console.log(btnName)
+
+
     const handlePrev = () => {
         if (!luggage || luggage.length === 0) return;
         setSelectedIndex((prev) => (prev === 0 ? luggage.length - 1 : prev - 1));
@@ -44,7 +49,13 @@ export const RideRequestDetails = ({ request }) => {
     };
 
     const handleAcceptClick = () => {
+        if(btnName =="Track Passenger"){
+            btnFn()
+        }
+        else{
+
         setModalType("amount");
+        }
     };
 
     const handleAmountSubmit = () => {
@@ -62,9 +73,9 @@ export const RideRequestDetails = ({ request }) => {
             setModalType("success");
         }, 3000);
 
-        setTimeout(() => {
-            setModalType("failed")
-        }, 5000);
+        // setTimeout(() => {
+        //     setModalType("failed")
+        // }, 7000);
     };
 
     const closeModal = () => {
@@ -72,10 +83,24 @@ export const RideRequestDetails = ({ request }) => {
 
     };
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setProgress((old) => {
+                if (old >= 100) {
+                    clearInterval(interval);
+                    return 100;
+                }
+                return old + 1; // increase 1% every tick
+            });
+        }, 100); // speed (100ms per step)
+
+        return () => clearInterval(interval);
+    }, []);
+
 
     return (
         <div className="self-stretch px-5 py-3 pb-4 bg-white rounded-lg
-      inline-flex flex-col lg:w-[460px] w-[360px]   lg:justify-start justify-center lg:items-start gap-2 relative">
+      inline-flex flex-col lg:w-[460px] w-[380px]   lg:justify-start justify-center lg:items-start gap-2 relative">
             {/* Header */}
             <div className="self-stretch h-11 inline-flex lg:justify-start lg:items-center">
                 <div className="w-10 h-10 px-1 py-[3px] bg-white rounded-[32px]
@@ -165,19 +190,19 @@ export const RideRequestDetails = ({ request }) => {
                         </div>
                     </div>
                 </div>
-               
+
 
                 {/* price show on bid success */}
                 {
-                    amount && amount !== "" && (   <div className="flex w-full justify-between ">
+                    amount && amount !== "" && (<div className="flex w-full justify-between ">
                         <div className="font-semibold font-poppins justify-start">Price: </div>
                         <div className="justify-end bg-red-50 rounded-xl px-4 text-red-500 font-semibold">${amount}</div>
                     </div>
-                 )
+                    )
                 }
-                     
 
-     
+
+
 
                 {/* Schedule Details */}
                 <div className="self-stretch flex flex-col gap-2">
@@ -202,9 +227,9 @@ export const RideRequestDetails = ({ request }) => {
             {/* Accept Button */}
             <div className="self-stretch">
                 <CustomButton
-                    name="Accept Ride and Enter Amount"
+                    name={btnName || `Accept Ride and Enter Amount`}
                     btnClick={handleAcceptClick}
-                    extendedStyles="w-full p-3 lg:p-4 rounded-lg"
+                    extendedStyles="w-full p-3 lg:p-4  bg-green-700 rounded-lg"
                 />
             </div>
 
@@ -249,14 +274,14 @@ export const RideRequestDetails = ({ request }) => {
             {/* Amount Modal */}
             {modalType === "amount" && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-4 w-[390px] lg:top-[] 
-                        top-[35%] lg:top-0 h-[229px] lg:w-[633px] lg:h-[249.5px]">
+                    <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-2 w-[390px] lg:top-[] 
+                        top-[35%] lg:top-0 h-[240px] lg:w-[633px] lg:h-[270.5px]">
                         {/* Close Button */}
                         <button
                             onClick={() => setModalType(null)}
-                            className="absolute top-2 right-2 text-black"
+                            className="right-2 text-black py- flex justify-end items-end "
                         >
-                            <CloseMenuIcon className="lg:w-12 lg:h-12 w-6 h-6" />
+                            <CloseMenuIcon className="lg:w-10 lg:h-10 w-6 h-6" />
                         </button>
 
                         {/* Input Label */}
@@ -267,6 +292,7 @@ export const RideRequestDetails = ({ request }) => {
                         {/* Input with ₦ symbol */}
                         <div className="relative w-full">
                             <InputField
+                                type="number"
                                 onChange={(e) => setAmount(e.target.value)}
                                 placeholder="Enter amount"
                                 leftIcon={NairaIcon}
@@ -290,8 +316,8 @@ export const RideRequestDetails = ({ request }) => {
                             name="Set Price"
                             disabled={!amount.trim()}
                             btnClick={handleAmountSubmit}
-                            extendedStyles="w-full p-3 lg:p-4 rounded-lg"
-                            className={`font-medium py-2 px-4 rounded-xl 
+
+                            extendedStyles={`font-medium py-2 w-full p-3 lg:p-4 rounded-lg bg-green-700 px-4 rounded-xl 
                 ${amount.trim()
                                     ? "bg-green-700 hover:bg-green-700 text-white"
                                     : "bg-gray-400 text-white cursor-not-allowed opacity-20"
@@ -304,12 +330,20 @@ export const RideRequestDetails = ({ request }) => {
             {/* Loading Modal */}
             {modalType === "loading" && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="relative bg-white rounded-3xl p-6 flex justify-center items-center flex-col gap-4 w-[390px] lg:top-[] 
-                        top-[35%] lg:top-0 h-[229px] lg:w-[640px] lg:h-[249.5px]">
-                        <CloseMenuIcon className="absolute top-2 right-4 text-black lg:w-8 lg:h-8 w-6 h-6" />
+                    <div className="relative bg-white rounded-3xl p-6 flex justify-center items-center flex-col  w-[100%] lg:top-[] 
+                        top-[40%] lg:top-0 h-[200px] lg:w-[640px] lg:h-[180.5px]">
+                        <button
+                            onClick={() => {
+                                setModalType(null)
+                                onBack()
+                            }}
+                            className="right-2  text-black w-full flex justify-end items-end "
+                        >
+                            <CloseMenuIcon className="lg:w-10 lg:h-10 w-8 h-8" />
+                        </button>
 
                         {/* Progress Bar */}
-                        <ProgressBar />
+                        <ProgressBar title="Waiting for Passenger to Respond" progress={progress} setProgress={setProgress} />
 
                     </div>
                 </div>
@@ -318,22 +352,38 @@ export const RideRequestDetails = ({ request }) => {
             {modalType === "success" && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-4 w-[390px] lg:top-[] 
-                        top-[28%] lg:top-0 h-[331px] lg:w-[640px] lg:h-[360px] justify-center items-center">
-                        <CloseMenuIcon className="absolute top-2 right-4 text-black lg:w-8 lg:h-8 w-6 h-6" onClick={() => {
-                            setModalType(null);
-                            onBack();
-                        }} />
+                        top-[28%] lg:top-0 h-[335px] lg:w-[640px] lg:h-[380px] justify-center items-center">
+                        <button
+                            onClick={() => {
+                                setModalType(null);
 
-                        <div className="lg:w-[90px] lg:h-[90px] bg-green-500 flex items-center justify-center rounded-full">
+                            }}
+                            className="right-2 text-black w-full flex justify-end items-end lg:pt-2 pt-4"
+                        >
+                            <CloseMenuIcon className="lg:w-10 lg:h-10 w-8 h-8" />
+                        </button>
+
+
+                        <div className="lg:w-[90px] lg:h-[90px] w-[90px] h-[90px]
+                         bg-green-500 flex items-center justify-center rounded-full">
                             <SuccessIcon className="w-[50px] h-[90px] bg-green-500 flex items-center justify-center rounded-full" />
                         </div>
-                        <p className="font-medium lg:text-[18px] text-center font-poppins ">
-                            <span className="font-semibold lg:text-[24px] font-poppins ">
+                        <p className="font-medium lg:text-[18px] text-[16px] text-center font-poppins ">
+                            <span className="font-semibold lg:text-[24px] text-[16px] font-poppins ">
                                 Congratulations, Bide Accepted!
                             </span>
                             <br />
                             Congratulations, John Nudubuisi Chukwuemeka accepted your bid.</p>
-                        <CustomButton name="View Passenger Details" extendedStyles="w-full p-3 lg:p-4 
+                        <CustomButton
+                            btnClick={() => {
+                                if (request && onRideAccepted) {
+                                    onRideAccepted(request);
+                                    setModalType(null);
+                                }
+                            }}
+
+                            name="View Passenger Details"
+                            extendedStyles="w-full p-3 lg:p-4 
                         !bg-green-250 text-green-900 rounded-lg mb-6 mt-4" />
 
 
@@ -341,22 +391,31 @@ export const RideRequestDetails = ({ request }) => {
                 </div>
             )}
 
+
+
+
             {modalType === "failed" && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-4 w-[390px] lg:top-[] 
-                        top-[28%] lg:top-0 h-[331px] lg:w-[640px] lg:h-[360px] justify-center items-center">
-                        <CloseMenuIcon className="absolute top-2 right-4 text-black lg:w-8 lg:h-8 w-6 h-6" onClick={() => {
-                            setModalType(null);
-                            onBack();
-                        }} />
+                        top-[28%] lg:top-0 h-[335px] lg:w-[640px] lg:h-[380px] justify-center items-center">
 
-                       
-                        <div className="lg:w-[90px] lg:h-[90px] bg-red-500 flex items-center justify-center rounded-full">
-                            <FailureIcon className="w-[50px] h-[90px] bg-red-500 flex items-center justify-center rounded-full" />
+                        <button
+                            onClick={() => {
+                                setModalType(null)
+                                onBack()
+                            }}
+                            className="right-2  text-black w-full flex justify-end items-end lg:pt-2 pt-4"
+                        >
+                            <CloseMenuIcon className="lg:w-10 lg:h-10 w-8 h-8" />
+                        </button>
+
+
+                        <div className="lg:w-[90px] lg:h-[90px] w-[90px] h-[90px] bg-red-500 flex items-center justify-center rounded-full">
+                            <FailureIcon className=" w-[50px] h-[90px] bg-red-500 flex items-center justify-center rounded-full" />
                         </div>
 
                         <p className="font-medium lg:text-[18px] text-center font-poppins">
-                            <span className="font-semibold lg:text-[24px] font-poppins ">
+                            <span className="font-semibold lg:text-[18px] font-poppins ">
                                 Sorry, No Passenger Responded.
                             </span>
                             <br />
