@@ -15,7 +15,7 @@ export default function MainDriverPage() {
       <DriverHeader />
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCards title="Total Trips" value="132" subtitle="Trips completed this month" change="+3.2%" image={<CarIcon className="h-5 w-5" />} />
         <StatsCards title="Current Earnings" value="₦5,200" subtitle="Earnings this month" change="+3.2%" image={<BitcoinBag />} />
         <StatsCards title="Total Earnings" value="₦85,200" subtitle="Since account activation" change="+3.2%" image={<Wallet />} />

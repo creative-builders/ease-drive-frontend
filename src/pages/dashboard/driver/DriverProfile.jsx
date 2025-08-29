@@ -11,7 +11,7 @@ const ProfilePage = () => {
 
 
   return (
-    <div className="gap-5 items-center justify-center  md:ml-[-50px] md:p-10 md:bg-transparent]">
+    <div className="gap-5 items-center justify-center  md:p-10 md:bg-transparent]">
       <h2 className="font-semibold md:font-bold text-[14px] md:text-[24px] leading-6 md:leading-[100%] tracking-normal text-left ml-5 md:ml-0 mt-5 md:mt-0">Profile</h2>
       {/* Profile View */}
         <div className="mt-6 gap-5 flex flex-col sm:flex-row items-center justify-center w-full transition-all duration-300">

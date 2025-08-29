@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { isToday, isYesterday, format, formatDistanceToNow } from "date-fns";
 import { UserIcon } from "../../assets/icons/UserIcon";
+import { Link } from "react-router-dom";
 
 export default function DriverNotifications() {
   const [selectedNoteId, setSelectedNoteId] = useState(null);
