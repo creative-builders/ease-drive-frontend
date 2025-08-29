@@ -9,7 +9,7 @@ export const GetTheApp = () => {
             <h3>Get the App</h3>
         </div>
         <div className="flex flex-col lg:flex-row gap-x-[60px] gap-y-[94px] justify-center lg:items-center">
-            <div className="lg:basis-[553px] bg-green-100 rounded-lg32 p-[30px]">
+            <div className="lg:basis-[553px] bg-green-100 rounded-32 p-[30px]">
                 <div className="mb-16">
                 <h4 className="mb-4 text-2xl lg:text-[32px] font-bold text-green-950">Enjoy fast-easy Rides</h4>
                 <p>We are bringing all our routes to you. Simply search for a route along your way and book a ride.</p> 
@@ -19,7 +19,7 @@ export const GetTheApp = () => {
                     <img className="w-[112px] h-[45px] lg:w-[180px] lg:h-[65px]" src={applePlayStore} alt="apple play store" />
                 </div>
             </div>
-            <div className="relative bg-accent-100 basis-[262px] lg:basis-[403px] rounded-lg32 min-h-[258px] lg:h-[397px] flex items-center justify-center">
+            <div className="relative bg-accent-100 basis-[262px] lg:basis-[403px] rounded-32 min-h-[258px] lg:h-[397px] flex items-center justify-center">
                 <img className="h-[370px] lg:h-[570px]" src={mobilePhoneImage} alt="Phone" />
             </div>
         </div>

@@ -7,11 +7,11 @@ const CustomButton = ({
     extendedStyles,
     name = "Book Now",
     size = "sm",
-    className = "",
     btnClick,
     navigateTo,
     navigateState,
     isLoading=false,
+    disabled
 
 }) => {
     const navigate = useNavigate();
@@ -34,8 +34,7 @@ const CustomButton = ({
   return (
     <button 
      onClick={handleClick}
-     className={`${sizeClasses} ${className} ${extendedStyles} flex items-center justify-center h-[45px] 
-     lg:h-[60px] bg-primary-700 text-gray-100 font-medium `}>
+     className={`${sizeClasses} ${extendedStyles} flex items-center justify-center ${disabled ? "bg-primary-50 cursor-not-allowed text-primary-300" : ""} text-gray-100 font-medium `}>
      {isLoading ? <LoadingSpinner className="animate-spin" /> : name}
      
     </button>
