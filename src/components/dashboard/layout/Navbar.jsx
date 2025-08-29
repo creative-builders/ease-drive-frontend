@@ -7,22 +7,25 @@ import { CloseMenuIcon } from "../../../assets/icons/CloseMenuIcon";
 import LogoutButton from "../../../pages/auth/logout/LogoutButton";
 import { SidebarNavLink } from "./NavLink";
 import { useDashboardNavLinks } from "../../../hooks/useDashboardNavLinks";
+import { LogoText } from "../../LogoText";
 
-export const Navbar = () => {
+export const Navbar = ({
+  isMenuOpen,
+  setIsMenuOpen
+}) => {
   const user = useRecoilValue(userAtom);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navLinks =  useDashboardNavLinks();
 
   // Lock/unlock scroll when menu is open
-  useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isMenuOpen]);
+  // useEffect(() => {
+  //   document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
+  //   return () => {
+  //     document.body.style.overflow = "auto";
+  //   };
+  // }, [isMenuOpen]);
 
   return (
-    <nav className="p-4 bg-transparent fixed lg:relative w-full top-0 left-0 z-[1020] pt-[18px] lg:pb-4 min-h-[63px]">
+    <nav className={`p-4 bg-transparent fixed lg:relative w-full top-0 left-0 ${isMenuOpen ? "z-[1014]" : "z-1010"} pt-4 lg:pb-4 min-h-[63px]`}>
       <div className="flex flex-row justify-between items-center gap-x-4 lg:ml-[360px] lg:mr-[18px]">
         <SearchBox />
 
@@ -59,10 +62,13 @@ export const Navbar = () => {
 
       {/* Mobile Dropdown Menu with Slide-Up Animation */}
       <div
-        className={`absolute z-40 left-0 w-full bg-white shadow-md flex flex-col items-center gap-4 p-6 lg:hidden transform transition-transform duration-300 ease-in-out
+        className={`absolute z-40 left-0 w-full bg-white shadow-md flex flex-col gap-4 p-6 lg:hidden transform transition-transform duration-300 ease-in-out
         ${isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}
         top-0`}
       >
+       <div className="px-[13px] mb-4">
+         <LogoText/>
+       </div>
        {
         navLinks.map(({ title, href, icon }, index ) => (
         <SidebarNavLink
@@ -74,6 +80,7 @@ export const Navbar = () => {
         />
         ))
         }
+        <LogoutButton text="Logout" />
       </div>
     </nav>
   );

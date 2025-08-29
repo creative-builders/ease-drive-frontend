@@ -43,10 +43,13 @@ export default {
         headHighlight: "#127C71", 
         primary:{
           50:"#F1FCF2",
-          100: "#DEFAE2",
-          500: "#2ABD45",
-          600: "#20AE3A",
+          100:"#DEFAE2",
+          200:"#BEF4C7",
+          300:"#8BEA9B",
+          500:"#2ABD45",
+          600:"#20AE3A",
           700:"#1A7B2C",
+          950:"#072C0F"
         },
         pink:{
           50:"#FFCC0014"
@@ -56,7 +59,8 @@ export default {
         white: "#FFFFFF",
       },
      borderRadius:{
-        'lg32':"32px"
+        'lg32':"32px",
+        "lg36":"36px"
       },
       height:{
         106: "450px",
@@ -82,7 +86,9 @@ export default {
       },
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/forms")
+  ],
 }
 
 
