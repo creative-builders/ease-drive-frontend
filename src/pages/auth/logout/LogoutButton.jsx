@@ -5,7 +5,7 @@ import { userAtom } from '../../../components/atoms/userAtom';
 import { LogoutIcon } from '../../../assets/icons/LogoutIcon';
 
 
-const LogoutButton = () => {
+const LogoutButton = ({className}) => {
   const navigate = useNavigate();
   const setUser = useSetRecoilState(userAtom);
 
@@ -18,7 +18,7 @@ const LogoutButton = () => {
   return (
     <div 
       onClick={handleLogout}
-      className="lg:w-[54px] lg:h-[50px] rounded-2xl flex items-center justify-center bg-primary-50 cursor-pointer">
+      className={`${className} lg:w-[54px] lg:h-[50px] rounded-2xl flex items-center justify-center bg-primary-50 cursor-pointer`}>
         <LogoutIcon />
     </div>
   )

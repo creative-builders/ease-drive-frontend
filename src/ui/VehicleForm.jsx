@@ -13,6 +13,7 @@ import { EyeCloseIcon } from "../assets/icons/EyeCloseIcon";
 
 
 const VehicleForm = ({ onClose }) => {
+  
 
   const [profileImage, setProfileImage] = useState(picture);
   const fileInputRef = useRef(null);
