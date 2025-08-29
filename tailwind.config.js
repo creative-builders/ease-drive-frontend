@@ -51,6 +51,10 @@ export default {
         pink:{
           50:"#FFCC0014"
         },
+        red:{
+          50:"#EA433514",
+          500:"#D60000"
+        },
         cardBg: "#F3F7FF",
         cardOverlay: "#E7E7E726",
         white: "#FFFFFF",
@@ -68,6 +72,7 @@ export default {
         inter: ["Inter", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
       },
+
        screens: {
         'max-990': { max: '990px' }, // applies from 0px to 990px
       },

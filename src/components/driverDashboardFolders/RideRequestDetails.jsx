@@ -58,7 +58,7 @@ export const RideRequestDetails = ({ request }) => {
 
         // simulate API call delay (3s)
         setTimeout(() => {
-        
+
             setModalType("success");
         }, 3000);
 
@@ -83,11 +83,11 @@ export const RideRequestDetails = ({ request }) => {
                     <div className="w-6 h-6 relative">
                         <BiArrowBack
                             onClick={onBack}
-                            className="w-6 h-6 text-black cursor-pointer"
+                            className="w-6 h-6 text-black cursor-pointer font-poppins"
                         />
                     </div>
                 </div>
-                <div className="w-96 text-center text-black text-lg font-semibold font-['Inter']">
+                <div className="w-96 text-center text-black text-lg font-semibold font-poppins">
                     Passenger Details
                 </div>
             </div>
@@ -96,7 +96,7 @@ export const RideRequestDetails = ({ request }) => {
             <div className="self-stretch flex flex-col justify-start items-center gap-12">
                 <div className="flex flex-col items-center gap-4">
                     <img className="w-24 h-24 rounded-full" src={avatar} alt="Passenger" />
-                    <div className="text-black text-base font-semibold font-['Inter']">
+                    <div className="text-black text-base font-semibold font-poppins">
                         {name}
                     </div>
                 </div>
@@ -104,83 +104,96 @@ export const RideRequestDetails = ({ request }) => {
                 {/* Trip Details */}
                 <div className="self-stretch flex flex-col gap-2">
                     <div className="h-14 px-4 bg-neutral-200 rounded-lg flex items-center">
-                        <div className="text-Primary-950 text-base font-medium font-['Inter']">
+                        <div className="text-Primary-950 text-base font-medium font-poppins">
                             Trip Details
                         </div>
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold">Date</div>
+                        <div className="font-semibold font-poppins">Date</div>
                         <div>
                             {time}, {date}
                         </div>
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold">Pick Up location</div>
+                        <div className="font-semibold font-poppins">Pick Up location</div>
                         <div>{pickup}</div>
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold">Destination</div>
+                        <div className="font-semibold font-poppins">Destination</div>
                         <div>{destination}</div>
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold">Trip Type</div>
+                        <div className="font-semibold font-poppins">Trip Type</div>
                         <div>{rideType}</div>
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold">Luggage</div>
+                        <div className="font-semibold font-poppins">Luggage</div>
                         <div>{luggage && luggage.length > 0 ? "Yes" : "No"}</div>
                     </div>
 
                     {/* Luggage Images */}
                     <div className="flex flex-col items-center gap-1">
-                        <div className="text-neutral-600 text-xs font-medium">
+                        <div className="text-neutral-600 text-xs font-medium font-poppins">
                             Click Single Image to view
                         </div>
-                        <div className="inline-flex gap-2 flex-wrap w-full justify-center">
+                        <div className="inline-flex gap-2 flex-wrap w-full justify-center font-poppins">
                             {luggage && luggage.length > 0 ? (
                                 luggage.map((img, index) => (
-                                    <div key={index} className="relative w-[100px] flex-wrap flex justify-center">
-                                    <img
-                                        key={index}
-                                        className="w-24 h-24 rounded  cursor-pointer"
-                                        src={img}
-                                        alt={`Luggage ${index + 1}`}
-                                        onClick={() => {
-                                            setSelectedIndex(index);
-                                            setModalType("image");
-                                        }}
-                                    />
+                                    <div key={index} className="relative w-[100px] flex-wrap  flex justify-center">
+                                        <img
+                                            key={index}
+                                            className="w-24 h-24 rounded  cursor-pointer"
+                                            src={img}
+                                            alt={`Luggage ${index + 1}`}
+                                            onClick={() => {
+                                                setSelectedIndex(index);
+                                                setModalType("image");
+                                            }}
+                                        />
                                     </div>
                                 ))
                             ) : (
-                                <div className="text-neutral-500">
+                                <div className="text-neutral-500 font-poppins">
                                     No luggage images available
                                 </div>
                             )}
                         </div>
                     </div>
                 </div>
+               
+
+                {/* price show on bid success */}
+                {
+                    amount && amount !== "" && (   <div className="flex w-full justify-between ">
+                        <div className="font-semibold font-poppins justify-start">Price: </div>
+                        <div className="justify-end bg-red-50 rounded-xl px-4 text-red-500 font-semibold">${amount}</div>
+                    </div>
+                 )
+                }
+                     
+
+     
 
                 {/* Schedule Details */}
                 <div className="self-stretch flex flex-col gap-2">
                     <div className="h-14 px-4 bg-primary-50 rounded-2xl flex items-center">
-                        <div className="text-Primary-950 text-base font-medium font-['Inter']">
+                        <div className="text-Primary-950 text-base font-medium font-poppins">
                             Schedule Details
                         </div>
                     </div>
                     <div className="flex gap-4 my-4">
                         <div className="flex items-center gap-1">
                             <ClockIcon className="-mt-[1px]" />
-                            <div className="text-sm lg:text-[14px]">08:15 AM</div>
+                            <div className="text-sm lg:text-[14px] font-poppins">08:15 AM</div>
                         </div>
                         <div className="flex items-center gap-1">
                             <DateIcon className="-mt-[2px]" />
-                            <div className="lg:text-[14px] text-sm">Date: Jun 24, 2024</div>
+                            <div className="lg:text-[14px] text-sm font-poppins">Date: Jun 24, 2024</div>
                         </div>
                     </div>
                 </div>
@@ -199,10 +212,10 @@ export const RideRequestDetails = ({ request }) => {
             {modalType === "image" && selectedIndex !== null && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="relative bg-white rounded-lg p-4 flex justify-center 
-                          items-center lg:w-[591px] lg:h-[553px] w-[332px] h-[334px]">
+                          items-center lg:w-[591px] lg:h-[553px] w-[332px] h-[334px] font-poppins">
                         <button
                             onClick={() => setModalType(null)}
-                            className="absolute top-2 right-2 text-black"
+                            className="absolute top-2 right-2  font-poppins text-black"
                         >
                             <CloseMenuIcon />
                         </button>
@@ -247,7 +260,7 @@ export const RideRequestDetails = ({ request }) => {
                         </button>
 
                         {/* Input Label */}
-                        <div className="text-black lg:text-lg text-[14px]  font-semibold">
+                        <div className="text-black lg:text-lg text-[14px] font-poppins font-semibold">
                             Amount you are willing to drive the Passenger
                         </div>
 
@@ -260,7 +273,7 @@ export const RideRequestDetails = ({ request }) => {
 
                             />
                             {isAmountEmpty && (
-                                <p className="text-red-500 text-sm mt-1">Please enter an amount.</p>
+                                <p className="text-red-500 text-sm mt-1 font-poppins">Please enter an amount.</p>
                             )}
 
                             {/* <input
@@ -291,9 +304,9 @@ export const RideRequestDetails = ({ request }) => {
             {/* Loading Modal */}
             {modalType === "loading" && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-4 w-[390px] lg:top-[] 
-                        top-[35%] lg:top-0 h-[229px] lg:w-[633px] lg:h-[249.5px]">
-                        <CloseMenuIcon className="absolute top-2 right-2 text-black lg:w-12 lg:h-12 w-6 h-6" />
+                    <div className="relative bg-white rounded-3xl p-6 flex justify-center items-center flex-col gap-4 w-[390px] lg:top-[] 
+                        top-[35%] lg:top-0 h-[229px] lg:w-[640px] lg:h-[249.5px]">
+                        <CloseMenuIcon className="absolute top-2 right-4 text-black lg:w-8 lg:h-8 w-6 h-6" />
 
                         {/* Progress Bar */}
                         <ProgressBar />
@@ -305,24 +318,23 @@ export const RideRequestDetails = ({ request }) => {
             {modalType === "success" && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-4 w-[390px] lg:top-[] 
-                        top-[28%] lg:top-0 h-[331px] lg:w-[633px] lg:h-[350px] justify-center items-center">
-                        <CloseMenuIcon className="absolute top-2 right-2 text-black lg:w-12 lg:h-12 w-6 h-6" onClick={() => {
+                        top-[28%] lg:top-0 h-[331px] lg:w-[640px] lg:h-[360px] justify-center items-center">
+                        <CloseMenuIcon className="absolute top-2 right-4 text-black lg:w-8 lg:h-8 w-6 h-6" onClick={() => {
                             setModalType(null);
                             onBack();
                         }} />
 
-                        <div className="lg:w-[107px] lg:h-[108px]">
-                            <SuccessIcon />
+                        <div className="lg:w-[90px] lg:h-[90px] bg-green-500 flex items-center justify-center rounded-full">
+                            <SuccessIcon className="w-[50px] h-[90px] bg-green-500 flex items-center justify-center rounded-full" />
                         </div>
-
-
-                        <p className="font-medium lg:text-[18px] text-center font-inter ">
-                            <span className="font-semibold lg:text-[24px] font-inter ">
-                                Congratulations, Ride Accepted!
+                        <p className="font-medium lg:text-[18px] text-center font-poppins ">
+                            <span className="font-semibold lg:text-[24px] font-poppins ">
+                                Congratulations, Bide Accepted!
                             </span>
                             <br />
-                            Congratulations, John Nudubuisi Chukwuemeka Accepted your ride.</p>
-                        <CustomButton name="View Passenger Details" extendedStyles="w-full p-3 lg:p-4 bg-green-250 text-green-900 rounded-lg mb-6 mt-4" />
+                            Congratulations, John Nudubuisi Chukwuemeka accepted your bid.</p>
+                        <CustomButton name="View Passenger Details" extendedStyles="w-full p-3 lg:p-4 
+                        !bg-green-250 text-green-900 rounded-lg mb-6 mt-4" />
 
 
                     </div>
@@ -332,26 +344,27 @@ export const RideRequestDetails = ({ request }) => {
             {modalType === "failed" && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-4 w-[390px] lg:top-[] 
-                        top-[28%] lg:top-0 h-[331px] lg:w-[633px] lg:h-[350px] justify-center items-center">
-                        <CloseMenuIcon className="absolute top-2 right-2 text-black lg:w-12 lg:h-12 w-6 h-6" onClick={() => {
+                        top-[28%] lg:top-0 h-[331px] lg:w-[640px] lg:h-[360px] justify-center items-center">
+                        <CloseMenuIcon className="absolute top-2 right-4 text-black lg:w-8 lg:h-8 w-6 h-6" onClick={() => {
                             setModalType(null);
                             onBack();
                         }} />
 
-                        <div className="lg:w-[107px] lg:h-[108px]">
-                            <FailureIcon />
+                       
+                        <div className="lg:w-[90px] lg:h-[90px] bg-red-500 flex items-center justify-center rounded-full">
+                            <FailureIcon className="w-[50px] h-[90px] bg-red-500 flex items-center justify-center rounded-full" />
                         </div>
 
-
-                        <p className="font-medium lg:text-[18px] text-center font-inter ">
-                            <span className="font-semibold lg:text-[24px] font-inter ">
+                        <p className="font-medium lg:text-[18px] text-center font-poppins">
+                            <span className="font-semibold lg:text-[24px] font-poppins ">
                                 Sorry, No Passenger Responded.
                             </span>
                             <br />
                             No one responded to your offer you can try again some other time.</p>
                         <CustomButton name="Try again" btnClick={() => {
                             setModalType("amount")
-                        }} extendedStyles="w-full p-3 lg:p-4 bg-green-250 text-green-900 rounded-lg mb-6 mt-4" />
+                        }} extendedStyles="w-full p-3 lg:p-4 !bg-green-250 
+                        text-green-900 rounded-lg mb-6 mt-4" />
 
 
                     </div>

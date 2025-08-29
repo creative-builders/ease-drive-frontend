@@ -11,11 +11,11 @@ export function Requests({ request, refresh }) {
 
       {/* Body */}
       <div className="inline-flex justify-start items-start gap-4">
-        <div className="lg:w-[563px] w-[95%] m-auto inline-flex flex-col lg:justify-start lg:items-start gap-4">
+        <div className="lg:w-[563px] w-[95%] m-auto font-poppins inline-flex flex-col lg:justify-start lg:items-start gap-4">
           <div className="lg:self-stretch lg:h-[853px] h-[426px] px-5 py-2.5 bg-white rounded-lg flex flex-col justify-start items-center gap-24">
             {/* Subheader */}
             <div className="lg:w-[543px] w-[346px] inline-flex justify-between items-center">
-              <div className="text-black lg:text-2xl text-xl font-semibold font-['Inter']">
+              <div className="text-black lg:text-2xl text-xl font-semibold font-poppins">
                 Ongoing Ride Requests
               </div>
 
@@ -23,7 +23,7 @@ export function Requests({ request, refresh }) {
 
               <div className="flex justify-start items-center gap-2 cursor-not-allowed">
                 <button className="w-24 h-10 p-2.5 rounded-lg  disabled  cursor-not-allowed flex justify-center items-center gap-2.5 hover:bg-Primary-50">
-                  <span className="text-accent-500 text-xl font-medium font-['Poppins']">
+                  <span className="text-accent-500 text-xl font-medium font-poppins">
                     Filter
                   </span>
                   <FilterIcon className="w-5 h-5 text-Accent-500" />
@@ -33,7 +33,7 @@ export function Requests({ request, refresh }) {
 
             {/* Empty State */}
             <div className="flex lg:w-[543px]   w-[346px] flex-col  justify-start items-center gap-52">
-              <div className="w-96 text-center text-neutral-300 lg:text-lg text-base font-medium font-['Inter']">
+              <div className="w-96 text-center font-poppins text-neutral-300 lg:text-lg text-base font-medium font-['Inter']">
                 No Customer has requested for a ride yet.
               </div>
 

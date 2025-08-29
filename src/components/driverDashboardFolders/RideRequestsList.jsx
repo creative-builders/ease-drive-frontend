@@ -24,7 +24,7 @@ export function RideRequestsList({ requests, onSelect }) {
      lg:justify-start justify-center lg:items-start gap-2 relative`}>
       <div className="lg:w-[490px] w-[325px]  justify-center items-center 
       inline-flex lg:justify-start lg:items-center gap-[10%] lg:gap-[30%]">
-        <div className="text-black lg:text-xl text-base font-semibold font-['Inter']">
+        <div className="text-black lg:text-xl text-base font-semibold font-poppins">
           Ongoing Ride Requests
         </div>
 
@@ -34,7 +34,7 @@ export function RideRequestsList({ requests, onSelect }) {
             className="w-24 h-10 p-2.5 rounded-lg flex justify-center items-center gap-2.5 cursor-pointer"
             onClick={() => setDropdownOpen((prev) => !prev)}
           >
-            <div className="text-accent-500 lg:text-xl text-base font-medium font-['Poppins']">
+            <div className="text-accent-500 lg:text-xl text-base font-medium font-poppins">
               {filter}
             </div>
             <div className="w-6 h-6 relative">
@@ -45,7 +45,7 @@ export function RideRequestsList({ requests, onSelect }) {
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
               <div
-                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer font-poppins" 
                 onClick={() => {
                   setFilter("Recent");
                   setDropdownOpen(false);
@@ -55,7 +55,7 @@ export function RideRequestsList({ requests, onSelect }) {
               </div>
               <hr />
               <div
-                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer font-poppins"
                 onClick={() => {
                   setFilter("Older");
                   setDropdownOpen(false);
@@ -73,7 +73,7 @@ export function RideRequestsList({ requests, onSelect }) {
         <div
           key={req.id}
           onClick={() => onSelect(req)}
-          className="cursor-pointer w-full"
+          className="cursor-pointer w-full font-poppins"
         >
           <RideRequestCard request={req} />
         </div>

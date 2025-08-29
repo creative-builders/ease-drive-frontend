@@ -12,7 +12,8 @@ import axios from 'axios';
 import { driverKYCUpdate } from "../../store/auth/driver/api"
 import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import {Skip} from '../Skip'
+import { Skip } from '../Skip'
+import toast from 'react-hot-toast';
 
 import CustomButton from '../CustomButton';
 
@@ -21,7 +22,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
     const [searchParams] = useSearchParams();
     const [submitting, setSubmitting] = useState(false);
     const [previewUrl, setPreviewUrl] = useState(null);
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
     const [showErrorPopup, setShowErrorPopup] = useState(false);
     const { formData, handleUpdateFormData } = useStepFlowContext();
@@ -51,12 +52,12 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
         driverKYCUpdate,
         {
             onSuccess: (data) => {
-                console.log("KYC data updated successfully:", data);
+                // console.log("KYC data updated successfully:", data);
                 setisSubmitting(false)
                 setShowModal(true);
             },
             onError: (error) => {
-                showError(error.response?.data?.message || error.message);
+                toast.error(error.response?.data?.message || error.message);
             }
         }
     );
@@ -107,7 +108,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
     };
 
     const handleSkip = () => {
-
+        const newErrors = {};
         if (Object.keys(newErrors).length === 0) {
             const _formData = new FormData();
             _formData.append("documentType", formData.documentType);
@@ -192,9 +193,9 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                             </div>
                             <div>
                                 <Link to="/login">
-                                <button >
-                                    <Skip title="Skip" />
-                                </button>
+                                    <button >
+                                        <Skip title="Skip" />
+                                    </button>
                                 </Link>
 
                             </div>
@@ -253,7 +254,8 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                                 handleNext()
                             }}
 
-                            className={`inline-block  mb-2 w-full px-1.5 lg:p-4 p-2 h-[45px] lg:h-[60px] rounded-lg transition-all duration-300 bg-green-700 hover:bg-green-600 `}
+                            className={`inline-block  mb-2 w-full px-1.5 lg:p-4 p-2 h-[45px] lg:h-[60px]
+                                 rounded-lg transition-all duration-300 bg-green-700 hover:bg-green-600 `}
                         >
                             <span className="text-white font-semibold flex items-center justify-center">
                                 {isSumitting ? (
@@ -271,15 +273,25 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                 </div>
             </div>
             {showModal && (
-                <Modal closeModal={closeModal} title="You're all set"
-                    bodyText={` Thanks for signing up! We’re reviewing your documents. 
-                   You’ll be notified within 24 hours when you’re approved to start accepting rides`} modalIcon={<RockedIconSuccess />}  >
+                <Modal
+                    closeModal={closeModal}
+                    title="You're all set"
+                    position="center"
+                    width="90%"
+                    bodyText={`Thanks for signing up! We’re reviewing your documents. 
+                     You’ll be notified within 24 hours when you’re approved to start accepting rides`}
+                    modalIcon={<RockedIconSuccess />}
+                    iconWidth="100px"
+                    iconHeight="100px"
+                    iconBg="bg-primary-50"
+                >
                     <Link to="/login" className="text-green-300">
-                        <CustomButton name="Proceed to Dashboard" extendedStyles="w-full p-3 lg:p-4 rounded-lg mb-6 mt-4" />
-
+                        <CustomButton
+                            name="Proceed to Dashboard"
+                            extendedStyles="w-full p-3 lg:p-4 rounded-lg mb-6 mt-4"
+                        />
                     </Link>
-
-                </Modal >
+                </Modal>
             )}
         </div>
     );
