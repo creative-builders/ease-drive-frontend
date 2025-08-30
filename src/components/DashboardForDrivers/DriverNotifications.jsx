@@ -4,7 +4,7 @@ import { isToday, isYesterday, format, formatDistanceToNow } from "date-fns";
 import { UserIcon } from "../../assets/icons/UserIcon";
 import { Link } from "react-router-dom";
 
-export default function DriverNotifications() {
+export default function DriverNotifications({ isPreview = false }) {
   const [selectedNoteId, setSelectedNoteId] = useState(null);
 
   // Example notifications array
@@ -65,7 +65,11 @@ export default function DriverNotifications() {
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-semibold text-[#000] text-[14px] md:text-2xl">Notifications</h2>
         
-        <Link className="text-[#2ABD45] text-sm font-semibold" to={'/dashboard/notifications'}>View all</Link>
+        {isPreview && (
+          <Link className="text-[#2ABD45] text-sm font-semibold" to={'/dashboard/notifications'}>
+            View all
+          </Link>
+        )}
       </div>
 
       {hasNotifications ? (
