@@ -5,6 +5,9 @@ import { RideRequestDetails } from "./RideRequestDetails";
 import { Requests } from "./Requests";
 import { LiveGPSIcon } from "../../assets/icons/LiveGPSIcon";
 import { RequestsMap } from "./RequestsMap";
+import { locationAtom } from "../atoms/locationAtom";
+import { useRecoilValue } from "recoil";
+
 
 
 export function RideRequests() {
@@ -14,6 +17,9 @@ export function RideRequests() {
   const [acceptedRequest, setAcceptedRequest] = useState(null);
   const [toggleMapList, setToggleMapList] = useState(false)
 
+  const location = useRecoilValue(locationAtom);
+
+  console.log(location)
 
   const myLocation = { lat: 6.5244, lng: 3.3792 };      // Driver (Lagos mainland)
   const destination = { lat: 6.465422, lng: 3.406448 };
@@ -48,7 +54,7 @@ export function RideRequests() {
             <div className="bg-primary-50 text-green-900 lg:w-[38px] lg:h-[36px] w-[28px] h-[26px] rounded-full px-2 py-1 mr-2 justify-center inline-flex items-center">
               <LiveGPSIcon className="inline font-poppins" />
             </div>
-            You’re currently at: UNN Hostel C, Nsukka
+            {location}
           </p>
         </div>
 
