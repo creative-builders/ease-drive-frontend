@@ -51,8 +51,10 @@ import { Trips } from '../pages/dashboard/driver/Trips';
 import DriverProfile from '../pages/dashboard/driver/DriverProfile';
 import { Requests } from '../pages/dashboard/driver/Requests';
 import ProtectedRoutes from './ProtectedRoutes';
-import Notifications from '../uI/Notifications';
-import { NotificationsPage } from '../uI/NotificationPage';
+// import Notifications from '../uI/Notifications';
+import Notifications from "../ui/Notifications"
+import {NotificationsPage} from "../ui/NotificationPage"
+// import { NotificationsPage } from '../uI/NotificationPage';
 
 
 
