@@ -3,9 +3,9 @@ import { useState } from "react";
 import { RideRequestsList } from "./RideRequestsList";
 import { RideRequestDetails } from "./RideRequestDetails";
 import { Requests } from "./Requests";
-import { LiveGPSIcon } from "../../assets/icons/LiveGPSIcon";
+import { LiveGPSIcon } from "../../../assets/icons/LiveGPSIcon";
 import { RequestsMap } from "./RequestsMap";
-import { locationAtom } from "../atoms/locationAtom";
+import { locationAtom } from "../../atoms/locationAtom";
 import { useRecoilValue } from "recoil";
 
 

@@ -1,4 +1,4 @@
-import { LocationIcon } from "../../assets/icons/LocationIcon";
+import { LocationIcon } from "../../../assets/icons/LocationIcon";
 
 export function RideRequestCard({ request }) {
   return (

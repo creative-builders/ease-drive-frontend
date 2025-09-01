@@ -1,7 +1,7 @@
 
-import CustomButton from "../CustomButton";
-import { FilterIcon } from "../../assets/icons/FilterIcon";
-import noRequest from "../../assets/images/norequest.png";
+import CustomButton from "../../CustomButton";
+import { FilterIcon } from "../../../assets/icons/FilterIcon";
+import noRequest from "../../../assets/images/norequest.png";
 
 import {data} from "./requestData";
 

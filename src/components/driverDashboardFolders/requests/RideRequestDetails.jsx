@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import CustomButton from "../CustomButton";
-import { DateIcon } from "../../assets/icons/DateIcon";
-import { ClockIcon } from "../../assets/icons/ClockIcon";
-import { CloseMenuIcon } from "../../assets/icons/CloseMenuIcon";
+import CustomButton from "../../CustomButton";
+import { DateIcon } from "../../../assets/icons/DateIcon";
+import { ClockIcon } from "../../../assets/icons/ClockIcon";
+import { CloseMenuIcon } from "../../../assets/icons/CloseMenuIcon";
 import { BiArrowBack, BiChevronLeft, BiChevronRight } from "react-icons/bi";
-import ProgressBar from "../ProgressBar";
-import { InputField } from "../customFormFields/InputField"
-import { NairaIcon } from "../../assets/icons/NairaIcon";
-import { Modal } from "../Modal"
-import { SuccessIcon } from "../../assets/icons/SuccesIcon";
-import { FailureIcon } from "../../assets/icons/FailureIcon";
+import ProgressBar from "../../ProgressBar";
+import { InputField } from "../../customFormFields/InputField"
+import { NairaIcon } from "../../../assets/icons/NairaIcon";
+// import { Modal } from "../Modal"
+import { SuccessIcon } from "../../../assets/icons/SuccesIcon";
+import { FailureIcon } from "../../../assets/icons/FailureIcon";
 
 
 export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) => {

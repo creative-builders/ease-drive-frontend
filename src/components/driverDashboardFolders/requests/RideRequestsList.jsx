@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RideRequestCard } from "./RideRequestCard";
-import { FilterIcon } from "../../assets/icons/FilterIcon";
+import { FilterIcon } from "../../../assets/icons/FilterIcon";
 
 export function RideRequestsList({ requests, onSelect }) {
   const [filter, setFilter] = useState("Filter");
