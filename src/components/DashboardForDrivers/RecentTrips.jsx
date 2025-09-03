@@ -31,9 +31,10 @@ export default function RecentTrips() {
           {/* Selected Option as Button */}
           <button
             onClick={() => setShowMenu((prev) => !prev)}
-            className="text-[#5E69F6] text-base font-medium not-italic leading-normal"
+            className="text-[#5E69F6] text-base flex items-center gap-2 w-fit font-medium not-italic leading-normal"
           >
             {selected}
+            <FilterIcon className="w-4 h-4" />
           </button>
 
           {/* Dropdown Menu */}
@@ -44,11 +45,11 @@ export default function RecentTrips() {
                 <div
                   key={option}
                   onClick={() => handleSelect(option)}
-                  className={`px-4 py-2 cursor-pointer hover:bg-gray-500 w-full border-[#E7E7E7] border-b-2 ${
+                  className={`px-4 py-2 cursor-pointer hover:bg-gray-500 w-full border-b-2 border-gray-200 ${
                     selected === option ? "text-green-500 font-semibold" : ""
                   }`}
                 >
-                  <FilterIcon className="w-4 h-4" />
+                  
                   {option}
                 </div>
               ))}
