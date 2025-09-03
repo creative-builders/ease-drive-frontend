@@ -15,8 +15,8 @@ export const Earnings = () => {
             <div className="inline-flex justify-start items-start ">
                 <div className="lg:w-[563px] w-[100%] m-auto font-poppins inline-flex flex-col lg:justify-start lg:items-start gap-4">
                     <div className='flex lg:gap-2 gap-3'>
-                        <InfoCard title="Current Balance" InfoIcon={EarningsIcon} value={"5,200"} footer="font-semibold" />
-                        <InfoCard title="Total Earnings" InfoIcon={EarningsIcon} value={"85,200"} footer="font-semibold" />
+                        <InfoCard title="Current Balance" InfoIcon={EarningsIcon} value={"5,200"} footer={"Earnings this month"} />
+                        <InfoCard title="Total Earnings" InfoIcon={EarningsIcon} value={"85,200"} footer="Since account activation" />
                     </div>
 
 
