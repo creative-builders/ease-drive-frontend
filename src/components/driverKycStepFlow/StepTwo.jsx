@@ -119,8 +119,9 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   // onChange={handleCityChange}
                   options={["Keke", "Car", "Shuttle Bus", "Motorcycle", "Regular Bus", "Truck"]}
                   rightIcon={FaChevronDown}
+                  leftIcon={CarIcon}
                 >
-                  <CarIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
+                  {/* <CarIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" /> */}
 
                 </CustomSelectField>
                 {errors.vehicleType && (
@@ -153,8 +154,9 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   defaultHolder="Select Service Area"
                   options={["Odenigwe", "Hill-Top", "Main gate", "Behind Flat", "Odeim gate",]}
                   rightIcon={FaChevronDown}
+                  leftIcon={LocationHomeIcon}
                 >
-                  <LocationHomeIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
+                  {/* <LocationHomeIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" /> */}
                 </CustomSelectField>
 
                 <div className='flex flex-row w-full gap-4'>
@@ -170,9 +172,6 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
                   // }
                   />
-
-
-
                   <InputField
                     label="Vehicle Color"
                     name="vehicleColor"
@@ -246,7 +245,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
             <CustomButton
               name="Continue"
-              extendedStyles={"w-full p-3 lg:p-4 rounded-lg"}
+              extendedStyles={"w-full p-3 lg:p-4 bg-green-700 rounded-lg"}
               btnClick={() => handleNext()}
             />
 

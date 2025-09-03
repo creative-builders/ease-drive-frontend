@@ -6,6 +6,7 @@ export default {
       colors:{
         gray:{
          2:"#AEAEB2",
+         50: "#E4E4E454",
          100:"#DEFAE2",
          200:"#E1F4E5",
          300:"#F0F1F1",
@@ -36,6 +37,7 @@ export default {
           950:"#262626",
         },
         accent:{
+          50:"#EDF3FF",
           100:"#EDF3FF",
           500:"#5E69F6"
         },
@@ -53,6 +55,10 @@ export default {
         },
         pink:{
           50:"#FFCC0014"
+        },
+        red:{
+          50:"#EA433514",
+          500:"#D60000"
         },
         cardBg: "#F3F7FF",
         cardOverlay: "#E7E7E726",
@@ -72,6 +78,7 @@ export default {
         inter: ["Inter", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
       },
+
        screens: {
         'max-990': { max: '990px' }, // applies from 0px to 990px
       },
