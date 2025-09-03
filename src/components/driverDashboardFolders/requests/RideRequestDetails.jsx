@@ -33,7 +33,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
     const [progress, setProgress] = useState(0);
 
-    console.log(btnName)
+    // console.log(btnName)
 
 
     const handlePrev = () => {

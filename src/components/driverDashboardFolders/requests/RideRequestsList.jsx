@@ -1,23 +1,23 @@
 import { useState } from "react";
 import { RideRequestCard } from "./RideRequestCard";
 import { FilterIcon } from "../../../assets/icons/FilterIcon";
+import { Filter } from "../Filter";
 
 export function RideRequestsList({ requests, onSelect }) {
   const [filter, setFilter] = useState("Filter");
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [displayList, setDisplayList] = useState("block");
-
+  const [sortedRequests, setSortedRequests] = useState(requests);
   // Sort based on filter
-  const sortedRequests = [...requests].sort((a, b) => {
-    const dateA = new Date(a.date);
-    const dateB = new Date(b.date);
+  // const sortedRequests = [...requests].sort((a, b) => {
+  //   const dateA = new Date(a.date);
+  //   const dateB = new Date(b.date);
 
-    if (filter === "Recent") {
-      return dateB - dateA; // newest first
-    } else {
-      return dateA - dateB; // oldest first
-    }
-  });
+  //   if (filter === "Recent") {
+  //     return dateB - dateA; // newest first
+  //   } else {
+  //     return dateA - dateB; // oldest first
+  //   }
+  // });
 
   return (
     <div className={`self-stretch  px-5 py-3 pb-4 bg-white rounded-lg inline-flex flex-col
@@ -29,7 +29,7 @@ export function RideRequestsList({ requests, onSelect }) {
         </div>
 
         {/* Filter dropdown */}
-        <div className="relative">
+        {/* <div className="relative">
           <div
             className="w-24 h-10 p-2.5 rounded-lg flex justify-center items-center gap-2.5 cursor-pointer"
             onClick={() => setDropdownOpen((prev) => !prev)}
@@ -65,7 +65,12 @@ export function RideRequestsList({ requests, onSelect }) {
               </div>
             </div>
           )}
-        </div>
+        </div> */}
+
+        <Filter itemsArray={requests} options={["Recent", "Older"]} 
+        title="Filter"
+        onSort={(sortedRequests) => setSortedRequests(sortedRequests)} />
+
       </div>
 
       {/* Render filtered requests */}
