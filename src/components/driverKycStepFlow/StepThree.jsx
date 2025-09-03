@@ -9,7 +9,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
 import { CreditCardIcon } from '../../assets/icons/CreditCardIcon';
 import { BankHouseIcon } from '../../assets/icons/BankHouseIcon';
-import {Skip} from '../Skip'
+import { Skip } from '../Skip'
 import { Link } from 'react-router-dom';
 
 export const StepThree = ({ nextStep, step, totalSteps }) => {
@@ -105,13 +105,10 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                      <form className="space-y-4 w-[100%]">
                         <CustomSelectField
                            label="Bank Name"
-                           defaultHolder="Select Bank Name"
-                           // iconSrc="/city-02.svg"
-                           // value={formData.city}
-                           // onChange={handleCityChange}
                            name="bankName"
                            value={formData.bankName}
                            onChange={handleUpdateFormData}
+                           defaultHolder="Select Bank Name"
                            options={[
                               "Access Bank",
                               "Zenith Bank",
@@ -129,11 +126,15 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                               "Keystone Bank",
                               "Jaiz Bank"
                            ]}
+                           // options={[
+                           //    { value: "us", label: "United States", icon: BankHouseIcon },
+                           //    { value: "ng", label: "Nigeria", icon:CreditCardIcon },
+                           //    { value: "uk", label: "United Kingdom", icon:CreditCardIcon,},
+                           // ]}
+                           leftIcon={BankHouseIcon}
                            rightIcon={FaChevronDown}
-                        >
-                           <BankHouseIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" />
+                        />
 
-                        </CustomSelectField>
                         {errors.bankName && (
                            <p className="text-red-500 text-sm -mt-2">{errors.bankName}</p>
                         )}
@@ -221,7 +222,7 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
 
                   <CustomButton
                      name="Continue"
-                     extendedStyles={"w-full p-3 lg:p-4 rounded-lg"}
+                     extendedStyles={"w-full p-3 lg:p-4 bg-green-700 rounded-lg"}
                      btnClick={() => handleNext()}
                   />
 

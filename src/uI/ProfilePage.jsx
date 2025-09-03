@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import useIsMobile from "../hooks/useIsMobile";
-import VehicleForm from "./VehicleForm";
-import DriverProfile from "./DriverProfile";
-import Crendentials from "./Crendentials";
+import VehicleForm from "../ui/VehicleForm";
+import { DriverProfile } from "../ui/DriverProfile";
+import Crendentials from "../ui/Crendentials";
 
 const ProfilePage = () => {
   const [activeEdit, setActiveEdit] = useState(null); 

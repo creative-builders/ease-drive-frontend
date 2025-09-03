@@ -26,7 +26,10 @@ body{
   }
 }
 
-
+.leaflet-bottom {
+    bottom: 0;
+    display: none;
+}
 /* Custom scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px; /* slim scrollbar */

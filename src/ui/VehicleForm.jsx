@@ -2,18 +2,26 @@ import React, { useRef, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import { CameraIcon } from "../assets/icons/CameraIcon";
 import { UserIcon } from "../assets/icons/UserIcon";
-import FormInput from "../components/form/FormInput"
-import { LockedIcon } from "../assets/icons/LockedIcon";
 import { EyeOpenIcon } from "../assets/icons/EyeOpenIcon";
 import CustomButton from "../components/CustomButton";
-import picture from "../assets/images/driver-picture.png"
+import fallbackProfile from "../assets/images/driver-picture.png"
 import { EmailSignedIcon } from "../assets/icons/EmailSignedIcon";
-import { CallIcon } from "../assets/icons/CallIcon";
+import { LockPasswordIcon } from "../assets/icons/LockPasswordIcon";
+import { PhoneIcon } from "../assets/icons/PhoneIcon";
+import { InputField } from "../components/customFormFields/InputField";
+import { EyeCloseIcon } from "../assets/icons/EyeCloseIcon";
+import { userAtom } from "../components/atoms/userAtom";
+import { useRecoilValue } from "recoil";
+import { Modal } from "../components/Modal";
 
 
 const VehicleForm = ({ onClose }) => {
+  
+const userData = useRecoilValue(userAtom);
+   const [profileImage, setProfileImage] = useState(
+      userData?.profileImage || fallbackProfile
+    );
 
-  const [profileImage, setProfileImage] = useState(picture);
   const fileInputRef = useRef(null);
 
   const handleIconClick = () => {
@@ -29,9 +37,17 @@ const VehicleForm = ({ onClose }) => {
     }
   };
  
+  const [isOpen, setIsOpen] = useState(false); // start closed
+  const [email, setEmail] = useState("");
+
+    const handleSendLink = () => {
+    console.log("Sending link to:", email);
+    // call API here
+    setIsOpen(false);
+  };
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md h-[683px] w-full md:w-[439px] flex flex-col gap-20 sm:mt-[-145px]">
+    <div className="bg-white rounded-2xl p-6 shadow-md h-fit w-full md:w-[439px] flex flex-col gap-20 sm:mt-[-195px]">
       <figure className="">
         <div className="flex items-center space-x-2 mb-4">
           <button onClick={onClose}>
@@ -60,48 +76,62 @@ const VehicleForm = ({ onClose }) => {
         </div>
 
         <form className="gap-4 mt-4" action="">
-          <FormInput
-              label="full name"
-              id="name"
-              type='text'
-              placeholder="Enter document Id number"
-              inputClassName = "indent-1 flex items-center justify-center"
-              required
-              leftIcon={<UserIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />}
+
+          <InputField
+            label="full name"
+            name="name"
+            type="text"
+            placeholder="Enter document id Number"
+            leftIcon={UserIcon}
+            // error={
+            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+            // }
           />
 
-          <FormInput
-              label="Email"
-              id="email"
-              type='email'
-              placeholder="Enter document Id number"
-              inputClassName = "indent-1 flex items-center justify-center"
-              required
-              leftIcon={<EmailSignedIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />}
+          <InputField
+            label="Email"
+            name="email"
+            type="email"
+            placeholder="Enter document Id  Number"
+            leftIcon={EmailSignedIcon}
+            // error={
+            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+            // }
           />
 
-          <FormInput
-              label="Phone number"
-              id="number"
-              type='number'
-              placeholder="Enter document Id number"
-              inputClassName = "indent-1 flex items-center justify-center"
-              required
-              leftIcon={<CallIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />}
+          <InputField
+            label="Phone number"
+            id="number"
+            type="number"
+            placeholder="Enter Vehicle Plate  Number"
+            leftIcon={PhoneIcon}
+            // error={
+            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+            // }
           />
 
-          <FormInput
-            label="Update Password"
-            id="password"
-            type='password'
-            placeholder="Enter document Id number"
-            inputClassName = "indent-1 flex items-center justify-center"
-            required
-            leftIcon={<LockedIcon className="h-[18px] md:h-6 w-[18px] md:w-6 aspect-square text-[#888]" />}
-            rightIcon={<EyeOpenIcon />}
-          />
 
-          <p className="font-medium text-base md:text-base leading-normal not-italic tracking-normal text-left mt-4 text-[#4847EB]">change password</p>
+          <InputField
+            label="Enter Password"
+            name="password"
+            placeholder="Enter your password"
+            leftIcon={LockPasswordIcon}
+    
+            // error={showPasswordError ? "Password must be at least 5 characters" : ""}
+            // toggleable
+            // showPassword={showPassword}
+            // handleTogglePassword={handleTogglePassword}
+            rightIconOpen={EyeOpenIcon}
+            rightIconClose={EyeCloseIcon}
+            isPassword
+  
+            />
+          <p
+            onClick={() => setIsOpen(true)}
+            className="font-medium text-base leading-[100%] tracking-normal text-left mt-4 text-blue-600 cursor-pointer"
+          >
+            Forgot password
+          </p>
         </form>
       </figure>
 
@@ -109,7 +139,38 @@ const VehicleForm = ({ onClose }) => {
         name="Save"
         className="hidden sm:flex px-4 py-4 w-full rounded-2xl gap-2 mt-6 bg-green-700"
         />
+      {isOpen && (
+        <Modal
+          closeModal={() => setIsOpen(false)}
+          title="Forgot Password"
+          bodyText="Enter your email and we'll send you a verification code to reset your Password"
+          modalIcon={<EmailSignedIcon />}
+        >
+          <div className="w-full mt-6">
+            <label className="block text-left font-medium text-sm mb-2">
+              Enter Email
+            </label>
+            
+            <InputField
+              // label="Email"
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              leftIcon={EmailSignedIcon}
+              onChange={(e) => setEmail(e.target.value)}
+              // error={
+              //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+              // }
+            />
 
+            <CustomButton
+              name="Send Link"
+              btnClick={handleSendLink}
+              extendedStyles="w-full h-[48px] mt-6 bg-green-700 text-white rounded-xl font-semibold"
+            />
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };
