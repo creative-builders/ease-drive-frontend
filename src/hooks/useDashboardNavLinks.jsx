@@ -63,6 +63,11 @@ const dashboardNavConfig = {
       href: "/profile",
       icon: ProfileIcon,
     },
+     {
+     title:"Support",
+     href:"/support",
+     icon: SupportIcon
+  },
   ],
 };
 
