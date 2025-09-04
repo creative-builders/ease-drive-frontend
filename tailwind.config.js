@@ -39,7 +39,8 @@ export default {
         accent:{
           50:"#EDF3FF",
           100:"#EDF3FF",
-          500:"#5E69F6"
+          500:"#5E69F6",
+          600:"#4847EB"
         },
         light: "#FDFDFD",
         headHighlight: "#127C71", 
