@@ -1,8 +1,9 @@
 
 import UserAvater from "../assets/icons/UserAvatar";
 import Notifications from "./Notifications";
+// import Notifications from "./Notifications";
 
-const NotificationsPage = () => {
+export const NotificationsPage = () => {
  
     const notifications = [
     {
@@ -42,5 +43,3 @@ const NotificationsPage = () => {
         </div>
    );
 };
-
-export default NotificationsPage;

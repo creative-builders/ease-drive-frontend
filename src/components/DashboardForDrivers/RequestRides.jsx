@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const rides = [
   {
@@ -23,12 +24,17 @@ const rides = [
   }
 ];
 
-export default function RideRequests() {
+export default function RideRequests({ isPreview = false }) {
   return (
     <div className="bg-white shadow rounded-lg p-4 border">
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-semibold text-[#000] text-2xl not-italic leading-normal">Ongoing Ride Requests</h2>
-        <a href="#" className="text-[#2ABD45] text-sm text-right not-italic font-semibold leading-normal">View all</a>
+        {/* <a href="#"></a> */}
+        {isPreview && (
+          <Link className="text-[#2ABD45] text-sm font-semibold" to={'/dashboard/requests'}>
+            View all
+          </Link>
+        )}
       </div>
       {rides.map((ride, i) => (
         <div key={i} className="flex items-start gap-3 mb-4 border-b-[1px] border-[#E7E7E7]">
