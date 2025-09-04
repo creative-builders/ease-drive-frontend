@@ -39,8 +39,8 @@ export const DashboardModal = ({
 
 
                 {/* Title & Message */}
-                <p className="font-medium lg:text-[18px] text-[16px] text-center font-poppins">
-                    <span className="font-semibold lg:text-[24px] text-[16px] font-poppins block mb-1">
+                <p className="font-medium lg:text-lg text-base text-center font-poppins">
+                    <span className="font-semibold lg:text-2xl text-base font-poppins block mb-1">
                         {title}
                     </span>
                     {message}

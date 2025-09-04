@@ -89,12 +89,12 @@ export const NoEarnings = () => {
             flex flex-col justify-start  gap-10">
 
             <div>
-              <h1 className="lg:text-[24px] font-semibold font-poppins text-gray-800">Payout Details</h1>
+              <h1 className="lg:text-2xl font-semibold font-poppins text-gray-800">Payout Details</h1>
             </div>
 
             <div className='flex justify-center items-center lg:flex-col flex-col lg:gap-20 gap-40'>
               <div className='lg:w-[70%] w-full '>
-                <p className='text-neutral-400 text-center font-normal font-poppins lg:text-[18px] text-[12px]'>You haven’t completed any trips yet.
+                <p className='text-neutral-400 text-center font-normal font-poppins lg:text-[18px] text-xs'>You haven’t completed any trips yet.
                   <br /> Once you accept and complete a ride, your earnings will appear here.</p>
               </div>
 
@@ -128,11 +128,11 @@ export const NoEarnings = () => {
             </button>
 
             {/* Input Label */}
-            <h4 className="text-black lg:text-[26px] text-[14px] text-left font-poppins font-semibold">
+            <h4 className="text-black lg:text-[26px] text-sm text-left font-poppins font-semibold">
               Set Up Your Withdrawal PIN </h4>
             <div className='flex flex-col justify-center items-center' >
 
-              <p className='lg:text-[16px] text-[14px] font-regular '>For your security, you’ll need a 4-digit PIN to authorize all withdrawals.
+              <p className='lg:text-base text-sm font-regular '>For your security, you’ll need a 4-digit PIN to authorize all withdrawals.
                 Please choose a PIN that’s easy to remember but hard to guess.</p>
 
             </div>

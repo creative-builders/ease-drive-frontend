@@ -170,10 +170,10 @@ export const AccountCenter = () => {
     return (
         <div className="p-6 lg:w-[495px] lg:h-[263px] bg-white rounded-xl shadow w-full">
             <div className="flex flex-col justify-start items-start gap-2 h-full w-[]">
-                <h2 className="text-lg font-semibold">Payout Details</h2>
+                <h2 className="lg:text-2xl text-sm font-semibold">Payout Details</h2>
                 <div className='flex flex-col gap-1'>
                     <div>
-                        <p className='text-sm font-semibold text-gray-800'>Linked Account</p>
+                        <p className='lg:text-base text-xs font-semibold text-gray-800'>Linked Account</p>
                     </div>
                     <div className='flex items-center lg:gap-2 justify-center lg:w-full w-[328px] bg-accent-50 p-4 rounded-lg '>
 
@@ -185,12 +185,12 @@ export const AccountCenter = () => {
                                     </div>
                                     <div className=' flex flex-col justify-start items-start gap-2 w-[70%] '>
                                         <div className='flex gap-4'>
-                                            <p className='lg:text-[16px] w-full text-[14px] font-semibold text-gray-800 '>{bankName} </p>
-                                            <span className='lg:text-[12px] text-[10px] flex items-center w-[100px] h-[20px] justify-center text-blue-500 bg-green-50 px-4 rounded-xl mt-'>Default</span>
+                                            <p className='lg:text-base w-full text-sm font-semibold text-gray-800 '>{bankName} </p>
+                                            <span className='lg:text-xs text-[8px] flex items-center w-[100px] h-[20px] justify-center text-blue-500 bg-green-50 px-4 rounded-xl mt-'>Default</span>
                                         </div>
 
                                         <div className='flex gap-2'>
-                                            <p className='lg:text-[14px] text-[10px]'> Account Number :{" "}
+                                            <p className='lg:text-sm text-[10px]'> Account Number :{" "}
                                                 <span>
                                                     {bankAccountNumber
                                                         ? `${bankAccountNumber.slice(0, 3)}****${bankAccountNumber.slice(-3)}`
@@ -231,7 +231,7 @@ export const AccountCenter = () => {
                         </button>
 
                         {/* Input Label */}
-                        <div className="text-black lg:text-lg text-[14px] font-poppins font-semibold">
+                        <div className="text-black lg:text-lg text-sm font-poppins font-semibold">
                             Amount to withdraw
                         </div>
 
@@ -246,14 +246,14 @@ export const AccountCenter = () => {
                                     leftIcon={NairaIcon}
 
                                 />
-                                <p className='font-regular lg:text-[14px] font-poppins lg:-mt-2 -mt-2'>Min. #500.00</p>
+                                <p className='font-regular lg:text-sm font-poppins lg:-mt-2 -mt-2'>Min. #500.00</p>
 
                                 {isAmountEmpty && (
                                     <p className="text-red-500 text-sm mt-1 font-poppins ">Please enter an amount.</p>
                                 )}
                             </div>
                             <div className='mt-2'>
-                                <h2 className='font-semibold text-neutral-950 lg:text-[18px] text-[14px]'>Bank Details</h2>
+                                <h2 className='font-semibold text-neutral-950 lg:text-lg text-sm'>Bank Details</h2>
                                 <div className='flex justify-start items-center lg:gap-10 w-full bg-accent-50 p-4 rounded-lg'>
 
                                     <div className='w-[25%]'>
@@ -263,13 +263,13 @@ export const AccountCenter = () => {
                                     </div>
 
                                     <div className=' flex flex-col justify-start items-start gap-2 w-[100%] '>
-                                        <div className='flex lg:text-base text-[14px] font-semibold text-gray-800 gap-4'>
+                                        <div className='flex lg:text-base text-sm font-semibold text-gray-800 gap-4'>
                                             Bank Name
-                                            <span className='lg:text-[12px] text-[10px] text-blue-500 bg-green-50 px-4 rounded-xl mt-'>Default</span>
+                                            <span className='lg:text-xs text-[10px] text-blue-500 bg-green-50 px-4 rounded-xl mt-'>Default</span>
                                         </div>
 
                                         <div className='flex gap-2'>
-                                            <p className='lg:text-[14px] text-[10px]'>Account Number : <span>023****3043</span> </p>
+                                            <p className='lg:text-sm text-[10px]'>Account Number : <span>023****3043</span> </p>
 
                                         </div>
                                     </div>
@@ -313,9 +313,9 @@ export const AccountCenter = () => {
 
                         {/* Input Label */}
                         <div className='flex flex-col justify-center items-center' >
-                            <h4 className="text-black lg:text-lg text-[14px] text-center font-poppins font-semibold">
+                            <h4 className="text-black lg:text-lg text-sm text-center font-poppins font-semibold">
                                 Enter Pin to make withdrawal </h4>
-                            <p className='lg:text-[18px] text-[14px] font-regular '> You are about to withdraw
+                            <p className='lg:text-lg text-sm font-regular '> You are about to withdraw
                                 <span className='text-blue-500 mx-2'> <br />
                                     ₦{inputs.amount}
                                 </span> from your balance?</p>
@@ -324,20 +324,20 @@ export const AccountCenter = () => {
 
                         <div className='lg:w-[100%] border-[2px] border-gray-50 lg:h-[182px] my-2 px-2 py-4 rounded-[10px] flex flex-col gap-2'>
                             <div className='w-full flex justify-between'>
-                                <p className='lg:text-[18px] text-[12px] font-poppins font-regular'>Amount</p>
-                                <p className='lg:text-[18px] text-[12px] font-poppins font-regular text-blue-500'>₦{inputs.amount}</p>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>Amount</p>
+                                <p className='lg:text-lg text-xs font-poppins font-regular text-blue-500'>₦{inputs.amount}</p>
                             </div>
                             <div className='w-full flex justify-between'>
-                                <p className='lg:text-[18px] text-[12px] font-poppins font-regular'>Bank Name</p>
-                                <p className='lg:text-[18px] text-[12px] font-poppins font-regular'>Chase Bank</p>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>Bank Name</p>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>Chase Bank</p>
                             </div>
                             <div className='w-full flex justify-between'>
-                                <p className='lg:text-[18px] text-[12px] font-poppins font-regular'>Account Number</p>
-                                <p className='lg:text-[18px] text-[12px] font-poppins font-regular'>12345678901</p>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>Account Number</p>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>12345678901</p>
                             </div>
                             <div className='w-full flex justify-between'>
-                                <p className='lg:text-[18px] text-[12px] font-poppins font-regular'>Processing Time</p>
-                                <p className='lg:text-[18px] text-[12px] font-poppins font-regular'>24 - 48 hours</p>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>Processing Time</p>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>24 - 48 hours</p>
                             </div>
                         </div>
 
@@ -358,7 +358,7 @@ export const AccountCenter = () => {
                                 )} */}
 
 
-                                <div className='flex justify-end cursor-pointer lg:-mb-6 -mb-6 font-medium text-[12px] lg:text-[18px] text-green-600'>
+                                <div className='flex justify-end cursor-pointer lg:-mb-6 -mb-6 font-medium text-xs lg:text-lg text-green-600'>
                                     <button className='cursor-pointer'>
                                         Forgot PIN?
                                     </button>
@@ -417,10 +417,10 @@ export const AccountCenter = () => {
                         </button>
 
                         {/* Input Label */}
-                        <p className="text-black lg:text-[26px] text-left text-[14px] font-poppins font-semibold">
+                        <p className="text-black lg:text-[26px] text-left text-sm font-poppins font-semibold">
                             Bank/Wallet Details </p>
                         <div className='flex flex-col justify-start items-center' >
-                            <p className='lg:text-[18px] text-[14px] font-regular text-left '>
+                            <p className='lg:text-lg text-sm font-regular text-left '>
                                 Your payments will be sent here. Please confirm the details are correct.</p>
 
                         </div>
@@ -550,11 +550,11 @@ export const AccountCenter = () => {
                         </button>
 
                         {/* Input Label */}
-                        <h4 className="text-black lg:text-[26px] text-[14px] text-left font-poppins font-semibold">
+                        <h4 className="text-black lg:text-[26px] text-sm text-left font-poppins font-semibold">
                             Set Up Your Withdrawal PIN </h4>
                         <div className='flex flex-col justify-center items-center' >
 
-                            <p className='lg:text-[16px] text-[14px] font-regular '>For your security, you’ll need a 4-digit PIN to authorize all withdrawals.
+                            <p className='lg:text-base text-sm font-regular '>For your security, you’ll need a 4-digit PIN to authorize all withdrawals.
                                 Please choose a PIN that’s easy to remember but hard to guess.</p>
 
                         </div>

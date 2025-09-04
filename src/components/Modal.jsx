@@ -21,7 +21,7 @@ export const Modal = ({
 
   return (
     <div
-      className={`fixed inset-0 bg-black bg-opacity-50 z-[1010] flex justify-center ${positionClasses[position]}`}
+      className={`fixed inset-0 bg-black bg-opacity-50 z-[2040] flex justify-center ${positionClasses[position]}`}
     >
       <div
         className="bg-white w-full lg:w-auto max-w-[614px] p-6 relative rounded-[32px] "

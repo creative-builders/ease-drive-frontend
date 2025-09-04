@@ -89,10 +89,10 @@ export const Filter = ({ itemsArray, options, onSort, title }) => {
         className="w-full h-10 p-2.5 rounded-lg flex justify-center items-center gap-2.5 cursor-pointer"
         onClick={() => setDropdownOpen((prev) => !prev)}
       >
-        <div className="text-accent-500 lg:text-[18px] text-base font-medium font-poppins">
+        <div className="text-accent-500 lg:text-base text-sm text-base font-medium font-poppins">
           {filter}
         </div>
-        <div className="w-6 h-6 relative">
+        <div className="lg:w-[24px] lg:h-[24px] w-[18px] h-[18px] relative">
           <FilterIcon />
         </div>
       </div>
