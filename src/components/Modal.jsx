@@ -7,7 +7,7 @@ export const Modal = ({
   modalIcon,
   iconWidth = "90px",
   iconHeight = "90px",
-  iconBg = "bg-green-500",
+  iconBg = "",
   children,
   position = "center",
   width = "90%",

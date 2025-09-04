@@ -6,12 +6,20 @@ import { useRecoilValue } from "recoil";
 import { NoEarnings } from "./NoEarnings";
 import { Earnings } from "./Earnings";
 
+import { userAtom } from "../../atoms/userAtom";
+
+
 export function DriverEarnings() {
   const [selectedRequest, setSelectedRequest] = useState(null);
+
+  const user = useRecoilValue(userAtom);
+
   const location = useRecoilValue(locationAtom);
 
   const myLocation = { lat: 6.5244, lng: 3.3792 };      // Driver (Lagos mainland)
   const destination = { lat: 6.465422, lng: 3.406448 };
+
+
 
   return (
     <div className="flex lg:w-full w-[100%] lg:justify-start justify-center m-auto items-center">

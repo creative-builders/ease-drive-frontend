@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { WalletIcon } from "../../../assets/icons/WalletIcon"
 import CustomButton from "../../CustomButton"
 import { EditIcon } from '../../../assets/icons/EditIcon'
@@ -15,7 +15,14 @@ import { PlateNumberIcon } from '../../../assets/icons/PlateNumberIcon'
 import { CreditCardIcon } from '../../../assets/icons/CreditCardIcon';
 import { BankHouseIcon } from '../../../assets/icons/BankHouseIcon';
 import { ResetSuccess } from '../../../assets/icons/ResetSuccess'
+
+import LoadingSpinner from '../../LoadingSpinner';
+import { driverKYCUpdate, getDriverDetails } from "../../../store/auth/driver/api"
+import { useMutation } from "@tanstack/react-query";
+import { userAtom } from "../../atoms/userAtom";
 import { useNavigate } from 'react-router-dom'
+import { useRecoilValue } from "recoil";
+
 
 import { DashboardModal } from './DashboardModal'
 import { CustomSelectField } from "../../customFormFields/CustomSelectField"
@@ -23,11 +30,15 @@ import { CustomSelectField } from "../../customFormFields/CustomSelectField"
 
 export const AccountCenter = () => {
 
+    const user = useRecoilValue(userAtom);
+
     const [modalType, setModalType] = useState(null); // "image" | "amount" | "loading"
     // const [amount, setAmount] = useState("");
     const [pin, setPin] = useState("")
     const [isAmountEmpty, setIsAmountEmpty] = useState(false);
+    const [isSumitting, setisSubmitting] = useState(false)
     const [isPinInvalid, setIsPinInvalid] = useState(false)
+    const [driverData, setDriverData] = useState({})
 
     const [showPassword, setShowPassword] = useState(false);
     const [inputTouched, setInputTouched] = useState(false);
@@ -59,6 +70,56 @@ export const AccountCenter = () => {
 
     const showPinNotMatchedError = inputTouched && inputs.newPin !== inputs.confirmNewPin
 
+    const {
+        bankName,
+        bankAccountHolderName,
+        bankAccountNumber,
+        transactionPin
+    } = driverData?.driverProfile || {}
+
+
+
+    // console.log("KYC data updated successfully:", driverData.driverProfile);
+
+
+    const { mutate: getDriverKYC, isLoaded } = useMutation(
+        getDriverDetails,
+        {
+            onSuccess: (data) => {
+                setDriverData(data.data)
+                // setisSubmitting(false)
+                // setModalType("accountsuccess");
+            },
+            onError: (error) => {
+                toast.error(error.response?.data?.message || error.message);
+            }
+        }
+    );
+
+
+
+    useEffect(() => {
+        if (user?.id) {
+            getDriverKYC({ userID: user.id });
+        }
+    }, [user?.id, getDriverKYC]);
+
+    
+
+    const { mutate: submitDriverKYC, isLoading } = useMutation(
+        driverKYCUpdate,
+        {
+            onSuccess: (data) => {
+                // console.log("KYC data updated successfully:", data);
+                setisSubmitting(false)
+                setModalType("accountsuccess");
+            },
+            onError: (error) => {
+                toast.error(error.response?.data?.message || error.message);
+            }
+        }
+    );
+
     const handleAmountSubmit = () => {
         if (!inputs.amount) {
             // setIsAmountEmpty(true);
@@ -81,8 +142,21 @@ export const AccountCenter = () => {
     }
 
     const handleBankDetailsSubmit = () => {
-        setModalType("withdralpin")
+        const _formData = new FormData();
+        _formData.append("bankAccountHolderName", inputs.bankAccountHolderName);
+        _formData.append("bankName", inputs.bankName);
+        _formData.append("bankAccountNumber", inputs.bankAccountNumber);
+        _formData.append("transactionPin", "2345");
+
+        try {
+            submitDriverKYC({ credentials: _formData, token: user?.id });
+            // setModalType("withdralpin")
+        } catch (error) {
+            console.log(error)
+        }
     }
+
+
     const handleChange = (e) => {
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
         setInputTouched(true);
@@ -95,29 +169,44 @@ export const AccountCenter = () => {
 
     return (
         <div className="p-6 lg:w-[495px] lg:h-[263px] bg-white rounded-xl shadow w-full">
-            <div className="flex flex-col justify-start items-start gap-4 h-full w-[]">
+            <div className="flex flex-col justify-start items-start gap-2 h-full w-[]">
                 <h2 className="text-lg font-semibold">Payout Details</h2>
-                <div className='flex flex-col gap-2'>
+                <div className='flex flex-col gap-1'>
                     <div>
                         <p className='text-sm font-semibold text-gray-800'>Linked Account</p>
                     </div>
-                    <div className='flex items-center lg:gap-10 justify-between lg:w-full w-[328px] bg-accent-50 p-4 rounded-lg '>
-                        <div className="inline mr-2 bg-green-50 lg:w-[60px] lg:h-[60px]  w-[34px] h-[34px] rounded-full flex justify-center items-center">
-                            <WalletIcon />
-                        </div>
-                        <div className=' flex flex-col justify-start items-start gap-2 '>
-                            <div className='flex lg:text-base text-[14px] font-semibold text-gray-800 gap-4'>
-                                Bank Name
-                                <span className='lg:text-[12px] text-[10px] text-blue-500 bg-green-50 px-4 rounded-xl mt-'>Default</span>
-                            </div>
+                    <div className='flex items-center lg:gap-2 justify-center lg:w-full w-[328px] bg-accent-50 p-4 rounded-lg '>
 
-                            <div className='flex gap-2'>
-                                <p className='lg:text-[14px] text-[10px]'>Account Number : <span>023****3043</span> </p>
+                        {
+                           bankName ? (
+                                <>
+                                    <div className="inline mr-2 bg-green-50 lg:w-[60px] lg:h-[60px]  w-[36px] h-[36px] rounded-full flex justify-center items-center">
+                                        <WalletIcon />
+                                    </div>
+                                    <div className=' flex flex-col justify-start items-start gap-2 w-[70%] '>
+                                        <div className='flex gap-4'>
+                                            <p className='lg:text-[16px] w-full text-[14px] font-semibold text-gray-800 '>{bankName} </p>
+                                            <span className='lg:text-[12px] text-[10px] flex items-center w-[100px] h-[20px] justify-center text-blue-500 bg-green-50 px-4 rounded-xl mt-'>Default</span>
+                                        </div>
 
-                            </div>
-                        </div>
-                        <EditIcon className="inline mr-2 cursor-pointer" onClick={handleUpdateBankAccount} />
+                                        <div className='flex gap-2'>
+                                            <p className='lg:text-[14px] text-[10px]'> Account Number :{" "}
+                                                <span>
+                                                    {bankAccountNumber
+                                                        ? `${bankAccountNumber.slice(0, 3)}****${bankAccountNumber.slice(-3)}`
+                                                        : ""}
+                                                </span> </p>
+
+                                        </div>
+                                    </div>
+                                    <EditIcon className="inline mr-2 cursor-pointer" onClick={handleUpdateBankAccount} />
+                                </>
+                            ) : (
+                                <LoadingSpinner  className="animate-spin" />
+                            )
+                        }
                     </div>
+
                     <div className='w-full flex gap-4'>
                         <CustomButton name="Withdraw Now" btnClick={() => setModalType("amount")} extendedStyles="bg-green-700 text-green-white w-full
                  p-3 lg:p-3 rounded-lg">
@@ -412,7 +501,26 @@ export const AccountCenter = () => {
 
                         </div>
 
-                        <CustomButton
+                        <button
+                            type="submit"
+                            onClick={() => {
+                                setisSubmitting(!isSumitting)
+                                handleBankDetailsSubmit()
+                            }}
+
+                            className={`inline-block  mb-2 w-full px-1.5 lg:p-4 p-2 h-[45px] lg:h-[60px]
+                                                         rounded-lg transition-all duration-300 bg-green-700 hover:bg-green-600 `}
+                        >
+                            <span className="text-white font-semibold flex items-center justify-center">
+                                {isSumitting ? (
+                                    <LoadingSpinner className="animate-spin" />
+                                ) : (
+                                    "Update"
+                                )}
+                            </span>
+                        </button>
+
+                        {/* <CustomButton
                             name="Update"
                             disabled={!inputs.bankAccountHolderName.trim() || !inputs.bankAccountNumber.trim() || !inputs.bankName.trim()}
                             btnClick={handleBankDetailsSubmit}
@@ -421,7 +529,7 @@ export const AccountCenter = () => {
                                     ? "bg-green-700 hover:bg-green-700 text-white"
                                     : "bg-gray-500 text-white cursor-not-allowed opacity-50"
                                 }`}
-                        />
+                        /> */}
                     </div>
                 </div>
             )}
@@ -554,125 +662,22 @@ export const AccountCenter = () => {
                 actionStyles="bg-green-700 text-white"
             />
 
-            {/* SUCCESS MODAL
-            {modalType === "success" && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-4 w-[390px] lg:top-[] 
-                                    top-[28%] lg:top-0 h-[335px] lg:w-[640px] lg:h-[380px] justify-center items-center">
-                        <button
-                            onClick={() => {
-                                setModalType(null);
-
-                            }}
-                            className="right-2 text-black w-full flex justify-end items-end lg:pt-2 pt-4"
-                        >
-                            <CloseMenuIcon className="lg:w-10 lg:h-10 w-8 h-8" />
-                        </button>
-
-
-                        <div className="lg:w-[90px] lg:h-[90px] w-[90px] h-[90px]
-                                     bg-green-500 flex items-center justify-center rounded-full">
-                            <SuccessIcon className="w-[50px] h-[90px] bg-green-500 flex items-center justify-center rounded-full" />
-                        </div>
-                        <p className="font-medium lg:text-[18px] text-[16px] text-center font-poppins ">
-                            <span className="font-semibold lg:text-[24px] text-[16px] font-poppins ">
-                                You’ve successfully withdrawn ₦{inputs.amount}
-                            </span>
-                            <br />
-                            Your funds will reflect in your bank account ending ••••1234 shortly.</p>
-                        <CustomButton
-                            btnClick={() => {
-
-                                setModalType(null);
-
-                            }}
-
-                            name="Back"
-                            extendedStyles="w-full p-3 lg:p-4 
-                                    !bg-green-250 text-green-900 rounded-lg mb-6 mt-4" />
+            <DashboardModal
+                isOpen={modalType === "accountsuccess"}
+                onClose={() => setModalType(null)}
+                icon={<SuccessIcon className="w-[50px] h-[90px] bg-green-50 flex items-center justify-center rounded-full" />}
+                iconBg="bg-green-50"
+                title="Account Updated Successfully!"
+                message="You can now withdraw funds to you new account."
+                actionLabel="OK"
+                onAction={() => {
+                    setModalType(null);
+                    navigate("/dashboard");
+                }}
+                actionStyles="bg-green-700 text-white"
+            />
 
 
-                    </div>
-                </div>
-            )}
-            {/* Reset SUCCESS MODAL 
-            {modalType === "resetsuccess" && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-2 w-[390px] lg:top-[] 
-                                    top-[28%] lg:top-0 h-[365px] lg:w-[640px] lg:h-[380px] justify-center items-center">
-                        <button
-                            onClick={() => {
-                                setModalType(null);
-
-                            }}
-                            className="right-2 text-black w-full flex justify-end items-end lg:pt-2 pt-4"
-                        >
-                            <CloseMenuIcon className="lg:w-10 lg:h-10 w-8 h-8" />
-                        </button>
-
-
-                        <div className="lg:w-[90px] lg:h-[90px] w-[90px] h-[90px]
-                                     bg-green-50 flex items-center justify-center rounded-full">
-                            <ResetSuccess className="w-[50px] h-[90px] bg-green-50 flex items-center justify-center rounded-full" />
-                        </div>
-                        <p className="font-medium lg:text-[18px] text-[16px] text-center font-poppins ">
-                            <span className="font-semibold lg:text-[24px] text-[16px] font-poppins ">
-                                PIN Set Successfully!
-                            </span>
-                            <br />
-                            You can now securely withdraw your earnings using your PIN.</p>
-                        <CustomButton
-                            btnClick={() => {
-
-                                setModalType(null);
-                                navigate("/dashboard")
-
-                            }}
-
-                            name="Return to Dashboard"
-                            extendedStyles="w-full p-3 lg:p-4 
-                                    bg-green-700 text-white rounded-lg mb-6 mt-4" />
-
-
-                    </div>
-                </div>
-            )}
-             FAILURE MODAL 
-            {modalType === "failed" && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-4 w-[390px] lg:top-[] 
-                        top-[28%] lg:top-0 h-[335px] lg:w-[640px] lg:h-[380px] justify-center items-center">
-
-                        <button
-                            onClick={() => {
-                                setModalType(null)
-                                onBack()
-                            }}
-                            className="right-2  text-black w-full flex justify-end items-end lg:pt-2 pt-4"
-                        >
-                            <CloseMenuIcon className="lg:w-10 lg:h-10 w-8 h-8" />
-                        </button>
-
-
-                        <div className="lg:w-[90px] lg:h-[90px] w-[90px] h-[90px] bg-red-500 flex items-center justify-center rounded-full">
-                            <FailureIcon className=" w-[50px] h-[90px] bg-red-500 flex items-center justify-center rounded-full" />
-                        </div>
-
-                        <p className="font-medium lg:text-[18px] text-center font-poppins">
-                            <span className="font-semibold lg:text-[18px] font-poppins ">
-                                Withdrawal Failed!
-                            </span>
-                            <br />
-                            Your request to withdraw ₦{inputs.amount} was not completed.</p>
-                        <CustomButton name="Retry" btnClick={() => {
-                            setModalType("amount")
-                        }} extendedStyles="w-full p-3 lg:p-4 !bg-green-250 
-                        text-green-900 rounded-lg mb-6 mt-4" />
-
-
-                    </div>
-                </div>
-            )} */}
         </div>
     )
 }
