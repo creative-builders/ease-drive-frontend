@@ -31,30 +31,6 @@ export function RequestsMap({ driverLocation, passengerLocation, btnFn }) {
       ? [passengerLocation.lat, passengerLocation.lng]
       : [6.5244, 3.3792]; // fallback: Lagos
 
-  // useEffect(() => {
-  //   if (!map) return;
-
-  //   // Remove old route
-  //   if (map._routingControl) {
-  //     map.removeControl(map._routingControl);
-  //   }
-
-  //   if (driverLocation && passengerLocation) {
-  //     const routingControl = L.Routing.control({
-  //       waypoints: [
-  //         L.latLng(driverLocation.lat, driverLocation.lng),
-  //         L.latLng(passengerLocation.lat, passengerLocation.lng),
-  //       ],
-  //       lineOptions: { styles: [{ color: "blue", weight: 5 }] },
-  //       addWaypoints: false,
-  //       draggableWaypoints: false,
-  //       fitSelectedRoutes: true,
-  //     }).addTo(map);
-
-  //     map._routingControl = routingControl;
-  //   }
-  // }, [map, driverLocation, passengerLocation]);
-
   return (
     <div className="py-2.5 relative h-full inline-flex flex-col lg:justify-start lg:items-start 
     items-center justify-center lg:-mt-2 lg:-ml-5 -mt-0 -ml-0">
