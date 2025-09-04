@@ -42,7 +42,6 @@ import ProfilePage from '../uI/ProfilePage';
 // import { DriverDashboard } from '../pages/dashboard/driver/DriverDashboard';
 import { Rides } from '../pages/dashboard/passenger/Rides';
 import { PassengerProfile } from '../pages/dashboard/passenger/PassengerProfile';
-import Support from '../pages/dashboard/passenger/Support';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from '../components/atoms/userAtom';
 import { DriverDashboardIndex } from '../pages/dashboard/driver';
@@ -53,6 +52,8 @@ import { Requests } from '../pages/dashboard/driver/Requests';
 import ProtectedRoutes from './ProtectedRoutes';
 import Notifications from '../ui/Notifications';
 import { NotificationsPage } from '../ui/NotificationPage';
+import { SupportPage } from '../pages/dashboard/passenger/SupportPage';
+
 
 
 
@@ -117,7 +118,7 @@ const IndexRoute = () => {
               <PassengerProfile /> :
               <DriverProfile />}
           />
-          <Route path="support" element={<Support />} />
+          <Route path="support" element={<SupportPage />} />
 
           {/* New Driver Routes */}
           <Route path="earnings" element={<Earnings />} />
