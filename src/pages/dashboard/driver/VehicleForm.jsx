@@ -1,32 +1,28 @@
 import React, { useRef, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
-import fallbackProfile from "../../assets/images/profile-user.png";
-import CustomButton from "../../components/CustomButton";
-import { UserIcon } from "../../assets/icons/UserIcon";
-import { CameraIcon } from "../../assets/icons/CameraIcon";
-import { EyeOpenIcon } from "../../assets/icons/EyeOpenIcon";
-import { EyeCloseIcon } from "../../assets/icons/EyeCloseIcon";
-import { EmailSignedIcon } from "../../assets/icons/EmailSignedIcon";
-import { PhoneIcon } from "../../assets/icons/PhoneIcon";
-import { LockPasswordIcon } from "../../assets/icons/LockPasswordIcon";
-import { InputField } from "../../components/customFormFields/InputField";
-import { userAtom } from "../../components/atoms/userAtom";
+import { UserIcon } from "../../../assets/icons/UserIcon";
+import { EyeOpenIcon } from "../../../assets/icons/EyeOpenIcon";
+import fallbackProfile from "../../../assets/images/driver-picture.png"
+import { EmailSignedIcon } from "../../../assets/icons/EmailSignedIcon";
+import { LockPasswordIcon } from "../../../assets/icons/LockPasswordIcon";
+import { PhoneIcon } from "../../../assets/icons/PhoneIcon";
+import { EyeCloseIcon } from "../../../assets/icons/EyeCloseIcon";
 import { useRecoilValue } from "recoil";
-import { Modal } from "../../components/Modal";
+import { CameraIcon } from "../../../assets/icons/CameraIcon";
+import CustomButton from "../../../components/new-landingPage/reusables/CustomButton";
+import { InputField } from "../../../components/customFormFields/InputField";
+import { userAtom } from "../../../components/atoms/userAtom";
+import { Modal } from "../../../components/Modal";
 
-export const EditProfileView = ({ onClose }) => {
-  const userData = useRecoilValue(userAtom);
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [profileImage, setProfileImage] = useState(
-    userData?.profileImage || fallbackProfile
-  );
+const VehicleForm = ({ onClose }) => {
+  
+const userData = useRecoilValue(userAtom);
+   const [profileImage, setProfileImage] = useState(
+      userData?.profileImage || fallbackProfile
+    );
+
   const fileInputRef = useRef(null);
-
-  const [isOpen, setIsOpen] = useState(false); // start closed
-  const [email, setEmail] = useState("");
-
-  const handleTogglePassword = () => setShowPassword((prev) => !prev);
 
   const handleIconClick = () => {
     fileInputRef.current.click();
@@ -37,30 +33,32 @@ export const EditProfileView = ({ onClose }) => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setProfileImage(imageUrl);
-      console.log(imageUrl);
+     console.log(imageUrl)
     }
   };
+ 
+  const [isOpen, setIsOpen] = useState(false); // start closed
+  const [email, setEmail] = useState("");
 
-  const handleSendLink = () => {
+    const handleSendLink = () => {
     console.log("Sending link to:", email);
     // call API here
     setIsOpen(false);
   };
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md h-fit md:h-[783px] w-full md:w-[439px] flex flex-col gap-20">
-      <figure>
+    <div className="bg-white rounded-2xl p-6 shadow-md h-fit w-full md:w-[439px] flex flex-col gap-20 sm:mt-[-195px]">
+      <figure className="">
         <div className="flex items-center space-x-2 mb-4">
           <button onClick={onClose}>
             <FiArrowLeft className="text-xl" />
           </button>
           <h2 className="text-lg font-semibold">Personal Information</h2>
         </div>
-
-        {/* Profile Image */}
+         <button className="p-2 flex sm:hidden align-center text-[#4847EB] text-base leading-normal not-italic tracking-normal absolute top-3 right-2">Save</button>
         <div className="flex items-center space-x-4 relative">
           <img
-            src={profileImage || userData?.profileImage || fallbackProfile}
+            src={profileImage}
             alt="Profile"
             className="w-14 h-14 rounded-full object-cover"
           />
@@ -77,13 +75,13 @@ export const EditProfileView = ({ onClose }) => {
           />
         </div>
 
-        {/* Form */}
         <form className="gap-4 mt-4" action="">
+
           <InputField
-            label="Full Name"
+            label="full name"
             name="name"
             type="text"
-            placeholder={userData?.fullName || "Enter your name"}
+            placeholder="Enter document id Number"
             leftIcon={UserIcon}
             // error={
             //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
@@ -94,7 +92,7 @@ export const EditProfileView = ({ onClose }) => {
             label="Email"
             name="email"
             type="email"
-            placeholder="Enter your email"
+            placeholder="Enter document Id  Number"
             leftIcon={EmailSignedIcon}
             // error={
             //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
@@ -102,32 +100,34 @@ export const EditProfileView = ({ onClose }) => {
           />
 
           <InputField
-            label="Phone Number"
-            name="number"
+            label="Phone number"
+            id="number"
             type="number"
-            placeholder={userData?.phone || "Enter your number"}
+            placeholder="Enter Vehicle Plate  Number"
             leftIcon={PhoneIcon}
             // error={
             //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
             // }
           />
 
+
           <InputField
             label="Enter Password"
             name="password"
             placeholder="Enter your password"
             leftIcon={LockPasswordIcon}
-            toggleable
-            showPassword={showPassword}
-            handleTogglePassword={handleTogglePassword}
+    
+            // error={showPasswordError ? "Password must be at least 5 characters" : ""}
+            // toggleable
+            // showPassword={showPassword}
+            // handleTogglePassword={handleTogglePassword}
             rightIconOpen={EyeOpenIcon}
             rightIconClose={EyeCloseIcon}
             isPassword
-          />
-
-          {/* Forgot Password Trigger */}
+  
+            />
           <p
-            onClick={() => setIsOpen(true)} // ✅ Correct setter
+            onClick={() => setIsOpen(true)}
             className="font-medium text-base leading-[100%] tracking-normal text-left mt-4 text-blue-600 cursor-pointer"
           >
             Forgot password
@@ -136,11 +136,9 @@ export const EditProfileView = ({ onClose }) => {
       </figure>
 
       <CustomButton
-        name="Save"
-        extendedStyles="px-4 py-4 w-full rounded-2xl gap-2 mt-6 bg-green-700"
-      />
-
-      {/* Forgot Password Modal */}
+        children="Save"
+        className="hidden sm:flex px-4 py-4 w-full text-white rounded-2xl gap-2 mt-6 bg-green-700"
+        />
       {isOpen && (
         <Modal
           closeModal={() => setIsOpen(false)}
@@ -166,9 +164,10 @@ export const EditProfileView = ({ onClose }) => {
             />
 
             <CustomButton
-              name="Send Link"
+              urlLink
+              children="Send Link"
               btnClick={handleSendLink}
-              extendedStyles="w-full h-[48px] mt-6 bg-green-700 text-white rounded-xl font-semibold"
+              className="w-full h-[48px] mt-6 bg-green-700 text-white rounded-xl font-semibold"
             />
           </div>
         </Modal>
@@ -176,3 +175,4 @@ export const EditProfileView = ({ onClose }) => {
     </div>
   );
 };
+export default VehicleForm 

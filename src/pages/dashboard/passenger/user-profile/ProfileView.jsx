@@ -1,12 +1,12 @@
-import PromoIcon from '../../assets/icons/PromoIcon';
+import PromoIcon from '../../../../assets/icons/PromoIcon';
 // import { LogoutIcon } from '../../assets/icons/LogoutIcon';
-import fallbackProfile from '../../assets/images/profile-user.png' // fallback if no image
-import { PhoneIcon } from '../../assets/icons/PhoneIcon';
-import { EmailSignedIcon } from '../../assets/icons/EmailSignedIcon';
-import { DelectIcon } from '../../assets/icons/DelectIcon';
-import { userAtom } from '../../components/atoms/userAtom';
+import fallbackProfile from '../../../../assets/images/profile-user.png'
+import { PhoneIcon } from '../../../../assets/icons/PhoneIcon';
+import { EmailSignedIcon } from '../../../../assets/icons/EmailSignedIcon';
+import { DelectIcon } from '../../../../assets/icons/DelectIcon';
+import { userAtom } from '../../../../components/atoms/userAtom';
 import { useRecoilValue } from 'recoil';
-import LogoutButton from '../../pages/auth/logout/LogoutButton';
+import LogoutButton from '../../../auth/logout/LogoutButton';
 
 const ProfileView = ({ onEdit }) => {
   const userData = useRecoilValue(userAtom);
