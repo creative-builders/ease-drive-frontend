@@ -16,7 +16,7 @@ function EarningsChart({ title, data }) {
     <div className="p-4 bg-white rounded-xl shadow w-full h-[263px] ">
       {/* Header */}
       <div className="flex items-center justify-between ">
-        <h2 className="lg:text-lg text-[14px] font-semibold">{title}</h2>
+        <h2 className="lg:text-2xl text-sm font-semibold">{title}</h2>
 
         <Filter options={["Daily", "Weekly", "Monthly"]} itemsArray={data}
           title="Trip Type"
@@ -65,6 +65,7 @@ function EarningsChart({ title, data }) {
               verticalAlign="top"
               align="center"
               iconType="circle"
+              className="lg:text-xs text-[8px]"
             />
           </PieChart>
         </ResponsiveContainer>

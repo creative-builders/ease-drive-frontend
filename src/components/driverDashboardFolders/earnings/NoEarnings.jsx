@@ -10,24 +10,48 @@ import { EyeCloseIcon } from "../../../assets/icons/EyeCloseIcon";
 import { LockPasswordIcon } from "../../../assets/icons/LockPasswordIcon";
 import { ResetSuccess } from '../../../assets/icons/ResetSuccess'
 import { DashboardModal } from './DashboardModal'
+import LoadingSpinner from '../../LoadingSpinner';
+import { driverKYCUpdate } from "../../../store/auth/driver/api"
+import { useMutation } from "@tanstack/react-query";
+import { userAtom } from "../../atoms/userAtom";
+import { useRecoilValue } from "recoil";
 
 export const NoEarnings = () => {
+
+  const user = useRecoilValue(userAtom);
 
   const [modalType, setModalType] = useState(null); // "image" | "amount" | "loading"
   const [showPassword, setShowPassword] = useState(false);
   const [inputTouched, setInputTouched] = useState(false);
+
+  const [isSumitting, setisSubmitting] = useState(false)
   const [errors, setErrors] = useState({});
   const [inputs, setInputs] = useState({
-   
+
     newPin: "",
     confirmNewPin: ""
   });
 
-  const showNewPinError = inputTouched && inputs.newPin.length !== 4
-
-  const showPinNotMatchedError = inputTouched && inputs.newPin !== inputs.confirmNewPin
 
   const navigate = useNavigate()
+
+  const showNewPinError = inputTouched && inputs.newPin.length !== 4
+  const showPinNotMatchedError = inputTouched && inputs.newPin !== inputs.confirmNewPin
+
+  const { mutate: submitDriverKYC, isLoading } = useMutation(
+    driverKYCUpdate,
+    {
+      onSuccess: (data) => {
+        // console.log("KYC data updated successfully:", data);
+        setisSubmitting(false)
+        setModalType("resetsuccess");
+      },
+      onError: (error) => {
+        toast.error(error.response?.data?.message || error.message);
+      }
+    }
+  )
+
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -37,7 +61,15 @@ export const NoEarnings = () => {
 
 
   const handlePinUpdate = () => {
-    setModalType("resetsuccess")
+    const _formData = new FormData();
+    _formData.append("transactionPin", inputs.newPin);
+
+    try {
+      submitDriverKYC({ credentials: _formData, token: user?.id });
+      // setModalType("withdralpin")
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 
@@ -57,17 +89,17 @@ export const NoEarnings = () => {
             flex flex-col justify-start  gap-10">
 
             <div>
-              <h1 className="lg:text-[24px] font-semibold font-poppins text-gray-800">Payout Details</h1>
+              <h1 className="lg:text-2xl font-semibold font-poppins text-gray-800">Payout Details</h1>
             </div>
 
             <div className='flex justify-center items-center lg:flex-col flex-col lg:gap-20 gap-40'>
               <div className='lg:w-[70%] w-full '>
-                <p className='text-neutral-400 text-center font-normal font-poppins lg:text-[18px] text-[12px]'>You haven’t completed any trips yet.
+                <p className='text-neutral-400 text-center font-normal font-poppins lg:text-[18px] text-xs'>You haven’t completed any trips yet.
                   <br /> Once you accept and complete a ride, your earnings will appear here.</p>
               </div>
 
               <div className="flex lg:w-[355px] w-[346px] flex-col lg:mt-[0%] mt-[5%] justify-start items-center gap-2 lg:gap-10">
-                <CustomButton name="Set Up Withdrawal Pin" btnClick={() =>{
+                <CustomButton name="Set Up Withdrawal Pin" btnClick={() => {
                   setModalType("withdralpin")
                 }} extendedStyles="w-full  bg-green-700 p-3 lg:p-4 rounded-lg">
                 </CustomButton >
@@ -96,11 +128,11 @@ export const NoEarnings = () => {
             </button>
 
             {/* Input Label */}
-            <h4 className="text-black lg:text-[26px] text-[14px] text-left font-poppins font-semibold">
+            <h4 className="text-black lg:text-[26px] text-sm text-left font-poppins font-semibold">
               Set Up Your Withdrawal PIN </h4>
             <div className='flex flex-col justify-center items-center' >
 
-              <p className='lg:text-[16px] text-[14px] font-regular '>For your security, you’ll need a 4-digit PIN to authorize all withdrawals.
+              <p className='lg:text-base text-sm font-regular '>For your security, you’ll need a 4-digit PIN to authorize all withdrawals.
                 Please choose a PIN that’s easy to remember but hard to guess.</p>
 
             </div>
@@ -149,7 +181,27 @@ export const NoEarnings = () => {
               </div>
 
             </div>
-            <CustomButton
+
+            <button
+              type="submit"
+              onClick={() => {
+                setisSubmitting(!isSumitting)
+                handlePinUpdate()
+              }}
+
+              className={`inline-block  mb-2 w-full px-1.5 lg:p-4 p-2 h-[45px] lg:h-[60px]
+                                                         rounded-lg transition-all duration-300 bg-green-700 hover:bg-green-600 `}
+            >
+              <span className="text-white font-semibold flex items-center justify-center">
+                {isSumitting ? (
+                  <LoadingSpinner className="animate-spin" />
+                ) : (
+                  "Set PIN"
+                )}
+              </span>
+            </button>
+
+            {/* <CustomButton
               name="Confirm Withdrawal"
               disabled={!inputs.newPin.trim() || !inputs.confirmNewPin.trim()}
               btnClick={handlePinUpdate}
@@ -158,7 +210,7 @@ export const NoEarnings = () => {
                   ? "bg-green-700 hover:bg-green-700 text-white"
                   : "bg-gray-400 text-white cursor-not-allowed opacity-20"
                 }`}
-            />
+            /> */}
           </div>
         </div>
       )}

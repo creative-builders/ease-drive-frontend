@@ -27,12 +27,10 @@ export const driverSignUpAuth = async (credentials) => {
 export const driverKYCUpdate = async ({ credentials, token }) => {
     console.log("API Function Called with:", credentials);
     try {
-        const response = await axiosInstancePrivate.put(
+        const response = await axiosInstancePrivate.patch(
             `v1/users/update/driverkyc?whois=${token}`,
             credentials,
-            {
-                headers: { "Content-Type": "multipart/form-data" }
-            }
+            
         );
         console.log("API Response:", response.data);
         return response.data;
@@ -41,3 +39,14 @@ export const driverKYCUpdate = async ({ credentials, token }) => {
         throw error;
     }
 };
+
+export const getDriverDetails = async ({userID}) => {
+       
+    try {
+        const response = await axiosInstancePrivate.get(`v1/users/${userID}`)
+        return response.data
+    } catch (error) {   
+         console.error("API Error:", error.response?.data || error.message);
+        throw error;
+    }
+}
