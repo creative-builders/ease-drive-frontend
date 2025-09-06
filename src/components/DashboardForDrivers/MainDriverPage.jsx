@@ -1,7 +1,8 @@
 
-import RecentTrips from "./RecentTrips";
+// import RecentTrips from "./RecentTrips";
+import { Trips as RecentTrips } from "./RecentTrips";
 import StatsCards from "./StatsCards";
-import DriverHeader from "./DriverHeader";
+import DriverTrackInfo from "./DriverTrackInfo";
 import DriverNotifications from "./DriverNotifications";
 import RideRequests from "./RequestRides";
 import { CarIcon } from "../../assets/icons/CarIcon";
@@ -12,7 +13,7 @@ import { Star } from "../../assets/icons/Star";
 export default function MainDriverPage() {
   return (
     <div className="p-6 space-y-6">
-      <DriverHeader />
+      <DriverTrackInfo />
 
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
