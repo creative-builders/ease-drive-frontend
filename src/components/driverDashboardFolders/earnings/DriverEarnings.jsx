@@ -6,12 +6,20 @@ import { useRecoilValue } from "recoil";
 import { NoEarnings } from "./NoEarnings";
 import { Earnings } from "./Earnings";
 
+import { userAtom } from "../../atoms/userAtom";
+
+
 export function DriverEarnings() {
   const [selectedRequest, setSelectedRequest] = useState(null);
+
+  const user = useRecoilValue(userAtom);
+
   const location = useRecoilValue(locationAtom);
 
   const myLocation = { lat: 6.5244, lng: 3.3792 };      // Driver (Lagos mainland)
   const destination = { lat: 6.465422, lng: 3.406448 };
+
+
 
   return (
     <div className="flex lg:w-full w-[100%] lg:justify-start justify-center m-auto items-center">
@@ -21,7 +29,7 @@ export function DriverEarnings() {
           <h2 className="lg:text-2xl font-semibold text-[18px] font-poppins">
             Earnings Overview
           </h2>
-          <p className="lg:text-[16px] text-base inline-flex items-center font-poppins">
+          <p className="lg:text-base text-base inline-flex items-center font-poppins">
             {/* <div className="bg-primary-50 text-green-900 lg:w-[38px] lg:h-[36px] w-[28px] h-[26px] rounded-full px-2 py-1 mr-2 justify-center inline-flex items-center">
               {/* <LiveGPSIcon className="inline font-poppins" /> 
             </div> */}

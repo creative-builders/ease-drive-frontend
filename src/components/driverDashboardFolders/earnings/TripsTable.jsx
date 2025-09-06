@@ -12,7 +12,7 @@ export function TripsTable({ columns, data }) {
       {/* Header */}
       <div className="flex w-[100%] m-auto items-center">
         <div className="flex w-[100%] justify-start">
-          <h1 className="lg:text-[18px] text-[14px] font-semibold font-poppins">Recent Trips</h1>
+          <h1 className="lg:text-2xl text-sm font-semibold font-poppins">Recent Trips</h1>
         </div>
         <div className="flex w-[90%] justify-end">
           <Filter
@@ -32,7 +32,7 @@ export function TripsTable({ columns, data }) {
               {columns.map((col) => (
                 <th
                   key={col.accessor}
-                  className="px-4 py-2 font-semibold text-gray-800 lg:text-[16px] text-[12px] border-b"
+                  className="px-4 py-2 font-semibold text-gray-800 lg:text-base text-xs border-b"
                 >
                   {col.Header}
                 </th>
@@ -48,7 +48,7 @@ export function TripsTable({ columns, data }) {
                     key={col.accessor}
 
                   >
-                    <div className={`px-4 py-2 -mb-2 lg:text-[12px] text-[10px] font-medium
+                    <div className={`px-4 py-2 -mb-2 lg:text-xs text-[10px] font-medium
                       ${col.accessor === "status" && row[col.accessor] === "Paid" ? "text-green-600 bg-green-50 rounded-[4px] text-center  " : ""}
                       ${col.accessor === "status" && row[col.accessor] === "Pending" ? "text-orange-600 bg-orange-50 rounded-[4px] text-center" : ""}
                       ${col.accessor === "status" && row[col.accessor] === "Cancelled" ? "text-red-600 bg-red-50 rounded-[4px] text-center" : ""}
