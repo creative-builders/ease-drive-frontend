@@ -136,7 +136,7 @@ export const EditProfileView = ({ onClose }) => {
       </figure>
 
       <CustomButton
-        name="Save"
+        children="Save"
         className="px-4 py-4 w-full rounded-2xl text-white gap-2 mt-6 bg-green-700"
       />
 
@@ -166,8 +166,8 @@ export const EditProfileView = ({ onClose }) => {
             />
 
             <CustomButton
-              name="Send Link"
-              btnClick={handleSendLink}
+              children="Send Link"
+              onClick={handleSendLink}
               className="w-full h-[48px] mt-6 bg-green-700 text-white rounded-xl font-semibold"
             />
           </div>

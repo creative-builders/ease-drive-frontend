@@ -81,7 +81,7 @@ const userData = useRecoilValue(userAtom);
             label="full name"
             name="name"
             type="text"
-            placeholder="Enter document id Number"
+            placeholder="Enter your Name"
             leftIcon={UserIcon}
             // error={
             //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
@@ -92,7 +92,7 @@ const userData = useRecoilValue(userAtom);
             label="Email"
             name="email"
             type="email"
-            placeholder="Enter document Id  Number"
+            placeholder="Enter your email"
             leftIcon={EmailSignedIcon}
             // error={
             //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
@@ -103,7 +103,7 @@ const userData = useRecoilValue(userAtom);
             label="Phone number"
             id="number"
             type="number"
-            placeholder="Enter Vehicle Plate  Number"
+            placeholder="Enter your Number"
             leftIcon={PhoneIcon}
             // error={
             //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""

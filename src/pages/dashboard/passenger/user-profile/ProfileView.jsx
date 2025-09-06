@@ -7,9 +7,13 @@ import { DelectIcon } from '../../../../assets/icons/DelectIcon';
 import { userAtom } from '../../../../components/atoms/userAtom';
 import { useRecoilValue } from 'recoil';
 import LogoutButton from '../../../auth/logout/LogoutButton';
+import { useState } from 'react';
+import { Modal } from '../../../../components/Modal';
 
 const ProfileView = ({ onEdit }) => {
   const userData = useRecoilValue(userAtom);
+
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="bg-white rounded-2xl p-6 md:shadow-md h-[600px] md:h-[783px] gap-4 flex flex-col">
@@ -84,9 +88,33 @@ const ProfileView = ({ onEdit }) => {
         </div>
 
         <div className="flex px-2 py-3 items-center justify-start gap-2 cursor-pointer">
-          <DelectIcon />
+          <DelectIcon onClick={() => setIsOpen(true)} />
           <p className="font-medium text-[14px] leading-6 tracking-normal text-red-500">delete account</p>
         </div>
+
+        {isOpen && (
+        <Modal
+          closeModal={() => setIsOpen(false)}
+          title="Delete Account?"
+          bodyText="We would miss you if you go, are you sure you want to delete your account?"
+        >
+          {/* Buttons inside modal */}
+          <div className="flex flex-col gap-3 w-full mt-6">
+            <button
+              className="w-full py-3 rounded-lg bg-green-200 text-black font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              Back
+            </button>
+            <button
+              className="w-full py-3 rounded-lg bg-red-500 text-white font-medium"
+              // onClick={handleDelete}
+            >
+              Yes, Delete Account
+            </button>
+          </div>
+        </Modal>
+      )}
       </section>
     </div>
   );

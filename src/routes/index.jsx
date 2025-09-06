@@ -1,5 +1,4 @@
 
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../pages/landingPage/Home';
 import Options from '../pages/auth/SignupOptions/Options';
@@ -38,7 +37,6 @@ import NotFoundPage from '../pages/dashboard/NotFoundPage';
 import DriverView from '../components/DashboardForDrivers/DriverView';
 import { Rides } from '../pages/dashboard/passenger/Rides';
 import { PassengerProfile } from '../pages/dashboard/passenger/PassengerProfile';
-import Support from '../pages/dashboard/passenger/Support';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from '../components/atoms/userAtom';
 import { DriverDashboardIndex } from '../pages/dashboard/driver';
@@ -50,6 +48,8 @@ import ProfilePage from '../pages/dashboard/driver/DriverProfiles';
 import Notifications from '../pages/dashboard/driver/Notification';
 import DriverProfile from '../pages/dashboard/driver/DriverProfiles';
 import DriverProfiles from '../pages/dashboard/driver/DriverProfiles';
+import { SupportPage } from "../pages/dashboard/passenger/SupportPage";
+
 
 
 
@@ -115,7 +115,7 @@ const IndexRoute = () => {
               <PassengerProfile /> :
               <DriverProfile />}
           />
-          <Route path="support" element={<Support />} />
+          <Route path="support" element={<SupportPage />} />
 
           {/* New Driver Routes */}
           <Route path="earnings" element={<Earnings />} />
