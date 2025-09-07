@@ -8,5 +8,6 @@ export default defineConfig({
     // host: 'localhost', // Ensure the host is explicitly set
     host: '0.0.0.0', // Allow access from anywhere
     port: 5178,        // Set the custom port
+    allowedHosts:"https://ease-drive.onrender.com"
   },
 })

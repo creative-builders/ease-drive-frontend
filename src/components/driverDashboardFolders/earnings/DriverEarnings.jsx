@@ -16,11 +16,6 @@ export function DriverEarnings() {
 
   const location = useRecoilValue(locationAtom);
 
-  const myLocation = { lat: 6.5244, lng: 3.3792 };      // Driver (Lagos mainland)
-  const destination = { lat: 6.465422, lng: 3.406448 };
-
-
-
   return (
     <div className="flex lg:w-full w-[100%] lg:justify-start justify-center m-auto items-center">
       <div>

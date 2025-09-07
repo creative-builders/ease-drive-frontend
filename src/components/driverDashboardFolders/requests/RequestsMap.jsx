@@ -116,5 +116,3 @@ function MapWithRouting({ driverLocation, passengerLocation }) {
 
   return null;
 }
-
-// open  eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImFjZWI4MDMwNTI5NTQyMTA5NmI5N2JjYzY2OTk1ZGYzIiwiaCI6Im11cm11cjY0In0=
