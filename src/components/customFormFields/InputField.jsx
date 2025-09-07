@@ -20,6 +20,7 @@ export const InputField = ({
   leftIcon: LeftIcon,
   error,
   isPassword = false,
+  readOnly = false,
   showPassword,
   handleTogglePassword,
   rightIconOpen: RightIconOpen,
@@ -46,6 +47,7 @@ const inputType = isPassword ? (showPassword ? "text" : "password") : type;
 
         <input
           type={inputType}
+          readOnly={readOnly}
           name={name}
           id={name}
           placeholder={placeholder}
