@@ -9,13 +9,28 @@ import { EmailSignedIcon } from "../../../../assets/icons/EmailSignedIcon";
 import { PhoneIcon } from "../../../../assets/icons/PhoneIcon";
 import { LockPasswordIcon } from "../../../../assets/icons/LockPasswordIcon";
 import { useRecoilValue } from "recoil";
-import CustomButton from "../../../../components/new-landingPage/reusables/CustomButton";
 import { InputField } from "../../../../components/customFormFields/InputField";
 import { userAtom } from "../../../../components/atoms/userAtom";
 import { Modal } from "../../../../components/Modal";
+import { FormProvider, useStepFlowContext } from "../../../../hooks/useStepFlowFormContext";
+import { useMutation } from "@tanstack/react-query";
+import { updateUserProfile } from "../../../../store/users/api";
+import CustomButton from "../../../../components/CustomButton";
 
-export const EditProfileView = ({ onClose }) => {
-  const userData = useRecoilValue(userAtom);
+
+
+
+
+const UpdatePassengerProfile = ({ onClose }) => {
+
+const {
+    formData,
+    inputTouched,
+    setFormData,
+    handleUpdateFormData,
+} = useStepFlowContext();
+
+const userData = useRecoilValue(userAtom);
 
   const [showPassword, setShowPassword] = useState(false);
   const [profileImage, setProfileImage] = useState(
@@ -25,6 +40,17 @@ export const EditProfileView = ({ onClose }) => {
 
   const [isOpen, setIsOpen] = useState(false); // start closed
   const [email, setEmail] = useState("");
+  const [file,setFile] = useState(null);
+
+
+  const { mutate:submitProfileUpdate , isLoading } = useMutation(updateUserProfile, {
+     onSuccess: () => {
+
+     },
+     onError:(error) => {
+      toast.error(error.response?.data?.message || error.message);
+     }
+  })
 
   const handleTogglePassword = () => setShowPassword((prev) => !prev);
 
@@ -33,7 +59,7 @@ export const EditProfileView = ({ onClose }) => {
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
+    setFile(e.target.files[0]);
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setProfileImage(imageUrl);
@@ -47,8 +73,16 @@ export const EditProfileView = ({ onClose }) => {
     setIsOpen(false);
   };
 
-  return (
-    <div className="bg-white rounded-2xl p-6 shadow-md h-fit md:h-[783px] w-full md:w-[439px] flex flex-col gap-20">
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userId = userData?.id;
+    submitProfileUpdate({ userId , payload: {...formData, profileImage: file }} );
+  }
+
+
+
+  return(
+   <div className="bg-white rounded-2xl p-6 shadow-md h-fit md:h-[783px] w-full md:w-[439px] flex flex-col gap-20">
       <figure>
         <div className="flex items-center space-x-2 mb-4">
           <button onClick={onClose}>
@@ -78,38 +112,36 @@ export const EditProfileView = ({ onClose }) => {
         </div>
 
         {/* Form */}
-        <form className="gap-4 mt-4" action="">
+        <form 
+        className="gap-4 mt-4" 
+         onSubmit={ handleSubmit}
+         >
+
           <InputField
             label="Full Name"
-            name="name"
+            name="fullName"
             type="text"
             placeholder={userData?.fullName || "Enter your name"}
             leftIcon={UserIcon}
-            // error={
-            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-            // }
+            onChange={handleUpdateFormData}
           />
 
           <InputField
             label="Email"
             name="email"
             type="email"
-            placeholder="Enter your email"
+            placeholder={userData?.email}
             leftIcon={EmailSignedIcon}
-            // error={
-            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-            // }
+            readOnly={true}
           />
 
           <InputField
             label="Phone Number"
-            name="number"
+            name="phoneNumber"
             type="number"
-            placeholder={userData?.phone || "Enter your number"}
+            placeholder={userData?.phoneNumber || "Enter your number"}
             leftIcon={PhoneIcon}
-            // error={
-            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-            // }
+            onChange={handleUpdateFormData}
           />
 
           <InputField
@@ -123,6 +155,7 @@ export const EditProfileView = ({ onClose }) => {
             rightIconOpen={EyeOpenIcon}
             rightIconClose={EyeCloseIcon}
             isPassword
+            onChange={handleUpdateFormData}
           />
 
           {/* Forgot Password Trigger */}
@@ -132,13 +165,16 @@ export const EditProfileView = ({ onClose }) => {
           >
             Forgot password
           </p>
+
+         <CustomButton
+          name="Save"
+          extendedStyles= {"px-4 py-4 w-full rounded-2xl text-white gap-2 mt-6 bg-green-700"}
+          isLoading = { isLoading }
+          />
         </form>
       </figure>
 
-      <CustomButton
-        children="Save"
-        className="px-4 py-4 w-full rounded-2xl text-white gap-2 mt-6 bg-green-700"
-      />
+     
 
       {/* Forgot Password Modal */}
       {isOpen && (
@@ -166,13 +202,25 @@ export const EditProfileView = ({ onClose }) => {
             />
 
             <CustomButton
-              children="Send Link"
+              name="Send Link"
               onClick={handleSendLink}
-              className="w-full h-[48px] mt-6 bg-green-700 text-white rounded-xl font-semibold"
+              extendedStyles= { "w-full h-[48px] mt-6 bg-green-700 text-white rounded-xl font-semibold" }
             />
           </div>
         </Modal>
       )}
     </div>
+  )
+}
+
+
+export const EditProfileView = ({ onClose }) => {
+  
+ const initialInputFields = ["fullName", "phoneNumber", "profileImage", "password"]
+
+  return (
+    <FormProvider initialInputFields={initialInputFields}>
+      <UpdatePassengerProfile/>
+    </FormProvider>
   );
 };
