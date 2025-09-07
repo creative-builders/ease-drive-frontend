@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const baseUrl = import.meta.env.VITE_BASE_URL;
-const baseUrl = import.meta.env.VITE_BASE_URL_LOCAL;
+const baseUrl = import.meta.env.VITE_BASE_URL;
+// const baseUrl = import.meta.env.VITE_BASE_URL_LOCAL;
 
 export const axiosInstancePrivate = axios.create({
     baseURL: baseUrl,
