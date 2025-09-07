@@ -19,7 +19,7 @@ const getLocationName = async (lat, lon) => {
   }
 };
 
-export default function DriverHeader() {
+export default function DriverTrackInfo() {
   const userData = useRecoilValue(userAtom);
   const setLiveLocation = useSetRecoilState(locationAtom);
 

@@ -1,18 +1,18 @@
 import React, { useRef, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
-import fallbackProfile from "../../assets/images/profile-user.png";
-import CustomButton from "../../components/CustomButton";
-import { UserIcon } from "../../assets/icons/UserIcon";
-import { CameraIcon } from "../../assets/icons/CameraIcon";
-import { EyeOpenIcon } from "../../assets/icons/EyeOpenIcon";
-import { EyeCloseIcon } from "../../assets/icons/EyeCloseIcon";
-import { EmailSignedIcon } from "../../assets/icons/EmailSignedIcon";
-import { PhoneIcon } from "../../assets/icons/PhoneIcon";
-import { LockPasswordIcon } from "../../assets/icons/LockPasswordIcon";
-import { InputField } from "../../components/customFormFields/InputField";
-import { userAtom } from "../../components/atoms/userAtom";
+import fallbackProfile from "../../../../assets/images/profile-user.png";
+import { UserIcon } from "../../../../assets/icons/UserIcon";
+import { CameraIcon } from "../../../../assets/icons/CameraIcon";
+import { EyeOpenIcon } from "../../../../assets/icons/EyeOpenIcon";
+import { EyeCloseIcon } from "../../../../assets/icons/EyeCloseIcon";
+import { EmailSignedIcon } from "../../../../assets/icons/EmailSignedIcon";
+import { PhoneIcon } from "../../../../assets/icons/PhoneIcon";
+import { LockPasswordIcon } from "../../../../assets/icons/LockPasswordIcon";
 import { useRecoilValue } from "recoil";
-import { Modal } from "../../components/Modal";
+import CustomButton from "../../../../components/new-landingPage/reusables/CustomButton";
+import { InputField } from "../../../../components/customFormFields/InputField";
+import { userAtom } from "../../../../components/atoms/userAtom";
+import { Modal } from "../../../../components/Modal";
 
 export const EditProfileView = ({ onClose }) => {
   const userData = useRecoilValue(userAtom);
@@ -136,8 +136,8 @@ export const EditProfileView = ({ onClose }) => {
       </figure>
 
       <CustomButton
-        name="Save"
-        extendedStyles="px-4 py-4 w-full rounded-2xl gap-2 mt-6 bg-green-700"
+        children="Save"
+        className="px-4 py-4 w-full rounded-2xl text-white gap-2 mt-6 bg-green-700"
       />
 
       {/* Forgot Password Modal */}
@@ -166,9 +166,9 @@ export const EditProfileView = ({ onClose }) => {
             />
 
             <CustomButton
-              name="Send Link"
-              btnClick={handleSendLink}
-              extendedStyles="w-full h-[48px] mt-6 bg-green-700 text-white rounded-xl font-semibold"
+              children="Send Link"
+              onClick={handleSendLink}
+              className="w-full h-[48px] mt-6 bg-green-700 text-white rounded-xl font-semibold"
             />
           </div>
         </Modal>
