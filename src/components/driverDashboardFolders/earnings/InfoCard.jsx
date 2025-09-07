@@ -26,7 +26,7 @@ export function InfoCard({ title, value, footer, InfoIcon }) {
 
             {/* Footer / Extra content */}
             {footer && 
-            <p className="lg:text-[10px] text-[8px] text-neutral-400 font-semibold">{footer.text} <span className="text-primary-700 ">{footer.value}%</span></p>}
+            <p className="lg:text-[10px] text-[8px] text-neutral-400 font-semibold">{footer.text} <span className="text-primary-700 ">+{footer.value}%</span></p>}
         </div>
     );
 }
