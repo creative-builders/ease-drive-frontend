@@ -1,5 +1,5 @@
 import { isToday, isYesterday, format, formatDistanceToNow } from "date-fns";
-import  Notification  from "../assets/images/notification-backgroud.png";
+import  Notification  from "../../../assets/images/notification-backgroud.png";
 
 function groupNotifications(notifications) {
   return notifications.reduce((groups, note) => {

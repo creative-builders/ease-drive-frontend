@@ -1,5 +1,4 @@
 
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../pages/landingPage/Home';
 import Options from '../pages/auth/SignupOptions/Options';
@@ -34,12 +33,8 @@ import { RegisterDriver } from "../pages/auth/driverSignup/DriverSignup"
 import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
 import { ForgotPassword } from '../pages/auth/Passengers/ForgotPassword';
 import { ResetPassword } from '../pages/auth/Passengers/ResetPassword';
-import NotFoundPage from '../ui/NotFoundPage';
+import NotFoundPage from '../pages/dashboard/NotFoundPage';
 import DriverView from '../components/DashboardForDrivers/DriverView';
-import Profile from '../uI/Profile';
-import ProfilePage from '../uI/ProfilePage';
-// import NotificationsPage from '../uI/NotificationPage';
-// import { DriverDashboard } from '../pages/dashboard/driver/DriverDashboard';
 import { Rides } from '../pages/dashboard/passenger/Rides';
 import { PassengerProfile } from '../pages/dashboard/passenger/PassengerProfile';
 import { useRecoilValue } from 'recoil';
@@ -47,12 +42,13 @@ import { userAtom } from '../components/atoms/userAtom';
 import { DriverDashboardIndex } from '../pages/dashboard/driver';
 import { Earnings } from '../pages/dashboard/driver/Earnings';
 import { Trips } from '../pages/dashboard/driver/Trips';
-import DriverProfile from '../pages/dashboard/driver/DriverProfile';
 import { Requests } from '../pages/dashboard/driver/Requests';
 import ProtectedRoutes from './ProtectedRoutes';
-import Notifications from '../ui/Notifications';
-import { NotificationsPage } from '../ui/NotificationPage';
-import { SupportPage } from '../pages/dashboard/passenger/SupportPage';
+import ProfilePage from '../pages/dashboard/driver/DriverProfiles';
+import Notifications from '../pages/dashboard/driver/Notification';
+import DriverProfile from '../pages/dashboard/driver/DriverProfiles';
+import DriverProfiles from '../pages/dashboard/driver/DriverProfiles';
+import { SupportPage } from "../pages/dashboard/passenger/SupportPage";
 
 
 
@@ -74,7 +70,7 @@ const IndexRoute = () => {
       <Route path="/Driv-upload" element={<DrivUpload />} />
       <Route path="/Driv-place" element={<DrivPlace />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/notification" element={<NotificationsPage />} />
+      {/* <Route path="/notification" element={<NotificationsPage />} /> */}
   
       
       <Route path="/Check-email" element={<CheckEmailFile />} />
@@ -89,8 +85,9 @@ const IndexRoute = () => {
       <Route path="/drivers" element={<DriverBoard />} />
       <Route path="/rides" element={<DataStatus />} />
       <Route path="/views" element={<DriverView />} />
-      <Route path="/driver-profile" element={<ProfilePage />} />
-      <Route path="/user-profile" element={<Profile />} />
+      <Route path="/driver-profile" element={<DriverProfile />} />
+      {/* <Route path="/driver-profile" element={<DriverProfiles />} /> */}
+      <Route path="/user-profile" element={<PassengerProfile />} />
       
 
       {/* Dashboard Route */}

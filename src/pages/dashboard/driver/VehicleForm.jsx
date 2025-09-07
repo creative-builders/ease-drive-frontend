@@ -1,18 +1,18 @@
 import React, { useRef, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
-import { CameraIcon } from "../assets/icons/CameraIcon";
-import { UserIcon } from "../assets/icons/UserIcon";
-import { EyeOpenIcon } from "../assets/icons/EyeOpenIcon";
-import CustomButton from "../components/CustomButton";
-import fallbackProfile from "../assets/images/driver-picture.png"
-import { EmailSignedIcon } from "../assets/icons/EmailSignedIcon";
-import { LockPasswordIcon } from "../assets/icons/LockPasswordIcon";
-import { PhoneIcon } from "../assets/icons/PhoneIcon";
-import { InputField } from "../components/customFormFields/InputField";
-import { EyeCloseIcon } from "../assets/icons/EyeCloseIcon";
-import { userAtom } from "../components/atoms/userAtom";
+import { UserIcon } from "../../../assets/icons/UserIcon";
+import { EyeOpenIcon } from "../../../assets/icons/EyeOpenIcon";
+import fallbackProfile from "../../../assets/images/driver-picture.png"
+import { EmailSignedIcon } from "../../../assets/icons/EmailSignedIcon";
+import { LockPasswordIcon } from "../../../assets/icons/LockPasswordIcon";
+import { PhoneIcon } from "../../../assets/icons/PhoneIcon";
+import { EyeCloseIcon } from "../../../assets/icons/EyeCloseIcon";
 import { useRecoilValue } from "recoil";
-import { Modal } from "../components/Modal";
+import { CameraIcon } from "../../../assets/icons/CameraIcon";
+import CustomButton from "../../../components/new-landingPage/reusables/CustomButton";
+import { InputField } from "../../../components/customFormFields/InputField";
+import { userAtom } from "../../../components/atoms/userAtom";
+import { Modal } from "../../../components/Modal";
 
 
 const VehicleForm = ({ onClose }) => {
@@ -81,7 +81,7 @@ const userData = useRecoilValue(userAtom);
             label="full name"
             name="name"
             type="text"
-            placeholder="Enter document id Number"
+            placeholder="Enter your Name"
             leftIcon={UserIcon}
             // error={
             //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
@@ -92,7 +92,7 @@ const userData = useRecoilValue(userAtom);
             label="Email"
             name="email"
             type="email"
-            placeholder="Enter document Id  Number"
+            placeholder="Enter your email"
             leftIcon={EmailSignedIcon}
             // error={
             //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
@@ -103,7 +103,7 @@ const userData = useRecoilValue(userAtom);
             label="Phone number"
             id="number"
             type="number"
-            placeholder="Enter Vehicle Plate  Number"
+            placeholder="Enter your Number"
             leftIcon={PhoneIcon}
             // error={
             //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
@@ -136,8 +136,8 @@ const userData = useRecoilValue(userAtom);
       </figure>
 
       <CustomButton
-        name="Save"
-        className="hidden sm:flex px-4 py-4 w-full rounded-2xl gap-2 mt-6 bg-green-700"
+        children="Save"
+        className="hidden sm:flex px-4 py-4 w-full text-white rounded-2xl gap-2 mt-6 bg-green-700"
         />
       {isOpen && (
         <Modal
@@ -164,9 +164,10 @@ const userData = useRecoilValue(userAtom);
             />
 
             <CustomButton
-              name="Send Link"
+              urlLink
+              children="Send Link"
               btnClick={handleSendLink}
-              extendedStyles="w-full h-[48px] mt-6 bg-green-700 text-white rounded-xl font-semibold"
+              className="w-full h-[48px] mt-6 bg-green-700 text-white rounded-xl font-semibold"
             />
           </div>
         </Modal>
