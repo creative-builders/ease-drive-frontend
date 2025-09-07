@@ -1,6 +1,6 @@
 
-// import RecentTrips from "./RecentTrips";
-import { Trips as RecentTrips } from "./RecentTrips";
+import RecentTrips from "./RecentTrips";
+// import { Trips as RecentTrips } from "./RecentTrips";
 import StatsCards from "./StatsCards";
 import DriverTrackInfo from "./DriverTrackInfo";
 import DriverNotifications from "./DriverNotifications";
