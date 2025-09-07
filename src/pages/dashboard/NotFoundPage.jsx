@@ -1,6 +1,6 @@
 // import { BackArrow } from "../assets/icons/BackArrowIcon";
-import found from "../assets/images/not-found.png"
-import BackArrow from "../components/BackArrow";
+import found from "../../assets/images/not-found.png"
+import BackArrow from "../../components/BackArrow";
 
 const NotFoundPage = () => {
     return (

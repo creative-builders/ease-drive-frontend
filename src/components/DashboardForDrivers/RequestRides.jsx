@@ -39,7 +39,7 @@ export default function RideRequests({ isPreview = false }) {
       {rides.map((ride, i) => (
         <div key={i} className="flex items-start gap-3 mb-4 border-b-[1px] border-[#E7E7E7]">
           <img src={ride.img} alt={ride.name} className="w-10 h-10 rounded-full" />
-          <div>
+          <div className="gap-20 md:gap-3">
             <h3 className="font-semibold text-base not-italic leading-normal text-[#000]">{ride.name}</h3>
             <p className="font-normal text-xs not-italic leading-normal text-[#000]">{ride.time}</p>
             <p className="text-[14px] not-italic font-semibold leading-6 tracking-wide text-[#072C0F]">
