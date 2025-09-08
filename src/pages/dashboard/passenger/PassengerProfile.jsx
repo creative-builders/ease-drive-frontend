@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { EditProfileView } from "./user-profile/EditProfile";
+import { EditProfileView } from "../../../components/dashboard/EditProfile";
 import ProfileView from "./user-profile/ProfileView";
 import useIsMobile from "../../../hooks/useIsMobile";
 

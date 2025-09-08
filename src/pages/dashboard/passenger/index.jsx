@@ -32,6 +32,8 @@ const PassengerDashboardIndex = () => {
           }}
           modalIcon={<LiveGPSIcon />}
           title={"Allow access to your live location"}
+          position="bottom"
+          width="100%"
           bodyText={
             "Use My Current Location"
           }
