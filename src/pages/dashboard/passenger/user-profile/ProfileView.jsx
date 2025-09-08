@@ -1,6 +1,4 @@
 import PromoIcon from '../../../../assets/icons/PromoIcon';
-// import { LogoutIcon } from '../../assets/icons/LogoutIcon';
-import fallbackProfile from '../../../../assets/images/profile-user.png'
 import { PhoneIcon } from '../../../../assets/icons/PhoneIcon';
 import { EmailSignedIcon } from '../../../../assets/icons/EmailSignedIcon';
 import { DelectIcon } from '../../../../assets/icons/DelectIcon';
@@ -9,6 +7,12 @@ import { useRecoilValue } from 'recoil';
 import LogoutButton from '../../../auth/logout/LogoutButton';
 import { useState } from 'react';
 import { Modal } from '../../../../components/Modal';
+import { InputField } from '../../../../components/customFormFields/InputField';
+import { Divider } from '../../../../components/Divider/Divider';
+import { AvatarIcon } from '../../../../assets/icons/AvatarIcon';
+
+
+
 
 const ProfileView = ({ onEdit }) => {
   const userData = useRecoilValue(userAtom);
@@ -16,85 +20,12 @@ const ProfileView = ({ onEdit }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-white rounded-2xl p-6 md:shadow-md h-[600px] md:h-[783px] gap-4 flex flex-col">
-      <div className="flex items-center justify-between">
-        {/* User Info */}
-        <div className="flex items-center space-x-4">
-          <img
-            src={userData?.profileImage || fallbackProfile}
-            alt="Profile"
-            className="w-14 h-14 rounded-full object-cover"
-          />
-          <div>
-            <h2 className="font-semibold text-lg">
-              {userData?.fullName || "John Ndubuisi Chukwuemeka"}
-            </h2>
-          </div>
-        </div>
-
-        {/* Edit Button */}
-        <button
-          className="text-blue-600 font-[inter] font-semibold text-base leading-[100%] tracking-normal top-0 right-6 absolute md:static"
-          onClick={onEdit}
-        >
-          Edit
-        </button>
-      </div>
-
-      {/* Personal Info */}
-      <section className="h-32 gap-2 p-2 border-b-[1px] border-gray-100">
-        <h2 className="font-medium text-[18px] leading-[100%] tracking-normal capitalize">
-          personal information
-        </h2>
-
-        <div className="flex px-2 py-3 items-center justify-start gap-2">
-          <EmailSignedIcon />
-          <input
-            type="email"
-            readOnly
-            onFocus={(e) => e.target.blur()}
-            className="h-6 w-48 sm:w-40 font-medium text-[14px] rounded-lg leading-6 tracking-normal border-none bg-transparent placeholder:text-gray-500"
-            placeholder={userData?.email || "Enter email"}
-            id="email"
-          />
-        </div>
-
-        <div className="flex px-2 py-3 items-center justify-start gap-2">
-          <PhoneIcon />
-          <input
-            type="number"
-            readOnly
-            onFocus={(e) => e.target.blur()}
-            className="h-6 w-48 sm:w-40 font-medium rounded-lg text-[14px] leading-6 tracking-normal border-none bg-transparent placeholder:text-gray-500"
-            placeholder={userData?.phone || "Enter phone number"}
-            id="phone"
-          />
-        </div>
-      </section>
-
-      {/* Promo */}
-      <section className="h-14 gap-5 flex px-3 py-2 border-b-[1px] border-gray-100">
-        <PromoIcon />
-        <p className="font-medium text-[14px] leading-6 tracking-normal">Promo card</p>
-      </section>
-
-      {/* Account */}
-      <section className="h-34 gap-2 p-2 border-b-[1px] border-gray-100">
-        <p className="font-medium text-[18px] leading-[100%] tracking-normal capitalize">account</p>
-
-        <div className="flex px-2 py-3 items-center justify-start gap-2 relative cursor-pointer">
-          <LogoutButton className="bg-transparent" />
-          <p className="font-medium text-[14px] leading-6 tracking-normal absolute left-14 text-red-500">log out</p>
-        </div>
-
-        <div className="flex px-2 py-3 items-center justify-start gap-2 cursor-pointer">
-          <DelectIcon onClick={() => setIsOpen(true)} />
-          <p className="font-medium text-[14px] leading-6 tracking-normal text-red-500">delete account</p>
-        </div>
-
+    <>
         {isOpen && (
         <Modal
           closeModal={() => setIsOpen(false)}
+          position='bottom'
+          width='100%'
           title="Delete Account?"
           bodyText="We would miss you if you go, are you sure you want to delete your account?"
         >
@@ -115,8 +46,99 @@ const ProfileView = ({ onEdit }) => {
           </div>
         </Modal>
       )}
+
+      <div className="bg-white rounded-2xl p-6 md:shadow-md h-[600px] md:h-[783px] gap-4 flex flex-col">
+      <div className="flex items-center justify-between">
+        {/* User Info */}
+        <div className=" flex items-center space-x-4">
+         <div className='rounded-lg48 bg-accent-50 flex justify-center items-center w-[38px] h-[37px] lg:w-[90px] lg:h-[87px]'>
+          {
+           userData?.profileImage ? (
+           <img
+            src={userData?.profileImage}
+            alt="Profile"
+            className="w-full h-full rounded-full object-cover"
+          />
+          )
+          :
+          (
+          <AvatarIcon
+           className="w-[24px] h-[24px] lg:w-[48px] lg:h-[48px]"
+          />)
+          }
+          </div>
+          <div>
+            <h2 className="font-semibold text-lg">
+              {userData?.fullName || "Hello Dear"}
+            </h2>
+          </div>
+        </div>
+
+        {/* Edit Button */}
+        <button
+          className="text-blue-600 font-semibold text-base leading-[100%] tracking-normal top-0 right-6 absolute md:static"
+          onClick={onEdit}
+        >
+          Edit
+        </button>
+      </div>
+
+      {/* Personal Info */}
+      <section className="">
+        <h3 className="font-semibold lg:font-medium text-sm lg:text-lg leading-[100%] tracking-normal">
+          Personal Information
+       </h3>
+
+        <InputField
+         type='email'
+         leftIcon={EmailSignedIcon}
+         placeholder={userData?.email || "Enter email"}
+         inputWrapperStyles = {"border-none"}
+         readOnly
+         />
+
+         <InputField
+         type='number'
+         readOnly
+         leftIcon={PhoneIcon}
+          placeholder={userData?.phoneNumber || "Enter phone number"}
+         inputWrapperStyles = {"border-none"}
+         />
+
+         <Divider/>
+
       </section>
+
+      {/* Promo Card*/}
+      <div className="gap-x-2.5 flex px-4 py-5">
+        <PromoIcon />
+        <p className="font-medium text-sm lg:text-lg text-neutral-200 leading-6 tracking-normal">Promo Code</p>
+      </div>
+
+      <Divider/>
+
+      {/* Account */}
+        <h4 className="font-semibold lg:font-medium text-sm lg:text-lg">Account</h4>
+
+        <div className="flex px-2.5 mb-2">
+          <LogoutButton 
+           strokeColor="#fe2a22"
+           text={"Log Out"}
+           textStyles={"font-medium text-sm lg:text-lg leading-6 text-red-500"}
+          />
+        </div>
+ 
+        <div 
+        className="flex px-2.5 items-center justify-start gap-2 cursor-pointer"
+        onClick={() => setIsOpen(true)}
+        >
+          <DelectIcon/>
+          <span className="font-medium text-sm lg:text-lg leading-6 text-red-500">Delete Account</span>
+        </div>
+
+         <Divider extendedStyles={"my-2"}/>
     </div>
+    </>
   );
 };
 

@@ -16,11 +16,8 @@ import LookingFor from '../components/luggagesparts/LookingFor';
 import PickRide from '../components/PickRide';
 import Cancelled from '../components/luggagesparts/Cancelled';
 import DriverCall from '../components/driverCall/DriverCall';
-import Setting from '../components/personalProfile/Setting';
-import Password from '../components/personalProfile/Password';
 import Luggage from '../components/luggagesparts/Luggage';
 import Bidder from '../components/bidders/Bidders';
-import EditProfile from '../components/personalProfile/EditProfile';
 import DashboardHome from '../pages/dashboard/DashboardHome';
 import PassengerDashboardIndex from '../pages/dashboard/passenger';
 import ViewBookings from '../components/Bookings/ViewBookings';
@@ -81,7 +78,6 @@ const IndexRoute = () => {
       <Route path="/LookingFor" element={<LookingFor />} />
       <Route path="/Cancelled" element={<Cancelled />} />
       <Route path="/DriverCall" element={<DriverCall />} />
-      <Route path="/Password" element={<Password />} />
       <Route path="/drivers" element={<DriverBoard />} />
       <Route path="/rides" element={<DataStatus />} />
       <Route path="/views" element={<DriverView />} />
@@ -98,8 +94,6 @@ const IndexRoute = () => {
          }
          />
         <Route path="my-bookings" element={<ViewBookings/>} />
-        <Route path="edit-profile" element={<EditProfile />} />
-        <Route path="settings" element={<Setting />} />
 
           <Route path="luggage" element={<Luggage />} />
           <Route path="looking-for" element={<LookingFor />} />

@@ -8,7 +8,7 @@ import { Modal } from '../../../components/Modal';
 import CustomButton from '../../../components/CustomButton';
 
 
-const LogoutButton = ({ text, className="" }) => {
+const LogoutButton = ({ text , textStyles, showBackgroundColor , strokeColor="#1A7B2C" }) => {
   const navigate = useNavigate();
   const setUser = useSetRecoilState(userAtom);
   const [openModal, setOpenModal] = useState(false);
@@ -24,6 +24,8 @@ const LogoutButton = ({ text, className="" }) => {
      {openModal && (
       <Modal
       title = {"Confirm Logout"}
+      position='bottom'
+      width='100%'
       bodyText={"Are you sure you want to logout?"}
       closeModal={() => setOpenModal(false)}
       >
@@ -44,9 +46,11 @@ const LogoutButton = ({ text, className="" }) => {
      }
       <div 
       onClick={() => setOpenModal(true)}
-      className={` ${className} w-[126px] h-[48px] px-[13px] bg-primary-50 rounded-36 lg:w-[54px] lg:h-[50px] rounded-2xl flex items-center lg:justify-center cursor-pointer`}>
-      <LogoutIcon/> 
-      <span className='text-primary-500'>{ text }</span>
+      className={`${showBackgroundColor ? "w-[126px] h-[48px] px-[13px] bg-primary-50 rounded-36 lg:w-[54px] lg:h-[50px] rounded-2xl":""} flex gap-x-2.5 items-center lg:justify-center cursor-pointer`}>
+      <LogoutIcon 
+       stroke ={ strokeColor} 
+      /> 
+      {text && <span className={`${textStyles} text-primary-500`}>{ text }</span>}
     </div>
     </>
   )
