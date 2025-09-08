@@ -1,23 +1,22 @@
 import React, { useRef, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
-import fallbackProfile from "../../../../assets/images/profile-user.png";
-import { UserIcon } from "../../../../assets/icons/UserIcon";
-import { CameraIcon } from "../../../../assets/icons/CameraIcon";
-import { EyeOpenIcon } from "../../../../assets/icons/EyeOpenIcon";
-import { EyeCloseIcon } from "../../../../assets/icons/EyeCloseIcon";
-import { EmailSignedIcon } from "../../../../assets/icons/EmailSignedIcon";
-import { PhoneIcon } from "../../../../assets/icons/PhoneIcon";
-import { LockPasswordIcon } from "../../../../assets/icons/LockPasswordIcon";
+import { CameraIcon } from "../../assets/icons/CameraIcon";
+import { EyeOpenIcon } from "../../assets/icons/EyeOpenIcon";
+import { EyeCloseIcon } from "../../assets/icons/EyeCloseIcon";
+import { EmailSignedIcon } from "../../assets/icons/EmailSignedIcon";
+import { PhoneIcon } from "../../assets/icons/PhoneIcon";
+import { LockPasswordIcon } from "../../assets/icons/LockPasswordIcon";
 import { useRecoilValue } from "recoil";
-import { InputField } from "../../../../components/customFormFields/InputField";
-import { userAtom } from "../../../../components/atoms/userAtom";
-import { Modal } from "../../../../components/Modal";
-import { FormProvider, useStepFlowContext } from "../../../../hooks/useStepFlowFormContext";
+import { InputField } from "../customFormFields/InputField";
+import { userAtom } from "../atoms/userAtom";
+import { Modal } from "../Modal";
+import { FormProvider, useStepFlowContext } from "../../hooks/useStepFlowFormContext";
 import { useMutation } from "@tanstack/react-query";
-import { updateUserProfile } from "../../../../store/users/api";
-import CustomButton from "../../../../components/CustomButton";
-
-
+import { updateUserProfile } from "../../store/users/api";
+import CustomButton from "../CustomButton";
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { UserIcon } from "../../assets/icons/UserIcon";
 
 
 
@@ -25,7 +24,6 @@ const UpdatePassengerProfile = ({ onClose }) => {
 
 const {
     formData,
-    inputTouched,
     setFormData,
     handleUpdateFormData,
 } = useStepFlowContext();
@@ -33,19 +31,25 @@ const {
 const userData = useRecoilValue(userAtom);
 
   const [showPassword, setShowPassword] = useState(false);
-  const [profileImage, setProfileImage] = useState(
-    userData?.profileImage || fallbackProfile
-  );
+  const [previewImage, setPreviewImage] = useState("");
   const fileInputRef = useRef(null);
 
-  const [isOpen, setIsOpen] = useState(false); // start closed
+  const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [file,setFile] = useState(null);
+
+  const isAnyFieldTouched = Object.values(formData).some((touched) => touched);
 
 
   const { mutate:submitProfileUpdate , isLoading } = useMutation(updateUserProfile, {
-     onSuccess: () => {
-
+     onSuccess: (response) => {
+      toast.success(response?.message);
+      setFormData(prev => ({
+        ...prev,
+        fullName:"",
+        profileImage:"",
+        phoneNumber:"",
+        password:""
+      }))
      },
      onError:(error) => {
       toast.error(error.response?.data?.message || error.message);
@@ -59,11 +63,18 @@ const userData = useRecoilValue(userAtom);
   };
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-    if (file) {
+    const file = e.target.files[0];
+
+    if(!file) return;
+
+    setFormData(prev => ({
+        ...prev,
+        profileImage:file
+      }))
+
+    if(file) {
       const imageUrl = URL.createObjectURL(file);
-      setProfileImage(imageUrl);
-      console.log(imageUrl);
+      setPreviewImage(imageUrl);
     }
   };
 
@@ -76,9 +87,8 @@ const userData = useRecoilValue(userAtom);
   const handleSubmit = (e) => {
     e.preventDefault();
     const userId = userData?.id;
-    submitProfileUpdate({ userId , payload: {...formData, profileImage: file }} );
+    submitProfileUpdate({ userId , payload:formData } );
   }
-
 
 
   return(
@@ -94,7 +104,7 @@ const userData = useRecoilValue(userAtom);
         {/* Profile Image */}
         <div className="flex items-center space-x-4 relative">
           <img
-            src={profileImage || userData?.profileImage || fallbackProfile}
+            src={ previewImage || userData?.profileImage }
             alt="Profile"
             className="w-14 h-14 rounded-full object-cover"
           />
@@ -102,24 +112,27 @@ const userData = useRecoilValue(userAtom);
             className="w-4 h-4 absolute left-7 cursor-pointer bottom-3"
             onClick={handleIconClick}
           />
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            className="hidden"
-            onChange={handleFileChange}
+
+          <InputField 
+           type="file"
+           accept="image/*"
+           inputRef={fileInputRef}
+           containerStyles={"hidden"}
+           inputTextStyles={"hidden"}
+           onChange={handleFileChange}
           />
         </div>
 
-        {/* Form */}
+        {/* Form Wrapper */}
         <form 
-        className="gap-4 mt-4" 
+         className="gap-4 mt-4" 
          onSubmit={ handleSubmit}
          >
-
+          
           <InputField
             label="Full Name"
             name="fullName"
+            value={formData?.fullName}
             type="text"
             placeholder={userData?.fullName || "Enter your name"}
             leftIcon={UserIcon}
@@ -129,6 +142,7 @@ const userData = useRecoilValue(userAtom);
           <InputField
             label="Email"
             name="email"
+            value={formData?.email}
             type="email"
             placeholder={userData?.email}
             leftIcon={EmailSignedIcon}
@@ -138,6 +152,7 @@ const userData = useRecoilValue(userAtom);
           <InputField
             label="Phone Number"
             name="phoneNumber"
+            value={formData?.phoneNumber}
             type="number"
             placeholder={userData?.phoneNumber || "Enter your number"}
             leftIcon={PhoneIcon}
@@ -145,7 +160,7 @@ const userData = useRecoilValue(userAtom);
           />
 
           <InputField
-            label="Enter Password"
+            label="Update Password"
             name="password"
             placeholder="Enter your password"
             leftIcon={LockPasswordIcon}
@@ -159,17 +174,18 @@ const userData = useRecoilValue(userAtom);
           />
 
           {/* Forgot Password Trigger */}
-          <p
-            onClick={() => setIsOpen(true)} // ✅ Correct setter
+          <Link
+            onClick={() => setIsOpen(true)}
             className="font-medium text-base leading-[100%] tracking-normal text-left mt-4 text-blue-600 cursor-pointer"
           >
             Forgot password
-          </p>
+          </Link>
 
          <CustomButton
           name="Save"
           extendedStyles= {"px-4 py-4 w-full rounded-2xl text-white gap-2 mt-6 bg-green-700"}
           isLoading = { isLoading }
+          disabled={ !isAnyFieldTouched }
           />
         </form>
       </figure>
@@ -183,23 +199,21 @@ const userData = useRecoilValue(userAtom);
           title="Forgot Password"
           bodyText="Enter your email and we'll send you a verification code to reset your Password"
           modalIcon={<EmailSignedIcon />}
+          position="bottom"
+          width="100%"
         >
           <div className="w-full mt-6">
-            <label className="block text-left font-medium text-sm mb-2">
-              Enter Email
-            </label>
-            
+
             <InputField
-              // label="Email"
+              label="Enter Email"
+              labelStyles={"block text-left font-medium text-sm mb-2"}
               name="email"
               type="email"
               placeholder="Enter your email"
               leftIcon={EmailSignedIcon}
               onChange={(e) => setEmail(e.target.value)}
-              // error={
-              //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-              // }
             />
+
 
             <CustomButton
               name="Send Link"
@@ -220,7 +234,7 @@ export const EditProfileView = ({ onClose }) => {
 
   return (
     <FormProvider initialInputFields={initialInputFields}>
-      <UpdatePassengerProfile/>
+      <UpdatePassengerProfile onClose={ onClose }/>
     </FormProvider>
   );
 };

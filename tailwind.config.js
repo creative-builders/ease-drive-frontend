@@ -67,7 +67,8 @@ export default {
       },
      borderRadius:{
         'lg32':"32px",
-        "lg36":"36px"
+        "lg36":"36px",
+        "lg48":"48px"
       },
       height:{
         106: "450px",

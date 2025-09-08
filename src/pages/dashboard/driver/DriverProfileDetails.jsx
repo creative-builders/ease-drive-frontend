@@ -15,7 +15,7 @@ import { userAtom } from "../../../components/atoms/userAtom";
 import { Modal } from "../../../components/Modal";
 
 
-const VehicleForm = ({ onClose }) => {
+export const DriverProfileDetails = ({ onClose }) => {
   
 const userData = useRecoilValue(userAtom);
    const [profileImage, setProfileImage] = useState(
@@ -47,7 +47,7 @@ const userData = useRecoilValue(userAtom);
   };
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md h-fit w-full md:w-[439px] flex flex-col gap-20 sm:mt-[-195px]">
+    <div className="bg-white rounded-2xl p-6 shadow-md w-full md:w-[439px] flex flex-col gap-20">
       <figure className="">
         <div className="flex items-center space-x-2 mb-4">
           <button onClick={onClose}>
@@ -175,4 +175,3 @@ const userData = useRecoilValue(userAtom);
     </div>
   );
 };
-export default VehicleForm 
