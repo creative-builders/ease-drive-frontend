@@ -18,6 +18,7 @@ export function RideRequests() {
   const [acceptedRequest, setAcceptedRequest] = useState(null);
   const [toggleMapList, setToggleMapList] = useState(false)
 const [myLocation, setMyLocation] = useState(null);
+
 const location = useRecoilValue(locationAtom);
 
 const {
