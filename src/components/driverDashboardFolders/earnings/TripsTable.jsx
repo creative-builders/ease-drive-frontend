@@ -30,7 +30,7 @@ function filterTripsByRange(trips, range) {
 }
 
 
-export function TripsTable({ columns, data }) {
+export function TripsTable({ columns, data, onView }) {
   const [filter, setFilter] = useState("All");
   const [sortedItems, setSortedItems] = useState(data);
 
@@ -75,6 +75,8 @@ export function TripsTable({ columns, data }) {
                   {col.Header}
                 </th>
               ))}
+               {/* Only show Action column if onView is passed */}
+                {onView && <th>Action</th>}
             </tr>
           </thead>
           <tbody>
@@ -99,6 +101,17 @@ export function TripsTable({ columns, data }) {
 
                   </td>
                 ))}
+                  {/* 👇 Add Action button if onView is provided */}
+                  {onView && (
+                    <td className="py-3 px-4">
+                      <button
+                        onClick={() => onView(row)}
+                        className="text-blue-600 hover:underline text-xs"
+                      >
+                        View
+                      </button>
+                    </td>
+                  )}
               </tr>
             ))}
           </tbody>
@@ -109,7 +122,7 @@ export function TripsTable({ columns, data }) {
 }
 
 // import { Pagination } from './Pagination'
-export function TripsPage({tripData}) {
+export function TripsPage({tripData, className = ''}) {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 6;
 
@@ -127,10 +140,22 @@ const data = tripData
     { Header: "Drop-Off", accessor: "dropoff" },
     { Header: "Status", accessor: "status" },
     { Header: "Earnings", accessor: "earnings" },
+     {
+    Header: "Action",
+    accessor: "action",
+    Cell: (_, row) => (
+      <span
+        className="text-green-600 cursor-pointer"
+        onClick={() => console.log("View trip:", row)}
+      >
+        view
+      </span>
+    ),
+  },
   ];
 
   return (
-    <div className="flex flex-col lg:gap-6 gap-4 ">
+    <div className={`flex flex-col lg:gap-6 gap-4 ${className}`}>
       <TripsTable columns={columns} data={currentData} />
       <Pagination
         currentPage={currentPage}
