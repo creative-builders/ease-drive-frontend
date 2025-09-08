@@ -1,4 +1,5 @@
 import React from 'react'
+import { CloseIcon } from '../assets/icons/CloseIcon'
 
 export const Modal = ({
   closeModal,
@@ -31,7 +32,7 @@ export const Modal = ({
           className="absolute top-4 right-4 text-gray-600 hover:text-black text-[34px] font-bold"
           onClick={closeModal}
         >
-          &times;
+        <CloseIcon/>
         </button>
 
         <div className="flex flex-col items-center justify-center text-center gap-2">
