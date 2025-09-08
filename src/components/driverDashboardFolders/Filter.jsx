@@ -79,9 +79,13 @@ export const Filter = ({ itemsArray, options, onSort, title }) => {
     });
   }, [itemsArray, filter]);
 
-  React.useEffect(() => {
-    onSort(filteredAndSortedItems);
-  }, [filteredAndSortedItems, onSort]);
+ // Call onSort only when the filter changes or when dropdown selection is made
+  const handleFilterChange = (option) => {
+    setFilter(option);
+    setDropdownOpen(false);
+    let filtered = [...itemsArray];
+    onSort(filtered); 
+  };
 
   return (
     <div className="relative">
@@ -103,10 +107,7 @@ export const Filter = ({ itemsArray, options, onSort, title }) => {
             <div
               key={idx}
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer font-poppins"
-              onClick={() => {
-                setFilter(option);
-                setDropdownOpen(false);
-              }}
+              onClick={() => handleFilterChange(option)}
             >
               {option}
             </div>
