@@ -26,7 +26,7 @@ export const updateUserProfile = async({ userId, payload }) => {
 
    const response = await axiosInstancePrivate.patch(`v1/users/${userId}`,
         formData,
-        // { headers: {"Content-Type": "multipart/form-data"}}
+        
     );
 
     return response.data;

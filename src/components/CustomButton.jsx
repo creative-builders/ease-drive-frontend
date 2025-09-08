@@ -11,7 +11,7 @@ const CustomButton = ({
     navigateTo,
     navigateState,
     isLoading=false,
-    disabled
+    disabled= false
 
 }) => {
     const navigate = useNavigate();
@@ -34,6 +34,7 @@ const CustomButton = ({
   return (
     <button 
      onClick={handleClick}
+    //  disabled={disabled}
      className={`${sizeClasses} ${extendedStyles} flex items-center justify-center ${disabled ? "bg-primary-50 cursor-not-allowed text-primary-300" : ""} text-gray-100 font-medium `}>
      {isLoading ? <LoadingSpinner className="animate-spin" /> : name}
      

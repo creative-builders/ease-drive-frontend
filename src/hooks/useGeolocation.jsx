@@ -51,6 +51,7 @@ const NOMINATIM_API = "https://nominatim.openstreetmap.org/reverse";
           setLocationName(location);
           setError(null);
           setLoading(false);
+          localStorage.setItem("user_location", JSON.stringify(location));
           setLiveLocation(location);
           setIsOpen(false);
           setLocationEnabled(true); // 👈 slide up

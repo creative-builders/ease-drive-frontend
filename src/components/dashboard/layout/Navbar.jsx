@@ -48,7 +48,9 @@ export const Navbar = ({
           <p className="capitalize font-medium text-neutral-400 lg:text-lg">
             {user?.fullName}
           </p>
-          <LogoutButton />
+          <LogoutButton
+          showBackgroundColor
+           />
         </div>
       </div>
 
@@ -80,7 +82,9 @@ export const Navbar = ({
         />
         ))
         }
-        <LogoutButton text="Logout" />
+        <LogoutButton 
+        showBackgroundColor
+        text="Logout" />
       </div>
     </nav>
   );

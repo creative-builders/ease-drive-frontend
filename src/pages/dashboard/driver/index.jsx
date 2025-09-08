@@ -18,7 +18,9 @@ export const DriverDashboardIndex = () => {
           closeModal={() => setIsOpen(false)}
           modalIcon={<LiveGPSIcon />}
           title="Allow access to your live location"
-          bodyText="Use My Current Location and Auto-fill the search bar with coordinates/nearest landmark"
+          bodyText="Use My Current Location"
+          position="bottom"
+          width="100%"
         >
           <CustomButton
             isLoading={loading}

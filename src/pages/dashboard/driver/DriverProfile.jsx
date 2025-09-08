@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import fallbackProfile from "../../../assets/images/driver-picture.png";
-import verify from "../../../assets/images/Create account.png";
 import star from "../../../assets/icons/starVector.svg";
 import { EmailSignedIcon } from "../../../assets/icons/EmailSignedIcon.jsx";
 import { LocationIcon } from "../../../assets/icons/LocationIcon.jsx";
@@ -19,62 +17,16 @@ import LogoutButton from "../../auth/logout/LogoutButton.jsx";
 import { userAtom } from "../../../components/atoms/userAtom.jsx";
 import { locationAtom } from "../../../components/atoms/locationAtom.jsx";
 import { Modal } from "../../../components/Modal.jsx";
+import { InputField } from "../../../components/customFormFields/InputField.jsx";
+import { DocumentIcon } from "../../../assets/icons/DocumentIcon.jsx";
+import { VerifiedBadgeIcon } from "../../../assets/icons/VerifiedBadgeIcon.jsx";
 
-
-const InfoField = ({ icon: Icon, placeholder, type = "text", value }) => (
-  <div className="flex px-2 py-3 items-center justify-start gap-2">
-    <Icon className="h-[18px] md:h-6 w-[18px] md:w-6 text-[#888]" />
-    <input
-      type={type}
-      readOnly
-      value={value}
-      placeholder={placeholder}
-      className="h-6 w-48 sm:w-40 font-medium text-[14px] pl-0 rounded-lg leading-6 tracking-normal not-italic border-none outline-none placeholder:text-[#888] focus:outline-none focus:border-none focus:ring-0"
-    />
-  </div>
-);
 
 export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
   const userData = useRecoilValue(userAtom);
-  const setLiveLocation = useSetRecoilState(locationAtom);
-
-  const [locationEnabled, setLocationEnabled] = useState(false);
-  const [locationName, setLocationName] = useState("");
-
-  // 🔹 get location name
-  const getLocationName = async (lat, lon) => {
-    try {
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
-      );
-      const data = await response.json();
-      return data.display_name;
-    } catch (err) {
-      console.error("Failed to fetch location name:", err);
-      return "";
-    }
-  };
-
-  // 🔹 set live location
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        async ({ coords: { latitude, longitude } }) => {
-          const name = await getLocationName(latitude, longitude);
-          setLiveLocation({ lat: latitude, lon: longitude, name });
-          setLocationName(name);
-          setLocationEnabled(true);
-        },
-        (error) => {
-          console.error("Location access denied:", error);
-          setLocationEnabled(false);
-        },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-      );
-    }
-  }, [setLiveLocation]);
 
   const [isOpen, setIsOpen] = useState(false);
+  const location = useRecoilValue(locationAtom)
 
   const handleDelete = () => {
     console.log("Account deleted");
@@ -82,134 +34,14 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md gap-4 flex flex-col h-[980px]">
-      {/* Top section: Profile */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <img
-            src={userData?.profileImage || fallbackProfile}
-            alt="Driver"
-            className="w-14 h-14 rounded-full"
-          />
-          <div className="flex flex-col space-y-1">
-            <div className="flex flex-col md:flex-row space-x-4">
-              <h2 className="font-semibold text-base">
-                {userData?.fullName || "John Ndubuisi Chukwuemeka"}
-              </h2>
-              <img src={verify} alt="verified" />
-            </div>
-            <p className="text-sm md:text-base font-bold text-[#262626] flex items-center gap-1">
-              <LocationIcon className="w-4 h-4 text-green-600" />
-              You’re currently at:{" "}
-              <span className="font-normal">
-                {locationEnabled && locationName
-                  ? locationName
-                  : "UNN Hostel C, Nsukka"}
-              </span>
-            </p>
-            <span className="flex gap-1 text-[10px]">
-              4.2 <img src={star} className="h-3 w-3" alt="rating" />
-              (42 Reviews)
-            </span>
-          </div>
-        </div>
-
-        <button
-          className="text-[#4847EB] font-medium md:font-semibold text-base"
-          onClick={onEditVehicle}
-        >
-          Edit
-        </button>
-      </div>
-
-      {/* Personal Info */}
-      <section className="gap-2 p-2 border-b border-[#E7E7E7]">
-        <h2 className="font-semibold text-base md:text-[18px] capitalize">
-          personal information
-        </h2>
-        <InfoField
-          icon={EmailSignedIcon}
-          type="email"
-          value={userData?.email}
-          placeholder="Enter email"
-        />
-        <InfoField
-          icon={PhoneIcon}
-          type="text"
-          value={userData?.phone}
-          placeholder="Enter phone number"
-        />
-        <InfoField
-          icon={HouseBuilding}
-          type="text"
-          value={userData?.address}
-          placeholder="Enugu"
-        />
-      </section>
-
-      {/* Vehicle Info */}
-      <section className="gap-2 p-2 relative border-b border-[#E7E7E7]">
-        <button
-          className="text-[#4847EB] font-medium absolute right-2 top-2 md:font-semibold text-base"
-          onClick={onEditCredentials}
-        >
-          Edit
-        </button>
-        <h2 className="font-semibold text-base md:text-[18px] capitalize">
-          Vehicle Information
-        </h2>
-        <InfoField
-          icon={CarIcon}
-          value={userData?.vehicleModel}
-          placeholder="Enter vehicle model"
-        />
-        <InfoField
-          icon={ColorIcon}
-          value={userData?.vehicleColor}
-          placeholder="Black"
-        />
-        <InfoField
-          icon={PlateNumberIcon}
-          value={userData?.plateNumber}
-          placeholder="ABC123"
-        />
-        <InfoField
-          icon={LocationHomeIcon}
-          value={userData?.pickupPoint}
-          placeholder="Main Gate"
-        />
-      </section>
-
-      {/* Support */}
-      <section className="gap-2 p-2 border-b border-[#E7E7E7]">
-        <InfoField
-          icon={CustomerService}
-          value={userData?.supportContact}
-          placeholder="Support contact"
-        />
-      </section>
-
-      {/* Account */}
-      <section className="h-36 gap-2 p-2 border-b border-[#E7E7E7]">
-        <p className="font-semibold text-[14px] md:text-[18px] capitalize">
-          account
-        </p>
-        <div className="flex px-2 py-3 items-center gap-2 cursor-pointer">
-          <LogoutButton className="bg-transparent" />
-          <p className="font-medium text-[14px] text-red-500">log out</p>
-        </div>
-        <div className="flex px-2 mb-2 py-3 items-center gap-2 cursor-pointer">
-          <DelectIcon 
-          className="h-[18px] md:h-6 w-[18px] md:w-6"
-          onClick={() => setIsOpen(true)} />
-          <p className="font-medium text-[14px] text-red-500">delete account</p>
-        </div>
-
-         {/* Reusable Modal */}
+    <>
+      {/* Reusable Modal */}
       {isOpen && (
         <Modal
           closeModal={() => setIsOpen(false)}
           title="Delete Account?"
+          position="bottom"
+          width="100%"
           bodyText="We would miss you if you go, are you sure you want to delete your account?"
         >
           {/* Buttons inside modal */}
@@ -229,7 +61,178 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
           </div>
         </Modal>
       )}
+
+      <div className="bg-white rounded-2xl p-6 shadow-md gap-4 flex flex-col">
+      {/* Top section: Profile */}
+      <div className="flex items-center justify-between">
+        <div className="flex gap-x-4">
+          <div className='rounded-lg48 bg-accent-50 flex justify-center items-center w-[38px] h-[37px] lg:w-[90px] lg:h-[87px]'>
+            {
+            userData?.profileImage ? (
+            <img
+            src={userData?.profileImage}
+            alt="Profile"
+            className="w-full h-full rounded-full object-cover"
+            />
+              )
+              :
+             (
+             <AvatarIcon
+             className="w-[24px] h-[24px] lg:w-[48px] lg:h-[48px]"
+              />)
+            }
+          </div>
+
+          <div className="flex flex-col">
+            <div className="flex flex-col md:flex-row md:items-center md:gap-x-4">
+              <h2 className="mb-2 font-semibold text-base capitalize">
+                {userData?.fullName || "John Ndubuisi Chukwuemeka"}
+              </h2>
+              <div className="flex gap-x-2 mb-2">
+                <VerifiedBadgeIcon/>
+                <span className="text-xs font-normal text-primary-500">Verified</span>
+              </div>
+            </div>
+            <p className="mb-2 hidden lg:flex text-xs lg:text-sm font-bold text-[#262626] flex items-center">
+              <LocationIcon className="text-green-600" />
+               You’re currently at:{" "}
+              <span className="font-normal">
+                {location
+                  ? location
+                  : "UNN Hostel C, Nsukka"}
+              </span>
+            </p>
+            <span className="flex text-[10px]">
+              4.2 <img src={star} className="h-3 w-3" alt="rating" />
+              (42 Reviews)
+            </span>
+          </div>
+        </div>
+
+        <button
+          className="text-[#4847EB] font-medium md:font-semibold text-base"
+          onClick={onEditVehicle}
+        >
+          Edit
+        </button>
+      </div>
+
+      {/* Personal Info */}
+      <section className="gap-2 p-2 border-b border-[#E7E7E7]">
+        <h3 className="font-semibold text-sm lg:text-lg">
+          Personal Information
+        </h3>
+        
+         <InputField
+         type='email'
+         leftIcon={EmailSignedIcon}
+         placeholder={userData?.email || "Enter email"}
+         inputWrapperStyles = {"border-none"}
+         readOnly
+         />
+
+        <InputField
+         type='number'
+         leftIcon={PhoneIcon}
+         placeholder={userData?.phoneNumber || "---"}
+         inputWrapperStyles = {"border-none"}
+         readOnly
+         />
+       
+         <InputField
+         leftIcon={HouseBuilding}
+         placeholder={userData?.address || "---"}
+         inputWrapperStyles = {"border-none"}
+         readOnly
+         />
+         
       </section>
-    </div>
+
+      {/* Vehicle Info */}
+      <section className="gap-2 p-2 relative border-b border-[#E7E7E7]">
+        <button
+          className="text-[#4847EB] font-medium absolute right-2 top-2 md:font-semibold text-base"
+          onClick={onEditCredentials}
+        >
+          Edit
+        </button>
+        <h3 className="font-semibold text-base md:text-[18px] capitalize">
+          Vehicle Information
+        </h3>
+        <InputField
+         leftIcon={CarIcon}
+         value={userData?.vehicleModel || "---"}
+         placeholder={"Enter Vehicle Model"}
+         inputWrapperStyles = {"border-none"}
+         readOnly
+         />
+         
+        <InputField
+         leftIcon={ColorIcon}
+         value={userData?.vehicleColor || "---"}
+         placeholder={"Black"}
+         inputWrapperStyles = {"border-none"}
+         readOnly
+         />
+
+         <InputField
+         leftIcon={PlateNumberIcon}
+         value={userData?.plateNumber || "---"}
+         placeholder={"ABC123"}
+         inputWrapperStyles = {"border-none"}
+         readOnly
+         />
+
+         <InputField
+         leftIcon={LocationHomeIcon}
+         value={userData?.pickupPoint || "---"}
+         placeholder={"Main Gate"}
+         inputWrapperStyles = {"border-none"}
+         readOnly
+         />
+
+        <InputField
+         leftIcon={DocumentIcon}
+         value={userData?.documentId || "---"}
+         placeholder={"Document ID"}
+         inputWrapperStyles = {"border-none"}
+         readOnly
+         />
+         
+      </section>
+
+      {/* Support */}
+      <section className="gap-2 p-2 border-b border-[#E7E7E7]">
+         <InputField
+         leftIcon={CustomerService}
+         value={userData?.supportContact }
+         placeholder={"Support contact"}
+         inputWrapperStyles = {"border-none"}
+         readOnly
+         />
+         
+      </section>
+
+      {/* Account */}
+        <h4 className="font-semibold lg:font-medium text-sm lg:text-lg">Account</h4>
+
+        <div className="flex px-2.5 mb-2">
+          <LogoutButton 
+           strokeColor="#fe2a22"
+           text={"Log Out"}
+           textStyles={"font-medium text-sm lg:text-lg leading-6 text-red-500"}
+          />
+        </div>
+ 
+        <div 
+        className="flex px-2.5 items-center justify-start gap-2 cursor-pointer"
+        onClick={() => setIsOpen(true)}
+        >
+          <DelectIcon/>
+          <span className="font-medium text-sm lg:text-lg leading-6 text-red-500">Delete Account</span>
+        </div>
+      </div>
+    </>
+
   );
 };
