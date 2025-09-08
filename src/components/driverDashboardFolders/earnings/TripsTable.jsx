@@ -2,6 +2,34 @@ import { useState } from "react";
 import { Pagination } from './Pagination'
 import { Filter } from '../Filter'
 
+
+function filterTripsByRange(trips, range) {
+  const today = new Date();
+
+  return trips.filter((trip) => {
+    const tripDate = new Date(trip.date);
+    const diffInDays = (today - tripDate) / (1000 * 60 * 60 * 24);
+
+    if (range === "Recent") {
+      return true; // show all
+    }
+    if (range === "Weekly") {
+      return diffInDays <= 7;
+    }
+    if (range === "Monthly") {
+      return (
+        tripDate.getMonth() === today.getMonth() &&
+        tripDate.getFullYear() === today.getFullYear()
+      );
+    }
+    if (range === "Yearly") {
+      return tripDate.getFullYear() === today.getFullYear();
+    }
+    return true;
+  });
+}
+
+
 export function TripsTable({ columns, data }) {
   const [filter, setFilter] = useState("All");
   const [sortedItems, setSortedItems] = useState(data);
@@ -15,10 +43,20 @@ export function TripsTable({ columns, data }) {
           <h1 className="lg:text-2xl text-sm font-semibold font-poppins">Recent Trips</h1>
         </div>
         <div className="flex w-[90%] justify-end">
-          <Filter
+          {/* <Filter
             itemsArray={data}
             options={["Recent", "Weekly", "Monthly", "Yearly"]}
             onSort={(sortedItems) => setSortedItems(sortedItems)}
+            title="All"
+          /> */}
+
+          <Filter
+            itemsArray={data}
+            options={["Recent", "Weekly", "Monthly", "Yearly"]}
+            onSort={(selected) => {
+              const filtered = filterTripsByRange(data, selected);
+              setSortedItems(filtered);
+            }}
             title="All"
           />
         </div>

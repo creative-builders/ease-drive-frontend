@@ -14,12 +14,15 @@ export const InputField = ({
   type = "text",
   placeholder,
   value,
+  accept,
+  inputRef,
   onChange,
   onFocus,
   onBlur,
   leftIcon: LeftIcon,
   error,
   isPassword = false,
+  readOnly = false,
   showPassword,
   handleTogglePassword,
   rightIconOpen: RightIconOpen,
@@ -46,9 +49,12 @@ const inputType = isPassword ? (showPassword ? "text" : "password") : type;
 
         <input
           type={inputType}
+          readOnly={readOnly}
           name={name}
           id={name}
           placeholder={placeholder}
+          accept={accept}
+          ref={inputRef}
           value={value}
           onChange={onChange}
           onFocus={onFocus}

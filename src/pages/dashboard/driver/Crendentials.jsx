@@ -1,21 +1,26 @@
 import React, { useRef, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
-import { CameraIcon } from "../assets/icons/CameraIcon";
-import CustomButton from "../components/CustomButton";
-import fallbackProfile from "../assets/images/driver-picture.png";
-import { CarIcon } from "../assets/icons/CarIcon";
-import { PlateNumberIcon } from "../assets/icons/PlateNumberIcon";
-import { HouseBuilding } from "../assets/icons/HouseBuilding";
-import { SeatIcon } from "../assets/icons/SeatIcon";
-import { ColorIcon } from "../assets/icons/ColorIcon";
-import { Document } from "../assets/icons/Document";
-import UploadIcon from "../assets/images/add.png";
-import { CustomSelectField } from "../components/customFormFields/CustomSelectField";
-import { InputField } from "../components/customFormFields/InputField";
+// import { CameraIcon } from "../assets/icons/CameraIcon";
+// import CustomButton from "../components/CustomButton";
+import fallbackProfile from "../../../assets/images/driver-picture.png";
+import { CarIcon } from "../../../assets/icons/CarIcon";
+import { PlateNumberIcon } from "../../../assets/icons/PlateNumberIcon";
+import { HouseBuilding } from "../../../assets/icons/HouseBuilding";
+import { SeatIcon } from "../../../assets/icons/SeatIcon";
+import { ColorIcon } from "../../../assets/icons/ColorIcon";
+import { Document } from "../../../assets/icons/Document";
+import UploadIcon from "../../../assets/images/add.png";
+// import { CustomSelectField } from "../components/customFormFields/CustomSelectField";
+// import { InputField } from "../components/customFormFields/InputField";
 import { FaChevronDown } from "react-icons/fa";
-import { LocationHomeIcon } from "../assets/icons/LocationHomeIcon";
-import { userAtom } from "../components/atoms/userAtom";
+import { LocationHomeIcon } from "../../../assets/icons/LocationHomeIcon";
+// import { userAtom } from "../components/atoms/userAtom";
 import { useRecoilValue } from "recoil";
+import { CameraIcon } from "../../../assets/icons/CameraIcon";
+import CustomButton from "../../../components/new-landingPage/reusables/CustomButton";
+import { InputField } from "../../../components/customFormFields/InputField";
+import { CustomSelectField } from "../../../components/customFormFields/CustomSelectField";
+import { userAtom } from "../../../components/atoms/userAtom";
 
 
 const Crendentials = ({ onClose }) => {
@@ -200,7 +205,7 @@ const Crendentials = ({ onClose }) => {
 
       <CustomButton
         name="Save"
-        className="hidden sm:flex px-4 py-4 w-full rounded-2xl gap-2 mt-0 bg-green-700"
+        className="hidden sm:flex px-4 py-4 w-full rounded-2xl text-white gap-2 mt-0 bg-green-700"
       />
     </div>
   );

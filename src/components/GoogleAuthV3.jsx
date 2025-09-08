@@ -47,7 +47,7 @@ const  GoogleAuthV3 = ({ role = "passenger" }) => {
   return (
     <>
       {loading ? (
-        <CustomButton extendedStyles="inline-block w-full p-4 rounded-lg" isLoading={loading} />
+        <CustomButton extendedStyles="inline-block w-full p-4 h-[50px] lg:h-[60px] rounded-lg bg-primary-700" isLoading={loading} />
       ) : (
         <button
           onClick={(e) => {

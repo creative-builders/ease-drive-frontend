@@ -39,7 +39,8 @@ export default {
         accent:{
           50:"#EDF3FF",
           100:"#EDF3FF",
-          500:"#5E69F6"
+          500:"#5E69F6",
+          600:"#4847EB"
         },
         light: "#FDFDFD",
         headHighlight: "#127C71", 
@@ -66,7 +67,8 @@ export default {
       },
      borderRadius:{
         'lg32':"32px",
-        "lg36":"36px"
+        "lg36":"36px",
+        "lg48":"48px"
       },
       height:{
         106: "450px",

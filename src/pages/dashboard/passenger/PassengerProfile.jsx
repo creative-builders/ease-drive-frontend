@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
-import { EditProfileView } from "../../../uI/user-profile/EditProfile";
-import ProfileView from "../../../uI/user-profile/ProfileView";
+import { EditProfileView } from "../../../components/dashboard/EditProfile";
+import ProfileView from "./user-profile/ProfileView";
 import useIsMobile from "../../../hooks/useIsMobile";
 
 export const PassengerProfile = () => {

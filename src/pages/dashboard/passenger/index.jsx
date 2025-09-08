@@ -32,6 +32,8 @@ const PassengerDashboardIndex = () => {
           }}
           modalIcon={<LiveGPSIcon />}
           title={"Allow access to your live location"}
+          position="bottom"
+          width="100%"
           bodyText={
             "Use My Current Location"
           }
@@ -54,7 +56,7 @@ const PassengerDashboardIndex = () => {
 
         {/* bottom sheet */}
         <div
-          className={`w-full transform transition-transform duration-500 lg:basis-full ${expanded ? "h-screen" : "h-[540px]"} lg:h-full overflow-y-auto custom-scrollbar p-4 lg:p-0 bg-white lg:bg-transparent fixed bottom-0 left-0 z-[1012] lg:relative rounded-t-[32px]
+          className={`w-full transform transition-transform duration-500 lg:basis-full ${expanded ? "h-full" : "h-[540px]"} lg:h-full overflow-y-auto custom-scrollbar p-4 lg:p-0 bg-white lg:bg-transparent fixed bottom-0 left-0 z-[1012] lg:relative rounded-t-[32px]
           ${locationEnabled ? "translate-y-0" : "translate-y-full"} 
           `}
         >

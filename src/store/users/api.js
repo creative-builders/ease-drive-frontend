@@ -1,4 +1,4 @@
-import { axiosInstancePrivate } from "../auth/passenger/api";
+import { axiosInstancePrivate } from "../auth/general/api";
 
 
 
@@ -7,5 +7,27 @@ import { axiosInstancePrivate } from "../auth/passenger/api";
 export const getUserProfile = async({ queryKey }) => {
     const [_key, user_id]  =  queryKey;
     const response = await axiosInstancePrivate.get(`/v1/users/${user_id}`);
+    return response.data;
+}
+
+
+
+
+export const updateUserProfile = async({ userId, payload }) => {
+
+   const formData = new FormData();
+
+   // Loop through payload and only append non-empty values
+    Object.entries(payload).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== "") {
+      formData.append(key, value);
+    }
+    });
+
+   const response = await axiosInstancePrivate.patch(`v1/users/${userId}`,
+        formData,
+        
+    );
+
     return response.data;
 }

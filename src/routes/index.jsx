@@ -1,5 +1,4 @@
 
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../pages/landingPage/Home';
 import Options from '../pages/auth/SignupOptions/Options';
@@ -17,11 +16,8 @@ import LookingFor from '../components/luggagesparts/LookingFor';
 import PickRide from '../components/PickRide';
 import Cancelled from '../components/luggagesparts/Cancelled';
 import DriverCall from '../components/driverCall/DriverCall';
-import Setting from '../components/personalProfile/Setting';
-import Password from '../components/personalProfile/Password';
 import Luggage from '../components/luggagesparts/Luggage';
 import Bidder from '../components/bidders/Bidders';
-import EditProfile from '../components/personalProfile/EditProfile';
 import DashboardHome from '../pages/dashboard/DashboardHome';
 import PassengerDashboardIndex from '../pages/dashboard/passenger';
 import ViewBookings from '../components/Bookings/ViewBookings';
@@ -34,25 +30,23 @@ import { RegisterDriver } from "../pages/auth/driverSignup/DriverSignup"
 import { DriverKycPage } from '../pages/auth/DriverKYC/DriverKyc';
 import { ForgotPassword } from '../pages/auth/Passengers/ForgotPassword';
 import { ResetPassword } from '../pages/auth/Passengers/ResetPassword';
-import NotFoundPage from '../ui/NotFoundPage';
+import NotFoundPage from '../pages/dashboard/NotFoundPage';
 import DriverView from '../components/DashboardForDrivers/DriverView';
-import Profile from '../uI/Profile';
-import ProfilePage from '../uI/ProfilePage';
-// import NotificationsPage from '../uI/NotificationPage';
-// import { DriverDashboard } from '../pages/dashboard/driver/DriverDashboard';
 import { Rides } from '../pages/dashboard/passenger/Rides';
 import { PassengerProfile } from '../pages/dashboard/passenger/PassengerProfile';
-import Support from '../pages/dashboard/passenger/Support';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from '../components/atoms/userAtom';
 import { DriverDashboardIndex } from '../pages/dashboard/driver';
 import { Earnings } from '../pages/dashboard/driver/Earnings';
 import { Trips } from '../pages/dashboard/driver/Trips';
-import DriverProfile from '../pages/dashboard/driver/DriverProfile';
 import { Requests } from '../pages/dashboard/driver/Requests';
 import ProtectedRoutes from './ProtectedRoutes';
-import Notifications from '../ui/Notifications';
-import { NotificationsPage } from '../ui/NotificationPage';
+import ProfilePage from '../pages/dashboard/driver/DriverProfiles';
+import Notifications from '../pages/dashboard/driver/Notification';
+import DriverProfile from '../pages/dashboard/driver/DriverProfiles';
+import DriverProfiles from '../pages/dashboard/driver/DriverProfiles';
+import { SupportPage } from "../pages/dashboard/passenger/SupportPage";
+
 
 
 
@@ -73,7 +67,7 @@ const IndexRoute = () => {
       <Route path="/Driv-upload" element={<DrivUpload />} />
       <Route path="/Driv-place" element={<DrivPlace />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/notification" element={<NotificationsPage />} />
+      {/* <Route path="/notification" element={<NotificationsPage />} /> */}
   
       
       <Route path="/Check-email" element={<CheckEmailFile />} />
@@ -84,12 +78,12 @@ const IndexRoute = () => {
       <Route path="/LookingFor" element={<LookingFor />} />
       <Route path="/Cancelled" element={<Cancelled />} />
       <Route path="/DriverCall" element={<DriverCall />} />
-      <Route path="/Password" element={<Password />} />
       <Route path="/drivers" element={<DriverBoard />} />
       <Route path="/rides" element={<DataStatus />} />
       <Route path="/views" element={<DriverView />} />
-      <Route path="/driver-profile" element={<ProfilePage />} />
-      <Route path="/user-profile" element={<Profile />} />
+      <Route path="/driver-profile" element={<DriverProfile />} />
+      {/* <Route path="/driver-profile" element={<DriverProfiles />} /> */}
+      <Route path="/user-profile" element={<PassengerProfile />} />
       
 
       {/* Dashboard Route */}
@@ -100,8 +94,6 @@ const IndexRoute = () => {
          }
          />
         <Route path="my-bookings" element={<ViewBookings/>} />
-        <Route path="edit-profile" element={<EditProfile />} />
-        <Route path="settings" element={<Setting />} />
 
           <Route path="luggage" element={<Luggage />} />
           <Route path="looking-for" element={<LookingFor />} />
@@ -117,7 +109,7 @@ const IndexRoute = () => {
               <PassengerProfile /> :
               <DriverProfile />}
           />
-          <Route path="support" element={<Support />} />
+          <Route path="support" element={<SupportPage />} />
 
           {/* New Driver Routes */}
           <Route path="earnings" element={<Earnings />} />
