@@ -122,7 +122,7 @@ export function TripsTable({ columns, data, onView }) {
 }
 
 // import { Pagination } from './Pagination'
-export function TripsPage({tripData, className = ''}) {
+export function TripsPage({tripData, className = '', onView}) {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 6;
 
@@ -146,7 +146,8 @@ const data = tripData
     Cell: (_, row) => (
       <span
         className="text-green-600 cursor-pointer"
-        onClick={() => console.log("View trip:", row)}
+        // onClick={() => console.log("View trip:", row)}
+        onClick={() => onView && onView(row)}
       >
         view
       </span>
@@ -156,7 +157,7 @@ const data = tripData
 
   return (
     <div className={`flex flex-col lg:gap-6 gap-4 ${className}`}>
-      <TripsTable columns={columns} data={currentData} />
+      <TripsTable columns={columns} data={currentData} onView={onView} />
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
