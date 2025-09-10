@@ -74,7 +74,9 @@ export default {
         106: "450px",
         108: "550px",
         39: "40px",
-        17: "80px"
+        17: "80px",
+        15: "124px",
+        11: "96"
       },
         fontFamily: {
         inter: ["Inter", "sans-serif"],
@@ -87,7 +89,8 @@ export default {
       width:{
         211: "200px",
         91: "95%",
-        7: "650px"
+        7: "650px",
+        8: "693px"
       },
       backgroundImage: {
         'custom-gradient': 'linear-gradient(123.39deg, #FDFDFD 3.85%, #F4EDFA 35.05%, #ddddddc9 57.05%, #EEE1F8 79.94%, #FDFDFD 99.96%)',

@@ -113,12 +113,22 @@ export const Trips = () => {
   return (
     <div className="flex px-3 py-0 flex-col items-start gap-4">
       <header className="flex flex-col md:flex-row w-full items-start md:items-center justify-between">
-        <h2 className="capitalize text-[32px] not-italic font-semibold leading-normal">trips details</h2>
+        <h2 className="capitalize text-4xl not-italic font-semibold leading-normal">trips details</h2>
         <p className="not-italic text-base font-medium leading-6">Track your earnings and trip performance</p>
       </header>
       <div className="flex gap-2 w-full items-center">
-        <StatsCards className="border border-[#E7E7E7] w-40 md:w-64 gap-3" title="Current Passengers" value={currentPassengers} image={<BitcoinBag className="h-5 w-5" />} />
-        <StatsCards className="border border-[#E7E7E7] w-40 md:w-64 gap-3" title="Total Passengers" value={totalPassengers} image={<Wallet className="h-5 w-5" />} />
+        <StatsCards 
+          className="border border-gray-300 w-40 md:w-64 gap-2" 
+          title="Current Passengers" 
+          value={currentPassengers} 
+          image={<BitcoinBag className="h-4 w-4 aspect-square flex-shrink-0" />} 
+        />
+        <StatsCards 
+          className="border border-gray-300 w-40 md:w-64 gap-2" 
+          title="Total Passengers" 
+          value={totalPassengers} 
+          image={<Wallet className="h-4 w-4 aspect-square flex-shrink-0" />} 
+        />
       </div>
 
       <TripsPage className="w-full" tripData={data} onView={setSelectedTrip} />

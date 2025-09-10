@@ -9,7 +9,7 @@ export const TripDetailsModal = ({ isOpen, onClose, trip }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-2xl shadow-lg w-full m-2 max-w-2xl p-6 relative">
+      <div className="bg-white rounded-lg32 shadow-lg w-full lg:w-8 px-5 py-6 flex-col items-start relative">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -41,12 +41,12 @@ export const TripDetailsModal = ({ isOpen, onClose, trip }) => {
         </div>
 
         {/* Passenger List */}
-        <div className="flex flex-col gap-4 max-h-72 overflow-y-auto pr-2">
+        <div className="flex flex-col gap-4 max-h-80 overflow-y-auto pr-2">
           {Array.isArray(trip.passengers) && trip.passengers.length > 0 ? (
             trip.passengers.map((p) => (
               <div
                 key={p.id}
-                className="flex justify-between items-center border-b pb-2"
+                className="flex justify-between self-stretch px-2 py-0 items-center border-b gap-6"
               >
                 <div className="flex w-4/5 h-24 items-center self-stretch gap-4">
                   <img
@@ -71,9 +71,9 @@ export const TripDetailsModal = ({ isOpen, onClose, trip }) => {
                     </div>
 
                     <div className="flex items-center gap-2 text-[10px] md:text-xs text-gray-800 font-normal not-italic leading-normal">
-                      <span className="hidden md:flex gap-1"> <LocationIcon className='h-4 w-4 text-primary-600' /> {p.location}</span>
-                      <span className="flex gap-1"> <ClockIcon className='h-4 w-4' /> {p.time}</span>
-                      <span className="flex gap-1"> <DateIcon className='h-4 w-4' /> Date: {p.date}</span>
+                      <span className="hidden md:flex gap-1"> <LocationIcon className='h-4 w-4 text-primary-700' /> {p.location}</span>
+                      <span className="flex gap-2"> <ClockIcon className='h-4 w-4' /> {p.time}</span>
+                      <span className="flex gap-2"> <DateIcon className='h-4 w-4' /> Date: {p.date}</span>
                     </div>
                     {p.rating ? (
                       <p className="text-xs text-yellow-500">{p.rating} ⭐</p>
