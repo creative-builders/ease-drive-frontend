@@ -29,6 +29,7 @@ const {
 } = useStepFlowContext();
 
 const userData = useRecoilValue(userAtom);
+console.log(userData)
 
   const [showPassword, setShowPassword] = useState(false);
   const [previewImage, setPreviewImage] = useState("");

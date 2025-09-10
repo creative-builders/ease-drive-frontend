@@ -5,6 +5,7 @@ import { locationAtom } from "../../atoms/locationAtom";
 import { useRecoilValue } from "recoil";
 import { NoEarnings } from "./NoEarnings";
 import { Earnings } from "./Earnings";
+import { SkeletonLoader } from "../../dashboard/SkeletonLoader"
 
 import { userAtom } from "../../atoms/userAtom";
 
@@ -32,10 +33,14 @@ export function DriverEarnings() {
           </p>
         </div>
 
-        <div className="flex lg:w-[100%] w-[80%] lg:justify-start justify-center m-auto items-start 
+        <div className="flex lg:w-[100%] w-[100%] lg:justify-start justify-center 
+        m-auto lg:items-start items-center lg:flex-row flex-col
         lg:mt-0 mt-4 lg:-ml-10 ml lg:h-full gap-4">
           {/* <NoEarnings /> */}
-          <Earnings />
+          {/* <Earnings /> */}
+
+          <SkeletonLoader variant="list" />
+          <SkeletonLoader variant="card" />
 
         </div>
       </div>

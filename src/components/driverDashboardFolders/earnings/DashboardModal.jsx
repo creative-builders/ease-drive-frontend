@@ -17,7 +17,7 @@ export const DashboardModal = ({
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center -z-80">
             <div
                 className={`relative bg-white rounded-3xl p-6 flex flex-col gap-4 lg:top-[0%] top-[28%]
         justify-center items-center 

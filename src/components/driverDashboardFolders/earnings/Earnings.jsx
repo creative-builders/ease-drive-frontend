@@ -11,7 +11,7 @@ import {data} from "./tripData"
 
 export const Earnings = () => {
     return (
-        <div className="py-2.5 relative  h-full inline-flex flex-col lg:justify-start lg:items-start justify-center items-center">
+        <div className="py-2.5  h-full inline-flex flex-col lg:justify-start lg:items-start justify-center items-center">
             <div className="inline-flex justify-start items-start ">
                 <div className="lg:w-[563px] w-[100%] m-auto font-poppins inline-flex flex-col lg:justify-start lg:items-start gap-4">
                     <div className='flex lg:gap-2 gap-3'>

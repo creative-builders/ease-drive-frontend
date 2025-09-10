@@ -39,7 +39,7 @@ useEffect(() => {
     setIsOpen(false);
   }
 }, [location, coords, setIsOpen]);
-  console.log(coords)
+  // console.log(coords)
   const destination = { lat: 6.8570, lng: 7.3928 };
   const activeRequest = acceptedRequest || selectedRequest;
 

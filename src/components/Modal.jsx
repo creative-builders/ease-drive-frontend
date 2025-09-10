@@ -32,25 +32,30 @@ export const Modal = ({
           className="absolute top-4 right-4 text-gray-600 hover:text-black text-[34px] font-bold"
           onClick={closeModal}
         >
-        <CloseIcon/>
+          <CloseIcon />
         </button>
 
-        <div className="flex flex-col items-center justify-center text-center gap-2">
-            
-          {/* Modal Icon Wrapper */}
-          <div
-            className={`${iconBg} flex items-center justify-center rounded-full`}
-            style={{ width: iconWidth, height: iconHeight }}
-          >
-            {/* Render the icon */}
-            {modalIcon}
-          </div>
+        <div className="flex flex-col items-center justify-center text-center gap-1">
 
-          <h2 className="lg:text-[32px] text-[14px] pt-4 font-bold text-[#333333]">
+          {/* Modal Icon Wrapper */}
+          {
+            modalIcon && (
+              <div
+                className={`${iconBg} flex items-center justify-center rounded-full`}
+                style={{ width: iconWidth, height: iconHeight }}
+              >
+                {/* Render the icon */}
+                {modalIcon}
+              </div>
+            )
+          }
+
+
+          <h2 className="lg:text-[32px] text-[14px] pt-2 font-bold text-[#333333]">
             {title}
           </h2>
 
-          <p className="lg:text-[16px] text-[12px] font-medium text-[#333333] pt-4 pb-2">
+          <p className="lg:text-[16px] text-[12px] font-medium text-[#333333] pt-2 pb-2">
             {bodyText}
           </p>
 
