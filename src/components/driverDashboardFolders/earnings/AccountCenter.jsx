@@ -79,9 +79,6 @@ export const AccountCenter = () => {
 
 
 
-    // console.log("KYC data updated successfully:", driverData.driverProfile);
-
-
     const { mutate: getDriverKYC, isLoaded } = useMutation(
         getDriverDetails,
         {
@@ -219,7 +216,7 @@ export const AccountCenter = () => {
 
             {/* Amount Modal */}
             {modalType === "amount" && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center ">
                     <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-2 w-[390px] lg:top-[] 
                                     top-[35%] lg:top-0 h-[480px] lg:w-[633px] lg:h-[420px]">
                         {/* Close Button */}
@@ -300,7 +297,7 @@ export const AccountCenter = () => {
             {/* ENTER PIN MODAL  */}
             {/* Enter modal*/}
             {modalType === "enterpin" && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center ">
                     <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-2 w-[390px] lg:top-[] 
                                     top-[35%] lg:top-0 h-[720px] lg:w-[633px] lg:h-[580px]">
                         {/* Close Button */}
@@ -405,7 +402,7 @@ export const AccountCenter = () => {
             {/* BANK DETAILA MODAL */}
             {/* Enter modal*/}
             {modalType === "bankdetails" && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center ">
                     <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-2 w-[390px] lg:top-[] 
                                     top-[35%] lg:top-0 h-[720px] lg:w-[633px] lg:h-[600px]">
                         {/* Close Button */}
@@ -538,7 +535,7 @@ export const AccountCenter = () => {
 
             {/* Enter modal*/}
             {modalType === "withdralpin" && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center ">
                     <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-2 w-[390px] lg:top-[] 
                                     top-[35%] lg:top-0 h-[600px] lg:w-[633px] lg:h-[500px]">
                         {/* Close Button */}

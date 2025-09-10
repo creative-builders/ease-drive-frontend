@@ -18,6 +18,7 @@ export function RideRequests() {
   const [acceptedRequest, setAcceptedRequest] = useState(null);
   const [toggleMapList, setToggleMapList] = useState(false)
 const [myLocation, setMyLocation] = useState(null);
+
 const location = useRecoilValue(locationAtom);
 
 const {
@@ -38,7 +39,7 @@ useEffect(() => {
     setIsOpen(false);
   }
 }, [location, coords, setIsOpen]);
-  console.log(coords)
+  // console.log(coords)
   const destination = { lat: 6.8570, lng: 7.3928 };
   const activeRequest = acceptedRequest || selectedRequest;
 

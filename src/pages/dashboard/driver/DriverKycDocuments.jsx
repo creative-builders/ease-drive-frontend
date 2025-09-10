@@ -17,46 +17,120 @@ import { LocationHomeIcon } from "../../../assets/icons/LocationHomeIcon";
 // import { userAtom } from "../components/atoms/userAtom";
 import { useRecoilValue } from "recoil";
 import { CameraIcon } from "../../../assets/icons/CameraIcon";
-import CustomButton from "../../../components/new-landingPage/reusables/CustomButton";
+// import CustomButton from "../../../components/new-landingPage/reusables/CustomButton";
+import CustomButton from "../../../components/CustomButton"
 import { InputField } from "../../../components/customFormFields/InputField";
 import { CustomSelectField } from "../../../components/customFormFields/CustomSelectField";
 import { userAtom } from "../../../components/atoms/userAtom";
+import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import { driverKYCUpdate } from "../../../store/auth/driver/api"
+import { FormProvider, useStepFlowContext } from "../../../hooks/useStepFlowFormContext";
 
 
-const Crendentials = ({ onClose }) => {
+const UpdateDriverKYC = ({ onClose }) => {
   const profileImageRef = useRef(null);
   const documentUploadRef = useRef(null);
-
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [errors, setErrors] = useState({});
   const [previewImages, setPreviewImages] = useState([]);
   const [selectedCity, setSelectedCity] = useState();
 
+
+  const {
+    formData,
+    setFormData,
+    handleUpdateFormData,
+  } = useStepFlowContext();
+
+
+
+  const { mutate: submitDriverKYCUpdate, isLoading } = useMutation(driverKYCUpdate, {
+    onSuccess: (response) => {
+      toast.success(response?.message);
+      setFormData(prev => ({
+        ...prev,
+        vehicleType: "",
+        plateNumber: "",
+        serviceArea: "",
+        numberOfSeats: "",
+        vehicleColor: "",
+        documentID: "",
+        vehiclePhotos: []
+      }))
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.message || error.message);
+    }
+  })
+
+  const isAnyFieldTouched = Object.values(formData).some((touched) => touched);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const userId = userData?.id;
+    const newErrors = {};
+
+    console.log(formData)
+    if (selectedFiles.length === 0) {
+      newErrors.files = "Please upload at least one document image";
+    }
+    const _formData = new FormData();
+
+    _formData.append("vehicleType", formData.vehicleType);
+    _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
+    _formData.append("vehicleColor", formData.vehicleColor);
+    _formData.append("serviceArea", formData.serviceArea);
+    _formData.append("numberOfSeats", formData.numberOfSeats);
+    _formData.append("documentID", formData.documentID);
+
+    formData.vehiclePhotos.forEach((file) => {
+      _formData.append("vehiclePhotos", file);
+    });
+
+    submitDriverKYCUpdate({ credentials: _formData, token: userId });
+  }
+
   const userData = useRecoilValue(userAtom);
-     const [profileImage, setProfileImage] = useState(
-        userData?.profileImage || fallbackProfile
-      );
+  const [profileImage, setProfileImage] = useState(
+    userData?.profileImage || fallbackProfile
+  );
 
-    const handleProfileImageClick = () => {
-      if (profileImageRef.current) {
-        profileImageRef.current.click();
-      }
-    };
+  const handleProfileImageClick = () => {
+    if (profileImageRef.current) {
+      profileImageRef.current.click();
+    }
+  };
 
-  
-    const handleProfileImageChange = (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const imageUrl = URL.createObjectURL(file);
-        setProfileImage(imageUrl);
-       console.log(imageUrl)
-      }
-    };
+
+  const handleProfileImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setProfileImage(imageUrl);
+      console.log(imageUrl)
+    }
+  };
 
   const handleDocumentsChange = (e) => {
     const files = Array.from(e.target.files).filter(
       (file) => file.type === "image/jpeg" || file.type === "image/png"
     );
+
     setPreviewImages(files.map((file) => URL.createObjectURL(file)));
+    setSelectedFiles(files);
+    handleUpdateFormData("vehiclePhotos", files);
   };
+
+  // const handleDocumentsChange = (e) => {
+  //   const files = Array.from(e.target.files).filter(
+  //     (file) => file.type === "image/jpeg" || file.type === "image/png"
+  //   );
+  //   setPreviewImages(files.map((file) => URL.createObjectURL(file)));
+  // };
+
+
 
   return (
     <div className="bg-white rounded-2xl p-6 shadow-md w-full md:w-[439px] flex flex-col gap-20">
@@ -89,33 +163,44 @@ const Crendentials = ({ onClose }) => {
           />
         </div>
 
-        <form className="gap-4 mt-4" action="">
+        <form className="gap-4 mt-4"
 
-          <InputField
+          onSubmit={handleSubmit}>
+
+          <CustomSelectField
             label="Vehicle type"
             name="vehicleType"
+            value={formData.vehicleType}
+            onChange={handleUpdateFormData}
             type="text"
             placeholder="Enter Vehicle Plate  Number"
+            options={["Keke", "Car", "Shuttle Bus", "Motorcycle", "Regular Bus", "Truck"]}
+            rightIcon={FaChevronDown}
+
             leftIcon={CarIcon}
-            // error={
-            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-            // }
+          // error={
+          //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+          // }
           />
-        
-          <InputField 
-              label="Plate Number"
-              name="plateNumber"
-              placeholder="Enter Vehicle Plate  Number"
-              leftIcon={PlateNumberIcon}
-              // error={
-              //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-              // }
-            />
+
+          <InputField
+            label="Plate Number"
+            name="plateNumber"
+            placeholder="Enter Vehicle Plate  Number"
+            value={formData.plateNumber}
+            onChange={handleUpdateFormData}
+            leftIcon={PlateNumberIcon}
+          // error={
+          //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+          // }
+          />
 
           <CustomSelectField
             label="Service Area (Location)"
             name="serviceArea"
-            value={selectedCity}
+            value={formData.serviceArea}
+            onChange={handleUpdateFormData}
+            // value={selectedCity}
             defaultHolder="Choose service location"
             options={["Odenigwe", "Hill-Top", "Main gate", "Behind Flat", "Odeim gate",]}
             rightIcon={FaChevronDown}
@@ -125,39 +210,47 @@ const Crendentials = ({ onClose }) => {
 
 
           <div className="flex space-x-2 items-center justify-between mt-3">
-            
+
             <InputField
               label="vehicle Color"
               name="vehicleColor"
               type="text"
+
+              value={formData.vehicleColor}
+              onChange={handleUpdateFormData}
               placeholder="Eg.black"
               leftIcon={ColorIcon}
-              // error={
-              //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-              // }
+            // error={
+            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+            // }
             />
 
             <InputField
               label="Number of seat"
-              name="seatCount"
+              name="numberOfSeats"
+              value={formData.numberOfSeats}
+              onChange={handleUpdateFormData}
+
               type="text"
               placeholder="Eg.4"
               leftIcon={SeatIcon}
-              // error={
-              //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-              // }
+            // error={
+            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+            // }
             />
           </div>
 
           <InputField
             label="Document ID"
-            name="driverLicence"
+            name="documentID"
             type="text"
+            value={formData.documentID}
+            onChange={handleUpdateFormData}
             placeholder="Driver's licence"
             leftIcon={Document}
-            // error={
-            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-            // }
+          // error={
+          //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+          // }
           />
 
           <div className="">
@@ -172,6 +265,7 @@ const Crendentials = ({ onClose }) => {
             <input
               type="file"
               multiple
+              name="vehiclePhotos"
               accept="image/*"
               ref={documentUploadRef}
               onChange={handleDocumentsChange}
@@ -196,19 +290,58 @@ const Crendentials = ({ onClose }) => {
                       className="w-full h-full object-cover rounded-md border-2"
                     />
                   ))}
+
                 </div>
+              )}
+              {errors.files && (
+                <p className="text-red-500 text-sm mt-1">{errors.files}</p>
               )}
             </div>
           </div>
+
+
+          <CustomButton
+            name="Save"
+            extendedStyles={"px-4 py-4 w-full rounded-2xl text-white gap-2 mt-6 bg-green-700"}
+            isLoading={isLoading}
+            disabled={!isAnyFieldTouched}
+          // btnClick={(e) =>handleSubmit(e)}
+          />
         </form>
       </figure>
 
-      <CustomButton
+      {/* <CustomButton
         name="Save"
-        className="hidden sm:flex px-4 py-4 w-full rounded-2xl text-white gap-2 mt-0 bg-green-700"
-      />
+        className="hidden sm:flex px-4 py-4 w-full
+        rounded-2xl text-white gap-2 mt-0 bg-green-700"
+        isLoading={isLoading}
+        disabled={!isAnyFieldTouched}
+      /> */}
+
+
+
     </div>
   );
 };
 
-export default Crendentials;
+
+const DriverKycDocuments = ({ onClose }) => {
+
+  const initialInputFields = [
+    "vehicleType",
+    "plateNumber",
+    "serviceArea",
+    "numberOfSeats",
+    "vehicleColor",
+    "documentID",
+    "vehiclePhotos"
+  ]
+
+  return (
+    <FormProvider initialInputFields={initialInputFields}>
+      <UpdateDriverKYC onClose={onClose} />
+    </FormProvider>
+  );
+};
+export default DriverKycDocuments
+

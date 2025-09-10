@@ -49,12 +49,12 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
     };
 
     const handleAcceptClick = () => {
-        if(btnName =="Track Passenger"){
+        if (btnName == "Track Passenger") {
             btnFn()
         }
-        else{
+        else {
 
-        setModalType("amount");
+            setModalType("amount");
         }
     };
 
@@ -225,11 +225,15 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
             </div>
 
             {/* Accept Button */}
-            <div className="self-stretch">
+
+            <div
+                className={`self-stretch ${btnName === "Track Passenger" ? "lg:hidden" : ""
+                    }`}
+            >
                 <CustomButton
                     name={btnName || `Accept Ride and Enter Amount`}
                     btnClick={handleAcceptClick}
-                    extendedStyles="w-full p-3 lg:p-4  bg-green-700 rounded-lg"
+                    extendedStyles="w-full p-3 lg:p-4 bg-green-700 rounded-lg"
                 />
             </div>
 
