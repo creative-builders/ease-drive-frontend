@@ -69,9 +69,9 @@ export default function DriverCall() {
                     className="w-[60px] h-[60px] rounded-full object-cover"
                   />
                   <section className='h-fit xl:h-28 w-fit items-start flex flex-col gap-2'>
-                    <p className="font-normal xl:font-medium text-[14px] xl:text-base not-italic">{name || 'N/A'}</p>
-                    <p className="font-normal xl:font-medium text-[14px] xl:text-base not-italic">{distance || 'Unknown distance'}</p>
-                    <p className="font-normal xl:font-medium text-[14px] xl:text-base not-italic">{rating || 'No rating'}</p>
+                    <p className="font-normal xl:font-medium text-sm xl:text-base not-italic">{name || 'N/A'}</p>
+                    <p className="font-normal xl:font-medium text-sm xl:text-base not-italic">{distance || 'Unknown distance'}</p>
+                    <p className="font-normal xl:font-medium text-sm xl:text-base not-italic">{rating || 'No rating'}</p>
                     <p className="font-normal xl:font-medium text-xs text-[#B8B8B8] not-italic gap-6">{vehicleInfo || 'Vehicle info unavailable'}</p>
                   </section>
                 </div>

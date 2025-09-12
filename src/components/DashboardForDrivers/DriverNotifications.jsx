@@ -63,8 +63,8 @@ export default function DriverNotifications({ isPreview = false }) {
   return (
     <div className="bg-white shadow rounded-lg p-4 border">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="font-semibold text-[#000] text-[14px] md:text-2xl">Notifications</h2>
-        
+        <h2 className="font-semibold text-[#000] text-sm md:text-2xl">Notifications</h2>
+
         {isPreview && (
           <Link className="text-[#2ABD45] text-sm font-semibold" to={'/dashboard/notifications'}>
             View all
@@ -77,29 +77,28 @@ export default function DriverNotifications({ isPreview = false }) {
           <div key={group} className="mb-6">
             <h3 className="text-xs md:text-base font-semibold mb-2">{group}</h3>
             {grouped[group].map((note) => (
-            <div 
-              key={note.id}
-              onClick={() => setSelectedNoteId(note.id)}
-              className={`p-3 rounded-2xl flex cursor-pointer transition-colors w-full ${
-                selectedNoteId === note.id ? "bg-green-50" : "hover:bg-gray-50"
-              }`}
-            >
-             
-              <div className="h-[50px] w-[51px] rounded-full flex items-center justify-center bg-white">
-                <UserIcon className="text-[#333333]" />
-              </div>
+              <div
+                key={note.id}
+                onClick={() => setSelectedNoteId(note.id)}
+                className={`p-3 rounded-2xl flex cursor-pointer transition-colors w-full ${selectedNoteId === note.id ? "bg-green-50" : "hover:bg-gray-50"
+                  }`}
+              >
 
-              <div className="flex flex-col space-y-2 w-full">
-                
+                <div className="h-[50px] w-[51px] rounded-full flex items-center justify-center bg-white">
+                  <UserIcon className="text-[#333333]" />
+                </div>
+
+                <div className="flex flex-col space-y-2 w-full">
+
                   <div
-                    
+
                   >
                     <p className="font-semibold text-[10px] md:text-sm not-italic leading-normal text-[#9C9C9C]">{note.type}</p>
                     <p className="font-medium text-[10px] md:text-sm not-italic leading-normal text-[#000]">{note.message}</p>
                     <p className="text-xs font-medium text-[10px] md:text-sm not-italic leading-normal text-[#4B5563]">{formatTime(note.date)}</p>
                   </div>
+                </div>
               </div>
-            </div>
             ))}
           </div>
         ))

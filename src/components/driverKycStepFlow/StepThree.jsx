@@ -76,7 +76,7 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                         {/* <Link to="/"> 
               <div className="flex flex-row items-center justify-start gap-2">
                 <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
-                <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-[18px] leading-[100%]">
+                <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-lg leading-[100%]">
                   Ease Drive
                 </h1>
               </div>
@@ -86,10 +86,10 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
 
                   <div className="lg:w-[100%]  w-[100%]  justify-between opacity-100 flex flex-row items-start">
                      <div className='text-left lg:w-[60%] w-[70%]'>
-                        <h4 className="font-inter text-gray-700  font-semibold lg:text-[26px] text-[18px] leading-[100%]">
+                        <h4 className="font-inter text-gray-700  font-semibold lg:text-[26px] text-lg leading-[100%]">
                            Bank/Wallet Setup
                         </h4>
-                        <p className=" font-medium text-left text-gray-800 lg:text-[18px] text-[14px] font-inter lg:pb- pt-2">
+                        <p className=" font-medium text-left text-gray-800 lg:text-lg text-sm font-inter lg:pb- pt-2">
                            Your payments will be sent here. Please confirm the details are correct.
                         </p>
                      </div>
@@ -202,18 +202,18 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                            )}
                         </div>
 
-                        <span className={`${agreed ? "text-green-600" : "text-gray-800"} lg:text-[14px] text-[12px] font-inter`}>
+                        <span className={`${agreed ? "text-green-600" : "text-gray-800"} lg:text-sm text-xs font-inter`}>
                            I agree to the driver guidelines and terms of service.
                         </span>
                      </label>
 
-                     {error && <p className="text-red-500 lg:text-[14px] text-[12px] font-inter">{error}</p>}
+                     {error && <p className="text-red-500 lg:text-sm text-xs font-inter">{error}</p>}
 
                   </div>
 
                   {/* <button
                      type="button"
-                     className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
+                     className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-lg font-bold "
                      onClick={() => {
                         nextStep()
                      }}>

@@ -51,11 +51,11 @@ export const Modal = ({
           }
 
 
-          <h2 className="lg:text-[32px] text-[14px] pt-2 font-bold text-[#333333]">
+          <h2 className="lg:text-[32px] text-sm pt-2 font-bold text-[#333333]">
             {title}
           </h2>
 
-          <p className="lg:text-[16px] text-[12px] font-medium text-[#333333] pt-2 pb-2">
+          <p className="lg:text-base text-xs font-medium text-[#333333] pt-2 pb-2">
             {bodyText}
           </p>
 

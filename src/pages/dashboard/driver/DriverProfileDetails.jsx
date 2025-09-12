@@ -55,7 +55,7 @@ const userData = useRecoilValue(userAtom);
           </button>
           <h2 className="text-lg font-semibold">Personal Information</h2>
         </div>
-         <button className="p-2 flex sm:hidden align-center text-[#4847EB] text-base leading-normal not-italic tracking-normal absolute top-3 right-2">Save</button>
+         <button className="p-2 flex sm:hidden align-center text-accent-600 text-base leading-normal not-italic tracking-normal absolute top-3 right-2">Save</button>
         <div className="flex items-center space-x-4 relative">
           <img
             src={profileImage}
@@ -83,9 +83,7 @@ const userData = useRecoilValue(userAtom);
             type="text"
             placeholder="Enter your Name"
             leftIcon={UserIcon}
-            // error={
-            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-            // }
+          
           />
 
           <InputField
@@ -94,9 +92,7 @@ const userData = useRecoilValue(userAtom);
             type="email"
             placeholder="Enter your email"
             leftIcon={EmailSignedIcon}
-            // error={
-            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-            // }
+        
           />
 
           <InputField
@@ -105,9 +101,7 @@ const userData = useRecoilValue(userAtom);
             type="number"
             placeholder="Enter your Number"
             leftIcon={PhoneIcon}
-            // error={
-            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-            // }
+            
           />
 
 
@@ -117,10 +111,6 @@ const userData = useRecoilValue(userAtom);
             placeholder="Enter your password"
             leftIcon={LockPasswordIcon}
     
-            // error={showPasswordError ? "Password must be at least 5 characters" : ""}
-            // toggleable
-            // showPassword={showPassword}
-            // handleTogglePassword={handleTogglePassword}
             rightIconOpen={EyeOpenIcon}
             rightIconClose={EyeCloseIcon}
             isPassword
@@ -158,9 +148,7 @@ const userData = useRecoilValue(userAtom);
               placeholder="Enter your email"
               leftIcon={EmailSignedIcon}
               onChange={(e) => setEmail(e.target.value)}
-              // error={
-              //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-              // }
+          
             />
 
             <CustomButton

@@ -1,6 +1,6 @@
 import React from 'react'
 import RideOptionSelector from "./RideOptionSelector"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export const SignupOptions = () => {
   return (
@@ -18,14 +18,14 @@ export const SignupOptions = () => {
           p-8 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
                 <div className="lg:w-[556px] lg:h-[59px] w-[182px] h-[68px] flex flex-col
                     gap-[7.38px] opacity-100 pt-4 md:pt-2">
-                  <Link to="/"> 
-                  <div className='lg:flex flex-row flex  flex-col lg:flex-row w-full  items-center justify-center gap-2'>
-                    <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] lg:mr-2 ' />
-                    <h1 className="font-inter text-gray-800 italic font-bold lg:text-[36px] text-[34px] leading-[100%]">
-                      Ease Drive
-                    </h1>
-                    
-                  </div>
+                  <Link to="/">
+                    <div className='lg:flex flex-row flex  flex-col lg:flex-row w-full  items-center justify-center gap-2'>
+                      <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] lg:mr-2 ' />
+                      <h1 className="font-inter text-gray-800 italic font-bold lg:text-[36px] text-[34px] leading-[100%]">
+                        Ease Drive
+                      </h1>
+
+                    </div>
                   </Link>
 
                 </div>
@@ -33,8 +33,8 @@ export const SignupOptions = () => {
                 <div className="lg:w-[556px] lg:h-[540px] w-[347px]
              h-[429px]  lg:gap-4 opacity-100 pt-6 flex flex-col items-center">
                   <div>
-                    <p className=" font-regular text-center text-gray-700 lg:text-[24px]
-              text-[16px] font-inter lg:pb- pt-2">
+                    <p className=" font-regular text-center text-gray-700 lg:text-2xl
+              text-base font-inter lg:pb- pt-2">
                       Book safe, reliable campus shuttles or become a verified driver in minutes.
                     </p>
                   </div>
@@ -47,12 +47,12 @@ export const SignupOptions = () => {
                   <div className='flex lg:gap-12 gap-12 items-center justify-center flex-row py-6'>
                     <a href="">
                       <p className=" font-medium text-center text-primary-700 
-                  lg:text-[14px] text-[14px] font-inter pt-2">
+                  lg:text-sm text-sm font-inter pt-2">
                         Terms of use
                       </p>
                     </a>
                     <a href="">
-                      <p className=" font-medium text-center text-primary-700 lg:text-[14px] text-[14px] font-inter   pt-2">
+                      <p className=" font-medium text-center text-primary-700 lg:text-sm text-sm font-inter   pt-2">
                         Privacy Policy
                       </p>
                     </a>

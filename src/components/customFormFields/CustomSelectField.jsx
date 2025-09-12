@@ -15,7 +15,7 @@ export const CustomSelectField = ({
       {label && (
         <label
           htmlFor={name}
-          className="block lg:text-[18px] mb-1 text-[16px] font-normal text-gray-800"
+          className="block lg:text-lg mb-1 text-base font-normal text-gray-800"
         >
           {label}
         </label>
@@ -24,7 +24,7 @@ export const CustomSelectField = ({
       <div className="flex items-center 
         lg:rounded-[10px] rounded-[8px] lg:px-4 px-3 py-2 border-neutral-400 border rounded-md
         relative bg-white">
-        
+
         {/* Left Icon */}
         {LeftIcon && (
           <span className="mr-3 text-gray-500 flex-shrink-0">
@@ -39,7 +39,7 @@ export const CustomSelectField = ({
           value={value}
           onChange={onChange}
           className="flex-1 appearance-none bg-transparent text-gray-700 
-            lg:text-[18px] text-[14px] font-inter placeholder-neutral-400 text-neutral-400
+            lg:text-lg text-sm font-inter placeholder-neutral-400 text-neutral-400
             border-none outline-none focus:ring-0 pr-8"
         >
           {defaultHolder && (
@@ -47,9 +47,9 @@ export const CustomSelectField = ({
               {defaultHolder}
             </option>
           )}
-           {options.map((opt, idx) => (
+          {options.map((opt, idx) => (
             <option key={idx} value={opt.value}>
-            
+
               {opt}
             </option>
           ))}

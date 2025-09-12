@@ -1,5 +1,5 @@
 import { isToday, isYesterday, format, formatDistanceToNow } from "date-fns";
-import  Notification  from "../../../assets/images/notification-backgroud.png";
+import Notification from "../../../assets/images/notification-backgroud.png";
 
 function groupNotifications(notifications) {
   return notifications.reduce((groups, note) => {
@@ -42,12 +42,12 @@ export default function Notifications({ notifications = [] }) {
               <div key={note.id} className="h-fit md:h-[90px] flex items-start flex-shrink-0 gap-1 md:gap-2 p-4">
                 <div className="w-[50px] h-[51px] flex justify-center items-center bg-white rounded-full">
                   {note.profilePic}
-               </div>
+                </div>
 
                 <div>
-                  <p className="font-semibold text-[#9C9C9C] text-[10px] md:text-[14px] not-italic leading-normal">{note.type}</p>
-                  <p className="text-[#000] text-[10px] md:text-[14px] not-italic font-medium leading-normal">{note.message}</p>
-                  <span className="text-[#4B5563] text-[8px] md:text-[12px] not-italic font-medium leading-normal">
+                  <p className="font-semibold text-[#9C9C9C] text-[10px] md:text-sm not-italic leading-normal">{note.type}</p>
+                  <p className="text-[#000] text-[10px] md:text-sm not-italic font-medium leading-normal">{note.message}</p>
+                  <span className="text-[#4B5563] text-[8px] md:text-xs not-italic font-medium leading-normal">
                     {formatNotificationTime(note.date)}
                   </span>
                 </div>
@@ -62,7 +62,7 @@ export default function Notifications({ notifications = [] }) {
             alt="No notifications"
             className="w-full object-cover h-full mb-4"
           />
-          <p className="text-[#B0B0B0] text-center text-[12px] md:text-[18px] not-italic font-medium leading-normal">Your Notifications would appear here!</p>
+          <p className="text-[#B0B0B0] text-center text-xs md:text-lg not-italic font-medium leading-normal">Your Notifications would appear here!</p>
         </div>
       )}
     </div>

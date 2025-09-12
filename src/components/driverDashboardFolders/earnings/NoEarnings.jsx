@@ -94,7 +94,7 @@ export const NoEarnings = () => {
 
             <div className='flex justify-center items-center lg:flex-col flex-col lg:gap-20 gap-40'>
               <div className='lg:w-[70%] w-full '>
-                <p className='text-neutral-400 text-center font-normal font-poppins lg:text-[18px] text-xs'>You haven’t completed any trips yet.
+                <p className='text-neutral-400 text-center font-normal font-poppins lg:text-lg text-xs'>You haven’t completed any trips yet.
                   <br /> Once you accept and complete a ride, your earnings will appear here.</p>
               </div>
 

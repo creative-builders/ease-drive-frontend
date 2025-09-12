@@ -12,11 +12,11 @@ export const DescCard = ({ title, desc }) => {
         flex flex-col
       "
     >
-      <h3 className="font-bold font-inter text-[8px] sm:text-[18px] text-black">
+      <h3 className="font-bold font-inter text-[8px] sm:text-lg text-black">
         {title}
       </h3>
 
-      <p className="font-inter font-regular text-black text-[8px] sm:text-[16px] pt-2 sm:pt-4">
+      <p className="font-inter font-regular text-black text-[8px] sm:text-base pt-2 sm:pt-4">
         {desc}
       </p>
     </div>

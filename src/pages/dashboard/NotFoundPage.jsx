@@ -9,8 +9,8 @@ const NotFoundPage = () => {
             <div className=" md:h-[799px] py-6 flex flex-col items-center justify-center gap-2 md:gap-4 flex-shrink-0 rounded-lg bg-white lg:shadow-[0_1px_15.5px_0_rgba(0,0,0,0.02ti)]">
                 <img className="h-[138px] md:h-[303px] w-[197px] md:w-[433px]" src={found} alt="" />
                 <p className="capitalize text-[#262626] text-[32px] md:text-[64px] not-italic font-black leading-normal">ooops!</p>
-                <p className="text-[#262626] text-[14px] md:text-[40px] text-center not-italic font-semibold leading-[36px]">Looks like you’re in the wrong place.</p>
-                <p className="text-[#262626] text-[12px] md:text-[24px] text-center not-italic font-normal leading-[36px]">We can’t find the page you are looking for.</p>
+                <p className="text-[#262626] text-sm md:text-[40px] text-center not-italic font-semibold leading-[36px]">Looks like you’re in the wrong place.</p>
+                <p className="text-[#262626] text-xs md:text-2xl text-center not-italic font-normal leading-[36px]">We can’t find the page you are looking for.</p>
             </div>
         </div>
     );

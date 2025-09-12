@@ -3,7 +3,7 @@ import CustomButton from "../../CustomButton";
 import { FilterIcon } from "../../../assets/icons/FilterIcon";
 import noRequest from "../../../assets/images/norequest.png";
 
-import {data} from "./requestData";
+import { data } from "./requestData";
 
 export function Requests({ request, refresh }) {
 
@@ -34,7 +34,7 @@ export function Requests({ request, refresh }) {
 
             {/* Empty State */}
             <div className="flex lg:w-[543px]  w-[346px] flex-col  justify-start items-center gap-10">
-              <div className="w-96 text-center font-poppins text-neutral-300 lg:text-lg text-[12px] font-medium font-['Inter']">
+              <div className="w-96 text-center font-poppins text-neutral-300 lg:text-lg text-xs font-medium font-['Inter']">
                 No Customer has requested for a ride yet.
               </div>
               <div className=" lg:w-[377px] lg:h-[392px]  w-[149px] h-[155px] object-contain flex justify-center items-center inline-flex">
@@ -43,7 +43,7 @@ export function Requests({ request, refresh }) {
 
             </div>
             <div className="flex lg:w-[500px] w-[346px] flex-col lg:mt-[0%] mt-[10%] justify-start items-center lg:gap-10">
-              <CustomButton name="Refresh" btnClick={() => refresh(data) } extendedStyles="w-full  bg-green-700 p-3 lg:p-4 rounded-lg">
+              <CustomButton name="Refresh" btnClick={() => refresh(data)} extendedStyles="w-full  bg-green-700 p-3 lg:p-4 rounded-lg">
               </CustomButton >
             </div>
           </div>

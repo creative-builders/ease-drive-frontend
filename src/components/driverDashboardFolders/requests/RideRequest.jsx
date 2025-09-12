@@ -8,7 +8,7 @@ import { RequestsMap } from "./RequestsMap";
 import { locationAtom } from "../../atoms/locationAtom";
 import { useRecoilValue } from "recoil";
 import { useGeolocation } from "../../../hooks/useGeolocation";
-import {Modal} from "../../Modal"
+import { Modal } from "../../Modal"
 import CustomButton from "../../CustomButton"
 
 export function RideRequests() {
@@ -17,28 +17,28 @@ export function RideRequests() {
   const [showMap, setShowMap] = useState(false);
   const [acceptedRequest, setAcceptedRequest] = useState(null);
   const [toggleMapList, setToggleMapList] = useState(false)
-const [myLocation, setMyLocation] = useState(null);
+  const [myLocation, setMyLocation] = useState(null);
 
-const location = useRecoilValue(locationAtom);
+  const location = useRecoilValue(locationAtom);
 
-const {
-  coords,
-  locationEnabled,
-  isOpen, loading,
-  fetchLocation,
-  setLocationEnabled,
-  setIsOpen,
-  setIsMenuOpen
-} = useGeolocation();
+  const {
+    coords,
+    locationEnabled,
+    isOpen, loading,
+    fetchLocation,
+    setLocationEnabled,
+    setIsOpen,
+    setIsMenuOpen
+  } = useGeolocation();
 
-useEffect(() => {
-  if (!location) {
-    setIsOpen(true);
-  } else if (coords && coords.lat && coords.lon) {
-    setMyLocation({ lat: coords.lat, lng: coords.lon });
-    setIsOpen(false);
-  }
-}, [location, coords, setIsOpen]);
+  useEffect(() => {
+    if (!location) {
+      setIsOpen(true);
+    } else if (coords && coords.lat && coords.lon) {
+      setMyLocation({ lat: coords.lat, lng: coords.lon });
+      setIsOpen(false);
+    }
+  }, [location, coords, setIsOpen]);
   // console.log(coords)
   const destination = { lat: 6.8570, lng: 7.3928 };
   const activeRequest = acceptedRequest || selectedRequest;
@@ -65,10 +65,10 @@ useEffect(() => {
     <div className="flex lg:w-full w-[100%] lg:justify-start justify-center">
       <div>
         <div className="lg:w-[990px] w-[351px] flex lg:flex-row flex-col gap-1 lg:justify-between justify-center m-auto lg:-ml-10 items-start py-2">
-          <h2 className="lg:text-2xl font-semibold text-[18px] font-poppins">
+          <h2 className="lg:text-2xl font-semibold text-lg font-poppins">
             Customers Ride Request
           </h2>
-          <div className="lg:text-[16px] text-base inline-flex items-center font-poppins">
+          <div className="lg:text-base text-base inline-flex items-center font-poppins">
             <div className="bg-primary-50 text-green-900 lg:w-[38px] lg:h-[36px] w-[28px] h-[26px] rounded-full px-2 py-1 mr-2 justify-center inline-flex items-center">
               <LiveGPSIcon className="inline font-poppins" />
             </div>

@@ -60,7 +60,7 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
     }
   }, [userData?.id, getDriverKYC]);
 
-  const { 
+  const {
     vehicleType,
     plateNumber,
     serviceArea,
@@ -130,7 +130,7 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
                   <span className="text-xs font-normal text-primary-500">Verified</span>
                 </div>
               </div>
-              <p className="mb-2 hidden lg:flex text-xs lg:text-sm font-bold text-[#262626] flex items-center">
+              <p className="mb-2 hidden lg:flex text-xs lg:text-sm font-bold text-neutral-950 flex items-center">
                 <LocationIcon className="text-green-600" />
                 You’re currently at:{" "}
                 <span className="font-normal">
@@ -147,7 +147,7 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
           </div>
 
           <button
-            className="text-[#4847EB] font-medium md:font-semibold text-base"
+            className="text-accent-600 font-medium md:font-semibold text-base"
             onClick={onEditVehicle}
           >
             Edit
@@ -155,7 +155,7 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
         </div>
 
         {/* Personal Info */}
-        <section className="gap-2 p-2 border-b border-[#E7E7E7]">
+        <section className="gap-2 p-2 border-b border-gray-750">
           <h3 className="font-semibold text-sm lg:text-lg">
             Personal Information
           </h3>
@@ -186,14 +186,14 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
         </section>
 
         {/* Vehicle Info */}
-        <section className="gap-2 p-2 relative border-b border-[#E7E7E7]">
+        <section className="gap-2 p-2 relative border-b border-gray-750">
           <button
             className="text-[#4847EB] font-medium absolute right-2 top-2 md:font-semibold text-base"
             onClick={onEditCredentials}
           >
             Edit
           </button>
-          <h3 className="font-semibold text-base md:text-[18px] capitalize">
+          <h3 className="font-semibold text-base md:text-lg capitalize">
             Vehicle Information
           </h3>
           <InputField
@@ -222,7 +222,7 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
 
           <InputField
             leftIcon={LocationHomeIcon}
-            value={userData?.pickupPoint ||serviceArea ||  "---"}
+            value={userData?.pickupPoint || serviceArea || "---"}
             placeholder={"Main Gate"}
             inputWrapperStyles={"border-none"}
             readOnly
@@ -239,7 +239,7 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
         </section>
 
         {/* Support */}
-        <section className="gap-2 p-2 border-b border-[#E7E7E7]">
+        <section className="gap-2 p-2 border-b border-gray-750">
           <InputField
             leftIcon={CustomerService}
             value={userData?.supportContact}
@@ -255,7 +255,7 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
 
         <div className="flex px-2.5 mb-2">
           <LogoutButton
-            strokeColor="#fe2a22"
+            strokeColor="red-500"
             text={"Log Out"}
             textStyles={"font-medium text-sm lg:text-lg leading-6 text-red-500"}
           />

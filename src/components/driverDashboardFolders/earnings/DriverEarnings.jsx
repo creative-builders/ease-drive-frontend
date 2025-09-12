@@ -22,7 +22,7 @@ export function DriverEarnings() {
       <div>
         <div className="lg:w-[990px] w-[351px] flex lg:flex-row flex-col gap-1 
         lg:justify-between justify-center m-auto lg:-ml-10 ml-4 items-start py-2">
-          <h2 className="lg:text-2xl font-semibold text-[18px] font-poppins">
+          <h2 className="lg:text-2xl font-semibold text-lg font-poppins">
             Earnings Overview
           </h2>
           <p className="lg:text-base text-base inline-flex items-center font-poppins">

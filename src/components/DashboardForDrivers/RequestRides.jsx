@@ -42,10 +42,10 @@ export default function RideRequests({ isPreview = false }) {
           <div className="gap-20 md:gap-3">
             <h3 className="font-semibold text-base not-italic leading-normal text-[#000]">{ride.name}</h3>
             <p className="font-normal text-xs not-italic leading-normal text-[#000]">{ride.time}</p>
-            <p className="text-[14px] not-italic font-semibold leading-6 tracking-wide text-[#072C0F]">
+            <p className="text-sm not-italic font-semibold leading-6 tracking-wide text-[#072C0F]">
               <strong>Current location:</strong> {ride.location}
             </p>
-            <p className="text-[14px] not-italic font-semibold leading-6 tracking-wide text-[#072C0F]">
+            <p className="text-sm not-italic font-semibold leading-6 tracking-wide text-[#072C0F]">
               <strong>Going to:</strong> {ride.destination}
             </p>
           </div>

@@ -72,24 +72,12 @@ const UpdateDriverKYC = ({ onClose }) => {
     const userId = userData?.id;
     const newErrors = {};
 
-    console.log(formData)
     if (selectedFiles.length === 0) {
       newErrors.files = "Please upload at least one document image";
     }
-    const _formData = new FormData();
+   
 
-    _formData.append("vehicleType", formData.vehicleType);
-    _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
-    _formData.append("vehicleColor", formData.vehicleColor);
-    _formData.append("serviceArea", formData.serviceArea);
-    _formData.append("numberOfSeats", formData.numberOfSeats);
-    _formData.append("documentID", formData.documentID);
-
-    formData.vehiclePhotos.forEach((file) => {
-      _formData.append("vehiclePhotos", file);
-    });
-
-    submitDriverKYCUpdate({ credentials: _formData, token: userId });
+    submitDriverKYCUpdate({ credentials: formData, token: userId });
   }
 
   const userData = useRecoilValue(userAtom);
@@ -123,13 +111,6 @@ const UpdateDriverKYC = ({ onClose }) => {
     handleUpdateFormData("vehiclePhotos", files);
   };
 
-  // const handleDocumentsChange = (e) => {
-  //   const files = Array.from(e.target.files).filter(
-  //     (file) => file.type === "image/jpeg" || file.type === "image/png"
-  //   );
-  //   setPreviewImages(files.map((file) => URL.createObjectURL(file)));
-  // };
-
 
 
   return (
@@ -141,7 +122,7 @@ const UpdateDriverKYC = ({ onClose }) => {
           </button>
           <h2 className="text-lg font-semibold">Vehicle Information</h2>
         </div>
-        <button className="p-2 flex sm:hidden align-center text-[#4847EB] text-base leading-normal not-italic tracking-normal absolute top-3 right-2">
+        <button className="p-2 flex sm:hidden align-center text-accent-600 text-base leading-normal not-italic tracking-normal absolute top-3 right-2">
           Save
         </button>
         <div className="flex sm:hidden items-center space-x-4 relative">
@@ -178,9 +159,7 @@ const UpdateDriverKYC = ({ onClose }) => {
             rightIcon={FaChevronDown}
 
             leftIcon={CarIcon}
-          // error={
-          //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-          // }
+         
           />
 
           <InputField
@@ -190,9 +169,7 @@ const UpdateDriverKYC = ({ onClose }) => {
             value={formData.plateNumber}
             onChange={handleUpdateFormData}
             leftIcon={PlateNumberIcon}
-          // error={
-          //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-          // }
+    
           />
 
           <CustomSelectField
@@ -220,9 +197,7 @@ const UpdateDriverKYC = ({ onClose }) => {
               onChange={handleUpdateFormData}
               placeholder="Eg.black"
               leftIcon={ColorIcon}
-            // error={
-            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-            // }
+          
             />
 
             <InputField
@@ -234,9 +209,7 @@ const UpdateDriverKYC = ({ onClose }) => {
               type="text"
               placeholder="Eg.4"
               leftIcon={SeatIcon}
-            // error={
-            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-            // }
+            
             />
           </div>
 
@@ -248,9 +221,7 @@ const UpdateDriverKYC = ({ onClose }) => {
             onChange={handleUpdateFormData}
             placeholder="Driver's licence"
             leftIcon={Document}
-          // error={
-          //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-          // }
+         
           />
 
           <div className="">
@@ -278,7 +249,7 @@ const UpdateDriverKYC = ({ onClose }) => {
               {previewImages.length === 0 ? (
                 <>
                   <img src={UploadIcon} className="h-14 w-14" alt="Upload Icon" />
-                  <p className="text-xs mt-2 text-gray-400 flex p-3 gap-3 rounded-lg bg-[#DEFAE2]"> upload picture</p>
+                  <p className="text-xs mt-2 text-gray-400 flex p-3 gap-3 rounded-lg bg-gray-100"> upload picture</p>
                 </>
               ) : (
                 <div className="grid grid-cols-2 gap-2 w-full">
@@ -305,18 +276,11 @@ const UpdateDriverKYC = ({ onClose }) => {
             extendedStyles={"px-4 py-4 w-full rounded-2xl text-white gap-2 mt-6 bg-green-700"}
             isLoading={isLoading}
             disabled={!isAnyFieldTouched}
-          // btnClick={(e) =>handleSubmit(e)}
+         
           />
         </form>
       </figure>
 
-      {/* <CustomButton
-        name="Save"
-        className="hidden sm:flex px-4 py-4 w-full
-        rounded-2xl text-white gap-2 mt-0 bg-green-700"
-        isLoading={isLoading}
-        disabled={!isAnyFieldTouched}
-      /> */}
 
 
 

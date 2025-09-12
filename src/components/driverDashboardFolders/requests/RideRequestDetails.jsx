@@ -214,11 +214,11 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                     <div className="flex gap-4 my-4">
                         <div className="flex items-center gap-1">
                             <ClockIcon className="-mt-[1px]" />
-                            <div className="text-sm lg:text-[14px] font-poppins">08:15 AM</div>
+                            <div className="text-sm lg:text-sm font-poppins">08:15 AM</div>
                         </div>
                         <div className="flex items-center gap-1">
                             <DateIcon className="-mt-[2px]" />
-                            <div className="lg:text-[14px] text-sm font-poppins">Date: Jun 24, 2024</div>
+                            <div className="lg:text-sm text-sm font-poppins">Date: Jun 24, 2024</div>
                         </div>
                     </div>
                 </div>
@@ -289,7 +289,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         </button>
 
                         {/* Input Label */}
-                        <div className="text-black lg:text-lg text-[14px] font-poppins font-semibold">
+                        <div className="text-black lg:text-lg text-sm font-poppins font-semibold">
                             Amount you are willing to drive the Passenger
                         </div>
 
@@ -312,7 +312,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                                 onChange={(e) => setAmount(e.target.value)}
                                 placeholder="Enter amount"
                                 className="border placeholder-gray-400 border-gray-300 rounded-lg p-2 pl-10 w-[80%] 
-                focus:outline-none focus:ring-2 focus:ring-green-500 lg:text-[20px]"
+                focus:outline-none focus:ring-2 focus:ring-green-500 lg:text-xl"
                             /> */}
                         </div>
 
@@ -372,8 +372,8 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                          bg-green-500 flex items-center justify-center rounded-full">
                             <SuccessIcon className="w-[50px] h-[90px] bg-green-500 flex items-center justify-center rounded-full" />
                         </div>
-                        <p className="font-medium lg:text-[18px] text-[16px] text-center font-poppins ">
-                            <span className="font-semibold lg:text-[24px] text-[16px] font-poppins ">
+                        <p className="font-medium lg:text-lg text-base text-center font-poppins ">
+                            <span className="font-semibold lg:text-2xl text-base font-poppins ">
                                 Congratulations, Bide Accepted!
                             </span>
                             <br />
@@ -418,8 +418,8 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                             <FailureIcon className=" w-[50px] h-[90px] bg-red-500 flex items-center justify-center rounded-full" />
                         </div>
 
-                        <p className="font-medium lg:text-[18px] text-center font-poppins">
-                            <span className="font-semibold lg:text-[18px] font-poppins ">
+                        <p className="font-medium lg:text-lg text-center font-poppins">
+                            <span className="font-semibold lg:text-lg font-poppins ">
                                 Sorry, No Passenger Responded.
                             </span>
                             <br />

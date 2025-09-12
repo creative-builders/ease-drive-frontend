@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export const CountdownTimer = ({ onSubmit, title,  minutes }) => {
+export const CountdownTimer = ({ onSubmit, title, minutes }) => {
     const [timeLeft, setTimeLeft] = useState(parseInt(minutes) * 60); // 4 minutes
     const [showCountdown, setShowCountdown] = useState(true);
     const [isReady, setIsReady] = useState(false);
@@ -29,7 +29,7 @@ export const CountdownTimer = ({ onSubmit, title,  minutes }) => {
         <div className="flex flex-col items-center gap-4">
             <div className="text-[#1E1E1E] text-xl font-semibold px-6 py-3 rounded-xl w-fit">
                 <span
-                    className={`text-[18px] font-bold px-2 transition 
+                    className={`text-lg font-bold px-2 transition 
                         ${isReady ? "text-green-600 cursor-pointer" : "text-gray-400 cursor-not-allowed"}
                     `}
                     onClick={isReady ? onSubmit : undefined}
@@ -37,7 +37,7 @@ export const CountdownTimer = ({ onSubmit, title,  minutes }) => {
                     {title}
                 </span>
 
-                <span className="ml-0 text-[18px] font-inter">
+                <span className="ml-0 text-lg font-inter">
                     {showCountdown ? (
                         <span className="text-blue-400">{formatTime(timeLeft)}</span>
                     ) : (

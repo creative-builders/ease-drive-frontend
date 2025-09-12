@@ -35,13 +35,13 @@ export default function Luggage() {
                 return;
             }
         }
-    
-        navigate('/dashboard/looking-for',{
-          state: { from }
+
+        navigate('/dashboard/looking-for', {
+            state: { from }
         })
     };
-    
-    
+
+
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -69,9 +69,9 @@ export default function Luggage() {
         <div className='min-h-screen w-full flex flex-col items-center justify-around gap-14'>
             <Header />
             <BackArrow extendedStyles='top-20 left-10 xl:left-24' />
-            
+
             <label htmlFor='current-location' className='h-17 flex w-11/12 xl:w-[667px] px-4 py-6 mt-24 items-center gap-6 rounded-2xl bg-[#fff]'>
-                <RideSelectorLocationIcon width="18px" height="22px"/>
+                <RideSelectorLocationIcon width="18px" height="22px" />
 
                 <input
                     type="text"
@@ -85,13 +85,13 @@ export default function Luggage() {
 
             <main className='w-full xl:w-[1176px] min-h-[462px] xl:h-[527px] flex flex-col bg-[#F8FDF9] p-3 items-center justify-around mt-8 rounded-t-[32px] flex-shrink-0'>
                 <figure className='w-4/5 xl:w-4/5 gap-6 flex flex-col items-start justify-end h-fit'>
-                    
+
                     {/* Location Display */}
                     <div className="h-16 w-3/5 xl:w-72 flex items-start justify-between p-2">
                         <img src={Search} alt="" className='mt-1' />
                         <div className="w-60 flex flex-col gap-2">
                             <h2 className='font-[poppins] text-base font-medium leading-9'>Current Location</h2>
-                            <p className='text-[#B8B8B8] text-[12px] leading-[18px]'>{from || "unn 2nd gate"}</p>
+                            <p className='text-[#B8B8B8] text-xs leading-[18px]'>{from || "unn 2nd gate"}</p>
                         </div>
                     </div>
 
@@ -99,7 +99,7 @@ export default function Luggage() {
                         <img src={locate} alt="" className='mt-1' />
                         <div className="w-60 flex flex-col gap-2">
                             <h2 className='font-[poppins] text-base font-medium leading-9'>To</h2>
-                            <p className='text-[#B8B8B8] text-[12px] leading-[18px]'>{to || "Ogige market"}</p>
+                            <p className='text-[#B8B8B8] text-xs leading-[18px]'>{to || "Ogige market"}</p>
                         </div>
                     </div>
 
@@ -113,7 +113,7 @@ export default function Luggage() {
                             checked={selectedOption === 'without-luggage'}
                             onChange={() => handleRadioChange('without-luggage')}
                         />
-                        <span className='text-[12px] xl:text-base font-medium'>Without luggage</span>
+                        <span className='text-xs xl:text-base font-medium'>Without luggage</span>
                     </label>
 
                     <label htmlFor='with-luggages' className='h-10 w-3/5 xl:w-72 inline-flex items-center gap-5 p-2'>
@@ -125,7 +125,7 @@ export default function Luggage() {
                             checked={selectedOption === 'with-luggages'}
                             onChange={() => handleRadioChange('with-luggages')}
                         />
-                        <span className='text-[12px] xl:text-base font-medium'>With luggages</span>
+                        <span className='text-xs xl:text-base font-medium'>With luggages</span>
                     </label>
 
                     {/* Luggage upload */}
@@ -168,11 +168,11 @@ export default function Luggage() {
                     )}
 
                     {/* Custom Button */}
-                   <CustomButton
+                    <CustomButton
                         name={selectedOption ? 'Send Request' : 'Continue'}
                         extendedStyles="p-3 text-base xl:text-2xl rounded-lg font-medium lg:p-4 w-full"
                         btnClick={handleSubmit}
-                        
+
                     />
                 </figure>
             </main>
