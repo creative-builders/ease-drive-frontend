@@ -11,7 +11,7 @@
 import { axiosInstancePrivate } from "../general/api";
 
 export const driverSignUpAuth = async (credentials) => {
-    console.log("API Function Called with:", credentials); // Debugging log
+    // console.log("API Function Called with:", credentials); // Debugging log
     try {
         const response = await axiosInstancePrivate.post(`/auth/register/driver`, credentials);
         console.log("API Response:", response.data);
@@ -88,8 +88,7 @@ export const driverKYCUpdate = async ({ credentials, token }) => {
   }
 };
 
-export const getDriverDetails = async ({userID}) => {
-       
+export const getDriverDetails = async ({userID}) => {  
     try {
         const response = await axiosInstancePrivate.get(`v1/users/${userID}`)
         return response.data

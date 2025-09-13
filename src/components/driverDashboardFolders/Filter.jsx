@@ -9,7 +9,7 @@ export const Filter = ({ options, onChange, title }) => {
   const handleFilterChange = (option) => {
     setFilter(option);
     setDropdownOpen(false);
-    onChange(option);   // ✅ send option to parent
+    onChange(option);   
   };
 
   return (
