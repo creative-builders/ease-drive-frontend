@@ -8,6 +8,7 @@ import { userAtom } from "../../components/atoms/userAtom";
 import useAuth from "../../hooks/useAuth";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import toast from "react-hot-toast";
+import { DashboardHomeLoader } from "../../components/dashboard/loaders/DashboardHomeLoader";
 
 
 
@@ -31,13 +32,9 @@ export const DashboardLayout = () => {
       }
     );
 
-    if(isLoading){
-      return (
-      <div className="flex justify-center items-center">
-        <p className="text-blue-500 text-base font-medium">Loading User Dashboard</p>
-      </div>
-      )
-    }
+    // if(isLoading){
+    //   return <DashboardHomeLoader/>
+    // }
 
 
   return (
@@ -47,10 +44,12 @@ export const DashboardLayout = () => {
      setIsMenuOpen={setIsMenuOpen}
      />
      <div className="flex">
-       <SideBarMenu/>
+       <SideBarMenu isLoading = {isLoading} />
         <div className="bg-gradient-bg basis-full">
           <div className="lg:mr-[22px] lg:ml-[362px] mt-[72px] lg:mt-[29px] min-h-screen">
-            <Outlet context={{ coords, setCoords, isMenuOpen, setIsMenuOpen}}/>
+            {
+              isLoading ? <DashboardHomeLoader/> : <Outlet context={{ coords, setCoords, isMenuOpen, setIsMenuOpen}}/>
+            }
           </div>
         </div>
      </div>
