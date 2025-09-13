@@ -21,9 +21,7 @@ export default {
         },
         placeholder: "#AEAEB2",
         green:{
-          
           50:"#F1FCF2",
-
          100:"#DEFAE2",
          200:"#D4F9DB",
          250:"#BEF4C7",
@@ -34,6 +32,7 @@ export default {
          950:"#072C0F"
         },
         neutral:{
+          50:"#F6F6F6",
           400:"#A1A1A1",
           950:"#262626",
         },
@@ -65,6 +64,14 @@ export default {
         cardBg: "#F3F7FF",
         cardOverlay: "#E7E7E726",
         white: "#FFFFFF",
+      },
+      keyframes: {
+        shimmer: {
+          "100%": { transform: "translateX(100%)" },
+        },
+      },
+      animation: {
+        shimmer: "shimmer 2s infinite",
       },
      borderRadius:{
         'lg32':"32px",
