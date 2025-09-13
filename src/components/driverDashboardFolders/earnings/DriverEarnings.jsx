@@ -5,7 +5,7 @@ import { locationAtom } from "../../atoms/locationAtom";
 import { useRecoilValue } from "recoil";
 import { NoEarnings } from "./NoEarnings";
 import { Earnings } from "./Earnings";
-import { SkeletonLoader } from "../../dashboard/SkeletonLoader"
+import { ConfirmBookingLoader } from "../../dashboard/loaders/ConfirmBookingLoader"
 
 import { userAtom } from "../../atoms/userAtom";
 
@@ -39,8 +39,8 @@ export function DriverEarnings() {
           {/* <NoEarnings /> */}
           {/* <Earnings /> */}
 
-          <SkeletonLoader variant="list" />
-          <SkeletonLoader variant="card" />
+          <ConfirmBookingLoader variant="list" />
+          <ConfirmBookingLoader variant="card" />
 
         </div>
       </div>
