@@ -17,9 +17,10 @@ import { EmailSignedIcon } from "../../../assets/icons/EmailSignedIcon";
 import { LogoText } from "../../../components/LogoText";
 import { InputField } from "../../../components/customFormFields/InputField";
 
+
 const Login = () => {
   const navigate = useNavigate();
-  const setUser = useSetRecoilState(userAtom);
+  const setUser = useSetRecoilState(userAtom)
 
   const [showPassword, setShowPassword] = useState(false);
   const [inputTouched, setInputTouched] = useState(false);
