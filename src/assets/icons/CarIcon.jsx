@@ -10,14 +10,14 @@ export const CarIcon = (props) => (
   >
     <path
       d="M3.33331 16L5.99998 17.3333"
-  stroke={props.stroke || `#B0B0B0`}
+      stroke={props.stroke || `#B0B0B0`}
       strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
       d="M28.6667 16.6665L26 17.3332"
-  stroke={props.stroke || `#B0B0B0`}
+      stroke={props.stroke || `#B0B0B0`}
       strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
