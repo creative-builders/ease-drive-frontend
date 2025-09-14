@@ -5,8 +5,8 @@ import { axiosInstancePrivate } from "../auth/general/api";
 
 // USER DASHBOARD APIS
 export const getUserProfile = async({ queryKey }) => {
-    const [_key, user_id]  =  queryKey;
-    const response = await axiosInstancePrivate.get(`/v1/users/${user_id}`);
+    const [_key, userId]  =  queryKey;
+    const response = await axiosInstancePrivate.get(`/v1/users/${userId}`);
     return response.data;
 }
 

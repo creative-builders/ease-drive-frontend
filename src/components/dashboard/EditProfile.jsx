@@ -11,7 +11,7 @@ import { InputField } from "../customFormFields/InputField";
 import { userAtom } from "../atoms/userAtom";
 import { Modal } from "../Modal";
 import { FormProvider, useStepFlowContext } from "../../hooks/useStepFlowFormContext";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateUserProfile } from "../../store/users/api";
 import CustomButton from "../CustomButton";
 import { Link } from "react-router-dom";
@@ -29,6 +29,7 @@ const {
 } = useStepFlowContext();
 
 const userData = useRecoilValue(userAtom);
+const queryClient = useQueryClient();
 
   const [showPassword, setShowPassword] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
@@ -43,6 +44,7 @@ const userData = useRecoilValue(userAtom);
   const { mutate:submitProfileUpdate , isLoading } = useMutation(updateUserProfile, {
      onSuccess: (response) => {
       toast.success(response?.message);
+      queryClient.invalidateQueries(["getUserProfile"]);
       setFormData(prev => ({
         ...prev,
         fullName:"",
@@ -86,7 +88,7 @@ const userData = useRecoilValue(userAtom);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userId = userData?.id;
+    const userId = userData?._id;
     submitProfileUpdate({ userId , payload:formData } );
   }
 

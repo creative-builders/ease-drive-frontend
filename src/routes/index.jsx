@@ -87,7 +87,13 @@ const IndexRoute = () => {
       
 
       {/* Dashboard Route */}
-      <Route path="/dashboard" element={<DashboardHome />}> 
+      <Route path="/dashboard" 
+      element={
+       <ProtectedRoutes>
+        <DashboardHome />
+       </ProtectedRoutes>
+       }
+      > 
         <Route index element={user?.role === "passenger" ? 
         <PassengerDashboardIndex/> : 
         <DriverDashboardIndex/>
