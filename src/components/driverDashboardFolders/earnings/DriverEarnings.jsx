@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LiveGPSIcon } from "../../../assets/icons/LiveGPSIcon";
 import { locationAtom } from "../../atoms/locationAtom";
 import { useRecoilValue } from "recoil";
@@ -12,10 +12,15 @@ import { userAtom } from "../../atoms/userAtom";
 
 export function DriverEarnings() {
   const [selectedRequest, setSelectedRequest] = useState(null);
+  const [loading, setLoading] = useState(false)
 
   const user = useRecoilValue(userAtom);
 
   const location = useRecoilValue(locationAtom);
+
+  setTimeout(() =>{
+    setLoading(true)
+  }, 2000)
 
   return (
     <div className="flex lg:w-full w-[100%] lg:justify-start justify-center m-auto items-center">
@@ -37,10 +42,19 @@ export function DriverEarnings() {
         m-auto lg:items-start items-center lg:flex-row flex-col
         lg:mt-0 mt-4 lg:-ml-10 ml lg:h-full gap-4">
           {/* <NoEarnings /> */}
-          {/* <Earnings /> */}
 
-          <ConfirmBookingLoader variant="list" />
-          <ConfirmBookingLoader variant="card" />
+          {
+            loading ? (
+              <Earnings />
+            ) : (
+              <>
+
+                <ConfirmBookingLoader variant="list" />
+                <ConfirmBookingLoader variant="card" />
+              </>
+            )
+          }
+
 
         </div>
       </div>

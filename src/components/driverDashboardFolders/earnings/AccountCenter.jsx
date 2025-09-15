@@ -18,7 +18,7 @@ import { ResetSuccess } from '../../../assets/icons/ResetSuccess'
 
 import LoadingSpinner from '../../LoadingSpinner';
 import { driverKYCUpdate, getDriverDetails } from "../../../store/auth/driver/api"
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { userAtom } from "../../atoms/userAtom";
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from "recoil";
@@ -30,7 +30,8 @@ import { CustomSelectField } from "../../customFormFields/CustomSelectField"
 
 export const AccountCenter = () => {
 
-    const user = useRecoilValue(userAtom);
+    const userData = useRecoilValue(userAtom);
+    const queryClient = useQueryClient();
 
     const [modalType, setModalType] = useState(null); // "image" | "amount" | "loading"
     // const [amount, setAmount] = useState("");
@@ -39,7 +40,6 @@ export const AccountCenter = () => {
     const [isSumitting, setisSubmitting] = useState(false)
     const [isPinInvalid, setIsPinInvalid] = useState(false)
     const [driverData, setDriverData] = useState({})
-
     const [showPassword, setShowPassword] = useState(false);
     const [inputTouched, setInputTouched] = useState(false);
     const [errors, setErrors] = useState({});
@@ -70,43 +70,28 @@ export const AccountCenter = () => {
 
     const showPinNotMatchedError = inputTouched && inputs.newPin !== inputs.confirmNewPin
 
+
+    useEffect(() => {
+        setDriverData(userData?.driverProfile)
+    }, [userData]);
+
     const {
         bankName,
         bankAccountHolderName,
         bankAccountNumber,
         transactionPin
-    } = driverData?.driverProfile || {}
+    } = driverData
 
 
+    console.log(driverData)
 
-    const { mutate: getDriverKYC, isLoaded } = useMutation(
-        getDriverDetails,
-        {
-            onSuccess: (data) => {
-                setDriverData(data.data)
-                // setisSubmitting(false)
-                // setModalType("accountsuccess");
-            },
-            onError: (error) => {
-                toast.error(error.response?.data?.message || error.message);
-            }
-        }
-    );
-
-
-
-    useEffect(() => {
-        if (user?.id) {
-            getDriverKYC({ userID: user.id });
-        }
-    }, [user?.id, getDriverKYC]);
-
-    
 
     const { mutate: submitDriverKYC, isLoading } = useMutation(
         driverKYCUpdate,
         {
             onSuccess: (data) => {
+                toast.success(response?.message);
+                queryClient.invalidateQueries(["getUserProfile"]);
                 // console.log("KYC data updated successfully:", data);
                 setisSubmitting(false)
                 setModalType("accountsuccess");
@@ -139,14 +124,15 @@ export const AccountCenter = () => {
     }
 
     const handleBankDetailsSubmit = () => {
-        const _formData = new FormData();
-        _formData.append("bankAccountHolderName", inputs.bankAccountHolderName);
-        _formData.append("bankName", inputs.bankName);
-        _formData.append("bankAccountNumber", inputs.bankAccountNumber);
-        _formData.append("transactionPin", "2345");
-
         try {
-            submitDriverKYC({ credentials: _formData, token: user?.id });
+            submitDriverKYC({
+                credentials: {
+                    bankName: inputs.bankName,
+                    bankAccountHolderName: inputs.bankAccountHolderName,
+                    bankAccountNumber: inputs.bankAccountNumber,
+                    transactionPin: inputs.newPin
+                }, userId: userData?._id
+            });
             // setModalType("withdralpin")
         } catch (error) {
             console.log(error)
@@ -175,7 +161,7 @@ export const AccountCenter = () => {
                     <div className='flex items-center lg:gap-2 justify-center lg:w-full w-[328px] bg-accent-50 p-4 rounded-lg '>
 
                         {
-                           bankName ? (
+                            bankName ? (
                                 <>
                                     <div className="inline mr-2 bg-green-50 lg:w-[60px] lg:h-[60px]  w-[36px] h-[36px] rounded-full flex justify-center items-center">
                                         <WalletIcon />
@@ -199,7 +185,11 @@ export const AccountCenter = () => {
                                     <EditIcon className="inline mr-2 cursor-pointer" onClick={handleUpdateBankAccount} />
                                 </>
                             ) : (
-                                <LoadingSpinner  className="animate-spin" />
+                                // <LoadingSpinner className="animate-spin" />
+                                <div className='w-full flex items-center gap-6 text-green-700'>
+                                    Setup Your Bank
+                                    <EditIcon className="inline mr-2 cursor-pointer" onClick={handleUpdateBankAccount} />
+                                </div>
                             )
                         }
                     </div>

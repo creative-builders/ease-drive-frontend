@@ -48,7 +48,6 @@ const UpdateDriverKYC = ({ onClose }) => {
 
   const { mutate: submitDriverKYCUpdate, isLoading } = useMutation(driverKYCUpdate, {
     onSuccess: (response) => {
-      toast.success(response?.message);
       queryClient.invalidateQueries(["getUserProfile"]);
       setFormData(prev => ({
         ...prev,
