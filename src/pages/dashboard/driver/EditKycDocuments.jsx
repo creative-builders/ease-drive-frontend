@@ -23,7 +23,7 @@ import { InputField } from "../../../components/customFormFields/InputField";
 import { CustomSelectField } from "../../../components/customFormFields/CustomSelectField";
 import { userAtom } from "../../../components/atoms/userAtom";
 import toast from "react-hot-toast";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { driverKYCUpdate } from "../../../store/auth/driver/api"
 import { FormProvider, useStepFlowContext } from "../../../hooks/useStepFlowFormContext";
 
@@ -36,8 +36,8 @@ const UpdateDriverKYC = ({ onClose }) => {
   const [previewImages, setPreviewImages] = useState([]);
   const [selectedCity, setSelectedCity] = useState();
 
-const userData = useRecoilValue(userAtom);
-
+  const userData = useRecoilValue(userAtom);
+  const queryClient = useQueryClient();
   const {
     formData,
     setFormData,
@@ -49,6 +49,7 @@ const userData = useRecoilValue(userAtom);
   const { mutate: submitDriverKYCUpdate, isLoading } = useMutation(driverKYCUpdate, {
     onSuccess: (response) => {
       toast.success(response?.message);
+      queryClient.invalidateQueries(["getUserProfile"]);
       setFormData(prev => ({
         ...prev,
         vehicleType: "",
@@ -66,7 +67,7 @@ const userData = useRecoilValue(userAtom);
   })
 
   const isAnyFieldTouched = Object.values(formData).some((touched) => touched);
-  
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -78,12 +79,12 @@ const userData = useRecoilValue(userAtom);
     if (selectedFiles.length === 0) {
       newErrors.files = "Please upload at least one document image";
     }
-   
 
-    submitDriverKYCUpdate({ credentials: formData, userId:userId });
+
+    submitDriverKYCUpdate({ credentials: formData, userId: userId });
   }
 
-  
+
   const [profileImage, setProfileImage] = useState(
     userData?.profileImage || fallbackProfile
   );
@@ -162,7 +163,7 @@ const userData = useRecoilValue(userAtom);
             rightIcon={FaChevronDown}
 
             leftIcon={CarIcon}
-         
+
           />
 
           <InputField
@@ -172,7 +173,7 @@ const userData = useRecoilValue(userAtom);
             value={formData.plateNumber}
             onChange={handleUpdateFormData}
             leftIcon={PlateNumberIcon}
-    
+
           />
 
           <CustomSelectField
@@ -200,7 +201,7 @@ const userData = useRecoilValue(userAtom);
               onChange={handleUpdateFormData}
               placeholder="Eg.black"
               leftIcon={ColorIcon}
-          
+
             />
 
             <InputField
@@ -212,7 +213,7 @@ const userData = useRecoilValue(userAtom);
               type="text"
               placeholder="Eg.4"
               leftIcon={SeatIcon}
-            
+
             />
           </div>
 
@@ -224,7 +225,7 @@ const userData = useRecoilValue(userAtom);
             onChange={handleUpdateFormData}
             placeholder="Driver's licence"
             leftIcon={Document}
-         
+
           />
 
           <div className="">
@@ -279,7 +280,7 @@ const userData = useRecoilValue(userAtom);
             extendedStyles={"px-4 py-4 w-full rounded-2xl text-white gap-2 mt-6 bg-green-700"}
             isLoading={isLoading}
             disabled={!isAnyFieldTouched}
-         
+
           />
         </form>
       </figure>
