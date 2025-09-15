@@ -131,12 +131,11 @@ export const Trips = () => {
         />
       </div>
 
-      <TripsPage className="w-full" tripData={data} onView={setSelectedTrip} />
+      <TripsPage className="w-full" tripData={tripData} onView={setSelectedTrip} />
         {/* Modal */}
         <TripDetailsModal
           isOpen={!!selectedTrip}
-          // trip={selectedTrip}
-          trip={mockTrip}
+          trip={selectedTrip ? { ...mockTrip, ...selectedTrip } : null}  
           onClose={() => setSelectedTrip(null)}
         />
     </div>

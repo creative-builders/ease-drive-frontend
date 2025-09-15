@@ -13,6 +13,7 @@ import { PlateNumberIcon } from "../../../assets/icons/PlateNumberIcon.jsx";
 import { CustomerService } from "../../../assets/icons/CustomerService.jsx";
 import { DelectIcon } from "../../../assets/icons/DelectIcon.jsx";
 import { PhoneIcon } from "../../../assets/icons/PhoneIcon.jsx";
+import { AvatarIcon } from "../../../assets/icons/AvatarIcon.jsx";
 import LogoutButton from "../../auth/logout/LogoutButton.jsx";
 import { userAtom } from "../../../components/atoms/userAtom.jsx";
 import { locationAtom } from "../../../components/atoms/locationAtom.jsx";
@@ -82,7 +83,6 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
               />)
             }
           </div>
-
           <div className="flex flex-col">
             <div className="flex flex-col md:flex-row md:items-center md:gap-x-4">
               <h2 className="mb-2 font-semibold text-base capitalize">

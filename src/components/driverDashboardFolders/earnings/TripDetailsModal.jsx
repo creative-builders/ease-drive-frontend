@@ -19,12 +19,19 @@ export const TripDetailsModal = ({ isOpen, onClose, trip }) => {
         </button>
 
         {/* Header */}
-        <div className="flex flex-col gap-2 pb-4 mb-4">
-          <div className="flex items-center justify-around">
-            <h2 className="text-lg md:text-xl font-semibold not-italic leading-normal">
+        <div className="flex flex-col gap-2 pb-4 mb-4 mt-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg md:text-xl font-semibold not-italic leading-normal w-52 flex items-start">
             {trip.pickup} → {trip.dropoff}
             </h2>
-            <span className="ml-auto text-xs bg-gray-100 text-gray-600 px-2 py-1 mr-5 rounded">
+            <span 
+            className={`text-xs text-accent-600 bg-accent-100 rounded-lg36 px-2 py-1 mr-6 w-24 flex justify-center
+              ${trip.status === "Paid" ? "text-green-600 bg-green-50" : ""}
+              ${trip.status === "Pending" ? "text-orange-600 bg-orange-50" : ""}
+              ${trip.status === "Cancelled" ? "text-red-600 bg-red-50" : ""}
+              ${!["Paid","Pending","Cancelled"].includes(trip.status) ? "text-blue-600 bg-blue-50" : ""}
+            `}
+            >
               {trip.status || "Completed"}
             </span>
           </div>
@@ -33,8 +40,8 @@ export const TripDetailsModal = ({ isOpen, onClose, trip }) => {
               Total Passengers: {trip.passengers?.length || 0}/{trip.passengers?.total || 0}
             </p>
             <div className="flex gap-6 text-sm font-medium">
-              <span className="text-accent-600 text-xs md:text-lg font-medium not-italic leading-normal">Dropped off: {trip.droppedOff}</span>
-              <span className="text-[#EA4335] text-xs md:text-lg font-medium not-italic leading-normal">Cancelled: {trip.cancelled}</span>
+              <span className="text-accent-600 rounded-lg36 text-xs lg:text-lg font-medium not-italic leading-normal">Dropped off: {trip.droppedOff}</span>
+              <span className="text-[#EA4335] rounded-lg36 text-xs lg:text-lg font-medium not-italic leading-normal">Cancelled: {trip.cancelled}</span>
               
             </div>
           </div>
