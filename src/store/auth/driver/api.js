@@ -41,33 +41,30 @@ export const driverSignUpAuth = async (credentials) => {
 // };
 
 
-export const driverKYCUpdate = async ({ credentials, token }) => {
+export const driverKYCUpdate = async ({ credentials, userId, whois }) => {
   // Validation
-  if (!credentials || typeof credentials !== 'object') {
-    throw new Error('Invalid credentials format');
+  if (!credentials || typeof credentials !== "object") {
+    throw new Error("Invalid credentials format");
   }
-  
-  if (!token) {
-    throw new Error('Token is required');
+
+  if (!userId && !whois) {
+    throw new Error("Either userId or whois token is required");
   }
 
   const _formData = new FormData();
 
   Object.entries(credentials).forEach(([key, value]) => {
-    if (value === null || value === undefined || value === '') return;
+    if (value === null || value === undefined || value === "") return;
 
- 
     if (value instanceof File) {
       _formData.append(key, value);
     } else if (Array.isArray(value)) {
-      value.forEach(item => {
+      value.forEach((item) => {
         if (item instanceof File) {
           _formData.append(key, item);
         }
       });
-    } else if (typeof value === 'boolean') {
-      _formData.append(key, value.toString());
-    } else if (typeof value === 'number') {
+    } else if (typeof value === "boolean" || typeof value === "number") {
       _formData.append(key, value.toString());
     } else {
       _formData.append(key, value);
@@ -75,18 +72,23 @@ export const driverKYCUpdate = async ({ credentials, token }) => {
   });
 
   try {
-    const response = await axiosInstancePrivate.patch(
-      `v1/users/update/driverkyc?whois=${encodeURIComponent(token)}`,
-      _formData,
-    );
+    // Build endpoint dynamically
+    let endpoint = "v1/users/update/driverkyc";
+    if (userId) {
+      endpoint += `/${encodeURIComponent(userId)}`;
+    } else if (whois) {
+      endpoint += `?whois=${encodeURIComponent(whois)}`;
+    }
 
+    const response = await axiosInstancePrivate.patch(endpoint, _formData);
     return response.data;
   } catch (error) {
     const errorMessage = error.response?.data?.message || error.message;
     console.error("KYC Update Error:", errorMessage);
-    throw new Error(errorMessage || 'KYC update failed');
+    throw new Error(errorMessage || "KYC update failed");
   }
 };
+
 
 export const getDriverDetails = async ({userID}) => {  
     try {

@@ -36,6 +36,7 @@ const UpdateDriverKYC = ({ onClose }) => {
   const [previewImages, setPreviewImages] = useState([]);
   const [selectedCity, setSelectedCity] = useState();
 
+const userData = useRecoilValue(userAtom);
 
   const {
     formData,
@@ -65,11 +66,13 @@ const UpdateDriverKYC = ({ onClose }) => {
   })
 
   const isAnyFieldTouched = Object.values(formData).some((touched) => touched);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const userId = userData?.id;
+    const userId = userData?._id;
+    // console.log(userId)
     const newErrors = {};
 
     if (selectedFiles.length === 0) {
@@ -77,10 +80,10 @@ const UpdateDriverKYC = ({ onClose }) => {
     }
    
 
-    submitDriverKYCUpdate({ credentials: formData, token: userId });
+    submitDriverKYCUpdate({ credentials: formData, userId:userId });
   }
 
-  const userData = useRecoilValue(userAtom);
+  
   const [profileImage, setProfileImage] = useState(
     userData?.profileImage || fallbackProfile
   );
@@ -289,7 +292,7 @@ const UpdateDriverKYC = ({ onClose }) => {
 };
 
 
-const DriverKycDocuments = ({ onClose }) => {
+const EditKycDocuments = ({ onClose }) => {
 
   const initialInputFields = [
     "vehicleType",
@@ -307,5 +310,5 @@ const DriverKycDocuments = ({ onClose }) => {
     </FormProvider>
   );
 };
-export default DriverKycDocuments
+export default EditKycDocuments
 

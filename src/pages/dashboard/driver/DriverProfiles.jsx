@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useIsMobile from "../../../hooks/useIsMobile";
 import { DriverProfile } from "./DriverProfile";
-import DriverKycDocuments from "./DriverKycDocuments";
+import EditKycDocuments from "./EditKycDocuments";
 import { DriverProfileDetails } from "./DriverProfileDetails";
 import { EditProfileView } from "../../../components/dashboard/EditProfile";
 
@@ -38,7 +38,7 @@ const DriverProfiles = () => {
 
         {activeEdit === "credentials" && (
           <div className="w-full sm:flex-1">
-            <DriverKycDocuments onClose={() => setActiveEdit(null)} />
+            <EditKycDocuments onClose={() => setActiveEdit(null)} />
           </div>
         )}
 

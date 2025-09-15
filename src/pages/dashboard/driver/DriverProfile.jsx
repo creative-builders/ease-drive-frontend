@@ -35,30 +35,13 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
 
 
   const handleDelete = () => {
-    console.log("Account deleted");
+    // console.log("Account deleted");
     setIsOpen(false);
   };
 
-  //THIS IS TEEMPORAL PENDIDNG USERDATA UPDATE
-  const { mutate: getDriverKYC, isLoaded } = useMutation(
-    getDriverDetails,
-    {
-      onSuccess: (data) => {
-        setDriverData(data.data)
-        // setisSubmitting(false)
-        // setModalType("accountsuccess");
-      },
-      onError: (error) => {
-        toast.error(error.response?.data?.message || error.message);
-      }
-    }
-  );
-
   useEffect(() => {
-    if (userData?.id) {
-      getDriverKYC({ userID: userData.id });
-    }
-  }, [userData?.id, getDriverKYC]);
+   setDriverData(userData?.driverProfile)
+  }, [userData] );
 
   const {
     vehicleType,
@@ -67,7 +50,7 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
     numberOfSeats,
     vehicleColor,
     documentID,
-    vehiclePhotos } = driverData?.driverProfile || {}
+    vehiclePhotos } = driverData
 
 
   return (
