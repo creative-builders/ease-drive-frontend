@@ -53,23 +53,16 @@ export const driverKYCUpdate = async ({ credentials, userId, whois }) => {
 
   const _formData = new FormData();
 
-  Object.entries(credentials).forEach(([key, value]) => {
-    if (value === null || value === undefined || value === "") return;
-
-    if (value instanceof File) {
-      _formData.append(key, value);
-    } else if (Array.isArray(value)) {
-      value.forEach((item) => {
-        if (item instanceof File) {
-          _formData.append(key, item);
-        }
-      });
-    } else if (typeof value === "boolean" || typeof value === "number") {
-      _formData.append(key, value.toString());
-    } else {
-      _formData.append(key, value);
-    }
-  });
+Object.entries(credentials).forEach(([key, value]) => {
+  if (value == null || value === "") return; 
+  if (Array.isArray(value)) {
+   value.forEach((item) => _formData.append(key, item));
+  } else if (typeof value === "boolean" || typeof value === "number") {
+    _formData.append(key, String(value)); 
+  } else {
+    _formData.append(key, value);
+  }
+});
 
   try {
     // Build endpoint dynamically

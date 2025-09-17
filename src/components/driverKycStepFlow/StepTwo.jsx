@@ -38,7 +38,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
     setSelectedFiles(files);
   };
 
-  const isplateNumberValid = (formData?.plateNumber || "").length >= 15;
+  const isplateNumberValid = (formData?.plateNumber || "").length >= 5;
   const showplateNumbererror =
     inputTouched && formData?.plateNumber.length > 0 && !isplateNumberValid;
 
@@ -136,7 +136,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   onChange={handleUpdateFormData}
                   leftIcon={PlateNumberIcon}
                   error={
-                    showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+                    showplateNumbererror ? " Plate Number must be at least 5 characters" : ""
                   }
                 />
 
@@ -208,7 +208,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                 >
                   Upload Photos
                 </button>
-                <input
+                {/* <input
                   type="file"
                   ref={fileInputRef}
                   name="vehiclePhotos"
@@ -220,7 +220,23 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                     handleUpdateFormData("vehiclePhotos", files);
                   }}
                   multiple
+                /> */}
+
+                <InputField
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  name="vehiclePhotos"
+                  inputRef={fileInputRef}
+                  containerStyles={"hidden"}
+                  inputTextStyles={"hidden"}
+                  onChange={(e) => {
+                    const files = Array.from(e.target.files);
+                    setSelectedFiles(files);
+                    handleUpdateFormData("vehiclePhotos", files);
+                  }}
                 />
+
                 {selectedFiles.length > 0 && (
                   <ul className="w-[80%] mt-2 text-sm text-gray-600 list-disc list-inside">
                     {selectedFiles.map((file, index) => (

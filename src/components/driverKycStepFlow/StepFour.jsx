@@ -14,6 +14,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Skip } from '../Skip'
 import toast from 'react-hot-toast';
+import { InputField } from '../customFormFields/InputField';
 
 import CustomButton from '../CustomButton';
 
@@ -66,16 +67,14 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
         const newErrors = {};
 
         if (!formData.profileImage || formData.profileImage.length === 0) {
-            showError("Please upload profile image or just skip");
+            toast.error("Please select profile image or skip.");
             newErrors.files = "Please upload at least one document image";
         }
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-          
-
-            // Submit via React Query
-            submitDriverKYC({ credentials: formData, whois:token });
+            // Subit via React Query
+            submitDriverKYC({ credentials: formData, whois: token });
         }
     };
 
@@ -140,7 +139,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                                     className="text-blue-800 bg-custom-gradient"
                                     title={` Step ${step}  of ${totalSteps}`}
                                 />
-                       
+
                             </div>
                         </div>
 
@@ -182,7 +181,7 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                                 >
                                     Upload Profile Photo
                                 </p>
-                                <input
+                                {/* <input
                                     type="file"
                                     ref={fileInputRef}
                                     className="hidden"
@@ -194,12 +193,28 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                                         handleUpdateFormData("profileImage", files);
                                         handleFileChange(e)
                                     }}
+                                /> */}
+
+                                <InputField
+                                    type="file"
+                                    accept="image/*"
+                                    multiple
+                                    name="profileImage"
+                                    inputRef={fileInputRef}
+                                    containerStyles={"hidden"}
+                                    inputTextStyles={"hidden"}
+                                    onChange={(e) => {
+                                        const files = Array.from(e.target.files);
+                                        setSelectedFiles(files);
+                                        handleUpdateFormData("profileImage", files);
+                                        handleFileChange(e)
+                                    }}
                                 />
                             </div>
                         </div>
 
 
-                
+
 
                         <button
                             type="submit"

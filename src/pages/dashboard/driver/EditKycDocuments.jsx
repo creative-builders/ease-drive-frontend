@@ -43,11 +43,15 @@ const UpdateDriverKYC = ({ onClose }) => {
     setFormData,
     handleUpdateFormData,
   } = useStepFlowContext();
+  
+  const isAnyFieldTouched = Object.values(formData).some((touched) => touched);
+
 
 
 
   const { mutate: submitDriverKYCUpdate, isLoading } = useMutation(driverKYCUpdate, {
     onSuccess: (response) => {
+      toast.success(response?.message);
       queryClient.invalidateQueries(["getUserProfile"]);
       setFormData(prev => ({
         ...prev,
@@ -65,12 +69,9 @@ const UpdateDriverKYC = ({ onClose }) => {
     }
   })
 
-  const isAnyFieldTouched = Object.values(formData).some((touched) => touched);
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const userId = userData?._id;
     // console.log(userId)
     const newErrors = {};
@@ -157,10 +158,9 @@ const UpdateDriverKYC = ({ onClose }) => {
             value={formData.vehicleType}
             onChange={handleUpdateFormData}
             type="text"
-            placeholder="Enter Vehicle Plate  Number"
+            defaultHolder="Select your vehicle type"
             options={["Keke", "Car", "Shuttle Bus", "Motorcycle", "Regular Bus", "Truck"]}
             rightIcon={FaChevronDown}
-
             leftIcon={CarIcon}
 
           />
@@ -195,7 +195,6 @@ const UpdateDriverKYC = ({ onClose }) => {
               label="vehicle Color"
               name="vehicleColor"
               type="text"
-
               value={formData.vehicleColor}
               onChange={handleUpdateFormData}
               placeholder="Eg.black"
@@ -208,7 +207,6 @@ const UpdateDriverKYC = ({ onClose }) => {
               name="numberOfSeats"
               value={formData.numberOfSeats}
               onChange={handleUpdateFormData}
-
               type="text"
               placeholder="Eg.4"
               leftIcon={SeatIcon}
@@ -236,15 +234,18 @@ const UpdateDriverKYC = ({ onClose }) => {
               per image
             </p>
 
-            <input
+
+            <InputField
               type="file"
+              accept="image/*"
               multiple
               name="vehiclePhotos"
-              accept="image/*"
-              ref={documentUploadRef}
+              inputRef={documentUploadRef}
+              containerStyles={"hidden"}
+              inputTextStyles={"hidden"}
               onChange={handleDocumentsChange}
-              className="hidden"
             />
+
             <div
               onClick={() => documentUploadRef.current.click()}
               className="border border-gray-300 rounded-md p-4 flex flex-col items-center justify-center text-center cursor-pointer"
