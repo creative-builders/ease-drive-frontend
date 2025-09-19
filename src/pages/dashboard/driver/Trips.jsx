@@ -5,6 +5,7 @@ import StatsCards from "../../../components/DashboardForDrivers/StatsCards";
 import { data } from "../../../components/driverDashboardFolders/earnings/tripData";
 import { TripDetailsModal } from "../../../components/driverDashboardFolders/earnings/TripDetailsModal";
 import { TripsPage } from "../../../components/driverDashboardFolders/earnings/TripsTable";
+import { Modal } from "../../../components/Modal";
 
 
 export const Trips = () => {
@@ -27,12 +28,12 @@ export const Trips = () => {
       date: "28 August 2024",
       pickup: "Town",
       dropoff: "odenigwe",
-      status: "Paid",
+      status: "Pending",
       earnings: "₦4,000",
     },
     {
       date: "3 Septmeber 2024",
-      pickup: "city",
+      pickup: "City",
       dropoff: "Odim street",
       status: "Paid",
       earnings: "₦6,000",
@@ -62,42 +63,42 @@ export const Trips = () => {
         date: "Jun 24, 2024",
         rating: 4.2,
       },
-      {
-        id: "p2",
-        name: "Jerome Bell",
-        profileImage: "https://randomuser.me/api/portraits/men/22.jpg",
-        tripType: "Drop-off",
-        status: "Cancelled",
-        fare: "₦2,500",
-        location: "20 mins away from you",
-        time: "08:15 AM",
-        date: "Jun 24, 2024",
-        rating: null,
-      },
-      {
-        id: "p3",
-        name: "Jerome Bell",
-        profileImage: "https://randomuser.me/api/portraits/men/22.jpg",
-        tripType: "Drop-off",
-        status: "Dropped off",
-        fare: "₦2,500",
-        location: "20 mins away from you",
-        time: "08:15 AM",
-        date: "Jun 24, 2024",
-        rating: null,
-      },
-      {
-        id: "p4",
-        name: "John Ndubuisi Chukwuemeka",
-        profileImage: "https://randomuser.me/api/portraits/men/32.jpg",
-        tripType: "Round-Trip",
-        status: "Dropped off",
-        fare: "₦3,700",
-        location: "20 mins away from you",
-        time: "08:15 AM",
-        date: "Jun 24, 2024",
-        rating: 3.5,
-      },
+      // {
+      //   id: "p2",
+      //   name: "Jerome Bell",
+      //   profileImage: "https://randomuser.me/api/portraits/men/22.jpg",
+      //   tripType: "Drop-off",
+      //   status: "Cancelled",
+      //   fare: "₦2,500",
+      //   location: "20 mins away from you",
+      //   time: "08:15 AM",
+      //   date: "Jun 24, 2024",
+      //   rating: null,
+      // },
+      // {
+      //   id: "p3",
+      //   name: "Jerome Bell",
+      //   profileImage: "https://randomuser.me/api/portraits/men/22.jpg",
+      //   tripType: "Drop-off",
+      //   status: "Dropped off",
+      //   fare: "₦2,500",
+      //   location: "20 mins away from you",
+      //   time: "08:15 AM",
+      //   date: "Jun 24, 2024",
+      //   rating: null,
+      // },
+      // {
+      //   id: "p4",
+      //   name: "John Ndubuisi Chukwuemeka",
+      //   profileImage: "https://randomuser.me/api/portraits/men/32.jpg",
+      //   tripType: "Round-Trip",
+      //   status: "Dropped off",
+      //   fare: "₦3,700",
+      //   location: "20 mins away from you",
+      //   time: "08:15 AM",
+      //   date: "Jun 24, 2024",
+      //   rating: 3.5,
+      // },
     ],
   };
 
@@ -131,13 +132,30 @@ export const Trips = () => {
         />
       </div>
 
-      <TripsPage className="w-full" tripData={tripData} onView={setSelectedTrip} />
-        {/* Modal */}
+       <TripsPage className="w-full" tripData={tripData} onView={setSelectedTrip} />
+      
         <TripDetailsModal
           isOpen={!!selectedTrip}
           trip={selectedTrip ? { ...mockTrip, ...selectedTrip } : null}  
           onClose={() => setSelectedTrip(null)}
+        /> 
+
+      {/* <Modal 
+        closeModal={() => setSelectedTrip(null)} 
+        title="Trip Details" 
+        bodyText="" 
+        iconBg="bg-gray-100"
+        position="center"
+        children
+      >
+        <TripDetailsModal
+          isOpen={!!selectedTrip}
+          trip={selectedTrip ? { ...mockTrip, ...selectedTrip } : null}
+          onClose={() => setSelectedTrip(null)}
         />
+      </Modal> */}
+
+
     </div>
   );
 };
