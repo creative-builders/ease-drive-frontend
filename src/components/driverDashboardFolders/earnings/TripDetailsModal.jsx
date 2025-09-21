@@ -6,20 +6,8 @@ import { DateIcon } from "../../../assets/icons/DateIcon";
 import { Divider } from "../../Divider/Divider";
 
 export const TripDetailsModal = ({ isOpen, onClose, trip }) => {
-  if (!isOpen || !trip) return null;
-
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg32 shadow-lg w-full lg:w-8 px-5 py-6 flex-col items-start relative m-4">
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-800"
-        >
-          <CloseIcon className="h-4 w-4" />
-        </button>
-
-        {/* Header */}
+      <div className="w-full flex-col items-start relative">
         <div className="flex flex-col gap-2 pb-4 mb-4 mt-4">
           <div className="flex items-center justify-between">
             <h2 className="text-lg md:text-xl font-semibold not-italic leading-normal w-52 flex items-start">
@@ -49,7 +37,7 @@ export const TripDetailsModal = ({ isOpen, onClose, trip }) => {
         </div>
 
         {/* Passenger List */}
-        <div className="flex flex-col gap-4 max-h-80 overflow-y-auto pr-2">
+        <div className="flex flex-col gap-4 pr-2">
           {Array.isArray(trip.passengers) && trip.passengers.length > 0 ? (
             trip.passengers.map((p) => (
               <>
@@ -98,7 +86,8 @@ export const TripDetailsModal = ({ isOpen, onClose, trip }) => {
                     <p className="text-[8px] md:text-xs text-black font-medium not-italic leading-normal">{p.tripType}</p>
                   </div>
                 </div>
-                <Divider extendedStyles="border-t border-gray-300" />
+
+                <Divider extendedStyles="mt-4" />
               </>
             ))
           ) : (
@@ -116,6 +105,5 @@ export const TripDetailsModal = ({ isOpen, onClose, trip }) => {
           </h3>
         </div>
       </div>
-    </div>
   );
 };

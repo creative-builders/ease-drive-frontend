@@ -112,7 +112,21 @@ export const Trips = () => {
 
 
   return (
-    <div className="flex px-3 py-0 flex-col items-start gap-4">
+    <>
+    {
+      !!selectedTrip && (
+        <Modal 
+        closeModal={() => setSelectedTrip(null)} 
+        // title="Trip Details" 
+        position="bottom"
+      >
+        <TripDetailsModal
+          trip={selectedTrip ? { ...mockTrip, ...selectedTrip } : null}
+        />
+      </Modal>
+      )
+    }
+       <div className="flex px-3 py-0 flex-col items-start gap-4">
       <header className="flex flex-col md:flex-row w-full items-start md:items-center justify-between">
         <h2 className="capitalize text-4xl not-italic font-semibold leading-normal">trips details</h2>
         <p className="not-italic text-base font-medium leading-6">Track your earnings and trip performance</p>
@@ -140,23 +154,7 @@ export const Trips = () => {
           onClose={() => setSelectedTrip(null)}
         />  */}
 
-      <Modal 
-        closeModal={() => setSelectedTrip(null)} 
-        title="Trip Details" 
-        bodyText="" 
-        iconBg="bg-gray-100"
-        position="center"
-        children
-      >
-        <p>Welocome to the trips modal</p>
-        {/* <TripDetailsModal
-          isOpen={!!selectedTrip}
-          trip={selectedTrip ? { ...mockTrip, ...selectedTrip } : null}
-          onClose={() => setSelectedTrip(null)}
-        /> */}
-      </Modal>
-
-
     </div>
+    </>
   );
 };
