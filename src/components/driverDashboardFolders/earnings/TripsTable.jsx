@@ -123,7 +123,7 @@ export function TripsPage({ tripData, className = '', onView }) {
             className="text-green-600 cursor-pointer"
             onClick={() => onView && onView(row)}
           >
-            view
+            View
           </span>
         ),
 

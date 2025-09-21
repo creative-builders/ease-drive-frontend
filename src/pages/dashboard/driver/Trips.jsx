@@ -134,13 +134,13 @@ export const Trips = () => {
 
        <TripsPage className="w-full" tripData={tripData} onView={setSelectedTrip} />
       
-        <TripDetailsModal
+        {/* <TripDetailsModal
           isOpen={!!selectedTrip}
           trip={selectedTrip ? { ...mockTrip, ...selectedTrip } : null}  
           onClose={() => setSelectedTrip(null)}
-        /> 
+        />  */}
 
-      {/* <Modal 
+      <Modal 
         closeModal={() => setSelectedTrip(null)} 
         title="Trip Details" 
         bodyText="" 
@@ -148,12 +148,13 @@ export const Trips = () => {
         position="center"
         children
       >
-        <TripDetailsModal
+        <p>Welocome to the trips modal</p>
+        {/* <TripDetailsModal
           isOpen={!!selectedTrip}
           trip={selectedTrip ? { ...mockTrip, ...selectedTrip } : null}
           onClose={() => setSelectedTrip(null)}
-        />
-      </Modal> */}
+        /> */}
+      </Modal>
 
 
     </div>
