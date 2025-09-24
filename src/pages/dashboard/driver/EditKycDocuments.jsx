@@ -17,46 +17,105 @@ import { LocationHomeIcon } from "../../../assets/icons/LocationHomeIcon";
 // import { userAtom } from "../components/atoms/userAtom";
 import { useRecoilValue } from "recoil";
 import { CameraIcon } from "../../../assets/icons/CameraIcon";
-import CustomButton from "../../../components/new-landingPage/reusables/CustomButton";
+// import CustomButton from "../../../components/new-landingPage/reusables/CustomButton";
+import CustomButton from "../../../components/CustomButton"
 import { InputField } from "../../../components/customFormFields/InputField";
 import { CustomSelectField } from "../../../components/customFormFields/CustomSelectField";
 import { userAtom } from "../../../components/atoms/userAtom";
+import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { driverKYCUpdate } from "../../../store/auth/driver/api"
+import { FormProvider, useStepFlowContext } from "../../../hooks/useStepFlowFormContext";
 
 
-const Crendentials = ({ onClose }) => {
+const UpdateDriverKYC = ({ onClose }) => {
   const profileImageRef = useRef(null);
   const documentUploadRef = useRef(null);
-
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [errors, setErrors] = useState({});
   const [previewImages, setPreviewImages] = useState([]);
   const [selectedCity, setSelectedCity] = useState();
 
   const userData = useRecoilValue(userAtom);
-     const [profileImage, setProfileImage] = useState(
-        userData?.profileImage || fallbackProfile
-      );
-
-    const handleProfileImageClick = () => {
-      if (profileImageRef.current) {
-        profileImageRef.current.click();
-      }
-    };
-
+  const queryClient = useQueryClient();
+  const {
+    formData,
+    setFormData,
+    handleUpdateFormData,
+  } = useStepFlowContext();
   
-    const handleProfileImageChange = (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const imageUrl = URL.createObjectURL(file);
-        setProfileImage(imageUrl);
-       console.log(imageUrl)
-      }
-    };
+  const isAnyFieldTouched = Object.values(formData).some((touched) => touched);
+
+
+
+
+  const { mutate: submitDriverKYCUpdate, isLoading } = useMutation(driverKYCUpdate, {
+    onSuccess: (response) => {
+      toast.success(response?.message);
+      queryClient.invalidateQueries(["getUserProfile"]);
+      setFormData(prev => ({
+        ...prev,
+        vehicleType: "",
+        plateNumber: "",
+        serviceArea: "",
+        numberOfSeats: "",
+        vehicleColor: "",
+        documentID: "",
+        vehiclePhotos: []
+      }))
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.message || error.message);
+    }
+  })
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userId = userData?._id;
+    // console.log(userId)
+    const newErrors = {};
+
+    if (selectedFiles.length === 0) {
+      newErrors.files = "Please upload at least one document image";
+    }
+
+
+    submitDriverKYCUpdate({ credentials: formData, userId: userId });
+  }
+
+
+  const [profileImage, setProfileImage] = useState(
+    userData?.profileImage || fallbackProfile
+  );
+
+  const handleProfileImageClick = () => {
+    if (profileImageRef.current) {
+      profileImageRef.current.click();
+    }
+  };
+
+
+  const handleProfileImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setProfileImage(imageUrl);
+      console.log(imageUrl)
+    }
+  };
 
   const handleDocumentsChange = (e) => {
     const files = Array.from(e.target.files).filter(
       (file) => file.type === "image/jpeg" || file.type === "image/png"
     );
+
     setPreviewImages(files.map((file) => URL.createObjectURL(file)));
+    setSelectedFiles(files);
+    handleUpdateFormData("vehiclePhotos", files);
   };
+
+
 
   return (
     <div className="bg-white rounded-2xl p-6 shadow-md w-full md:w-[439px] flex flex-col gap-20">
@@ -67,7 +126,7 @@ const Crendentials = ({ onClose }) => {
           </button>
           <h2 className="text-lg font-semibold">Vehicle Information</h2>
         </div>
-        <button className="p-2 flex sm:hidden align-center text-[#4847EB] text-base leading-normal not-italic tracking-normal absolute top-3 right-2">
+        <button className="p-2 flex sm:hidden align-center text-accent-600 text-base leading-normal not-italic tracking-normal absolute top-3 right-2">
           Save
         </button>
         <div className="flex sm:hidden items-center space-x-4 relative">
@@ -89,33 +148,39 @@ const Crendentials = ({ onClose }) => {
           />
         </div>
 
-        <form className="gap-4 mt-4" action="">
+        <form className="gap-4 mt-4"
 
-          <InputField
+          onSubmit={handleSubmit}>
+
+          <CustomSelectField
             label="Vehicle type"
             name="vehicleType"
+            value={formData.vehicleType}
+            onChange={handleUpdateFormData}
             type="text"
-            placeholder="Enter Vehicle Plate  Number"
+            defaultHolder="Select your vehicle type"
+            options={["Keke", "Car", "Shuttle Bus", "Motorcycle", "Regular Bus", "Truck"]}
+            rightIcon={FaChevronDown}
             leftIcon={CarIcon}
-            // error={
-            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-            // }
+
           />
-        
-          <InputField 
-              label="Plate Number"
-              name="plateNumber"
-              placeholder="Enter Vehicle Plate  Number"
-              leftIcon={PlateNumberIcon}
-              // error={
-              //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-              // }
-            />
+
+          <InputField
+            label="Plate Number"
+            name="plateNumber"
+            placeholder="Enter Vehicle Plate  Number"
+            value={formData.plateNumber}
+            onChange={handleUpdateFormData}
+            leftIcon={PlateNumberIcon}
+
+          />
 
           <CustomSelectField
             label="Service Area (Location)"
             name="serviceArea"
-            value={selectedCity}
+            value={formData.serviceArea}
+            onChange={handleUpdateFormData}
+            // value={selectedCity}
             defaultHolder="Choose service location"
             options={["Odenigwe", "Hill-Top", "Main gate", "Behind Flat", "Odeim gate",]}
             rightIcon={FaChevronDown}
@@ -125,39 +190,39 @@ const Crendentials = ({ onClose }) => {
 
 
           <div className="flex space-x-2 items-center justify-between mt-3">
-            
+
             <InputField
               label="vehicle Color"
               name="vehicleColor"
               type="text"
+              value={formData.vehicleColor}
+              onChange={handleUpdateFormData}
               placeholder="Eg.black"
               leftIcon={ColorIcon}
-              // error={
-              //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-              // }
+
             />
 
             <InputField
               label="Number of seat"
-              name="seatCount"
+              name="numberOfSeats"
+              value={formData.numberOfSeats}
+              onChange={handleUpdateFormData}
               type="text"
               placeholder="Eg.4"
               leftIcon={SeatIcon}
-              // error={
-              //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-              // }
+
             />
           </div>
 
           <InputField
             label="Document ID"
-            name="driverLicence"
+            name="documentID"
             type="text"
+            value={formData.documentID}
+            onChange={handleUpdateFormData}
             placeholder="Driver's licence"
             leftIcon={Document}
-            // error={
-            //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-            // }
+
           />
 
           <div className="">
@@ -169,14 +234,18 @@ const Crendentials = ({ onClose }) => {
               per image
             </p>
 
-            <input
+
+            <InputField
               type="file"
-              multiple
               accept="image/*"
-              ref={documentUploadRef}
+              multiple
+              name="vehiclePhotos"
+              inputRef={documentUploadRef}
+              containerStyles={"hidden"}
+              inputTextStyles={"hidden"}
               onChange={handleDocumentsChange}
-              className="hidden"
             />
+
             <div
               onClick={() => documentUploadRef.current.click()}
               className="border border-gray-300 rounded-md p-4 flex flex-col items-center justify-center text-center cursor-pointer"
@@ -184,7 +253,7 @@ const Crendentials = ({ onClose }) => {
               {previewImages.length === 0 ? (
                 <>
                   <img src={UploadIcon} className="h-14 w-14" alt="Upload Icon" />
-                  <p className="text-xs mt-2 text-gray-400 flex p-3 gap-3 rounded-lg bg-[#DEFAE2]"> upload picture</p>
+                  <p className="text-xs mt-2 text-gray-400 flex p-3 gap-3 rounded-lg bg-gray-100"> upload picture</p>
                 </>
               ) : (
                 <div className="grid grid-cols-2 gap-2 w-full">
@@ -196,19 +265,51 @@ const Crendentials = ({ onClose }) => {
                       className="w-full h-full object-cover rounded-md border-2"
                     />
                   ))}
+
                 </div>
+              )}
+              {errors.files && (
+                <p className="text-red-500 text-sm mt-1">{errors.files}</p>
               )}
             </div>
           </div>
+
+
+          <CustomButton
+            name="Save"
+            extendedStyles={"px-4 py-4 w-full rounded-2xl text-white gap-2 mt-6 bg-green-700"}
+            isLoading={isLoading}
+            disabled={!isAnyFieldTouched}
+
+          />
         </form>
       </figure>
 
-      <CustomButton
-        name="Save"
-        className="hidden sm:flex px-4 py-4 w-full rounded-2xl text-white gap-2 mt-0 bg-green-700"
-      />
+
+
+
     </div>
   );
 };
 
-export default Crendentials;
+
+const EditKycDocuments = ({ onClose }) => {
+
+  const initialInputFields = [
+    "vehicleType",
+    "plateNumber",
+    "serviceArea",
+    "numberOfSeats",
+    "vehicleColor",
+    "documentID",
+    "vehiclePhotos"
+  ]
+
+  return (
+    <FormProvider initialInputFields={initialInputFields}>
+      <UpdateDriverKYC onClose={onClose} />
+    </FormProvider>
+  );
+};
+export default EditKycDocuments
+

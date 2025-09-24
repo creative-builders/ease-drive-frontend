@@ -11,7 +11,7 @@ export function RideRequestCard({ request }) {
         />
         <div className="inline-flex flex-col justify-start items-start gap-2">
           <div className="inline-flex justify-start items-center gap-4">
-            <div className="justify-start text-black lg:text-[16px] text-[14px] font-semibold font-poppins">
+            <div className="justify-start text-black lg:text-base text-sm font-semibold font-poppins">
               {request.name}
             </div>
           </div>
@@ -29,7 +29,7 @@ export function RideRequestCard({ request }) {
             </div>
 
             <div className="self-stretch inline-flex justify-start items-center gap-1">
-              <div className="justify-start text-Primary-950 lg:text-sm text-[12px] font-semibold font-poppins leading-normal tracking-tight">
+              <div className="justify-start text-Primary-950 lg:text-sm text-xs font-semibold font-poppins leading-normal tracking-tight">
                 Current location:
               </div>
               <div className="justify-start text-neutral-900 lg:text-xs text-[10px] font-normal font-poppins leading-normal">
@@ -38,7 +38,7 @@ export function RideRequestCard({ request }) {
             </div>
 
             <div className="self-stretch inline-flex justify-start items-center gap-1">
-              <div className="justify-start text-Primary-950 lg:text-sm text-[12px] font-semibold font-poppins leading-normal tracking-tight">
+              <div className="justify-start text-Primary-950 lg:text-sm text-xs font-semibold font-poppins leading-normal tracking-tight">
                 Going to:
               </div>
               <div className="justify-start text-Neutral-900 lg:text-xs text-[10px] font-normal font-poppins leading-normal">
