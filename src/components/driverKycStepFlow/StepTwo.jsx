@@ -38,7 +38,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
     setSelectedFiles(files);
   };
 
-  const isplateNumberValid = (formData?.plateNumber || "").length >= 15;
+  const isplateNumberValid = (formData?.plateNumber || "").length >= 5;
   const showplateNumbererror =
     inputTouched && formData?.plateNumber.length > 0 && !isplateNumberValid;
 
@@ -81,7 +81,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                 {/* <Link to="/"> 
               <div className="flex flex-row items-center justify-start gap-2">
                 <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
-                <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-[18px] leading-[100%]">
+                <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-lg leading-[100%]">
                   Ease Drive
                 </h1>
               </div>
@@ -91,10 +91,10 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
             <div className="lg:w-[100%] lg:h-[] w-[347px] justify-between opacity-100 flex flex-row items-start">
               <div className='text-left lg:w-[60%] w-[70%]'>
-                <h4 className="font-inter text-gray-700 italic font-semibold lg:text-[26px] text-[18px] leading-[100%]">
+                <h4 className="font-inter text-gray-700 italic font-semibold lg:text-[26px] text-lg leading-[100%]">
                   Vehicle Information
                 </h4>
-                <p className=" font-medium text-left text-gray-800 lg:text-[18px] text-[14px] font-inter lg:pb- pt-2">
+                <p className=" font-medium text-left text-gray-800 lg:text-lg text-sm font-inter lg:pb- pt-2">
                   Ensure your vehicle image is clean, recent, and shows the number plate.
                 </p>
               </div>
@@ -136,7 +136,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   onChange={handleUpdateFormData}
                   leftIcon={PlateNumberIcon}
                   error={
-                    showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
+                    showplateNumbererror ? " Plate Number must be at least 5 characters" : ""
                   }
                 />
 
@@ -192,10 +192,10 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
             {/* Upload Section */}
             <div className="flex flex-col w-full -mt-4">
-              <p className="font-semibold text-left text-gray-800 lg:text-[18px] text-[16px] font-inter pt-2">
+              <p className="font-semibold text-left text-gray-800 lg:text-lg text-base font-inter pt-2">
                 Upload a document
               </p>
-              <p className="font-medium text-left text-gray-800 lg:text-[14px] text-[12px] font-inter">
+              <p className="font-medium text-left text-gray-800 lg:text-sm text-xs font-inter">
                 You can upload up to 4 images (JPG, PNG). Max size: 5MB each
               </p>
 
@@ -204,11 +204,11 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                 <button
                   type="button"
                   onClick={handleUploadClick}
-                  className="lg:w-[30%] w-[50%] bg-green-200 text-gray-400 rounded-xl py-1.5 text-[18px] font-bold mb-4"
+                  className="lg:w-[30%] w-[50%] bg-green-200 text-gray-400 rounded-xl py-1.5 text-lg font-bold mb-4"
                 >
                   Upload Photos
                 </button>
-                <input
+                {/* <input
                   type="file"
                   ref={fileInputRef}
                   name="vehiclePhotos"
@@ -220,7 +220,23 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                     handleUpdateFormData("vehiclePhotos", files);
                   }}
                   multiple
+                /> */}
+
+                <InputField
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  name="vehiclePhotos"
+                  inputRef={fileInputRef}
+                  containerStyles={"hidden"}
+                  inputTextStyles={"hidden"}
+                  onChange={(e) => {
+                    const files = Array.from(e.target.files);
+                    setSelectedFiles(files);
+                    handleUpdateFormData("vehiclePhotos", files);
+                  }}
                 />
+
                 {selectedFiles.length > 0 && (
                   <ul className="w-[80%] mt-2 text-sm text-gray-600 list-disc list-inside">
                     {selectedFiles.map((file, index) => (
@@ -236,7 +252,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
             {/* <button
               type="button"
-              className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
+              className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-lg font-bold "
               onClick={() => {
                 nextStep()
               }}>
