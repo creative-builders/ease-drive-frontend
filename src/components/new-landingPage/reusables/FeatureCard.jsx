@@ -8,7 +8,7 @@ const FeatureCard = ({
   flex_direction = "flex-col justify-start items-start",
   cardBg = "bg-white",
   borerColor = "border-primary-100",
-  className=""
+  className = ""
 }) => {
   return (
     <div
@@ -26,13 +26,13 @@ const FeatureCard = ({
         {/* Icon + Title */}
         <div className={`flex ${flex_direction} gap-3`}>
           <img src={imgSrc} alt="check" className="w-6 sm:w-10" />
-          <h3 className="font-inter font-bold text-[14px] sm:text-[18px] text-black">
+          <h3 className="font-inter font-bold text-sm sm:text-lg text-black">
             {title}
           </h3>
         </div>
 
         {/* Description */}
-        <p className="font-poppins font-regular text-[12px] sm:text-[14px] text-black">
+        <p className="font-poppins font-regular text-xs sm:text-sm text-black">
           {description}
         </p>
       </div>

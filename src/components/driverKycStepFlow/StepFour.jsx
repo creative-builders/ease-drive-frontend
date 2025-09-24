@@ -14,6 +14,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Skip } from '../Skip'
 import toast from 'react-hot-toast';
+import { InputField } from '../customFormFields/InputField';
 
 import CustomButton from '../CustomButton';
 
@@ -66,87 +67,54 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
         const newErrors = {};
 
         if (!formData.profileImage || formData.profileImage.length === 0) {
-            showError("Please upload profile image or just skip");
+            toast.error("Please select profile image or skip.");
             newErrors.files = "Please upload at least one document image";
         }
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-            const _formData = new FormData();
-            _formData.append("documentType", formData.documentType);
-            _formData.append("documentID", formData.documentID);
-            _formData.append("meansOfIdentification", formData.meansOfIdentification);
-            _formData.append("vehicleType", formData.vehicleType);
-
-            _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
-            _formData.append("vehicleColor", formData.vehicleColor);
-            _formData.append("serviceArea", formData.serviceArea);
-            _formData.append("numberOfSeats", formData.numberOfSeats);
-
-            // Append document photos
-            formData.documentPhotos.forEach((file) => {
-                _formData.append("documentPhotos", file);
-            });
-
-            // Append vehicle photos
-            formData.vehiclePhotos.forEach((file) => {
-                _formData.append("vehiclePhotos", file);
-            });
-
-            // Bank details
-            _formData.append("bankAccountHolderName", formData.bankAccountHolderName);
-            _formData.append("bankName", formData.bankName);
-            _formData.append("bankAccountNumber", formData.bankAccountNumber);
-            _formData.append("transactionPin", "2345");
-
-            // Profile image
-            _formData.append("profileImage", formData.profileImage[0]);
-
-            // Submit via React Query
-            submitDriverKYC({ credentials: _formData, token });
+            // Subit via React Query
+            submitDriverKYC({ credentials: formData, whois: token });
         }
     };
 
-    const handleSkip = () => {
-        const newErrors = {};
-        if (Object.keys(newErrors).length === 0) {
-            const _formData = new FormData();
-            _formData.append("documentType", formData.documentType);
-            _formData.append("documentID", formData.documentID);
-            _formData.append("meansOfIdentification", formData.meansOfIdentification);
-            _formData.append("vehicleType", formData.vehicleType);
+    // const handleSkip = () => {
+    //     const newErrors = {};
+    //     if (Object.keys(newErrors).length === 0) {
+    //         const _formData = new FormData();
+    //         _formData.append("documentType", formData.documentType);
+    //         _formData.append("documentID", formData.documentID);
+    //         _formData.append("meansOfIdentification", formData.meansOfIdentification);
+    //         _formData.append("vehicleType", formData.vehicleType);
 
-            _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
-            _formData.append("vehicleColor", formData.vehicleColor);
-            _formData.append("serviceArea", formData.serviceArea);
-            _formData.append("numberOfSeats", formData.numberOfSeats);
+    //         _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
+    //         _formData.append("vehicleColor", formData.vehicleColor);
+    //         _formData.append("serviceArea", formData.serviceArea);
+    //         _formData.append("numberOfSeats", formData.numberOfSeats);
 
-            // Append document photos
-            formData.documentPhotos.forEach((file) => {
-                _formData.append("documentPhotos", file);
-            });
+    //         // Append document photos
+    //         formData.documentPhotos.forEach((file) => {
+    //             _formData.append("documentPhotos", file);
+    //         });
 
-            // Append vehicle photos
-            formData.vehiclePhotos.forEach((file) => {
-                _formData.append("vehiclePhotos", file);
-            });
+    //         // Append vehicle photos
+    //         formData.vehiclePhotos.forEach((file) => {
+    //             _formData.append("vehiclePhotos", file);
+    //         });
 
-            // Bank details
-            _formData.append("bankAccountHolderName", formData.bankAccountHolderName);
-            _formData.append("bankName", formData.bankName);
-            _formData.append("bankAccountNumber", formData.bankAccountNumber);
-            _formData.append("transactionPin", "2345");
+    //         // Bank details
+    //         _formData.append("bankAccountHolderName", formData.bankAccountHolderName);
+    //         _formData.append("bankName", formData.bankName);
+    //         _formData.append("bankAccountNumber", formData.bankAccountNumber);
+    //         _formData.append("transactionPin", "2345");
 
-            // Profile image
-            _formData.append("profileImage", formData.profileImage[0]);
+    //         // Profile image
+    //         _formData.append("profileImage", formData.profileImage[0]);
 
-            // Submit via React Query
-            submitDriverKYC({ credentials: _formData, token });
-        }
-    };
-
-
-
+    //         // Submit via React Query
+    //         submitDriverKYC({ credentials: _formData, token });
+    //     }
+    // };
 
     const closeModal = () => {
         setShowModal(false);
@@ -171,23 +139,16 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                                     className="text-blue-800 bg-custom-gradient"
                                     title={` Step ${step}  of ${totalSteps}`}
                                 />
-                                {/* <Link to="/"> 
-              <div className="flex flex-row items-center justify-start gap-2">
-                <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
-                <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-[18px] leading-[100%]">
-                  Ease Drive
-                </h1>
-              </div>
-              </Link> */}
+
                             </div>
                         </div>
 
                         <div className="lg:w-[100%] w-[347px] justify-between opacity-100 flex flex-row items-start">
                             <div className="text-left lg:w-[60%] w-[70%]">
-                                <h4 className="font-inter text-gray-700 italic font-semibold lg:text-[26px] text-[18px] leading-[100%]">
+                                <h4 className="font-inter text-gray-700 italic font-semibold lg:text-[26px] text-lg leading-[100%]">
                                     Upload Profile Photo
                                 </h4>
-                                <p className="font-medium text-left text-gray-800 lg:text-[18px] text-[14px] font-inter pt-2">
+                                <p className="font-medium text-left text-gray-800 lg:text-lg text-sm font-inter pt-2">
                                     Show face clearly, no filters or group photos
                                 </p>
                             </div>
@@ -216,11 +177,11 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                                 <p
                                     onClick={handleUploadClick}
                                     className="font-regular cursor-pointer text-center text-gray-70
-                                    lg:text-[20px] text-[14px] font-inter pt-2"
+                                    lg:text-xl text-sm font-inter pt-2"
                                 >
                                     Upload Profile Photo
                                 </p>
-                                <input
+                                {/* <input
                                     type="file"
                                     ref={fileInputRef}
                                     className="hidden"
@@ -232,20 +193,28 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                                         handleUpdateFormData("profileImage", files);
                                         handleFileChange(e)
                                     }}
+                                /> */}
+
+                                <InputField
+                                    type="file"
+                                    accept="image/*"
+                                    multiple
+                                    name="profileImage"
+                                    inputRef={fileInputRef}
+                                    containerStyles={"hidden"}
+                                    inputTextStyles={"hidden"}
+                                    onChange={(e) => {
+                                        const files = Array.from(e.target.files);
+                                        setSelectedFiles(files);
+                                        handleUpdateFormData("profileImage", files);
+                                        handleFileChange(e)
+                                    }}
                                 />
                             </div>
                         </div>
 
 
-                        {/* <button
-                            type="button"
-                            className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-[18px] font-bold "
-                            onClick={() => {
-                                setisSubmitting(!isSumitting)
-                                handleSkip()
-                            }}>
-                            Skip
-                        </button> */}
+
 
                         <button
                             type="submit"

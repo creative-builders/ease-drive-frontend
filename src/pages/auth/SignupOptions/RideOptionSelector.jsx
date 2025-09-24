@@ -47,8 +47,8 @@ const RideOptionSelector = () => {
                         </div>
                         <div className="flex flex-col">
                             <h3 className="text-gray-700 font-semibold font-inter 
-                            text-[14px] lg:text-[24px]">{option.title}</h3>
-                            <p className="text-gray-700 lg:text-[16px] text-[8px] font-poppins">{option.description}</p>
+                            text-sm lg:text-2xl">{option.title}</h3>
+                            <p className="text-gray-700 lg:text-base text-[8px] font-poppins">{option.description}</p>
                         </div>
                     </div>
 

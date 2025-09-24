@@ -12,13 +12,14 @@ import { ResetSuccess } from '../../../assets/icons/ResetSuccess'
 import { DashboardModal } from './DashboardModal'
 import LoadingSpinner from '../../LoadingSpinner';
 import { driverKYCUpdate } from "../../../store/auth/driver/api"
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient  } from "@tanstack/react-query";
 import { userAtom } from "../../atoms/userAtom";
 import { useRecoilValue } from "recoil";
 
 export const NoEarnings = () => {
 
-  const user = useRecoilValue(userAtom);
+  const userData = useRecoilValue(userAtom);
+  const queryClient = useQueryClient();
 
   const [modalType, setModalType] = useState(null); // "image" | "amount" | "loading"
   const [showPassword, setShowPassword] = useState(false);
@@ -43,6 +44,8 @@ export const NoEarnings = () => {
     {
       onSuccess: (data) => {
         // console.log("KYC data updated successfully:", data);
+       
+        queryClient.invalidateQueries(["getUserProfile"]);
         setisSubmitting(false)
         setModalType("resetsuccess");
       },
@@ -52,20 +55,17 @@ export const NoEarnings = () => {
     }
   )
 
-
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     setInputTouched(true);
   };
 
 
-
   const handlePinUpdate = () => {
-    const _formData = new FormData();
-    _formData.append("transactionPin", inputs.newPin);
-
     try {
-      submitDriverKYC({ credentials: _formData, token: user?.id });
+      submitDriverKYC({ credentials: {
+        transactionPin:inputs.newPin
+      }, userId: userData?._id });
       // setModalType("withdralpin")
     } catch (error) {
       console.log(error)
@@ -94,7 +94,7 @@ export const NoEarnings = () => {
 
             <div className='flex justify-center items-center lg:flex-col flex-col lg:gap-20 gap-40'>
               <div className='lg:w-[70%] w-full '>
-                <p className='text-neutral-400 text-center font-normal font-poppins lg:text-[18px] text-xs'>You haven’t completed any trips yet.
+                <p className='text-neutral-400 text-center font-normal font-poppins lg:text-lg text-xs'>You haven’t completed any trips yet.
                   <br /> Once you accept and complete a ride, your earnings will appear here.</p>
               </div>
 

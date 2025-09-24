@@ -58,7 +58,7 @@ const FaqSection = () => {
                 )}
               </button>
               {isOpen && (
-                <div className="text-xs leading-normal lg:text-[18px] text-gray-700 font-normal">{faq.answer}</div>
+                <div className="text-xs leading-normal lg:text-lg text-gray-700 font-normal">{faq.answer}</div>
               )}
             </div>
           );
