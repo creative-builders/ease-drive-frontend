@@ -46,6 +46,7 @@ import Notifications from '../pages/dashboard/driver/Notification';
 import DriverProfile from '../pages/dashboard/driver/DriverProfiles';
 import DriverProfiles from '../pages/dashboard/driver/DriverProfiles';
 import { SupportPage } from "../pages/dashboard/passenger/SupportPage";
+import ViewDriverPage from '../pages/dashboard/passenger/view-driver-details/ViewDriverPage';
 
 
 
@@ -84,6 +85,7 @@ const IndexRoute = () => {
       <Route path="/driver-profile" element={<DriverProfile />} />
       {/* <Route path="/driver-profile" element={<DriverProfiles />} /> */}
       <Route path="/user-profile" element={<PassengerProfile />} />
+      <Route path="/view-driver" element={<ViewDriverPage />} />
       
 
       {/* Dashboard Route */}
