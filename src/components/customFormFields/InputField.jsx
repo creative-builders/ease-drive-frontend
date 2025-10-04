@@ -15,6 +15,7 @@ export const InputField = ({
   placeholder,
   value,
   accept,
+  multiple,
   inputRef,
   onChange,
   onFocus,
@@ -54,6 +55,7 @@ const inputType = isPassword ? (showPassword ? "text" : "password") : type;
           id={name}
           placeholder={placeholder}
           accept={accept}
+          multiple={multiple}
           ref={inputRef}
           value={value}
           onChange={onChange}

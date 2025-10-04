@@ -1,4 +1,5 @@
 import { RidesIcon } from "../../assets/icons/dashboard/RidesIcon"
+import { LuggageIcon } from "../../assets/icons/LuggageIcon"
 import { PoliceCarIcon } from "../../assets/icons/PoliceCarIcon"
 import CustomButton from "../CustomButton"
 import { CustomSelectField } from "../customFormFields/CustomSelectField"
@@ -16,7 +17,7 @@ export const SelectRide = () => {
           <CustomSelectField
           defaultHolder={"Car"}
           label={"Select Ride"}
-          options={["Shuttle Bus","Car","Bike","Keke"]}
+          options={[ "Keke","Car","Shuttle Bus","Motorcycle","Regular Bus","Truck"]}
           >
             <PoliceCarIcon/>
           </CustomSelectField>
@@ -29,7 +30,12 @@ export const SelectRide = () => {
           />
         </div>
         <div className="mb-4 lg:mb-5"></div>
-        {/* <div></div> */}
+         <div className="mb-4 lg:mb-5 flex items-center gap-x-1.5">
+             <div className="flex justify-center items-center w-[38px] h-[36px] rounded-[30px] bg-primary-50 py-[3px] px-1">
+                <LuggageIcon/>
+             </div>
+             <h4 className="text-base lg:text-lg font-medium">Do you have a luggage?</h4>
+        </div>
         <div>
           <CustomButton
            name ="Search for Available Drivers"
