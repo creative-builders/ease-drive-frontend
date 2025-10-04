@@ -8,6 +8,7 @@ import { DocumentIcon } from '../../assets/icons/DocumentIcon';
 import { IdCardIcon } from '../../assets/icons/IdCardIcon';
 import { InputField } from '../customFormFields/InputField';
 import CustomButton from '../CustomButton';
+import { FaArrowLeft } from "react-icons/fa"
 import { Skip } from '../Skip';
 import { Link } from 'react-router-dom';
 
@@ -63,13 +64,21 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
   return (
     <div className=" min-h-screen lg:h-full">
       <div className="flex items-center justify-center min-h-screen ">
-        <div className="bg-white lg:w-[1116px] lg:h-[600px] w-[90%] m-auto flex
+        <div className="bg-white lg:w-[1116px] lg:h-[0px] w-[90%] m-auto flex
          lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center py-auto">
 
           <div className="lg:w-[637px] lg:h-[734px]  w-[400px] 
             p-5 gap-6 bg-white flex flex-col items-center justify-center">
             {/* Logo */}
             <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
+
+              <div >
+                <button className='flex items-center  text-xl lg:justify-start cursor-pointer py-4  '>
+                  <FaArrowLeft className='' /> 
+                </button>
+              </div>
+
+
               <div className="flex flex-row items-center justify-start">
                 <SectionLabel
                   className="text-blue-800 bg-custom-gradient"

@@ -4,7 +4,7 @@ import { CustomSelectField } from "../customFormFields/CustomSelectField"
 import { useState, useRef } from 'react';
 
 import CustomButton from '../CustomButton';
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaArrowLeft } from "react-icons/fa";
 import { CarIcon } from '../../assets/icons/CarIcon'
 import { AddFileIcon } from '../../assets/icons/AddFileIcon'
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
@@ -58,7 +58,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
     }
 
     setErrors(newErrors);
-
+    
     if (Object.keys(newErrors).length === 0) {
       nextStep(); // Proceed only if no validation error
     }
@@ -67,12 +67,17 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
   return (
     <div lassName=" min-h-screen lg:h-full ">
       <div className="flex items-center justify-center  min-h-screen ">
-        <div className=" lg:w-[1116px] lg:h-[1000px] w-[100%] h-[100%] m-auto 
+        <div className=" lg:w-[1116px] lg:h-[1040px] w-[100%] h-[100%] m-auto 
          opacity-100 flex flex-row items-center py-auto">
           <div className="lg:w-[637px] lg:h-[700px] w-[360px]  h-[100%] m-auto 
           flex justify-center items-center ml-0
            p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
             <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
+              <div >
+                <button className='flex items-center text-red-500 text-xl lg:justify-start gap-4 cursor-pointer py-4 font-inter '>
+                  <FaArrowLeft className='' /> <span>Back</span>
+                </button>
+              </div>
               <div className="flex flex-row items-center justify-start">
                 <SectionLabel
                   className="text-blue-800 bg-custom-gradient"
