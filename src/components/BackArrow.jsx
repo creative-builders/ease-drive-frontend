@@ -1,6 +1,7 @@
 
 import arrow from '/src/assets/images/arrow-left.png'
 import { useNavigate } from 'react-router-dom'
+import { BackArrowIcon } from "../assets/icons/BackArrowIcon"
 
 const BackArrow = ({ extendedStyles }) => {
 
@@ -18,7 +19,7 @@ const BackArrow = ({ extendedStyles }) => {
     <div className={` inline-flex items-center gap-2 z-0 md:z-10 absolute left-6 cursor-pointer ${extendedStyles}`} onClick={handleGoBack}>
       {/* <img  src={arrow} alt="" /> */}
       <div className='h-6 w-6'>
-        <BackArrow />
+        <BackArrowIcon/>
       </div>
       {/* <span className='text-xs not-italic font-normal leading-normal'>back</span> */}
     </div>

@@ -1,4 +1,4 @@
-// import { BackArrow } from "../assets/icons/BackArrowIcon";
+// import { BackArrowIcon } from "../assets/icons/BackArrowIconIcon";
 import found from "../../assets/images/not-found.png"
 import BackArrow from "../../components/BackArrow";
 

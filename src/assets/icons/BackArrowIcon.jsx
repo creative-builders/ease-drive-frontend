@@ -1,4 +1,4 @@
-export const BackArrow = (props) => (
+export const BackArrowIcon = (props) => (
   <svg
     width={24}
     height={25}
