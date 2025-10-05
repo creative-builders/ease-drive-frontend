@@ -4,7 +4,7 @@ import { CustomSelectField } from "../customFormFields/CustomSelectField"
 import { useState, useRef } from 'react';
 
 import CustomButton from '../CustomButton';
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaArrowLeft } from "react-icons/fa";
 import { CarIcon } from '../../assets/icons/CarIcon'
 import { AddFileIcon } from '../../assets/icons/AddFileIcon'
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
@@ -17,7 +17,7 @@ import { Skip } from '../Skip';
 import { Link } from 'react-router-dom';
 
 
-export const StepTwo = ({ nextStep, step, totalSteps }) => {
+export const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
 
   const fileInputRef = useRef(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -73,6 +73,13 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
           flex justify-center items-center ml-0
            p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
             <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
+
+              <div className='flex gap-4 px-2 py-3'>
+                <button onClick={prevStep} className='flex font-regular text-xl'>
+                  <FaArrowLeft />
+                </button>
+              </div>
+
               <div className="flex flex-row items-center justify-start">
                 <SectionLabel
                   className="text-blue-800 bg-custom-gradient"

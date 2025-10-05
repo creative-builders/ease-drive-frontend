@@ -5,14 +5,14 @@ import { useState, useRef } from 'react';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import { InputField } from '../customFormFields/InputField';
 import CustomButton from '../CustomButton';
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaArrowLeft } from "react-icons/fa";
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
 import { CreditCardIcon } from '../../assets/icons/CreditCardIcon';
 import { BankHouseIcon } from '../../assets/icons/BankHouseIcon';
 import { Skip } from '../Skip'
 import { Link } from 'react-router-dom';
 
-export const StepThree = ({ nextStep, step, totalSteps }) => {
+export const StepThree = ({ nextStep, prevStep, step, totalSteps }) => {
 
    const fileInputRef = useRef(null);
    const [checked, setChecked] = useState(false);
@@ -68,6 +68,13 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                   flex justify-center items-center 
                 p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
                   <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
+
+                     <div className='flex gap-4 px-2 py-3'>
+                        <button onClick={prevStep} className='flex font-regular text-xl'>
+                           <FaArrowLeft />
+                        </button>
+                     </div>
+
                      <div className="flex flex-row items-center justify-start">
                         <SectionLabel
                            className="text-blue-800 bg-custom-gradient"
