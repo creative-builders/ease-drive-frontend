@@ -24,6 +24,7 @@ import { LocationHomeIcon } from "../../../assets/icons/LocationHomeIcon";
 import { Modal } from "../../../components/Modal";
 import { EmailSent } from "../../../assets/icons/EmailSent";
 import { CountdownTimer } from "../../../components/CountdownTimer";
+import { nigeriaStates } from "../../../../commonData";
 
 
 export const DriverSignup = () => {
@@ -204,7 +205,7 @@ export const DriverSignup = () => {
                             name="city"
                             defaultHolder="Select City"
                             onChange={handleUpdateFormData}
-                            options={["Anambra", "Lagos", "Kano"]}
+                            options={nigeriaStates}
                             rightIcon={FaChevronDown}
                             error={showPhoneError ? "Select your city" : ""}
                         >

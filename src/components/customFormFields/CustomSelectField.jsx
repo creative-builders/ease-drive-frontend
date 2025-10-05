@@ -28,7 +28,7 @@ export const CustomSelectField = ({
         {/* Left Icon */}
         {LeftIcon && (
           <span className="mr-3 text-gray-500 flex-shrink-0">
-            <LeftIcon className="lg:w-8 lg:h-8 w-5 h-5" />
+            <LeftIcon className="lg:w-6 lg:h-8 w-5 h-5" />
           </span>
         )}
 
@@ -47,12 +47,31 @@ export const CustomSelectField = ({
               {defaultHolder}
             </option>
           )}
-          {options.map((opt, idx) => (
-            <option key={idx} value={opt.value}>
+          {
+            options.map((opt, idx) => {
+              if (typeof opt === "string") {
+                return (
+                  <option key={idx} value={opt}>
+                    {opt}
+                  </option>
+                );
+              } else {
+                return (
+                  <option key={idx} value={opt.value}>
+                    <div className="flex items-center gap-12">
+                      <p > {opt.title}  </p>
+                       <p> {opt.icon && <span className="ml-18">{opt.icon}</span>
+                       }</p>
+                       
+                    </div>
 
-              {opt}
-            </option>
-          ))}
+
+                  </option>
+                );
+              }
+            })
+          }
+
         </select>
 
         {/* Right Icon (overlays the default arrow) */}

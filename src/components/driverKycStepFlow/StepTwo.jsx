@@ -17,7 +17,7 @@ import { Skip } from '../Skip';
 import { Link } from 'react-router-dom';
 
 
-export const StepTwo = ({ nextStep, step, totalSteps }) => {
+export const StepTwo = ({ nextStep,prevStep, step, totalSteps }) => {
 
   const fileInputRef = useRef(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -58,7 +58,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
     }
 
     setErrors(newErrors);
-    
+
     if (Object.keys(newErrors).length === 0) {
       nextStep(); // Proceed only if no validation error
     }
@@ -74,10 +74,12 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
            p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
             <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
               <div >
-                <button className='flex items-center text-red-500 text-xl lg:justify-start gap-4 cursor-pointer py-4 font-inter '>
-                  <FaArrowLeft className='' /> <span>Back</span>
+                <button onClick={prevStep} className='flex items-center px-2 text-xl lg:justify-start cursor-pointer py-4  '>
+                  <FaArrowLeft className='' />
                 </button>
               </div>
+
+
               <div className="flex flex-row items-center justify-start">
                 <SectionLabel
                   className="text-blue-800 bg-custom-gradient"
@@ -122,7 +124,8 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   // iconSrc="/city-02.svg"
                   // value={formData.city}
                   // onChange={handleCityChange}
-                  options={["Keke", "Car", "Shuttle Bus", "Motorcycle", "Regular Bus", "Truck"]}
+                  options={[{ title: "Keke", icon:"" }, { title: "Car" }, { title: "Shuttle Bus" },
+                  { title: "Motorcycle" }, { title: "Regular Bus" }, { title: "Truck" }]}
                   rightIcon={FaChevronDown}
                   leftIcon={CarIcon}
                 >
@@ -157,7 +160,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   onChange={handleUpdateFormData}
 
                   defaultHolder="Select Service Area"
-                  options={["Odenigwe", "Hill-Top", "Main gate", "Behind Flat", "Odeim gate",]}
+                  options={[{ title: "Odenigwe" }, { title: "Hill-Top" }, { title: "Main gate" }, { title: "Behind Flat" }, { title: "Odeim gate" },]}
                   rightIcon={FaChevronDown}
                   leftIcon={LocationHomeIcon}
                 >

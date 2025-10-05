@@ -8,8 +8,8 @@ import LoadingSpinner from '../LoadingSpinner';
 import { useMutation } from "@tanstack/react-query";
 import { RockedIconSuccess } from '../../assets/icons/RocketIconSucess';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
-import axios from 'axios';
 import { driverKYCUpdate } from "../../store/auth/driver/api"
+import {FaArrowLeft} from "react-icons/fa"
 import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Skip } from '../Skip'
@@ -18,7 +18,7 @@ import { InputField } from '../customFormFields/InputField';
 
 import CustomButton from '../CustomButton';
 
-export const StepFour = ({ nextStep, step, totalSteps }) => {
+export const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
     const fileInputRef = useRef(null);
     const [searchParams] = useSearchParams();
     const [submitting, setSubmitting] = useState(false);
@@ -78,44 +78,6 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
         }
     };
 
-    // const handleSkip = () => {
-    //     const newErrors = {};
-    //     if (Object.keys(newErrors).length === 0) {
-    //         const _formData = new FormData();
-    //         _formData.append("documentType", formData.documentType);
-    //         _formData.append("documentID", formData.documentID);
-    //         _formData.append("meansOfIdentification", formData.meansOfIdentification);
-    //         _formData.append("vehicleType", formData.vehicleType);
-
-    //         _formData.append("plateNumber", formData.plateNumber?.toString() ?? "");
-    //         _formData.append("vehicleColor", formData.vehicleColor);
-    //         _formData.append("serviceArea", formData.serviceArea);
-    //         _formData.append("numberOfSeats", formData.numberOfSeats);
-
-    //         // Append document photos
-    //         formData.documentPhotos.forEach((file) => {
-    //             _formData.append("documentPhotos", file);
-    //         });
-
-    //         // Append vehicle photos
-    //         formData.vehiclePhotos.forEach((file) => {
-    //             _formData.append("vehiclePhotos", file);
-    //         });
-
-    //         // Bank details
-    //         _formData.append("bankAccountHolderName", formData.bankAccountHolderName);
-    //         _formData.append("bankName", formData.bankName);
-    //         _formData.append("bankAccountNumber", formData.bankAccountNumber);
-    //         _formData.append("transactionPin", "2345");
-
-    //         // Profile image
-    //         _formData.append("profileImage", formData.profileImage[0]);
-
-    //         // Submit via React Query
-    //         submitDriverKYC({ credentials: _formData, token });
-    //     }
-    // };
-
     const closeModal = () => {
         setShowModal(false);
 
@@ -134,6 +96,12 @@ export const StepFour = ({ nextStep, step, totalSteps }) => {
                     <div className="lg:w-[637px] w-[360px] h-[70vh] lg:h-[90vh] m-auto 
                     p-5 gap-8 bg-white flex flex-col items-center justify-center">
                         <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
+                            <div >
+                                <button onClick={prevStep} className='flex items-center px-2 text-xl lg:justify-start cursor-pointer py-4  '>
+                                    <FaArrowLeft className='' />
+                                </button>
+                            </div>
+
                             <div className="flex flex-row items-center justify-start">
                                 <SectionLabel
                                     className="text-blue-800 bg-custom-gradient"
