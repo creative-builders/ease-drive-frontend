@@ -9,6 +9,7 @@ import { IdCardIcon } from '../../assets/icons/IdCardIcon';
 import { InputField } from '../customFormFields/InputField';
 import CustomButton from '../CustomButton';
 import { FaArrowLeft } from "react-icons/fa"
+import BackArrow from "../BackArrow"
 import { Skip } from '../Skip';
 import { Link } from 'react-router-dom';
 
@@ -74,7 +75,7 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
 
               <div >
                 <button className='flex items-center  text-xl lg:justify-start cursor-pointer py-4  '>
-                  <FaArrowLeft className='' /> 
+                  <BackArrow className='' /> 
                 </button>
               </div>
 
