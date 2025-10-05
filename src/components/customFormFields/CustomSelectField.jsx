@@ -28,7 +28,7 @@ export const CustomSelectField = ({
         {/* Left Icon */}
         {LeftIcon && (
           <span className="mr-3 text-gray-500 flex-shrink-0">
-            <LeftIcon className="lg:w-6 lg:h-8 w-5 h-5" />
+            <LeftIcon className="lg:h-8 w-5 h-5" />
           </span>
         )}
 
