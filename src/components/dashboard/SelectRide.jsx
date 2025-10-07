@@ -5,7 +5,7 @@ import { PoliceCarIcon } from "../../assets/icons/PoliceCarIcon"
 import CustomButton from "../CustomButton"
 import { CustomSelectField } from "../customFormFields/CustomSelectField"
 import { Divider } from "../Divider/Divider"
-import { FileUpload } from "../FileUpload"
+import { AddFile } from "../AddFile"
 
 export const SelectRide = () => {
   const [selectedLuggage, setSelectedLuggage] = useState("");
@@ -95,8 +95,15 @@ export const SelectRide = () => {
           {
             selectedLuggage === "yes" && (
               <div className="mb-4">
-                <p className="mb-8 text-center text-neutral-950 text-base font-medium lg:text-lg">Upload a photo of the luggage</p>
-                <FileUpload/>
+                <AddFile
+                 title={"Upload a photo of the luggage"}
+                 extendedStyles={"text-center"}
+                >
+                  <p className="mb-4 text-xs text-center font-medium text-neutral-700">
+                    You can upload up to 4 images (JPG, PNG). <br />
+                    Maximum file size: 10MB per image
+                  </p>
+                </AddFile>
                 <Divider extendedStyles={"mb-4"}/>
               </div>
             )
