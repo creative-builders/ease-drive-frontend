@@ -4,6 +4,8 @@ import { LuggageIcon } from "../../assets/icons/LuggageIcon"
 import { PoliceCarIcon } from "../../assets/icons/PoliceCarIcon"
 import CustomButton from "../CustomButton"
 import { CustomSelectField } from "../customFormFields/CustomSelectField"
+import { Divider } from "../Divider/Divider"
+import { FileUpload } from "../FileUpload"
 
 export const SelectRide = () => {
   const [selectedLuggage, setSelectedLuggage] = useState("");
@@ -44,9 +46,9 @@ export const SelectRide = () => {
              <h4 className="text-base lg:text-lg font-medium">Do you have a luggage?</h4>
         </div>
           <div>
-              <label className="mb-4 text-neutral-950 flex items-center gap-x-3 cursor-pointer text-gray-800" 
+              <label className="mb-4 text-neutral-950 flex items-center cursor-pointer" 
                htmlFor="yes-luggage">
-                <span>  Yes </span>
+               <span className="basis-[41px]">  Yes </span>
                <input 
                type="radio" 
                name="luggage" 
@@ -66,9 +68,9 @@ export const SelectRide = () => {
             </label>
 
               <label 
-              className="flex text-neutral-950 items-center gap-x-3 cursor-pointer text-gray-800" 
+              className="flex text-neutral-950 items-center cursor-pointer" 
               htmlFor="no-luggage">
-                <span> No </span>
+              <span className="basis-[41px]"> No </span>
                <input 
                type="radio" 
                name="luggage" 
@@ -88,6 +90,17 @@ export const SelectRide = () => {
             </label>
           </div>
           </div>
+
+          {/* show if luggage there is an available luggage */}
+          {
+            selectedLuggage === "yes" && (
+              <div className="mb-4">
+                <p className="mb-8 text-center text-neutral-950 text-base font-medium lg:text-lg">Upload a photo of the luggage</p>
+                <FileUpload/>
+                <Divider extendedStyles={"mb-4"}/>
+              </div>
+            )
+          }
         <div>
           <CustomButton
            name ="Search for Available Drivers"
