@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { AddFileIcon } from "../assets/icons/AddFileIcon";
 import { InputField } from "./customFormFields/InputField";
 import toast from "react-hot-toast";
+import { X } from "lucide-react";
 
 export const AddFile = ({
   title,
@@ -39,7 +40,15 @@ export const AddFile = ({
   const handleClickUpload = () => {
     if (fileUploadRef.current) fileUploadRef.current.click();
   };
-  
+
+    const handleDeleteImage = (index) => {
+    const updatedFiles = selectedFiles.filter((_, i) => i !== index);
+    const updatedPreviews = previewImages.filter((_, i) => i !== index);
+
+    setSelectedFiles(updatedFiles);
+    setPreviewImages(updatedPreviews);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center w-full mb-8">
       {/* Title + Description */}
@@ -65,12 +74,21 @@ export const AddFile = ({
             } justify-center items-center mr-8`}
           >
             {previewImages.map((src, index) => (
-              <img
-                key={index}
-                src={src}
-                alt={`preview-${index}`}
-                className="w-[171px] h-[123px] object-cover rounded-md shadow-md"
-              />
+              <div key={index} className="relative">
+                <img
+                  src={src}
+                  alt={`preview-${index}`}
+                  className="w-[171px] h-[123px] object-cover rounded-md shadow-md"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleDeleteImage(index)}
+                  className="absolute top-1 right-1 bg-white/70 hover:bg-white text-red-600 rounded-full p-[3px] shadow-md transition-all"
+                >
+                  <X size={14} />
+                </button>
+              </div>
+              
             ))}
           </div>
         ) : (
