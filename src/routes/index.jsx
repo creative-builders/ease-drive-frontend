@@ -46,7 +46,7 @@ import Notifications from '../pages/dashboard/driver/Notification';
 import DriverProfile from '../pages/dashboard/driver/DriverProfiles';
 import DriverProfiles from '../pages/dashboard/driver/DriverProfiles';
 import { SupportPage } from "../pages/dashboard/passenger/SupportPage";
-import ViewDriverPage from '../pages/dashboard/passenger/view-driver-details/ViewDriverPage';
+import { ViewDriverPage } from '../pages/dashboard/passenger/view-driver-details/ViewDriverPage';
 
 
 
