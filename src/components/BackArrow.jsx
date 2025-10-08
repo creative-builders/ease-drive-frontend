@@ -2,6 +2,7 @@
 import arrow from '/src/assets/images/arrow-left.png'
 import { FaArrowLeft } from "react-icons/fa"
 import { useNavigate } from 'react-router-dom'
+import { BackArrowIcon } from "../assets/icons/BackArrowIcon"
 
 const BackArrow = ({ extendedStyles }) => {
 
@@ -24,7 +25,7 @@ const BackArrow = ({ extendedStyles }) => {
         </button>
       </div>
       <div className='h-6 w-6'>
-
+        <BackArrowIcon/>
       </div>
       {/* <span className='text-xs not-italic font-normal leading-normal'>back</span> */}
     </div>

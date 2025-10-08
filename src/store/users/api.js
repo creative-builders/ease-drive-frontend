@@ -1,3 +1,4 @@
+import { form } from "framer-motion/client";
 import { axiosInstancePrivate } from "../auth/general/api";
 
 
@@ -30,4 +31,22 @@ export const updateUserProfile = async({ userId, payload }) => {
     );
 
     return response.data;
+}
+
+
+export const bookRide =  async(credentials) => {
+ const response = await axiosInstancePrivate.post(`/v1/bookings/ride`, credentials);
+ return response.data;
+}
+
+
+//Sample using formData
+export const useFormData = async( credentials) => {
+  const formData =  new FormData();
+  for (const key in credentials){
+    formData.append(key, credentials[key]);
+
+  }
+ const response = await axiosInstancePrivate.post(`/v1/bookings/ride`, credentials);
+ return response.data;
 }

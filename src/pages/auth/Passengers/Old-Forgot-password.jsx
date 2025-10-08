@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { sendResetPasswordOTP } from '../../../store/auth/forgetPassword/api';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import toast from "react-hot-toast";
-import Backarrow from "../../../assets/icons/arrow.svg"
+import BackArrowIcon from "../../../assets/icons/arrow.svg"
 import Emoji from "../../../assets/images/forget-password-emoji.svg"
 
 export const ForgotPassword = () => {
@@ -85,7 +85,7 @@ export const ForgotPassword = () => {
                                 </span>
                         </button>
                         <Link className='flex gap-2 w-40 mx-auto' to={'/login'}>
-                             <img src={Backarrow} alt="" />
+                             <img src={BackArrowIcon} alt="" />
                             <p className='font-[poppins] font-normal text-base'>back to log in</p>
                         </Link>
                     {/* </Link>  */}
