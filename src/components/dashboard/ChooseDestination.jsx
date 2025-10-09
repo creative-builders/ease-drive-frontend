@@ -8,8 +8,9 @@ import { Divider } from "../Divider/Divider";
 import axios from "axios";
 import { useDebounce } from "../../hooks/useDebounce";
 import toast from "react-hot-toast";
+import { FormProvider, useStepFlowContext } from "../../hooks/useStepFlowFormContext";
 
-export const ChooseDestination = ({ onFocus }) => {
+  const ChooseDestinationContext = ({ onFocus }) => {
   const [queryValue, setQueryValue] = useState("");
   const [results, setResults] = useState([]);
   const [cache, setCache] = useState({});
@@ -17,6 +18,11 @@ export const ChooseDestination = ({ onFocus }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [history, setHistory] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(null); 
+  const {
+      formData,
+      setFormData,
+      handleUpdateFormData,
+  } = useStepFlowContext();
 
   const [liveLocation, _] = useRecoilState(locationAtom);
 
@@ -105,6 +111,9 @@ export const ChooseDestination = ({ onFocus }) => {
     results.length === 0 &&
     !selectedPlace;
 
+
+  // debugging
+  console.log(formData)
   return (
     <div className="mb-6 p-1.5 lg:p-[14px] bg-white min-h-[210px] rounded-2xl">
       {/* Header */}
@@ -127,6 +136,16 @@ export const ChooseDestination = ({ onFocus }) => {
           onChange={() => {}}
         />
 
+       <InputField 
+        type="number"
+        label={"Phone Number"}
+        labelStyles="font-medium text-xs lg:text-xs"
+        inputWrapperStyles="h-[40px] lg:h-[49px]"
+        inputTextStyles="text-neutral-950"
+        onChange={handleUpdateFormData}
+        name={"phoneNumber"}
+     
+        />
         <InputField
           label="To Where"
           labelStyles="font-medium text-xs lg:text-xs"
@@ -142,10 +161,10 @@ export const ChooseDestination = ({ onFocus }) => {
 
       <Divider />
 
-      {/* ✅ Dropdown UI */}
-      {(isTyping || isSearching || results.length > 0 || history.length > 0) && (
+      {/*Dropdown UI */}
+      {(isTyping || isSearching || results.length > 0 || history.length > 0 || shouldShowNoResult) && (
         <div className="bg-white border border-gray-200 shadow rounded-lg mt-2 max-h-64 overflow-y-auto">
-          {/* 🔄 Loading Spinner */}
+          {/*Loading Spinner */}
           {isSearching && (
             <div className="flex justify-center items-center p-4">
               <div className="w-4 h-4 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
@@ -209,3 +228,16 @@ export const ChooseDestination = ({ onFocus }) => {
     </div>
   );
 };
+
+
+
+export const ChooseDestination = () => {
+const initialInputFields = 
+["destination", "location", "phoneNumber","imageUrls","vehicleType","tripType","isLuggage"]
+
+return(
+  <FormProvider initialInputFields={initialInputFields}>
+    <ChooseDestinationContext/>
+  </FormProvider>
+)
+}
