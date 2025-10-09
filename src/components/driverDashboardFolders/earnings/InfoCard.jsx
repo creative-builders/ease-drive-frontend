@@ -12,7 +12,7 @@ export function InfoCard({ title, value, footer, InfoIcon }) {
                         <InfoIcon />
                     </div>
                     <div>
-                        <h4 className="lg:text-lg text-base text-primary-700 font-medium font-poppins">
+                        <h4 className="lg:text-lg text-sm text-primary-700 font-medium font-poppins">
                             {title}
                         </h4>
                     </div>
@@ -25,7 +25,8 @@ export function InfoCard({ title, value, footer, InfoIcon }) {
             {value && <h1 className="lg:text-2xl text-base font-semibold font-poppins text-gray-800">₦{value}</h1>}
 
             {/* Footer / Extra content */}
-            {footer && <p className="lg:text-[10px] tex-[8px] text-primary-700  font-semibold">{footer}</p>}
+            {footer && 
+            <p className="lg:text-[10px] text-[8px] text-neutral-400 font-semibold">{footer.text} <span className="text-primary-700 ">+{footer.value}%</span></p>}
         </div>
     );
 }
