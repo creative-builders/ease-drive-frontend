@@ -6,36 +6,25 @@ import { locationAtom } from "../atoms/locationAtom";
 import { SearchIcon } from "../../assets/icons/SearchIcon";
 import { Divider } from "../Divider/Divider";
 import axios from "axios";
-import { ca } from "date-fns/locale";
-
-// 🧠 Simple debounce utility
-function debounce(fn, delay) {
-  let timeoutId;
-  return (...args) => {
-    if (timeoutId) clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn(...args), delay);
-  };
-}
+import { useDebounce } from "../../hooks/useDebounce";
 
 export const ChooseDestination = ({ onFocus }) => {
   const [queryValue, setQueryValue] = useState("");
   const [results, setResults] = useState([]);
-  const [markers, setMarkers] = useState([]);
   const [cache, setCache] = useState({});
   const [isTyping, setIsTyping] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [history, setHistory] = useState([]);
-  const [userPosition, setUserPosition] = useState(null);
 
   const [liveLocation] = useRecoilState(locationAtom);
 
-  // 💾 Load saved searches from localStorage
+  //Load saved searches from localStorage
   useEffect(() => {
     const storedHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
     setHistory(storedHistory);
   }, []);
 
-  // 💾 Save searches
+  //Save searches
   const saveToHistory = (place) => {
     const newEntry = {
       name: place.display_name,
@@ -49,8 +38,8 @@ export const ChooseDestination = ({ onFocus }) => {
     });
   };
 
-  // 🚀 Debounced API search
-  const debouncedSearch = debounce(async (q) => {
+  //Debounced API search
+  const debouncedSearch = useDebounce(async (q) => {
     setIsTyping(false);
     if (!q.trim()) {
       setResults([]);
@@ -71,6 +60,7 @@ export const ChooseDestination = ({ onFocus }) => {
       setCache((prev) => ({ ...prev, [q]: response.data }));
     } catch (error) {
       console.error("Nominatim error:", error);
+      toast.error("Something Went Wrong:", error);
     } finally {
       setIsSearching(false);
     }
@@ -86,22 +76,15 @@ export const ChooseDestination = ({ onFocus }) => {
   const handleSelect = (place) => {
     const lat = parseFloat(place.lat);
     const lon = parseFloat(place.lon);
-    const newMarker = { lat, lon, display_name: place.display_name };
-    setMarkers((prev) => [...prev, newMarker]);
-    setQueryValue(place.name);
+    setQueryValue(place.display_name);
     setResults([]);
     saveToHistory(place);
   };
 
   const handleHistoryClick = (entry) => {
-    const newMarker = { lat: entry.lat, lon: entry.lon, display_name: entry.name };
-    setMarkers((prev) => [...prev, newMarker]);
     setQueryValue(entry.name);
     setResults([]);
   };
-
-  console.log(cache);
-  console.log(results)
   return (
     <div className="mb-6 p-1.5 lg:p-[14px] bg-white min-h-[210px] rounded-2xl">
       <div className="mb-2 flex items-center gap-x-1.5 ">
@@ -136,11 +119,10 @@ export const ChooseDestination = ({ onFocus }) => {
       </div>
 
       <Divider />
-
-      {/* Suggestions & History */}
-     {/* Dropdown UI */}
+      
+       {/* Dropdown UI */}
         {(isTyping || isSearching || results.length > 0 || history.length > 0) && (
-          <div className="bg-white border border-gray-200 rounded-lg shadow mt-2 max-h-64 overflow-y-auto">
+          <div className="bg-white border border-gray-200  shadow rounded-lg  mt-2 max-h-64 overflow-y-auto">
             {/* Loading Spinner */}
             {isSearching && (
               <div className="flex justify-center items-center p-4">
@@ -166,19 +148,27 @@ export const ChooseDestination = ({ onFocus }) => {
                 </li>
               ))}
 
+            {/* No results found */}
+            {
+              !isSearching && queryValue &&
+               results.length === 0 && (
+                <h4 className="py-2 px-4 text-red-500">Location not found!, Please search again</h4>
+              )
+            }
+
             {/* History Section */}
             {!queryValue && !isSearching && history.length > 0 && (
               <div className="border-t border-gray-100">
-                <p className="text-xs text-gray-400 uppercase px-3 pt-2">
+                <p className="mb-2 text-xs text-neutral-950 font-bold uppercase px-3 pt-2">
                   Recent Searches
                 </p>
                 {history.map((entry, i) => (
                   <li
                     key={i}
                     onClick={() => handleHistoryClick(entry)}
-                    className="list-none p-3 hover:bg-gray-50 cursor-pointer text-sm flex items-center"
+                    className="list-none p-2 hover:bg-gray-50 cursor-pointer text-sm flex items-center"
                   >
-                    <LiveGPSIcon className="mr-3"/>
+                    <LiveGPSIcon className="mr-2"/>
                     {entry.name}
                   </li>
                 ))}
