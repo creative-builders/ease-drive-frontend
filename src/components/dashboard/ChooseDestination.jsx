@@ -7,6 +7,7 @@ import { SearchIcon } from "../../assets/icons/SearchIcon";
 import { Divider } from "../Divider/Divider";
 import axios from "axios";
 import { useDebounce } from "../../hooks/useDebounce";
+import toast from "react-hot-toast";
 
 export const ChooseDestination = ({ onFocus }) => {
   const [queryValue, setQueryValue] = useState("");
@@ -15,22 +16,23 @@ export const ChooseDestination = ({ onFocus }) => {
   const [isTyping, setIsTyping] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [history, setHistory] = useState([]);
+  const [selectedPlace, setSelectedPlace] = useState(null); 
 
-  const [liveLocation] = useRecoilState(locationAtom);
+  const [liveLocation, _] = useRecoilState(locationAtom);
 
-  //Load saved searches from localStorage
   useEffect(() => {
     const storedHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
     setHistory(storedHistory);
   }, []);
 
-  //Save searches
+
   const saveToHistory = (place) => {
     const newEntry = {
       name: place.display_name,
       lat: parseFloat(place.lat),
       lon: parseFloat(place.lon),
     };
+
     setHistory((prev) => {
       const updated = [newEntry, ...prev.filter((h) => h.name !== newEntry.name)];
       localStorage.setItem("searchHistory", JSON.stringify(updated.slice(0, 10)));
@@ -38,9 +40,17 @@ export const ChooseDestination = ({ onFocus }) => {
     });
   };
 
-  //Debounced API search
+
+  const handleClearHistory = () => {
+    localStorage.removeItem("searchHistory");
+    setHistory([]);
+    toast.success("Search history cleared!");
+  };
+
+
   const debouncedSearch = useDebounce(async (q) => {
     setIsTyping(false);
+
     if (!q.trim()) {
       setResults([]);
       return;
@@ -56,15 +66,17 @@ export const ChooseDestination = ({ onFocus }) => {
       const response = await axios.get("https://nominatim.openstreetmap.org/search", {
         params: { q, format: "json", addressdetails: 1, limit: 5 },
       });
+
       setResults(response.data);
       setCache((prev) => ({ ...prev, [q]: response.data }));
     } catch (error) {
       console.error("Nominatim error:", error);
-      toast.error("Something Went Wrong:", error);
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setIsSearching(false);
     }
   }, 700);
+
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -74,44 +86,54 @@ export const ChooseDestination = ({ onFocus }) => {
   };
 
   const handleSelect = (place) => {
-    const lat = parseFloat(place.lat);
-    const lon = parseFloat(place.lon);
     setQueryValue(place.display_name);
+    setSelectedPlace(place);
     setResults([]);
     saveToHistory(place);
   };
 
+
   const handleHistoryClick = (entry) => {
     setQueryValue(entry.name);
+    setSelectedPlace(entry);
     setResults([]);
   };
+
+  const shouldShowNoResult =
+    !isSearching &&
+    queryValue.trim() !== "" &&
+    results.length === 0 &&
+    !selectedPlace;
+
   return (
     <div className="mb-6 p-1.5 lg:p-[14px] bg-white min-h-[210px] rounded-2xl">
-      <div className="mb-2 flex items-center gap-x-1.5 ">
+      {/* Header */}
+      <div className="mb-2 flex items-center gap-x-1.5">
         <span className="block w-[38px] h-[36px] flex justify-center items-center bg-primary-50 rounded-[32px]">
           <LiveGPSIcon />
         </span>
         <h4 className="text-base lg:text-lg font-medium">Where are you going?</h4>
       </div>
 
+      {/* Input Fields */}
       <div>
         <InputField
-          label={"From"}
-          labelStyles={"font-medium text-xs lg:text-xs"}
-          inputWrapperStyles={"h-[40px] lg:h-[49px]"}
-          inputTextStyles={"text-neutral-950"}
+          label="From"
+          labelStyles="font-medium text-xs lg:text-xs"
+          inputWrapperStyles="h-[40px] lg:h-[49px]"
+          inputTextStyles="text-neutral-950"
           value={liveLocation}
           onFocus={onFocus}
           onChange={() => {}}
         />
 
         <InputField
-          label={"To Where"}
-          labelStyles={"font-medium text-xs lg:text-xs"}
-          inputWrapperStyles={"h-[40px] lg:h-[49px]"}
-          placeholder={"Enter your Destination"}
+          label="To Where"
+          labelStyles="font-medium text-xs lg:text-xs"
+          inputWrapperStyles="h-[40px] lg:h-[49px]"
+          placeholder="Enter your Destination"
           rightIcon={SearchIcon}
-          name={"search"}
+          name="search"
           value={queryValue}
           onFocus={onFocus}
           onChange={handleChange}
@@ -119,63 +141,71 @@ export const ChooseDestination = ({ onFocus }) => {
       </div>
 
       <Divider />
-      
-       {/* Dropdown UI */}
-        {(isTyping || isSearching || results.length > 0 || history.length > 0) && (
-          <div className="bg-white border border-gray-200  shadow rounded-lg  mt-2 max-h-64 overflow-y-auto">
-            {/* Loading Spinner */}
-            {isSearching && (
-              <div className="flex justify-center items-center p-4">
-                <div className="w-4 h-4 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
-                <p className="ml-2 text-sm text-green-600">Searching location...</p>
-              </div>
-            )}
 
-            {/* Typing indicator */}
-            {isTyping && !isSearching && (
-              <p className="p-3 text-sm text-neutral-950 italic">Typing...</p>
-            )}
+      {/* ✅ Dropdown UI */}
+      {(isTyping || isSearching || results.length > 0 || history.length > 0) && (
+        <div className="bg-white border border-gray-200 shadow rounded-lg mt-2 max-h-64 overflow-y-auto">
+          {/* 🔄 Loading Spinner */}
+          {isSearching && (
+            <div className="flex justify-center items-center p-4">
+              <div className="w-4 h-4 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+              <p className="ml-2 text-sm text-green-600">Searching location...</p>
+            </div>
+          )}
 
-            {/* Results */}
-            {!isSearching &&
-              results.map((result, i) => (
-                <li
-                  key={i}
-                  onClick={() => handleSelect(result)}
-                  className="list-none p-3 hover:bg-green-50 cursor-pointer text-sm"
-                >
-                  {result.display_name}
-                </li>
-              ))}
+          {isTyping && !isSearching && (
+            <p className="p-3 text-sm text-neutral-950 italic">Typing...</p>
+          )}
 
-            {/* No results found */}
-            {
-              !isSearching && queryValue &&
-               results.length === 0 && (
-                <h4 className="py-2 px-4 text-red-500">Location not found!, Please search again</h4>
-              )
-            }
+          {/*Search Results */}
+          {!isSearching &&
+            results.length > 0 &&
+            results.map((result, i) => (
+              <li
+                key={i}
+                onClick={() => handleSelect(result)}
+                className="list-none p-3 hover:bg-green-50 cursor-pointer text-sm"
+              >
+                {result.display_name}
+              </li>
+            ))}
 
-            {/* History Section */}
-            {!queryValue && !isSearching && history.length > 0 && (
-              <div className="border-t border-gray-100">
-                <p className="mb-2 text-xs text-neutral-950 font-bold uppercase px-3 pt-2">
+          {/* No Results */}
+          {shouldShowNoResult && (
+            <p className="py-2 px-4 text-sm text-red-500">
+              No location found. Please try another search.
+            </p>
+          )}
+
+          {/*History Section */}
+          {!queryValue && !isSearching && history.length > 0 && (
+            <div className="border-t border-gray-100">
+              <div className="flex justify-between items-center px-3 pt-2">
+                <p className="text-xs text-neutral-950 font-bold uppercase">
                   Recent Searches
                 </p>
-                {history.map((entry, i) => (
-                  <li
-                    key={i}
-                    onClick={() => handleHistoryClick(entry)}
-                    className="list-none p-2 hover:bg-gray-50 cursor-pointer text-sm flex items-center"
-                  >
-                    <LiveGPSIcon className="mr-2"/>
-                    {entry.name}
-                  </li>
-                ))}
+                <button
+                  onClick={handleClearHistory}
+                  className="text-xs text-red-500 font-medium hover:underline"
+                >
+                  Clear
+                </button>
               </div>
-            )}
-          </div>
-        )}
+
+              {history.map((entry, i) => (
+                <li
+                  key={i}
+                  onClick={() => handleHistoryClick(entry)}
+                  className="list-none p-2 hover:bg-gray-50 cursor-pointer text-sm flex items-center"
+                >
+                  <LiveGPSIcon className="mr-2" />
+                  {entry.name}
+                </li>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
