@@ -10,6 +10,7 @@ import { InputField } from '../customFormFields/InputField';
 import CustomButton from '../CustomButton';
 import { Skip } from '../Skip';
 import { Link } from 'react-router-dom';
+import { AddFile } from '../AddFile'
 
 export const StepOne = ({ nextStep, step, totalSteps }) => {
   const fileInputRef = useRef(null);
@@ -137,7 +138,8 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
             </form>
 
             {/* Upload Section */}
-            <div className="flex flex-col w-full -mt-4">
+            <AddFile />
+            {/* <div className="flex flex-col w-full -mt-4">
               <p className="font-semibold text-left text-gray-700 lg:text-lg text-base font-inter pt-2">
                 Upload a document
               </p>
@@ -195,7 +197,7 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
                   <p className="text-red-500 text-sm mt-1">{errors.files}</p>
                 )}
               </div>
-            </div>
+            </div> */}
 
             {/* <button
               type="button"
