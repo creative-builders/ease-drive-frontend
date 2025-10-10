@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from "framer-motion"
 import PromoIcon from '../../../../assets/icons/PromoIcon';
 import CustomButton from '../../../../components/CustomButton';
-import { BackArrow } from '../../../../assets/icons/BackArrowIcon';
+import { BackArrowIcon } from '../../../../assets/icons/BackArrowIcon';
 
 
 export const BookDriver = ({ driver, onBack }) => {
@@ -19,7 +19,7 @@ export const BookDriver = ({ driver, onBack }) => {
         onClick={onBack}
         className="text-lg font-semibold mb-4 flex items-center gap-40 hover:cursor-pointer"
       >
-        <BackArrow />
+        <BackArrowIcon />
         Book driver
       </button>
 

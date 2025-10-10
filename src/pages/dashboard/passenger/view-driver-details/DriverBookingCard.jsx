@@ -1,12 +1,12 @@
 import React from 'react'
 import CustomButton from '../../../../components/CustomButton'
-import { BackArrow } from '../../../../assets/icons/BackArrowIcon'
+import { BackArrowIcon } from '../../../../assets/icons/BackArrowIcon'
 
 export const DriverBookingCard = ({ drivers, onSelectDriver }) => {
   return (
     <div className="bg-white w-full lg:w-31 rounded-lg shadow-current lg:shadow-md flex flex-col top-2 p-5 gap-4">
       <div className=' w-full mb-4 flex items-center gap-20'>
-        <BackArrow />
+        <BackArrowIcon />
         <h2 className="text-lg font-semibold">Available Drivers</h2>
       </div>
       {drivers.map((driver) => (
