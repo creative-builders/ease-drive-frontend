@@ -13,11 +13,11 @@ export const BookDriver = ({ driver, onBack }) => {
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: 200, opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="bg-white rounded-lg shadow-md w-full lg:w-[557px] absolute top-12 flex flex-col gap-4 p-6"
+      className="bg-white rounded-lg shadow-none lg:shadow-md w-full md:w-[557px] absolute top-12 flex flex-col gap-4 px-4 py-2"
     >
       <button
         onClick={onBack}
-        className="text-lg font-semibold mb-4 flex items-center gap-40 hover:cursor-pointer"
+        className="text-lg font-semibold mb-4 flex items-center gap-20 lg:gap-40 hover:cursor-pointer"
       >
         <BackArrowIcon />
         Book driver
@@ -65,7 +65,7 @@ export const BookDriver = ({ driver, onBack }) => {
 
       <CustomButton
        name='Confirm Booking'
-       extendedStyles="mt-52 md:mt-6 w-full bg-green-700 text-white py-2 rounded-lg hover:bg-green-700 transition"
+       extendedStyles="mt-52 md:mt-6 w-full bg-green-700 text-white px-4 py-4 gap-2 text-lg rounded-2xl hover:bg-green-700 transition"
         
         />
     </motion.div>
