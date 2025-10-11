@@ -21,6 +21,32 @@ const PassengerDashboardIndex = () => {
     setIsMenuOpen
   } = useGeolocation();
 
+  const [luggageFiles, setLuggageFiles] = useState([]);
+
+
+  const handleLuggageUpload = (files) => {
+    setLuggageFiles(files);
+    console.log("Uploaded luggage files:", files);
+  };
+
+
+  const handleSubmit = () => {
+    if (selectedLuggage === "yes" && luggageFiles.length === 0) {
+      alert("Please upload at least one luggage image");
+      return;
+    }
+
+    const data = {
+      rideType: "Car",
+      tripType: "Round Trip",
+      hasLuggage: selectedLuggage === "yes",
+      luggageFiles,
+    };
+
+    console.log("Ride data ready to submit:", data);
+  };
+
+
   return (
     <>
       {/* modal prompt */}
@@ -78,7 +104,10 @@ const PassengerDashboardIndex = () => {
            onFocus={() => setExpanded(true)}
            onBlur={() => setExpanded(false)} 
            />
-          <SelectRide/>
+          <SelectRide 
+          handleSubmit={handleSubmit}
+          handleLuggageUpload={handleLuggageUpload}
+          />
         </div>
       </div>
     </>

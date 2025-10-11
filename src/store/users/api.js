@@ -41,7 +41,7 @@ export const bookRide =  async(credentials) => {
 
 
 //Sample using formData
-export const useFormData = async( credentials) => {
+export const createRide  = async( credentials) => {
   const formData =  new FormData();
   for (const key in credentials){
     formData.append(key, credentials[key]);
