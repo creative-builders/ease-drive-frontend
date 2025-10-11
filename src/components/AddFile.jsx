@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { AddFileIcon } from "../assets/icons/AddFileIcon";
 import { InputField } from "./customFormFields/InputField";
 import toast from "react-hot-toast";
@@ -9,7 +9,10 @@ export const AddFile = ({
   description,
   maxFiles = 4,
   maxFileSize = 10 * 1024 * 1024, // 10MB
+  allowedTypes = ["image/jpeg", "image/png"],
+  onFilesChange = () => {},
   extendedStyles = "",
+  name,
   children,
 }) => {
   const fileUploadRef = useRef(null);
@@ -20,33 +23,41 @@ export const AddFile = ({
     const files = Array.from(e.target.files);
 
     const validFiles = files.filter((file) => {
-      const isValidType =
-        file.type === "image/jpeg" || file.type === "image/png";
+      const isValidType = allowedTypes.includes(file.type);
       const isValidSize = file.size <= maxFileSize;
+
+      if (!isValidType)
+        toast.error(`${file.name} has an unsupported file type.`);
+      if (!isValidSize)
+        toast.error(`${file.name} exceeds ${maxFileSize / 1024 / 1024}MB limit.`);
+
       return isValidType && isValidSize;
     });
 
     const allFiles = [...selectedFiles, ...validFiles];
 
     if (allFiles.length > maxFiles) {
-      toast.error(`You can only upload up to ${maxFiles} images.`)
+      toast.error(`You can only upload up to ${maxFiles} files.`);
       return;
     }
 
+    const newPreviews = validFiles.map((file) => URL.createObjectURL(file));
+
     setSelectedFiles(allFiles);
-    setPreviewImages(allFiles.map((file) => URL.createObjectURL(file)));
+    setPreviewImages((prev) => [...prev, ...newPreviews]);
+    onFilesChange(allFiles);
   };
 
-  const handleClickUpload = () => {
-    if (fileUploadRef.current) fileUploadRef.current.click();
-  };
+  const handleClickUpload = () => fileUploadRef.current?.click();
 
-    const handleDeleteImage = (index) => {
+
+  const handleDeleteImage = (index) => {
     const updatedFiles = selectedFiles.filter((_, i) => i !== index);
     const updatedPreviews = previewImages.filter((_, i) => i !== index);
 
     setSelectedFiles(updatedFiles);
     setPreviewImages(updatedPreviews);
+    onFilesChange(updatedFiles);
   };
 
   return (
@@ -88,11 +99,10 @@ export const AddFile = ({
                   <X size={14} />
                 </button>
               </div>
-              
             ))}
           </div>
         ) : (
-          // Centered Add Icon (if no preview)
+          // Centered Add Icon (no preview)
           <AddFileIcon
             onClick={handleClickUpload}
             className="w-[56px] h-[56px] cursor-pointer hover:scale-105 transition-transform"
@@ -109,24 +119,24 @@ export const AddFile = ({
           </div>
         )}
 
-      {/* Upload Photos button only visible when no previews */}
-      {previewImages.length === 0 && (
-        <button
-          type="button"
-          onClick={handleClickUpload}
-          className="bg-primary-100 text-neutral-950 rounded-lg p-1.5 text-[10px] font-medium"
-        >
-          Upload Photos
-        </button>
-      )}
-
+        {/* Upload Photos Button (only visible if no previews) */}
+        {previewImages.length === 0 && (
+          <button
+            type="button"
+            onClick={handleClickUpload}
+            className="bg-primary-100 text-neutral-950 rounded-lg p-1.5 text-[10px] font-medium"
+          >
+            Upload Photos
+          </button>
+        )}
       </div>
 
       {/* Hidden File Input */}
       <InputField
         type="file"
-        accept="image/*"
-        multiple
+        name={name}
+        accept={allowedTypes.join(",")}
+        multiple={maxFiles > 1}
         inputRef={fileUploadRef}
         containerStyles="hidden"
         inputTextStyles="hidden"

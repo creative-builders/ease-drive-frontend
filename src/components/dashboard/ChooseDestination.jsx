@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { LiveGPSIcon } from "../../assets/icons/LiveGPSIcon";
 import { InputField } from "../customFormFields/InputField";
 import { locationAtom } from "../atoms/locationAtom";
@@ -9,6 +9,8 @@ import axios from "axios";
 import { useDebounce } from "../../hooks/useDebounce";
 import toast from "react-hot-toast";
 import { FormProvider, useStepFlowContext } from "../../hooks/useStepFlowFormContext";
+import { createRide } from "../../store/users/api";
+import { useMutation } from "@tanstack/react-query";
 
   const ChooseDestinationContext = ({ onFocus }) => {
   const [queryValue, setQueryValue] = useState("");
@@ -24,12 +26,35 @@ import { FormProvider, useStepFlowContext } from "../../hooks/useStepFlowFormCon
       handleUpdateFormData,
   } = useStepFlowContext();
 
-  const [liveLocation, _] = useRecoilState(locationAtom);
+  const liveLocation = useRecoilValue(locationAtom);
+
 
   useEffect(() => {
     const storedHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
     setHistory(storedHistory);
   }, []);
+
+
+
+  const { mutate:submitCreateRide , isLoading } = useMutation(createRide, {
+     onSuccess: (response) => {
+      toast.success(response?.message);
+      queryClient.invalidateQueries(["getUserProfile"]);
+      setFormData(prev => ({
+        ...prev,
+        destination:"",
+        location:"",
+        phoneNumber:"",
+        luggageImage:"",
+        vehicleType:"",
+        tripType:"",
+        luggage:""
+      }))
+     },
+     onError:(error) => {
+      toast.error(error.response?.data?.message || error.message);
+     }
+  })
 
 
   const saveToHistory = (place) => {
@@ -113,7 +138,7 @@ import { FormProvider, useStepFlowContext } from "../../hooks/useStepFlowFormCon
 
 
   // debugging
-  console.log(formData)
+  // console.log(formData)
   return (
     <div className="mb-6 p-1.5 lg:p-[14px] bg-white min-h-[210px] rounded-2xl">
       {/* Header */}
@@ -143,6 +168,7 @@ import { FormProvider, useStepFlowContext } from "../../hooks/useStepFlowFormCon
         inputWrapperStyles="h-[40px] lg:h-[49px]"
         inputTextStyles="text-neutral-950"
         onChange={handleUpdateFormData}
+        placeholder={"Enter a Phone Number"}
         name={"phoneNumber"}
      
         />
@@ -233,7 +259,7 @@ import { FormProvider, useStepFlowContext } from "../../hooks/useStepFlowFormCon
 
 export const ChooseDestination = () => {
 const initialInputFields = 
-["destination", "location", "phoneNumber","imageUrls","vehicleType","tripType","isLuggage"]
+["destination", "location", "phoneNumber","luggageImage","vehicleType","tripType","luggage"]
 
 return(
   <FormProvider initialInputFields={initialInputFields}>

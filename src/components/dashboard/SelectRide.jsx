@@ -7,7 +7,9 @@ import { CustomSelectField } from "../customFormFields/CustomSelectField"
 import { Divider } from "../Divider/Divider"
 import { AddFile } from "../AddFile"
 
-export const SelectRide = () => {
+export const SelectRide = ({
+  handleLuggageUpload
+}) => {
   const [selectedLuggage, setSelectedLuggage] = useState("");
 
   const handleChange = (e) => {
@@ -98,6 +100,7 @@ export const SelectRide = () => {
                 <AddFile
                  title={"Upload a photo of the luggage"}
                  extendedStyles={"text-center"}
+                 onFilesChange={handleLuggageUpload}
                 >
                   <p className="mb-4 text-xs text-center font-medium text-neutral-700">
                     You can upload up to 4 images (JPG, PNG). <br />
