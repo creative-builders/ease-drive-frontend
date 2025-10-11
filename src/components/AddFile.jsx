@@ -12,6 +12,7 @@ export const AddFile = ({
   allowedTypes = ["image/jpeg", "image/png"],
   onFilesChange = () => {},
   extendedStyles = "",
+  name,
   children,
 }) => {
   const fileUploadRef = useRef(null);
@@ -133,6 +134,7 @@ export const AddFile = ({
       {/* Hidden File Input */}
       <InputField
         type="file"
+        name={name}
         accept={allowedTypes.join(",")}
         multiple={maxFiles > 1}
         inputRef={fileUploadRef}
