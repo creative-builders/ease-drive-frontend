@@ -10,6 +10,9 @@ import { useRecoilValue } from "recoil";
 import { useGeolocation } from "../../../hooks/useGeolocation";
 import { Modal } from "../../Modal"
 import CustomButton from "../../CustomButton"
+import { useMutation } from "@tanstack/react-query";
+import { getPendingBookings } from "../../../store/auth/driver/api";
+import toast from 'react-hot-toast';
 
 export function RideRequests() {
   const [selectedRequest, setSelectedRequest] = useState(null);
@@ -18,7 +21,6 @@ export function RideRequests() {
   const [acceptedRequest, setAcceptedRequest] = useState(null);
   const [toggleMapList, setToggleMapList] = useState(false)
   const [myLocation, setMyLocation] = useState(null);
-
   const location = useRecoilValue(locationAtom);
 
   const {
@@ -43,9 +45,28 @@ export function RideRequests() {
   const destination = { lat: 6.8570, lng: 7.3928 };
   const activeRequest = acceptedRequest || selectedRequest;
 
+
+  const { mutate: getPendingRideRequests, isLoading } = useMutation(
+    getPendingBookings,
+    {
+      onSuccess: (data) => {
+        setRequests(data);
+      },
+      onError: (error) => {
+        toast.error(error.response?.data?.message || error.message);
+      }
+    }
+  );
+
+
   const handleRefresh = (data) => {
-    setRequests(data);
+    getPendingRideRequests()
+  
   };
+
+  useEffect(() =>{
+    getPendingRideRequests()
+  }, [coords])
 
   const handleBack = () => {
     setSelectedRequest(null);

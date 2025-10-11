@@ -98,13 +98,13 @@ export const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
                     p-5 gap-8 bg-white flex flex-col items-center justify-center">
                         <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
 
-                            <div className='flex gap-4 px-2 py-3'>
+                            <div className='flex gap-4 -ml-4 lg:-ml-0 px-2 py-3'>
                                 <button onClick={prevStep} className='flex font-regular text-xl'>
                                     <FaArrowLeft />
                                 </button>
                             </div>
 
-                            <div className="flex flex-row items-center justify-start">
+                            <div className="flex flex-row -ml-3 lg:-ml-0 items-center justify-start">
                                 <SectionLabel
                                     className="text-blue-800 bg-custom-gradient"
                                     title={` Step ${step}  of ${totalSteps}`}

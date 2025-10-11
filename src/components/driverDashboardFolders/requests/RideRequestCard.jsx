@@ -1,18 +1,45 @@
+import { useState } from "react";
 import { LocationIcon } from "../../../assets/icons/LocationIcon";
+import { getETA } from "../../../helpers/getETA";
+import { useGeolocation } from "../../../hooks/useGeolocation";
+
 
 export function RideRequestCard({ request }) {
+  const { booker, location, destination, status, tripType, luggages, luggageImages, totalBids, updatedAt } = request
+  const [eta, setEta] = useState({})
+
+  const {
+    coords,
+    locationEnabled,
+    isOpen, loading,
+    fetchLocation,
+    setLocationEnabled,
+    setIsOpen,
+    setIsMenuOpen
+  } = useGeolocation();
+
+  console.log(coords, destination.coordinates)
+
+  // (async () => {
+  //   const eta = await getETA(coords, destination.coordinates);
+  //   setEta(eta)
+  //   console.log("ETA:", eta);
+  // })();
+
+  // console.log(request)
+
   return (
     <div className="self-stretch w-full py-2.5 border-b border-neutral-100 inline-flex justify-start items-center gap-4">
       <div className="flex justify-start lg:items-center items-start lg:gap-2 gap-2 font-poppins">
         <img
-          className="lg:w-[80px] lg:h-[80px] w-[60px] h-[60px] relative rounded-[50px] font-poppins"
-          src={request.avatar}
-          alt={request.name}
+          className="lg:w-[80px] lg:h-[80px] w-[60px] h-[60px] object-fit relative rounded-[50px] font-poppins"
+          src={booker.profileImage}
+          alt={booker.name}
         />
         <div className="inline-flex flex-col justify-start items-start gap-2">
           <div className="inline-flex justify-start items-center gap-4">
             <div className="justify-start text-black lg:text-base text-sm font-semibold font-poppins">
-              {request.name}
+              {booker.name}
             </div>
           </div>
 
@@ -23,7 +50,7 @@ export function RideRequestCard({ request }) {
                   <LocationIcon fill="#1A7B2C" className={`text-primary-700`} />
                 </div>
                 <div className="justify-start text-black lg:text-xs text-[10px] font-normal font-poppins leading-normal">
-                  {request.eta} away from you
+                  {/* {request.eta} away from you */}
                 </div>
               </div>
             </div>
@@ -33,7 +60,7 @@ export function RideRequestCard({ request }) {
                 Current location:
               </div>
               <div className="justify-start text-neutral-900 lg:text-xs text-[10px] font-normal font-poppins leading-normal">
-                {request.currentLocation}
+                {location.locationName}
               </div>
             </div>
 
@@ -42,7 +69,7 @@ export function RideRequestCard({ request }) {
                 Going to:
               </div>
               <div className="justify-start text-Neutral-900 lg:text-xs text-[10px] font-normal font-poppins leading-normal">
-                {request.destination}
+                {destination.destinationName}
               </div>
             </div>
           </div>

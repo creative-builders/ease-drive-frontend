@@ -7,17 +7,7 @@ export function RideRequestsList({ requests, onSelect }) {
   const [filter, setFilter] = useState("Filter");
   const [displayList, setDisplayList] = useState("block");
   const [sortedRequests, setSortedRequests] = useState(requests);
-  // Sort based on filter
-  // const sortedRequests = [...requests].sort((a, b) => {
-  //   const dateA = new Date(a.date);
-  //   const dateB = new Date(b.date);
 
-  //   if (filter === "Recent") {
-  //     return dateB - dateA; // newest first
-  //   } else {
-  //     return dateA - dateB; // oldest first
-  //   }
-  // });
 
   return (
     <div className={`self-stretch  px-5 py-3 pb-4 bg-white rounded-lg inline-flex flex-col
@@ -74,9 +64,9 @@ export function RideRequestsList({ requests, onSelect }) {
       </div>
 
       {/* Render filtered requests */}
-      {sortedRequests.map((req) => (
+      {sortedRequests.map((req, index) => (
         <div
-          key={req.id}
+          key={index}
           onClick={() => onSelect(req)}
           className="cursor-pointer w-full font-poppins"
         >

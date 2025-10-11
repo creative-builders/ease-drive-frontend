@@ -14,16 +14,21 @@ import { FailureIcon } from "../../../assets/icons/FailureIcon";
 
 export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) => {
     const {
-        name,
-        avatar,
+       
+        booker,
+        profileImage,
         onBack,
         destination,
-        rideType,
+        location,
+        tripType,
         date,
         pickup,
-        luggage,
+        luggages,
+        luggageImages,
         time,
     } = request;
+
+    console.log(request)
 
     const [modalType, setModalType] = useState(null); // "image" | "amount" | "loading"
     const [selectedIndex, setSelectedIndex] = useState(null);
@@ -37,14 +42,14 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
 
     const handlePrev = () => {
-        if (!luggage || luggage.length === 0) return;
-        setSelectedIndex((prev) => (prev === 0 ? luggage.length - 1 : prev - 1));
+        if (!luggageImages || luggageImages.length === 0) return;
+        setSelectedIndex((prev) => (prev === 0 ? luggageImages.length - 1 : prev - 1));
     };
 
     const handleNext = () => {
-        if (!luggage || luggage.length === 0) return;
+        if (!luggageImages || luggageImages.length === 0) return;
         setSelectedIndex((prev) =>
-            prev === luggage.length - 1 ? 0 : prev + 1
+            prev === luggageImages.length - 1 ? 0 : prev + 1
         );
     };
 
@@ -120,9 +125,9 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
             {/* Passenger Info */}
             <div className="self-stretch flex flex-col justify-start items-center gap-12">
                 <div className="flex flex-col items-center gap-4">
-                    <img className="w-24 h-24 rounded-full" src={avatar} alt="Passenger" />
+                    <img className="w-24 h-24 rounded-full" src={booker.profileImage} alt="Passenger" />
                     <div className="text-black text-base font-semibold font-poppins">
-                        {name}
+                        {booker.name}
                     </div>
                 </div>
 
@@ -143,22 +148,22 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
                     <div className="flex justify-between">
                         <div className="font-semibold font-poppins">Pick Up location</div>
-                        <div>{pickup}</div>
+                        <div>{location.locationName}</div>
                     </div>
 
                     <div className="flex justify-between">
                         <div className="font-semibold font-poppins">Destination</div>
-                        <div>{destination}</div>
+                        <div>{destination.destinationName}</div>
                     </div>
 
                     <div className="flex justify-between">
                         <div className="font-semibold font-poppins">Trip Type</div>
-                        <div>{rideType}</div>
+                        <div>{tripType}</div>
                     </div>
 
                     <div className="flex justify-between">
                         <div className="font-semibold font-poppins">Luggage</div>
-                        <div>{luggage && luggage.length > 0 ? "Yes" : "No"}</div>
+                        <div>{luggages}</div>
                     </div>
 
                     {/* Luggage Images */}
@@ -167,8 +172,8 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                             Click Single Image to view
                         </div>
                         <div className="inline-flex gap-2 flex-wrap w-full justify-center font-poppins">
-                            {luggage && luggage.length > 0 ? (
-                                luggage.map((img, index) => (
+                            {luggageImages && luggageImages.length > 0 ? (
+                                luggageImages.map((img, index) => (
                                     <div key={index} className="relative w-[100px] flex-wrap  flex justify-center">
                                         <img
                                             key={index}

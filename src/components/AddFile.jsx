@@ -10,6 +10,8 @@ export const AddFile = ({
   maxFiles = 4,
   maxFileSize = 10 * 1024 * 1024, // 10MB
   extendedStyles = "",
+  name,
+  onFilesChange,
   children,
 }) => {
   const fileUploadRef = useRef(null);
@@ -35,6 +37,8 @@ export const AddFile = ({
 
     setSelectedFiles(allFiles);
     setPreviewImages(allFiles.map((file) => URL.createObjectURL(file)));
+
+    if (onFilesChange && name) onFilesChange(name, allFiles);
   };
 
   const handleClickUpload = () => {
