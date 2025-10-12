@@ -14,6 +14,7 @@ export const InputField = ({
   type = "text",
   placeholder,
   value,
+  id,
   accept,
   multiple,
   hidden,
@@ -55,7 +56,7 @@ const inputType = isPassword ? (showPassword ? "text" : "password") : type;
           type={inputType}
           readOnly={readOnly}
           name={name}
-          id={name}
+          id={id}
           placeholder={placeholder}
           accept={accept}
           multiple={multiple}
