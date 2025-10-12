@@ -61,18 +61,11 @@ const PassengerDashboardIndexContext = () => {
         long:""
       }
     },
-    location:{
-    locationName:"",
-    coordinates:{
-        lat:"",
-        long:""
-      }
-    },
     phoneNumber:"",
     luggageImage:[],
     vehicleType:"",
     tripType:"",
-    luggage:"",
+    luggages:"",
     searchValue:""
       }))
      },
@@ -82,28 +75,15 @@ const PassengerDashboardIndexContext = () => {
   })
 
 
-   const handleLuggageUpload = (files) => {
-    if(files){
-      setFormData(prev => ({
-      ...prev,
-      luggageImage: files
-    }))
-    }
-  };
-
-
-
-
   const handleSubmit = () => {
-    if (formData?.luggage === "yes" && formData?.luggageImage.length === 0) {
+    if (formData?.luggages === "yes" && formData?.luggageImage.length === 0) {
       toast.error("Upload at least one luggage image !");
       return;
     }
-
+    
     submitCreateRide(formData)
-    console.log("Ride data ready to submit:");
   };
-
+  
   return (
     <>
       {/* modal prompt */}
@@ -163,7 +143,6 @@ const PassengerDashboardIndexContext = () => {
            />
           <SelectRide 
           handleSubmit={handleSubmit}
-          handleLuggageUpload={handleLuggageUpload}
           isLoading={isLoading}
           />
         </div>
@@ -194,7 +173,7 @@ const PassengerDashboardIndex = () => {
     luggageImage:[],
     vehicleType:"",
     tripType:"",
-    luggage:"",
+    luggages:"",
     searchValue:""
   }}>
         <PassengerDashboardIndexContext/>

@@ -144,9 +144,9 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
           labelStyles="font-medium text-xs lg:text-xs"
           inputWrapperStyles="h-[40px] lg:h-[49px]"
           inputTextStyles="text-neutral-950"
-          value={liveLocation}
+          value={liveLocation ?? ""}
           onFocus={onFocus}
-          onChange={() => {}}
+          onChange={() => null}
         />
 
        <InputField 

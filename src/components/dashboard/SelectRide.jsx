@@ -9,7 +9,6 @@ import { InputField } from "../customFormFields/InputField"
 import { AddFile } from "../AddFile"
 
 export const SelectRide = ({
-  handleLuggageUpload,
   handleSubmit,
  isLoading 
 }) => {
@@ -17,11 +16,20 @@ export const SelectRide = ({
   const {
       formData,
       isFormValid,
+      setFormData,
       handleUpdateFormData,
   } = useStepFlowContext();
 
-  console.log(formData)
-  const isLuggageAvailable = formData?.luggage === "yes";
+  const isLuggageAvailable = formData?.luggages === "yes";
+
+   const handleLuggageUpload = (files) => {
+    if(files){
+      setFormData(prev => ({
+      ...prev,
+      luggageImage: files
+    }))
+    }
+  };
 
 
   return (
@@ -67,10 +75,10 @@ export const SelectRide = ({
                <span className="basis-[41px]">  Yes </span>
                <InputField 
                type="radio" 
-               name="luggage" 
+               name="luggages" 
                value={"yes"}
                id="yes-luggage"
-               checked={formData?.luggage === "yes"}
+               checked={formData?.luggages === "yes"}
                onChange={handleUpdateFormData}
                containerStyles={"hidden"}
                inputTextStyles={"hidden"}
@@ -91,10 +99,10 @@ export const SelectRide = ({
               <span className="basis-[41px]"> No </span>
                <InputField 
                type="radio" 
-               name="luggage" 
+               name="luggages" 
                value={"no"}
                id="no-luggage"
-               checked={formData?.luggage === "no"}
+               checked={formData?.luggages === "no"}
                onChange={handleUpdateFormData}
                containerStyles={"hidden"}
                inputTextStyles={"hidden"}
@@ -103,7 +111,7 @@ export const SelectRide = ({
             <span
                 className={`relative inline-flex items-center justify-center w-5 h-5 rounded-full border-2 transition-all duration-200 border-green-600`}
              >
-             {formData?.luggage === "no" && (
+             {formData?.luggages === "no" && (
               <span className="absolute w-2.5 h-2.5 bg-green-600 rounded-full"></span>
               )}
              </span>
@@ -111,9 +119,9 @@ export const SelectRide = ({
           </div>
           </div>
 
-          {/* show if luggage there is an available luggage */}
+          {/* show if luggages there is an available luggage */}
           {
-            formData?.luggage === "yes" && (
+            formData?.luggages === "yes" && (
               <div className="mb-4">
                 <AddFile
                  title={"Upload a photo of the luggage"}
