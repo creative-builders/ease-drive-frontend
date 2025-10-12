@@ -76,6 +76,6 @@ const NOMINATIM_API = "https://nominatim.openstreetmap.org/reverse";
         setIsOpen,
         locationEnabled,
         setLocationEnabled,
-        setIsMenuOpen
+        setIsMenuOpen,
     }
 }

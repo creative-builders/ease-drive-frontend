@@ -230,11 +230,14 @@ const queryClient = useQueryClient();
 
 
 export const EditProfileView = ({ onClose }) => {
-  
- const initialInputFields = ["fullName", "phoneNumber", "profileImage", "password"]
 
   return (
-    <FormProvider initialInputFields={initialInputFields}>
+    <FormProvider initialInputFields={{
+      fullName:"",
+      phoneNumber:"", 
+      profileImage:"", 
+      password:""
+    }}>
       <UpdatePassengerProfile onClose={ onClose }/>
     </FormProvider>
   );
