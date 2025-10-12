@@ -1,4 +1,7 @@
 import { createContext, useContext, useState } from "react";
+import { validateFormFields } from "../utils/validateFormFields";
+
+
 
 const FormContext = createContext();
 
@@ -24,9 +27,11 @@ export const FormProvider = ({ children, initialInputFields = {} }) => {
     }
   };
 
+   const isFormValid = validateFormFields(formData)
+
   return (
     <FormContext.Provider
-      value={{ formData, inputTouched, setFormData, handleUpdateFormData }}
+      value={{ formData, inputTouched, setFormData, handleUpdateFormData , isFormValid}}
     >
       {children}
     </FormContext.Provider>

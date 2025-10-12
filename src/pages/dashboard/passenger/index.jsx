@@ -11,6 +11,7 @@ import { useGeolocation } from "../../../hooks/useGeolocation";
 import { FormProvider, useStepFlowContext } from "../../../hooks/useStepFlowFormContext";
 import { useMutation } from "@tanstack/react-query";
 import { createRide } from "../../../store/users/api";
+import toast from "react-hot-toast";
 
 const PassengerDashboardIndexContext = () => {
   const [expanded, setExpanded] = useState(false);
@@ -28,6 +29,7 @@ const PassengerDashboardIndexContext = () => {
 
   const {
       setFormData,
+      formData
   } = useStepFlowContext();
 
 
@@ -78,22 +80,19 @@ const PassengerDashboardIndexContext = () => {
 
 
   const handleSubmit = () => {
-    if (selectedLuggage === "yes" && luggageFiles.length === 0) {
-      alert("Please upload at least one luggage image");
+    if (formData?.luggage === "yes" && formData?.luggageImage.length === 0) {
+      toast.error("Upload at least one luggage image !");
       return;
     }
+    // const data = {
+    //   rideType: "Car",
+    //   tripType: "Round Trip",
+    //   hasLuggage: selectedLuggage === "yes",
+    //   luggageFiles,
+    // };
 
-    const data = {
-      rideType: "Car",
-      tripType: "Round Trip",
-      hasLuggage: selectedLuggage === "yes",
-      luggageFiles,
-    };
-
-    console.log("Ride data ready to submit:", data);
+    console.log("Ride data ready to submit:");
   };
-
-  // console.log(locationName);
 
   return (
     <>
@@ -155,6 +154,7 @@ const PassengerDashboardIndexContext = () => {
           <SelectRide 
           handleSubmit={handleSubmit}
           handleLuggageUpload={handleLuggageUpload}
+          isLoading={isLoading}
           />
         </div>
       </div>

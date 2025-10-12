@@ -12,11 +12,13 @@ import { AddFile } from "../AddFile"
 export const SelectRide = ({
   handleLuggageUpload,
   handleSubmit,
+ isLoading 
 }) => {
 
   const {
       formData,
       setFormData,
+      isFormValid,
       handleUpdateFormData,
   } = useStepFlowContext();
 
@@ -132,8 +134,10 @@ export const SelectRide = ({
         <div>
           <CustomButton
            name ="Search for Available Drivers"
-           extendedStyles={"h-[50px] lg:h-[60px] w-full rounded-2xl"}
-           disabled
+           extendedStyles= { "w-full h-[50px] lg:h-[60px] mt-6 bg-green-700 text-white rounded-2xl" }
+           disabled={!isFormValid}
+           btnClick={handleSubmit}
+           isLoading={isLoading}
           />
         </div>
     </div>

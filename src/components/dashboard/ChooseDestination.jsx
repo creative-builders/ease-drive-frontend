@@ -85,13 +85,6 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
   }, 500);
 
 
-  // const handleChange = (e) => {
-  //   const value = e.target.value;
-  //   setQueryValue(value);
-  //   setIsTyping(true);
-  //   debouncedSearch(value);
-  // };
-
   const handleSelect = (place) => {
      setFormData(prev => ({
       ...prev,
@@ -125,6 +118,8 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
     setSelectedPlace(entry);
     setResults([]);
   };
+
+  const isPhoneValid = /^[0-9]{10,}$/.test(formData?.phoneNumber);
 
   const shouldShowNoResult =
     !isSearching &&
@@ -164,6 +159,7 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
         placeholder={"Enter a Phone Number"}
         name={"phoneNumber"}
         value={formData?.phoneNumber}
+        error={!isPhoneValid ? "Please enter a valid phone number" : ""}
         />
         <InputField
           label="To Where"
