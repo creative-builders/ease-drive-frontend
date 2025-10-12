@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BackgroundMap from "../../../components/dashboard/BackgroundMap";
 import { Modal } from "../../../components/Modal";
 import { LiveGPSIcon } from "../../../assets/icons/LiveGPSIcon";
@@ -30,16 +30,30 @@ const PassengerDashboardIndexContext = () => {
       setFormData,
   } = useStepFlowContext();
 
+
+  useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      location:{
+        locationName,
+        coordinates:{
+          lat:coords?.lat,
+          long:coords?.lon
+        }
+      }
+    }))
+  },[coords,locationName])
+
   const { mutate:submitCreateRide , isLoading } = useMutation(createRide, {
      onSuccess: (response) => {
       toast.success(response?.message);
       queryClient.invalidateQueries(["getUserProfile"]);
       setFormData(prev => ({
         ...prev,
-        destination:"",
-        location:"",
+        destination:{},
+        location:{},
         phoneNumber:"",
-        luggageImage:"",
+        luggageImage:[],
         vehicleType:"",
         tripType:"",
         luggage:""
@@ -170,7 +184,8 @@ const PassengerDashboardIndex = () => {
     luggageImage:[],
     vehicleType:"",
     tripType:"",
-    luggage:""
+    luggage:"",
+    searchValue:""
   }}>
         <PassengerDashboardIndexContext/>
       </FormProvider>

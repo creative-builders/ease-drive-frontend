@@ -3,14 +3,6 @@ import { createContext, useContext, useState } from "react";
 const FormContext = createContext();
 
 export const FormProvider = ({ children, initialInputFields = {} }) => {
-  // const generateInitialState = () => {
-  //   const initialState = {};
-  //   initialInputFields.forEach((inputField) => {
-  //     initialState[inputField] = "";
-  //   });
-  //   return initialState;
-  // };
-
   const [formData, setFormData] = useState(initialInputFields);
   const [inputTouched, setInputTouched] = useState(false);
 
