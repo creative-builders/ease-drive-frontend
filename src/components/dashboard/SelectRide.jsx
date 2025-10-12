@@ -6,15 +6,25 @@ import CustomButton from "../CustomButton"
 import { CustomSelectField } from "../customFormFields/CustomSelectField"
 import { Divider } from "../Divider/Divider"
 import { AddFile } from "../AddFile"
+import { formToJSON } from "axios"
+import { useStepFlowContext } from "../../hooks/useStepFlowFormContext"
+import { InputField } from "../customFormFields/InputField"
+import { formatDate } from "date-fns"
 
 export const SelectRide = ({
-  handleLuggageUpload
+  handleLuggageUpload,
+  handleSubmit,
 }) => {
-  const [selectedLuggage, setSelectedLuggage] = useState("");
 
-  const handleChange = (e) => {
-    setSelectedLuggage(e.target.value);
-  };
+  const {
+      formData,
+      setFormData,
+      handleUpdateFormData,
+  } = useStepFlowContext();
+
+  console.log(formData)
+  const isLuggageAvailable = formData?.luggage === "yes";
+
 
   return (
     <div className="px-[14px] py-4 bg-white basis-full min-h-[210px] rounded-2xl">
@@ -29,6 +39,9 @@ export const SelectRide = ({
           defaultHolder={"Car"}
           label={"Select Ride"}
           options={[ "Keke","Car","Shuttle Bus","Motorcycle","Regular Bus","Truck"]}
+          name={"vehicleType"}
+          value={formData?.vehicleType}
+          onChange={handleUpdateFormData}
           >
             <PoliceCarIcon/>
           </CustomSelectField>
@@ -38,6 +51,9 @@ export const SelectRide = ({
           defaultHolder={"Round Trip"}
           options={["Round Trip","Drop Off","Wail-Billing (Package only)"]}
           label={"Select Trip Type"}
+          name={"tripType"}
+          value={formData?.tripType}
+          onChange={handleUpdateFormData}
           />
         </div>
         <div className="mb-4 lg:mb-5">
@@ -51,19 +67,21 @@ export const SelectRide = ({
               <label className="mb-4 text-neutral-950 flex items-center cursor-pointer" 
                htmlFor="yes-luggage">
                <span className="basis-[41px]">  Yes </span>
-               <input 
+               <InputField 
                type="radio" 
                name="luggage" 
                value={"yes"}
                id="yes-luggage"
-               className="hidden"
-               onChange={handleChange}
-               checked={selectedLuggage === "yes"}
+               checked={formData?.luggage === "yes"}
+               onChange={handleUpdateFormData}
+               containerStyles={"hidden"}
+               inputTextStyles={"hidden"}
                />
+
               <span
                 className={`relative inline-flex items-center justify-center w-5 h-5 rounded-full border-2 transition-all duration-200 border-green-600`}
              >
-             {selectedLuggage === "yes" && (
+              { isLuggageAvailable && (
               <span className="absolute w-2.5 h-2.5 bg-green-600 rounded-full"></span>
               )}
              </span>
@@ -73,19 +91,21 @@ export const SelectRide = ({
               className="flex text-neutral-950 items-center cursor-pointer" 
               htmlFor="no-luggage">
               <span className="basis-[41px]"> No </span>
-               <input 
+               <InputField 
                type="radio" 
                name="luggage" 
                value={"no"}
                id="no-luggage"
-               className="hidden"
-               onChange={handleChange}
-               checked={selectedLuggage === "no"}
-                />
-              <span
+               checked={formData?.luggage === "no"}
+               onChange={handleUpdateFormData}
+               containerStyles={"hidden"}
+               inputTextStyles={"hidden"}
+               />
+
+            <span
                 className={`relative inline-flex items-center justify-center w-5 h-5 rounded-full border-2 transition-all duration-200 border-green-600`}
              >
-             {selectedLuggage === "no" && (
+             {formData?.luggage === "no" && (
               <span className="absolute w-2.5 h-2.5 bg-green-600 rounded-full"></span>
               )}
              </span>
@@ -95,7 +115,7 @@ export const SelectRide = ({
 
           {/* show if luggage there is an available luggage */}
           {
-            selectedLuggage === "yes" && (
+            formData?.luggage === "yes" && (
               <div className="mb-4">
                 <AddFile
                  title={"Upload a photo of the luggage"}

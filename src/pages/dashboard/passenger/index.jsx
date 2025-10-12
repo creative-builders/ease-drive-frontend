@@ -8,26 +8,54 @@ import { SelectRide } from "../../../components/dashboard/SelectRide";
 import { GoBackIcon } from "../../../assets/icons/GoBackIcon";
 import { HamburgerIcon } from "../../../assets/icons/HamburgerIcon";
 import { useGeolocation } from "../../../hooks/useGeolocation";
+import { FormProvider } from "../../../hooks/useStepFlowFormContext";
+import { useMutation } from "@tanstack/react-query";
+import { createRide } from "../../../store/users/api";
 
-const PassengerDashboardIndex = () => {
+const PassengerDashboardIndexContext = () => {
   const [expanded, setExpanded] = useState(false);
   const { 
     coords,  
     locationEnabled, 
-    isOpen, loading, 
+    isOpen, 
+    loading, 
     fetchLocation,
     setLocationEnabled,
     setIsOpen,
-    setIsMenuOpen
+    setIsMenuOpen,
+    locationName
   } = useGeolocation();
 
   const [luggageFiles, setLuggageFiles] = useState([]);
+
+
+
+  const { mutate:submitCreateRide , isLoading } = useMutation(createRide, {
+     onSuccess: (response) => {
+      toast.success(response?.message);
+      queryClient.invalidateQueries(["getUserProfile"]);
+      setFormData(prev => ({
+        ...prev,
+        destination:"",
+        location:"",
+        phoneNumber:"",
+        luggageImage:"",
+        vehicleType:"",
+        tripType:"",
+        luggage:""
+      }))
+     },
+     onError:(error) => {
+      toast.error(error.response?.data?.message || error.message);
+     }
+  })
 
 
   const handleLuggageUpload = (files) => {
     setLuggageFiles(files);
     console.log("Uploaded luggage files:", files);
   };
+
 
 
   const handleSubmit = () => {
@@ -46,6 +74,7 @@ const PassengerDashboardIndex = () => {
     console.log("Ride data ready to submit:", data);
   };
 
+  // console.log(locationName);
 
   return (
     <>
@@ -113,5 +142,15 @@ const PassengerDashboardIndex = () => {
     </>
   );
 };
+
+const PassengerDashboardIndex = () => {
+  const initialInputFields = 
+  ["destination", "location", "phoneNumber","luggageImage","vehicleType","tripType","luggage"];
+  return(
+      <FormProvider initialInputFields={initialInputFields}>
+        <PassengerDashboardIndexContext/>
+      </FormProvider>
+  )
+}
 
 export default PassengerDashboardIndex;

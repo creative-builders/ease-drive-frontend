@@ -12,7 +12,7 @@ import { FormProvider, useStepFlowContext } from "../../hooks/useStepFlowFormCon
 import { createRide } from "../../store/users/api";
 import { useMutation } from "@tanstack/react-query";
 
-  const ChooseDestinationContext = ({ onFocus }) => {
+  export const ChooseDestination = ({ onFocus }) => {
   const [queryValue, setQueryValue] = useState("");
   const [results, setResults] = useState([]);
   const [cache, setCache] = useState({});
@@ -33,28 +33,6 @@ import { useMutation } from "@tanstack/react-query";
     const storedHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
     setHistory(storedHistory);
   }, []);
-
-
-
-  const { mutate:submitCreateRide , isLoading } = useMutation(createRide, {
-     onSuccess: (response) => {
-      toast.success(response?.message);
-      queryClient.invalidateQueries(["getUserProfile"]);
-      setFormData(prev => ({
-        ...prev,
-        destination:"",
-        location:"",
-        phoneNumber:"",
-        luggageImage:"",
-        vehicleType:"",
-        tripType:"",
-        luggage:""
-      }))
-     },
-     onError:(error) => {
-      toast.error(error.response?.data?.message || error.message);
-     }
-  })
 
 
   const saveToHistory = (place) => {
@@ -110,7 +88,8 @@ import { useMutation } from "@tanstack/react-query";
 
 
   const handleChange = (e) => {
-    const value = e.target.value;
+    // const value = e.target.value;
+    // handleUpdateFormData();
     setQueryValue(value);
     setIsTyping(true);
     debouncedSearch(value);
@@ -257,13 +236,10 @@ import { useMutation } from "@tanstack/react-query";
 
 
 
-export const ChooseDestination = () => {
-const initialInputFields = 
-["destination", "location", "phoneNumber","luggageImage","vehicleType","tripType","luggage"]
-
-return(
-  <FormProvider initialInputFields={initialInputFields}>
-    <ChooseDestinationContext/>
-  </FormProvider>
-)
-}
+// export const ChooseDestination = () => {
+// return(
+//   <FormProvider initialInputFields={initialInputFields}>
+//     <ChooseDestinationContext/>
+//   </FormProvider>
+// )
+// }
