@@ -9,7 +9,7 @@ import { GoBackIcon } from "../../../assets/icons/GoBackIcon";
 import { HamburgerIcon } from "../../../assets/icons/HamburgerIcon";
 import { useGeolocation } from "../../../hooks/useGeolocation";
 import { FormProvider, useStepFlowContext } from "../../../hooks/useStepFlowFormContext";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createRide } from "../../../store/users/api";
 import toast from "react-hot-toast";
 
@@ -46,19 +46,34 @@ const PassengerDashboardIndexContext = () => {
     }))
   },[coords,locationName])
 
+  const queryClient = useQueryClient();
+
   const { mutate:submitCreateRide , isLoading } = useMutation(createRide, {
      onSuccess: (response) => {
-      toast.success(response?.message);
-      queryClient.invalidateQueries(["getUserProfile"]);
-      setFormData(prev => ({
-        ...prev,
-        destination:{},
-        location:{},
-        phoneNumber:"",
-        luggageImage:[],
-        vehicleType:"",
-        tripType:"",
-        luggage:""
+     toast.success(response?.message);
+     queryClient.invalidateQueries(["getUserProfile"]);
+     setFormData(prev => ({
+    ...prev,
+    destination:{
+    destinationName:"",
+    coordinates:{
+        lat:"",
+        long:""
+      }
+    },
+    location:{
+    locationName:"",
+    coordinates:{
+        lat:"",
+        long:""
+      }
+    },
+    phoneNumber:"",
+    luggageImage:[],
+    vehicleType:"",
+    tripType:"",
+    luggage:"",
+    searchValue:""
       }))
      },
      onError:(error) => {
@@ -84,13 +99,8 @@ const PassengerDashboardIndexContext = () => {
       toast.error("Upload at least one luggage image !");
       return;
     }
-    // const data = {
-    //   rideType: "Car",
-    //   tripType: "Round Trip",
-    //   hasLuggage: selectedLuggage === "yes",
-    //   luggageFiles,
-    // };
 
+    submitCreateRide(formData)
     console.log("Ride data ready to submit:");
   };
 

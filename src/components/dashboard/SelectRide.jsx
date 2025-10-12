@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { RidesIcon } from "../../assets/icons/dashboard/RidesIcon"
 import { LuggageIcon } from "../../assets/icons/LuggageIcon"
 import { PoliceCarIcon } from "../../assets/icons/PoliceCarIcon"
@@ -17,7 +16,6 @@ export const SelectRide = ({
 
   const {
       formData,
-      setFormData,
       isFormValid,
       handleUpdateFormData,
   } = useStepFlowContext();
