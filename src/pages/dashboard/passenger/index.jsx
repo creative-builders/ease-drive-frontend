@@ -8,7 +8,7 @@ import { SelectRide } from "../../../components/dashboard/SelectRide";
 import { GoBackIcon } from "../../../assets/icons/GoBackIcon";
 import { HamburgerIcon } from "../../../assets/icons/HamburgerIcon";
 import { useGeolocation } from "../../../hooks/useGeolocation";
-import { FormProvider } from "../../../hooks/useStepFlowFormContext";
+import { FormProvider, useStepFlowContext } from "../../../hooks/useStepFlowFormContext";
 import { useMutation } from "@tanstack/react-query";
 import { createRide } from "../../../store/users/api";
 
@@ -26,9 +26,9 @@ const PassengerDashboardIndexContext = () => {
     locationName
   } = useGeolocation();
 
-  const [luggageFiles, setLuggageFiles] = useState([]);
-
-
+  const {
+      setFormData,
+  } = useStepFlowContext();
 
   const { mutate:submitCreateRide , isLoading } = useMutation(createRide, {
      onSuccess: (response) => {
@@ -51,10 +51,15 @@ const PassengerDashboardIndexContext = () => {
   })
 
 
-  const handleLuggageUpload = (files) => {
-    setLuggageFiles(files);
-    console.log("Uploaded luggage files:", files);
+   const handleLuggageUpload = (files) => {
+    if(files){
+      setFormData(prev => ({
+      ...prev,
+      luggageImage: files
+    }))
+    }
   };
+
 
 
 
@@ -144,10 +149,29 @@ const PassengerDashboardIndexContext = () => {
 };
 
 const PassengerDashboardIndex = () => {
-  const initialInputFields = 
-  ["destination", "location", "phoneNumber","luggageImage","vehicleType","tripType","luggage"];
+  
   return(
-      <FormProvider initialInputFields={initialInputFields}>
+   <FormProvider initialInputFields={{
+    destination:{
+    destinationName:"",
+    coordinates:{
+        lat:"",
+        long:""
+      }
+    },
+    location:{
+    locationName:"",
+    coordinates:{
+        lat:"",
+        long:""
+      }
+    },
+    phoneNumber:"",
+    luggageImage:[],
+    vehicleType:"",
+    tripType:"",
+    luggage:""
+  }}>
         <PassengerDashboardIndexContext/>
       </FormProvider>
   )

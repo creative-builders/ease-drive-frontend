@@ -5,11 +5,9 @@ import { PoliceCarIcon } from "../../assets/icons/PoliceCarIcon"
 import CustomButton from "../CustomButton"
 import { CustomSelectField } from "../customFormFields/CustomSelectField"
 import { Divider } from "../Divider/Divider"
-import { AddFile } from "../AddFile"
-import { formToJSON } from "axios"
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext"
 import { InputField } from "../customFormFields/InputField"
-import { formatDate } from "date-fns"
+import { AddFile } from "../AddFile"
 
 export const SelectRide = ({
   handleLuggageUpload,

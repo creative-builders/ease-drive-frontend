@@ -88,8 +88,7 @@ import { useMutation } from "@tanstack/react-query";
 
 
   const handleChange = (e) => {
-    // const value = e.target.value;
-    // handleUpdateFormData();
+    const value = e.target.value;
     setQueryValue(value);
     setIsTyping(true);
     debouncedSearch(value);
@@ -149,7 +148,7 @@ import { useMutation } from "@tanstack/react-query";
         onChange={handleUpdateFormData}
         placeholder={"Enter a Phone Number"}
         name={"phoneNumber"}
-     
+        value={formData?.phoneNumber}
         />
         <InputField
           label="To Where"
@@ -160,7 +159,8 @@ import { useMutation } from "@tanstack/react-query";
           name="search"
           value={queryValue}
           onFocus={onFocus}
-          onChange={handleChange}
+          // onChange={handleChange}
+          onChange={handleUpdateFormData}
         />
       </div>
 
