@@ -112,14 +112,11 @@ export const ChooseDestination = ({
   };
 
   const handleChange = (e) => {
-    // const value = e.target.value;
     setQuery(prev => ({...prev, [e.target.name]:e.target.value}))
-    // setQueryValue(value);
     setIsTyping(true);
     debouncedSearch(query[e.target.name]);
   }
 
-  console.log(query)
   
   return (
     <div className="mb-6 p-1.5 lg:p-[14px] bg-white min-h-[210px] rounded-2xl">

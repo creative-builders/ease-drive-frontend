@@ -1,17 +1,12 @@
 import { createContext, useContext, useState } from "react";
+import { validateFormFields } from "../utils/validateFormFields";
+
+
 
 const FormContext = createContext();
 
-export const FormProvider = ({ children, initialInputFields = [] }) => {
-  const generateInitialState = () => {
-    const initialState = {};
-    initialInputFields.forEach((inputField) => {
-      initialState[inputField] = "";
-    });
-    return initialState;
-  };
-
-  const [formData, setFormData] = useState(generateInitialState);
+export const FormProvider = ({ children, initialInputFields = {} }) => {
+  const [formData, setFormData] = useState(initialInputFields);
   const [inputTouched, setInputTouched] = useState(false);
 
   const handleUpdateFormData = (eOrName, value) => {
@@ -32,9 +27,11 @@ export const FormProvider = ({ children, initialInputFields = [] }) => {
     }
   };
 
+   const isFormValid = validateFormFields(formData)
+
   return (
     <FormContext.Provider
-      value={{ formData, inputTouched, setFormData, handleUpdateFormData }}
+      value={{ formData, inputTouched, setFormData, handleUpdateFormData , isFormValid}}
     >
       {children}
     </FormContext.Provider>

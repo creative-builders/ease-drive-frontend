@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BackgroundMap from "../../../components/dashboard/BackgroundMap";
 import { Modal } from "../../../components/Modal";
 import { LiveGPSIcon } from "../../../assets/icons/LiveGPSIcon";
@@ -8,19 +8,82 @@ import { SelectRide } from "../../../components/dashboard/SelectRide";
 import { GoBackIcon } from "../../../assets/icons/GoBackIcon";
 import { HamburgerIcon } from "../../../assets/icons/HamburgerIcon";
 import { useGeolocation } from "../../../hooks/useGeolocation";
+import { FormProvider, useStepFlowContext } from "../../../hooks/useStepFlowFormContext";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createRide } from "../../../store/users/api";
+import toast from "react-hot-toast";
 
-const PassengerDashboardIndex = () => {
+const PassengerDashboardIndexContext = () => {
   const [expanded, setExpanded] = useState(false);
   const { 
     coords,  
     locationEnabled, 
-    isOpen, loading, 
+    isOpen, 
+    loading, 
     fetchLocation,
     setLocationEnabled,
     setIsOpen,
-    setIsMenuOpen
+    setIsMenuOpen,
+    locationName
   } = useGeolocation();
 
+  const {
+      setFormData,
+      formData
+  } = useStepFlowContext();
+
+
+  useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      location:{
+        locationName,
+        coordinates:{
+          lat:coords?.lat,
+          long:coords?.lon
+        }
+      }
+    }))
+  },[coords,locationName])
+
+  const queryClient = useQueryClient();
+
+  const { mutate:submitCreateRide , isLoading } = useMutation(createRide, {
+     onSuccess: (response) => {
+     toast.success(response?.message);
+     queryClient.invalidateQueries(["getUserProfile"]);
+     setFormData(prev => ({
+    ...prev,
+    destination:{
+    destinationName:"",
+    coordinates:{
+        lat:"",
+        long:""
+      }
+    },
+    phoneNumber:"",
+    luggageImage:[],
+    vehicleType:"",
+    tripType:"",
+    luggages:"",
+    searchValue:""
+      }))
+     },
+     onError:(error) => {
+      toast.error(error.response?.data?.message || error.message);
+     }
+  })
+
+
+  const handleSubmit = () => {
+    if (formData?.luggages === "yes" && formData?.luggageImage.length === 0) {
+      toast.error("Upload at least one luggage image !");
+      return;
+    }
+    
+    submitCreateRide(formData)
+  };
+  
   return (
     <>
       {/* modal prompt */}
@@ -78,11 +141,44 @@ const PassengerDashboardIndex = () => {
            onFocus={() => setExpanded(true)}
            onBlur={() => setExpanded(false)} 
            />
-          <SelectRide/>
+          <SelectRide 
+          handleSubmit={handleSubmit}
+          isLoading={isLoading}
+          />
         </div>
       </div>
     </>
   );
 };
+
+const PassengerDashboardIndex = () => {
+  
+  return(
+   <FormProvider initialInputFields={{
+    destination:{
+    destinationName:"",
+    coordinates:{
+        lat:"",
+        long:""
+      }
+    },
+    location:{
+    locationName:"",
+    coordinates:{
+        lat:"",
+        long:""
+      }
+    },
+    phoneNumber:"",
+    luggageImage:[],
+    vehicleType:"",
+    tripType:"",
+    luggages:"",
+    searchValue:""
+  }}>
+        <PassengerDashboardIndexContext/>
+      </FormProvider>
+  )
+}
 
 export default PassengerDashboardIndex;
