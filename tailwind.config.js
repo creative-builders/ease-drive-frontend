@@ -34,6 +34,7 @@ export default {
         neutral:{
           50:"#F6F6F6",
           400:"#A1A1A1",
+          700:"#525252",
           950:"#262626",
         },
         accent:{

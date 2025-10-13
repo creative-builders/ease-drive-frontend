@@ -1,3 +1,4 @@
+import { form } from "framer-motion/client";
 import { axiosInstancePrivate } from "../auth/general/api";
 
 
@@ -31,3 +32,48 @@ export const updateUserProfile = async({ userId, payload }) => {
 
     return response.data;
 }
+
+
+export const bookRide =  async(credentials) => {
+ const response = await axiosInstancePrivate.post(`/v1/bookings/ride`, credentials);
+ return response.data;
+}
+
+
+//Sample using formData
+// export const createRide = async( credentials) => {
+//   const formData =  new FormData();
+//   // for (const key in credentials){
+//   //   formData.append(key, credentials[key]);
+
+//   // }
+//  const response = await axiosInstancePrivate.post(`/v1/bookings/ride`, formData);
+//  return response.data;
+// }
+
+export const createRide = async (credentials) => {
+  const formData = new FormData();
+
+  for (const key in credentials) {
+    const value = credentials[key];
+
+    // Handle arrays (e.g., multiple files)
+    if (Array.isArray(value)) {
+      value.forEach((item) => {
+        formData.append(`${key}`, item);
+      });
+    } 
+    // Handle nested objects (convert to JSON)
+    else if (typeof value === "object" && value !== null) {
+      formData.append(key, JSON.stringify(value));
+    } 
+    // Handle primitives (strings, numbers, etc.)
+    else {
+      formData.append(key, value);
+    }
+  }
+
+  const response = await axiosInstancePrivate.post(`/v1/bookings/ride`, formData);
+
+  return response.data;
+};
