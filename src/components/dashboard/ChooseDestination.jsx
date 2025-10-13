@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { LiveGPSIcon } from "../../assets/icons/LiveGPSIcon";
 import { InputField } from "../customFormFields/InputField";
 import { locationAtom } from "../atoms/locationAtom";
@@ -8,12 +8,10 @@ import { Divider } from "../Divider/Divider";
 import axios from "axios";
 import { useDebounce } from "../../hooks/useDebounce";
 import toast from "react-hot-toast";
-import { FormProvider, useStepFlowContext } from "../../hooks/useStepFlowFormContext";
-import { createRide } from "../../store/users/api";
-import { useMutation } from "@tanstack/react-query";
+import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
 
-  const ChooseDestinationContext = ({ onFocus }) => {
-  const [queryValue, setQueryValue] = useState("");
+
+  export const ChooseDestination = ({ onFocus }) => {
   const [results, setResults] = useState([]);
   const [cache, setCache] = useState({});
   const [isTyping, setIsTyping] = useState(false);
@@ -33,28 +31,6 @@ import { useMutation } from "@tanstack/react-query";
     const storedHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
     setHistory(storedHistory);
   }, []);
-
-
-
-  const { mutate:submitCreateRide , isLoading } = useMutation(createRide, {
-     onSuccess: (response) => {
-      toast.success(response?.message);
-      queryClient.invalidateQueries(["getUserProfile"]);
-      setFormData(prev => ({
-        ...prev,
-        destination:"",
-        location:"",
-        phoneNumber:"",
-        luggageImage:"",
-        vehicleType:"",
-        tripType:"",
-        luggage:""
-      }))
-     },
-     onError:(error) => {
-      toast.error(error.response?.data?.message || error.message);
-     }
-  })
 
 
   const saveToHistory = (place) => {
@@ -106,18 +82,21 @@ import { useMutation } from "@tanstack/react-query";
     } finally {
       setIsSearching(false);
     }
-  }, 700);
+  }, 500);
 
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setQueryValue(value);
-    setIsTyping(true);
-    debouncedSearch(value);
-  };
 
   const handleSelect = (place) => {
-    setQueryValue(place.display_name);
+     setFormData(prev => ({
+      ...prev,
+      searchValue:place?.display_name,
+      destination:{
+        destinationName: place?.display_name,
+          coordinates:{
+          lat:place?.lat,
+          long:place?.lon
+        }
+      }
+    }))
     setSelectedPlace(place);
     setResults([]);
     saveToHistory(place);
@@ -125,20 +104,29 @@ import { useMutation } from "@tanstack/react-query";
 
 
   const handleHistoryClick = (entry) => {
-    setQueryValue(entry.name);
+    setFormData(prev => ({
+      ...prev,
+      searchValue:entry?.name,
+      destination:{
+        destinationName: entry?.name,
+        coordinates:{
+          lat:entry?.lat,
+          long:entry?.lon
+        }
+      }
+    }))
     setSelectedPlace(entry);
     setResults([]);
   };
 
+  const isPhoneValid = /^[0-9]{10,}$/.test(formData?.phoneNumber);
+
   const shouldShowNoResult =
     !isSearching &&
-    queryValue.trim() !== "" &&
+    formData?.searchValue.trim() !== "" &&
     results.length === 0 &&
     !selectedPlace;
 
-
-  // debugging
-  // console.log(formData)
   return (
     <div className="mb-6 p-1.5 lg:p-[14px] bg-white min-h-[210px] rounded-2xl">
       {/* Header */}
@@ -156,9 +144,9 @@ import { useMutation } from "@tanstack/react-query";
           labelStyles="font-medium text-xs lg:text-xs"
           inputWrapperStyles="h-[40px] lg:h-[49px]"
           inputTextStyles="text-neutral-950"
-          value={liveLocation}
+          value={liveLocation ?? ""}
           onFocus={onFocus}
-          onChange={() => {}}
+          onChange={() => null}
         />
 
        <InputField 
@@ -170,7 +158,8 @@ import { useMutation } from "@tanstack/react-query";
         onChange={handleUpdateFormData}
         placeholder={"Enter a Phone Number"}
         name={"phoneNumber"}
-     
+        value={formData?.phoneNumber}
+        error={!isPhoneValid ? "Please enter a valid phone number" : ""}
         />
         <InputField
           label="To Where"
@@ -178,10 +167,14 @@ import { useMutation } from "@tanstack/react-query";
           inputWrapperStyles="h-[40px] lg:h-[49px]"
           placeholder="Enter your Destination"
           rightIcon={SearchIcon}
-          name="search"
-          value={queryValue}
+          name={"searchValue"}
+          value={formData?.searchValue}
           onFocus={onFocus}
-          onChange={handleChange}
+          onChange={(e) => {
+            handleUpdateFormData(e);
+            setIsTyping(true);
+            debouncedSearch(e.target.value);
+          }}
         />
       </div>
 
@@ -223,7 +216,7 @@ import { useMutation } from "@tanstack/react-query";
           )}
 
           {/*History Section */}
-          {!queryValue && !isSearching && history.length > 0 && (
+          {!formData?.searchValue && !isSearching && history.length > 0 && (
             <div className="border-t border-gray-100">
               <div className="flex justify-between items-center px-3 pt-2">
                 <p className="text-xs text-neutral-950 font-bold uppercase">
@@ -254,16 +247,3 @@ import { useMutation } from "@tanstack/react-query";
     </div>
   );
 };
-
-
-
-export const ChooseDestination = () => {
-const initialInputFields = 
-["destination", "location", "phoneNumber","luggageImage","vehicleType","tripType","luggage"]
-
-return(
-  <FormProvider initialInputFields={initialInputFields}>
-    <ChooseDestinationContext/>
-  </FormProvider>
-)
-}

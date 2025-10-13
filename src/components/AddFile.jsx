@@ -79,8 +79,7 @@ export const AddFile = ({
       <div className="mb-8 relative w-full max-w-md flex flex-col items-center justify-center">
         {previewImages.length > 0 ? (
           <div
-            className={`grid gap-4 ${previewImages.length > 2 ? "grid-cols-2" : "grid-cols-1"
-              } justify-center items-center mr-8`}
+            className={`grid gap-4 grid-cols-2 justify-center items-center mr-8`}
           >
             {previewImages.map((src, index) => (
               <div key={index} className="relative">
