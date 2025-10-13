@@ -4,7 +4,7 @@ import { CustomSelectField } from "../customFormFields/CustomSelectField"
 import { useState, useRef } from 'react';
 
 import CustomButton from '../CustomButton';
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaArrowLeft } from "react-icons/fa";
 import { CarIcon } from '../../assets/icons/CarIcon'
 import { AddFileIcon } from '../../assets/icons/AddFileIcon'
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
@@ -17,7 +17,7 @@ import { Skip } from '../Skip';
 import { Link } from 'react-router-dom';
 
 
-export const StepTwo = ({ nextStep, step, totalSteps }) => {
+export const StepTwo = ({ nextStep,prevStep, step, totalSteps }) => {
 
   const fileInputRef = useRef(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -67,12 +67,19 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
   return (
     <div lassName=" min-h-screen lg:h-full ">
       <div className="flex items-center justify-center  min-h-screen ">
-        <div className=" lg:w-[1116px] lg:h-[1000px] w-[100%] h-[100%] m-auto 
+        <div className=" lg:w-[1116px] lg:h-[1040px] w-[100%] h-[100%] m-auto 
          opacity-100 flex flex-row items-center py-auto">
           <div className="lg:w-[637px] lg:h-[700px] w-[360px]  h-[100%] m-auto 
           flex justify-center items-center ml-0
            p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
             <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
+              <div >
+                <button onClick={prevStep} className='flex items-center px-2 text-xl lg:justify-start cursor-pointer py-4  '>
+                  <FaArrowLeft className='' />
+                </button>
+              </div>
+
+
               <div className="flex flex-row items-center justify-start">
                 <SectionLabel
                   className="text-blue-800 bg-custom-gradient"
@@ -117,7 +124,8 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   // iconSrc="/city-02.svg"
                   // value={formData.city}
                   // onChange={handleCityChange}
-                  options={["Keke", "Car", "Shuttle Bus", "Motorcycle", "Regular Bus", "Truck"]}
+                  options={[{ title: "Keke", icon:"" }, { title: "Car" }, { title: "Shuttle Bus" },
+                  { title: "Motorcycle" }, { title: "Regular Bus" }, { title: "Truck" }]}
                   rightIcon={FaChevronDown}
                   leftIcon={CarIcon}
                 >
@@ -152,7 +160,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   onChange={handleUpdateFormData}
 
                   defaultHolder="Select Service Area"
-                  options={["Odenigwe", "Hill-Top", "Main gate", "Behind Flat", "Odeim gate",]}
+                  options={[{ title: "Odenigwe" }, { title: "Hill-Top" }, { title: "Main gate" }, { title: "Behind Flat" }, { title: "Odeim gate" },]}
                   rightIcon={FaChevronDown}
                   leftIcon={LocationHomeIcon}
                 >

@@ -47,12 +47,31 @@ export const CustomSelectField = ({
               {defaultHolder}
             </option>
           )}
-          {options.map((opt, idx) => (
-            <option key={idx} value={opt.value}>
+          {
+            options.map((opt, idx) => {
+              if (typeof opt === "string") {
+                return (
+                  <option key={idx} value={opt}>
+                    {opt}
+                  </option>
+                );
+              } else {
+                return (
+                  <option key={idx} value={opt.value}>
+                    <div className="flex items-center gap-12">
+                      <p > {opt.title}  </p>
+                       <p> {opt.icon && <span className="ml-18">{opt.icon}</span>
+                       }</p>
+                       
+                    </div>
 
-              {opt}
-            </option>
-          ))}
+
+                  </option>
+                );
+              }
+            })
+          }
+
         </select>
 
         {/* Right Icon (overlays the default arrow) */}
