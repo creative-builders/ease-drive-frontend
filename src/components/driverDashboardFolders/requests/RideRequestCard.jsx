@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { LocationIcon } from "../../../assets/icons/LocationIcon";
-import { getETA } from "../../../helpers/getETA";
+import { getETA } from "../../../utils/getETA"
 import { useGeolocation } from "../../../hooks/useGeolocation";
 
 

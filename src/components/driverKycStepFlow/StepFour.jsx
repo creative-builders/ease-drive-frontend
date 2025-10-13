@@ -35,6 +35,7 @@ export const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
         fileInputRef.current.click();
     };
 
+
     const showError = (msg) => {
         setErrorMessage(msg);
         setShowErrorPopup(true);
@@ -65,6 +66,7 @@ export const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
 
     const handleNext = () => {
         const newErrors = {};
+        console.log(formData)
 
         if (!formData.profileImage || formData.profileImage.length === 0) {
             toast.error("Please select profile image or skip.");

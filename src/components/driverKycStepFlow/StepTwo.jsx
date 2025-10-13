@@ -22,13 +22,20 @@ export const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
 
   const fileInputRef = useRef(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [errors, setErrors] = useState({});
+
   const {
     formData,
     inputTouched,
     setFormData,
     handleUpdateFormData,
   } = useStepFlowContext();
-  const [errors, setErrors] = useState({});
+
+  const handleFileFieldUpdate = (files) => {
+    handleUpdateFormData("vehiclePhotos", files)
+    setSelectedFiles(files)
+  }
+
 
   const handleUploadClick = () => {
     fileInputRef.current.click();
@@ -45,7 +52,7 @@ export const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
 
   const handleNext = () => {
     const newErrors = {};
-
+   
     if (!formData.vehicleType) {
       newErrors.vehicleType = "Please select you vehicle type";
     }
@@ -86,7 +93,7 @@ export const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
                   className="text-blue-800 bg-custom-gradient"
                   title={` Step ${step}  of ${totalSteps}`}
                 />
-            
+
               </div>
             </div>
 
@@ -115,7 +122,7 @@ export const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
                   defaultHolder="Select Vehicle Type"
                   value={formData.vehicleType}
                   onChange={handleUpdateFormData}
-                
+
                   options={["Keke", "Car", "Shuttle Bus", "Motorcycle", "Regular Bus", "Truck"]}
                   rightIcon={FaChevronDown}
                   leftIcon={CarIcon}
@@ -166,7 +173,7 @@ export const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
                     placeholder="e.g 4"
                     onChange={handleUpdateFormData}
                     leftIcon={SeatIcon}
-               
+
                   />
                   <InputField
                     label="Vehicle Color"
@@ -175,7 +182,7 @@ export const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
                     placeholder="e.g Black"
                     onChange={handleUpdateFormData}
                     leftIcon={ColorIcon}
-                  
+
                   />
 
                 </div>
@@ -190,7 +197,7 @@ export const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
                 name="vehiclePhotos"
                 title={"Upload photos of vehicle"}
                 extendedStyles={"text-center"}
-                onFilesChange={handleUpdateFormData}
+                onFilesChange={handleFileFieldUpdate}
               >
                 <p className=" text-xs text-center font-medium text-neutral-700">
                   You can upload up to 4 images (JPG, PNG). <br />

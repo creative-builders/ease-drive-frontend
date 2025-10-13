@@ -76,14 +76,13 @@ export const getPendingBookings = async () => {
 }
 
 export const bidForARid = async ({rideId, amount, message}) => {
-  console.log(typeof(parseInt(amount)))
+
   try {
     const response = await axiosInstancePrivate.post(`/v1/biddings/bids/${rideId}`, {
       bidPrice:parseInt(amount),
-       message: message || "I'm very availble, wait for me to pick you up"
+       message: message || "I'm very available, wait for me to pick you up"
       
     });
-    console.log("API Response:", response.data);
     return response.data
   } catch (error) {
     console.error("API Error:", error.response?.data || error.message);

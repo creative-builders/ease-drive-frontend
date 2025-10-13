@@ -23,9 +23,10 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
     handleUpdateFormData,
   } = useStepFlowContext();
 
-  const handleTest = (files) => {
-    console.log("The images", files)
-      //  return files
+
+  const handleFileFieldUpdate = (files) => {
+      handleUpdateFormData("documentPhotos", files)
+      setSelectedFiles(files)
   }
 
   const [errors, setErrors] = useState({});
@@ -46,7 +47,6 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
 
   const handleNext = () => {
     const newErrors = {};
-    console.log(formData)
 
     if (!formData.meansOfIdentification) {
       newErrors.meansOfIdentification = "Please select means of identification";
@@ -61,6 +61,7 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
     }
 
     setErrors(newErrors);
+    console.log(newErrors)
 
     if (Object.keys(newErrors).length === 0) {
       nextStep(); // Proceed only if no validation error
@@ -142,7 +143,7 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
                 name="documentPhotos"
                 title={"Upload photos of document"}
                 extendedStyles={"text-center"}
-                onFilesChange={handleTest}
+                onFilesChange={handleFileFieldUpdate}
               >
                 <p className=" text-xs text-center font-medium text-neutral-700">
                   You can upload up to 4 images (JPG, PNG). <br />

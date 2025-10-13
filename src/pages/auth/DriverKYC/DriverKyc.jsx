@@ -37,36 +37,9 @@ export const DriverKycPage = () => {
    const nextStep = () => setStep((prev) => prev + 1);
    const prevStep = () => setStep((prev) => prev - 1);
 
-   // Setup mutation using useMutation
-   // const { mutate: submitSignup, isLoading } = useMutation(
-   //    (credentials) => driverSignUpAuth(credentials),
-   //    {
-   //       onSuccess: (response) => {
-   //          console.log("Signup successful:", response);
-   //          // Navigate to success page or next step if needed
-   //       },
-   //       onError: (error) => {
-   //          console.error("Signup failed:", error.response?.data || error.message);
-   //       },
-   //    }
-   // );
-
-   // const handleChange = (e) => {
-   //    const { name, value } = e.target;
-   //    setSignupData((prev) => ({
-   //       ...prev,
-   //       [name]: value
-   //    }));
-   // };
-
-   // const handleSubmit = (e) => {
-   //    e.preventDefault();
-   //    console.log("Submitting API call with:", signupData); // Debugging log
-   //    submitSignup(signupData);
-   // };
-   // console.log(step, totalSteps)
+ 
    return (
-      <FormProvider initialInputFields={Object.keys(initialInputFields)}>
+      <FormProvider initialInputFields={initialInputFields}>
          <div className="h-full w-full">
             <div className="min-h-screen flex flex-col lg:flex-row lg:items-center 
       justify-center bg-[linear-gradient(123deg,_#FDFDFD_3.85%,_#F4EDFA_35.58%,_#F1FBF2_56%,_#EEE1F8_81.24%,_#FDFDFD_101.6%)]">
