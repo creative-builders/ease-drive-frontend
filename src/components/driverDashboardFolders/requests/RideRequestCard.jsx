@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LocationIcon } from "../../../assets/icons/LocationIcon";
 import { getETA } from "../../../helpers/getETA";
 import { useGeolocation } from "../../../hooks/useGeolocation";
+
 
 
 export function RideRequestCard({ request }) {
@@ -18,15 +19,21 @@ export function RideRequestCard({ request }) {
     setIsMenuOpen
   } = useGeolocation();
 
-  console.log(coords, destination.coordinates)
+  // console.log(coords, destination.coordinates)
 
-  // (async () => {
-  //   const eta = await getETA(coords, destination.coordinates);
-  //   setEta(eta)
-  //   console.log("ETA:", eta);
-  // })();
+  useEffect(() => {
+    // only run if coords and destination exist
+    if (!coords || !destination?.coordinates) return;
 
-  // console.log(request)
+    const fetchETA = async () => {
+      const result = await getETA(coords, destination.coordinates);
+      setEta(result);
+      console.log("ETA:", result);
+    };
+
+    fetchETA();
+  }, [coords, destination]);
+
 
   return (
     <div className="self-stretch w-full py-2.5 border-b border-neutral-100 inline-flex justify-start items-center gap-4">
@@ -50,7 +57,11 @@ export function RideRequestCard({ request }) {
                   <LocationIcon fill="#1A7B2C" className={`text-primary-700`} />
                 </div>
                 <div className="justify-start text-black lg:text-xs text-[10px] font-normal font-poppins leading-normal">
-                  {/* {request.eta} away from you */}
+                  {eta ? (
+                    <p>{eta.formattedETA} away from you</p>
+                  ) : (
+                    <p>Calculating ETA...</p>
+                  )}
                 </div>
               </div>
             </div>

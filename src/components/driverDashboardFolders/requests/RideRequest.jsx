@@ -12,6 +12,7 @@ import { Modal } from "../../Modal"
 import CustomButton from "../../CustomButton"
 import { useMutation } from "@tanstack/react-query";
 import { getPendingBookings } from "../../../store/auth/driver/api";
+import { ConfirmBookingLoader } from "../../dashboard/loaders/ConfirmBookingLoader"
 import toast from 'react-hot-toast';
 
 export function RideRequests() {
@@ -22,6 +23,7 @@ export function RideRequests() {
   const [toggleMapList, setToggleMapList] = useState(false)
   const [myLocation, setMyLocation] = useState(null);
   const location = useRecoilValue(locationAtom);
+  const [isFetching, setIsFetching] = useState(true)
 
   const {
     coords,
@@ -51,6 +53,7 @@ export function RideRequests() {
     {
       onSuccess: (data) => {
         setRequests(data);
+        setIsFetching(false)
       },
       onError: (error) => {
         toast.error(error.response?.data?.message || error.message);
@@ -61,10 +64,10 @@ export function RideRequests() {
 
   const handleRefresh = (data) => {
     getPendingRideRequests()
-  
+
   };
 
-  useEffect(() =>{
+  useEffect(() => {
     getPendingRideRequests()
   }, [coords])
 
@@ -98,88 +101,100 @@ export function RideRequests() {
         </div>
 
         <div className="flex lg:w-[100%] w-[80%] lg:justify-start justify-center m-auto items-start lg:mt-0 mt-4 lg:-ml-10 ml lg:h-full gap-4">
-          {showMap && acceptedRequest ? (
+
+          {isFetching ? (
             <>
-              <div className="hidden lg:block">
-                <RequestsMap
-                  driverLocation={myLocation}
-                  passengerLocation={destination}
-                  request={acceptedRequest}
-                  btnFn={handleMapToggle}
 
-                />
-              </div>
-
-              <div className="hidden lg:block">
-                <RideRequestDetails
-                  request={{ ...acceptedRequest, onBack: handleBack }}
-                  onRideAccepted={handleRideAccepted}
-                  btnName="Track Passenger"
-                  btnFn={handleMapToggle}
-
-
-                />
-              </div>
-              {/* Mobile */}
-              <div className="block lg:hidden">
-                {toggleMapList ? (
-                  <RequestsMap
-                    driverLocation={myLocation}
-                    passengerLocation={destination}
-                    request={acceptedRequest}
-                    btnFn={handleMapToggle}
-
-                  />
-                ) : (
-                  <RideRequestDetails
-                    request={{ ...acceptedRequest, onBack: handleBack }}
-                    onRideAccepted={handleRideAccepted}
-                    btnName="Track Passenger"
-                    btnFn={() => handleMapToggle()}
-                  />
-                )}
-              </div>
-
+              <ConfirmBookingLoader variant="list" />
+              <ConfirmBookingLoader variant="card" />
             </>
-          ) : requests.length === 0 ? (
-            <Requests refresh={handleRefresh} />
-          ) : (
-            <>
-              {/* Large screens */}
-              <div className="hidden lg:block">
-                <RideRequestsList
-                  requests={requests}
-                  onSelect={setSelectedRequest}
-                />
-              </div>
+          ) :
+            (
+              <>
+                {showMap && acceptedRequest ? (
+                  <>
+                    <div className="hidden lg:block">
+                      <RequestsMap
+                        driverLocation={myLocation}
+                        passengerLocation={destination}
+                        request={acceptedRequest}
+                        btnFn={handleMapToggle}
 
-              {activeRequest && (
-                <div className="hidden lg:block">
-                  <RideRequestDetails
-                    request={{ ...activeRequest, onBack: handleBack }}
-                    onRideAccepted={handleRideAccepted}
-                    btnFn={() => { }}
-                  />
-                </div>
-              )}
+                      />
+                    </div>
 
-              {/* Mobile */}
-              <div className="block lg:hidden">
-                {!activeRequest ? (
-                  <RideRequestsList
-                    requests={requests}
-                    onSelect={setSelectedRequest}
-                  />
+                    <div className="hidden lg:block">
+                      <RideRequestDetails
+                        request={{ ...acceptedRequest, onBack: handleBack }}
+                        onRideAccepted={handleRideAccepted}
+                        btnName="Track Passenger"
+                        btnFn={handleMapToggle}
+
+
+                      />
+                    </div>
+                    {/* Mobile */}
+                    <div className="block lg:hidden">
+                      {toggleMapList ? (
+                        <RequestsMap
+                          driverLocation={myLocation}
+                          passengerLocation={destination}
+                          request={acceptedRequest}
+                          btnFn={handleMapToggle}
+
+                        />
+                      ) : (
+                        <RideRequestDetails
+                          request={{ ...acceptedRequest, onBack: handleBack }}
+                          onRideAccepted={handleRideAccepted}
+                          btnName="Track Passenger"
+                          btnFn={() => handleMapToggle()}
+                        />
+                      )}
+                    </div>
+
+                  </>
+                ) : requests.length === 0 ? (
+                  <Requests refresh={handleRefresh} />
                 ) : (
-                  <RideRequestDetails
-                    request={{ ...activeRequest, onBack: handleBack }}
-                    onRideAccepted={handleRideAccepted}
-                    btnFn={() => { }}
-                  />
+                  <>
+                    {/* Large screens */}
+                    <div className="hidden lg:block">
+                      <RideRequestsList
+                        requests={requests}
+                        onSelect={setSelectedRequest}
+                      />
+                    </div>
+
+                    {activeRequest && (
+                      <div className="hidden lg:block">
+                        <RideRequestDetails
+                          request={{ ...activeRequest, onBack: handleBack }}
+                          onRideAccepted={handleRideAccepted}
+                          btnFn={() => { }}
+                        />
+                      </div>
+                    )}
+
+                    {/* Mobile */}
+                    <div className="block lg:hidden">
+                      {!activeRequest ? (
+                        <RideRequestsList
+                          requests={requests}
+                          onSelect={setSelectedRequest}
+                        />
+                      ) : (
+                        <RideRequestDetails
+                          request={{ ...activeRequest, onBack: handleBack }}
+                          onRideAccepted={handleRideAccepted}
+                          btnFn={() => { }}
+                        />
+                      )}
+                    </div>
+                  </>
                 )}
-              </div>
-            </>
-          )}
+              </>
+            )}
         </div>
       </div>
       {isOpen && (

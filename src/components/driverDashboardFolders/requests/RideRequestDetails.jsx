@@ -10,48 +10,64 @@ import { NairaIcon } from "../../../assets/icons/NairaIcon";
 // import { Modal } from "../Modal"
 import { SuccessIcon } from "../../../assets/icons/SuccesIcon";
 import { FailureIcon } from "../../../assets/icons/FailureIcon";
-
-
+import { bidForARid } from "../../../store/auth/driver/api";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast"
 export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) => {
     const {
-       
+
         booker,
         profileImage,
         onBack,
         destination,
         location,
         tripType,
-        date,
-        pickup,
         luggages,
-        luggageImages,
-        time,
+        luggageImage,
+        createdAt,
+        _id
     } = request;
 
-    console.log(request)
+    const rideDate = new Date(createdAt);
+    // console.log(request)
 
     const [modalType, setModalType] = useState(null); // "image" | "amount" | "loading"
-    const [selectedIndex, setSelectedIndex] = useState(null);
+    const [selectedIndex, setSelectedIndex] = useState(0);
     const [amount, setAmount] = useState("");
     const [isAmountEmpty, setIsAmountEmpty] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
     const [progress, setProgress] = useState(0);
 
-    // console.log(btnName)
-
+   const { mutate: submitRideBid, isLoading } = useMutation(
+      bidForARid,
+        {
+            onSuccess: (data) => {
+                // console.log("KYC data updated successfully:", data);
+                toast.success("Bid Successful!")
+                setModalType("loading");
+                
+            },
+            onError: (error) => {
+                 setModalType("failed")
+                toast.error(error.response?.data?.message || error.message);
+            }
+        }
+    );
 
     const handlePrev = () => {
-        if (!luggageImages || luggageImages.length === 0) return;
-        setSelectedIndex((prev) => (prev === 0 ? luggageImages.length - 1 : prev - 1));
+        if (!luggageImage || luggageImage.length === 0) return;
+        setSelectedIndex((prev) => (prev === 0 ? luggageImage.length - 1 : prev - 1));
     };
 
     const handleNext = () => {
-        if (!luggageImages || luggageImages.length === 0) return;
+        if (!luggageImage || luggageImage.length === 0) return;
         setSelectedIndex((prev) =>
-            prev === luggageImages.length - 1 ? 0 : prev + 1
+            prev === luggageImage.length - 1 ? 0 : prev + 1
         );
     };
+
+
 
     const handleAcceptClick = () => {
         if (btnName == "Track Passenger") {
@@ -68,15 +84,16 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
             setIsAmountEmpty(true);
             return;
         }
-
         // close amount modal, open loading modal
-        setModalType("loading");
+
+        // setModalType("loading");
+        submitRideBid({rideId:_id, amount})
 
         // simulate API call delay (3s)
-        setTimeout(() => {
+        // setTimeout(() => {
 
-            setModalType("success");
-        }, 3000);
+        //     setModalType("success");
+        // }, 3000);
 
         // setTimeout(() => {
         //     setModalType("failed")
@@ -97,7 +114,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                 }
                 return old + 1; // increase 1% every tick
             });
-        }, 100); // speed (100ms per step)
+        }, 400); // speed (100ms per step)
 
         return () => clearInterval(interval);
     }, []);
@@ -140,29 +157,29 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold font-poppins">Date</div>
+                        <div className="font-semibold font-poppins">Date:</div>
                         <div>
-                            {time}, {date}
+                            {rideDate.toLocaleString()}
                         </div>
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold font-poppins">Pick Up location</div>
+                        <div className="font-semibold font-poppins">Pick Up location:</div>
                         <div>{location.locationName}</div>
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold font-poppins">Destination</div>
-                        <div>{destination.destinationName}</div>
+                        <div className="font-semibold font-poppins">Destination: </div>
+                        <div className="pl-2 text-right">{" " + destination.destinationName}</div>
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold font-poppins">Trip Type</div>
+                        <div className="font-semibold font-poppins">Trip Type:</div>
                         <div>{tripType}</div>
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold font-poppins">Luggage</div>
+                        <div className="font-semibold font-poppins">Luggages:</div>
                         <div>{luggages}</div>
                     </div>
 
@@ -172,13 +189,13 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                             Click Single Image to view
                         </div>
                         <div className="inline-flex gap-2 flex-wrap w-full justify-center font-poppins">
-                            {luggageImages && luggageImages.length > 0 ? (
-                                luggageImages.map((img, index) => (
+                            {luggageImage && luggageImage.length > 0 ? (
+                                luggageImage.map((img, index) => (
                                     <div key={index} className="relative w-[100px] flex-wrap  flex justify-center">
                                         <img
                                             key={index}
                                             className="w-24 h-24 rounded  cursor-pointer"
-                                            src={img}
+                                            src={img.url}
                                             alt={`Luggage ${index + 1}`}
                                             onClick={() => {
                                                 setSelectedIndex(index);
@@ -263,11 +280,14 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         </button>
 
                         {/* Image */}
-                        <img
-                            src={luggage[selectedIndex]}
-                            alt={`Luggage ${selectedIndex + 1}`}
-                            className="lg:w-[80%] w-[85%] max-w-[533px] h-auto object-contain rounded-lg"
-                        />
+                        <div className="lg:w-[400px] w-[80%] max-w-[420px] h-auto object-contain rounded-lg">
+                            <img
+                                src={luggageImage[selectedIndex].url}
+                                alt={`Luggage ${selectedIndex + 1}`}
+                                className="rounded-lg"
+                            />
+                        </div>
+
 
                         {/* Next Button */}
                         <button

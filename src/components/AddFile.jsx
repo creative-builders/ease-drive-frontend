@@ -10,7 +10,7 @@ export const AddFile = ({
   maxFiles = 4,
   maxFileSize = 10 * 1024 * 1024, // 10MB
   allowedTypes = ["image/jpeg", "image/png"],
-  onFilesChange = () => {},
+  onFilesChange = () => { },
   extendedStyles = "",
   name,
   children,
@@ -40,11 +40,11 @@ export const AddFile = ({
       toast.error(`You can only upload up to ${maxFiles} files.`);
       return;
     }
-
     const newPreviews = validFiles.map((file) => URL.createObjectURL(file));
 
     setSelectedFiles(allFiles);
-    setPreviewImages(allFiles.map((file) => URL.createObjectURL(file)));
+    setPreviewImages((prev) => [...prev, ...newPreviews]);
+    onFilesChange(allFiles);
   };
 
   const handleClickUpload = () => fileUploadRef.current?.click();
@@ -79,9 +79,8 @@ export const AddFile = ({
       <div className="mb-8 relative w-full max-w-md flex flex-col items-center justify-center">
         {previewImages.length > 0 ? (
           <div
-            className={`grid gap-4 ${
-              previewImages.length > 2 ? "grid-cols-2" : "grid-cols-1"
-            } justify-center items-center mr-8`}
+            className={`grid gap-4 ${previewImages.length > 2 ? "grid-cols-2" : "grid-cols-1"
+              } justify-center items-center mr-8`}
           >
             {previewImages.map((src, index) => (
               <div key={index} className="relative">
