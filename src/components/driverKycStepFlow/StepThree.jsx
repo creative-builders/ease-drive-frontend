@@ -5,14 +5,15 @@ import { useState, useRef } from 'react';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import { InputField } from '../customFormFields/InputField';
 import CustomButton from '../CustomButton';
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaArrowLeft } from "react-icons/fa";
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
 import { CreditCardIcon } from '../../assets/icons/CreditCardIcon';
 import { BankHouseIcon } from '../../assets/icons/BankHouseIcon';
+import {nigeriaBanks} from "../../../commonData"
 import { Skip } from '../Skip'
 import { Link } from 'react-router-dom';
 
-export const StepThree = ({ nextStep, step, totalSteps }) => {
+export const StepThree = ({ nextStep, prevStep, step, totalSteps }) => {
 
    const fileInputRef = useRef(null);
    const [checked, setChecked] = useState(false);
@@ -68,6 +69,13 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                   flex justify-center items-center 
                 p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
                   <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
+
+                     <div >
+                        <button onClick={prevStep} className='flex items-center px-2 text-xl lg:justify-start cursor-pointer py-4  '>
+                           <FaArrowLeft className='' />
+                        </button>
+                     </div>
+
                      <div className="flex flex-row items-center justify-start">
                         <SectionLabel
                            className="text-blue-800 bg-custom-gradient"
@@ -109,23 +117,7 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                            value={formData.bankName}
                            onChange={handleUpdateFormData}
                            defaultHolder="Select Bank Name"
-                           options={[
-                              "Access Bank",
-                              "Zenith Bank",
-                              "Guaranty Trust Bank (GTBank)",
-                              "First Bank of Nigeria",
-                              "United Bank for Africa (UBA)",
-                              "Fidelity Bank",
-                              "Union Bank",
-                              "Stanbic IBTC Bank",
-                              "Polaris Bank",
-                              "Sterling Bank",
-                              "Wema Bank",
-                              "Ecobank Nigeria",
-                              "Heritage Bank",
-                              "Keystone Bank",
-                              "Jaiz Bank"
-                           ]}
+                           options={nigeriaBanks}
                            // options={[
                            //    { value: "us", label: "United States", icon: BankHouseIcon },
                            //    { value: "ng", label: "Nigeria", icon:CreditCardIcon },

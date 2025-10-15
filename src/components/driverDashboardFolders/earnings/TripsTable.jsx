@@ -66,7 +66,7 @@ function filterTripsByRange(trips, range) {
   if (!trips || !Array.isArray(trips)) return [];
   
   const today = new Date();
-  today.setHours(0, 0, 0, 0); // Normalize to start of day
+  today.setHours(0, 0, 0, 0);
 
   return trips.filter((trip) => {
     if (!trip.date) return false;
@@ -74,7 +74,7 @@ function filterTripsByRange(trips, range) {
     const tripDate = new Date(trip.date);
     if (isNaN(tripDate.getTime())) return false;
     
-    tripDate.setHours(0, 0, 0, 0); // Normalize to start of day
+    tripDate.setHours(0, 0, 0, 0);
 
     if (range === "Recent") return true;
     

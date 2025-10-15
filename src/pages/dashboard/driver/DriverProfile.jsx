@@ -13,6 +13,7 @@ import { PlateNumberIcon } from "../../../assets/icons/PlateNumberIcon.jsx";
 import { CustomerService } from "../../../assets/icons/CustomerService.jsx";
 import { DelectIcon } from "../../../assets/icons/DelectIcon.jsx";
 import { PhoneIcon } from "../../../assets/icons/PhoneIcon.jsx";
+import { AvatarIcon } from "../../../assets/icons/AvatarIcon.jsx";
 import LogoutButton from "../../auth/logout/LogoutButton.jsx";
 import { userAtom } from "../../../components/atoms/userAtom.jsx";
 import { locationAtom } from "../../../components/atoms/locationAtom.jsx";
@@ -27,8 +28,6 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
   const userData = useRecoilValue(userAtom);
  
 
-  // console.log(userData)
-
   const [isOpen, setIsOpen] = useState(false);
   const [driverData, setDriverData] = useState({})
 
@@ -36,7 +35,6 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
 
 
   const handleDelete = () => {
-    // console.log("Account deleted");
     setIsOpen(false);
   };
 

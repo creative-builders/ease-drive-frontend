@@ -1,6 +1,11 @@
-    
+import { useState } from "react";
+import { BitcoinBag } from "../../../assets/icons/BitcoinBag";
+import { Wallet } from "../../../assets/icons/Wallet";
+import StatsCards from "../../../components/DashboardForDrivers/StatsCards";
 import { data } from "../../../components/driverDashboardFolders/earnings/tripData";
+import { TripDetailsModal } from "../../../components/driverDashboardFolders/earnings/TripDetailsModal";
 import { TripsPage } from "../../../components/driverDashboardFolders/earnings/TripsTable";
+import { Modal } from "../../../components/Modal";
 
 
 export const Trips = () => {
@@ -23,21 +28,133 @@ export const Trips = () => {
       date: "28 August 2024",
       pickup: "Town",
       dropoff: "odenigwe",
-      status: "Paid",
+      status: "Pending",
       earnings: "₦4,000",
     },
     {
       date: "3 Septmeber 2024",
-      pickup: "city",
+      pickup: "City",
       dropoff: "Odim street",
       status: "Paid",
       earnings: "₦6,000",
     },
   ];
 
+  // mockTrips.js
+
+  const mockTrip = {
+    id: "trip-123",
+    pickup: "Bello Hotel",
+    dropoff: "SUB",
+    droppedOff: 3,
+    cancelled: 1,
+    totalEarnings: 5200,
+    status: "Completed",
+    passengers: [
+      {
+        id: "p1",
+        name: "John Ndubuisi Chukwuemeka",
+        profileImage: "https://randomuser.me/api/portraits/men/32.jpg",
+        tripType: "Drop-off",
+        status: "Dropped off",
+        fare: "₦1,500",
+        location: "20 mins away from you",
+        time: "08:15 AM",
+        date: "Jun 24, 2024",
+        rating: 4.2,
+      },
+      // {
+      //   id: "p2",
+      //   name: "Jerome Bell",
+      //   profileImage: "https://randomuser.me/api/portraits/men/22.jpg",
+      //   tripType: "Drop-off",
+      //   status: "Cancelled",
+      //   fare: "₦2,500",
+      //   location: "20 mins away from you",
+      //   time: "08:15 AM",
+      //   date: "Jun 24, 2024",
+      //   rating: null,
+      // },
+      // {
+      //   id: "p3",
+      //   name: "Jerome Bell",
+      //   profileImage: "https://randomuser.me/api/portraits/men/22.jpg",
+      //   tripType: "Drop-off",
+      //   status: "Dropped off",
+      //   fare: "₦2,500",
+      //   location: "20 mins away from you",
+      //   time: "08:15 AM",
+      //   date: "Jun 24, 2024",
+      //   rating: null,
+      // },
+      // {
+      //   id: "p4",
+      //   name: "John Ndubuisi Chukwuemeka",
+      //   profileImage: "https://randomuser.me/api/portraits/men/32.jpg",
+      //   tripType: "Round-Trip",
+      //   status: "Dropped off",
+      //   fare: "₦3,700",
+      //   location: "20 mins away from you",
+      //   time: "08:15 AM",
+      //   date: "Jun 24, 2024",
+      //   rating: 3.5,
+      // },
+    ],
+  };
+
+
+
+  const currentPassengers = 4;
+  const totalPassengers = 102;
+
+  const [selectedTrip, setSelectedTrip] = useState(null);
+
+
+
   return (
-    <div>
-      <TripsPage tripData={data} />
+    <>
+    {
+      !!selectedTrip && (
+        <Modal 
+        closeModal={() => setSelectedTrip(null)} 
+        // title="Trip Details" 
+        position="bottom"
+      >
+        <TripDetailsModal
+          trip={selectedTrip ? { ...mockTrip, ...selectedTrip } : null}
+        />
+      </Modal>
+      )
+    }
+       <div className="flex px-3 py-0 flex-col items-start gap-4">
+      <header className="flex flex-col md:flex-row w-full items-start md:items-center justify-between">
+        <h2 className="capitalize text-4xl not-italic font-semibold leading-normal">trips details</h2>
+        <p className="not-italic text-base font-medium leading-6">Track your earnings and trip performance</p>
+      </header>
+      <div className="flex gap-2 w-full items-center">
+        <StatsCards 
+          className="border border-gray-300 w-40 md:w-64 gap-2" 
+          title="Current Passengers" 
+          value={currentPassengers} 
+          image={<BitcoinBag className="h-4 w-4 aspect-square flex-shrink-0" />} 
+        />
+        <StatsCards 
+          className="border border-gray-300 w-40 md:w-64 gap-2" 
+          title="Total Passengers" 
+          value={totalPassengers} 
+          image={<Wallet className="h-4 w-4 aspect-square flex-shrink-0" />} 
+        />
+      </div>
+
+       <TripsPage className="w-full" tripData={tripData} onView={setSelectedTrip} />
+      
+        {/* <TripDetailsModal
+          isOpen={!!selectedTrip}
+          trip={selectedTrip ? { ...mockTrip, ...selectedTrip } : null}  
+          onClose={() => setSelectedTrip(null)}
+        />  */}
+
     </div>
+    </>
   );
 };
