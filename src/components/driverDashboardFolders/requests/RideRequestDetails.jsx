@@ -24,13 +24,13 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
         tripType,
         luggages,
         luggageImage,
+        scheduledTrip,
         createdAt,
         _id
     } = request;
 
     const rideDate = new Date(createdAt);
-    // console.log(request)
-
+  
     const [modalType, setModalType] = useState(null); // "image" | "amount" | "loading"
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [amount, setAmount] = useState("");
@@ -39,17 +39,17 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
     const [progress, setProgress] = useState(0);
 
-   const { mutate: submitRideBid, isLoading } = useMutation(
-      bidForARid,
+    const { mutate: submitRideBid, isLoading } = useMutation(
+        bidForARid,
         {
             onSuccess: (data) => {
-                // console.log("KYC data updated successfully:", data);
-                toast.success("Bid Successful!")
+
+                toast.success(data.message)
                 setModalType("loading");
-                
+
             },
             onError: (error) => {
-                 setModalType("failed")
+                setModalType("failed")
                 toast.error(error.response?.data?.message || error.message);
             }
         }
@@ -87,13 +87,13 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
         // close amount modal, open loading modal
 
         // setModalType("loading");
-        submitRideBid({rideId:_id, amount})
+        submitRideBid({ rideId: _id, amount })
 
-        // simulate API call delay (3s)
+        // // simulate API call delay (3s)
         // setTimeout(() => {
 
         //     setModalType("success");
-        // }, 3000);
+        // }, 5000);
 
         // setTimeout(() => {
         //     setModalType("failed")
@@ -121,7 +121,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
 
     return (
-        <div className="self-stretch px-5 py-3 pb-4 bg-white rounded-lg
+        <div className="self-stretch px-5 py-3 pb-4 bg-white rounded-lg 
       inline-flex flex-col lg:w-[460px] w-[380px]   lg:justify-start justify-center lg:items-start gap-2 relative">
             {/* Header */}
             <div className="self-stretch h-11 inline-flex lg:justify-start lg:items-center">
@@ -134,7 +134,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         />
                     </div>
                 </div>
-                <div className="w-96 text-center text-black text-lg font-semibold font-poppins">
+                <div className="w-80 text-center text-black text-lg font-semibold font-poppins">
                     Passenger Details
                 </div>
             </div>
@@ -142,7 +142,14 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
             {/* Passenger Info */}
             <div className="self-stretch flex flex-col justify-start items-center gap-12">
                 <div className="flex flex-col items-center gap-4">
-                    <img className="w-24 h-24 rounded-full" src={booker.profileImage} alt="Passenger" />
+                    <div className="lg:w-24 lg:h-24 w-24 h-24 rounded-full overflow-hidden">
+                        <img
+                            className="w-full h-full object-cover"
+                            src={booker.profileImage}
+                            alt={booker.name}
+                        />
+                    </div>
+                    {/* <img className="w-24 h-24 rounded-full" src={booker.profileImage} alt="Passenger" /> */}
                     <div className="text-black text-base font-semibold font-poppins">
                         {booker.name}
                     </div>
@@ -227,23 +234,31 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
 
                 {/* Schedule Details */}
-                <div className="self-stretch flex flex-col gap-2">
-                    <div className="h-14 px-4 bg-primary-50 rounded-2xl flex items-center">
-                        <div className="text-Primary-950 text-base font-medium font-poppins">
-                            Schedule Details
-                        </div>
-                    </div>
-                    <div className="flex gap-4 my-4">
-                        <div className="flex items-center gap-1">
-                            <ClockIcon className="-mt-[1px]" />
-                            <div className="text-sm lg:text-sm font-poppins">08:15 AM</div>
-                        </div>
-                        <div className="flex items-center gap-1">
-                            <DateIcon className="-mt-[2px]" />
-                            <div className="lg:text-sm text-sm font-poppins">Date: Jun 24, 2024</div>
-                        </div>
-                    </div>
-                </div>
+                {
+                    scheduledTrip && scheduledTrip.scheduled ?
+                        (
+                            <div className="self-stretch flex flex-col gap-2 pt-4">
+                                <div className="h-14 px-4 bg-primary-50 rounded-2xl flex items-center">
+                                    <div className="text-Primary-950 text-base font-medium font-poppins">
+                                        Schedule Details
+                                    </div>
+                                </div>
+                                <div className="flex gap-4 my-4">
+                                    <div className="flex items-center gap-1">
+                                        <ClockIcon className="-mt-[1px]" />
+                                        <div className="text-sm lg:text-sm font-poppins">{scheduledTrip.scheduleTime}</div>
+                                    </div>
+                                    <div className="flex items-center gap-1">
+                                        <DateIcon className="-mt-[2px]" />
+                                        <div className="lg:text-sm text-sm font-poppins">{scheduledTrip.scheduleDate}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                        :
+                        null
+                }
+
             </div>
 
             {/* Accept Button */}
@@ -342,6 +357,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         </div>
 
                         <CustomButton
+                            isLoading={isLoading}
                             name="Set Price"
                             disabled={!amount.trim()}
                             btnClick={handleAmountSubmit}

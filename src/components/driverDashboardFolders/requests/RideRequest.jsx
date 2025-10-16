@@ -48,6 +48,8 @@ export function RideRequests() {
   const activeRequest = acceptedRequest || selectedRequest;
 
 
+  const localLocation = localStorage.getItem("user_location")
+
   const { mutate: getPendingRideRequests, isLoading } = useMutation(
     getPendingBookings,
     {
@@ -88,23 +90,26 @@ export function RideRequests() {
   return (
     <div className="flex lg:w-full w-[100%] lg:justify-start justify-center">
       <div>
-        <div className="lg:w-[990px] w-[351px] flex lg:flex-row flex-col gap-1 lg:justify-between justify-center m-auto lg:-ml-10 items-start py-2">
+        <div className="lg:w-[990px] w-[351px] flex lg:flex-row flex-col gap-1 lg:justify-between 
+        justify-center m-auto lg:-ml-10 items-start py-2">
           <h2 className="lg:text-2xl font-semibold text-lg font-poppins">
             Customers Ride Request
           </h2>
           <div className="lg:text-base text-base inline-flex items-center font-poppins">
-            <div className="bg-primary-50 text-green-900 lg:w-[38px] lg:h-[36px] w-[28px] h-[26px] rounded-full px-2 py-1 mr-2 justify-center inline-flex items-center">
+            <div className="bg-primary-50 text-green-900 lg:w-[38px] lg:h-[36px] w-[28px] 
+            h-[26px] rounded-full px-2 py-1 mr-2 justify-center inline-flex items-center">
               <LiveGPSIcon className="inline font-poppins" />
             </div>
-            <p>{location ? location : "Fetching location..."}</p>
+            <p>{localLocation}</p>
+            {/* <p>{location ? location : "Fetching location..."}</p> */}
           </div>
         </div>
 
-        <div className="flex lg:w-[100%] w-[80%] lg:justify-start justify-center m-auto items-start lg:mt-0 mt-4 lg:-ml-10 ml lg:h-full gap-4">
+        <div className="flex lg:w-[100%] w-[80%] lg:justify-start justify-center m-auto 
+        items-start lg:mt-0 mt-4 lg:-ml-10 ml lg:h-full gap-4">
 
           {isFetching ? (
             <>
-
               <ConfirmBookingLoader variant="list" />
               <ConfirmBookingLoader variant="card" />
             </>
@@ -123,7 +128,7 @@ export function RideRequests() {
                       />
                     </div>
 
-                    <div className="hidden lg:block">
+                    <div className="hidden  lg:block">
                       <RideRequestDetails
                         request={{ ...acceptedRequest, onBack: handleBack }}
                         onRideAccepted={handleRideAccepted}

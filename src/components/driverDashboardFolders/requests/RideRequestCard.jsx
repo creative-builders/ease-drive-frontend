@@ -19,30 +19,35 @@ export function RideRequestCard({ request }) {
     setIsMenuOpen
   } = useGeolocation();
 
-  // console.log(coords, destination.coordinates)
 
   useEffect(() => {
-    // only run if coords and destination exist
+    
     if (!coords || !destination?.coordinates) return;
 
     const fetchETA = async () => {
       const result = await getETA(coords, destination.coordinates);
       setEta(result);
-      console.log("ETA:", result);
+      // console.log("ETA:", result);
     };
 
     fetchETA();
   }, [coords, destination]);
 
 
+
   return (
     <div className="self-stretch w-full py-2.5 border-b border-neutral-100 inline-flex justify-start items-center gap-4">
       <div className="flex justify-start lg:items-center items-start lg:gap-2 gap-2 font-poppins">
-        <img
-          className="lg:w-[80px] lg:h-[80px] w-[60px] h-[60px] object-fit relative rounded-[50px] font-poppins"
-          src={booker.profileImage}
-          alt={booker.name}
-        />
+
+        <div className="lg:w-[80px] lg:h-[80px] w-[60px] h-[60px] rounded-full overflow-hidden">
+          <img
+            className="w-full h-full object-cover"
+            src={booker.profileImage}
+            alt={booker.name}
+          />
+        </div>
+
+
         <div className="inline-flex flex-col justify-start items-start gap-2">
           <div className="inline-flex justify-start items-center gap-4">
             <div className="justify-start text-black lg:text-base text-sm font-semibold font-poppins">
@@ -57,7 +62,8 @@ export function RideRequestCard({ request }) {
                   <LocationIcon fill="#1A7B2C" className={`text-primary-700`} />
                 </div>
                 <div className="justify-start text-black lg:text-xs text-[10px] font-normal font-poppins leading-normal">
-                  {eta ? (
+                  {eta && eta.formattedETA ? (
+                    
                     <p>{eta.formattedETA} away from you</p>
                   ) : (
                     <p>Calculating ETA...</p>

@@ -67,21 +67,28 @@ export const driverKYCUpdate = async ({ credentials, userId, whois }) => {
 export const getPendingBookings = async () => {
   try {
     const response = await axiosInstancePrivate.get(`/v1/bookings/ride`);
-    // console.log("API Response:", response.data.data.allBookings);
-    return response.data.data.allBookings;
+
+    const allBookings = response.data.data.allBookings || [];
+
+    const pendingBookings = allBookings.filter(
+      (booking) => booking?.status?.toLowerCase() === "pending"
+    );
+
+    return pendingBookings;
+
   } catch (error) {
     console.error("API Error:", error.response?.data || error.message);
     throw error;
   }
 }
 
-export const bidForARid = async ({rideId, amount, message}) => {
+export const bidForARid = async ({ rideId, amount, message }) => {
 
   try {
     const response = await axiosInstancePrivate.post(`/v1/biddings/bids/${rideId}`, {
-      bidPrice:parseInt(amount),
-       message: message || "I'm very available, wait for me to pick you up"
-      
+      bidPrice: parseInt(amount),
+      message: message || "I'm very available, wait for me to pick you up"
+
     });
     return response.data
   } catch (error) {
