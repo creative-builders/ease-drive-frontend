@@ -225,7 +225,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                 {
                     amount && amount !== "" && (<div className="flex w-full justify-between ">
                         <div className="font-semibold font-poppins justify-start">Price: </div>
-                        <div className="justify-end bg-red-50 rounded-xl px-4 text-red-500 font-semibold">${amount}</div>
+                        <div className="justify-end bg-red-50 rounded-xl px-4 text-red-500 font-semibold">₦{amount}</div>
                     </div>
                     )
                 }
