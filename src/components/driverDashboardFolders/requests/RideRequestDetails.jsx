@@ -10,43 +10,64 @@ import { NairaIcon } from "../../../assets/icons/NairaIcon";
 // import { Modal } from "../Modal"
 import { SuccessIcon } from "../../../assets/icons/SuccesIcon";
 import { FailureIcon } from "../../../assets/icons/FailureIcon";
-
-
+import { bidForARid } from "../../../store/auth/driver/api";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast"
 export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) => {
     const {
-        name,
-        avatar,
+
+        booker,
+        profileImage,
         onBack,
         destination,
-        rideType,
-        date,
-        pickup,
-        luggage,
-        time,
+        location,
+        tripType,
+        luggages,
+        luggageImage,
+        scheduledTrip,
+        createdAt,
+        _id
     } = request;
 
+    const rideDate = new Date(createdAt);
+  
     const [modalType, setModalType] = useState(null); // "image" | "amount" | "loading"
-    const [selectedIndex, setSelectedIndex] = useState(null);
+    const [selectedIndex, setSelectedIndex] = useState(0);
     const [amount, setAmount] = useState("");
     const [isAmountEmpty, setIsAmountEmpty] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
     const [progress, setProgress] = useState(0);
 
-    // console.log(btnName)
+    const { mutate: submitRideBid, isLoading } = useMutation(
+        bidForARid,
+        {
+            onSuccess: (data) => {
 
+                toast.success(data.message)
+                setModalType("loading");
+
+            },
+            onError: (error) => {
+                setModalType("failed")
+                toast.error(error.response?.data?.message || error.message);
+            }
+        }
+    );
 
     const handlePrev = () => {
-        if (!luggage || luggage.length === 0) return;
-        setSelectedIndex((prev) => (prev === 0 ? luggage.length - 1 : prev - 1));
+        if (!luggageImage || luggageImage.length === 0) return;
+        setSelectedIndex((prev) => (prev === 0 ? luggageImage.length - 1 : prev - 1));
     };
 
     const handleNext = () => {
-        if (!luggage || luggage.length === 0) return;
+        if (!luggageImage || luggageImage.length === 0) return;
         setSelectedIndex((prev) =>
-            prev === luggage.length - 1 ? 0 : prev + 1
+            prev === luggageImage.length - 1 ? 0 : prev + 1
         );
     };
+
+
 
     const handleAcceptClick = () => {
         if (btnName == "Track Passenger") {
@@ -63,15 +84,16 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
             setIsAmountEmpty(true);
             return;
         }
-
         // close amount modal, open loading modal
-        setModalType("loading");
 
-        // simulate API call delay (3s)
-        setTimeout(() => {
+        // setModalType("loading");
+        submitRideBid({ rideId: _id, amount })
 
-            setModalType("success");
-        }, 3000);
+        // // simulate API call delay (3s)
+        // setTimeout(() => {
+
+        //     setModalType("success");
+        // }, 5000);
 
         // setTimeout(() => {
         //     setModalType("failed")
@@ -92,14 +114,14 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                 }
                 return old + 1; // increase 1% every tick
             });
-        }, 100); // speed (100ms per step)
+        }, 400); // speed (100ms per step)
 
         return () => clearInterval(interval);
     }, []);
 
 
     return (
-        <div className="self-stretch px-5 py-3 pb-4 bg-white rounded-lg
+        <div className="self-stretch px-5 py-3 pb-4 bg-white rounded-lg 
       inline-flex flex-col lg:w-[460px] w-[380px]   lg:justify-start justify-center lg:items-start gap-2 relative">
             {/* Header */}
             <div className="self-stretch h-11 inline-flex lg:justify-start lg:items-center">
@@ -112,7 +134,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         />
                     </div>
                 </div>
-                <div className="w-96 text-center text-black text-lg font-semibold font-poppins">
+                <div className="w-80 text-center text-black text-lg font-semibold font-poppins">
                     Passenger Details
                 </div>
             </div>
@@ -120,9 +142,16 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
             {/* Passenger Info */}
             <div className="self-stretch flex flex-col justify-start items-center gap-12">
                 <div className="flex flex-col items-center gap-4">
-                    <img className="w-24 h-24 rounded-full" src={avatar} alt="Passenger" />
+                    <div className="lg:w-24 lg:h-24 w-24 h-24 rounded-full overflow-hidden">
+                        <img
+                            className="w-full h-full object-cover"
+                            src={booker.profileImage}
+                            alt={booker.name}
+                        />
+                    </div>
+                    {/* <img className="w-24 h-24 rounded-full" src={booker.profileImage} alt="Passenger" /> */}
                     <div className="text-black text-base font-semibold font-poppins">
-                        {name}
+                        {booker.name}
                     </div>
                 </div>
 
@@ -135,30 +164,30 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold font-poppins">Date</div>
+                        <div className="font-semibold font-poppins">Date:</div>
                         <div>
-                            {time}, {date}
+                            {rideDate.toLocaleString()}
                         </div>
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold font-poppins">Pick Up location</div>
-                        <div>{pickup}</div>
+                        <div className="font-semibold font-poppins">Pick Up location:</div>
+                        <div>{location.locationName}</div>
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold font-poppins">Destination</div>
-                        <div>{destination}</div>
+                        <div className="font-semibold font-poppins">Destination: </div>
+                        <div className="pl-2 text-right">{" " + destination.destinationName}</div>
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold font-poppins">Trip Type</div>
-                        <div>{rideType}</div>
+                        <div className="font-semibold font-poppins">Trip Type:</div>
+                        <div>{tripType}</div>
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold font-poppins">Luggage</div>
-                        <div>{luggage && luggage.length > 0 ? "Yes" : "No"}</div>
+                        <div className="font-semibold font-poppins">Luggages:</div>
+                        <div>{luggages}</div>
                     </div>
 
                     {/* Luggage Images */}
@@ -167,13 +196,13 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                             Click Single Image to view
                         </div>
                         <div className="inline-flex gap-2 flex-wrap w-full justify-center font-poppins">
-                            {luggage && luggage.length > 0 ? (
-                                luggage.map((img, index) => (
+                            {luggageImage && luggageImage.length > 0 ? (
+                                luggageImage.map((img, index) => (
                                     <div key={index} className="relative w-[100px] flex-wrap  flex justify-center">
                                         <img
                                             key={index}
                                             className="w-24 h-24 rounded  cursor-pointer"
-                                            src={img}
+                                            src={img.url}
                                             alt={`Luggage ${index + 1}`}
                                             onClick={() => {
                                                 setSelectedIndex(index);
@@ -196,7 +225,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                 {
                     amount && amount !== "" && (<div className="flex w-full justify-between ">
                         <div className="font-semibold font-poppins justify-start">Price: </div>
-                        <div className="justify-end bg-red-50 rounded-xl px-4 text-red-500 font-semibold">${amount}</div>
+                        <div className="justify-end bg-red-50 rounded-xl px-4 text-red-500 font-semibold">₦{amount}</div>
                     </div>
                     )
                 }
@@ -205,23 +234,31 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
 
                 {/* Schedule Details */}
-                <div className="self-stretch flex flex-col gap-2">
-                    <div className="h-14 px-4 bg-primary-50 rounded-2xl flex items-center">
-                        <div className="text-Primary-950 text-base font-medium font-poppins">
-                            Schedule Details
-                        </div>
-                    </div>
-                    <div className="flex gap-4 my-4">
-                        <div className="flex items-center gap-1">
-                            <ClockIcon className="-mt-[1px]" />
-                            <div className="text-sm lg:text-sm font-poppins">08:15 AM</div>
-                        </div>
-                        <div className="flex items-center gap-1">
-                            <DateIcon className="-mt-[2px]" />
-                            <div className="lg:text-sm text-sm font-poppins">Date: Jun 24, 2024</div>
-                        </div>
-                    </div>
-                </div>
+                {
+                    scheduledTrip && scheduledTrip.scheduled ?
+                        (
+                            <div className="self-stretch flex flex-col gap-2 pt-4">
+                                <div className="h-14 px-4 bg-primary-50 rounded-2xl flex items-center">
+                                    <div className="text-Primary-950 text-base font-medium font-poppins">
+                                        Schedule Details
+                                    </div>
+                                </div>
+                                <div className="flex gap-4 my-4">
+                                    <div className="flex items-center gap-1">
+                                        <ClockIcon className="-mt-[1px]" />
+                                        <div className="text-sm lg:text-sm font-poppins">{scheduledTrip.scheduleTime}</div>
+                                    </div>
+                                    <div className="flex items-center gap-1">
+                                        <DateIcon className="-mt-[2px]" />
+                                        <div className="lg:text-sm text-sm font-poppins">{scheduledTrip.scheduleDate}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                        :
+                        null
+                }
+
             </div>
 
             {/* Accept Button */}
@@ -258,11 +295,14 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         </button>
 
                         {/* Image */}
-                        <img
-                            src={luggage[selectedIndex]}
-                            alt={`Luggage ${selectedIndex + 1}`}
-                            className="lg:w-[80%] w-[85%] max-w-[533px] h-auto object-contain rounded-lg"
-                        />
+                        <div className="lg:w-[400px] w-[80%] max-w-[420px] h-auto object-contain rounded-lg">
+                            <img
+                                src={luggageImage[selectedIndex].url}
+                                alt={`Luggage ${selectedIndex + 1}`}
+                                className="rounded-lg"
+                            />
+                        </div>
+
 
                         {/* Next Button */}
                         <button
@@ -317,6 +357,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         </div>
 
                         <CustomButton
+                            isLoading={isLoading}
                             name="Set Price"
                             disabled={!amount.trim()}
                             btnClick={handleAmountSubmit}
