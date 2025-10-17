@@ -39,7 +39,7 @@ export const CustomSelectField = ({
           value={value}
           onChange={onChange}
           className="flex-1 appearance-none bg-transparent text-gray-700 
-            lg:text-lg text-sm font-inter placeholder-neutral-400 text-neutral-400
+            lg:text-lg text-sm font-inter placeholder-neutral-500 text-neutral-500
             border-none outline-none focus:ring-0 pr-8"
         >
           {defaultHolder && (

@@ -37,6 +37,16 @@ export const DriverSignup = () => {
     // console.log(formData)
 
     const [showModal, setShowModal] = useState(false);
+    
+    const [states] = useState([
+        "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", 
+        "Bayelsa", "Benue", "Borno", "Cross River", "Delta",
+         "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", 
+         "Jigawa", "Kaduna", "Kano", "Katsina", "Kebbi", 
+         "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger", "Ogun", 
+         "Ondo", "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", 
+         "Taraba", "Yobe", "Zamfara",
+    ]);
 
     const handleCityChange = (selectedCity) => {
         setFormData({ ...formData, city: selectedCity });
@@ -162,7 +172,7 @@ export const DriverSignup = () => {
                             toggleable
                             toggleState={showPassword}
                             onToggle={() => setShowPassword((prev) => !prev)}
-                            rightIconOpen={EyeOpenIcon }
+                            rightIconOpen={EyeOpenIcon}
                             rightIconClose={EyeCloseIcon}
                         />
 
@@ -204,7 +214,7 @@ export const DriverSignup = () => {
                             name="city"
                             defaultHolder="Select City"
                             onChange={handleUpdateFormData}
-                            options={["Anambra", "Lagos", "Kano"]}
+                            options={states}
                             rightIcon={FaChevronDown}
                             error={showPhoneError ? "Select your city" : ""}
                         >

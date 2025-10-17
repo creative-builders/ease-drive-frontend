@@ -4,42 +4,23 @@
 //     return response.data;
 
 
-    
+
 // }
 
 
 import { axiosInstancePrivate } from "../general/api";
 
 export const driverSignUpAuth = async (credentials) => {
-    // console.log("API Function Called with:", credentials); // Debugging log
-    try {
-        const response = await axiosInstancePrivate.post(`/auth/register/driver`, credentials);
-        console.log("API Response:", response.data);
-        return response.data;
-    } catch (error) {
-        console.error("API Error:", error.response?.data || error.message);
-        throw error;
-    }
+  // console.log("API Function Called with:", credentials); // Debugging log
+  try {
+    const response = await axiosInstancePrivate.post(`/auth/register/driver`, credentials);
+    console.log("API Response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error:", error.response?.data || error.message);
+    throw error;
+  }
 };
-
-
-
-// export const driverKYCUpdate = async ({ credentials, token }) => {
-//     console.log("API Function Called with:", credentials);
-//     try {
-//         const response = await axiosInstancePrivate.patch(
-//             `v1/users/update/driverkyc?whois=${token}`,
-//             credentials,
-            
-//         );
-//         console.log("API Response:", response.data);
-//         return response.data;
-//     } catch (error) {
-//         console.error("API Error:", error.response?.data || error.message);
-//         throw error;
-//     }
-// };
-
 
 export const driverKYCUpdate = async ({ credentials, userId, whois }) => {
   // Validation
@@ -53,16 +34,16 @@ export const driverKYCUpdate = async ({ credentials, userId, whois }) => {
 
   const _formData = new FormData();
 
-Object.entries(credentials).forEach(([key, value]) => {
-  if (value == null || value === "") return; 
-  if (Array.isArray(value)) {
-   value.forEach((item) => _formData.append(key, item));
-  } else if (typeof value === "boolean" || typeof value === "number") {
-    _formData.append(key, String(value)); 
-  } else {
-    _formData.append(key, value);
-  }
-});
+  Object.entries(credentials).forEach(([key, value]) => {
+    if (value == null || value === "") return;
+    if (Array.isArray(value)) {
+      value.forEach((item) => _formData.append(key, item));
+    } else if (typeof value === "boolean" || typeof value === "number") {
+      _formData.append(key, String(value));
+    } else {
+      _formData.append(key, value);
+    }
+  });
 
   try {
     // Build endpoint dynamically
@@ -83,12 +64,47 @@ Object.entries(credentials).forEach(([key, value]) => {
 };
 
 
-export const getDriverDetails = async ({userID}) => {  
-    try {
-        const response = await axiosInstancePrivate.get(`v1/users/${userID}`)
-        return response.data
-    } catch (error) {   
-         console.error("API Error:", error.response?.data || error.message);
-        throw error;
-    }
+export const getPendingBookings = async () => {
+  try {
+    const response = await axiosInstancePrivate.get(`/v1/bookings/ride`);
+
+    const allBookings = response.data.data.allBookings || [];
+
+    const pendingBookings = allBookings.filter(
+      (booking) => booking?.status?.toLowerCase() === "pending"
+    );
+
+    return pendingBookings;
+
+  } catch (error) {
+    console.error("API Error:", error.response?.data || error.message);
+    throw error;
+  }
+}
+
+export const bidForARid = async ({ rideId, amount, message }) => {
+
+  try {
+    const response = await axiosInstancePrivate.post(`/v1/biddings/bids/${rideId}`, {
+      bidPrice: parseInt(amount),
+      message: message || "I'm very available, wait for me to pick you up"
+
+    });
+    return response.data
+  } catch (error) {
+    console.error("API Error:", error.response?.data || error.message);
+    throw error;
+  }
+}
+
+
+
+export const getDriverDetails = async ({ userID }) => {
+  try {
+    const response = await axiosInstancePrivate.get(`v1/users/${userID}`)
+    return response.data
+  } catch (error) {
+    console.error("API Error:", error.response?.data || error.message);
+    throw error;
+  }
 }
