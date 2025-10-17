@@ -83,8 +83,6 @@ export const AccountCenter = () => {
     } = driverData
 
 
-    // console.log(driverData)
-
 
     const { mutate: submitDriverKYC, isLoading } = useMutation(
         driverKYCUpdate,
@@ -92,7 +90,6 @@ export const AccountCenter = () => {
             onSuccess: (data) => {
                 toast.success(response?.message);
                 queryClient.invalidateQueries(["getUserProfile"]);
-                // console.log("KYC data updated successfully:", data);
                 setisSubmitting(false)
                 setModalType("accountsuccess");
             },
@@ -124,19 +121,15 @@ export const AccountCenter = () => {
     }
 
     const handleBankDetailsSubmit = () => {
-        try {
-            submitDriverKYC({
-                credentials: {
-                    bankName: inputs.bankName,
-                    bankAccountHolderName: inputs.bankAccountHolderName,
-                    bankAccountNumber: inputs.bankAccountNumber,
-                    transactionPin: inputs.newPin
-                }, userId: userData?._id
-            });
-            // setModalType("withdralpin")
-        } catch (error) {
-            console.log(error)
-        }
+        submitDriverKYC({
+            credentials: {
+                bankName: inputs.bankName,
+                bankAccountHolderName: inputs.bankAccountHolderName,
+                bankAccountNumber: inputs.bankAccountNumber,
+                transactionPin: inputs.newPin
+            }, userId: userData?._id
+        });
+
     }
 
 

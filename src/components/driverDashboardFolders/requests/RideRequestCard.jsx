@@ -27,7 +27,7 @@ export function RideRequestCard({ request }) {
     const fetchETA = async () => {
       const result = await getETA(coords, destination.coordinates);
       setEta(result);
-      // console.log("ETA:", result);
+      
     };
 
     fetchETA();

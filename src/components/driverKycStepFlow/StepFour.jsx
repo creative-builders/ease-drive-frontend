@@ -54,7 +54,6 @@ export const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
         driverKYCUpdate,
         {
             onSuccess: (data) => {
-                // console.log("KYC data updated successfully:", data);
                 setisSubmitting(false)
                 setShowModal(true);
             },
@@ -66,8 +65,7 @@ export const StepFour = ({ nextStep, prevStep, step, totalSteps }) => {
 
     const handleNext = () => {
         const newErrors = {};
-        console.log(formData)
-
+        
         if (!formData.profileImage || formData.profileImage.length === 0) {
             toast.error("Please select profile image or skip.");
             newErrors.files = "Please upload at least one document image";
