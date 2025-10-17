@@ -53,23 +53,7 @@ import { TripsPage } from "../../../components/driverDashboardFolders/earnings/T
 import { Modal } from "../../../components/Modal";
 
 export const Trips = () => {
-  const mockTrips = [
-    {
-      date: "28 August 2024",
-      pickup: "Town",
-      dropoff: "Odenigwe",
-      status: "Paid",
-      earnings: "₦4,000",
-    },
-    {
-      date: "3 September 2024",
-      pickup: "City",
-      dropoff: "Odim Street",
-      status: "Pending",
-      earnings: "₦6,000",
-    },
-  ];
-
+  
   const mockTrip = {
     id: "trip-123",
     pickup: "Bello Hotel",
@@ -91,6 +75,42 @@ export const Trips = () => {
         date: "Jun 24, 2024",
         rating: 4.2,
       },
+      // {
+      //   id: "p2",
+      //   name: "Jerome Bell",
+      //   profileImage: "https://randomuser.me/api/portraits/men/22.jpg",
+      //   tripType: "Drop-off",
+      //   status: "Cancelled",
+      //   fare: "₦2,500",
+      //   location: "20 mins away from you",
+      //   time: "08:15 AM",
+      //   date: "Jun 24, 2024",
+      //   rating: null,
+      // },
+      // {
+      //   id: "p3",
+      //   name: "Jerome Bell",
+      //   profileImage: "https://randomuser.me/api/portraits/men/22.jpg",
+      //   tripType: "Drop-off",
+      //   status: "Dropped off",
+      //   fare: "₦2,500",
+      //   location: "20 mins away from you",
+      //   time: "08:15 AM",
+      //   date: "Jun 24, 2024",
+      //   rating: null,
+      // },
+      // {
+      //   id: "p4",
+      //   name: "John Ndubuisi Chukwuemeka",
+      //   profileImage: "https://randomuser.me/api/portraits/men/32.jpg",
+      //   tripType: "Round-Trip",
+      //   status: "Dropped off",
+      //   fare: "₦3,700",
+      //   location: "20 mins away from you",
+      //   time: "08:15 AM",
+      //   date: "Jun 24, 2024",
+      //   rating: 3.5,
+      // },
     ],
   };
 
