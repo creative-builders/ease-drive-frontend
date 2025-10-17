@@ -10,7 +10,7 @@ export const AddFile = ({
   maxFiles = 4,
   maxFileSize = 10 * 1024 * 1024, // 10MB
   allowedTypes = ["image/jpeg", "image/png"],
-  onFilesChange = () => {},
+  onFilesChange = () => { },
   extendedStyles = "",
   name,
   children,
@@ -40,7 +40,6 @@ export const AddFile = ({
       toast.error(`You can only upload up to ${maxFiles} files.`);
       return;
     }
-
     const newPreviews = validFiles.map((file) => URL.createObjectURL(file));
 
     setSelectedFiles(allFiles);

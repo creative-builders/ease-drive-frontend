@@ -4,7 +4,7 @@ import { CustomSelectField } from "../customFormFields/CustomSelectField"
 import { useState, useRef } from 'react';
 
 import CustomButton from '../CustomButton';
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaArrowLeft } from "react-icons/fa";
 import { CarIcon } from '../../assets/icons/CarIcon'
 import { AddFileIcon } from '../../assets/icons/AddFileIcon'
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
@@ -15,19 +15,27 @@ import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import { InputField } from '../customFormFields/InputField';
 import { Skip } from '../Skip';
 import { Link } from 'react-router-dom';
+import { AddFile } from "../AddFile"
 
 
-export const StepTwo = ({ nextStep, step, totalSteps }) => {
+export const StepTwo = ({ nextStep, prevStep, step, totalSteps }) => {
 
   const fileInputRef = useRef(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [errors, setErrors] = useState({});
+
   const {
     formData,
     inputTouched,
     setFormData,
     handleUpdateFormData,
   } = useStepFlowContext();
-  const [errors, setErrors] = useState({});
+
+  const handleFileFieldUpdate = (files) => {
+    handleUpdateFormData("vehiclePhotos", files)
+    setSelectedFiles(files)
+  }
+
 
   const handleUploadClick = () => {
     fileInputRef.current.click();
@@ -44,7 +52,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
   const handleNext = () => {
     const newErrors = {};
-
+   
     if (!formData.vehicleType) {
       newErrors.vehicleType = "Please select you vehicle type";
     }
@@ -67,25 +75,25 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
   return (
     <div lassName=" min-h-screen lg:h-full ">
       <div className="flex items-center justify-center  min-h-screen ">
-        <div className=" lg:w-[1116px] lg:h-[1000px] w-[100%] h-[100%] m-auto 
+        <div className=" lg:w-[1116px] lg:h-[1040px] w-[100%] h-[100%] m-auto 
          opacity-100 flex flex-row items-center py-auto">
           <div className="lg:w-[637px] lg:h-[700px] w-[360px]  h-[100%] m-auto 
           flex justify-center items-center ml-0
            p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
             <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
-              <div className="flex flex-row items-center justify-start">
+
+              <div className='flex gap-4 -ml-2 lg:-ml-0 lg:px-2 py-3'>
+                <button onClick={prevStep} className='flex font-regular text-xl'>
+                  <FaArrowLeft />
+                </button>
+              </div>
+
+              <div className="flex -ml-3 lg:-ml-0 flex-row items-center justify-start">
                 <SectionLabel
                   className="text-blue-800 bg-custom-gradient"
                   title={` Step ${step}  of ${totalSteps}`}
                 />
-                {/* <Link to="/"> 
-              <div className="flex flex-row items-center justify-start gap-2">
-                <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
-                <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-lg leading-[100%]">
-                  Ease Drive
-                </h1>
-              </div>
-              </Link> */}
+
               </div>
             </div>
 
@@ -114,14 +122,11 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                   defaultHolder="Select Vehicle Type"
                   value={formData.vehicleType}
                   onChange={handleUpdateFormData}
-                  // iconSrc="/city-02.svg"
-                  // value={formData.city}
-                  // onChange={handleCityChange}
+
                   options={["Keke", "Car", "Shuttle Bus", "Motorcycle", "Regular Bus", "Truck"]}
                   rightIcon={FaChevronDown}
                   leftIcon={CarIcon}
                 >
-                  {/* <CarIcon className="lg:w-8 lg:h-8 w-6 h-6 text-gray-500" /> */}
 
                 </CustomSelectField>
                 {errors.vehicleType && (
@@ -168,9 +173,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                     placeholder="e.g 4"
                     onChange={handleUpdateFormData}
                     leftIcon={SeatIcon}
-                  // error={
-                  //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-                  // }
+
                   />
                   <InputField
                     label="Vehicle Color"
@@ -179,9 +182,7 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
                     placeholder="e.g Black"
                     onChange={handleUpdateFormData}
                     leftIcon={ColorIcon}
-                  // error={
-                  //   showplateNumbererror ? " Plate Number must be at least 9 characters" : ""
-                  // }
+
                   />
 
                 </div>
@@ -192,76 +193,23 @@ export const StepTwo = ({ nextStep, step, totalSteps }) => {
 
             {/* Upload Section */}
             <div className="flex flex-col w-full -mt-4">
-              <p className="font-semibold text-left text-gray-800 lg:text-lg text-base font-inter pt-2">
-                Upload a document
-              </p>
-              <p className="font-medium text-left text-gray-800 lg:text-sm text-xs font-inter">
-                You can upload up to 4 images (JPG, PNG). Max size: 5MB each
-              </p>
-
-              <div className="flex-col flex justify-center items-center w-full mt-4">
-                <AddFileIcon className="w-20 h-20 mb-4 cursor-pointer" onClick={handleUploadClick} />
-                <button
-                  type="button"
-                  onClick={handleUploadClick}
-                  className="lg:w-[30%] w-[50%] bg-green-200 text-gray-400 rounded-xl py-1.5 text-lg font-bold mb-4"
-                >
-                  Upload Photos
-                </button>
-                {/* <input
-                  type="file"
-                  ref={fileInputRef}
-                  name="vehiclePhotos"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={(e) => {
-                    const files = Array.from(e.target.files);
-                    setSelectedFiles(files);
-                    handleUpdateFormData("vehiclePhotos", files);
-                  }}
-                  multiple
-                /> */}
-
-                <InputField
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  name="vehiclePhotos"
-                  inputRef={fileInputRef}
-                  containerStyles={"hidden"}
-                  inputTextStyles={"hidden"}
-                  onChange={(e) => {
-                    const files = Array.from(e.target.files);
-                    setSelectedFiles(files);
-                    handleUpdateFormData("vehiclePhotos", files);
-                  }}
-                />
-
-                {selectedFiles.length > 0 && (
-                  <ul className="w-[80%] mt-2 text-sm text-gray-600 list-disc list-inside">
-                    {selectedFiles.map((file, index) => (
-                      <li key={index}>{file.name}</li>
-                    ))}
-                  </ul>
-                )}
-                {errors.files && (
-                  <p className="text-red-500 text-sm mt-1">{errors.files}</p>
-                )}
-              </div>
+              <AddFile
+                name="vehiclePhotos"
+                title={"Upload photos of vehicle"}
+                extendedStyles={"text-center"}
+                onFilesChange={handleFileFieldUpdate}
+              >
+                <p className=" text-xs text-center font-medium text-neutral-700">
+                  You can upload up to 4 images (JPG, PNG). <br />
+                  Maximum file size: 10MB per image
+                </p>
+              </AddFile>
             </div>
 
-            {/* <button
-              type="button"
-              className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-lg font-bold "
-              onClick={() => {
-                nextStep()
-              }}>
-              Skip
-            </button> */}
 
             <CustomButton
               name="Continue"
-              extendedStyles={"w-full p-3 lg:p-4 bg-green-700 rounded-lg"}
+              extendedStyles={"w-full p-3 lg:p-3 bg-green-700 rounded-lg"}
               btnClick={() => handleNext()}
             />
 
