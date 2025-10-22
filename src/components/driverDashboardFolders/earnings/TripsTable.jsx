@@ -167,11 +167,11 @@ export function TripsPage({ tripData = [], onView }) {
           />
         </div>
 
-        {/* Table */}
+        
         <TripsTable columns={columns} data={currentData} />
       </div>
 
-      {/* Pagination */}
+      
       {totalPages > 1 && (
         <Pagination
           currentPage={currentPage}

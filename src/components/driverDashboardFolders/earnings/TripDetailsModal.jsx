@@ -10,7 +10,7 @@ export const TripDetailsModal = ({ isOpen, onClose, trip }) => {
       <div className="w-full flex-col items-start relative">
         <div className="flex flex-col gap-2 pb-4 mb-4 mt-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg md:text-xl font-semibold not-italic leading-normal w-52 flex items-start">
+            <h2 className="text-lg md:text-xl font-semibold not-italic leading-normal w-48 flex items-start">
             {trip.pickup} → {trip.dropoff}
             </h2>
             <span 
@@ -24,16 +24,7 @@ export const TripDetailsModal = ({ isOpen, onClose, trip }) => {
               {trip.status || "Completed"}
             </span>
           </div>
-          {/* <div className="flex items-start gap-16">
-            <p className="text-xs md:text-lg font-medium not-italic leading-normal">
-              Total Passengers: {trip.passengers?.length || 0}/{trip.passengers?.total || 0}
-            </p>
-            <div className="flex gap-6 text-sm font-medium">
-              <span className="text-accent-600 rounded-lg36 text-xs lg:text-lg font-medium not-italic leading-normal">Dropped off: {trip.droppedOff}</span>
-              <span className="text-[#EA4335] rounded-lg36 text-xs lg:text-lg font-medium not-italic leading-normal">Cancelled: {trip.cancelled}</span>
-              
-            </div>
-          </div> */}
+        
         </div>
 
         {/* Passenger List */}
