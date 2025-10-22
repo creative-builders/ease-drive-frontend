@@ -195,7 +195,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         <div className="text-neutral-600 text-xs font-medium font-poppins">
                             Click Single Image to view
                         </div>
-                        <div className="inline-flex gap-2 flex-wrap w-full justify-center font-poppins">
+                        <div className="inline-flex gap-2 flex-wrap w-full justify-start font-poppins">
                             {luggageImage && luggageImage.length > 0 ? (
                                 luggageImage.map((img, index) => (
                                     <div key={index} className="relative w-[100px] flex-wrap  flex justify-center">
