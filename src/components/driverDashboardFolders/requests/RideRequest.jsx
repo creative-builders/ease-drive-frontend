@@ -13,6 +13,7 @@ import CustomButton from "../../CustomButton"
 import { useMutation } from "@tanstack/react-query";
 import { getPendingBookings } from "../../../store/auth/driver/api";
 import { ConfirmBookingLoader } from "../../dashboard/loaders/ConfirmBookingLoader"
+import { RideHistoryLoader } from "../../dashboard/loaders/RideHistoryLoader";
 import toast from 'react-hot-toast';
 
 export function RideRequests() {
@@ -110,6 +111,9 @@ export function RideRequests() {
 
           {isFetching ? (
             <>
+              {/* <RideHistoryLoader variant="list" items={6} />
+              <RideHistoryLoader variant="card" /> */}
+
               <ConfirmBookingLoader variant="list" />
               <ConfirmBookingLoader variant="card" />
             </>
