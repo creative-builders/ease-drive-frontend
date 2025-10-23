@@ -158,7 +158,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                 {/* Trip Details */}
                 <div className="self-stretch flex flex-col gap-2">
                     <div className="h-14 px-4 bg-neutral-200 rounded-lg flex items-center">
-                        <div className="text-Primary-950 text-base font-medium font-poppins">
+                        <div className="text-primary-950 text-base font-medium font-poppins">
                             Trip Details
                         </div>
                     </div>
@@ -171,8 +171,8 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold font-poppins">Pick Up location:</div>
-                        <div>{location.locationName}</div>
+                        <div className="font-semibold font-poppins ">Pick Up location:</div>
+                        <div className="text-right">{location.locationName}</div>
                     </div>
 
                     <div className="flex justify-between">
@@ -195,13 +195,13 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         <div className="text-neutral-600 text-xs font-medium font-poppins">
                             Click Single Image to view
                         </div>
-                        <div className="inline-flex gap-2 flex-wrap w-full justify-start font-poppins">
+                        <div className="inline-flex gap-2 flex-wrap lg:w-[438px] justify-center font-poppins">
                             {luggageImage && luggageImage.length > 0 ? (
                                 luggageImage.map((img, index) => (
-                                    <div key={index} className="relative w-[100px] flex-wrap  flex justify-center">
+                                    <div key={index} className="relative lg:w-[100px] w-[100px] flex-wrap  flex justify-center">
                                         <img
                                             key={index}
-                                            className="w-24 h-24 rounded  cursor-pointer"
+                                            className=" rounded  cursor-pointer"
                                             src={img.url}
                                             alt={`Luggage ${index + 1}`}
                                             onClick={() => {
