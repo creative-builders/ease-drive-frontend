@@ -84,20 +84,7 @@ export const BidRequestsList = ({ request, onSelect, onBack }) => {
                 </button>
             </div>
 
-            {/* List */}
-            {/* <div>
-                {rideRequests.map((ride, index) => (
-                    <div
-                        key={index}
-                        onClick={() => onSelect(ride)}
-                        className="cursor-pointer w-full font-poppins"
-                    >
-                        <BidRequestCard key={ride.id} ride={ride} />
-                    </div>
-                ))}
-
-            </div> */}
-
+      
             <div>
                 {rideRequests.map((ride, index) => (
                     <div
