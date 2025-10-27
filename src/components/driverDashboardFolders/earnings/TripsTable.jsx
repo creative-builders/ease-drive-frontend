@@ -1,11 +1,12 @@
 import { useState, useMemo, useEffect } from "react";
 import { Pagination } from "./Pagination";
 import { Filter } from "../Filter";
+import { TripDetailsModal } from "./TripDetailsModal";
 
 // Table only renders data
 function TripsTable({ columns, data }) {
   return (
-    <div className="p-4 bg-white rounded-2xl ">
+    <div className="p-4 bg-white rounded-2xl">
       <div className="overflow-x-auto">
         <table className="min-w-full text-sm text-left border-collapse">
           <thead>
@@ -25,24 +26,34 @@ function TripsTable({ columns, data }) {
               <tr key={row.id || row._id} className="border-b hover:bg-gray-50">
                 {columns.map((col) => (
                   <td className="py-3" key={col.accessor}>
-                    <div
-                      className={`px-4 py-2 -mb-2 lg:text-xs text-[10px] font-medium
-                        ${col.accessor === "status" && row[col.accessor] === "Paid"
-                          ? "text-green-600 bg-green-50 rounded-[4px] text-center"
-                          : ""}
-                        ${col.accessor === "status" && row[col.accessor] === "Pending"
-                          ? "text-orange-600 bg-orange-50 rounded-[4px] text-center"
-                          : ""}
-                        ${col.accessor === "status" && row[col.accessor] === "Cancelled"
-                          ? "text-red-600 bg-red-50 rounded-[4px] text-center"
-                          : ""}
-                        ${col.accessor !== "status" ? "text-gray-600" : ""}
-                      `}
-                    >
-                      {typeof col.Cell === "function"
-                        ? col.Cell(row[col.accessor], row)
-                        : row[col.accessor]}
-                    </div>
+                    {col.accessor === "action" ? (
+                      <button
+                        onClick={() => col.onView && col.onView(row)}
+                        className="px-3 py-1 text-xs text-blue-600 bg-blue-50 rounded-md hover:bg-blue-100 transition"
+                      >
+                        View
+                      </button>
+
+                    ) : (
+                      <div
+                        className={`px-4 py-2 -mb-2 lg:text-xs text-[10px] font-medium
+                          ${col.accessor === "status" && row[col.accessor] === "Paid"
+                            ? "text-green-600 bg-green-50 rounded-[4px] text-center"
+                            : ""}
+                          ${col.accessor === "status" && row[col.accessor] === "Pending"
+                            ? "text-orange-600 bg-orange-50 rounded-[4px] text-center"
+                            : ""}
+                          ${col.accessor === "status" && row[col.accessor] === "Cancelled"
+                            ? "text-red-600 bg-red-50 rounded-[4px] text-center"
+                            : ""}
+                          ${col.accessor !== "status" ? "text-gray-600" : ""}
+                        `}
+                      >
+                        {typeof col.Cell === "function"
+                          ? col.Cell(row[col.accessor], row)
+                          : row[col.accessor]}
+                      </div>
+                    )}
                   </td>
                 ))}
               </tr>
@@ -93,9 +104,12 @@ function filterTripsByRange(trips, range) {
 }
 
 // Page handles filter + pagination
-export function TripsPage({ tripData = [] }) {
+export function TripsPage({ tripData = [], onView }) {
   const [filter, setFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedTrip, setSelectedTrip] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
   const pageSize = 6;
 
   // Apply filtering
@@ -131,10 +145,15 @@ export function TripsPage({ tripData = [] }) {
     { Header: "Drop-Off", accessor: "dropoff" },
     { Header: "Status", accessor: "status" },
     { Header: "Earnings", accessor: "earnings" },
+    {
+      Header: "Action",
+      accessor: "action",
+      onView,
+    },
   ];
 
   return (
-    <div className="flex flex-col lg:gap-6 gap-4">
+    <div className="flex w-full flex-col lg:gap-6 gap-4">
       <div className="bg-white rounded-2xl shadow">
         {/* Header with Filter */}
         <div className="flex justify-between items-center lg:px-6 lg:py-4 px-6 py-4">
@@ -148,16 +167,23 @@ export function TripsPage({ tripData = [] }) {
           />
         </div>
 
-        {/* Table */}
+        
         <TripsTable columns={columns} data={currentData} />
       </div>
 
-      {/* Pagination */}
+      
       {totalPages > 1 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={setCurrentPage}
+        />
+      )}
+
+      {showModal && (
+        <TripDetailsModal
+          trip={selectedTrip}
+          onClose={() => setShowModal(false)}
         />
       )}
     </div>

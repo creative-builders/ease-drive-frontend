@@ -1,5 +1,5 @@
 
-export default function StatsCards({ title, value, subtitle, change, image }) {
+export default function StatsCards({ title, value, subtitle, change = "", image }) {
   const isNegative = change.startsWith("-");
   return (
     <div className="bg-white rounded-lg border items-start justify-center gap-2 flex-shrink-0 h-[96px] md:h-[124px] px-[10px] py-[10px] md:py-[20px]">
