@@ -37,7 +37,7 @@ export function RideRequestCard({ request }) {
 
   return (
     <div className="self-stretch w-full py-2.5 border-b border-neutral-100 inline-flex justify-start items-center gap-4">
-      <div className="flex justify-start lg:items-center items-start lg:gap-2 gap-2 font-poppins">
+      <div className="flex justify-start flex-1 w-full lg:items-center items-start lg:gap-2 gap-2 font-poppins">
 
         <div className=" rounded-full overflow-hidden w-[40px] h-[40px] lg:w-[80px] lg:h-[80px] flex-shrink-0">
           <img
@@ -48,7 +48,7 @@ export function RideRequestCard({ request }) {
         </div>
 
 
-        <div className="basis-[280px] lg:basis-[380px] inline-flex flex-col justify-start items-start gap-2">
+        <div className="basis-[280px] lg:basis-[500px] inline-flex flex-col justify-start items-start gap-2">
           <div className="inline-flex justify-start items-center gap-4">
             <div className="justify-start text-black lg:text-base text-sm font-semibold font-poppins">
               {booker.name}
