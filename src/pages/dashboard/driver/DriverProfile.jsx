@@ -22,27 +22,44 @@ import { DocumentIcon } from "../../../assets/icons/DocumentIcon.jsx";
 import { VerifiedBadgeIcon } from "../../../assets/icons/VerifiedBadgeIcon.jsx";
 import { getDriverDetails } from "../../../store/auth/driver/api.js";
 import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { useDeleteAccount } from "../../../hooks/useDeleteAccount.js";
+import toast from "react-hot-toast";
 
 export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
   const userData = useRecoilValue(userAtom);
- 
-
-  // console.log(userData)
-
   const [isOpen, setIsOpen] = useState(false);
-  const [driverData, setDriverData] = useState({})
+  const [driverData, setDriverData] = useState({});
+  const location = useRecoilValue(locationAtom);
+  const navigate = useNavigate();
 
-  const location = useRecoilValue(locationAtom)
-
-
-  const handleDelete = () => {
-    // console.log("Account deleted");
-    setIsOpen(false);
-  };
+  const { mutate: deleteAccount, isLoading, isSuccess, isError, error } = useDeleteAccount();
 
   useEffect(() => {
-   setDriverData(userData?.driverProfile)
-  }, [userData] );
+    setDriverData(userData?.driverProfile);
+  }, [userData]);
+
+  const handleDelete = () => {
+    if (!userData?._id) {
+      console.error("User ID not found");
+      toast?.error?.("User ID not found");
+      return;
+    }
+
+    // call mutate only when the user confirms deletion
+    deleteAccount(userData._id, {
+      onSuccess: () => {
+        toast?.success?.("Account deleted successfully");
+        setIsOpen(false);
+        localStorage.clear();
+        navigate("/signup-as");
+      },
+      onError: (err) => {
+        console.error("Error deleting account:", err?.response?.data || err?.message || err);
+        toast?.error?.((err?.response?.data?.message) || err?.message || "Failed to delete account");
+      },
+    });
+  };
 
   const {
     vehicleType,
@@ -76,8 +93,10 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
             <button
               className="w-full py-3 rounded-lg bg-red-500 text-white font-medium"
               onClick={handleDelete}
+               disabled={isLoading}
             >
-              Yes, Delete Account
+              {/* Yes, Delete Account */}
+               {isLoading ? "Deleting..." : "Yes, Delete Account"}
             </button>
           </div>
         </Modal>
