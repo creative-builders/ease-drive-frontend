@@ -6,25 +6,25 @@ import { getETA } from "../../../utils/getETA";
 
 export const BidRequestCard = ({ ride }) => {
     const { booker, location, destination, status, } = ride;
-    const [eta, setEta] = useState({})
+    // const [eta, setEta] = useState({})
 
     const {
         coords,
 
     } = useGeolocation();
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (!coords || !destination?.coordinates) return;
+    //     if (!coords || !destination?.coordinates) return;
 
-        const fetchETA = async () => {
-            const result = await getETA(coords, destination.coordinates);
-            setEta(result);
+    //     const fetchETA = async () => {
+    //         const result = await getETA(coords, destination.coordinates);
+    //         setEta(result);
 
-        };
+    //     };
 
-        fetchETA();
-    }, [coords, destination]);
+    //     fetchETA();
+    // }, [coords, destination]);
 
     const statusStyles = {
         pending: "bg-blue-100 text-blue-700",
@@ -76,12 +76,13 @@ export const BidRequestCard = ({ ride }) => {
                     <div className="flex items-center mr-4">
                         <MapPin className="w-4 h-4 text-green-600 mr-1" />
                         <p className="flex-shrink-0 whitespace-nowrap ">
-                            {eta && eta.formattedETA ? (
+                            {/* {eta && eta.formattedETA ? (
 
                                 <p>{eta.formattedETA} away from you</p>
                             ) : (
                                 <p>Calculating ETA...</p>
-                            )}
+                            )} */}
+                             1hour 20mins away from you
                         </p>
                     </div>
 

@@ -7,7 +7,7 @@ import { useGeolocation } from "../../../hooks/useGeolocation";
 
 export function RideRequestCard({ request }) {
   const { booker, location, destination, status, tripType, luggages, luggageImages, totalBids, updatedAt } = request
-  const [eta, setEta] = useState({})
+  // const [eta, setEta] = useState({})
 
   const {
     coords,
@@ -20,18 +20,18 @@ export function RideRequestCard({ request }) {
   } = useGeolocation();
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (!coords || !destination?.coordinates) return;
+  //   if (!coords || !destination?.coordinates) return;
 
-    const fetchETA = async () => {
-      const result = await getETA(coords, destination.coordinates);
-      setEta(result);
+  //   const fetchETA = async () => {
+  //     const result = await getETA(coords, destination.coordinates);
+  //     setEta(result);
 
-    };
+  //   };
 
-    fetchETA();
-  }, [coords, destination]);
+  //   fetchETA();
+  // }, [coords, destination]);
 
 
 
@@ -62,12 +62,14 @@ export function RideRequestCard({ request }) {
                   <LocationIcon fill="#1A7B2C" className={`text-primary-700`} />
                 </div>
                 <div className="justify-start text-black lg:text-xs text-[10px] font-normal font-poppins leading-normal">
-                  {eta && eta.formattedETA ? (
+                  {/* {eta && eta.formattedETA ? (
 
                     <p>{eta.formattedETA} away from you</p>
                   ) : (
                     <p>Calculating ETA...</p>
-                  )}
+                  )} */}
+
+                     <p>1hour 20mins away from you</p>
                 </div>
               </div>
             </div>
