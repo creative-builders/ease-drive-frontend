@@ -72,7 +72,7 @@ export const BidRequestCard = ({ ride }) => {
                         {statusLabels[statusLower]}
                     </span>
                 </div>
-                <div className="flex lg:flex-row flex-col items-start lg:text-sm text-[10px] text-gray-600 mt-1">
+                <div className="flex  flex-col items-start lg:text-sm text-[10px] text-gray-600 mt-1">
                     <div className="flex items-center mr-4">
                         <MapPin className="w-4 h-4 text-green-600 mr-1" />
                         <p className="flex-shrink-0 whitespace-nowrap ">
