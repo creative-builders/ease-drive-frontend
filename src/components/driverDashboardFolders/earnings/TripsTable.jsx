@@ -192,7 +192,7 @@ export function TripsPage({ tripData = [], onView }) {
   };
 
   return (
-    <div className="flex w-full flex-col lg:gap-6 gap-4">
+    <div className="flex lg:w-[1050px] w-full flex-col lg:gap-6 gap-4">
       <div className="bg-white rounded-2xl shadow">
         {/* Header with Filter */}
         <div className="flex justify-between items-center lg:px-6 lg:py-4 px-6 py-4">

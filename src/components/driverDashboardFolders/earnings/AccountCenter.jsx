@@ -144,7 +144,7 @@ export const AccountCenter = () => {
     const handleTogglePassword = () => setShowPassword((prev) => !prev);
 
     return (
-        <div className="p-6 lg:w-[495px] lg:h-[263px] bg-white rounded-xl shadow w-full">
+        <div className="p-6 lg:w-[519px] lg:h-[263px] bg-white rounded-xl shadow w-full">
             <div className="flex flex-col justify-start items-start gap-2 h-full w-[]">
                 <h2 className="lg:text-2xl text-sm font-semibold">Payout Details</h2>
                 <div className='flex flex-col gap-1'>

@@ -100,7 +100,7 @@ export function DashboardEarningChart() {
   ];
 
   return (
-    <div className="lg:w-[495px] lg:h-[263px] w-[380px] -z-1">
+    <div className="lg:w-[519px] lg:h-[263px] w-[380px] -z-1">
       <EarningsChart title="Earnings Analysis" data={chartData} />
     </div>
   );
