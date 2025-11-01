@@ -1,49 +1,6 @@
-    
-// import { data } from "../../../components/driverDashboardFolders/earnings/tripData";
-// import { TripsPage } from "../../../components/driverDashboardFolders/earnings/TripsTable";
 
 
-// export const Trips = () => {
-//   const tripData = [
-//     {
-//       date: "17 July 2024",
-//       pickup: "Bello Hostel",
-//       dropoff: "SUB",
-//       status: "Pending",
-//       earnings: "₦1,200",
-//     },
-//     {
-//       date: "12 June 2024",
-//       pickup: "Town",
-//       dropoff: "Hilltop",
-//       status: "Paid",
-//       earnings: "₦2,000",
-//     },
-//     {
-//       date: "28 August 2024",
-//       pickup: "Town",
-//       dropoff: "odenigwe",
-//       status: "Paid",
-//       earnings: "₦4,000",
-//     },
-//     {
-//       date: "3 Septmeber 2024",
-//       pickup: "city",
-//       dropoff: "Odim street",
-//       status: "Paid",
-//       earnings: "₦6,000",
-//     },
-//   ];
-
-//   return (
-//     <div>
-//       <TripsPage tripData={data} />
-//     </div>
-//   );
-// };
-
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BitcoinBag } from "../../../assets/icons/BitcoinBag";
 import { Wallet } from "../../../assets/icons/Wallet";
 import StatsCards from "../../../components/DashboardForDrivers/StatsCards";
@@ -51,9 +8,52 @@ import { data as tripData } from "../../../components/driverDashboardFolders/ear
 import { TripDetailsModal } from "../../../components/driverDashboardFolders/earnings/TripDetailsModal";
 import { TripsPage } from "../../../components/driverDashboardFolders/earnings/TripsTable";
 import { Modal } from "../../../components/Modal";
+import { getDriverBids } from "../../../store/auth/driver/api";
+import { useMutation } from "@tanstack/react-query";
+import { userAtom } from "../../../components/atoms/userAtom";
+import { useRecoilValue } from "recoil"
+import { formatDate } from "../../../utils/formatDate";
+import { ConfirmBookingLoader } from "../../../components/dashboard/loaders/ConfirmBookingLoader";
+
 
 export const Trips = () => {
-  
+
+  const [rideRequests, setRideRequests] = useState([]);
+  const [isFetching, setIsFetching] = useState(true)
+  const userData = useRecoilValue(userAtom);
+  const userId = userData?._id;
+
+
+  const { mutate: getBidedRides, isLoading } = useMutation(
+    getDriverBids,
+    {
+      onSuccess: (data) => {
+        setRideRequests(data);
+        setIsFetching(false)
+      },
+      onError: (error) => {
+        toast.error(error.response?.data?.message || error.message);
+      }
+    }
+  );
+
+  useEffect(() => {
+    getBidedRides({ userId: userId })
+  }, [])
+
+  // console.log(rideRequests)
+
+  const currentPassengers = rideRequests.filter(
+    (ride) => ride.status === "Ongoing"
+  ).length;
+
+  // Count rides with status = "Ongoing" or "Completed"
+  const totalPassengers = rideRequests.filter((ride) =>
+    ["Ongoing", "Completed"].includes(ride.status)
+  ).length;
+
+
+
   const mockTrip = {
     id: "trip-123",
     pickup: "Bello Hotel",
@@ -75,12 +75,12 @@ export const Trips = () => {
         date: "Jun 24, 2024",
         rating: 4.2,
       },
-      
+
     ],
   };
 
-  const currentPassengers = 4;
-  const totalPassengers = 102;
+  // const currentPassengers = 4;
+  // const totalPassengers = 102;
   const [selectedTrip, setSelectedTrip] = useState(null);
 
   return (
@@ -109,11 +109,11 @@ export const Trips = () => {
         />
       </div>
 
-      <TripsPage className="w-full" tripData={tripData} onView={setSelectedTrip} />
+      <TripsPage className="w-full" tripData={rideRequests} onView={setSelectedTrip} />
 
       {selectedTrip && (
         <Modal closeModal={() => setSelectedTrip(null)} position="bottom">
-          <TripDetailsModal trip={{ ...mockTrip, ...selectedTrip }} />
+          <TripDetailsModal trip={selectedTrip } />
         </Modal>
       )}
     </div>
