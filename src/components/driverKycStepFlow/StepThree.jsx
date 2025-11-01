@@ -207,8 +207,6 @@ export const StepThree = ({ nextStep, prevStep, step, totalSteps }) => {
 
                   </div>
 
-            
-
                   <CustomButton
                      name="Continue"
                      extendedStyles={"w-full p-3 lg:p-4 bg-green-700 rounded-lg"}

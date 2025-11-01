@@ -21,7 +21,7 @@ export const NoEarnings = () => {
   const userData = useRecoilValue(userAtom);
   const queryClient = useQueryClient();
 
-  const [modalType, setModalType] = useState(null); // "image" | "amount" | "loading"
+  const [modalType, setModalType] = useState(null); 
   const [showPassword, setShowPassword] = useState(false);
   const [inputTouched, setInputTouched] = useState(false);
 
@@ -43,8 +43,6 @@ export const NoEarnings = () => {
     driverKYCUpdate,
     {
       onSuccess: (data) => {
-        // console.log("KYC data updated successfully:", data);
-       
         queryClient.invalidateQueries(["getUserProfile"]);
         setisSubmitting(false)
         setModalType("resetsuccess");
@@ -62,17 +60,11 @@ export const NoEarnings = () => {
 
 
   const handlePinUpdate = () => {
-    try {
       submitDriverKYC({ credentials: {
         transactionPin:inputs.newPin
       }, userId: userData?._id });
-      // setModalType("withdralpin")
-    } catch (error) {
-      console.log(error)
-    }
+    
   }
-
-
 
   const handleTogglePassword = () => setShowPassword((prev) => !prev);
 
