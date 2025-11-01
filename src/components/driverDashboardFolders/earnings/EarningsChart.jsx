@@ -12,8 +12,6 @@ const COLORS = {
 function filterEarningsByRange(data, range) {
   const today = new Date();
 
-  // ⚡ In your real app, you'd filter by `date`. 
-  // For now, we'll just return the same data (mock).
   if (range === "Daily") return data;
   if (range === "Weekly") return data;
   if (range === "Monthly") return data;

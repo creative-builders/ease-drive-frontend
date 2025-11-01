@@ -29,7 +29,7 @@ const { mutate: getPendingRideRequests, isLoading } = useMutation(
     getPendingRideRequests()
   },[])
 
-console.log(requests)
+// console.log(requests)
 
  if(isFetching){
   return (
