@@ -54,7 +54,10 @@ function TripsTable({ columns, data, onSelectTrip }) {
                           ${col.accessor === "status" && row[col.accessor] === "Cancelled"
                             ? "text-red-600 bg-red-50 rounded-[4px] text-center"
                             : ""}
-                          ${col.accessor !== "status" ? "text-gray-600" : ""}
+                            ${col.accessor === "status" && row[col.accessor] === "Completed"
+                            ? "text-green-700 bg-green-200 rounded-[4px] text-center"
+                            : ""}
+                          ${col.accessor !== "status" ? "text-gray-600 " : ""}
                         `}
                       >
                         {typeof col.Cell === "function"

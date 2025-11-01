@@ -54,34 +54,15 @@ export const Trips = () => {
 
 
 
-  const mockTrip = {
-    id: "trip-123",
-    pickup: "Bello Hotel",
-    dropoff: "SUB",
-    droppedOff: 3,
-    cancelled: 1,
-    totalEarnings: 5200,
-    status: "Completed",
-    passengers: [
-      {
-        id: "p1",
-        name: "John Ndubuisi Chukwuemeka",
-        profileImage: "https://randomuser.me/api/portraits/men/32.jpg",
-        tripType: "Drop-off",
-        status: "Dropped off",
-        fare: "₦1,500",
-        location: "20 mins away from you",
-        time: "08:15 AM",
-        date: "Jun 24, 2024",
-        rating: 4.2,
-      },
-
-    ],
-  };
-
   // const currentPassengers = 4;
   // const totalPassengers = 102;
   const [selectedTrip, setSelectedTrip] = useState(null);
+
+     if(isFetching){
+    return (
+      <ConfirmBookingLoader type="card" items={4}/>
+    )
+   }
 
   return (
     <div className="flex px-3 py-0 flex-col items-start gap-4">

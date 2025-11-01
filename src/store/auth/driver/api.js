@@ -93,7 +93,7 @@ export const getDriverBids = async ({userId}) => {
       (booking) => booking?.status?.toLowerCase()  !== "completed"
     );
 
-    return pendingBookings.reverse();
+    return allBookings.reverse();
 
   } catch (error) {
     console.error("API Error:", error.response?.data || error.message);
