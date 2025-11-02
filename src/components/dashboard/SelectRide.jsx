@@ -20,7 +20,6 @@ export const SelectRide = ({
       handleUpdateFormData,
   } = useStepFlowContext();
 
-  console.log(formData)
 
   const isLuggageAvailable = formData?.luggages === "yes";
 

@@ -1,5 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FilterIcon } from "../../assets/icons/FilterIcon";
+import { getDriverBids } from "../../store/auth/driver/api";
+import { useMutation } from "@tanstack/react-query";
+import { userAtom } from "../atoms/userAtom";
+import { useRecoilValue } from "recoil"
+import { formatDate } from "../../utils/formatDate";
+import { ConfirmBookingLoader } from "../dashboard/loaders/ConfirmBookingLoader";
 
 
 
@@ -11,16 +17,48 @@ const trips = [
 ];
 
 export default function RecentTrips() {
-
   const [showMenu, setShowMenu] = useState(false);
   const [selected, setSelected] = useState("Weekly");
+  const [rideRequests, setRideRequests] = useState([]);
+  const [isFetching, setIsFetching] = useState(true)
+  const userData = useRecoilValue(userAtom);
+  const userId = userData?._id;
+
+
 
   const handleSelect = (option) => {
     setSelected(option);
     setShowMenu(false);
   };
 
-  return (
+  const { mutate: getBidedRides, isLoading } = useMutation(
+    getDriverBids,
+    {
+      onSuccess: (data) => {
+        setRideRequests(data);
+        setIsFetching(false)
+      },
+      onError: (error) => {
+        toast.error(error.response?.data?.message || error.message);
+      }
+    }
+  );
+
+  useEffect(() => {
+    getBidedRides({ userId: userId })
+  }, [])
+
+
+
+  const slicedRequest = rideRequests.slice(0, 4)
+
+   if(isFetching){
+    return (
+      <ConfirmBookingLoader type="card" items={2}/>
+    )
+   }
+
+  return(
     <div className="bg-white shadow rounded-lg p-4 border">
 
       <div className="flex justify-between items-center mb-4 relative">
@@ -45,11 +83,10 @@ export default function RecentTrips() {
                 <div
                   key={option}
                   onClick={() => handleSelect(option)}
-                  className={`px-4 py-2 cursor-pointer hover:bg-gray-500 w-full border-b-2 border-gray-200 ${
-                    selected === option ? "text-green-500 font-semibold" : ""
-                  }`}
+                  className={`px-4 py-2 cursor-pointer hover:bg-gray-500 w-full border-b-2 border-gray-200 ${selected === option ? "text-green-500 font-semibold" : ""
+                    }`}
                 >
-                  
+
                   {option}
                 </div>
               ))}
@@ -57,31 +94,47 @@ export default function RecentTrips() {
           )}
         </div>
       </div>
-      
-      <table className="w-full text-sm">
+
+      <table className="w-full table-fixed border-collapse text-sm">
         <thead>
-          <tr className="text-left text-[#333] text-base not-italic font-semibold leading-[140%] capitalize border-b">
-            <th className="py-2">Date</th>
-            <th>Pick-Up</th>
-            <th>Drop-Off</th>
-            <th>Status</th>
-            <th>Earnings</th>
-            <th>Action</th>
+          <tr className="text-left text-gray-700 lg:text-base text-xs font-semibold leading-[140%] capitalize border-b">
+            <th className="py-2 w-[12%]">Date</th>
+            <th className="w-[22%]">Pick-Up</th>
+            <th className="w-[22%]">Drop-Off</th>
+            <th className="w-[14%]">Status</th>
+            <th className="w-[14%]">Earnings</th>
+            <th className="w-[10%]">Action</th>
           </tr>
         </thead>
         <tbody>
-          {trips.map((trip, i) => (
-            <tr key={i} className="border-b text-[#4B5563] text-xs font-medium not-italic leading-normal">
-              <td className="py-2">{trip.date}</td>
-              <td>{trip.pickup}</td>
-              <td>{trip.dropoff}</td>
+          {slicedRequest.map((trip, i) => (
+            <tr
+              key={i}
+              className="border-b text-gray-900 lg:text-sm text-[10px] font-medium leading-normal"
+            >
+              <td className="py-2 truncate">{formatDate(trip.createdAt).date}</td>
+              <td className="break-words whitespace-normal max-w-[180px]">
+                {trip.location.locationName}
+              </td>
+              <td className="break-words whitespace-normal max-w-[180px]">
+                {trip.destination.destinationName}
+              </td>
               <td>
-                <span className={`px-2 py-1 text-xs rounded ${trip.status === "Paid" ? "bg-green-100 text-green-600" : "bg-yellow-100 text-yellow-600"}`}>
+                <span
+                  className={`px-2 py-1 text-xs rounded ${trip.status === "Completed"
+                      ? "bg-green-100 text-green-600"
+                      : "bg-yellow-100 text-yellow-600"
+                    }`}
+                >
                   {trip.status}
                 </span>
               </td>
-              <td>{trip.earnings}</td>
-              <td><a href="#" className="text-green-600">view</a></td>
+              <td>₦{trip.bidPrice}</td>
+              <td>
+                <a href="#" className="text-green-600 hover:underline">
+                  view
+                </a>
+              </td>
             </tr>
           ))}
         </tbody>

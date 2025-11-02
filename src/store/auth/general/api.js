@@ -4,11 +4,11 @@ import axios from "axios";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const axiosInstancePrivate = axios.create({
-    baseURL: baseUrl,
+    baseURL: baseUrl, 
     withCredentials: true,
-    
   });
 
+  
 
 
 //AUTH APIS
@@ -42,7 +42,6 @@ export const googleAuth = async( { access_token, role }) => {
 
 //Forgot Pssword APIs
 
-
 export const sendResetPasswordOTP = async(credentials) => {
     const response = await axiosInstancePrivate.post(`/auth/send-otp`, credentials);
     return response.data;
@@ -53,9 +52,6 @@ export const resetPassword = async(credentials) => {
     const response = await axiosInstancePrivate.put(`/auth/reset-password`, credentials);
     return response.data;
 }
-
-
-
 
 
 // Log Out API

@@ -82,6 +82,27 @@ export const getPendingBookings = async () => {
   }
 }
 
+export const getDriverBids = async ({userId}) => {
+  try {
+    const response = await axiosInstancePrivate.get(`/v1/bookings/ride/${userId}/bookings`);
+
+    const allBookings = response.data.data.rides || [];
+    // console.log("All Bookings:", allBookings);
+
+    const pendingBookings = allBookings.filter(
+      (booking) => booking?.status?.toLowerCase()  !== "completed"
+    );
+
+    return allBookings.reverse();
+
+  } catch (error) {
+    console.error("API Error:", error.response?.data || error.message);
+    throw error;
+  }
+}
+
+
+
 export const bidForARid = async ({ rideId, amount, message }) => {
 
   try {

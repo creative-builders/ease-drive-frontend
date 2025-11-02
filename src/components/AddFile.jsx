@@ -10,7 +10,7 @@ export const AddFile = ({
   maxFiles = 4,
   maxFileSize = 10 * 1024 * 1024, // 10MB
   allowedTypes = ["image/jpeg", "image/png"],
-  onFilesChange = () => { },
+  onFilesChange = () => {},
   extendedStyles = "",
   name,
   children,
