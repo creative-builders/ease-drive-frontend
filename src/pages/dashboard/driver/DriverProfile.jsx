@@ -25,6 +25,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useDeleteAccount } from "../../../hooks/useDeleteAccount.js";
 import toast from "react-hot-toast";
+import CustomButton from "../../../components/CustomButton.jsx";
 
 export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
   const userData = useRecoilValue(userAtom);
@@ -41,7 +42,6 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
 
   const handleDelete = () => {
     if (!userData?._id) {
-      console.error("User ID not found");
       toast?.error?.("User ID not found");
       return;
     }
@@ -55,7 +55,6 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
         navigate("/signup-as");
       },
       onError: (err) => {
-        console.error("Error deleting account:", err?.response?.data || err?.message || err);
         toast?.error?.((err?.response?.data?.message) || err?.message || "Failed to delete account");
       },
     });
@@ -84,20 +83,18 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
         >
           {/* Buttons inside modal */}
           <div className="flex flex-col gap-3 w-full mt-6">
-            <button
-              className="w-full py-3 rounded-lg bg-green-200 text-black font-medium"
+            <CustomButton
+              name="Back"
+              extendedStyles={"w-full py-3 rounded-lg bg-green-200 text-black font-medium"}
               onClick={() => setIsOpen(false)}
-            >
-              Back
-            </button>
-            <button
-              className="w-full py-3 rounded-lg bg-red-500 text-white font-medium"
-              onClick={handleDelete}
-               disabled={isLoading}
-            >
-              {/* Yes, Delete Account */}
-               {isLoading ? "Deleting..." : "Yes, Delete Account"}
-            </button>
+            />
+            
+            <CustomButton
+              name="Yes, Delete Account"
+               btnClick={handleDelete}
+              extendedStyles={"w-full py-3 rounded-lg bg-red-500 text-white font-medium"}
+              isLoading={isLoading}
+            />
           </div>
         </Modal>
       )}
@@ -258,7 +255,7 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
 
         <div className="flex px-2.5 mb-2">
           <LogoutButton
-            strokeColor="red-500"
+            strokeColor="#fe2a22"
             text={"Log Out"}
             textStyles={"font-medium text-sm lg:text-lg leading-6 text-red-500"}
           />
