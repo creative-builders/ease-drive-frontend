@@ -12,6 +12,8 @@ import { userAtom } from "../../atoms/userAtom";
 import { useRecoilValue } from "recoil"
 import { formatDate } from "../../../utils/formatDate";
 import { ConfirmBookingLoader } from "../../dashboard/loaders/ConfirmBookingLoader";
+import {Modal} from "../../Modal"
+import { TripDetailsModal } from './TripDetailsModal';
 
 
 
@@ -35,6 +37,8 @@ export const Earnings = () => {
             }
         }
     );
+
+    const [selectedTrip, setSelectedTrip] = useState(null);
 
     useEffect(() => {
         getBidedRides({ userId: userId })
@@ -66,11 +70,17 @@ export const Earnings = () => {
                         isFetching ? (
                             <div className=" lg:h-[858px] lg:w-[1000px] h-full w-[380px] flex flex-col justify-start ">
                                 <ConfirmBookingLoader type="list" items={3} />
-                                </div>
-                            
+                            </div>
+
                         ) : (
                             <div className=" lg:h-[828px] lg:w-[1000px] h-full w-[380px] flex flex-col justify-start ">
-                                <TripsPage tripData={rideRequests} />
+                                <TripsPage className="w-full" tripData={rideRequests} onView={setSelectedTrip} />
+
+                                {selectedTrip && (
+                                    <Modal closeModal={() => setSelectedTrip(null)} position="bottom">
+                                        <TripDetailsModal trip={selectedTrip} />
+                                    </Modal>
+                                )}
 
                             </div>
                         )

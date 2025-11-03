@@ -33,9 +33,10 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
     const rideDate = new Date(createdAt);
 
-    const [modalType, setModalType] = useState(null); // "image" | "amount" | "loading"
+    const [modalType, setModalType] = useState("loading"); // "image" | "amount" | "loading"
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [amount, setAmount] = useState("");
+    const [amountError, setAmountError] = useState(false)
     const [isAmountEmpty, setIsAmountEmpty] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
@@ -73,9 +74,9 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
         );
     };
 
-    useEffect(() =>{
+    useEffect(() => {
         setAmount(request.bidPrice || "")
-    },[request])
+    }, [request])
 
 
     const handleAcceptClick = () => {
@@ -113,6 +114,8 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
         setShowModal(false);
 
     };
+
+
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -273,7 +276,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
             {/* Accept Button */}
 
             <div
-                className={`${request.bidPrice ? "hidden" :"block"} self-stretch ${btnName === "Track Passenger" ? "lg:hidden" : ""
+                className={`${request.bidPrice ? "hidden" : "block"} self-stretch ${btnName === "Track Passenger" ? "lg:hidden" : ""
                     }`} >
 
                 <CustomButton
@@ -328,7 +331,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
             {modalType === "amount" && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-2 w-[390px] lg:top-[] 
-                        top-[35%] lg:top-0 h-[240px] lg:w-[633px] lg:h-[270.5px]">
+                        top-[35%] lg:top-0 h-[240px] lg:w-[633px] lg:h-[275.5px]">
                         {/* Close Button */}
                         <button
                             onClick={() => setModalType(null)}
@@ -346,9 +349,20 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         <div className="relative w-full">
                             <InputField
                                 type="number"
-                                onChange={(e) => setAmount(e.target.value)}
+                                min="0"
+                                onChange={(e) => {
+                                    if (value < 0) return;
+                                    if (e.target.value < 100) {
+                                        setAmountError(true)
+                                    }
+                                    else {
+                                        setAmountError(false)
+                                        setAmount(e.target.value)
+                                    }
+                                }}
                                 placeholder="Enter amount"
                                 leftIcon={NairaIcon}
+                                error={amountError ? "Bid price cannot be less than ₦100" : ""}
 
                             />
                             {isAmountEmpty && (
@@ -368,13 +382,21 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         <CustomButton
                             isLoading={isLoading}
                             name="Set Price"
-                            disabled={!amount.trim()}
-                            btnClick={handleAmountSubmit}
+                            disabled={amountError && !amount.trim()}
+                            btnClick={() => {
+                                if (amountError) {
+                                  return null
+                                }
+                                else {
+                                    handleAmountSubmit()
+                                    setAmount("")
+                                }
+                            }}
 
                             extendedStyles={`font-medium py-2 w-full p-3 lg:p-4 rounded-lg bg-green-700 px-4 rounded-xl 
-                              ${amount.trim()
+                              ${!amountError && amount.trim()
                                     ? "bg-green-700 hover:bg-green-700 text-white"
-                                    : "bg-gray-400 text-white cursor-not-allowed opacity-20"
+                                    : "bg-gray-100 text-white cursor-not-allowed opacity-10 -mt-2"
                                 }`}
                         />
                     </div>
@@ -410,9 +432,9 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
                         <CustomButton
                             btnClick={() => {
-                            navigate("/dashboard/bids")
+                                navigate("/dashboard/bids")
                             }}
-
+                             
                             name="See Response"
                             extendedStyles="w-full p-3 lg:p-4 
                          text-green-900 bg-green-700 text-white rounded-lg mb-6 mt-4" />
@@ -421,11 +443,11 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                 </div>
             )}
 
-         
 
 
 
-           
+
+
             {/* {showModal && (
                 <Modal closeModal={closeModal} title="Congratulations, Ride Accepted!"
                     bodyText={`

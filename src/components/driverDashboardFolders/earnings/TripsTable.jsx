@@ -42,7 +42,7 @@ function TripsTable({ columns, data, onSelectTrip }) {
                     ) : (
                       <div
                         className={`px-4 py-2 -mb-2 lg:text-sm text-[10px] font-medium break-words whitespace-normal
-                          ${col.accessor === "createdAt"
+                          ${col.accessor === "bidDate"
                             ? "whitespace-nowrap truncate" 
                             : "break-words whitespace-normal"} 
                           ${col.accessor === "status" && row[col.accessor] === "Ongoing"
@@ -95,7 +95,7 @@ function filterTripsByRange(trips, range) {
     if (!dateValue) return false;
 
     const tripDate = new Date(dateValue);
-    console.log(tripDate)
+    // console.log(tripDate)
     if (isNaN(tripDate.getTime())) return false;
 
     tripDate.setHours(0, 0, 0, 0);
@@ -158,7 +158,7 @@ export function TripsPage({ tripData = [], onView }) {
   const columns = [
     {
       Header: "Date",
-      accessor: "createdAt",
+      accessor: "bidDate",
       Cell: (value) => formatDate(value).date,
     },
     {

@@ -49,13 +49,19 @@ export function RideRequestsList({ requests, onSelect }) {
         sortedRequests.map((req, index) => (
           <div
             key={index}
-            onClick={() => onSelect(req)}
-            className="cursor-pointer w-full font-poppins"
+            onClick={() => {
+              onSelect(req)
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+              }}
+      className="cursor-pointer w-full font-poppins"
           >
-            <RideRequestCard request={req} />
-          </div>
-        ))
-      }
+      <RideRequestCard request={req} />
+    </div>
+  ))
+}
     </div >
   );
 }

@@ -82,8 +82,8 @@ export const TripDetailsModal = ({ isOpen, onClose, trip }) => {
 
 
             <div className="h-20 w-16 flex flex-col items-center justify-around">
-              <span className="text-xs md:text-sm font-semibold not-italic leading-normal">₦{trip.bidPrice}</span>
-              <p className="text-[8px] md:text-xs mt-4 text-black font-medium not-italic leading-normal">{trip.tripType}</p>
+              <span className="text-xs md:text-sm  whitespace-nowrap truncate font-semibold not-italic leading-normal">₦{trip.bidPrice}</span>
+              <p className="text-[8px] md:text-xs  whitespace-nowrap truncate mt-4 text-black font-medium not-italic leading-normal">{trip.tripType}</p>
             </div>
           </div>
 
