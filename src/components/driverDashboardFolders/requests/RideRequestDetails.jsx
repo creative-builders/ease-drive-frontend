@@ -39,7 +39,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
     const [amountError, setAmountError] = useState(false)
     const [isAmountEmpty, setIsAmountEmpty] = useState(false);
     const [showModal, setShowModal] = useState(false);
-
+    const [bidLoaded, setBidLoaded] = useState(false)
     const [progress, setProgress] = useState(0);
 
     const navigate = useNavigate()
@@ -99,15 +99,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
         // setModalType("loading");
         submitRideBid({ rideId: _id, amount })
 
-        // // simulate API call delay (3s)
-        // setTimeout(() => {
-
-        //     setModalType("success");
-        // }, 5000);
-
-        // setTimeout(() => {
-        //     setModalType("failed")
-        // }, 7000);
+        
     };
 
     const closeModal = () => {
@@ -118,18 +110,19 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setProgress((old) => {
-                if (old >= 100) {
-                    clearInterval(interval);
-                    return 100;
-                }
-                return old + 1; // increase 1% every tick
-            });
-        }, 400); // speed (100ms per step)
+    const interval = setInterval(() => {
+      setProgress((old) => {
+        if (old >= 100) {
+          clearInterval(interval);
+          setBidLoaded(true);
+          return 100;
+        }
+        return old + 5; // increase smoothly
+      });
+    }, 200); // smaller interval for smoother animation
 
-        return () => clearInterval(interval);
-    }, []);
+    return () => clearInterval(interval);
+  }, []);
 
 
     return (
@@ -423,14 +416,17 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
                         <CustomButton
                             btnClick={() => {
-                                setModalType("loading")
+                                setModalType(null)
+                                // setModalType("loading")
                             }}
 
                             name="Refresh"
                             extendedStyles="w-full p-3 lg:p-4 
                         !bg-green-250 text-green-900 rounded-lg mb- mt-4" />
 
-                        <CustomButton
+                       {
+                        bidLoaded ? (
+                            <CustomButton
                             btnClick={() => {
                                 navigate("/dashboard/bids")
                             }}
@@ -439,6 +435,16 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                             extendedStyles="w-full p-3 lg:p-4 
                          text-green-900 bg-green-700 text-white rounded-lg mb-6 mt-4" />
 
+                        ) : (
+                            <CustomButton
+                            
+                             
+                            name="See Response"
+                            extendedStyles="w-full p-3 lg:p-4 
+                         text-green-900 bg-gray-100 text-white opacity-10 rounded-lg mb-6 mt-4" />
+
+                        )
+                       } 
                     </div>
                 </div>
             )}
