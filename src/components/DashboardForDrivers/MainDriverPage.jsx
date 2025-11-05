@@ -12,7 +12,7 @@ import { Star } from "../../assets/icons/Star";
 
 export default function MainDriverPage() {
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 w-full">
       <DriverTrackInfo />
 
       {/* Stats */}
@@ -30,7 +30,10 @@ export default function MainDriverPage() {
       </div>
 
       {/* Recent Trips */}
+      <div className=" lg:w-full w-[350px]">
+
       <RecentTrips />
+      </div>
     </div>
   );
 }

@@ -62,7 +62,7 @@ export const Earnings = () => {
 
                     <div className='flex flex-col lg:gap-4 gap-2 justify-start items-start lg:flex-row '>
                         <AccountCenter />
-                        <DashboardEarningChart />
+                        <DashboardEarningChart tripData={rideRequests} />
 
                     </div>
 
@@ -73,7 +73,7 @@ export const Earnings = () => {
                             </div>
 
                         ) : (
-                            <div className=" lg:h-[828px] lg:w-[1000px] h-full w-[380px] flex flex-col justify-start ">
+                            <div className=" lg:h-[828px] lg:w-[1050px] h-full w-[380px] flex flex-col justify-start ">
                                 <TripsPage className="w-full" tripData={rideRequests} onView={setSelectedTrip} />
 
                                 {selectedTrip && (

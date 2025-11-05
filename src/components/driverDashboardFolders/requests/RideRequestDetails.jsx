@@ -33,7 +33,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
     const rideDate = new Date(createdAt);
 
-    const [modalType, setModalType] = useState("loading"); // "image" | "amount" | "loading"
+    const [modalType, setModalType] = useState(null); // "image" | "amount" | "loading"
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [amount, setAmount] = useState("");
     const [amountError, setAmountError] = useState(false)
@@ -344,7 +344,6 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                                 type="number"
                                 min="0"
                                 onChange={(e) => {
-                                    if (value < 0) return;
                                     if (e.target.value < 100) {
                                         setAmountError(true)
                                     }

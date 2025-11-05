@@ -1,9 +1,9 @@
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Filter } from "../Filter";
 
 const COLORS = {
-  Paid: "#22c55e",      // green-500
+  Completed: "#22c55e",      // green-500
   Pending: "#3b82f6",   // blue-500
   Cancelled: "#efd544ff", // yellow-ish
 };
@@ -20,7 +20,12 @@ function filterEarningsByRange(data, range) {
 }
 
 function EarningsChart({ title, data }) {
-  const [sortedItems, setSortedItems] = useState(data);
+  const [sortedItems, setSortedItems] = useState([]);
+
+  useEffect(() => {
+    setSortedItems(JSON.parse(JSON.stringify(data)));
+  }, [data]);
+  
 
   return (
     <div className="p-4 bg-white rounded-xl shadow w-full h-[263px] ">
@@ -90,12 +95,32 @@ function EarningsChart({ title, data }) {
   );
 }
 
-export function DashboardEarningChart() {
+export function DashboardEarningChart({ tripData }) {
+
+  const pending = tripData.filter(
+    (ride) => ride.status === "Ongoing"
+  ).length;
+
+   const completed = tripData.filter(
+    (ride) => ride.status === "Completed"
+  ).length;
+
+     const cancelled = tripData.filter(
+    (ride) => ride.status === "Cancelled"
+  ).length;
+
+  // Count rides with status = "Ongoing" or "Completed"
+  const totalPassengers = tripData.filter((ride) =>
+    ["Ongoing", "Completed"].includes(ride.status)
+  ).length;
+
   const chartData = [
-    { name: "Paid", value: 32 },
-    { name: "Pending", value: 12 },
-    { name: "Cancelled", value: 56 },
+    { name: "Completed", value: Number(completed) },
+    { name: "Pending", value: Number(pending) },
+    { name: "Cancelled", value: Number(cancelled)},
   ];
+console.log(chartData)
+
 
   return (
     <div className="lg:w-[519px] lg:h-[263px] w-[380px] -z-1">

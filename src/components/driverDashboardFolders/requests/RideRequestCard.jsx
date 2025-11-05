@@ -36,7 +36,7 @@ export function RideRequestCard({ request }) {
 
 
   return (
-    <div className="self-stretch w-full py-2.5 border-b border-neutral-100 inline-flex justify-start items-center gap-4">
+    <div className="self-stretch w-full py-2.5 border-b border-neutral-100 inline-flex justify-start items-center gap-4 -z-1">
       <div className="flex justify-start flex-1 w-full lg:items-center items-start lg:gap-2 gap-2 font-poppins">
 
         <div className=" rounded-full overflow-hidden w-[40px] h-[40px] lg:w-[80px] lg:h-[80px] flex-shrink-0">

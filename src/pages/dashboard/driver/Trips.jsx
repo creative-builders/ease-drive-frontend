@@ -65,7 +65,7 @@ export const Trips = () => {
    }
 
   return (
-    <div className="flex px-3 py-0 flex-col items-start gap-4">
+    <div className="flex px-3 py-0 flex-col items-start gap-4 lg:-ml-12">
       <header className="flex flex-col md:flex-row w-full items-start md:items-center justify-between">
         <h2 className="capitalize text-4xl not-italic font-semibold leading-normal">
           Trips Details
