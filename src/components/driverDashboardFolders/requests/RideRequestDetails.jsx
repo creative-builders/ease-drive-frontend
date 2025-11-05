@@ -39,6 +39,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
     const [amountError, setAmountError] = useState(false)
     const [isAmountEmpty, setIsAmountEmpty] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [restart, setRestart] = useState(false);
     const [bidLoaded, setBidLoaded] = useState(false)
     const [progress, setProgress] = useState(0);
 
@@ -99,7 +100,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
         // setModalType("loading");
         submitRideBid({ rideId: _id, amount })
 
-        
+
     };
 
     const closeModal = () => {
@@ -110,20 +111,30 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
 
     useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((old) => {
-        if (old >= 100) {
-          clearInterval(interval);
-          setBidLoaded(true);
-          return 100;
-        }
-        return old + 5; // increase smoothly
-      });
-    }, 200); // smaller interval for smoother animation
+        let interval;
 
-    return () => clearInterval(interval);
-  }, []);
+        // Start the progress only when restart is true or on mount
+        interval = setInterval(() => {
+            setProgress((old) => {
+                if (old >= 100) {
+                    clearInterval(interval);
+                    setBidLoaded(true);
+                    return 100;
+                }
+                return old + 3;
+            });
+        }, 200);
 
+        // Cleanup
+        return () => clearInterval(interval);
+    }, [restart]); // runs every time restart changes
+
+    const handleRefresh = () => {
+        setBidLoaded(false);
+        setProgress(0);
+        // toggle restart to trigger the effect again
+        setRestart((prev) => !prev);
+    };
 
     return (
         <div className="self-stretch px-5 py-3 pb-4 bg-white rounded-lg 
@@ -377,7 +388,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                             disabled={amountError && !amount.trim()}
                             btnClick={() => {
                                 if (amountError) {
-                                  return null
+                                    return null
                                 }
                                 else {
                                     handleAmountSubmit()
@@ -413,37 +424,46 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         {/* Progress Bar */}
                         <ProgressBar title="Waiting for Passenger to Respond" progress={progress} setProgress={setProgress} />
 
-                        <CustomButton
-                            btnClick={() => {
-                                setModalType(null)
-                                // setModalType("loading")
-                            }}
+                        {
+                            bidLoaded ? (
+                                <CustomButton
+                                    btnClick={handleRefresh}
 
-                            name="Refresh"
-                            extendedStyles="w-full p-3 lg:p-4 
+                                    name="Refresh"
+                                    extendedStyles="w-full p-3 lg:p-4 
                         !bg-green-250 text-green-900 rounded-lg mb- mt-4" />
+                            ) : (
+                                <CustomButton
+                                    btnClick={handleRefresh}
+                                     disabled ={!bidLoaded}
+                                    name="Refresh"
+                                    extendedStyles="w-full p-3 lg:p-4 
+                        !bg-green-50 text-green-100 rounded-lg mb- mt-4" />
+                            )
+                        }
 
-                       {
-                        bidLoaded ? (
-                            <CustomButton
-                            btnClick={() => {
-                                navigate("/dashboard/bids")
-                            }}
-                             
-                            name="See Response"
-                            extendedStyles="w-full p-3 lg:p-4 
+
+                        {
+                            bidLoaded ? (
+                                <CustomButton
+                                    btnClick={() => {
+                                        navigate("/dashboard/bids")
+                                    }}
+
+                                    name="See Response"
+                                    extendedStyles="w-full p-3 lg:p-4 
                          text-green-900 bg-green-700 text-white rounded-lg mb-6 mt-4" />
 
-                        ) : (
-                            <CustomButton
-                            
-                             
-                            name="See Response"
-                            extendedStyles="w-full p-3 lg:p-4 
-                         text-green-900 bg-gray-100 text-white opacity-10 rounded-lg mb-6 mt-4" />
+                            ) : (
+                                <CustomButton
 
-                        )
-                       } 
+
+                                    name="See Response"
+                                    extendedStyles="w-full p-3 lg:p-4 
+                         text-white-100 !bg-green-50 text-white  rounded-lg mb-6 mt-4" />
+
+                            )
+                        }
                     </div>
                 </div>
             )}
