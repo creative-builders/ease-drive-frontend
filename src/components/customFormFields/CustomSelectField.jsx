@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { FaChevronDown, FaIdCard } from "react-icons/fa";
 import { Divider } from "../Divider/Divider";
+import { div } from "framer-motion/client";
 
 export const CustomSelectField = ({
   label,
