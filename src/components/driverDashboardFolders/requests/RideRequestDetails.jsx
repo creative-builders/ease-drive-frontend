@@ -355,7 +355,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                                 type="number"
                                 min="0"
                                 onChange={(e) => {
-                                    if (e.target.value < 100) {
+                                    if (e.target.value < 500) {
                                         setAmountError(true)
                                     }
                                     else {
@@ -365,7 +365,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                                 }}
                                 placeholder="Enter amount"
                                 leftIcon={NairaIcon}
-                                error={amountError ? "Bid price cannot be less than ₦100" : ""}
+                                error={amountError ? "Bid price cannot be less than ₦500" : ""}
 
                             />
                             {isAmountEmpty && (
@@ -435,7 +435,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                             ) : (
                                 <CustomButton
                                     btnClick={handleRefresh}
-                                     disabled ={!bidLoaded}
+                                    disabled={!bidLoaded}
                                     name="Refresh"
                                     extendedStyles="w-full p-3 lg:p-4 
                         !bg-green-50 text-green-100 rounded-lg mb- mt-4" />

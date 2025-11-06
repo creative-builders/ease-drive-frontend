@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { FaChevronDown, FaIdCard } from "react-icons/fa";
 import { Divider } from "../Divider/Divider"
-import { div } from "framer-motion/client";
 
 export const CustomSelectField = ({ label,
   name,
@@ -45,10 +43,14 @@ export const CustomSelectField = ({ label,
             <selected.iconRight className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px] text-neutral-400" />
           )}
         </div>
-        <RightIcon
-          className={`w-[18px] lg:w-[24px] h-[18px] lg:h-[24px] text-neutral-400  transition-transform ${open ? "rotate-180" : ""
-            }`}
-        />
+        {
+          RightIcon &&
+
+          <RightIcon
+            className={`w-[18px] lg:w-[24px] h-[18px] lg:h-[24px] text-neutral-400  transition-transform ${open ? "rotate-180" : ""
+              }`}
+          />
+        }
 
       </button>
 
