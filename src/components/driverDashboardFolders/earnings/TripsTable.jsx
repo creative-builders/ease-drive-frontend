@@ -8,7 +8,7 @@ import { formatDate } from "../../../utils/formatDate";
 function TripsTable({ columns, data, onSelectTrip }) {
 
   return (
-    <div className="p-4 bg-white rounded-2xl">
+    <div className="p-4 w-full bg-white rounded-2xl">
       <div className="overflow-x-auto">
         <table className="min-w-full text-sm text-left border-collapse">
           <thead>
@@ -195,7 +195,7 @@ export function TripsPage({ tripData = [], onView }) {
   };
 
   return (
-    <div className="flex  w-full flex-col lg:gap-6 gap-4">
+    <div className="flex w-full flex-col lg:gap-6 gap-4">
       <div className="bg-white rounded-2xl shadow">
         {/* Header with Filter */}
         <div className="flex justify-between items-center lg:px-6 lg:py-4 px-6 py-4">

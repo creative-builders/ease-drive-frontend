@@ -28,23 +28,23 @@ export function RideRequestsList({ requests, onSelect, viewAll }) {
 
 
   return (
-    <div className={`self-stretch lg:w-[560px] lg:mb- px-5 py-3 pb-4 bg-white rounded-lg inline-flex flex-col
+    <div className={`self-stretch lg:w-[520px] lg:mb- px-5 py-3 pb-4 bg-white rounded-lg inline-flex flex-col
      lg:justify-start justify-center lg:items-start gap-2 relative -z-1`}>
-      <div className="lg:w-[490px] w-[335px]  justify-center items-center 
-      inline-flex lg:justify-start lg:items-center gap-[10%] lg:gap-[30%] -z-1">
+      <div className="lg:w-[440px] w-[335px]  justify-center items-center 
+      inline-flex lg:justify-start lg:items-center gap-[10%] lg:gap-[22%] -z-1">
         <div className="text-black lg:text-lg text-base font-semibold font-poppins">
           Ongoing Ride Requests
         </div>
 
         {
           viewAll ? (
-            <div className="lg:ml-16">
+            <div className="lg:ml-20 ">
               <Link to={viewAll} className="text-green-600 text-sm font-semibold">
                 View all
               </Link>
             </div>
           ) : (
-            <div className="mx-4">
+            <div className="mx-4 lg:-mr-14">
               <Filter
                 options={["Recent", "Older"]}
                 title="Filter"

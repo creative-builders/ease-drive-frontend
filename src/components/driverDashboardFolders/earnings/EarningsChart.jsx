@@ -26,6 +26,17 @@ function EarningsChart({ title, data }) {
     setSortedItems(JSON.parse(JSON.stringify(data)));
   }, [data]);
   
+   const handleFilterChange = (option) => {
+    let sorted = [...data];
+
+    if (option === "Recent") {
+      sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    } else if (option === "Older") {
+      sorted.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+    }
+
+    setSortedItems(sorted);
+  };
 
   return (
     <div className="p-4 bg-white rounded-xl shadow w-full h-[263px] ">
@@ -37,10 +48,11 @@ function EarningsChart({ title, data }) {
           options={["Daily", "Weekly", "Monthly"]}
           itemsArray={data}
           title="Trip Type"
-          onSort={(selected) => {
-            const filtered = filterEarningsByRange(data, selected);
-            setSortedItems(filtered);
-          }}
+          onChange={handleFilterChange}
+          // onSort={(selected) => {
+          //   const filtered = filterEarningsByRange(data, selected);
+          //   setSortedItems(filtered);
+          // }}
         />
       </div>
 
@@ -123,7 +135,7 @@ console.log(chartData)
 
 
   return (
-    <div className="lg:w-[519px] lg:h-[263px] w-[380px] -z-1">
+    <div className="lg:w-[480px] lg:h-[263px] w-[380px] -z-1">
       <EarningsChart title="Earnings Analysis" data={chartData} />
     </div>
   );
