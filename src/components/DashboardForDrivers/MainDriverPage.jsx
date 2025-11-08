@@ -9,6 +9,7 @@ import { CarIcon } from "../../assets/icons/CarIcon";
 import { Wallet } from "../../assets/icons/Wallet";
 import { BitcoinBag } from "../../assets/icons/BitcoinBag";
 import { Star } from "../../assets/icons/Star";
+import PaymentResult from "../../components/PaymentResult"
 
 export default function MainDriverPage() {
   return (
@@ -32,6 +33,8 @@ export default function MainDriverPage() {
       <div className=" lg:w-full w-[395px]">
       <RecentTrips />
       </div>
+
+      <PaymentResult />
     </div>
   );
 }

@@ -33,7 +33,7 @@ export default function Notifications({ notifications = [] }) {
   const hasNotifications = notifications.length > 0;
 
   return (
-    <div className="flex h-[79px] lg:-ml-12 md:h-[799px] px-1 py-1 md:p-2 flex-col gap-2 md:gap-4 flex-shrink-0 rounded-lg bg-white self-stretch md:self-auto">
+    <div className="flex h-full lg:-ml-12 md:h-[799px] px-1 py-1 md:p-2 flex-col gap-2 md:gap-4 flex-shrink-0 rounded-lg bg-white self-stretch md:self-auto">
       {hasNotifications ? (
         Object.keys(grouped).map((group) => (
           <div key={group} className="mb-6 flex flex-col h-fit w-full px-2 py-3">
@@ -45,9 +45,9 @@ export default function Notifications({ notifications = [] }) {
                 </div>
 
                 <div>
-                  <p className="font-semibold text-[#9C9C9C] text-[10px] md:text-sm not-italic leading-normal">{note.type}</p>
-                  <p className="text-[#000] text-[10px] md:text-sm not-italic font-medium leading-normal">{note.message}</p>
-                  <span className="text-[#4B5563] text-[8px] md:text-xs not-italic font-medium leading-normal">
+                  <p className="font-semibold text-gray-600 text-[10px] md:text-sm not-italic leading-normal">{note.type}</p>
+                  <p className="text-gray-950 text-[10px] md:text-sm not-italic font-medium leading-normal">{note.message}</p>
+                  <span className="text-gray-900 text-[8px] md:text-xs not-italic font-medium leading-normal">
                     {formatNotificationTime(note.date)}
                   </span>
                 </div>

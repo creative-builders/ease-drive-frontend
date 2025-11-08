@@ -95,9 +95,6 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
             setIsAmountEmpty(true);
             return;
         }
-        // close amount modal, open loading modal
-
-        // setModalType("loading");
         submitRideBid({ rideId: _id, amount })
 
 

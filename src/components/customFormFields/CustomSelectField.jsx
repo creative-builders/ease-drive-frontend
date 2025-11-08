@@ -59,7 +59,7 @@ export const CustomSelectField = ({ label,
           {options.map((opt, idx) => {
             if (typeof opt === "string") {
               return (
-                <div>
+                <div key={idx}>
                   <div
                     key={idx}
                     onClick={() => handleSelect(opt)}
