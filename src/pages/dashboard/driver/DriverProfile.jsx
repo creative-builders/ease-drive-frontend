@@ -47,7 +47,7 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
     }
 
     // call mutate only when the user confirms deletion
-    deleteAccount(userData._id, {
+    deleteAccount(userData?._id, {
       onSuccess: () => {
         toast?.success?.("Account deleted successfully");
         setIsOpen(false);
