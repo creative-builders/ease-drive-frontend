@@ -40,6 +40,9 @@ export const bookRide =  async(credentials) => {
 }
 
 
+
+
+
 //Sample using formData
 // export const createRide = async( credentials) => {
 //   const formData =  new FormData();
@@ -77,3 +80,10 @@ export const createRide = async (credentials) => {
 
   return response.data;
 };
+
+
+export const getUserBids = async({ queryKey }) => {
+    const [_key, userId]  =  queryKey;
+    const response = await axiosInstancePrivate.get(`/v1/users/${userId}`);
+    return response.data;
+}
