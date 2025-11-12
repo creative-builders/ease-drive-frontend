@@ -1,19 +1,21 @@
 import { createContext, useContext, useState } from "react";
 import { validateFormFields } from "../utils/validateFormFields";
 
-
-
 const FormContext = createContext();
 
-export const FormProvider = ({ children, initialInputFields = {} }) => {
+export const FormProvider = ({
+  children,
+  initialInputFields = {}
+}) => {
   const [formData, setFormData] = useState(initialInputFields);
-  const [inputTouched, setInputTouched] = useState(false);
+  const [inputTouched, setInputTouched] = useState({});
 
   const handleUpdateFormData = (eOrName, value) => {
     if (typeof eOrName === "string") {
       // Direct key/value update
-      setFormData((prev) => ({ ...prev, [eOrName]: value }));
-      setInputTouched(true);
+      const fieldName = eOrName;
+      setFormData((prev) => ({ ...prev, [fieldName]: value }));
+      setInputTouched((prev) => ({ ...prev, [fieldName]: true }));
     } else if (eOrName?.target) {
       // Normal input change event
       const { name, type, value, checked, files } = eOrName.target;
@@ -23,15 +25,22 @@ export const FormProvider = ({ children, initialInputFields = {} }) => {
       if (type === "file") newValue = files ? Array.from(files) : [];
 
       setFormData((prev) => ({ ...prev, [name]: newValue }));
-      setInputTouched(true);
+      setInputTouched((prev) => ({ ...prev, [name]: true }));
     }
   };
 
-   const isFormValid = validateFormFields(formData)
+  const isFormValid = validateFormFields(formData);
 
   return (
     <FormContext.Provider
-      value={{ formData, inputTouched, setFormData, handleUpdateFormData , isFormValid}}
+      value={{
+        formData,
+        inputTouched,
+        setFormData,
+        setInputTouched,
+        handleUpdateFormData,
+        isFormValid,
+      }}
     >
       {children}
     </FormContext.Provider>
