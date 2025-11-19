@@ -90,7 +90,7 @@ export const Trips = () => {
         />
       </div>
 
-      <div className="lg:w-[1050px]">
+      <div className="lg:w-[990px]">
         <TripsPage className="" tripData={rideRequests} onView={setSelectedTrip} />
       </div>
 

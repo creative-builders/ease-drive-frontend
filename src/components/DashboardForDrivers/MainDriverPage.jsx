@@ -34,7 +34,7 @@ export default function MainDriverPage() {
       <RecentTrips />
       </div>
 
-      <PaymentResult />
+      {/* <PaymentResult /> */}
     </div>
   );
 }
