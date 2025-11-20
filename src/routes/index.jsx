@@ -27,6 +27,7 @@ import Notifications from '../pages/dashboard/driver/Notification';
 import DriverProfile from '../pages/dashboard/driver/DriverProfiles';
 import { SupportPage } from "../pages/dashboard/passenger/SupportPage";
 import { ViewDriverPage } from '../pages/dashboard/passenger/veiw-driver-detail/ViewDriverPage';
+import Privacy from '../pages/auth/Passengers/Privacy';
 
 
 
@@ -45,6 +46,7 @@ const IndexRoute = () => {
       <Route path="/driver-signup" element={<RegisterDriver />} />
        <Route path="/driver-kyc" element={<DriverKycPage />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/privacy" element={<Privacy />} />
       {/* <Route path="/notification" element={<NotificationsPage />} /> */}
   
     
