@@ -16,13 +16,13 @@ const ProgressBar = ({ progress, setProgress, title }) => {
     }, []);
 
   return (
-    <>
+    <div className="w-full">
       <h2 className="mb-8 text-base lg:text-lg font-semibold text-gray-950">{title}</h2>
         <div
           className="h-3 bg-blue-600 rounded-full transition-all duration-200"
           style={{ width: `${progress}%` }}
         ></div>
-    </>
+    </div >
   );
 };
 

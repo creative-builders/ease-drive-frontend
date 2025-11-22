@@ -104,22 +104,6 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
         setShowModal(false);
 
     };
-
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         setProgress((old) => {
-    //             if (old >= 100) {
-    //                 clearInterval(interval);
-    //                 return 100;
-    //             }
-    //             return old + 1; // increase 1% every tick
-    //         });
-    //     }, 400); // speed (100ms per step)
-
-    //     return () => clearInterval(interval);
-    // }, []);
-
-
     return (
         <div className="self-stretch px-5 py-3 pb-4 bg-white rounded-lg 
       inline-flex flex-col lg:w-[460px] w-[380px]   lg:justify-start justify-center lg:items-start gap-2 relative">
