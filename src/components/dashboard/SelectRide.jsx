@@ -7,6 +7,9 @@ import { Divider } from "../Divider/Divider"
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext"
 import { InputField } from "../customFormFields/InputField"
 import { AddFile } from "../AddFile"
+import { Modal } from "../Modal"
+import { useState } from "react"
+import ProgressBar from "../ProgressBar"
 
 export const SelectRide = ({
   handleSubmit,
@@ -20,7 +23,8 @@ export const SelectRide = ({
       handleUpdateFormData,
   } = useStepFlowContext();
 
-  console.log(formData)
+  const [progress, setProgress] = useState(0);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const isLuggageAvailable = formData?.luggages === "yes";
 
@@ -35,6 +39,21 @@ export const SelectRide = ({
 
 
   return (
+    <>
+    {
+     !isOpenModal && (
+      <Modal position="center" closeModal={() => setIsOpenModal(prev => !prev)}>
+        <div className="mb-8 w-full">
+          <ProgressBar progress={progress} setProgress={setProgress} title="Searching for Available Drivers" />
+        </div>
+        <CustomButton
+         name ="Refresh"
+         extendedStyles= { "w-full h-[50px] lg:h-[60px] bg-primary-200 text-primary-950 rounded-2xl" }
+         btnClick={() => {}}
+        />
+      </Modal>
+     )
+    }
     <div className="px-[14px] py-4 bg-white basis-full min-h-[210px] rounded-2xl">
         <div className="mb-4 lg:mb-5 flex items-center gap-x-1.5">
              <div className="flex justify-center items-center w-[38px] h-[36px] rounded-[30px] bg-primary-50 py-[3px] px-1">
@@ -149,5 +168,6 @@ export const SelectRide = ({
           />
         </div>
     </div>
+    </>
   )
 }

@@ -105,19 +105,19 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
     };
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setProgress((old) => {
-                if (old >= 100) {
-                    clearInterval(interval);
-                    return 100;
-                }
-                return old + 1; // increase 1% every tick
-            });
-        }, 400); // speed (100ms per step)
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setProgress((old) => {
+    //             if (old >= 100) {
+    //                 clearInterval(interval);
+    //                 return 100;
+    //             }
+    //             return old + 1; // increase 1% every tick
+    //         });
+    //     }, 400); // speed (100ms per step)
 
-        return () => clearInterval(interval);
-    }, []);
+    //     return () => clearInterval(interval);
+    // }, []);
 
 
     return (
