@@ -1,11 +1,39 @@
 import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { userAtom } from "../../../components/atoms/userAtom";
+import { useQuery } from "@tanstack/react-query";
+import { getUserRides } from "../../../store/users/api";
+import { RideHistoryLoader } from "../../../components/dashboard/loaders/RideHistoryLoader";
+import toast from "react-hot-toast";
 
 
 export const Rides = () => {
   // const tabs = ["Ride History", "Ongoing Rides", "Scheduled Rides"];
   const tabs = ["Ride History", "Ongoing Rides"];
+  const logginedUser = useRecoilValue(userAtom);
+  console.log(logginedUser);
 
   const [activeTab, setActiveTab] = useState(tabs[0]);
+
+   const { isLoading } = useQuery(["getUserRides", logginedUser?.id || logginedUser?._id], getUserRides,
+      {
+        onSuccess: (response) => {
+          setUser(response?.data)
+        },
+        
+        onError:(error) => {
+        toast.error(error?.message || error?.response?.data?.message)
+        // If authentication fails (no token or invalid token), redirect to login page
+        navigate('/dashboard'); 
+        }
+      }
+    );
+
+    if(isLoading){
+      return(
+        <RideHistoryLoader variant="list"/>
+      )
+    }
 
   return (
     <div className="ml-4 lg:ml-0">

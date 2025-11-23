@@ -67,7 +67,7 @@ export const RideHistoryLoader = ({ variant = "card", items = 5, className = "" 
         className={`space-y-6 bg-white w-full lg:w-[686px] md:w-[520px] rounded-xl shadow-sm p-4 mb-6 ${className}`}
       >
         <div className="flex space-x-2">
-          <ShimmerBlock className="h-6 w-1/2 rounded-md" />
+          <ShimmerBlock className="h-7 w-[202px] rounded-md" />
         </div>
 
         {skeletonItems.map((i) => (
@@ -76,7 +76,7 @@ export const RideHistoryLoader = ({ variant = "card", items = 5, className = "" 
             className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 mb-2 gap-4"
           >
             <div className="flex items-center gap-4 w-full sm:w-auto">
-              <ShimmerBlock className="h-[40px] w-[40px] sm:h-[80px] sm:w-[80px] rounded-full" />
+              <ShimmerBlock className="bg-red-500 h-[40px] w-[40px] lg:h-[80px] lg:w-[80px] rounded-full" />
 
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-16 items-start sm:items-baseline w-full">
                 <div className="flex flex-col gap-2 w-full">
