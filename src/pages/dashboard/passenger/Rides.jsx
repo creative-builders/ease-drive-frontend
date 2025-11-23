@@ -31,7 +31,10 @@ export const Rides = () => {
 
     if(isLoading){
       return(
+        <div className="flex flex-col lg:flex-row lg:gap-x-4">
         <RideHistoryLoader variant="list"/>
+        <RideHistoryLoader variant="card"/>
+        </div>
       )
     }
 

@@ -15,7 +15,7 @@ export const RideHistoryLoader = ({ variant = "card", items = 5, className = "" 
   if (variant === "card") {
     return (
       <div
-        className={`p-4 space-y-4 bg-white rounded-xl hidden md:block lg:block shadow-sm mb-6 w-full lg:w-[400px] md:w-[360px] ${className}`}
+        className={`p-4 space-y-4 bg-white rounded-xl hidden lg:block shadow-sm mb-6 w-full lg:w-[394px]${className}`}
       >
         <ShimmerBlock className="h-6 w-1/2 rounded-md" />
 
@@ -64,7 +64,7 @@ export const RideHistoryLoader = ({ variant = "card", items = 5, className = "" 
   if (variant === "list") {
     return (
       <div
-        className={`space-y-6 bg-white w-full lg:w-[686px] md:w-[520px] rounded-xl shadow-sm p-4 mb-6 ${className}`}
+        className={`space-y-6 bg-white basis-full lg:basis-auto rounded-xl shadow-sm p-4 mb-6 ${className}`}
       >
         <div className="flex space-x-2">
           <ShimmerBlock className="h-7 w-[202px] rounded-md" />
@@ -73,30 +73,32 @@ export const RideHistoryLoader = ({ variant = "card", items = 5, className = "" 
         {skeletonItems.map((i) => (
           <div
             key={i}
-            className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 mb-2 gap-4"
+            className="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-neutral-100 mb-2 gap-4"
           >
-            <div className="flex items-center gap-4 w-full sm:w-auto">
-              <ShimmerBlock className="bg-red-500 h-[40px] w-[40px] lg:h-[80px] lg:w-[80px] rounded-full" />
+           <div className="basis-full lg:basis-[480px] h-full">
+             <div className="py-2.5 flex items-center gap-x-2 w-full">
+              <ShimmerBlock className="w-[40px] aspect-square rounded-full shrink-0 lg:w-[80px]" />
 
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-16 items-start sm:items-baseline w-full">
+
+              <div className="basis-auto flex flex-col lg:flex-row gap-4 lg:gap-16 items-start w-full">
                 <div className="flex flex-col gap-2 w-full">
-                  <div className="flex flex-wrap gap-2">
-                    <ShimmerBlock className="h-3 w-2/3 lg:w-[282px] rounded" />
-                    <ShimmerBlock className="h-3 w-1/4 lg:w-[85px] rounded" />
+                  <div className="mb-4 flex flex-wrap gap-2">
+                    <ShimmerBlock className="h-5 w-[282px] rounded" />
+                    <ShimmerBlock className="h-5 w-[85px] rounded" />
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <ShimmerBlock className="h-3 w-1/3 lg:w-[146px] rounded" />
-                    <ShimmerBlock className="h-3 w-1/4 lg:w-[76px] rounded" />
-                    <ShimmerBlock className="h-3 w-1/3 lg:w-[130px] rounded" />
+                    <ShimmerBlock className="h-5 w-[146px] rounded" />
+                    <ShimmerBlock className="h-5 w-[76px] rounded" />
+                    <ShimmerBlock className="h-3 w-[130px] rounded" />
                   </div>
-                  <ShimmerBlock className="h-2 w-1/4 lg:w-[97px] rounded" />
+                  <ShimmerBlock className="h-2 w-[97px] rounded" />
                 </div>
-
-                <div className="flex flex-row sm:flex-col gap-2 sm:gap-4 items-end justify-between sm:justify-center w-full sm:w-auto">
-                  <ShimmerBlock className="h-4 w-[60px] lg:w-[81px] rounded-md" />
-                  <ShimmerBlock className="h-4 w-[40px] lg:w-[41px] rounded-md" />
-                </div>
-              </div>
+           </div>
+            </div>
+            </div>
+            <div className="flex flex-row lg:flex-col gap-2 lg:gap-4 items-end justify-between lg:justify-center w-full">
+              <ShimmerBlock className="h-5 w-[81px] rounded-md" />
+              <ShimmerBlock className="h-5 w-[41px] rounded-md" />
             </div>
           </div>
         ))}
