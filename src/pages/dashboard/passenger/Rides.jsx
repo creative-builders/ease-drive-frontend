@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getUserRides } from "../../../store/users/api";
 import { RideHistoryLoader } from "../../../components/dashboard/loaders/RideHistoryLoader";
 import toast from "react-hot-toast";
+import { LocationIcon } from "../../../assets/icons/LocationIcon";
+import { RidesLocationIcon } from "../../../assets/icons/RidesLocationIcon";
 
 
 export const Rides = () => {
@@ -94,6 +96,17 @@ export const Rides = () => {
                           {ride?.status}
                         </button>
                       </div>
+                             {/* for desktop ui */}
+                 <div className="flex gap-x-4">
+                  <div>
+                    <RidesLocationIcon className="w-[18px] h-[18px]"/>
+                    <span>20 mins away from you</span>
+                  </div>
+                  <div>
+                    <RidesLocationIcon className="w-[18px] h-[18px]"/>
+                    <span>20 mins away from you</span>
+                  </div>
+                 </div>
                     </div>
                   </div>
                   <button className="text-sm text-green-600 text-xs lg:text-sm font-medium">View Details</button>
