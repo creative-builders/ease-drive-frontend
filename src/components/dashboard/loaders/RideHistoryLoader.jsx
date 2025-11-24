@@ -73,7 +73,7 @@ export const RideHistoryLoader = ({ variant = "card", items = 5, className = "" 
         {skeletonItems.map((i) => (
           <div
             key={i}
-            className="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-neutral-100 mb-2 gap-4"
+            className="py-2.5 flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-neutral-100 mb-2 gap-4"
           >
            <div className="basis-full lg:basis-[480px] h-full">
              <div className="py-2.5 flex items-center gap-x-2 w-full">
