@@ -1,5 +1,16 @@
+import { useState } from "react"
+import { useNavigate } from "react-router-dom";
+import CustomButton from "../../../components/CustomButton"
 
 const Privacy = () => {
+
+    const [isChecked, setIsChecked] = useState(false);
+    const navigate = useNavigate();
+
+    const handleNavigate = () =>{
+        navigate("/signup-as")
+    }
+
     return (
         <div className="bg-light flex flex-col items-center justify-center gap-6">
             <header className="mt-5">
@@ -166,6 +177,27 @@ const Privacy = () => {
                     </p>
                 </article>
             </main>
+            <div className="h-fit w-4/5 p-2 mb-6">
+                <section className="flex items-center gap-4">
+                    <input 
+                    className="ml-2 outline-0 focus:ring-0 border border-grey-400 outline-none focus:outline-none" 
+                    type="checkbox"
+                    checked={isChecked}
+                    onChange={()=>setIsChecked(!isChecked)}
+                />
+                <p>I agree to the terms and conditions</p>
+                </section>
+
+                <CustomButton
+                    name="I Agree"
+                    disabled={!isChecked}
+                    btnClick={handleNavigate}
+                    extendedStyles={`
+                    px-4 py-4 w-full rounded-2xl text-white gap-2 mt-6 
+                    ${isChecked ? "bg-green-800 cursor-pointer" : "bg-gray-600 cursor-not-allowed"}
+                    `}
+                />
+            </div>
         </div>
     )
 }
