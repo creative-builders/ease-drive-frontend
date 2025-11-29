@@ -67,8 +67,8 @@ export const Earnings = () => {
                     </div>
 
                     {
-                        isFetching ? (
-                            <div className=" lg:h-[858px] lg:w-[1050px] h-full w-[380px] flex flex-col justify-start ">
+                        isLoading ? (
+                            <div className="lg:w-[990px] h-full w-[380px] flex flex-col justify-start ">
                                 <ConfirmBookingLoader type="list" items={3} />
                             </div>
 
