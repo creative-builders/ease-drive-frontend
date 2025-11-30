@@ -170,10 +170,10 @@ const Privacy = () => {
 
                 <article>
                     <h3  className="text-[#333] text-xl not-italic font-bold leading-7">19 Contact Information</h3>
-                    <p className="text-[#333] text-base not-italic font-normal leading-6">For inquiries, feedback, or complaints, contact:
-                        📧 info@ease-drive.com
-                        📞 +234 9017912839
-                        🏢 University of Nigeria, Nsukka – Innovation Hub
+                    <p className="text-[#333] text-base not-italic font-normal leading-6">For inquiries, feedback, or complaints, contact: <br />
+                        📧 info@ease-drive.com <br />
+                        📞 +234 9017912839 <br />
+                        🏢 University of Nigeria, Nsukka – Innovation Hub <br />
                     </p>
                 </article>
             </main>
