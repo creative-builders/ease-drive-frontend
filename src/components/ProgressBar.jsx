@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const ProgressBar = ({ progress, setProgress, title }) => {
+const ProgressBar = ({ progress, setProgress, title, resetTrigger }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((old) => {
@@ -13,7 +13,7 @@ const ProgressBar = ({ progress, setProgress, title }) => {
         }, 100); // speed (100ms per step)
 
         return () => clearInterval(interval);
-    }, []);
+    }, [resetTrigger]);
 
   return (
     <div className="w-full">

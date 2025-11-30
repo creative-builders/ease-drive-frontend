@@ -12,9 +12,13 @@ import { FormProvider, useStepFlowContext } from "../../../hooks/useStepFlowForm
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createRide } from "../../../store/users/api";
 import toast from "react-hot-toast";
+import ProgressBar from "../../../components/ProgressBar";
 
 const PassengerDashboardIndexContext = () => {
   const [expanded, setExpanded] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [isSearchingDrivers, setIsSearchingDrivers] = useState(false);
+  const [refreshTrigger, setRefreshTrigger] = useState(0); 
   const { 
     coords,  
     locationEnabled, 
@@ -32,6 +36,8 @@ const PassengerDashboardIndexContext = () => {
       formData
   } = useStepFlowContext();
 
+  const queryClient = useQueryClient();
+
 
   useEffect(() => {
     setFormData(prev => ({
@@ -44,9 +50,16 @@ const PassengerDashboardIndexContext = () => {
         }
       }
     }))
-  },[coords,locationName])
+  },[coords,locationName]);
 
-  const queryClient = useQueryClient();
+  //Reset progress when modal closes
+  useEffect(() => {
+    if (!isSearchingDrivers) {
+      setProgress(0);
+    }
+  }, [isSearchingDrivers]);
+
+
 
   const { mutate:submitCreateRide , isLoading } = useMutation(createRide, {
      onSuccess: (response) => {
@@ -67,7 +80,10 @@ const PassengerDashboardIndexContext = () => {
     tripType:"",
     luggages:"",
     searchValue:""
-      }))
+      }));
+
+    setIsSearchingDrivers(true);
+    
      },
      onError:(error) => {
       toast.error(error.response?.data?.message || error.message);
@@ -83,10 +99,42 @@ const PassengerDashboardIndexContext = () => {
     
     submitCreateRide(formData)
   };
+
+    // Determine if progress is actively loading (0-99%)
+  const isProgressLoading = progress > 0 && progress < 100;
+
+  const handleRefresh = () => {
+  if(isProgressLoading) return;
+
+   setProgress(0);
+   setRefreshTrigger(prev => prev + 1);
+  }
+
+    // Determine if refresh should be disabled
+  // const isRefreshDisabled = isProgressLoading || isFetchingRides || isRefetchingRides || isRecentlyRefreshed;
+    // Determine if refresh should be disabled
+  const isRefreshDisabled = isProgressLoading
   
   return (
     <>
-      {/* modal prompt */}
+      {/* Driver Search Modal - Shows after ride creation */}
+      {
+        isSearchingDrivers && (
+          <Modal position="center" closeModal={() => setIsOpenModal(prev => !prev)}>
+            <div className="mb-8 w-full">
+              <ProgressBar resetTrigger={refreshTrigger} progress={progress} setProgress={setProgress} title="Searching for Available Drivers" />
+            </div>
+            <CustomButton
+             name ="Refresh"
+             extendedStyles= { "w-full h-[50px] lg:h-[60px] bg-primary-200 text-primary-950 rounded-2xl" }
+             btnClick={handleRefresh}
+             disabled={isRefreshDisabled}
+            />
+          </Modal>
+         )
+      }
+      
+      {/* Location Permission Modal */}
       {isOpen && (
         <Modal
           closeModal={() => {
