@@ -45,13 +45,13 @@ export const SignupOptions = () => {
                 <div className="lg:mt-16 gap-8 opacity-100  ">
 
                   <div className='flex lg:gap-12 gap-12 items-center justify-center flex-row py-6'>
-                    <a href="/privacy">
+                    <a href="/terms-of-use">
                       <p className=" font-medium text-center text-primary-700 
                   lg:text-sm text-sm font-inter pt-2">
                         Terms of use
                       </p>
                     </a>
-                    <a href="">
+                    <a href="/privacy">
                       <p className=" font-medium text-center text-primary-700 lg:text-sm text-sm font-inter   pt-2">
                         Privacy Policy
                       </p>
@@ -65,9 +65,6 @@ export const SignupOptions = () => {
               <div className="lg:w-[528px] lg:h-[638px] lg:block hidden opacity-100 rounded-[45px]">
                 <img src="/signup-banner.png" alt="Signup Banner " className='lg:w-[528px] lg:h-[623px] lg:rounded-[45px]' />
               </div>
-
-
-
             </div>
           </div>
         </div>
