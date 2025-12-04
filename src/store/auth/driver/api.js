@@ -58,7 +58,7 @@ export const driverKYCUpdate = async ({ credentials, userId, whois }) => {
     return response.data;
   } catch (error) {
     const errorMessage = error.response?.data?.message || error.message;
-    console.error("KYC Update Error:", errorMessage);
+    // console.error("KYC Update Error:", errorMessage);
     throw new Error(errorMessage || "KYC update failed");
   }
 };
@@ -123,6 +123,16 @@ export const bidForARid = async ({ rideId, amount, message }) => {
 export const getDriverDetails = async ({ userID }) => {
   try {
     const response = await axiosInstancePrivate.get(`v1/users/${userID}`)
+    return response.data
+  } catch (error) {
+    console.error("API Error:", error.response?.data || error.message);
+    throw error;
+  }
+}
+
+export const withdrawDriverEarnings = async ({ credentials }) => {
+  try {
+    const response = await axiosInstancePrivate.post(`/v1/payment/withdraw`, credentials);
     return response.data
   } catch (error) {
     console.error("API Error:", error.response?.data || error.message);

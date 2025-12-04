@@ -15,9 +15,10 @@ import { PlateNumberIcon } from '../../../assets/icons/PlateNumberIcon'
 import { CreditCardIcon } from '../../../assets/icons/CreditCardIcon';
 import { BankHouseIcon } from '../../../assets/icons/BankHouseIcon';
 import { ResetSuccess } from '../../../assets/icons/ResetSuccess'
+import toast from 'react-hot-toast';
 
 import LoadingSpinner from '../../LoadingSpinner';
-import { driverKYCUpdate, getDriverDetails } from "../../../store/auth/driver/api"
+import { driverKYCUpdate, getDriverDetails, withdrawDriverEarnings } from "../../../store/auth/driver/api"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { userAtom } from "../../atoms/userAtom";
 import { useNavigate } from 'react-router-dom'
@@ -63,14 +64,14 @@ export const AccountCenter = () => {
     const showaccountNameerror =
         inputTouched && inputs?.bankAccountHolderName.length > 0 && !isaccountNameValid;
 
-    const isPinValid = inputs.pin.length >= 4 && inputs.pin == "1234";
-    const showPasswordError = inputTouched && inputs.pin.length > 0 && !isPinValid;
+    // const isPinValid = inputs.pin.length >= 4 && inputs.pin == "1234";
+    // const showPasswordError = inputTouched && inputs.pin.length > 0 && !isPinValid;
 
     const showNewPinError = inputTouched && inputs.newPin.length !== 4
 
     const showPinNotMatchedError = inputTouched && inputs.newPin !== inputs.confirmNewPin
 
-
+    // console.log(userData)
     useEffect(() => {
         setDriverData(userData?.driverProfile)
     }, [userData]);
@@ -84,17 +85,34 @@ export const AccountCenter = () => {
 
 
 
-    const { mutate: submitDriverKYC, isLoading } = useMutation(
+    const { mutate: submitDriverKYC, } = useMutation(
         driverKYCUpdate,
         {
             onSuccess: (data) => {
-                toast.success(response?.message);
+                toast.success(data?.message);
                 queryClient.invalidateQueries(["getUserProfile"]);
                 setisSubmitting(false)
                 setModalType("accountsuccess");
             },
             onError: (error) => {
-                toast.error(error.response?.data?.message || error.message);
+                toast.error(error?.message || "An error occurred");
+            }
+        }
+    );
+
+
+    const { mutate: handleWithdrawal } = useMutation(
+        withdrawDriverEarnings,
+        {
+            onSuccess: (data) => {
+                toast.success(data?.message);
+                queryClient.invalidateQueries(["getUserProfile"]);
+                setisSubmitting(false)
+                // setModalType("accountsuccess");
+                setModalType("success")
+            },
+            onError: (error) => {
+                toast.error(error?.message || "An error occurred");
             }
         }
     );
@@ -109,10 +127,17 @@ export const AccountCenter = () => {
     };
 
     const handlePinSubmit = () => {
-        setModalType("success")
-        setTimeout(() => {
-            setModalType("failed")
-        }, 7000);
+
+        handleWithdrawal({
+            credentials: {
+                amount: parseInt(inputs.amount),
+                account_number: inputs?.bankAccountNumber,
+                bank_name: inputs?.bankName,
+                bank_holder_name: inputs?.bankAccountHolderName,
+                transactionPin: inputs.pin
+            }, userId: userData?._id
+        })
+
 
     }
 
@@ -121,6 +146,7 @@ export const AccountCenter = () => {
     }
 
     const handleBankDetailsSubmit = () => {
+
         submitDriverKYC({
             credentials: {
                 bankName: inputs.bankName,
@@ -137,7 +163,16 @@ export const AccountCenter = () => {
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
         setInputTouched(true);
     };
+
     const handlePinUpdate = () => {
+        submitDriverKYC({
+            credentials: {
+                bankName: inputs.bankName,
+                bankAccountHolderName: inputs.bankAccountHolderName,
+                bankAccountNumber: inputs.bankAccountNumber,
+                transactionPin: inputs.newPin
+            }, userId: userData?._id
+        });
         setModalType("resetsuccess")
     }
 
@@ -244,17 +279,19 @@ export const AccountCenter = () => {
 
                                     <div className=' flex flex-col justify-start items-start gap-2 w-[100%] '>
                                         <div className='flex lg:text-base text-sm font-semibold text-gray-800 gap-4'>
-                                            Bank Name
+                                            {bankName || "No Bank Selected"}
                                             <span className='lg:text-xs text-[10px] text-blue-500 bg-green-50 px-4 rounded-xl mt-'>Default</span>
                                         </div>
 
                                         <div className='flex gap-2'>
-                                            <p className='lg:text-sm text-[10px]'>Account Number : <span>023****3043</span> </p>
+                                            <p className='lg:text-sm text-[10px]'>Account Number : <span>{bankAccountNumber}</span> </p>
 
                                         </div>
                                     </div>
-                                    <div className='w-[25%]'>
-                                        <EditIcon className="inline mr-2" />
+                                    <div className='w-[25%]' onClick={() => setModalType("bankdetails")}>
+                                        <EditIcon className="inline mr-2 cursor-pointer"
+
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -323,29 +360,16 @@ export const AccountCenter = () => {
 
                         {/* Input with ₦ symbol */}
                         <div className="relative w-full">
-                            <div className=''>
-                                {/* <InputField
-                                    label="Enter PIN"
-                                    type="text"
-                                    onChange={(e) => setPin(e.target.value)}
-                                    placeholder="Enter pin"
-                                    rightIconOpen={EyeOpenIcon}
-                                    rightIconClose={EyeCloseIcon}
-                                />
+                            <div className='flex flex-col gap-3'>
 
-                                {isPinInvalid && (
-                                    <p className="text-red-500 text-sm mt-1 font-poppins ">Invalid PIN</p>
-                                )} */}
-
-
-                                <div className='flex justify-end cursor-pointer lg:-mb-6 -mb-6 font-medium text-xs lg:text-lg text-green-600'>
-                                    <button className='cursor-pointer'>
+                                <div onClick={() => setModalType("withdralpin")} className='flex justify-end  cursor-pointer z-1 lg:-mb-6 -mb-6 font-medium text-xs lg:text-lg text-green-600'>
+                                    <button type='button' onClick={() => setModalType("withdralpin")} className='cursor-pointer lg:-mb-2 py-2 ' >
                                         Forgot PIN?
                                     </button>
                                 </div>
 
 
-                                <div className='w-[100%]'>
+                                <div className='-z-1'>
                                     <InputField
                                         label="Enter PIN"
                                         name="pin"
@@ -353,7 +377,7 @@ export const AccountCenter = () => {
                                         value={inputs.pin}
                                         onChange={handleChange}
                                         leftIcon={LockPasswordIcon}
-                                        error={showPasswordError ? "Invalid PIN" : ""}
+                                        // error={showPasswordError ? "Invalid PIN" : ""}
                                         toggleable
                                         showPassword={showPassword}
                                         handleTogglePassword={handleTogglePassword}
@@ -584,7 +608,7 @@ export const AccountCenter = () => {
 
                         </div>
                         <CustomButton
-                            name="Confirm Withdrawal"
+                            name="Confirm PIN Setup"
                             disabled={!inputs.newPin.trim() || !inputs.confirmNewPin.trim()}
                             btnClick={handlePinUpdate}
                             extendedStyles={`font-medium lg:py-3 py-3 w-full p-3 lg:p-4 rounded-lg bg-green-700 px-4 rounded-xl 

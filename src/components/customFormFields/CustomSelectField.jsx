@@ -15,6 +15,13 @@ export const CustomSelectField = ({ label,
   const handleSelect = (option) => {
     setSelected(option);
     setOpen(false);
+
+    onChange({
+      target: {
+        name,
+        value: typeof option === "string" ? option : option.value,
+      },
+    });
   };
 
   return (

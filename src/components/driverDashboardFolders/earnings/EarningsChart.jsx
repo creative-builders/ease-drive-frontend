@@ -58,7 +58,7 @@ function EarningsChart({ title, data }) {
 
       {/* Pie Chart */}
       <div className="w-[100%] h-[203px] flex justify-center relative items-center">
-        <div className="absolute inset-0 z-0">
+        <div className="relative w-full h-full">
           <ResponsiveContainer width="100%" height="100%" className="piechart">
             <PieChart className="relative z-0">
               <Pie
@@ -131,11 +131,11 @@ export function DashboardEarningChart({ tripData }) {
     { name: "Pending", value: Number(pending) },
     { name: "Cancelled", value: Number(cancelled)},
   ];
-console.log(chartData)
+// console.log(chartData)
 
 
   return (
-    <div className="lg:w-[480px] lg:h-[263px] w-[380px] -z-1">
+    <div className="lg:w-[480px] lg:h-[263px] w-[380px] ">
       <EarningsChart title="Earnings Analysis" data={chartData} />
     </div>
   );
