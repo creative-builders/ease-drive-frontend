@@ -1,3 +1,6 @@
+import { EmailSignedIcon } from "../../../assets/icons/EmailSignedIcon"
+import { HouseBuilding } from "../../../assets/icons/HouseBuilding"
+import { PhoneIcon } from "../../../assets/icons/PhoneIcon"
 
 
 const TermsOfUse = () => {
@@ -159,12 +162,15 @@ const TermsOfUse = () => {
                     <p className="text-[#333] text-base not-italic font-normal leading-6">These Terms are governed by the laws of Nigeria, with jurisdiction in Enugu State.</p>
                 </article>
 
-                <article>
+                <article className="flex flex-col gap-4">
                     <h3  className="text-[#333] text-xl not-italic font-bold leading-7">19. Contact Information</h3>
-                    <p className="text-[#333] text-base not-italic font-normal leading-6">For inquiries, feedback, or complaints, contact: <br />
-                        📧 info@ease-drive.com <br />
-                        📞 +234 9017912839 <br />
-                        🏢 University of Nigeria, Nsukka – Innovation Hub <br />
+                    <p className="flex flex-col gap-2 text-[#333] text-base not-italic font-normal leading-6">For inquiries, feedback, or complaints, contact: <br />
+                        <span className="flex items-center gap-2"><EmailSignedIcon stroke="#000" /> info@ease-drive.com</span>
+                         
+                        <span className="flex items-center gap-2"><PhoneIcon stroke="#000" /> +234 9017912839 </span>
+                        
+                        <span className="flex items-center gap-2"><HouseBuilding /> University of Nigeria, Nsukka – Innovation Hub</span> 
+                        
                     </p>
                 </article>
             </main>
