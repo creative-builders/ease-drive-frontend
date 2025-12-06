@@ -39,7 +39,7 @@ export const AccountCenter = () => {
     const [pin, setPin] = useState("")
     const [isAmountEmpty, setIsAmountEmpty] = useState(false);
     const [isSumitting, setisSubmitting] = useState(false)
-    const [isPinInvalid, setIsPinInvalid] = useState(false)
+    const [isPinInvalid, setIsPinInvalid] = useState("")
     const [driverData, setDriverData] = useState({})
     const [showPassword, setShowPassword] = useState(false);
     const [inputTouched, setInputTouched] = useState(false);
@@ -101,7 +101,7 @@ export const AccountCenter = () => {
     );
 
 
-    const { mutate: handleWithdrawal } = useMutation(
+    const { mutate: handleWithdrawal, isLoading } = useMutation(
         withdrawDriverEarnings,
         {
             onSuccess: (data) => {
@@ -112,7 +112,13 @@ export const AccountCenter = () => {
                 setModalType("success")
             },
             onError: (error) => {
-                toast.error(error?.message || "An error occurred");
+                const backendMessage = error?.response?.data?.message;
+                setIsPinInvalid(backendMessage)
+                toast.error(backendMessage || "An error occurred");
+
+                setTimeout(() => {
+                    setIsPinInvalid("");
+                }, 5000);
             }
         }
     );
@@ -123,18 +129,19 @@ export const AccountCenter = () => {
             return;
         }
         // close amount modal, open loading modal
+        inputs.pin = ""
         setModalType("enterpin");
     };
 
     const handlePinSubmit = () => {
-
         handleWithdrawal({
             credentials: {
                 amount: parseInt(inputs.amount),
-                account_number: inputs?.bankAccountNumber,
-                bank_name: inputs?.bankName,
-                bank_holder_name: inputs?.bankAccountHolderName,
-                transactionPin: inputs.pin
+                account_number: bankAccountNumber,
+                bank_name: bankName,
+                bank_holder_name: bankAccountHolderName,
+                transactionPin: inputs.pin,
+                reference: `WD-${Date.now()}`
             }, userId: userData?._id
         })
 
@@ -319,7 +326,7 @@ export const AccountCenter = () => {
             {modalType === "enterpin" && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center ">
                     <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-2 w-[390px] lg:top-[] 
-                                    top-[35%] lg:top-0 h-[720px] lg:w-[633px] lg:h-[580px]">
+                                    top-[35%] lg:top-0 h-[720px] lg:w-[633px] lg:h-[590px]">
                         {/* Close Button */}
                         <button
                             onClick={() => setModalType(null)}
@@ -339,18 +346,22 @@ export const AccountCenter = () => {
 
                         </div>
 
-                        <div className='lg:w-[100%] border-[2px] border-gray-50 lg:h-[182px] my-2 px-2 py-4 rounded-[10px] flex flex-col gap-2'>
+                        <div className='lg:w-[100%] border-[2px] border-gray-50 lg:h-[198px] my-2 px-2 py-4 rounded-[10px] flex flex-col gap-2'>
                             <div className='w-full flex justify-between'>
                                 <p className='lg:text-lg text-xs font-poppins font-regular'>Amount</p>
                                 <p className='lg:text-lg text-xs font-poppins font-regular text-blue-500'>₦{inputs.amount}</p>
                             </div>
                             <div className='w-full flex justify-between'>
                                 <p className='lg:text-lg text-xs font-poppins font-regular'>Bank Name</p>
-                                <p className='lg:text-lg text-xs font-poppins font-regular'>Chase Bank</p>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>{bankName}</p>
+                            </div>
+                            <div className='w-full flex justify-between'>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>Account Name</p>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>{bankAccountHolderName}</p>
                             </div>
                             <div className='w-full flex justify-between'>
                                 <p className='lg:text-lg text-xs font-poppins font-regular'>Account Number</p>
-                                <p className='lg:text-lg text-xs font-poppins font-regular'>12345678901</p>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>{bankAccountNumber}</p>
                             </div>
                             <div className='w-full flex justify-between'>
                                 <p className='lg:text-lg text-xs font-poppins font-regular'>Processing Time</p>
@@ -362,14 +373,14 @@ export const AccountCenter = () => {
                         <div className="relative w-full">
                             <div className='flex flex-col gap-3'>
 
-                                <div onClick={() => setModalType("withdralpin")} className='flex justify-end  cursor-pointer z-1 lg:-mb-6 -mb-6 font-medium text-xs lg:text-lg text-green-600'>
+                                <div onClick={() => setModalType("withdralpin")} className='flex justify-end  cursor-pointer lg:-mb-6 -mb-6 font-medium text-xs lg:text-lg text-green-600'>
                                     <button type='button' onClick={() => setModalType("withdralpin")} className='cursor-pointer lg:-mb-2 py-2 ' >
                                         Forgot PIN?
                                     </button>
                                 </div>
 
 
-                                <div className='-z-1'>
+                                <div className=''>
                                     <InputField
                                         label="Enter PIN"
                                         name="pin"
@@ -377,7 +388,7 @@ export const AccountCenter = () => {
                                         value={inputs.pin}
                                         onChange={handleChange}
                                         leftIcon={LockPasswordIcon}
-                                        // error={showPasswordError ? "Invalid PIN" : ""}
+                                        error={isPinInvalid}
                                         toggleable
                                         showPassword={showPassword}
                                         handleTogglePassword={handleTogglePassword}
@@ -394,6 +405,7 @@ export const AccountCenter = () => {
 
                         <CustomButton
                             name="Confirm Withdrawal"
+                            isLoading={isLoading}
                             disabled={!inputs.pin.trim()}
                             btnClick={handlePinSubmit}
                             extendedStyles={`font-medium lg:py-3 py-3 w-full p-3 lg:p-4 rounded-lg bg-green-700 px-4 rounded-xl 
@@ -628,7 +640,7 @@ export const AccountCenter = () => {
                 icon={<SuccessIcon className="w-[50px] h-[90px] bg-green-500 flex items-center justify-center rounded-full" />}
                 iconBg="bg-green-500"
                 title={`You’ve successfully withdrawn ₦${inputs.amount}`}
-                message="Your funds will reflect in your bank account ending ••••1234 shortly."
+                message={`Your funds will reflect in your bank account ***${bankAccountNumber?.slice(-4)} shortly.`}
                 actionLabel="Back"
                 onAction={() => setModalType(null)}
                 actionStyles="!bg-green-250 text-green-900"
@@ -661,7 +673,7 @@ export const AccountCenter = () => {
                 actionLabel="Return to Dashboard"
                 onAction={() => {
                     setModalType(null);
-                    navigate("/dashboard");
+                    navigate("/earnings");
                 }}
                 actionStyles="bg-green-700 text-white"
             />
