@@ -1,29 +1,65 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
-const ProgressBar = ({ progress, setProgress, title, resetTrigger }) => {
+export const ProgressBar = ({
+  progress,
+  setProgress,
+  title,
+  resetTrigger,
+  maxDuration = 30000,
+}) => {
+  const passDuration = 10000; // 10s per forward or backward movement
+  const passes = Math.floor(maxDuration / passDuration); // total movements
+  const startTimeRef = useRef(null);
+  const frameRef = useRef(null);
+
+  const animate = () => {
+    const now = Date.now();
+    const elapsed = now - startTimeRef.current;
+
+    if (elapsed >= maxDuration) {
+      cancelAnimationFrame(frameRef.current);
+      return;
+    }
+
+    // How far are we into the animation (0 to passes)?
+    const totalProgress = elapsed / passDuration;
+
+    // Determine which pass we are in
+    const currentPass = Math.floor(totalProgress);
+
+    // Fraction of the current pass
+    const passFraction = totalProgress - currentPass;
+
+    // Even pass = forward movement
+    // Odd pass  = backward movement
+    const isForward = currentPass % 2 === 0;
+
+    const newProgress = isForward
+      ? Math.min(100, passFraction * 100)      // 0 → 100
+      : Math.max(0, 100 - passFraction * 100)  // 100 → 0
+
+    setProgress(Math.round(newProgress));
+
+    frameRef.current = requestAnimationFrame(animate);
+  };
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((old) => {
-        if (old >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
-                return old + 1; // increase 1% every tick
-            });
-        }, 100); // speed (100ms per step)
+    startTimeRef.current = Date.now();
+    frameRef.current = requestAnimationFrame(animate);
 
-        return () => clearInterval(interval);
-    }, [resetTrigger]);
+    return () => cancelAnimationFrame(frameRef.current);
+  }, [resetTrigger, maxDuration]);
 
   return (
     <div className="w-full">
-      <h2 className="mb-8 text-base lg:text-lg font-semibold text-gray-950">{title}</h2>
-        <div
-          className="h-3 bg-blue-600 rounded-full transition-all duration-200"
-          style={{ width: `${progress}%` }}
-        ></div>
-    </div >
+      <h2 className="mb-8 text-base lg:text-lg font-semibold text-gray-950">
+        {title}
+      </h2>
+      <div
+        className="h-3 bg-blue-600 rounded-full transition-all duration-100"
+        style={{ width: `${progress}%` }}
+      ></div>
+    </div>
   );
 };
 
-export default ProgressBar;

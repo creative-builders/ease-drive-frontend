@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BackgroundMap from "../../../components/dashboard/BackgroundMap";
 import { Modal } from "../../../components/Modal";
 import { LiveGPSIcon } from "../../../assets/icons/LiveGPSIcon";
@@ -10,15 +10,22 @@ import { HamburgerIcon } from "../../../assets/icons/HamburgerIcon";
 import { useGeolocation } from "../../../hooks/useGeolocation";
 import { FormProvider, useStepFlowContext } from "../../../hooks/useStepFlowFormContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createRide } from "../../../store/users/api";
+import { createRide, getRideById } from "../../../store/users/api";
 import toast from "react-hot-toast";
-import ProgressBar from "../../../components/ProgressBar";
+import { ProgressBar } from "../../../components/ProgressBar";
+
 
 const PassengerDashboardIndexContext = () => {
   const [expanded, setExpanded] = useState(false);
   const [progress, setProgress] = useState(0);
   const [isSearchingDrivers, setIsSearchingDrivers] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0); 
+  const [rideId, setRideId] = useState(null);
+  const [driverStatus, setDriverStatus] = useState("searching"); 
+
+
+  const pollingRef = useRef(null);
+
   const { 
     coords,  
     locationEnabled, 
@@ -52,13 +59,33 @@ const PassengerDashboardIndexContext = () => {
     }))
   },[coords,locationName]);
 
-  //Reset progress when modal closes
-  useEffect(() => {
-    if (!isSearchingDrivers) {
-      setProgress(0);
-    }
-  }, [isSearchingDrivers]);
 
+// Fetch ride status every 2 seconds
+  const startPollingRide = (id) => {
+    stopPollingRide();
+
+    pollingRef.current = setInterval(async () => {
+      try {
+        const ride = await getRideById(id);
+
+        if (ride?.bids?.length > 0) {
+          // DRIVER FOUND
+          stopPollingRide();
+          setProgress(100);
+          setDriverStatus("found");
+        }
+      } catch (err) {
+        console.log("Error fetching ride:", err);
+      }
+    }, 2000);
+  };
+
+  const stopPollingRide = () => {
+    if (pollingRef.current) {
+      clearInterval(pollingRef.current);
+      pollingRef.current = null;
+    }
+  };
 
 
   const { mutate:submitCreateRide , isLoading } = useMutation(createRide, {
@@ -82,7 +109,13 @@ const PassengerDashboardIndexContext = () => {
     searchValue:""
       }));
 
+    setRideId(response?.rideId);
+    setDriverStatus("searching");
+    setProgress(0);
     setIsSearchingDrivers(true);
+
+    //Start polling this ride
+    startPollingRide(response?.rideId);
     
      },
      onError:(error) => {
@@ -100,36 +133,71 @@ const PassengerDashboardIndexContext = () => {
     submitCreateRide(formData)
   };
 
-    // Determine if progress is actively loading (0-99%)
+
+  //Stop polling when progress completes but no drivers
+  useEffect(() => {
+    if (progress >= 100 && driverStatus === "searching") {
+      stopPollingRide();
+      setDriverStatus("none"); // no drivers available
+    }
+  }, [progress]);
+
+  // Determine if progress is actively loading (0-99%)
   const isProgressLoading = progress > 0 && progress < 100;
 
   const handleRefresh = () => {
   if(isProgressLoading) return;
 
-   setProgress(0);
-   setRefreshTrigger(prev => prev + 1);
+  setProgress(0);
+  setDriverStatus("searching");
+  setRefreshTrigger(prev => prev + 1);
+
+  startPollingRide(rideId);
   }
 
-    // Determine if refresh should be disabled
-  // const isRefreshDisabled = isProgressLoading || isFetchingRides || isRefetchingRides || isRecentlyRefreshed;
-    // Determine if refresh should be disabled
-  const isRefreshDisabled = isProgressLoading
+   const renderDriverActionButton = () => {
+    if (driverStatus === "found") {
+      return (
+        <CustomButton
+          name="See Available Drivers"
+          extendedStyles="w-full h-[50px] bg-green-600 text-white rounded-2xl font-medium"
+          btnClick={() => console.log("Navigate to drivers")}
+        />
+      );
+    }
+
+    if (driverStatus === "none") {
+      return (
+        <CustomButton
+          name="No Drivers Available - Refresh"
+          extendedStyles="w-full h-[50px] bg-primary-200 text-primary-950 rounded-2xl font-medium"
+          btnClick={handleRefresh}
+          disabled={isProgressLoading}
+        />
+      );
+    }
+
+    return (
+      <CustomButton
+       name ="Refresh"
+       extendedStyles= { "w-full h-[50px] lg:h-[60px] bg-primary-200 text-primary-950 rounded-2xl font-medium" }
+       btnClick={handleRefresh}
+       disabled={isProgressLoading}
+      /> 
+    );
+  };
   
   return (
     <>
       {/* Driver Search Modal - Shows after ride creation */}
       {
-        isSearchingDrivers && (
-          <Modal position="center" closeModal={() => setIsOpenModal(prev => !prev)}>
+        !isSearchingDrivers && (
+          <Modal position="center" closeModal={() => setIsSearchingDrivers(prev => !prev)}>
             <div className="mb-8 w-full">
               <ProgressBar resetTrigger={refreshTrigger} progress={progress} setProgress={setProgress} title="Searching for Available Drivers" />
             </div>
-            <CustomButton
-             name ="Refresh"
-             extendedStyles= { "w-full h-[50px] lg:h-[60px] bg-primary-200 text-primary-950 rounded-2xl" }
-             btnClick={handleRefresh}
-             disabled={isRefreshDisabled}
-            />
+            
+            { renderDriverActionButton() }
           </Modal>
          )
       }

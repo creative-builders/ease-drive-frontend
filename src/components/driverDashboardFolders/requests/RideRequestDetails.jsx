@@ -4,7 +4,7 @@ import { DateIcon } from "../../../assets/icons/DateIcon";
 import { ClockIcon } from "../../../assets/icons/ClockIcon";
 import { CloseMenuIcon } from "../../../assets/icons/CloseMenuIcon";
 import { BiArrowBack, BiChevronLeft, BiChevronRight } from "react-icons/bi";
-import ProgressBar from "../../ProgressBar";
+import { ProgressBar } from "../../ProgressBar";
 import { InputField } from "../../customFormFields/InputField"
 import { NairaIcon } from "../../../assets/icons/NairaIcon";
 // import { Modal } from "../Modal"

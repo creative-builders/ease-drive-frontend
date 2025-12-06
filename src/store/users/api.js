@@ -74,3 +74,10 @@ export const getUserRides = async({ queryKey }) => {
     const response = await axiosInstancePrivate.get(`/v1/bookings/ride/passenger/${passengerId}`);
     return response.data;
 }
+
+
+export const getRideById = async({ queryKey }) => {
+    const [_key, passengerId, rideId]  =  queryKey;
+    const response = await axiosInstancePrivate.get(`/v1/bookings/ride/${passengerId}/${rideId}`);
+    return response.data;
+}

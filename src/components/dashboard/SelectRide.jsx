@@ -7,9 +7,7 @@ import { Divider } from "../Divider/Divider"
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext"
 import { InputField } from "../customFormFields/InputField"
 import { AddFile } from "../AddFile"
-import { Modal } from "../Modal"
 import { useState } from "react"
-import ProgressBar from "../ProgressBar"
 
 export const SelectRide = ({
   handleSubmit,
