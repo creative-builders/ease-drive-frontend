@@ -1,6 +1,5 @@
 
 import { useState, useEffect } from "react";
-import { RideRequestsList } from "./RideRequestsList";
 import { RideRequestDetails } from "./RideRequestDetails";
 import { Requests } from "./Requests";
 import { LiveGPSIcon } from "../../../assets/icons/LiveGPSIcon";
@@ -14,10 +13,10 @@ import { useMutation } from "@tanstack/react-query";
 import { getPendingBookings } from "../../../store/auth/driver/api";
 import { ConfirmBookingLoader } from "../../dashboard/loaders/ConfirmBookingLoader"
 import { RideHistoryLoader } from "../../dashboard/loaders/RideHistoryLoader";
-
+import { BidRequestsList } from "./BidRequestList";
 import toast from 'react-hot-toast';
 
-export function RideRequests() {
+export function RideBids() {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [requests, setRequests] = useState([]);
   const [showMap, setShowMap] = useState(false);
@@ -170,8 +169,9 @@ export function RideRequests() {
                   <>
                     {/* Large screens */}
                     <div className="hidden lg:block">
-                      <RideRequestsList
+                      <BidRequestsList
                         requests={requests}
+                        onBack={handleBack}
                         onSelect={setSelectedRequest}
                       />
                     </div>
@@ -189,7 +189,7 @@ export function RideRequests() {
                     {/* Mobile */}
                     <div className="block lg:hidden">
                       {!activeRequest ? (
-                        <RideRequestsList
+                        <BidRequestsList
                           requests={requests}
                           onSelect={setSelectedRequest}
                         />
