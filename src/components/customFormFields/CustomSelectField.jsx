@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Divider } from "../Divider/Divider"
 
-export const CustomSelectField = ({ label,
+export const CustomSelectField = ({ 
+  label,
   name,
   value,
   onChange,
