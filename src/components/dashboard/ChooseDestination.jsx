@@ -22,6 +22,7 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
       formData,
       setFormData,
       handleUpdateFormData,
+      inputTouched
   } = useStepFlowContext();
 
   const liveLocation = useRecoilValue(locationAtom);
@@ -120,6 +121,8 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
   };
 
   const isPhoneValid = /^[0-9]{10,}$/.test(formData?.phoneNumber);
+  const showIsPhoneValidError = inputTouched?.phoneNumber && !isPhoneValid;
+    
 
   const shouldShowNoResult =
     !isSearching &&
@@ -159,7 +162,7 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
         placeholder={"Enter a Phone Number"}
         name={"phoneNumber"}
         value={formData?.phoneNumber}
-        error={!isPhoneValid ? "Please enter a valid phone number" : ""}
+        error={showIsPhoneValidError ? "Please enter a valid phone number" : ""}
         />
         <InputField
           label="To Where"
