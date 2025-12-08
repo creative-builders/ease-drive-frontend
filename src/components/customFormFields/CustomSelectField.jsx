@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Divider } from "../Divider/Divider"
 
@@ -9,7 +10,8 @@ export const CustomSelectField = ({
   options = [],
   defaultHolder,
   leftIcon: LeftIcon,
-  rightIcon: RightIcon, }) => {
+  rightIcon: RightIcon,
+}) => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(null);
 
@@ -28,9 +30,7 @@ export const CustomSelectField = ({
   return (
     <div className="relative w-full">
       {label && (
-        <label className=" block mb-2 text-sm lg:text-lg ">
-          {label}
-        </label>
+        <label className="block mb-2 text-sm lg:text-lg">{label}</label>
       )}
 
       <button
@@ -38,15 +38,15 @@ export const CustomSelectField = ({
         onClick={() => setOpen(!open)}
         className="flex items-center justify-between w-full border gap-4 border-neutral-400 rounded-lg px-3 lg:py-3 py-2 bg-white"
       >
-        {LeftIcon && <LeftIcon className="text-neutral-400 w-[18px] lg:w-[32px] h-[18px] lg:h-[32px]" />}
+        {LeftIcon && (
+          <LeftIcon className="text-neutral-400 w-[18px] lg:w-[32px] h-[18px] lg:h-[32px]" />
+        )}
 
         <div className="flex items-center flex-1 text-neutral-400 text-base lg:text-lg">
           {selected?.iconLeft && (
             <selected.iconLeft className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px] mr-2 text-neutral-400" />
           )}
-          <span>{
-            selected?.value || selected || defaultHolder
-          }</span>
+          <span>{selected?.value || selected || defaultHolder}</span>
           {selected?.iconRight && (
             <selected.iconRight className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px] text-neutral-400" />
           )}
@@ -60,6 +60,13 @@ export const CustomSelectField = ({
           />
         }
 
+        {RightIcon && (
+          <RightIcon
+            className={`w-[18px] lg:w-[24px] h-[18px] lg:h-[24px] text-neutral-400 transition-transform ${
+              open ? "rotate-180" : ""
+            }`}
+          />
+        )}
       </button>
 
       {open && (
@@ -69,38 +76,36 @@ export const CustomSelectField = ({
               return (
                 <div key={idx}>
                   <div
-                    key={idx}
                     onClick={() => handleSelect(opt)}
-                    className="flex items-center text-sm lg:text-lg text-neutral-600  px-3 py-2 hover:bg-neutral-200 cursor-pointer"
+                    className="flex items-center text-sm lg:text-lg text-neutral-600 px-3 py-2 hover:bg-neutral-200 cursor-pointer"
                   >
                     <span>{opt}</span>
-
                   </div>
-
                   <Divider className="ml-2 w-full text-neutral-400" />
                 </div>
-              )
+              );
             }
             return (
-              <div>
+              <div key={idx}>
                 <div
-                  key={idx}
                   onClick={() => handleSelect(opt)}
-                  className="flex items-center text-sm lg:text-lg text-neutral-600  px-3 py-2 hover:bg-neutral-200 cursor-pointer"
+                  className="flex items-center text-sm lg:text-lg text-neutral-600 px-3 py-2 hover:bg-neutral-200 cursor-pointer"
                 >
 
                   {opt.iconLeft && 
                   <opt.iconLeft className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px] mr-2 text-neutral-400" />}
                   <span>{opt.value}</span>
-                  {opt.iconRight && <opt.iconRight className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px] ml-2 text-neutral-400" />}
+                  {opt.iconRight && (
+                    <opt.iconRight className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px] ml-2 text-neutral-400" />
+                  )}
                 </div>
-
                 <Divider className="ml-2 w-full text-neutral-400" />
               </div>
-            )
+            );
           })}
         </div>
       )}
     </div>
   );
 };
+
