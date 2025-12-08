@@ -60,6 +60,7 @@ export default {
         },
         red:{
           50:"#EA433514",
+          56:"#EA4335",
           500:"#D60000"
         },
         cardBg: "#F3F7FF",
