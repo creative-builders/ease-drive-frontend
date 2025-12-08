@@ -6,7 +6,6 @@ export const useDeleteAccount = () => {
   const mutation = useMutation({
     mutationFn: async (user_Id) => {
       const response = await deleteUserAccount(user_Id);
-      console.log("Response:", response);
       return response;
     },
   });

@@ -65,14 +65,14 @@ export const logOut = async(credentials) => {
 
 export const deleteUserAccount = async (user_Id) => {
   if (!user_Id) throw new Error("User ID is required for account deletion");
-  console.log("Full Delete URL:", `${baseUrl}/v1/user/${user_Id}`);
+  // console.log("Full Delete URL:", `${baseUrl}/v1/user/${user_Id}`);
 
   try {
     const response = await axiosInstancePrivate.delete(`/v1/users/${user_Id}`);
     console.log("Delete Response:", response.data);
     return response.data;
   } catch (error) {
-    console.error("Delete Account Error:", error.response?.data || error.message);
+    // console.error("Delete Account Error:", error.response?.data || error.message);
     throw error;
   }
 };
