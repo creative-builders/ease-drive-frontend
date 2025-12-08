@@ -43,8 +43,6 @@ export const Rides = () => {
     (ride) => Array.isArray(ride.bids) && ride.bids.length > 0
    ) || [];
 
-   console.log("All Booking", bookingsWithBids?.length)
-
   const allBids = bookingsWithBids.flatMap((ride) =>
   ride.bids.map((bid) => ({
     ...bid,
