@@ -57,12 +57,12 @@ const Footer = () => {
       <div className="p-4 flex gap-y-2 flex-col lg:flex-row lg:justify-around lg:items-center">
         <p className="text-xs font-normal lg:text-lg">&copy; { year } easedrive. All rights reserved.</p>
         
-         <Link to={"/terms-of-use"}>
-         <p className="text-xs font-normal lg:text-lg">Terms of use</p>
+         <Link className="text-xs font-normal lg:text-lg" to={"/terms-of-use"}>
+         Terms of use
          </Link>
         
-        <Link to={"/privacy"}>
-        <p className="text-xs font-normal lg:text-lg">Privacy Policy</p>
+        <Link className="text-xs font-normal lg:text-lg" to={"/privacy"}>
+        Privacy Policy
         </Link>
         
         <p className="text-xs font-normal lg:text-lg">Proudly built by students, for students.</p>
