@@ -8,7 +8,7 @@ import { formatDate } from "../../../utils/formatDate";
 function TripsTable({ columns, data, onSelectTrip }) {
 
   return (
-    <div className="p-4 bg-white rounded-2xl">
+    <div className="p-4 w-full bg-white rounded-2xl">
       <div className="overflow-x-auto">
         <table className="min-w-full text-sm text-left border-collapse">
           <thead>
@@ -42,7 +42,7 @@ function TripsTable({ columns, data, onSelectTrip }) {
                     ) : (
                       <div
                         className={`px-4 py-2 -mb-2 lg:text-sm text-[10px] font-medium break-words whitespace-normal
-                          ${col.accessor === "createdAt"
+                          ${col.accessor === "bidDate"
                             ? "whitespace-nowrap truncate" 
                             : "break-words whitespace-normal"} 
                           ${col.accessor === "status" && row[col.accessor] === "Ongoing"
@@ -95,7 +95,7 @@ function filterTripsByRange(trips, range) {
     if (!dateValue) return false;
 
     const tripDate = new Date(dateValue);
-    console.log(tripDate)
+    // console.log(tripDate)
     if (isNaN(tripDate.getTime())) return false;
 
     tripDate.setHours(0, 0, 0, 0);
@@ -158,7 +158,7 @@ export function TripsPage({ tripData = [], onView }) {
   const columns = [
     {
       Header: "Date",
-      accessor: "createdAt",
+      accessor: "bidDate",
       Cell: (value) => formatDate(value).date,
     },
     {
@@ -195,7 +195,7 @@ export function TripsPage({ tripData = [], onView }) {
   };
 
   return (
-    <div className="flex lg:w-[1050px] w-full flex-col lg:gap-6 gap-4">
+    <div className="flex w-full flex-col lg:gap-6 gap-4">
       <div className="bg-white rounded-2xl shadow">
         {/* Header with Filter */}
         <div className="flex justify-between items-center lg:px-6 lg:py-4 px-6 py-4">

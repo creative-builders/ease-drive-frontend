@@ -12,6 +12,8 @@ import { userAtom } from "../../atoms/userAtom";
 import { useRecoilValue } from "recoil"
 import { formatDate } from "../../../utils/formatDate";
 import { ConfirmBookingLoader } from "../../dashboard/loaders/ConfirmBookingLoader";
+import {Modal} from "../../Modal"
+import { TripDetailsModal } from './TripDetailsModal';
 
 
 
@@ -36,6 +38,8 @@ export const Earnings = () => {
         }
     );
 
+    const [selectedTrip, setSelectedTrip] = useState(null);
+
     useEffect(() => {
         getBidedRides({ userId: userId })
     }, [])
@@ -58,19 +62,25 @@ export const Earnings = () => {
 
                     <div className='flex flex-col lg:gap-4 gap-2 justify-start items-start lg:flex-row '>
                         <AccountCenter />
-                        <DashboardEarningChart />
+                        <DashboardEarningChart tripData={rideRequests} />
 
                     </div>
 
                     {
-                        isFetching ? (
-                            <div className=" lg:h-[858px] lg:w-[1000px] h-full w-[380px] flex flex-col justify-start ">
+                        isLoading ? (
+                            <div className="lg:w-[990px] h-full w-[380px] flex flex-col justify-start ">
                                 <ConfirmBookingLoader type="list" items={3} />
-                                </div>
-                            
+                            </div>
+
                         ) : (
-                            <div className=" lg:h-[828px] lg:w-[1000px] h-full w-[380px] flex flex-col justify-start ">
-                                <TripsPage tripData={rideRequests} />
+                            <div className=" lg:h-[828px] lg:w-[990px] h-full w-[380px] flex flex-col justify-start ">
+                                <TripsPage className="w-full" tripData={rideRequests} onView={setSelectedTrip} />
+
+                                {selectedTrip && (
+                                    <Modal closeModal={() => setSelectedTrip(null)} position="bottom">
+                                        <TripDetailsModal trip={selectedTrip} />
+                                    </Modal>
+                                )}
 
                             </div>
                         )

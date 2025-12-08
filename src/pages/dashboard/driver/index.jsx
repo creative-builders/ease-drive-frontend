@@ -9,7 +9,7 @@ export const DriverDashboardIndex = () => {
 
   return (
     <>
-      <div className="min-h-screen md:ml-[-50px] bg-transparent text-gray-900 font-sans">
+      <div className="min-h-screen md:ml-[-50px] -ml-1.5 bg-transparent text-gray-900 font-sans">
         <MainDriverPage />
       </div>
 
