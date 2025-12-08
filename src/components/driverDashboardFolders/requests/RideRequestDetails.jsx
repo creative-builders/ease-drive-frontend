@@ -4,7 +4,7 @@ import { DateIcon } from "../../../assets/icons/DateIcon";
 import { ClockIcon } from "../../../assets/icons/ClockIcon";
 import { CloseMenuIcon } from "../../../assets/icons/CloseMenuIcon";
 import { BiArrowBack, BiChevronLeft, BiChevronRight } from "react-icons/bi";
-import ProgressBar from "../../ProgressBar";
+import { ProgressBar } from "../../ProgressBar";
 import { InputField } from "../../customFormFields/InputField"
 import { NairaIcon } from "../../../assets/icons/NairaIcon";
 // import { Modal } from "../Modal"
@@ -12,6 +12,7 @@ import { SuccessIcon } from "../../../assets/icons/SuccesIcon";
 import { FailureIcon } from "../../../assets/icons/FailureIcon";
 import { bidForARid } from "../../../store/auth/driver/api";
 import { useMutation } from "@tanstack/react-query";
+import { useNavigate, useRoutes } from "react-router-dom";
 import toast from "react-hot-toast"
 export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) => {
     const {
@@ -26,11 +27,12 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
         luggageImage,
         scheduledTrip,
         createdAt,
-        _id
+        _id,
+        bidPrice,
     } = request;
 
     const rideDate = new Date(createdAt);
-  
+
     const [modalType, setModalType] = useState(null); // "image" | "amount" | "loading"
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [amount, setAmount] = useState("");
@@ -38,6 +40,10 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
     const [showModal, setShowModal] = useState(false);
 
     const [progress, setProgress] = useState(0);
+
+    const navigate = useNavigate()
+
+
 
     const { mutate: submitRideBid, isLoading } = useMutation(
         bidForARid,
@@ -67,6 +73,9 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
         );
     };
 
+    useEffect(() =>{
+        setAmount(request.bidPrice || "")
+    },[request])
 
 
     const handleAcceptClick = () => {
@@ -104,25 +113,9 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
         setShowModal(false);
 
     };
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setProgress((old) => {
-                if (old >= 100) {
-                    clearInterval(interval);
-                    return 100;
-                }
-                return old + 1; // increase 1% every tick
-            });
-        }, 400); // speed (100ms per step)
-
-        return () => clearInterval(interval);
-    }, []);
-
-
     return (
         <div className="self-stretch px-5 py-3 pb-4 bg-white rounded-lg 
-      inline-flex flex-col lg:w-[460px] w-[380px]   lg:justify-start justify-center lg:items-start gap-2 relative">
+      inline-flex flex-col lg:w-[500px] w-[380px]   lg:justify-start justify-center lg:items-start gap-2 relative">
             {/* Header */}
             <div className="self-stretch h-11 inline-flex lg:justify-start lg:items-center">
                 <div className="w-10 h-10 px-1 py-[3px] bg-white rounded-[32px]
@@ -158,7 +151,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                 {/* Trip Details */}
                 <div className="self-stretch flex flex-col gap-2">
                     <div className="h-14 px-4 bg-neutral-200 rounded-lg flex items-center">
-                        <div className="text-Primary-950 text-base font-medium font-poppins">
+                        <div className="text-primary-950 text-base font-medium font-poppins">
                             Trip Details
                         </div>
                     </div>
@@ -171,8 +164,8 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="font-semibold font-poppins">Pick Up location:</div>
-                        <div>{location.locationName}</div>
+                        <div className="font-semibold font-poppins ">Pick Up location:</div>
+                        <div className="text-right">{location.locationName}</div>
                     </div>
 
                     <div className="flex justify-between">
@@ -195,13 +188,13 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         <div className="text-neutral-600 text-xs font-medium font-poppins">
                             Click Single Image to view
                         </div>
-                        <div className="inline-flex gap-2 flex-wrap w-full justify-center font-poppins">
+                        <div className="inline-flex gap-2 flex-wrap lg:w-[438px] justify-center font-poppins">
                             {luggageImage && luggageImage.length > 0 ? (
                                 luggageImage.map((img, index) => (
-                                    <div key={index} className="relative w-[100px] flex-wrap  flex justify-center">
+                                    <div key={index} className="relative lg:w-[100px] w-[100px] flex-wrap  flex justify-center">
                                         <img
                                             key={index}
-                                            className="w-24 h-24 rounded  cursor-pointer"
+                                            className=" rounded  cursor-pointer"
                                             src={img.url}
                                             alt={`Luggage ${index + 1}`}
                                             onClick={() => {
@@ -223,7 +216,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
 
                 {/* price show on bid success */}
                 {
-                    amount && amount !== "" && (<div className="flex w-full justify-between ">
+                    amount && amount !== "" && (<div className="flex w-full justify-between py-2 ">
                         <div className="font-semibold font-poppins justify-start">Price: </div>
                         <div className="justify-end bg-red-50 rounded-xl px-4 text-red-500 font-semibold">₦{amount}</div>
                     </div>
@@ -264,9 +257,9 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
             {/* Accept Button */}
 
             <div
-                className={`self-stretch ${btnName === "Track Passenger" ? "lg:hidden" : ""
-                    }`}
-            >
+                className={`${request.bidPrice ? "hidden" :"block"} self-stretch ${btnName === "Track Passenger" ? "lg:hidden" : ""
+                    }`} >
+
                 <CustomButton
                     name={btnName || `Accept Ride and Enter Amount`}
                     btnClick={handleAcceptClick}
@@ -363,7 +356,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                             btnClick={handleAmountSubmit}
 
                             extendedStyles={`font-medium py-2 w-full p-3 lg:p-4 rounded-lg bg-green-700 px-4 rounded-xl 
-                ${amount.trim()
+                              ${amount.trim()
                                     ? "bg-green-700 hover:bg-green-700 text-white"
                                     : "bg-gray-400 text-white cursor-not-allowed opacity-20"
                                 }`}
@@ -376,7 +369,7 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
             {modalType === "loading" && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="relative bg-white rounded-3xl p-6 flex justify-center items-center flex-col  w-[100%] lg:top-[] 
-                        top-[40%] lg:top-0 h-[200px] lg:w-[640px] lg:h-[180.5px]">
+                        top-[32%] lg:top-0 h-[320px] lg:w-[640px] lg:h-[380px]">
                         <button
                             onClick={() => {
                                 setModalType(null)
@@ -390,91 +383,33 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         {/* Progress Bar */}
                         <ProgressBar title="Waiting for Passenger to Respond" progress={progress} setProgress={setProgress} />
 
-                    </div>
-                </div>
-            )}
-
-            {modalType === "success" && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-4 w-[390px] lg:top-[] 
-                        top-[28%] lg:top-0 h-[335px] lg:w-[640px] lg:h-[380px] justify-center items-center">
-                        <button
-                            onClick={() => {
-                                setModalType(null);
-
-                            }}
-                            className="right-2 text-black w-full flex justify-end items-end lg:pt-2 pt-4"
-                        >
-                            <CloseMenuIcon className="lg:w-10 lg:h-10 w-8 h-8" />
-                        </button>
-
-
-                        <div className="lg:w-[90px] lg:h-[90px] w-[90px] h-[90px]
-                         bg-green-500 flex items-center justify-center rounded-full">
-                            <SuccessIcon className="w-[50px] h-[90px] bg-green-500 flex items-center justify-center rounded-full" />
-                        </div>
-                        <p className="font-medium lg:text-lg text-base text-center font-poppins ">
-                            <span className="font-semibold lg:text-2xl text-base font-poppins ">
-                                Congratulations, Bide Accepted!
-                            </span>
-                            <br />
-                            Congratulations, John Nudubuisi Chukwuemeka accepted your bid.</p>
                         <CustomButton
                             btnClick={() => {
-                                if (request && onRideAccepted) {
-                                    onRideAccepted(request);
-                                    setModalType(null);
-                                }
+                                setModalType("loading")
                             }}
 
-                            name="View Passenger Details"
+                            name="Refresh"
                             extendedStyles="w-full p-3 lg:p-4 
-                        !bg-green-250 text-green-900 rounded-lg mb-6 mt-4" />
+                        !bg-green-250 text-green-900 rounded-lg mb- mt-4" />
 
-
-                    </div>
-                </div>
-            )}
-
-
-
-
-            {modalType === "failed" && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-4 w-[390px] lg:top-[] 
-                        top-[28%] lg:top-0 h-[335px] lg:w-[640px] lg:h-[380px] justify-center items-center">
-
-                        <button
-                            onClick={() => {
-                                setModalType(null)
-                                onBack()
+                        <CustomButton
+                            btnClick={() => {
+                            navigate("/dashboard/bids")
                             }}
-                            className="right-2  text-black w-full flex justify-end items-end lg:pt-2 pt-4"
-                        >
-                            <CloseMenuIcon className="lg:w-10 lg:h-10 w-8 h-8" />
-                        </button>
 
-
-                        <div className="lg:w-[90px] lg:h-[90px] w-[90px] h-[90px] bg-red-500 flex items-center justify-center rounded-full">
-                            <FailureIcon className=" w-[50px] h-[90px] bg-red-500 flex items-center justify-center rounded-full" />
-                        </div>
-
-                        <p className="font-medium lg:text-lg text-center font-poppins">
-                            <span className="font-semibold lg:text-lg font-poppins ">
-                                Sorry, No Passenger Responded.
-                            </span>
-                            <br />
-                            No one responded to your offer you can try again some other time.</p>
-                        <CustomButton name="Try again" btnClick={() => {
-                            setModalType("amount")
-                        }} extendedStyles="w-full p-3 lg:p-4 !bg-green-250 
-                        text-green-900 rounded-lg mb-6 mt-4" />
-
+                            name="See Response"
+                            extendedStyles="w-full p-3 lg:p-4 
+                         text-green-900 bg-green-700 text-white rounded-lg mb-6 mt-4" />
 
                     </div>
                 </div>
             )}
 
+         
+
+
+
+           
             {/* {showModal && (
                 <Modal closeModal={closeModal} title="Congratulations, Ride Accepted!"
                     bodyText={`

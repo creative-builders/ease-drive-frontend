@@ -111,7 +111,7 @@ export async function getETA(origin, destination) {
     return result;
 
   } catch (error) {
-    console.error("Error fetching ETA:", error);
+    // console.error("Error fetching ETA:", error);
     
     // Return fallback or re-throw based on your error handling strategy
     return {

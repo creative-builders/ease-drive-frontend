@@ -61,7 +61,6 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
     }
 
     setErrors(newErrors);
-    console.log(newErrors)
 
     if (Object.keys(newErrors).length === 0) {
       nextStep(); // Proceed only if no validation error
