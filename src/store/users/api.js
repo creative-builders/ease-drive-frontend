@@ -40,17 +40,6 @@ export const bookRide =  async(credentials) => {
 }
 
 
-//Sample using formData
-// export const createRide = async( credentials) => {
-//   const formData =  new FormData();
-//   // for (const key in credentials){
-//   //   formData.append(key, credentials[key]);
-
-//   // }
-//  const response = await axiosInstancePrivate.post(`/v1/bookings/ride`, formData);
-//  return response.data;
-// }
-
 export const createRide = async (credentials) => {
   const formData = new FormData();
 
@@ -76,4 +65,26 @@ export const createRide = async (credentials) => {
   const response = await axiosInstancePrivate.post(`/v1/bookings/ride`, formData);
 
   return response.data;
+};
+
+
+
+export const getUserRides = async({ queryKey }) => {
+    const [_key, passengerId]  =  queryKey;
+    const response = await axiosInstancePrivate.get(`/v1/bookings/ride/passenger/${passengerId}`);
+    return response.data;
+}
+
+
+
+export const fetchRideById = async (passengerId, rideId) => {
+  try {
+    const response = await axiosInstancePrivate.get(
+      `/v1/bookings/ride/${passengerId}/${rideId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching ride:", error);
+    throw error;
+  }
 };
