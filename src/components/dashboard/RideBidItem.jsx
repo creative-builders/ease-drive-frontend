@@ -1,4 +1,3 @@
-
 import { RidesLocationIcon } from "../../assets/icons/RidesLocationIcon";
 import useIsMobile from "../../hooks/useIsMobile";
 import { trimText } from "../../utils/trimeText";
@@ -7,7 +6,6 @@ import CustomButton from "../CustomButton";
 
 export const RideBidItem = ({ rideBid }) => {
    const isMobile = useIsMobile(1024);
-   console.log(rideBid)
   return(
        <div className="cursor-pointer border-b border-neutral-100 py-4">
         <div className="flex justify-between items-center w-full">
@@ -28,9 +26,9 @@ export const RideBidItem = ({ rideBid }) => {
                   <p className="hidden lg:block font-medium text-[11px]">Going to : {trimText(rideBid?.destination?.destinationName)} </p>
                 </div>
                </div>
-                <div className="flex items-center lg:flex-col gap-x-1 lg:gap-y-[24px] lg:items-center mr-[22px] lg:mr-0">
+                <div className="flex lg:flex-col gap-x-1 lg:gap-y-[24px] lg:items-center mr-[22px] lg:mr-0">
                 <h4 className="font-normal lg:font-bold text-neutral-950 text-xs lg:text-sm">Price <span className="lg:hidden"> : </span> </h4>
-                <span className="font-bold flex items-center justify-center w-[69px] h-[20px] lg:w-[88px] lg:h-[29px] text-red-56 bg-[rgba(234,67,53,0.08)] rounded-full px-4 text-xs">#5,300 </span>
+                <span className="font-bold flex items-center justify-center w-[69px] h-[20px] lg:w-[88px] lg:h-[29px] text-red-56 bg-[rgba(234,67,53,0.08)] rounded-full px-4 text-xs">₦ {rideBid?.bidPrice}</span>
                 </div>
             </div>
            </div>

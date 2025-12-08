@@ -11,10 +11,10 @@ import { useLocation } from "react-router-dom";
 import CustomButton from "../../../components/CustomButton";
 import useIsMobile from "../../../hooks/useIsMobile";
 import { RideBidLists } from "../../../components/dashboard/RideBidLists";
+import { RideHistoryLists } from "../../../components/dashboard/RideHistoryLists";
 
 
 export const Rides = () => {
-  // const tabs = ["Ride History", "Ongoing Rides", "Scheduled Rides"];
   const location = useLocation();
   const defaultTab = location.state?.activeTab || "Ongoing Bids";
   const tabs = ["Ride History", "Ongoing Bids"];
@@ -22,11 +22,12 @@ export const Rides = () => {
 
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [rideHistory,setRideHistory] = useState([]);
+  const [rideBids,setRideBids] = useState([]);
 
-   const { data,  isLoading } = useQuery(["getUserRides", logginedUser?.id || logginedUser?._id], getUserRides,
+   const { data:rideBidsData,  isLoading } = useQuery(["getUserRides", logginedUser?.id || logginedUser?._id], getUserRides,
       {
         onSuccess: (response) => {
-          setRideHistory(response?.data?.bookings);
+          setRideBids(response?.data?.bookings);
         },
         
         onError:(error) => {
@@ -37,9 +38,25 @@ export const Rides = () => {
       }
     );
 
+  
+  // query to fetch the user ride history
+
+  //  const { data:rideBidsData,  isLoading } = useQuery(["getUserRides", logginedUser?.id || logginedUser?._id], getUserRides,
+  //     {
+  //       onSuccess: (response) => {
+  //         setRideBids(response?.data?.bookings);
+  //       },
+        
+  //       onError:(error) => {
+  //       toast.error(error?.message || error?.response?.data?.message)
+  //       navigate('/dashboard'); 
+  //       }
+  //     }
+  //   );
+
 
   //filter bookings with non-empty bids
-   const bookingsWithBids = data?.data?.bookings?.filter(
+   const bookingsWithBids = rideBidsData?.data?.bookings?.filter(
     (ride) => Array.isArray(ride.bids) && ride.bids.length > 0
    ) || [];
 
@@ -70,8 +87,8 @@ export const Rides = () => {
 
   return (
     <div className="ml-4 lg:ml-0">
-      <div className="mb-3 flex items-center gap-x-2.5">
-        <h2 className="basis-[178px] text-lg font-bold text-gray-950">Your Rides</h2>
+      <div className="mb-3 flex flex-col lg:flex-row items-center gap-y-4 lg:gap-y-0 lg:gap-x-2.5">
+        <h2 className="lg:basis-[178px] text-lg font-bold text-gray-950">Your Rides</h2>
         <div>
           {/* Tabs */}
           <div className="flex gap-x-1.5 ml-auto justify-center items-center bg-white rounded-[10px] h-[51px] border-b border-gray-300">
@@ -85,17 +102,17 @@ export const Rides = () => {
               </button>
             ))}
           </div>
-          {/* Tab Content */}
-          <div>
-            {/* Content for the selected tab goes here */}
-          </div>
-          
         </div>
       </div>
 
-        {/* render rideHistory and check if empty */}
+        {/* render the ongoing bids and  rideHistory */}
         <div className="bg-white p-4 rounded-2xl">
-          <RideBidLists rideBids={allBids} />
+          {
+           activeTab === "Ongoing Bids" ? 
+           (<RideBidLists rideBids={allBids} />)
+           :
+           <RideHistoryLists/>
+          }
         </div>
     </div>
   )

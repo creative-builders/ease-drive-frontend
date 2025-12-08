@@ -173,7 +173,7 @@ const PassengerDashboardIndexContext = () => {
           extendedStyles="w-full h-[50px] bg-green-600 text-white rounded-2xl font-medium"
            btnClick={() => {
            // Navigate to /rides page and set active tab to "Ongoing Bids"
-          navigate("/dashboard/rides", { state: { activeTab: "Ongoing Bids" } });
+           navigate("/dashboard/rides", { state: { activeTab: "Ongoing Bids" } });
           }}
         />
       );
