@@ -58,14 +58,14 @@ export const Trips = () => {
   // const totalPassengers = 102;
   const [selectedTrip, setSelectedTrip] = useState(null);
 
-     if(isFetching){
+  if (isFetching) {
     return (
-      <ConfirmBookingLoader type="card" items={4}/>
+      <ConfirmBookingLoader type="card" items={4} />
     )
-   }
+  }
 
   return (
-    <div className="flex px-3 py-0 flex-col items-start gap-4">
+    <div className="flex px-3 py-0 flex-col items-start gap-4 lg:-ml-12">
       <header className="flex flex-col md:flex-row w-full items-start md:items-center justify-between">
         <h2 className="capitalize text-4xl not-italic font-semibold leading-normal">
           Trips Details
@@ -90,11 +90,13 @@ export const Trips = () => {
         />
       </div>
 
-      <TripsPage className="w-full" tripData={rideRequests} onView={setSelectedTrip} />
+      <div className="lg:w-[990px]">
+        <TripsPage className="" tripData={rideRequests} onView={setSelectedTrip} />
+      </div>
 
       {selectedTrip && (
         <Modal closeModal={() => setSelectedTrip(null)} position="bottom">
-          <TripDetailsModal trip={selectedTrip } />
+          <TripDetailsModal trip={selectedTrip} />
         </Modal>
       )}
     </div>

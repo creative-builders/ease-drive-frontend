@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { RideRequestCard } from "./RideRequestCard";
 import { FilterIcon } from "../../../assets/icons/FilterIcon";
 import { Filter } from "../Filter";
+import { Link } from "react-router-dom";
 
-export function RideRequestsList({ requests, onSelect }) {
+export function RideRequestsList({ requests, onSelect, viewAll }) {
   const [filter, setFilter] = useState("Filter");
   const [displayList, setDisplayList] = useState("block");
   const [sortedRequests, setSortedRequests] = useState(requests);
@@ -27,21 +28,32 @@ export function RideRequestsList({ requests, onSelect }) {
 
 
   return (
-    <div className={`self-stretch lg:w-[560px] lg:mb-6 px-5 py-3 pb-4 bg-white rounded-lg inline-flex flex-col
-     lg:justify-start justify-center lg:items-start gap-2 relative`}>
-      <div className="lg:w-[490px] w-[335px]  justify-center items-center 
-      inline-flex lg:justify-start lg:items-center gap-[10%] lg:gap-[30%]">
+    <div className={`self-stretch lg:w-[520px] lg:mb- px-5 py-3 pb-4 bg-white rounded-lg inline-flex flex-col
+     lg:justify-start justify-center lg:items-start gap-2 relative -z-1`}>
+      <div className="lg:w-[440px] w-[335px]  justify-center items-center 
+      inline-flex lg:justify-start lg:items-center gap-[10%] lg:gap-[22%] -z-1">
         <div className="text-black lg:text-lg text-base font-semibold font-poppins">
           Ongoing Ride Requests
         </div>
 
-        <div className="mx-4">
-          <Filter
-            options={["Recent", "Older"]}
-            title="Filter"
-            onChange={handleFilterChange}
-          />
-        </div>
+        {
+          viewAll ? (
+            <div className="lg:ml-20 ">
+              <Link to={viewAll} className="text-green-600 text-sm font-semibold">
+                View all
+              </Link>
+            </div>
+          ) : (
+            <div className="mx-4 lg:-mr-14">
+              <Filter
+                options={["Recent", "Older"]}
+                title="Filter"
+                onChange={handleFilterChange}
+              />
+            </div>
+          )
+        }
+
       </div>
 
       {/* Render filtered requests */}
@@ -49,7 +61,13 @@ export function RideRequestsList({ requests, onSelect }) {
         sortedRequests.map((req, index) => (
           <div
             key={index}
-            onClick={() => onSelect(req)}
+            onClick={() => {
+              onSelect(req)
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }}
             className="cursor-pointer w-full font-poppins"
           >
             <RideRequestCard request={req} />

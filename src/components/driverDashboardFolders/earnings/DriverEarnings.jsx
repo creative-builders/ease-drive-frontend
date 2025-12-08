@@ -48,7 +48,7 @@ export function DriverEarnings() {
               <Earnings />
             ) : (
               <>
-
+                
                 <ConfirmBookingLoader variant="list" />
                 <ConfirmBookingLoader variant="card" />
               </>

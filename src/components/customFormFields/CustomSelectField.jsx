@@ -1,7 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Divider } from "../Divider/Divider"
 
-export const CustomSelectField = ({ label,
+export const CustomSelectField = ({ 
+  label,
   name,
   value,
   onChange,
@@ -15,6 +16,13 @@ export const CustomSelectField = ({ label,
   const handleSelect = (option) => {
     setSelected(option);
     setOpen(false);
+
+    onChange({
+      target: {
+        name,
+        value: typeof option === "string" ? option : option.value,
+      },
+    });
   };
 
   return (
@@ -43,10 +51,14 @@ export const CustomSelectField = ({ label,
             <selected.iconRight className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px] text-neutral-400" />
           )}
         </div>
-        <RightIcon
-          className={`w-[18px] lg:w-[24px] h-[18px] lg:h-[24px] text-neutral-400  transition-transform ${open ? "rotate-180" : ""
-            }`}
-        />
+        {
+          RightIcon &&
+
+          <RightIcon
+            className={`w-[18px] lg:w-[24px] h-[18px] lg:h-[24px] text-neutral-400  transition-transform ${open ? "rotate-180" : ""
+              }`}
+          />
+        }
 
       </button>
 
@@ -55,7 +67,7 @@ export const CustomSelectField = ({ label,
           {options.map((opt, idx) => {
             if (typeof opt === "string") {
               return (
-                <div>
+                <div key={idx}>
                   <div
                     key={idx}
                     onClick={() => handleSelect(opt)}
@@ -76,7 +88,9 @@ export const CustomSelectField = ({ label,
                   onClick={() => handleSelect(opt)}
                   className="flex items-center text-sm lg:text-lg text-neutral-600  px-3 py-2 hover:bg-neutral-200 cursor-pointer"
                 >
-                  {opt.iconLeft && <opt.iconLeft className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px] mr-2 text-neutral-400" />}
+
+                  {opt.iconLeft && 
+                  <opt.iconLeft className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px] mr-2 text-neutral-400" />}
                   <span>{opt.value}</span>
                   {opt.iconRight && <opt.iconRight className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px] ml-2 text-neutral-400" />}
                 </div>
