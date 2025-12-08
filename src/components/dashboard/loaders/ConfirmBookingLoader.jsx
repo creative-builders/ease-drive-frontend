@@ -20,7 +20,7 @@ export const ConfirmBookingLoader = ({
   if (variant === "list") {
     return (
       <div
-        className={`space-y-6 p-4 bg-white w-full rounded-xl z-0 ${className}`}
+        className={`space-y-6 p-4 bg-white w-full rounded-xl  ${className}`}
       >
         {/* Top bar */}
         <ShimmerBlock className="h-6 w-3/4 rounded-md" />

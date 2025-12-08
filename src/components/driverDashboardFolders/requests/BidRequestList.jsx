@@ -68,7 +68,7 @@ export const BidRequestsList = ({ request, onSelect, onBack }) => {
     }
     return (
 
-        <div className="lg:w-[600px] w-[370px] mx-auto bg-white min-h-screen px-4 py-5 rounded-2xl shadow-sm">
+        <div className="lg:w-[540px] w-[370px] mx-auto bg-white min-h-screen px-4 py-5 rounded-2xl shadow-sm">
             {/* Header */}
             <div className="flex justify-between items-center mb-5">
                 <h2 className="lg:text-xl text-sm font-semibold text-gray-800 items-center" >
