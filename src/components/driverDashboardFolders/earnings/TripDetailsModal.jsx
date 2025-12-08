@@ -15,7 +15,8 @@ export const TripDetailsModal = ({ isOpen, onClose, trip }) => {
         <div className="flex items-baseline justify-between">
           <div>
             <h2 className="text-sm md:text-base w-full font-semibold text-left not-italic gap-4  flex items-center">
-              {trip.location.locationName} <span className="text-green-900"> <FaArrowRight /> </span>{trip.destination.destinationName}
+              {trip.location.locationName} <span className="text-green-900">
+                <FaArrowRight /> </span>{trip.destination.destinationName}
             </h2>
           </div>
           <div>
@@ -43,11 +44,14 @@ export const TripDetailsModal = ({ isOpen, onClose, trip }) => {
             className="flex justify-between self-stretch px-2 py-0 items-center gap-6"
           >
             <div className="flex w-4/5 h-24 items-center  self-stretch gap-4">
-              <img
-                src={trip.booker.profileImage}
-                alt={trip.booker.name}
-                className="w-9 md:w-20 h-9 md:h-20 rounded-full object-cover"
-              />
+              <div className=" rounded-full overflow-hidden w-[40px] h-[40px] lg:w-[80px] lg:h-[80px] flex-shrink-0">
+                <img
+                  className="w-full h-full object-cover"
+                  src={trip.booker.profileImage}
+                  alt={trip.booker.name}
+                />
+              </div>
+
               <div className="h-full w-full flex flex-col p-2 gap-2">
                 <div className="flex gap-6">
                   <p className="font-medium text-xs md:text-base not-italic leading-normal">{trip.booker.name}</p>
