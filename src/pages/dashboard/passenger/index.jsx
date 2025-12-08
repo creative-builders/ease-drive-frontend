@@ -10,9 +10,12 @@ import { HamburgerIcon } from "../../../assets/icons/HamburgerIcon";
 import { useGeolocation } from "../../../hooks/useGeolocation";
 import { FormProvider, useStepFlowContext } from "../../../hooks/useStepFlowFormContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createRide, getRideById } from "../../../store/users/api";
+import { createRide, fetchRideById } from "../../../store/users/api";
 import toast from "react-hot-toast";
 import { ProgressBar } from "../../../components/ProgressBar";
+import { useRecoilValue } from "recoil";
+import { userAtom } from "../../../components/atoms/userAtom";
+import { useNavigate } from "react-router-dom";
 
 
 const PassengerDashboardIndexContext = () => {
@@ -22,6 +25,10 @@ const PassengerDashboardIndexContext = () => {
   const [refreshTrigger, setRefreshTrigger] = useState(0); 
   const [rideId, setRideId] = useState(null);
   const [driverStatus, setDriverStatus] = useState("searching"); 
+  const currentUser  = useRecoilValue(userAtom);
+  const navigate = useNavigate();
+
+
 
 
   const pollingRef = useRef(null);
@@ -66,16 +73,17 @@ const PassengerDashboardIndexContext = () => {
 
     pollingRef.current = setInterval(async () => {
       try {
-        const ride = await getRideById(id);
+        const ride = await fetchRideById(currentUser?._id , id);
+        console.log("CUrrent Ride",ride?.data?.booking?.bids);
 
-        if (ride?.bids?.length > 0) {
+        if (ride?.data?.booking?.bids?.length > 0) {
           // DRIVER FOUND
           stopPollingRide();
           setProgress(100);
           setDriverStatus("found");
         }
       } catch (err) {
-        console.log("Error fetching ride:", err);
+        toast.error("Error fetching ride:", err);
       }
     }, 2000);
   };
@@ -109,15 +117,15 @@ const PassengerDashboardIndexContext = () => {
     searchValue:""
       }));
 
-    setRideId(response?.rideId);
+    setRideId(response?.data?._id);
     setDriverStatus("searching");
     setProgress(0);
     setIsSearchingDrivers(true);
 
-    //Start polling this ride
-    startPollingRide(response?.rideId);
-    
+    //start polling this ride
+    startPollingRide(response?.data?._id);
      },
+
      onError:(error) => {
       toast.error(error.response?.data?.message || error.message);
      }
@@ -127,6 +135,7 @@ const PassengerDashboardIndexContext = () => {
   const handleSubmit = () => {
     if (formData?.luggages === "yes" && formData?.luggageImage.length === 0) {
       toast.error("Upload at least one luggage image !");
+
       return;
     }
     
@@ -155,13 +164,17 @@ const PassengerDashboardIndexContext = () => {
   startPollingRide(rideId);
   }
 
+  console.log(driverStatus)
    const renderDriverActionButton = () => {
     if (driverStatus === "found") {
       return (
         <CustomButton
           name="See Available Drivers"
           extendedStyles="w-full h-[50px] bg-green-600 text-white rounded-2xl font-medium"
-          btnClick={() => console.log("Navigate to drivers")}
+           btnClick={() => {
+           // Navigate to /rides page and set active tab to "Ongoing Bids"
+          navigate("/dashboard/rides", { state: { activeTab: "Ongoing Bids" } });
+          }}
         />
       );
     }
@@ -191,12 +204,12 @@ const PassengerDashboardIndexContext = () => {
     <>
       {/* Driver Search Modal - Shows after ride creation */}
       {
-        !isSearchingDrivers && (
+        isSearchingDrivers && (
           <Modal position="center" closeModal={() => setIsSearchingDrivers(prev => !prev)}>
             <div className="mb-8 w-full">
               <ProgressBar resetTrigger={refreshTrigger} progress={progress} setProgress={setProgress} title="Searching for Available Drivers" />
             </div>
-            
+
             { renderDriverActionButton() }
           </Modal>
          )

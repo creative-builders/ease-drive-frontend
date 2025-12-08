@@ -76,8 +76,15 @@ export const getUserRides = async({ queryKey }) => {
 }
 
 
-export const getRideById = async({ queryKey }) => {
-    const [_key, passengerId, rideId]  =  queryKey;
-    const response = await axiosInstancePrivate.get(`/v1/bookings/ride/${passengerId}/${rideId}`);
+
+export const fetchRideById = async (passengerId, rideId) => {
+  try {
+    const response = await axiosInstancePrivate.get(
+      `/v1/bookings/ride/${passengerId}/${rideId}`
+    );
     return response.data;
-}
+  } catch (error) {
+    console.error("Error fetching ride:", error);
+    throw error;
+  }
+};
