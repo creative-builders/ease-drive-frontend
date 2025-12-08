@@ -10,16 +10,24 @@ import { InputField } from '../customFormFields/InputField';
 import CustomButton from '../CustomButton';
 import { Skip } from '../Skip';
 import { Link } from 'react-router-dom';
+import { AddFile } from '../AddFile'
 
 export const StepOne = ({ nextStep, step, totalSteps }) => {
   const fileInputRef = useRef(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
+
   const {
     formData,
     inputTouched,
     setFormData,
     handleUpdateFormData,
   } = useStepFlowContext();
+
+
+  const handleFileFieldUpdate = (files) => {
+      handleUpdateFormData("documentPhotos", files)
+      setSelectedFiles(files)
+  }
 
   const [errors, setErrors] = useState({});
 
@@ -39,7 +47,6 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
 
   const handleNext = () => {
     const newErrors = {};
-    // console.log("Form Data:", formData);
 
     if (!formData.meansOfIdentification) {
       newErrors.meansOfIdentification = "Please select means of identification";
@@ -63,7 +70,7 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
   return (
     <div className=" min-h-screen lg:h-full">
       <div className="flex items-center justify-center min-h-screen ">
-        <div className="bg-white lg:w-[1116px] lg:h-[600px] w-[90%] m-auto flex
+        <div className="bg-white lg:w-[1116px] lg:h-[720px] w-[90%] m-auto flex
          lg:pt-12 lg:pb-12 opacity-100 flex flex-row items-center py-auto">
 
           <div className="lg:w-[637px] lg:h-[734px]  w-[400px] 
@@ -75,14 +82,7 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
                   className="text-blue-800 bg-custom-gradient"
                   title={` Step ${step}  of ${totalSteps}`}
                 />
-                {/* <Link to="/"> 
-              <div className="flex flex-row items-center justify-start gap-2">
-                <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
-                <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-lg leading-[100%]">
-                  Ease Drive
-                </h1>
-              </div>
-              </Link> */}
+
               </div>
             </div>
             {/* Section Header */}
@@ -108,7 +108,6 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
                 label="Means of Identification"
                 value={formData.meansOfIdentification}
                 onChange={handleUpdateFormData}
-                // onChange={(val) => handleUpdateFormData("meansOfIdentification", val)}
                 options={["NIN", "Driver's License", "International Passport", "Voter’s Card"]}
                 defaultHolder="Select means of identification"
                 rightIcon={FaChevronDown}
@@ -137,78 +136,24 @@ export const StepOne = ({ nextStep, step, totalSteps }) => {
             </form>
 
             {/* Upload Section */}
-            <div className="flex flex-col w-full -mt-4">
-              <p className="font-semibold text-left text-gray-700 lg:text-lg text-base font-inter pt-2">
-                Upload a document
-              </p>
-              <p className="font-medium text-left text-gray-700 lg:text-sm text-xs font-inter">
-                You can upload up to 4 images (JPG, PNG). Max size: 5MB each
-              </p>
 
-              <div className="flex-col flex justify-center items-center w-full mt-4">
-                <AddFileIcon className="w-20 h-20 mb-4 cursor-pointer" onClick={handleUploadClick} />
-                <button
-                  type="button"
-                  onClick={handleUploadClick}
-                  className="lg:w-[30%] w-[50%] bg-green-200 text-gray-400 rounded-xl py-1.5 text-lg font-bold mb-4"
-                >
-                  Upload Photos
-                </button>
-
-                {/* <input
-                  type="file"
-                  ref={fileInputRef}
-                  name="documentPhotos"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={(e) => {
-                    const files = Array.from(e.target.files);
-                    setSelectedFiles(files);
-                    handleUpdateFormData("documentPhotos", files);
-                  }}
-                  multiple
-                /> */}
-
-                <InputField
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  name="documentPhotos"
-                  inputRef={fileInputRef}
-                  containerStyles={"hidden"}
-                  inputTextStyles={"hidden"}
-                  onChange={(e) => {
-                    const files = Array.from(e.target.files);
-                    setSelectedFiles(files);
-                    handleUpdateFormData("documentPhotos", files);
-                  }}
-                />
-
-                {selectedFiles.length > 0 && (
-                  <ul className="w-[80%] mt-2 text-sm text-gray-600 list-disc list-inside">
-                    {selectedFiles.map((file, index) => (
-                      <li key={index}>{file.name}</li>
-                    ))}
-                  </ul>
-                )}
-                {errors.files && (
-                  <p className="text-red-500 text-sm mt-1">{errors.files}</p>
-                )}
-              </div>
+            <div className="flex flex-col w-full">
+              <AddFile 
+                name="documentPhotos"
+                title={"Upload photos of document"}
+                extendedStyles={"text-center"}
+                onFilesChange={handleFileFieldUpdate}
+              >
+                <p className=" text-xs text-center font-medium text-neutral-700">
+                  You can upload up to 4 images (JPG, PNG). <br />
+                  Maximum file size: 10MB per image
+                </p>
+              </AddFile>
             </div>
-
-            {/* <button
-              type="button"
-              className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-lg font-bold "
-              onClick={() => {
-                nextStep()
-              }}>
-              Skip
-            </button> */}
 
             <CustomButton
               name="Continue"
-              extendedStyles="w-full p-3 bg-green-700 lg:p-4 rounded-lg"
+              extendedStyles="w-full p-3 bg-green-700 lg:p-3 rounded-lg"
               btnClick={handleNext}
             />
           </div>

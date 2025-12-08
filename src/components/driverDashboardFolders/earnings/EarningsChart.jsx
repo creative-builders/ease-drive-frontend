@@ -12,8 +12,6 @@ const COLORS = {
 function filterEarningsByRange(data, range) {
   const today = new Date();
 
-  // ⚡ In your real app, you'd filter by `date`. 
-  // For now, we'll just return the same data (mock).
   if (range === "Daily") return data;
   if (range === "Weekly") return data;
   if (range === "Monthly") return data;
@@ -100,7 +98,7 @@ export function DashboardEarningChart() {
   ];
 
   return (
-    <div className="lg:w-[495px] lg:h-[263px] w-[380px] -z-1">
+    <div className="lg:w-[519px] lg:h-[263px] w-[380px] -z-1">
       <EarningsChart title="Earnings Analysis" data={chartData} />
     </div>
   );

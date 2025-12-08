@@ -1,11 +1,14 @@
 import { useState, useMemo, useEffect } from "react";
 import { Pagination } from "./Pagination";
 import { Filter } from "../Filter";
+import { TripDetailsModal } from "./TripDetailsModal";
+import { formatDate } from "../../../utils/formatDate";
 
 // Table only renders data
-function TripsTable({ columns, data }) {
+function TripsTable({ columns, data, onSelectTrip }) {
+
   return (
-    <div className="p-4 bg-white rounded-2xl ">
+    <div className="p-4 bg-white rounded-2xl">
       <div className="overflow-x-auto">
         <table className="min-w-full text-sm text-left border-collapse">
           <thead>
@@ -13,7 +16,7 @@ function TripsTable({ columns, data }) {
               {columns.map((col) => (
                 <th
                   key={col.accessor}
-                  className="px-4 py-2 font-semibold text-gray-800 lg:text-base text-xs border-b"
+                  className="px-4 py-2 font-semibold text-gray-800 truncate lg:text-base text-xs border-b"
                 >
                   {col.Header}
                 </th>
@@ -22,27 +25,46 @@ function TripsTable({ columns, data }) {
           </thead>
           <tbody>
             {data.map((row) => (
-              <tr key={row.id || row._id} className="border-b hover:bg-gray-50">
+              <tr key={row.id || row._id} className="border-b  hover:bg-gray-50">
                 {columns.map((col) => (
-                  <td className="py-3" key={col.accessor}>
-                    <div
-                      className={`px-4 py-2 -mb-2 lg:text-xs text-[10px] font-medium
-                        ${col.accessor === "status" && row[col.accessor] === "Paid"
-                          ? "text-green-600 bg-green-50 rounded-[4px] text-center"
-                          : ""}
-                        ${col.accessor === "status" && row[col.accessor] === "Pending"
-                          ? "text-orange-600 bg-orange-50 rounded-[4px] text-center"
-                          : ""}
-                        ${col.accessor === "status" && row[col.accessor] === "Cancelled"
-                          ? "text-red-600 bg-red-50 rounded-[4px] text-center"
-                          : ""}
-                        ${col.accessor !== "status" ? "text-gray-600" : ""}
-                      `}
-                    >
-                      {typeof col.Cell === "function"
-                        ? col.Cell(row[col.accessor], row)
-                        : row[col.accessor]}
-                    </div>
+                  <td className="py-3 " key={col.accessor}>
+                    {col.accessor === "action" ? (
+                      <button
+                        onClick={() => {
+                          col.onView && col.onView(row)
+                          onSelectTrip && onSelectTrip(row)
+                        }}
+                        className="px-3 py-1 lg:text-sm text-xs text-green-600 bg-blue-50 rounded-md hover:bg-blue-100 transition"
+                      >
+                        View
+                      </button>
+
+                    ) : (
+                      <div
+                        className={`px-4 py-2 -mb-2 lg:text-sm text-[10px] font-medium break-words whitespace-normal
+                          ${col.accessor === "createdAt"
+                            ? "whitespace-nowrap truncate" 
+                            : "break-words whitespace-normal"} 
+                          ${col.accessor === "status" && row[col.accessor] === "Ongoing"
+                            ? "text-green-600 bg-green-50 rounded-[4px] text-center"
+                            : ""}
+                          ${col.accessor === "status" && row[col.accessor] === "Pending"
+                            ? "text-orange-600 bg-orange-50 rounded-[4px] text-center"
+                            : ""}
+                          ${col.accessor === "status" && row[col.accessor] === "Cancelled"
+                            ? "text-red-600 bg-red-50 rounded-[4px] text-center"
+                            : ""}
+                            ${col.accessor === "status" && row[col.accessor] === "Completed"
+                            ? "text-green-700 bg-green-200 rounded-[4px] text-center"
+                            : ""}
+                          ${col.accessor !== "status" ? "text-gray-600 " : ""}
+                        `}
+                      >
+                        {typeof col.Cell === "function"
+                          ? col.Cell(row[col.accessor], row)
+                          : row[col.accessor]}
+                      </div>
+                    )}
                   </td>
                 ))}
               </tr>
@@ -64,22 +86,27 @@ function TripsTable({ columns, data }) {
 // Filter helper with improved date handling
 function filterTripsByRange(trips, range) {
   if (!trips || !Array.isArray(trips)) return [];
-  
+
   const today = new Date();
-  today.setHours(0, 0, 0, 0); // Normalize to start of day
+  today.setHours(0, 0, 0, 0);
 
   return trips.filter((trip) => {
-    if (!trip.date) return false;
-    
-    const tripDate = new Date(trip.date);
+    const dateValue = trip.date || trip.createdAt;
+    if (!dateValue) return false;
+
+    const tripDate = new Date(dateValue);
+    console.log(tripDate)
     if (isNaN(tripDate.getTime())) return false;
-    
-    tripDate.setHours(0, 0, 0, 0); // Normalize to start of day
+
+    tripDate.setHours(0, 0, 0, 0);
 
     if (range === "Recent") return true;
-    
-    const diffInDays = Math.max(0, Math.floor((today - tripDate) / (1000 * 60 * 60 * 24)));
-    
+
+    const diffInDays = Math.max(
+      0,
+      Math.floor((today - tripDate) / (1000 * 60 * 60 * 24))
+    );
+
     if (range === "Weekly") return diffInDays <= 7;
     if (range === "Monthly")
       return (
@@ -93,9 +120,12 @@ function filterTripsByRange(trips, range) {
 }
 
 // Page handles filter + pagination
-export function TripsPage({ tripData = [] }) {
+export function TripsPage({ tripData = [], onView }) {
   const [filter, setFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
+    const [selectedTrip, setSelectedTrip] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
   const pageSize = 6;
 
   // Apply filtering
@@ -110,7 +140,7 @@ export function TripsPage({ tripData = [] }) {
 
   // Pagination
   const totalPages = Math.ceil(filteredTrips.length / pageSize);
-  
+
   // Ensure currentPage doesn't exceed totalPages after filtering
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
@@ -126,15 +156,46 @@ export function TripsPage({ tripData = [] }) {
   }, [filteredTrips, currentPage, pageSize]);
 
   const columns = [
-    { Header: "Date", accessor: "date" },
-    { Header: "Pick-Up", accessor: "pickup" },
-    { Header: "Drop-Off", accessor: "dropoff" },
-    { Header: "Status", accessor: "status" },
-    { Header: "Earnings", accessor: "earnings" },
+    {
+      Header: "Date",
+      accessor: "createdAt",
+      Cell: (value) => formatDate(value).date,
+    },
+    {
+      Header: "Pick-Up",
+      accessor: "location.locationName",
+      Cell: (_, row) => row.location?.locationName || "—",
+    },
+    {
+      Header: "Drop-Off",
+      accessor: "destination.destinationName",
+      Cell: (_, row) => row.destination?.destinationName || "—",
+    },
+    {
+      Header: "Status",
+      accessor: "status",
+    },
+    {
+      Header: "Earnings",
+      accessor: "bidPrice",
+      Cell: (value) => `₦${Math.abs(value).toLocaleString()}`,
+    },
+    {
+      Header: "Action",
+      accessor: "action",
+      onView,
+    },
   ];
+  // console.log(currentData)
+
+  
+  const handleSelectTrip = (trip) => {
+    // console.log("Selected trip:", trip);
+    setSelectedTrip(trip);
+  };
 
   return (
-    <div className="flex flex-col lg:gap-6 gap-4">
+    <div className="flex lg:w-[1050px] w-full flex-col lg:gap-6 gap-4">
       <div className="bg-white rounded-2xl shadow">
         {/* Header with Filter */}
         <div className="flex justify-between items-center lg:px-6 lg:py-4 px-6 py-4">
@@ -148,16 +209,23 @@ export function TripsPage({ tripData = [] }) {
           />
         </div>
 
-        {/* Table */}
-        <TripsTable columns={columns} data={currentData} />
+
+        <TripsTable columns={columns} data={currentData} onSelectTrip={handleSelectTrip}  />
       </div>
 
-      {/* Pagination */}
+
       {totalPages > 1 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={setCurrentPage}
+        />
+      )}
+
+      {showModal && (
+        <TripDetailsModal
+          trip={selectedTrip}
+          onClose={() => setShowModal(false)}
         />
       )}
     </div>

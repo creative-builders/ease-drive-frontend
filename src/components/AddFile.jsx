@@ -40,7 +40,6 @@ export const AddFile = ({
       toast.error(`You can only upload up to ${maxFiles} files.`);
       return;
     }
-
     const newPreviews = validFiles.map((file) => URL.createObjectURL(file));
 
     setSelectedFiles(allFiles);

@@ -83,8 +83,6 @@ export const AccountCenter = () => {
     } = driverData
 
 
-    // console.log(driverData)
-
 
     const { mutate: submitDriverKYC, isLoading } = useMutation(
         driverKYCUpdate,
@@ -92,7 +90,6 @@ export const AccountCenter = () => {
             onSuccess: (data) => {
                 toast.success(response?.message);
                 queryClient.invalidateQueries(["getUserProfile"]);
-                // console.log("KYC data updated successfully:", data);
                 setisSubmitting(false)
                 setModalType("accountsuccess");
             },
@@ -124,19 +121,15 @@ export const AccountCenter = () => {
     }
 
     const handleBankDetailsSubmit = () => {
-        try {
-            submitDriverKYC({
-                credentials: {
-                    bankName: inputs.bankName,
-                    bankAccountHolderName: inputs.bankAccountHolderName,
-                    bankAccountNumber: inputs.bankAccountNumber,
-                    transactionPin: inputs.newPin
-                }, userId: userData?._id
-            });
-            // setModalType("withdralpin")
-        } catch (error) {
-            console.log(error)
-        }
+        submitDriverKYC({
+            credentials: {
+                bankName: inputs.bankName,
+                bankAccountHolderName: inputs.bankAccountHolderName,
+                bankAccountNumber: inputs.bankAccountNumber,
+                transactionPin: inputs.newPin
+            }, userId: userData?._id
+        });
+
     }
 
 
@@ -151,7 +144,7 @@ export const AccountCenter = () => {
     const handleTogglePassword = () => setShowPassword((prev) => !prev);
 
     return (
-        <div className="p-6 lg:w-[495px] lg:h-[263px] bg-white rounded-xl shadow w-full">
+        <div className="p-6 lg:w-[519px] lg:h-[263px] bg-white rounded-xl shadow w-full">
             <div className="flex flex-col justify-start items-start gap-2 h-full w-[]">
                 <h2 className="lg:text-2xl text-sm font-semibold">Payout Details</h2>
                 <div className='flex flex-col gap-1'>

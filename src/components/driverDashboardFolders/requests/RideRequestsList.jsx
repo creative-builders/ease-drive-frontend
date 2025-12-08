@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RideRequestCard } from "./RideRequestCard";
 import { FilterIcon } from "../../../assets/icons/FilterIcon";
 import { Filter } from "../Filter";
@@ -7,82 +7,56 @@ export function RideRequestsList({ requests, onSelect }) {
   const [filter, setFilter] = useState("Filter");
   const [displayList, setDisplayList] = useState("block");
   const [sortedRequests, setSortedRequests] = useState(requests);
-  // Sort based on filter
-  // const sortedRequests = [...requests].sort((a, b) => {
-  //   const dateA = new Date(a.date);
-  //   const dateB = new Date(b.date);
 
-  //   if (filter === "Recent") {
-  //     return dateB - dateA; // newest first
-  //   } else {
-  //     return dateA - dateB; // oldest first
-  //   }
-  // });
+  useEffect(() => {
+    setSortedRequests(requests);
+  }, [requests]);
+
+  // Handle filter change
+  const handleFilterChange = (option) => {
+    let sorted = [...requests];
+
+    if (option === "Recent") {
+      sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    } else if (option === "Older") {
+      sorted.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+    }
+
+    setSortedRequests(sorted);
+  };
+
 
   return (
-    <div className={`self-stretch  px-5 py-3 pb-4 bg-white rounded-lg inline-flex flex-col
+    <div className={`self-stretch lg:w-[560px] lg:mb-6 px-5 py-3 pb-4 bg-white rounded-lg inline-flex flex-col
      lg:justify-start justify-center lg:items-start gap-2 relative`}>
       <div className="lg:w-[490px] w-[335px]  justify-center items-center 
       inline-flex lg:justify-start lg:items-center gap-[10%] lg:gap-[30%]">
-        <div className="text-black lg:text-xl text-base font-semibold font-poppins">
+        <div className="text-black lg:text-lg text-base font-semibold font-poppins">
           Ongoing Ride Requests
         </div>
 
-        {/* Filter dropdown */}
-        {/* <div className="relative">
-          <div
-            className="w-24 h-10 p-2.5 rounded-lg flex justify-center items-center gap-2.5 cursor-pointer"
-            onClick={() => setDropdownOpen((prev) => !prev)}
-          >
-            <div className="text-accent-500 lg:text-xl text-base font-medium font-poppins">
-              {filter}
-            </div>
-            <div className="w-6 h-6 relative">
-              <FilterIcon />
-            </div>
-          </div>
-
-          {dropdownOpen && (
-            <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-              <div
-                className="px-4 py-2 hover:bg-gray-100 cursor-pointer font-poppins" 
-                onClick={() => {
-                  setFilter("Recent");
-                  setDropdownOpen(false);
-                }}
-              >
-                Recent
-              </div>
-              <hr />
-              <div
-                className="px-4 py-2 hover:bg-gray-100 cursor-pointer font-poppins"
-                onClick={() => {
-                  setFilter("Older");
-                  setDropdownOpen(false);
-                }}
-              >
-                Older
-              </div>
-            </div>
-          )}
-        </div> */}
-
-        <Filter itemsArray={requests} options={["Recent", "Older"]} 
-        title="Filter"
-        onSort={(sortedRequests) => setSortedRequests(sortedRequests)} />
-
+        <div className="mx-4">
+          <Filter
+            options={["Recent", "Older"]}
+            title="Filter"
+            onChange={handleFilterChange}
+          />
+        </div>
       </div>
 
       {/* Render filtered requests */}
-      {sortedRequests.map((req) => (
-        <div
-          key={req.id}
-          onClick={() => onSelect(req)}
-          className="cursor-pointer w-full font-poppins"
-        >
-          <RideRequestCard request={req} />
-        </div>
-      ))}
-    </div>
+      {
+        sortedRequests.map((req, index) => (
+          <div
+            key={index}
+            onClick={() => onSelect(req)}
+            className="cursor-pointer w-full font-poppins"
+          >
+            <RideRequestCard request={req} />
+          </div>
+        ))
+      }
+    </div >
   );
 }
+

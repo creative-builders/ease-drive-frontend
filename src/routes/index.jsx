@@ -21,10 +21,12 @@ import { DriverDashboardIndex } from '../pages/dashboard/driver';
 import { Earnings } from '../pages/dashboard/driver/Earnings';
 import { Trips } from '../pages/dashboard/driver/Trips';
 import { Requests } from '../pages/dashboard/driver/Requests';
+import { Bids } from '../pages/dashboard/driver/Bids';
 import ProtectedRoutes from './ProtectedRoutes';
 import Notifications from '../pages/dashboard/driver/Notification';
 import DriverProfile from '../pages/dashboard/driver/DriverProfiles';
 import { SupportPage } from "../pages/dashboard/passenger/SupportPage";
+import { ViewDriverPage } from '../pages/dashboard/passenger/veiw-driver-detail/ViewDriverPage';
 
 
 
@@ -49,6 +51,7 @@ const IndexRoute = () => {
       <Route path="/driver-profile" element={<DriverProfile />} />
       {/* <Route path="/driver-profile" element={<DriverProfiles />} /> */}
       <Route path="/user-profile" element={<PassengerProfile />} />
+       <Route path="/view-driver" element={<ViewDriverPage />} />
       
 
       {/* Dashboard Route */}
@@ -80,6 +83,8 @@ const IndexRoute = () => {
           <Route path="notifications" element={<Notifications />} />
           <Route path="trips" element={<Trips />} />
           <Route path="requests" element={<Requests />} />
+          <Route path="bids" element={<Bids />} />
+
         </Route>
 
 

@@ -5,14 +5,14 @@ import { useState, useRef } from 'react';
 import { useStepFlowContext } from '../../hooks/useStepFlowFormContext';
 import { InputField } from '../customFormFields/InputField';
 import CustomButton from '../CustomButton';
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaArrowLeft } from "react-icons/fa";
 import { PlateNumberIcon } from '../../assets/icons/PlateNumberIcon'
 import { CreditCardIcon } from '../../assets/icons/CreditCardIcon';
 import { BankHouseIcon } from '../../assets/icons/BankHouseIcon';
 import { Skip } from '../Skip'
 import { Link } from 'react-router-dom';
 
-export const StepThree = ({ nextStep, step, totalSteps }) => {
+export const StepThree = ({ nextStep, prevStep, step, totalSteps }) => {
 
    const fileInputRef = useRef(null);
    const [checked, setChecked] = useState(false);
@@ -68,19 +68,19 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                   flex justify-center items-center 
                 p-5 gap-8 opacity-100 bg-white flex flex-col items-center justify-center">
                   <div className="lg:w-[100%] w-full text-left flex flex-col justify-start   opacity-100 ">
-                     <div className="flex flex-row items-center justify-start">
+
+                     <div className='flex gap-4 -ml-2 lg:-ml-0 px-2 py-3'>
+                        <button onClick={prevStep} className='flex font-regular text-xl'>
+                           <FaArrowLeft />
+                        </button>
+                     </div>
+
+                     <div className="flex flex-row -ml-1 lg:-ml-0 items-center justify-start">
                         <SectionLabel
                            className="text-blue-800 bg-custom-gradient"
                            title={` Step ${step}  of ${totalSteps}`}
                         />
-                        {/* <Link to="/"> 
-              <div className="flex flex-row items-center justify-start gap-2">
-                <img src='/ease-drivelogo.png' className='lg:w-[64px] lg:h-[64px] w-[45px] h-[45px] mr-2' />
-                <h1 className="font-inter text-gray-700 italic font-bold lg:text-[36px] text-lg leading-[100%]">
-                  Ease Drive
-                </h1>
-              </div>
-              </Link> */}
+                     
                      </div>
                   </div>
 
@@ -126,11 +126,7 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                               "Keystone Bank",
                               "Jaiz Bank"
                            ]}
-                           // options={[
-                           //    { value: "us", label: "United States", icon: BankHouseIcon },
-                           //    { value: "ng", label: "Nigeria", icon:CreditCardIcon },
-                           //    { value: "uk", label: "United Kingdom", icon:CreditCardIcon,},
-                           // ]}
+                         
                            leftIcon={BankHouseIcon}
                            rightIcon={FaChevronDown}
                         />
@@ -210,15 +206,6 @@ export const StepThree = ({ nextStep, step, totalSteps }) => {
                      {error && <p className="text-red-500 lg:text-sm text-xs font-inter">{error}</p>}
 
                   </div>
-
-                  {/* <button
-                     type="button"
-                     className="lg:w-full w-full bg-green-200 text-primary-700 rounded-xl py-4 text-lg font-bold "
-                     onClick={() => {
-                        nextStep()
-                     }}>
-                     Skip
-                  </button> */}
 
                   <CustomButton
                      name="Continue"
