@@ -16,6 +16,7 @@ import { ProgressBar } from "../../../components/ProgressBar";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../../../components/atoms/userAtom";
 import { useLocation, useNavigate } from "react-router-dom";
+import { div } from "framer-motion/client";
 
 
 const PassengerDashboardIndexContext = () => {
@@ -29,7 +30,12 @@ const PassengerDashboardIndexContext = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location?.state?.selectedRideBid)
+  console.log(location?.state?.selectedRideBid);
+
+
+  const isFromBookDriver =
+  location.state?.source === "book-driver" &&
+  location.state?.confirmBooking;
 
 
 
@@ -145,6 +151,10 @@ const PassengerDashboardIndexContext = () => {
     submitCreateRide(formData)
   };
 
+  //to prevent memory leaks on route changes
+  useEffect(() => {
+  return () => stopPollingRide();
+   }, []);
 
   //Stop polling when progress completes but no drivers
   useEffect(() => {
@@ -218,7 +228,7 @@ const PassengerDashboardIndexContext = () => {
       }
       
       {/* Location Permission Modal */}
-      {isOpen && (
+      {isOpen && !isFromBookDriver &&  (
         <Modal
           closeModal={() => {
            setLocationEnabled(true);
@@ -242,7 +252,10 @@ const PassengerDashboardIndexContext = () => {
         </Modal>
       )}
 
-      <div className="flex flex-col lg:flex-row lg:gap-x-4">
+      {/* render this if it is not from book driver route */}
+      {
+        !isFromBookDriver && (
+          <div className="flex flex-col lg:flex-row lg:gap-x-4">
         {/* map */}
         <div className="bg-white rounded-[10px] lg:p-4 w-full h-screen lg:min-w-[480px] lg:min-h-[734px]">
           <BackgroundMap coords={coords} />
@@ -278,6 +291,17 @@ const PassengerDashboardIndexContext = () => {
           />
         </div>
       </div>
+        )
+      }
+
+      {/* render if it it from book driver */}
+      {
+        isFromBookDriver && (
+          <div>
+            <h3>Hi Welcome to the book driver UI</h3>
+          </div>
+        )
+      }
     </>
   );
 };
