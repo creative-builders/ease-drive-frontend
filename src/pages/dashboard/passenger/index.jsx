@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 import { ProgressBar } from "../../../components/ProgressBar";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../../../components/atoms/userAtom";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const PassengerDashboardIndexContext = () => {
@@ -27,6 +27,9 @@ const PassengerDashboardIndexContext = () => {
   const [driverStatus, setDriverStatus] = useState("searching"); 
   const currentUser  = useRecoilValue(userAtom);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  console.log(location?.state?.selectedRideBid)
 
 
 
@@ -164,7 +167,6 @@ const PassengerDashboardIndexContext = () => {
   startPollingRide(rideId);
   }
 
-  console.log(driverStatus)
    const renderDriverActionButton = () => {
     if (driverStatus === "found") {
       return (

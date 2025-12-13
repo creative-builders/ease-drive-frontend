@@ -6,7 +6,8 @@ import { Divider } from "../Divider/Divider"
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext"
 import { InputField } from "../customFormFields/InputField"
 import { AddFile } from "../AddFile"
-import { useState } from "react"
+import { CustomSelectField } from "../customFormFields/CustomSelectField"
+
 
 export const SelectRide = ({
   handleSubmit,
