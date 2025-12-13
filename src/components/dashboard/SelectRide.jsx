@@ -2,7 +2,6 @@ import { RidesIcon } from "../../assets/icons/dashboard/RidesIcon"
 import { LuggageIcon } from "../../assets/icons/LuggageIcon"
 import { PoliceCarIcon } from "../../assets/icons/PoliceCarIcon"
 import CustomButton from "../CustomButton"
-import { CustomSelectField } from "../customFormFields/CustomSelectField"
 import { Divider } from "../Divider/Divider"
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext"
 import { InputField } from "../customFormFields/InputField"
@@ -20,9 +19,6 @@ export const SelectRide = ({
       setFormData,
       handleUpdateFormData,
   } = useStepFlowContext();
-
-  const [progress, setProgress] = useState(0);
-  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const isLuggageAvailable = formData?.luggages === "yes";
 
