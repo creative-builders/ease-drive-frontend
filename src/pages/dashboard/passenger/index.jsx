@@ -3,14 +3,12 @@ import BackgroundMap from "../../../components/dashboard/BackgroundMap";
 import { Modal } from "../../../components/Modal";
 import { LiveGPSIcon } from "../../../assets/icons/LiveGPSIcon";
 import CustomButton from "../../../components/CustomButton";
-import { ChooseDestination } from "../../../components/dashboard/ChooseDestination";
-import { SelectRide } from "../../../components/dashboard/SelectRide";
 import { GoBackIcon } from "../../../assets/icons/GoBackIcon";
 import { HamburgerIcon } from "../../../assets/icons/HamburgerIcon";
 import { useGeolocation } from "../../../hooks/useGeolocation";
 import { FormProvider, useStepFlowContext } from "../../../hooks/useStepFlowFormContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createRide, fetchRideById } from "../../../store/users/api";
+import { createRide, fetchRideById, initializePayment } from "../../../store/users/api";
 import toast from "react-hot-toast";
 import { ProgressBar } from "../../../components/ProgressBar";
 import { useRecoilValue } from "recoil";
@@ -21,6 +19,9 @@ import { format } from "date-fns";
 import { trimText } from "../../../utils/trimeText";
 import { ReviewBadgeIcon } from "../../../assets/icons/ReviewBadgeIcon";
 import { Divider } from "../../../components/Divider/Divider";
+import { TaxiCarIcon } from "../../../assets/icons/TaxiCarIcon";
+import { MotorcycleIcon } from "../../../assets/icons/MotocycleIcon";
+import { BusIcon } from "../../../assets/icons/BusIcon";
 
 
 const PassengerDashboardIndexContext = () => {
@@ -38,8 +39,15 @@ const PassengerDashboardIndexContext = () => {
   location.state?.source === "book-driver" &&
   location.state?.confirmBooking;
 
-  console.log(location?.state)
+ const VEHICLE_ICON_MAP = {
+  Keke: TaxiCarIcon,
+  Motorcylcle: MotorcycleIcon,
+  "Regular Bus": BusIcon,
+  Truck: BusIcon,
+  Car: TaxiCarIcon,
+ "Shuttle Bus": BusIcon,
 
+};
 
   const pollingRef = useRef(null);
 
@@ -141,6 +149,26 @@ const PassengerDashboardIndexContext = () => {
      }
   })
 
+  const { mutate:submitHandlePayment, isLoading:isPaymentLoading } = useMutation(initializePayment, {
+     onSuccess: (response) => {
+     toast.success(response?.message);
+     queryClient.invalidateQueries(["getUserProfile"]);
+
+     const redirectUrl = response?.data?.authorization_url;
+
+      if (redirectUrl) {
+        window.location.href = redirectUrl;
+      } else {
+        toast.error("Payment link not available");
+      }
+      
+     },
+
+     onError:(error) => {
+      toast.error(error.response?.data?.message || error.message);
+     }
+  })
+
 
   const handleSubmit = () => {
     if (formData?.luggages === "yes" && formData?.luggageImage.length === 0) {
@@ -153,6 +181,12 @@ const PassengerDashboardIndexContext = () => {
       ...formData, 
       phoneNumber:currentUser?.phoneNumber})
   };
+
+ const handleInitializePayment = () => {
+    submitHandlePayment({
+      amount: location?.state?.selectedRideBid?.totalPrice,
+    })
+}
 
   //to prevent memory leaks on route changes
   useEffect(() => {
@@ -180,6 +214,8 @@ const PassengerDashboardIndexContext = () => {
   startPollingRide(rideId);
   }
 
+  const Icon = VEHICLE_ICON_MAP[location?.state?.selectedRideBid?.bidder?.vehicleType] || TaxiCarIcon;
+  
    const renderDriverActionButton = () => {
     if (driverStatus === "found") {
       return (
@@ -320,13 +356,14 @@ const PassengerDashboardIndexContext = () => {
                   <div className="flex flex-col gap-x-2 lg:flex-row lg:gap-y-2 items-center lg:items-start">
                     <div className="relative w-[89px] z-4 h-[89px] rounded-full">
                       <img className="w-full h-full object-cover rounded-full" src={location?.state?.selectedRideBid?.bidder?.profileImage} alt={location?.state?.selectedRideBid?.bidder?.name} />
-                      {/* appear like a profile badge at the bottom right */}
                       <div className="absolute bottom-0 z-8 right-0 w-[29px] h-[28px] rounded-full bg-neutral-50 flex justify-center items-center">
-                        {/* <ReviewBadgeIcon/> */}
+                        {
+                         Icon && <Icon className="w-6 h-6"/>
+                        }
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-center font-semibold text-base text-gray-950 capitalize">{location?.state?.selectedRideBid?.bidder?.name}</h3>
+                      <h3 className="font-semibold text-base text-gray-950 capitalize">{location?.state?.selectedRideBid?.bidder?.name}</h3>
                       <p className="flex text-xs items-center gap-x-1 font-normal text-gray-950">
                         4.2
                         <span>
@@ -379,13 +416,15 @@ const PassengerDashboardIndexContext = () => {
                   </div>
                   <div className="mb-[14px] flex justify-between items-center">
                     <h5 className="font-semibold text-base text-gray-950">Price</h5>
-                    <p className="font-normal text-base text-gray-950">{location?.state?.selectedRideBid?.totalPrice}</p>
+                    <p className="font-normal text-base text-red-56 flex items-center justify-center w-[88px] h-[29px] rounded-full bg-[rgba(234,67,53,0.08)] px-4">₦{location?.state?.selectedRideBid?.totalPrice}</p>
                   </div>
                 </div>
                 <div>
                   <CustomButton
                   name="Make Payment"
                   extendedStyles="w-full h-[45px] lg:h-[60px] px-4 font-medium rounded-2xl bg-primary-700 text-white flex items-center justify-center"
+                  btnClick={handleInitializePayment}
+                  isLoading={isPaymentLoading}
                   />
                 </div>
               </div>
@@ -415,7 +454,6 @@ const PassengerDashboardIndex = () => {
         long:""
       }
     },
-    // phoneNumber:"",
     luggageImage:[],
     vehicleType:"",
     tripType:"",

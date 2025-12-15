@@ -8,7 +8,7 @@ import { InputField } from "../customFormFields/InputField"
 import { AddFile } from "../AddFile"
 import { CustomSelectField } from "../customFormFields/CustomSelectField"
 import { TaxiCarIcon } from "../../assets/icons/TaxiCarIcon"
-import { MotocycleIcon } from "../../assets/icons/MotocycleIcon"
+import { MotorcycleIcon } from "../../assets/icons/MotocycleIcon"
 import { BusIcon } from "../../assets/icons/BusIcon"
 
 
@@ -60,7 +60,7 @@ export const SelectRide = ({
             },
             {
             value:"Motorcylce",
-            iconRight: MotocycleIcon
+            iconRight: MotorcycleIcon
             },   {
             value:"Keke",
             iconRight: TaxiCarIcon

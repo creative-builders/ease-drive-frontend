@@ -1,5 +1,5 @@
 
-export const MotocycleIcon = (props) => (
+export const MotorcycleIcon = (props) => (
   <svg
     width={25}
     height={25}
