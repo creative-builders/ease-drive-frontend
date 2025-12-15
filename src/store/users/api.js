@@ -88,3 +88,12 @@ export const fetchRideById = async (passengerId, rideId) => {
     throw error;
   }
 };
+
+
+
+export const initializePayment  = async( credentials ) => {
+    const response = await axiosInstancePrivate.post(`/v1/payment/paystack`, 
+      credentials
+    );
+    return response.data;
+}
