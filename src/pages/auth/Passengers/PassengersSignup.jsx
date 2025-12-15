@@ -48,16 +48,16 @@ const PassengerSignUp = () => {
   const isFormValid = emailOrPhoneValid && isPasswordValid && isFullNameValid && isPhone;
 
   const showPhoneError =
-    inputTouched && !!formData?.phoneNumber && !isPhone;
+    inputTouched?.phoneNumber && !!formData?.phoneNumber && !isPhone;
 
   const showEmailError =
-    inputTouched && !!formData?.email && !isEmail;
+    inputTouched?.email && !!formData?.email && !isEmail;
 
   const showPasswordError =
-    inputTouched && formData?.password.length > 0 && !isPasswordValid;
+    inputTouched?.password && formData?.password.length > 0 && !isPasswordValid;
 
   const showFullNameError =
-    inputTouched && formData?.fullName.length > 0 && !isFullNameValid;
+    inputTouched?.fullName && formData?.fullName.length > 0 && !isFullNameValid;
 
   const { mutate: submitPassengerDetails, isLoading } = useMutation(
     passengerSignUpAuth,
@@ -150,7 +150,7 @@ const PassengerSignUp = () => {
               leftIcon={LockPasswordIcon}
               error={
                 showPasswordError
-                  ? "Password must be at least 5 characters"
+                  ? "Password must be at least 6 characters"
                   : ""
               }
               isPassword
@@ -178,7 +178,7 @@ const PassengerSignUp = () => {
               className={`inline-block mb-2 w-full px-1.5 h-[45px] lg:h-[60px] rounded-lg transition-all duration-300 
                 ${
                   isFormValid
-                    ? "bg-green-500 hover:bg-green-600"
+                    ? "bg-green-700"
                     : "bg-green-200 cursor-not-allowed"
                 }`}
             >
