@@ -112,11 +112,11 @@ export function RideRequests() {
 
           {isFetching ? (
             <>
-              {/* <RideHistoryLoader variant="list" items={6} />
-              <RideHistoryLoader variant="card" /> */}
-
+              <RideHistoryLoader variant="list" items={6} />
+              {/* <RideHistoryLoader variant="card" /> */}
+{/* 
               <ConfirmBookingLoader variant="list" />
-              <ConfirmBookingLoader variant="card" />
+              <ConfirmBookingLoader variant="card" /> */}
             </>
           ) :
             (

@@ -10,14 +10,40 @@ import { Modal } from '../../../../components/Modal';
 import { InputField } from '../../../../components/customFormFields/InputField';
 import { Divider } from '../../../../components/Divider/Divider';
 import { AvatarIcon } from '../../../../assets/icons/AvatarIcon';
+import { useDeleteAccount } from '../../../../hooks/useDeleteAccount';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import CustomButton from '../../../../components/CustomButton';
 
 
 
 
 const ProfileView = ({ onEdit }) => {
   const userData = useRecoilValue(userAtom);
+   const navigate = useNavigate();
+   const [isOpen, setIsOpen] = useState(false);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const { mutate: deleteAccount, isLoading, isSuccess, isError, error } = useDeleteAccount();
+
+  const handleDelete = () => {
+    if (!userData?._id) {
+      toast?.error?.("User ID not found");
+      return;
+    }
+
+    // call mutate only when the user confirms deletion
+    deleteAccount(userData?._id, {
+      onSuccess: () => {
+        toast?.success?.("Account deleted successfully");
+        setIsOpen(false);
+        localStorage.clear();
+        navigate("/signup-as");
+      },
+      onError: (err) => {
+        toast?.error?.(err?.response?.data?.message || err?.message || "Failed to delete account");
+      },
+    });
+  };
 
   return (
     <>
@@ -31,18 +57,20 @@ const ProfileView = ({ onEdit }) => {
         >
           {/* Buttons inside modal */}
           <div className="flex flex-col gap-3 w-full mt-6">
-            <button
-              className="w-full py-3 rounded-lg bg-green-200 text-black font-medium"
-              onClick={() => setIsOpen(false)}
-            >
-              Back
-            </button>
-            <button
-              className="w-full py-3 rounded-lg bg-red-500 text-white font-medium"
-              // onClick={handleDelete}
-            >
-              Yes, Delete Account
-            </button>
+          <CustomButton
+            name="Back"
+            extendedStyles={"w-full py-3 rounded-lg bg-green-200 text-black font-medium"}
+            isLoading={isLoading}
+            btnClick={() => setIsOpen(false)}
+          />
+           
+            <CustomButton
+              name="Yes, Delete Account"
+              extendedStyles={"w-full py-3 rounded-lg bg-red-500 text-white font-medium"}
+              isLoading={isLoading}
+              btnClick={handleDelete}
+            />
+            
           </div>
         </Modal>
       )}

@@ -1,7 +1,6 @@
-import React from 'react'
 
 export const RideHistoryLists = () => {
   return (
-    <div className='text-center'>No Ride History at the moment !</div>
+    <div className='h-screen flex items-center justify-center text-center'>No Ride History at the moment !</div>
   )
 }

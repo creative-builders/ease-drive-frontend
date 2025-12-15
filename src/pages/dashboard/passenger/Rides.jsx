@@ -12,6 +12,7 @@ import CustomButton from "../../../components/CustomButton";
 import useIsMobile from "../../../hooks/useIsMobile";
 import { RideBidLists } from "../../../components/dashboard/RideBidLists";
 import { RideHistoryLists } from "../../../components/dashboard/RideHistoryLists";
+import { Luggage } from "lucide-react";
 
 
 export const Rides = () => {
@@ -63,9 +64,13 @@ export const Rides = () => {
   const allBids = bookingsWithBids.flatMap((ride) =>
   ride.bids.map((bid) => ({
     ...bid,
-    rideId: ride._id,
-    destination: ride.destination,
-    booker: ride.booker,
+    rideId: ride?._id,
+    destination: ride?.destination,
+    location: ride?.location,
+    vehicleType: ride?.vehicleType,
+    tripType:ride?.tripType,
+    luggages:ride?.luggages,
+    booker: ride?.booker,
   }))
 );
 

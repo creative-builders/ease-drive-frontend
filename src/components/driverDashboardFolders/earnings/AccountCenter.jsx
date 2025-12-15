@@ -15,9 +15,10 @@ import { PlateNumberIcon } from '../../../assets/icons/PlateNumberIcon'
 import { CreditCardIcon } from '../../../assets/icons/CreditCardIcon';
 import { BankHouseIcon } from '../../../assets/icons/BankHouseIcon';
 import { ResetSuccess } from '../../../assets/icons/ResetSuccess'
+import toast from 'react-hot-toast';
 
 import LoadingSpinner from '../../LoadingSpinner';
-import { driverKYCUpdate, getDriverDetails } from "../../../store/auth/driver/api"
+import { driverKYCUpdate, getDriverDetails, withdrawDriverEarnings } from "../../../store/auth/driver/api"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { userAtom } from "../../atoms/userAtom";
 import { useNavigate } from 'react-router-dom'
@@ -38,7 +39,7 @@ export const AccountCenter = () => {
     const [pin, setPin] = useState("")
     const [isAmountEmpty, setIsAmountEmpty] = useState(false);
     const [isSumitting, setisSubmitting] = useState(false)
-    const [isPinInvalid, setIsPinInvalid] = useState(false)
+    const [isPinInvalid, setIsPinInvalid] = useState("")
     const [driverData, setDriverData] = useState({})
     const [showPassword, setShowPassword] = useState(false);
     const [inputTouched, setInputTouched] = useState(false);
@@ -63,14 +64,14 @@ export const AccountCenter = () => {
     const showaccountNameerror =
         inputTouched && inputs?.bankAccountHolderName.length > 0 && !isaccountNameValid;
 
-    const isPinValid = inputs.pin.length >= 4 && inputs.pin == "1234";
-    const showPasswordError = inputTouched && inputs.pin.length > 0 && !isPinValid;
+    // const isPinValid = inputs.pin.length >= 4 && inputs.pin == "1234";
+    // const showPasswordError = inputTouched && inputs.pin.length > 0 && !isPinValid;
 
     const showNewPinError = inputTouched && inputs.newPin.length !== 4
 
     const showPinNotMatchedError = inputTouched && inputs.newPin !== inputs.confirmNewPin
 
-
+    // console.log(userData)
     useEffect(() => {
         setDriverData(userData?.driverProfile)
     }, [userData]);
@@ -84,17 +85,40 @@ export const AccountCenter = () => {
 
 
 
-    const { mutate: submitDriverKYC, isLoading } = useMutation(
+    const { mutate: submitDriverKYC, } = useMutation(
         driverKYCUpdate,
         {
             onSuccess: (data) => {
-                toast.success(response?.message);
+                toast.success(data?.message);
                 queryClient.invalidateQueries(["getUserProfile"]);
                 setisSubmitting(false)
                 setModalType("accountsuccess");
             },
             onError: (error) => {
-                toast.error(error.response?.data?.message || error.message);
+                toast.error(error?.message || "An error occurred");
+            }
+        }
+    );
+
+
+    const { mutate: handleWithdrawal, isLoading } = useMutation(
+        withdrawDriverEarnings,
+        {
+            onSuccess: (data) => {
+                toast.success(data?.message);
+                queryClient.invalidateQueries(["getUserProfile"]);
+                setisSubmitting(false)
+                // setModalType("accountsuccess");
+                setModalType("success")
+            },
+            onError: (error) => {
+                const backendMessage = error?.response?.data?.message;
+                setIsPinInvalid(backendMessage)
+                toast.error(backendMessage || "An error occurred");
+
+                setTimeout(() => {
+                    setIsPinInvalid("");
+                }, 5000);
             }
         }
     );
@@ -105,14 +129,22 @@ export const AccountCenter = () => {
             return;
         }
         // close amount modal, open loading modal
+        inputs.pin = ""
         setModalType("enterpin");
     };
 
     const handlePinSubmit = () => {
-        setModalType("success")
-        setTimeout(() => {
-            setModalType("failed")
-        }, 7000);
+        handleWithdrawal({
+            credentials: {
+                amount: parseInt(inputs.amount),
+                account_number: bankAccountNumber,
+                bank_name: bankName,
+                bank_holder_name: bankAccountHolderName,
+                transactionPin: inputs.pin,
+                reference: `WD-${Date.now()}`
+            }, userId: userData?._id
+        })
+
 
     }
 
@@ -121,6 +153,7 @@ export const AccountCenter = () => {
     }
 
     const handleBankDetailsSubmit = () => {
+
         submitDriverKYC({
             credentials: {
                 bankName: inputs.bankName,
@@ -137,14 +170,23 @@ export const AccountCenter = () => {
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
         setInputTouched(true);
     };
+
     const handlePinUpdate = () => {
+        submitDriverKYC({
+            credentials: {
+                bankName: inputs.bankName,
+                bankAccountHolderName: inputs.bankAccountHolderName,
+                bankAccountNumber: inputs.bankAccountNumber,
+                transactionPin: inputs.newPin
+            }, userId: userData?._id
+        });
         setModalType("resetsuccess")
     }
 
     const handleTogglePassword = () => setShowPassword((prev) => !prev);
 
     return (
-        <div className="p-6 lg:w-[519px] lg:h-[263px] bg-white rounded-xl shadow w-full">
+        <div className="p-6 lg:w-[494px] lg:h-[263px] bg-white rounded-xl shadow w-full">
             <div className="flex flex-col justify-start items-start gap-2 h-full w-[]">
                 <h2 className="lg:text-2xl text-sm font-semibold">Payout Details</h2>
                 <div className='flex flex-col gap-1'>
@@ -244,17 +286,19 @@ export const AccountCenter = () => {
 
                                     <div className=' flex flex-col justify-start items-start gap-2 w-[100%] '>
                                         <div className='flex lg:text-base text-sm font-semibold text-gray-800 gap-4'>
-                                            Bank Name
+                                            {bankName || "No Bank Selected"}
                                             <span className='lg:text-xs text-[10px] text-blue-500 bg-green-50 px-4 rounded-xl mt-'>Default</span>
                                         </div>
 
                                         <div className='flex gap-2'>
-                                            <p className='lg:text-sm text-[10px]'>Account Number : <span>023****3043</span> </p>
+                                            <p className='lg:text-sm text-[10px]'>Account Number : <span>{bankAccountNumber}</span> </p>
 
                                         </div>
                                     </div>
-                                    <div className='w-[25%]'>
-                                        <EditIcon className="inline mr-2" />
+                                    <div className='w-[25%]' onClick={() => setModalType("bankdetails")}>
+                                        <EditIcon className="inline mr-2 cursor-pointer"
+
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -282,7 +326,7 @@ export const AccountCenter = () => {
             {modalType === "enterpin" && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center ">
                     <div className="relative bg-white rounded-3xl p-6 flex flex-col gap-2 w-[390px] lg:top-[] 
-                                    top-[35%] lg:top-0 h-[720px] lg:w-[633px] lg:h-[580px]">
+                                    top-[35%] lg:top-0 h-[720px] lg:w-[633px] lg:h-[590px]">
                         {/* Close Button */}
                         <button
                             onClick={() => setModalType(null)}
@@ -302,18 +346,22 @@ export const AccountCenter = () => {
 
                         </div>
 
-                        <div className='lg:w-[100%] border-[2px] border-gray-50 lg:h-[182px] my-2 px-2 py-4 rounded-[10px] flex flex-col gap-2'>
+                        <div className='lg:w-[100%] border-[2px] border-gray-50 lg:h-[198px] my-2 px-2 py-4 rounded-[10px] flex flex-col gap-2'>
                             <div className='w-full flex justify-between'>
                                 <p className='lg:text-lg text-xs font-poppins font-regular'>Amount</p>
                                 <p className='lg:text-lg text-xs font-poppins font-regular text-blue-500'>₦{inputs.amount}</p>
                             </div>
                             <div className='w-full flex justify-between'>
                                 <p className='lg:text-lg text-xs font-poppins font-regular'>Bank Name</p>
-                                <p className='lg:text-lg text-xs font-poppins font-regular'>Chase Bank</p>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>{bankName}</p>
+                            </div>
+                            <div className='w-full flex justify-between'>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>Account Name</p>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>{bankAccountHolderName}</p>
                             </div>
                             <div className='w-full flex justify-between'>
                                 <p className='lg:text-lg text-xs font-poppins font-regular'>Account Number</p>
-                                <p className='lg:text-lg text-xs font-poppins font-regular'>12345678901</p>
+                                <p className='lg:text-lg text-xs font-poppins font-regular'>{bankAccountNumber}</p>
                             </div>
                             <div className='w-full flex justify-between'>
                                 <p className='lg:text-lg text-xs font-poppins font-regular'>Processing Time</p>
@@ -323,29 +371,16 @@ export const AccountCenter = () => {
 
                         {/* Input with ₦ symbol */}
                         <div className="relative w-full">
-                            <div className=''>
-                                {/* <InputField
-                                    label="Enter PIN"
-                                    type="text"
-                                    onChange={(e) => setPin(e.target.value)}
-                                    placeholder="Enter pin"
-                                    rightIconOpen={EyeOpenIcon}
-                                    rightIconClose={EyeCloseIcon}
-                                />
+                            <div className='flex flex-col gap-3'>
 
-                                {isPinInvalid && (
-                                    <p className="text-red-500 text-sm mt-1 font-poppins ">Invalid PIN</p>
-                                )} */}
-
-
-                                <div className='flex justify-end cursor-pointer lg:-mb-6 -mb-6 font-medium text-xs lg:text-lg text-green-600'>
-                                    <button className='cursor-pointer'>
+                                <div onClick={() => setModalType("withdralpin")} className='flex justify-end  cursor-pointer lg:-mb-6 -mb-6 font-medium text-xs lg:text-lg text-green-600'>
+                                    <button type='button' onClick={() => setModalType("withdralpin")} className='cursor-pointer lg:-mb-2 py-2 ' >
                                         Forgot PIN?
                                     </button>
                                 </div>
 
 
-                                <div className='w-[100%]'>
+                                <div className=''>
                                     <InputField
                                         label="Enter PIN"
                                         name="pin"
@@ -353,7 +388,7 @@ export const AccountCenter = () => {
                                         value={inputs.pin}
                                         onChange={handleChange}
                                         leftIcon={LockPasswordIcon}
-                                        error={showPasswordError ? "Invalid PIN" : ""}
+                                        error={isPinInvalid}
                                         toggleable
                                         showPassword={showPassword}
                                         handleTogglePassword={handleTogglePassword}
@@ -370,6 +405,7 @@ export const AccountCenter = () => {
 
                         <CustomButton
                             name="Confirm Withdrawal"
+                            isLoading={isLoading}
                             disabled={!inputs.pin.trim()}
                             btnClick={handlePinSubmit}
                             extendedStyles={`font-medium lg:py-3 py-3 w-full p-3 lg:p-4 rounded-lg bg-green-700 px-4 rounded-xl 
@@ -584,7 +620,7 @@ export const AccountCenter = () => {
 
                         </div>
                         <CustomButton
-                            name="Confirm Withdrawal"
+                            name="Confirm PIN Setup"
                             disabled={!inputs.newPin.trim() || !inputs.confirmNewPin.trim()}
                             btnClick={handlePinUpdate}
                             extendedStyles={`font-medium lg:py-3 py-3 w-full p-3 lg:p-4 rounded-lg bg-green-700 px-4 rounded-xl 
@@ -604,7 +640,7 @@ export const AccountCenter = () => {
                 icon={<SuccessIcon className="w-[50px] h-[90px] bg-green-500 flex items-center justify-center rounded-full" />}
                 iconBg="bg-green-500"
                 title={`You’ve successfully withdrawn ₦${inputs.amount}`}
-                message="Your funds will reflect in your bank account ending ••••1234 shortly."
+                message={`Your funds will reflect in your bank account ***${bankAccountNumber?.slice(-4)} shortly.`}
                 actionLabel="Back"
                 onAction={() => setModalType(null)}
                 actionStyles="!bg-green-250 text-green-900"
@@ -637,7 +673,7 @@ export const AccountCenter = () => {
                 actionLabel="Return to Dashboard"
                 onAction={() => {
                     setModalType(null);
-                    navigate("/dashboard");
+                    navigate("/earnings");
                 }}
                 actionStyles="bg-green-700 text-white"
             />
