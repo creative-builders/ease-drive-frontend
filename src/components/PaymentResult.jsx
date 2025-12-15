@@ -16,7 +16,7 @@ function PaymentResult() {
     }
 
     axios
-      .get(`http://localhost:8000/api/payment/verifypayment?reference=${reference}`)
+      .get(`/api/payment/verifypayment?reference=${reference}`)
       .then((res) => {
         if (res.data.status === "success") {
           setStatus("Payment successful! Thank you.");

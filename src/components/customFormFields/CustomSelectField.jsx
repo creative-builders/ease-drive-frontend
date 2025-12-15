@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Divider } from "../Divider/Divider"
 
-export const CustomSelectField = ({ 
+export const CustomSelectField = ({
   label,
   name,
   value,
@@ -89,8 +89,8 @@ export const CustomSelectField = ({
                   className="flex items-center text-sm lg:text-lg text-neutral-600  px-3 py-2 hover:bg-neutral-200 cursor-pointer"
                 >
 
-                  {opt.iconLeft && 
-                  <opt.iconLeft className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px] mr-2 text-neutral-400" />}
+                  {opt.iconLeft &&
+                    <opt.iconLeft className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px] mr-2 text-neutral-400" />}
                   <span>{opt.value}</span>
                   {opt.iconRight && <opt.iconRight className="w-[18px] lg:w-[32px] h-[18px] lg:h-[32px] ml-2 text-neutral-400" />}
                 </div>

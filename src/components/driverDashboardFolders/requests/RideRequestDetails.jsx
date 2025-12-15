@@ -46,7 +46,6 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
     const navigate = useNavigate()
 
 
-
     const { mutate: submitRideBid, isLoading } = useMutation(
         bidForARid,
         {
@@ -395,14 +394,14 @@ export const RideRequestDetails = ({ request, onRideAccepted, btnName, btnFn }) 
                         {
                             bidLoaded ? (
                                 <CustomButton
-                                    btnClick={handleRefresh}
+                                    // btnClick={handleRefresh}
 
                                     name="Refresh"
                                     extendedStyles="w-full p-3 lg:p-4 
                         !bg-green-250 text-green-900 rounded-lg mb- mt-4" />
                             ) : (
                                 <CustomButton
-                                    btnClick={handleRefresh}
+                                    // btnClick={handleRefresh}
                                     disabled={!bidLoaded}
                                     name="Refresh"
                                     extendedStyles="w-full p-3 lg:p-4 

@@ -45,6 +45,7 @@ export const driverKYCUpdate = async ({ credentials, userId, whois }) => {
     }
   });
 
+  
   try {
     // Build endpoint dynamically
     let endpoint = "v1/users/update/driverkyc";
