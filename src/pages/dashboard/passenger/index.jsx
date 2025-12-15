@@ -154,14 +154,14 @@ const PassengerDashboardIndexContext = () => {
      toast.success(response?.message);
      queryClient.invalidateQueries(["getUserProfile"]);
 
-     const redirectUrl = response?.data?.authorization_url;
+      const redirectUrl = response?.data?.authorization_url;
 
       if (redirectUrl) {
         window.location.href = redirectUrl;
       } else {
         toast.error("Payment link not available");
       }
-      
+
      },
 
      onError:(error) => {
