@@ -22,27 +22,43 @@ import { DocumentIcon } from "../../../assets/icons/DocumentIcon.jsx";
 import { VerifiedBadgeIcon } from "../../../assets/icons/VerifiedBadgeIcon.jsx";
 import { getDriverDetails } from "../../../store/auth/driver/api.js";
 import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { useDeleteAccount } from "../../../hooks/useDeleteAccount.js";
+import toast from "react-hot-toast";
+import CustomButton from "../../../components/CustomButton.jsx";
 
 export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
   const userData = useRecoilValue(userAtom);
- 
-
-  // console.log(userData)
-
   const [isOpen, setIsOpen] = useState(false);
-  const [driverData, setDriverData] = useState({})
+  const [driverData, setDriverData] = useState({});
+  const location = useRecoilValue(locationAtom);
+  const navigate = useNavigate();
 
-  const location = useRecoilValue(locationAtom)
-
-
-  const handleDelete = () => {
-    // console.log("Account deleted");
-    setIsOpen(false);
-  };
+  const { mutate: deleteAccount, isLoading, isSuccess, isError, error } = useDeleteAccount();
 
   useEffect(() => {
-   setDriverData(userData?.driverProfile)
-  }, [userData] );
+    setDriverData(userData?.driverProfile);
+  }, [userData]);
+
+  const handleDelete = () => {
+    if (!userData?._id) {
+      toast?.error?.("User ID not found");
+      return;
+    }
+
+    // call mutate only when the user confirms deletion
+    deleteAccount(userData?._id, {
+      onSuccess: () => {
+        toast?.success?.("Account deleted successfully");
+        setIsOpen(false);
+        localStorage.clear();
+        navigate("/signup-as");
+      },
+      onError: (err) => {
+        toast?.error?.((err?.response?.data?.message) || err?.message || "Failed to delete account");
+      },
+    });
+  };
 
   const {
     vehicleType,
@@ -67,18 +83,18 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
         >
           {/* Buttons inside modal */}
           <div className="flex flex-col gap-3 w-full mt-6">
-            <button
-              className="w-full py-3 rounded-lg bg-green-200 text-black font-medium"
+            <CustomButton
+              name="Back"
+              extendedStyles={"w-full py-3 rounded-lg bg-green-200 text-black font-medium"}
               onClick={() => setIsOpen(false)}
-            >
-              Back
-            </button>
-            <button
-              className="w-full py-3 rounded-lg bg-red-500 text-white font-medium"
-              onClick={handleDelete}
-            >
-              Yes, Delete Account
-            </button>
+            />
+            
+            <CustomButton
+              name="Yes, Delete Account"
+               btnClick={handleDelete}
+              extendedStyles={"w-full py-3 rounded-lg bg-red-500 text-white font-medium"}
+              isLoading={isLoading}
+            />
           </div>
         </Modal>
       )}
@@ -239,7 +255,7 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
 
         <div className="flex px-2.5 mb-2">
           <LogoutButton
-            strokeColor="red-500"
+            strokeColor="#fe2a22"
             text={"Log Out"}
             textStyles={"font-medium text-sm lg:text-lg leading-6 text-red-500"}
           />
