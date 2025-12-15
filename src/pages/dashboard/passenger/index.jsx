@@ -16,7 +16,11 @@ import { ProgressBar } from "../../../components/ProgressBar";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../../../components/atoms/userAtom";
 import { useLocation, useNavigate } from "react-router-dom";
-import { div } from "framer-motion/client";
+import { CreateRideSection } from "../../../components/dashboard/CreateRideSection";
+import { format } from "date-fns";
+import { trimText } from "../../../utils/trimeText";
+import { ReviewBadgeIcon } from "../../../assets/icons/ReviewBadgeIcon";
+import { Divider } from "../../../components/Divider/Divider";
 
 
 const PassengerDashboardIndexContext = () => {
@@ -30,14 +34,11 @@ const PassengerDashboardIndexContext = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location?.state?.selectedRideBid);
-
-
   const isFromBookDriver =
   location.state?.source === "book-driver" &&
   location.state?.confirmBooking;
 
-
+  console.log(location?.state)
 
 
   const pollingRef = useRef(null);
@@ -83,7 +84,7 @@ const PassengerDashboardIndexContext = () => {
     pollingRef.current = setInterval(async () => {
       try {
         const ride = await fetchRideById(currentUser?._id , id);
-        console.log("CUrrent Ride",ride?.data?.booking?.bids);
+        // console.log("CUrrent Ride",ride?.data?.booking?.bids);
 
         if (ride?.data?.booking?.bids?.length > 0) {
           // DRIVER FOUND
@@ -118,7 +119,7 @@ const PassengerDashboardIndexContext = () => {
         long:""
       }
     },
-    phoneNumber:"",
+    // phoneNumber:"",
     luggageImage:[],
     vehicleType:"",
     tripType:"",
@@ -148,7 +149,9 @@ const PassengerDashboardIndexContext = () => {
       return;
     }
     
-    submitCreateRide(formData)
+    submitCreateRide({
+      ...formData, 
+      phoneNumber:currentUser?.phoneNumber})
   };
 
   //to prevent memory leaks on route changes
@@ -191,12 +194,12 @@ const PassengerDashboardIndexContext = () => {
       );
     }
 
-    if (driverStatus === "none") {
+    if (driverStatus === "searching") {
       return (
         <CustomButton
-          name="No Drivers Available - Refresh"
+          name="Searching..."
           extendedStyles="w-full h-[50px] bg-primary-200 text-primary-950 rounded-2xl font-medium"
-          btnClick={handleRefresh}
+          // btnClick={handleRefresh}
           disabled={isProgressLoading}
         />
       );
@@ -281,13 +284,13 @@ const PassengerDashboardIndexContext = () => {
           </div>
            )
           }
-          <ChooseDestination
+
+          <CreateRideSection
            onFocus={() => setExpanded(true)}
            onBlur={() => setExpanded(false)} 
-           />
-          <SelectRide 
-          handleSubmit={handleSubmit}
-          isLoading={isLoading}
+           handleSubmit={handleSubmit }
+           isLoading={ isLoading }
+
           />
         </div>
       </div>
@@ -297,8 +300,96 @@ const PassengerDashboardIndexContext = () => {
       {/* render if it it from book driver */}
       {
         isFromBookDriver && (
-          <div>
-            <h3>Hi Welcome to the book driver UI</h3>
+          <div className="flex flex-col lg:flex-row lg:gap-x-4">
+            <div className="hidden lg:block lg:flex-1">
+               <CreateRideSection
+            />
+            </div>
+            <div className="bg-white py-5 px-[14px] lg:rounded-xl lg:w-[557px] shrink-0">
+              <div>
+                <div className="mb-4">
+                  {/* <span>
+                    <GoBackIcon/>
+                  </span> */}
+                  <h2 className="text-center">Make Payment</h2>
+                </div>
+                <div className="mb-4 bg-accent-500 flex items-center justify-center h-[26px] lg:h-[38px] px-4">
+                  <p className="font-medium text-neutral-50 text-xs lg:text-base">Your driver will arrive in 7 minutes</p>
+                </div>
+                <div className="mb-4">
+                  <div className="flex flex-col gap-x-2 lg:flex-row lg:gap-y-2 items-center lg:items-start">
+                    <div className="relative w-[89px] z-4 h-[89px] rounded-full">
+                      <img className="w-full h-full object-cover rounded-full" src={location?.state?.selectedRideBid?.bidder?.profileImage} alt={location?.state?.selectedRideBid?.bidder?.name} />
+                      {/* appear like a profile badge at the bottom right */}
+                      <div className="absolute bottom-0 z-8 right-0 w-[29px] h-[28px] rounded-full bg-neutral-50 flex justify-center items-center">
+                        {/* <ReviewBadgeIcon/> */}
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-center font-semibold text-base text-gray-950 capitalize">{location?.state?.selectedRideBid?.bidder?.name}</h3>
+                      <p className="flex text-xs items-center gap-x-1 font-normal text-gray-950">
+                        4.2
+                        <span>
+                        <ReviewBadgeIcon/>
+                      </span>
+                       (45 reviews)
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mb-5">
+                  <div className="mb-[14px] flex justify-between items-center">
+                    <h5 className="font-semibold text-base text-gray-950">Plate Number</h5>
+                    <p className="font-normal text-base text-gray-950">{location?.state?.selectedRideBid?.bidder?.plateNumber}</p>
+                  </div>
+                  <div className="mb-[14px] flex justify-between items-center">
+                    <h5 className="font-semibold text-base text-gray-950">Vehicle Type</h5>
+                    <p className="font-normal text-base text-gray-950">{location?.state?.selectedRideBid?.bidder?.vehicleType}</p>
+                  </div>
+                   {/* <div className="mb-[14px] flex justify-between items-center">
+                    <h5 className="font-semibold text-base text-gray-950">Model</h5>
+                    <p className="font-normal text-base text-gray-950">{location?.state?.selectedRideBid?.bidder?.vehicleType}</p>
+                  </div> */}
+                </div>
+                <Divider extendedStyles={"mb-4"}/>
+                <div className="mb-4 lg:mb-[22px]">
+                  <div className="mb-2 flex items-center bg-neutral-50 rounded-lg px-4 h-[45px] lg:h-[53px]">
+                    <h4 className="font-medium text-gray-950 text-base">Trip Details</h4>
+                  </div>
+                  <div className="mb-[14px] flex justify-between items-center">
+                    <h5 className="font-semibold text-base text-gray-950">Date</h5>
+                    <p className="font-normal text-base text-gray-950">{format(location?.state?.selectedRideBid?.createdAt,"h:mma, do MMMM")}</p>
+                  </div>
+                  <div className="mb-[14px] flex justify-between items-center">
+                    <h5 className="font-semibold text-base text-gray-950">Pickup Location</h5>
+                    <p className="font-normal text-base text-gray-950">{trimText(location?.state?.selectedRideBid?.location?.locationName, 38)}</p>
+                   
+                  </div>
+                  <div className="mb-[14px] flex justify-between items-center">
+                    <h5 className="font-semibold text-base text-gray-950">Destination</h5>
+                    <p className="font-normal text-base text-gray-950">{trimText(location?.state?.selectedRideBid?.destination?.destinationName, 38)}</p>
+                  </div>
+                  <div className="mb-[14px] flex justify-between items-center">
+                    <h5 className="font-semibold text-base text-gray-950">Trip Type</h5>
+                    <p className="font-normal text-base text-gray-950">{location?.state?.selectedRideBid?.tripType}</p>
+                  </div>
+                  <div className="mb-[14px] flex justify-between items-center">
+                    <h5 className="font-semibold text-base text-gray-950">Luggage</h5>
+                    <p className="font-normal text-base text-gray-950">{location?.state?.selectedRideBid?.luggages === "no" ? "None" : "Yes"}</p>
+                  </div>
+                  <div className="mb-[14px] flex justify-between items-center">
+                    <h5 className="font-semibold text-base text-gray-950">Price</h5>
+                    <p className="font-normal text-base text-gray-950">{location?.state?.selectedRideBid?.totalPrice}</p>
+                  </div>
+                </div>
+                <div>
+                  <CustomButton
+                  name="Make Payment"
+                  extendedStyles="w-full h-[45px] lg:h-[60px] px-4 font-medium rounded-2xl bg-primary-700 text-white flex items-center justify-center"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         )
       }
@@ -324,7 +415,7 @@ const PassengerDashboardIndex = () => {
         long:""
       }
     },
-    phoneNumber:"",
+    // phoneNumber:"",
     luggageImage:[],
     vehicleType:"",
     tripType:"",

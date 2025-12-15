@@ -7,11 +7,14 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext"
 import { InputField } from "../customFormFields/InputField"
 import { AddFile } from "../AddFile"
 import { CustomSelectField } from "../customFormFields/CustomSelectField"
+import { TaxiCarIcon } from "../../assets/icons/TaxiCarIcon"
+import { MotocycleIcon } from "../../assets/icons/MotocycleIcon"
+import { BusIcon } from "../../assets/icons/BusIcon"
 
 
 export const SelectRide = ({
   handleSubmit,
- isLoading 
+  isLoading 
 }) => {
 
   const {
@@ -46,7 +49,27 @@ export const SelectRide = ({
           <CustomSelectField
           defaultHolder={"Car"}
           label={"Select Ride"}
-          options={[ "Keke","Car","Shuttle Bus","Motorcycle","Regular Bus","Truck"]}
+          options={[
+            {
+            value:"Shuttle Bus",
+            iconRight: BusIcon
+            },
+            {
+            value:"Car",
+            iconRight: TaxiCarIcon
+            },
+            {
+            value:"Motorcylce",
+            iconRight: MotocycleIcon
+            },   {
+            value:"Keke",
+            iconRight: TaxiCarIcon
+            },  
+            {
+            value:"Regular Bus",
+            iconRight: TaxiCarIcon
+            },
+          ]}
           name={"vehicleType"}
           value={formData?.vehicleType}
           onChange={handleUpdateFormData}

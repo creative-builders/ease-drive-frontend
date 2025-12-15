@@ -9,6 +9,7 @@ import axios from "axios";
 import { useDebounce } from "../../hooks/useDebounce";
 import toast from "react-hot-toast";
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
+import { DestinationBar } from "../DestinationBar";
 
 
   export const ChooseDestination = ({ onFocus }) => {
@@ -22,7 +23,6 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
       formData,
       setFormData,
       handleUpdateFormData,
-      inputTouched
   } = useStepFlowContext();
 
   const liveLocation = useRecoilValue(locationAtom);
@@ -120,8 +120,8 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
     setResults([]);
   };
 
-  const isPhoneValid = /^[0-9]{10,}$/.test(formData?.phoneNumber);
-  const showIsPhoneValidError = inputTouched?.phoneNumber && !isPhoneValid;
+  // const isPhoneValid = /^[0-9]{10,}$/.test(formData?.phoneNumber);
+  // const showIsPhoneValidError = inputTouched?.phoneNumber && !isPhoneValid;
     
 
   const shouldShowNoResult =
@@ -141,8 +141,9 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
       </div>
 
       {/* Input Fields */}
-      <div>
-        <InputField
+      <div className="flex flex-row items-center gap-x-1">
+        <div className="basis-full">
+          <InputField
           label="From"
           labelStyles="font-medium text-xs lg:text-xs"
           inputWrapperStyles="h-[40px] lg:h-[49px]"
@@ -152,7 +153,7 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
           onChange={() => null}
         />
 
-       <InputField 
+       {/* <InputField 
         type="number"
         label={"Phone Number"}
         labelStyles="font-medium text-xs lg:text-xs"
@@ -163,7 +164,7 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
         name={"phoneNumber"}
         value={formData?.phoneNumber}
         error={showIsPhoneValidError ? "Please enter a valid phone number" : ""}
-        />
+        /> */}
         <InputField
           label="To Where"
           labelStyles="font-medium text-xs lg:text-xs"
@@ -179,6 +180,9 @@ import { useStepFlowContext } from "../../hooks/useStepFlowFormContext";
             debouncedSearch(e.target.value);
           }}
         />
+        </div>
+        <DestinationBar/>
+        
       </div>
 
       <Divider />
