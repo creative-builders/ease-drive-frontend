@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function PaymentResult() {
   const [status, setStatus] = useState("Verifying payment...");
@@ -20,17 +21,20 @@ function PaymentResult() {
       .then((res) => {
         if (res.data.status === "success") {
           setStatus("Payment successful! Thank you.");
+          toast.success("Payment successful! Thank you.");
         } else {
           setStatus("Payment failed or cancelled.");
+          toast.error("Payment failed or cancelled.");
         }
       })
       .catch((err) => {
         console.error(err);
         setStatus("Error verifying payment. Try again later.");
+        toast.error("Error verifying payment. Try again later.");
       });
   }, [location.search]);
 
-  return <div>{status}</div>;
+  return null; // UI implementation can be added here based on 'status'
 }
 
 export default PaymentResult;
