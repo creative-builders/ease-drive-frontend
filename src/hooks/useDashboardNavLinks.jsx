@@ -43,11 +43,6 @@ const dashboardNavConfig = {
       href: "/requests",
       icon: RidesIcon,
     },
-     {
-      title: "Bids",
-      href: "/bids",
-      icon: RidesIcon,
-    },
     {
       title: "Trips",
       href: "/trips",

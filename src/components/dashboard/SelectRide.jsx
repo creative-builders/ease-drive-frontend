@@ -2,16 +2,19 @@ import { RidesIcon } from "../../assets/icons/dashboard/RidesIcon"
 import { LuggageIcon } from "../../assets/icons/LuggageIcon"
 import { PoliceCarIcon } from "../../assets/icons/PoliceCarIcon"
 import CustomButton from "../CustomButton"
-import { CustomSelectField } from "../customFormFields/CustomSelectField"
 import { Divider } from "../Divider/Divider"
 import { useStepFlowContext } from "../../hooks/useStepFlowFormContext"
 import { InputField } from "../customFormFields/InputField"
 import { AddFile } from "../AddFile"
-import { useState } from "react"
+import { CustomSelectField } from "../customFormFields/CustomSelectField"
+import { TaxiCarIcon } from "../../assets/icons/TaxiCarIcon"
+import { MotorcycleIcon } from "../../assets/icons/MotocycleIcon"
+import { BusIcon } from "../../assets/icons/BusIcon"
+
 
 export const SelectRide = ({
   handleSubmit,
- isLoading 
+  isLoading 
 }) => {
 
   const {
@@ -20,9 +23,6 @@ export const SelectRide = ({
       setFormData,
       handleUpdateFormData,
   } = useStepFlowContext();
-
-  const [progress, setProgress] = useState(0);
-  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const isLuggageAvailable = formData?.luggages === "yes";
 
@@ -49,7 +49,27 @@ export const SelectRide = ({
           <CustomSelectField
           defaultHolder={"Car"}
           label={"Select Ride"}
-          options={[ "Keke","Car","Shuttle Bus","Motorcycle","Regular Bus","Truck"]}
+          options={[
+            {
+            value:"Shuttle Bus",
+            iconRight: BusIcon
+            },
+            {
+            value:"Car",
+            iconRight: TaxiCarIcon
+            },
+            {
+            value:"Motorcylce",
+            iconRight: MotorcycleIcon
+            },   {
+            value:"Keke",
+            iconRight: TaxiCarIcon
+            },  
+            {
+            value:"Regular Bus",
+            iconRight: TaxiCarIcon
+            },
+          ]}
           name={"vehicleType"}
           value={formData?.vehicleType}
           onChange={handleUpdateFormData}
