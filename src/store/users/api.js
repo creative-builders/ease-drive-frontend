@@ -1,4 +1,4 @@
-import { form } from "framer-motion/client";
+
 import { axiosInstancePrivate } from "../auth/general/api";
 
 
@@ -92,8 +92,9 @@ export const fetchRideById = async (passengerId, rideId) => {
 
 
 export const initializePayment  = async( credentials ) => {
-    const response = await axiosInstancePrivate.post(`/v1/payment/paystack`, 
-      credentials
+   const {amount, bidId} = credentials
+    const response = await axiosInstancePrivate.post(`/v1/payment/paystack/${bidId}`, 
+      {amount:amount}
     );
     return response.data;
 }

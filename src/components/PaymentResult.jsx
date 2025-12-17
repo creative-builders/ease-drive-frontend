@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
+import { axiosInstancePrivate } from "../store/auth/general/api"
 
 function PaymentResult() {
   const [status, setStatus] = useState("Verifying payment...");
@@ -15,10 +16,10 @@ function PaymentResult() {
       setStatus("No payment reference found. Payment may have been cancelled.");
       return;
     }
-
-    axios
-      .get(`/api/payment/verifypayment?reference=${reference}`)
-      .then((res) => {
+    const verifyingPayment = async () => {
+      
+      try {
+        const res = await axiosInstancePrivate.get(`v1/payment/verifypayment?reference=${reference}`);
         if (res.data.status === "success") {
           setStatus("Payment successful! Thank you.");
           toast.success("Payment successful! Thank you.");
@@ -26,12 +27,13 @@ function PaymentResult() {
           setStatus("Payment failed or cancelled.");
           toast.error("Payment failed or cancelled.");
         }
-      })
-      .catch((err) => {
-        console.error(err);
-        setStatus("Error verifying payment. Try again later.");
+      } catch (error) {
         toast.error("Error verifying payment. Try again later.");
-      });
+        toast.error(error.response?.data?.message)
+      }
+    }
+    verifyingPayment()
+
   }, [location.search]);
 
   return null; // UI implementation can be added here based on 'status'
