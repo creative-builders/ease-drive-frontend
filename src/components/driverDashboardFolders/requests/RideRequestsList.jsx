@@ -70,7 +70,13 @@ export function RideRequestsList({ requests, onSelect, viewAll }) {
             }}
             className="cursor-pointer w-full font-poppins"
           >
-            <RideRequestCard request={req} />
+            {
+              viewAll ?
+                <Link to={"/dashboard/requests"}>
+                  <RideRequestCard request={req} />
+                </Link> :
+                <RideRequestCard request={req} />
+            }
           </div>
         ))
       }
