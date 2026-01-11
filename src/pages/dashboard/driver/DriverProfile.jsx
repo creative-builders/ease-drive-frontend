@@ -85,7 +85,7 @@ export const DriverProfile = ({ onEditVehicle, onEditCredentials }) => {
           <div className="flex flex-col gap-3 w-full mt-6">
             <CustomButton
               name="Back"
-              extendedStyles={"w-full py-3 rounded-lg bg-green-200 text-black font-medium"}
+              extendedStyles={"w-full py-3 rounded-lg bg-green-200 text-gray-950 font-medium"}
               onClick={() => setIsOpen(false)}
             />
             
