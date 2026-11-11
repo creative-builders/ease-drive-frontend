@@ -22,6 +22,7 @@ import { Divider } from "../../../components/Divider/Divider";
 import { TaxiCarIcon } from "../../../assets/icons/TaxiCarIcon";
 import { MotorcycleIcon } from "../../../assets/icons/MotocycleIcon";
 import { BusIcon } from "../../../assets/icons/BusIcon";
+import  PaymentResult from "../../../components/PaymentResult"
 
 
 const PassengerDashboardIndexContext = () => {
@@ -185,8 +186,10 @@ const PassengerDashboardIndexContext = () => {
  const handleInitializePayment = () => {
     submitHandlePayment({
       amount: location?.state?.selectedRideBid?.totalPrice,
+      bidId: location?.state?.selectedRideBid?._id
     })
 }
+
 
   //to prevent memory leaks on route changes
   useEffect(() => {
@@ -432,6 +435,8 @@ const PassengerDashboardIndexContext = () => {
           </div>
         )
       }
+      
+      <PaymentResult />
     </>
   );
 };
