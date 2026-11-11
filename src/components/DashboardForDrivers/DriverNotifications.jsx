@@ -80,11 +80,11 @@ export default function DriverNotifications({ isPreview = false }) {
               <div
                 key={note.id}
                 onClick={() => setSelectedNoteId(note.id)}
-                className={`p-3 rounded-2xl flex cursor-pointer transition-colors w-full ${selectedNoteId === note.id ? "bg-green-50" : "hover:bg-gray-50"
+                className={`p-3 rounded-2xl flex cursor-pointer items-center gap-3 transition-colors w-full ${selectedNoteId === note.id ? "bg-green-50" : "hover:bg-gray-50"
                   }`}
               >
 
-                <div className="h-[50px] w-[51px] rounded-full flex items-center justify-center bg-white">
+                <div className="h-[50px] w-[55px] rounded-full flex items-center justify-center bg-white">
                   <UserIcon className="text-[#333333]" />
                 </div>
 

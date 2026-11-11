@@ -76,6 +76,7 @@ export const AccountCenter = () => {
         setDriverData(userData?.driverProfile)
     }, [userData]);
 
+
     const {
         bankName,
         bankAccountHolderName,
