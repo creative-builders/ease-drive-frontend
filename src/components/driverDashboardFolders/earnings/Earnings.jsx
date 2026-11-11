@@ -12,7 +12,7 @@ import { userAtom } from "../../atoms/userAtom";
 import { useRecoilValue } from "recoil"
 import { formatDate } from "../../../utils/formatDate";
 import { ConfirmBookingLoader } from "../../dashboard/loaders/ConfirmBookingLoader";
-import {Modal} from "../../Modal"
+import { Modal } from "../../Modal"
 import { TripDetailsModal } from './TripDetailsModal';
 
 
@@ -22,6 +22,7 @@ export const Earnings = () => {
 
     const [rideRequests, setRideRequests] = useState([]);
     const [isFetching, setIsFetching] = useState(true)
+    const [driverData, setDriverData] = useState({})
     const userData = useRecoilValue(userAtom);
     const userId = userData?._id;
 
@@ -44,19 +45,23 @@ export const Earnings = () => {
         getBidedRides({ userId: userId })
     }, [])
 
+    useEffect(() => {
+        setDriverData(userData?.driverProfile)
+    }, [userData]);
 
-    //      if(isFetching){
-    //     return (
-    //       <ConfirmBookingLoader type="card" items={2}/>
-    //     )
-    //    }
+    const {
+        current_balance,
+        total_earnings_ } = driverData
+
+
+   
     return (
         <div className="py-2.5 h-full inline-flex flex-col lg:justify-start lg:items-start justify-center items-center">
             <div className="inline-flex justify-start items-start ">
                 <div className="lg:w-[563px] w-[100%] m-auto font-poppins inline-flex flex-col lg:justify-start lg:items-start gap-4">
                     <div className='flex lg:gap-2 gap-3'>
-                        <InfoCard title="Current Balance" InfoIcon={EarningsIcon} value={"0.00"} footer={{ text: "Earnings this month", value: "0.00" }} />
-                        <InfoCard title="Total Earnings" InfoIcon={EarningsIcon} value={"0.00"} footer={{ text: "Since account activation", value: "0.00" }} />
+                        <InfoCard title="Current Balance" InfoIcon={EarningsIcon} value={current_balance?.toFixed(2)} footer={{ text: "Earnings this month", value: "0.00" }} />
+                        <InfoCard title="Total Earnings" InfoIcon={EarningsIcon} value={total_earnings_?.toFixed(2)} footer={{ text: "Since account activation", value: "0.00" }} />
                     </div>
 
 
